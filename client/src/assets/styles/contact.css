@@ -1,0 +1,75 @@
+.prefooter-container{
+  width: 100%;
+  padding: 0;
+}
+
+<<<<<<< HEAD
+.grid-container{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-container::before{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+=======
+.pre-footer{  
+  padding: 0;
+>>>>>>> d779322c9c1bb5a057eec493ba86b064e92e9df2
+  background-color: #000000;
+}
+
+.contact-info-container,
+.form-container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0;
+}
+
+.contact-info-container{
+  justify-content: space-between;
+}
+
+.contact-info-container h1{
+  font-size: 66px;
+  color: #ffffff;
+}
+
+
+@media (min-width: 768px) {   
+  .prefooter-container{
+    min-width: 100%;
+    height: 100dvh;
+    padding: 0;
+  } 
+  .grid-prefooter-container{
+    display: grid;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pre-footer::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    /* background-color: #FFDD00; */
+    /* clip-path: polygon(0 0, 10% 2%, 0 11%, 10% 69%, 23% 63%, 35% 39%, 21% 37%, 43% 30%, 48% 47%, 39% 44%, 30% 66%, 26% 94%, 100% 100%, 100% 0); */
+  }
+  .grid-prefooter-container{
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+  }
+}

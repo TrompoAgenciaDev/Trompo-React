@@ -1,0 +1,78 @@
+.et-container{
+  width: 100%;
+  max-width: 1366px;
+  margin-top: 50px;
+}
+
+.et-text{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.et-text h1{
+  font-size: 48px;
+  line-height: normal;
+}
+
+.et-text h1 span{
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.text-bold{
+  font-weight: 700;
+}
+
+.description-container{
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  transition: all .5s ease-in-out;
+}
+
+.description-container.animated-height{
+  height: 135px;
+  transition: all .5s ease-in-out;
+}
+
+.showText{
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.showText svg{
+  width: 100%;
+  height: 100%;
+}
+
+.showText svg g circle,
+.showText svg g path{
+  transition: all .2s ease-in-out;
+}
+
+.showText:hover svg g circle,
+.showText:hover svg g path{
+  color: #fec235;
+}
+
+.description-container{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.text{
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+}
+
+.et-footer{
+  font-size: 18px;
+  font-weight: 400;
+}

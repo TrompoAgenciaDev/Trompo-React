@@ -1,0 +1,36 @@
+.custom-cursor img{
+  width: 50px;  
+}
+
+.custom-cursor .custom-cursor-text {
+  width: 100px;
+  height: 40px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-left: -20px;
+  background-color: #000000bc;
+  padding: 10px 20px;
+  border-radius: 999px;
+  color: #ffffff;
+  fill: #ffffff;
+  backdrop-filter: blur(8px);
+}
+
+.custom-cursor .custom-cursor-text img {
+  filter: invert(1);
+}
+
+.blur-bg{
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 999px;
+  padding-left: 6px;
+  background-color: #000000b9;  
+  backdrop-filter: blur(4px);
+}

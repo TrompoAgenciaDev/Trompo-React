@@ -1,0 +1,48 @@
+.portfolio-section{
+  width: 100%;
+  height: 1200px;
+  color: #ffffff;
+  padding: 70px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: carruselAnimation 16s infinite ease-in-out;
+}
+
+.portfolio-section .title-section{
+  width: 1140px;
+}
+
+.portfolio-section .title-section .title{
+  color: #ffffff;  
+  font-weight: 300;
+}
+
+.portfolio-section .title-section span{
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.portfolio-carrusel{
+  width: 120vw;
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 250px;
+  gap: 20px;
+  transform: perspective(1200px) rotateX(20deg) rotateY(20deg);
+}
+
+
+@keyframes carruselAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

@@ -1,0 +1,139 @@
+.portfolio-section{
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #222222;
+  position: relative;
+  padding: 150px 20px 50px;
+  gap: 150px;
+}
+
+.bg-section {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: transparent;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.bg-section.fade-in {
+  opacity: 1;
+}
+
+.bg-section.fade-out {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.portfolio-header{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  z-index: 10;
+}
+
+.portfolio-title{
+  font-size: 120px;
+  text-transform: uppercase;
+}
+
+.portfolio-excerpt{
+  font-size: 23px;
+  text-align: justify;
+}
+
+.grid-portfolio{
+  width: 100%;
+  height: 75%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-collapse: collapse;
+  z-index: 10;
+}
+
+.portfolio-item{
+  height: 80px;
+  display: grid;
+  align-content: center;
+  border: 1px solid #dddddd2f;
+  cursor: pointer;
+  transition: text-shadow .2s ease-in-out;
+}
+
+.bg-color-jump{  
+  background-color: #dddddd4f;
+  backdrop-filter: blur(3px);
+}
+
+.portfolio-item h2{
+  font-size: 18px;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: #ffffff;
+  text-align: center;
+  font-weight: 700;
+}
+
+.portfolio-item:hover{
+  z-index: 999;
+  backdrop-filter: blur(5px);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 540px) {
+    
+  .portfolio-item h2{
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  .grid-portfolio{
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .portfolio-item{
+    height: 120px;
+  }
+  .portfolio-section{
+    padding: 150px 50px 50px;
+  }
+  .portfolio-item h2{
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 980px) {    
+  .portfolio-item h2{
+    font-size: 26px;
+  }
+}
+
+@media (min-width: 1024px) {    
+  .portfolio-item h2{
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 1366px) {    
+  .grid-portfolio{
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .portfolio-item{
+    height: 300px;
+    align-content: flex-end;
+    padding-bottom: 16px;
+  }
+  .portfolio-item h2{
+    font-size: 32px;
+  }
+}

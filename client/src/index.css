@@ -1,0 +1,95 @@
+:root {
+  font-family: 'Montserrat', 'Poppins', system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 300;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #ffffff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: 0;
+}
+
+*{
+  position: relative;
+}
+
+body{
+  width: 100%;
+  height: auto;
+  scroll-behavior: smooth;
+  position: relative;
+  overflow-x: hidden;  
+}
+
+#root{
+  overflow: hidden;
+  background-color: #000000;
+}
+
+main {
+  width: 100%;
+  max-width: 100%;
+}
+
+img{
+  width: 100%;
+}
+
+.container{
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+  margin-top: -1px;
+  
+}
+
+.medium-container{
+  width: 95%;
+}
+
+.noise-bg{
+  background-image: image-set(
+    url(./noise-bg.webp) type("image/webp"),
+    url(./noise-bg.png) type("image/png"));
+  background-size: cover;
+  background-position: center;
+}
+
+.hover-y{
+  font-weight: 900;
+  transition: color .3s ease-in-out;
+  cursor: none;
+}
+
+.hover-y:hover,
+.hover-y:hover a{
+  color: #fec235;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .container{
+    padding: 0 50px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .medium-container{
+    width: 1140px;
+  }
+}

@@ -1,0 +1,28 @@
+.social-icons{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+}
+
+.social-icons img{
+  width: 36px;
+}
+
+@media (min-width: 768px) {
+  .social-icons img{
+    width: 42px;
+  }  
+}
+
+@media (min-width: 1024px) {
+  .social-icons img{
+    width: 46px;
+  }  
+}
+
+@media (min-width: 1366px) {
+  .social-icons img{
+    width: 50px;
+  }  
+}

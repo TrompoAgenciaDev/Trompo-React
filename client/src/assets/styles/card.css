@@ -1,0 +1,118 @@
+.str-card-container{
+  width: 100%;
+  height: 62vh;
+  padding-bottom: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: transparent;
+  position: sticky;
+}
+
+.str-card-container:nth-child(1){
+  height: 90vh;
+  top: 11vh;
+  background-color: #fec235;
+  padding-top: 100px;
+}
+
+.str-card-container:nth-child(1)::before{
+  content: '';
+  width: 100vw;
+  height: 55vh;
+  background-color: #212121;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;  
+  background-image: image-set(
+    url(./noise-bg.webp) type("image/webp"),
+    url(./noise-bg.png) type("image/png"));
+  background-size: cover;
+  background-position: center;
+  
+}
+
+
+.str-card-container:nth-child(2){
+  height: 70vh;
+  top: 30vh;
+}
+
+.str-card-container:nth-child(3){
+  height: 62vh;
+  top: 38vh;
+}
+
+.str-card-container:nth-child(4){
+  height: 54vh;
+  top: 46vh;
+}
+
+.str-card-container:nth-child(5){
+  height: 100%;
+  max-height: 700px;
+  position: static;
+  padding: 200px 0 35px;
+}
+
+.card{
+  width: 900px;
+  height: 100%;
+  max-height: 400px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 30px; 
+  border-radius: 58px;
+  padding-top: 10px;
+  z-index: 2;
+}
+
+.str-card-header{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+  padding: 20px 40px;
+}
+
+.str-card-body{
+  display: flex;
+  flex-direction: column;
+  padding: 0 40px 20px;
+}
+
+.str-card-footer{
+  width: 100%;
+  height: 150px;
+  background-image: image-set(
+    url(./card/card-footer.webp) type("image/webp"),
+    url(./card/card-footer.png) type("image/png"));
+  background-size: cover;
+  background-position: center center;
+}
+
+.card.card-black{
+  background-color: #212121;
+}
+
+.card.card-white{
+  background-color: #ffffff;
+  color: #212121;
+}
+
+.card.card-grey{
+  background-color: #7D7D7D;
+  color: #ffffff;
+}
+
+.card.card-yellow{
+  background-color: #FEC235;
+  color: #212121;
+}
+
+.card.card-golden{
+  background-color: #E88D10;
+  color: #ffffff;
+}

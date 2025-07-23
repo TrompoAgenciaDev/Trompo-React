@@ -1,0 +1,181 @@
+.about-container {
+  width: 100%;
+  min-height: 100dvh;
+  overflow: hidden;
+  color: #000000;
+}
+
+.about {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+}
+
+.container.about {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+}
+
+.about-left {
+  background-color: #FFDD00;
+}
+
+.about-acordeon {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 0;
+}
+
+.acordeon-item {
+  width: 100%;
+  border-bottom: 1px solid #212121;
+  cursor: pointer;
+}
+
+.acordeon-title {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  gap: 50px;
+}
+
+.acordeon-title h3 {
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.acordeon-title img {
+  width: 14px;
+  height: 14px;
+}
+
+.acordeon-content {
+  width: 100%;
+  overflow: hidden;
+}
+
+.acordeon-content-inner {
+  padding: 20px;
+  border-top: 1px solid #212121;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.acordeon-img {
+  width: 100%;
+}
+
+.text-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  font-size: 18px;
+}
+
+.text-content p.bold-text {
+  font-weight: bold;
+}
+
+.text-y {
+  color: #FFDD00;
+}
+
+.about-right {
+  padding: 20px 10px;
+}
+
+.about-right .text-section {
+  padding: 0 10px;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .about-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .acordeon-title,
+  .about-right .text-section {
+    padding: 0 30px;
+  }
+  
+  .acordeon-title h3 {
+    font-size: 18px;
+  }
+  
+  .acordeon-content-inner {
+    padding: 30px;
+    font-size: 16px;
+  }
+  
+  .text-content {
+    font-size: 16px;
+  }
+  .about-right .text-section {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .about-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 20px;
+  }
+  
+  .about-left {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }  
+  .acordeon-title,
+  .about-right .text-section {
+    padding: 0 50px;
+  }  
+  .acordeon-content-inner {
+    padding: 30px 50px;
+  }  
+  .text-content {
+    font-size: 20px;
+  }
+  .about-right .text-section {
+    font-size: 24px;
+    font-size: 26px;
+    font-weight: 500;
+    margin-top: 150px;
+  }
+  .about-left::before{
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 150px;
+    height: 216px;
+    border-radius: 30%;
+    background-color: #FFDD00;
+    background-image: url('/trompo-black.svg');
+    background-size: cover;
+    background-position: center;
+    z-index: 10;
+  }
+}

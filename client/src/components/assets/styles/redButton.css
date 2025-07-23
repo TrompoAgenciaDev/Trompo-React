@@ -1,0 +1,14 @@
+.red-button{
+  font-size: 14px;
+  font-weight: 100;
+  color: #ffffff;
+  background-color: #B70F23;
+  padding: 10px 26px;
+  border: none;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+.red-button span{
+  font-weight: 600;
+}
