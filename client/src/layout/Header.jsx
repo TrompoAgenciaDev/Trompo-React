@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Menu from "../components/Menu";
 import routesConfig from "../config/routesConfig";
 
 import Icons from '../components/Icons';
@@ -12,8 +11,8 @@ const Header = ({onTogglePopup}) => {
   const [showPopuup, setShowPopup] = useState(false);
 
   return (
-    <header className="header">
-      <div className="container header-header">
+    <header className="full-container">
+      <div className="container header">
         <motion.a
           className="logo-img"
           href="/"
@@ -55,13 +54,6 @@ const Header = ({onTogglePopup}) => {
 
         </motion.button>
       </div>
-      {/* <div className="container footer-header">
-        <Menu
-          menuType="movement"
-          routes={routesConfig}
-          classMenu="movement-menu"
-        />
-      </div> */}
     </header>
   );
 };

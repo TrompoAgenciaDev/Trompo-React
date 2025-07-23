@@ -1,7 +1,7 @@
 import Home from "../pages/Home";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
-import News from "../pages/News";
+import Casos from "../pages/Casos";
 import Trends from "../pages/Trends";
 
 //Servicios
@@ -22,7 +22,7 @@ const routesConfig = {
     { path: "#", label: "Servicios", Component: Servicios },
     { path: "#", label: "Quiénes Somos", Component: About },
     { path: "#", label: "Tendencias", Component: Trends },
-    { path: "#", label: "Casos", Component: Contact },
+    { path: "#", label: "Casos", Component: Casos },
     { path: "#", label: "Contacto", Component: Contact },
   ],
   servicios: [
