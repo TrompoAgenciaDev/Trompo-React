@@ -131,11 +131,15 @@ p{
 }
 
 @media (min-width: 1024px) {
-  .medium-container{
-    width: 1140px;
-  }
   .container{
     width: 100%;
-    max-width: 1366px;
+    max-width: 955px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container{
+    width: 100%;
+    max-width: 955px;
   }
 }

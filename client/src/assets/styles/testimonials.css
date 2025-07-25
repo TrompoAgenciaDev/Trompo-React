@@ -87,7 +87,6 @@
 .testimoniales-rating {
   color: #f7b500;
   font-size: 1.2rem;
-  margin-bottom: 12px;
   letter-spacing: 2px;
   text-align: left;
   width: 100%;
@@ -129,4 +128,10 @@
 .testimoniales-dot.active {
   background: #ffffff;
   border-color: #000000;
+}
+
+@media (min-width:768px){
+  .testimoniales-card {
+    height: 350px;
+  }
 }

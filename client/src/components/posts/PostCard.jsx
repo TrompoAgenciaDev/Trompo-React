@@ -40,7 +40,7 @@ const PostCard = ({ initialLimit = 999, maxLimit = 1000, category, tag, type = "
           const featuredImage = post?.featured_image || "/assets/postImg/post.png"; 
 
           return (
-            <div className="full-container post-card" key={post.id} style={{
+            <div className="container post-card" key={post.id} style={{
               backgroundImage: `url(${featuredImage})`
             }}>
               <h3 className="post-title">{title}</h3>
