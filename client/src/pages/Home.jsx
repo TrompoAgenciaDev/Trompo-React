@@ -12,7 +12,6 @@ import Testimoniales from "../components/Testimoniales";
 import PostCard from "../components/posts/PostCard";
 import Hero from "../layout/Hero";
 
-
 const Home = () => {
   return (
     <main className="full-container">
@@ -22,7 +21,7 @@ const Home = () => {
         <div className="container home-content">
           <p>
             Somos una agencia digital que combina{" "}
-            <span className="bold">creatividad, estrategia Y tecnología{" "}</span>
+            <span className="bold">creatividad, estrategia y tecnología </span>
             para diseñar soluciones integrales que generan impacto.
           </p>
         </div>
@@ -30,7 +29,7 @@ const Home = () => {
 
       <section className="video-section full-container">
         <div className="full-container">
-          <VideoSlider/>
+          <VideoSlider />
         </div>
 
         <div className="container home-content">
@@ -60,7 +59,7 @@ const Home = () => {
               </motion.span>
             ))}
           </motion.p>
-          <a href="#" className="read-more-link">
+          <Link href="#" className="read-more-link">
             Todos los proyectos
             <svg
               height="21"
@@ -80,7 +79,7 @@ const Home = () => {
                 <path d="m.5 4.5h13" />
               </g>
             </svg>
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -99,11 +98,11 @@ const Home = () => {
         </div>
 
         <div className="container">
-          <p className="show-effect">
+          <p className="services-text">
             Con un Equipo interdisciplinario y años de experiencia, nos
             especializamos en entender las necesidades de cada cliente y
             convertirlas en <span className="bold">oportunidades</span> que
-            impulsen hsu crecimiento.
+            impulsen su crecimiento.
           </p>
         </div>
 
@@ -115,7 +114,10 @@ const Home = () => {
                   <span className="title-grid"> identidad</span>
                   <span className="hover-show">
                     {" "}
-                    <span className="title-grid"> que conecta</span>
+                    <span className="title-grid title-grid-hover">
+                      {" "}
+                      que conecta
+                    </span>
                     <p>
                       Branding, diseño y multimedia para marcas con propósito.
                     </p>
@@ -129,7 +131,10 @@ const Home = () => {
                   <span className="title-grid"> desarrollo web</span>
                   <span className="hover-show">
                     {" "}
-                    <span className="title-grid"> que evoluciona</span>
+                    <span className="title-grid title-grid-hover">
+                      {" "}
+                      que evoluciona
+                    </span>
                     <p>Sitios que no se detienen, se adaptan y crecen</p>
                   </span>
                 </span>
@@ -140,7 +145,10 @@ const Home = () => {
                 <span>
                   <span className="title-grid">ads</span>
                   <span className="hover-show">
-                    <span className="title-grid"> inteligentes</span>
+                    <span className="title-grid title-grid-hover">
+                      {" "}
+                      inteligentes
+                    </span>
                     <p>Publicidad con dirección, optimización y resultados.</p>
                   </span>
                 </span>
@@ -151,7 +159,10 @@ const Home = () => {
                 <span>
                   <span className="title-grid">redes sociales</span>
                   <span className="hover-show">
-                    <span className="title-grid"> que transforman</span>
+                    <span className="title-grid title-grid-hover">
+                      {" "}
+                      que transforman
+                    </span>
                     <p>
                       Estrategias que conectan. Contenidos que provocan
                       respuesta.
@@ -165,7 +176,10 @@ const Home = () => {
                 <span>
                   <span className="title-grid">soporte</span>
                   <span className="hover-show">
-                    <span className="title-grid"> continuo</span>
+                    <span className="title-grid title-grid-hover">
+                      {" "}
+                      continuo
+                    </span>
                     <p>
                       Soporte técnico y creativo para que tu marca no se
                       detenga.
@@ -180,7 +194,7 @@ const Home = () => {
 
       <section className="full-container">
         <div className="slider-conainer container">
-            <ImageSlider/>
+          <ImageSlider />
         </div>
 
         <div className="banner full-container">
@@ -223,7 +237,7 @@ const Home = () => {
       </section>
 
       <section className="full-container">
-        <div className="container">
+        <div className="container social-post-container">
           <motion.p
             className="text-show-effect"
             initial="hidden"
@@ -248,15 +262,15 @@ const Home = () => {
                 </motion.span>
               ))}
           </motion.p>
-          <PubliSlides/>
+          <PubliSlides />
         </div>
       </section>
 
       <section className="full-container">
         <PostCard initialLimit={3} maxLimit={3} />
-        <div className="container">
+        <div className="container text-show-effect">
           <p>Guías, casos y análisis para optimizar tu presencia digital.</p>
-          <Link to={'/news'} className="read-more-link">
+          <Link to={"#"} className="read-more-link">
             Ver todas las notas
             <svg
               height="21"
@@ -284,16 +298,14 @@ const Home = () => {
         <div className="container testimonial-header">
           <h4>La voz de nuestros clientes.</h4>
           <p>
-            Testimonios de profesionales que
-            han visto resultados concretos
-            en sus proyectos.
+            Testimonios de profesionales que han visto resultados concretos en
+            sus proyectos.
           </p>
         </div>
-        <div className="container">          
-          <Testimoniales/>
+        <div className="container">
+          <Testimoniales />
         </div>
       </section>
-
     </main>
   );
 };

@@ -1,6 +1,5 @@
 // App.jsx
 import { BrowserRouter } from "react-router-dom";
-import "./assets/styles/fonts/index.css";
 import AppRoutes from "@/routes/AppRoutes";
 import Header from "@/layout/Header";
 import Footer from "@/layout/Footer";
@@ -16,7 +15,7 @@ function App() {
       <Header onTogglePopup={togglePopup}/>
       <MenuPopup isOpen={isOpen} onClose={togglePopup}/>
       <AppRoutes/>
-      <Footer/>
+      {/* <Footer/> */}
     </BrowserRouter>
   );
 }

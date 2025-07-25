@@ -1,5 +1,3 @@
-
-
 .home-content p{
   text-align: center;
   font-size: 16px;
@@ -35,6 +33,11 @@ p{
   text-transform: uppercase;
   font-weight: 700;
   font-size: 14px;
+  color: #2c2c2c;
+}
+
+.title-grid-hover{
+  color: #000000;
 }
 
 .hover-show{
@@ -70,6 +73,11 @@ p{
   flex-direction: column;
   gap: 20px;
   padding: 50px 0;
+  font-size: 17px;
+}
+
+.text-home p{
+  font-size: 16px;
 }
 
 .grid-text{
@@ -88,4 +96,74 @@ p{
 
 .grid-text-home:first-child, .grid-text-home:last-child{
   background-color: #F5F5F5;
+}
+
+.mobile-banner{
+  display: block;
+}
+
+.desktop-banner{
+  display: none;
+}
+
+.services-text{
+  width: 100%;
+  max-width: 320px;
+}
+
+.container.text-show-effect{
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .home-content{
+    height: 200px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .home-content p{
+    font-size: 19px;
+  }
+
+  .text-show-effect *{
+    font-size: 19px;
+  }
+
+  .mobile-banner{
+    display: none;
+  }
+
+  .desktop-banner{
+    display: block;
+  }
+
+  .desktop-banner img{
+    width: 100%;
+  }
+
+  .services-text{
+    max-width: 550px;
+  }
+
+  .grid-text{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 20px 0;
+  }
+
+  .grid-text-home{
+    height: 80px;
+  }
+
+  .social-post-container{
+    height: 500px;
+  }
 }

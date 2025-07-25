@@ -93,17 +93,29 @@ p{
   background-color: #fed332;
 }
 
-.mobile-banner{
-  display: block;
+
+.read-more-link{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+  color: #222222;
+  text-decoration: none;
 }
 
-.desktop-banner{
-  display: none;
+.read-more-link svg{
+  width: 35px;
+  height: 35px;
+  fill: #222222;
 }
+
 
 @media (min-width: 768px) {
   .container{
-    padding: 0 50px;
+    width: 100%;
+    max-width: 95%;
+    padding: 20px;
   }
   .mobile-banner{
     display: none;
@@ -111,6 +123,10 @@ p{
   
   .desktop-banner{
     display: block;
+  }
+
+  .read-more-link{
+    font-size: 17px;
   }
 }
 

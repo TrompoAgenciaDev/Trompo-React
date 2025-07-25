@@ -1,12 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState, useEffect, useRef } from "react";
+import { motion } from "motion/react";
+import "../assets/styles/video-slider.css";
 
-// Puedes cambiar estos paths por videos reales si lo deseas
 const sliderVideos = [
-  "/assets/heroImages/home-video.mp4",
-  "/assets/heroImages/home-video.mp4",
-  "/assets/heroImages/home-video.mp4",
-  "/assets/heroImages/home-video.mp4",
+  "/assets/portfolioImg/videos/volvo.mp4",
+  "/assets/portfolioImg/videos/denso.mp4",
+  "/assets/portfolioImg/videos/sw.mp4",
+  "/assets/portfolioImg/videos/viditec.mp4",
 ];
 
 function isMobile() {
@@ -22,168 +22,105 @@ function isMobile() {
 function VideoSlider() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [animating, setAnimating] = useState(true);
   const timerRef = useRef(null);
   const containerRef = useRef(null);
-  const videoRef = useRef(null);
 
   const duration = 800;
-  const interval = 2800;
+  const interval = 4000;
 
-  // Avanza al siguiente slide
-  const nextSlide = () => {
-    setIndex((prev) => (prev + 1) % sliderVideos.length);
+  const getVisibleCount = () => {
+    if (typeof window === "undefined") return 1;
+    if (window.innerWidth >= 1024) return 4;
+    if (window.innerWidth >= 768) return 2;
+    return 1;
   };
 
-  // Maneja el timer de auto-slide
+  const visibleCount = getVisibleCount();
+  const totalSlides = sliderVideos.length;
+  const clonedSlides = [...sliderVideos, ...sliderVideos, ...sliderVideos];
+  const totalCloned = clonedSlides.length;
+
+  const nextSlide = () => {
+    setIndex((prev) => prev + 1);
+    setAnimating(true);
+  };
+
   useEffect(() => {
     if (!paused) {
-      timerRef.current = setInterval(() => {
-        nextSlide();
-      }, interval);
+      timerRef.current = setInterval(nextSlide, interval);
     }
     return () => clearInterval(timerRef.current);
   }, [paused, index]);
 
-  // Pausar/resumir por hover/touch
   useEffect(() => {
     const handleScrollOrClickOutside = (e) => {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(e.target)
-      ) {
+      if (containerRef.current && !containerRef.current.contains(e.target)) {
         setPaused(false);
       }
     };
 
+    const events = ["scroll", "mousedown", "touchstart"];
     if (paused) {
-      window.addEventListener("scroll", handleScrollOrClickOutside, true);
-      window.addEventListener("mousedown", handleScrollOrClickOutside, true);
-      window.addEventListener("touchstart", handleScrollOrClickOutside, true);
+      events.forEach((ev) =>
+        window.addEventListener(ev, handleScrollOrClickOutside, true)
+      );
     } else {
-      window.removeEventListener("scroll", handleScrollOrClickOutside, true);
-      window.removeEventListener("mousedown", handleScrollOrClickOutside, true);
-      window.removeEventListener("touchstart", handleScrollOrClickOutside, true);
+      events.forEach((ev) =>
+        window.removeEventListener(ev, handleScrollOrClickOutside, true)
+      );
     }
 
-    return () => {
-      window.removeEventListener("scroll", handleScrollOrClickOutside, true);
-      window.removeEventListener("mousedown", handleScrollOrClickOutside, true);
-      window.removeEventListener("touchstart", handleScrollOrClickOutside, true);
-    };
+    return () =>
+      events.forEach((ev) =>
+        window.removeEventListener(ev, handleScrollOrClickOutside, true)
+      );
   }, [paused]);
 
-  // Handlers para pausar/reanudar
   const handlePause = () => setPaused(true);
+  const handleTouch = () => isMobile() && setPaused(true);
 
-  // Mobile: tap para pausar
-  const handleTouch = (e) => {
-    if (isMobile()) {
-      setPaused(true);
-    }
-  };
-
-  // Reproduce el video solo cuando el slide es visible
+  // Detecta fin del loop y resetea sin animación
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.currentTime = 0;
-      // Espera a que la animación de entrada termine antes de reproducir
-      // para asegurar que el video está visible
-      const playTimeout = setTimeout(() => {
-        videoRef.current.play().catch(() => {});
+    if (index >= totalSlides) {
+      const resetTimeout = setTimeout(() => {
+        setAnimating(false);
+        setIndex(0);
       }, duration);
-      return () => clearTimeout(playTimeout);
+      return () => clearTimeout(resetTimeout);
     }
   }, [index]);
 
-  // Pausa el video cuando el componente se desmonta o el slide cambia
-  useEffect(() => {
-    return () => {
-      if (videoRef.current) {
-        videoRef.current.pause();
-      }
-    };
-  }, [index]);
-
-  // Cuando termina el video, avanza al siguiente slide y reanuda animación
-  const handleVideoEnded = () => {
-    nextSlide();
-  };
+  const offset = (index * 100) / visibleCount;
 
   return (
     <div
       ref={containerRef}
-      style={{
-        width: "100%",
-        height: 300,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        position: "relative",
-        overflow: "hidden",
-        touchAction: "manipulation",
-        cursor: paused ? "pointer" : "default",
-      }}
+      className="video-slider-container"
+      style={{ cursor: paused ? "pointer" : "default" }}
       onMouseEnter={!isMobile() ? handlePause : undefined}
       onTouchStart={handleTouch}
     >
-      <AnimatePresence initial={false}>
-        
-        <motion.div
-          key={index}
-          style={{
-            width: "100%",
-            height: "300px",
-            position: "absolute",
-            left: 0,
-            top: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -100 }}
-          transition={{ duration: duration / 1000 }}
-        >
-          <video
-            ref={videoRef}
-            src={sliderVideos[index]}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              border: "none",
-              outline: "none",
-              pointerEvents: "none", // para que el touch/mouse pase al contenedor
-            }}
-            muted
-            playsInline
-            onEnded={handleVideoEnded}
-            autoPlay={false}
-            controls={false}
-          />
-        </motion.div>
-      </AnimatePresence>
-      {/* Overlay para indicar pausa */}
-      {paused && (
-        <div
-          style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            width: "100%",
-            height: "100%",
-            background: "transparent",
-            zIndex: 2,
-            display: "flex",
-            alignItems: "center",
-            pointerEvents: "none",
-            userSelect: "none",
-          }}
-        >
-          
-        </div>
-      )}
+      <motion.div
+        className="video-slider-track"
+        animate={{ x: `-${offset}%` }}
+        transition={animating ? { duration: duration / 1000 } : { duration: 0 }}
+      >
+        {clonedSlides.map((videoSrc, i) => (
+          <div className="video-slide" key={i}>
+            <video
+              src={videoSrc}
+              muted
+              playsInline
+              autoPlay
+              loop
+              className="video-element"
+            />
+          </div>
+        ))}
+      </motion.div>
+
+      {paused && <div className="video-slider-overlay"></div>}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
+import "../../assets/styles/publi-slider.css";
 
-// Ejemplo de datos: cada slide puede tener hasta 2 enlaces
 const slides = [
   [
     { href: "https://www.google.com", img: "/assets/portfolioImg/volvo.jpg", alt: "Volvo" },
@@ -28,54 +28,21 @@ export default function PubliSlides() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Solo mostrar la cantidad de slides que entran
   const visibleSlides = slides.slice(0, slidesToShow);
 
   return (
-    <div
-      ref={containerRef}
-      style={{
-        width: "100%",
-        display: "flex",
-        gap: 16,
-        justifyContent: "center",
-        alignItems: "stretch",
-        minHeight: 120,
-        margin: "24px 0",
-      }}
-    >
+    <div ref={containerRef} className="publi-slider-container">
       {visibleSlides.map((slide, idx) => (
-        <div
-          key={idx}
-          style={{
-            flex: 1,
-            minWidth: 0,
-            display: "flex",
-            flexDirection: "column",
-            gap: 8,
-            background: "#f7f7f7",
-            borderRadius: 12,
-            overflow: "hidden",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
-            padding: 8,
-          }}
-        >
+        <div key={idx} className="publi-slide">
           {slide.map((item, i) => (
             <a
               key={i}
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
+              className="publi-slide-item"
               style={{
-                display: "block",
-                width: "100%",
-                height: 90,
-                background: `url(${item.img}) center/cover no-repeat`,
-                borderRadius: 8,
-                marginBottom: i === slide.length - 1 ? 0 : 8,
-                minHeight: 90,
-                boxShadow: "0 1px 4px rgba(0,0,0,0.07)",
-                transition: "box-shadow 0.2s",
+                backgroundImage: `url(${item.img})`,
               }}
               title={item.alt}
             />
