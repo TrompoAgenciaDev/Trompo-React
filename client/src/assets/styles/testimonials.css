@@ -1,0 +1,132 @@
+.testimonial-wrapper{
+  background-color: #fed332;
+  padding-bottom: 30px;
+}
+
+.testimonial-header{
+  text-align: center;
+  color: #ffffff;
+}
+
+.testimonial-header h4{
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.testimonial-header p{
+  font-size: 13px;
+}
+
+.testimonial-header h4,
+.testimonial-header p{
+  color: #ffffff;
+}
+
+.testimoniales-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: 20px;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  overflow: visible;
+}
+
+.testimoniales-card {
+  width: 100%;
+  height: 420px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  padding: 32px 28px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s;
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: unset;
+  margin: 0;
+  z-index: 1;
+}
+
+.testimoniales-img{
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+  background-color: #d0d0d0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.testimoniales-img img{
+  width: 300px;
+}
+
+.testimoniales-author {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #222;
+  margin-bottom: 8px;
+  text-align: left;
+  width: 100%;
+}
+
+.testimoniales-rating {
+  color: #f7b500;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+  text-align: left;
+  width: 100%;
+}
+
+.testimoniales-rating-empty {
+  color: #e0e0e0;
+}
+
+.testimoniales-text {
+  color: #444;
+  font-size: 12px;
+  text-align: left;
+  flex: 1 1 auto;
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.testimoniales-dots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 22px;
+  width: 100%;
+}
+
+.testimoniales-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ebebeb;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: 1px solid transparent;
+}
+
+.testimoniales-dot.active {
+  background: #ffffff;
+  border-color: #000000;
+}

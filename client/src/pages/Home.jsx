@@ -1,8 +1,17 @@
-import Hero from "../layout/Hero";
+import { Link } from "react-router-dom";
 
 //styles
 import "../assets/styles/home.css";
 import { motion } from "motion/react";
+
+//components
+import VideoSlider from "../components/sliders/VideoSlider";
+import ImageSlider from "../components/sliders/ImageSlider";
+import PubliSlides from "../components/sliders/PubliSlides";
+import Testimoniales from "../components/Testimoniales";
+import PostCard from "../components/posts/PostCard";
+import Hero from "../layout/Hero";
+
 
 const Home = () => {
   return (
@@ -13,7 +22,7 @@ const Home = () => {
         <div className="container home-content">
           <p>
             Somos una agencia digital que combina{" "}
-            <span className="bold">creatividad, estrategia Y tecnología</span>
+            <span className="bold">creatividad, estrategia Y tecnología{" "}</span>
             para diseñar soluciones integrales que generan impacto.
           </p>
         </div>
@@ -21,10 +30,7 @@ const Home = () => {
 
       <section className="video-section full-container">
         <div className="full-container">
-          <div className="video-container"></div>
-          <div className="video-container"></div>
-          <div className="video-container"></div>
-          <div className="video-container"></div>
+          <VideoSlider/>
         </div>
 
         <div className="container home-content">
@@ -54,7 +60,7 @@ const Home = () => {
               </motion.span>
             ))}
           </motion.p>
-          <a href="/casos" className="">
+          <a href="#" className="read-more-link">
             Todos los proyectos
             <svg
               height="21"
@@ -64,10 +70,10 @@ const Home = () => {
             >
               <g
                 fill="none"
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 transform="translate(4 6)"
               >
                 <path d="m9.5.497 4 4.002-4 4.001" />
@@ -174,8 +180,7 @@ const Home = () => {
 
       <section className="full-container">
         <div className="slider-conainer container">
-
-
+            <ImageSlider/>
         </div>
 
         <div className="banner full-container">
@@ -243,6 +248,49 @@ const Home = () => {
                 </motion.span>
               ))}
           </motion.p>
+          <PubliSlides/>
+        </div>
+      </section>
+
+      <section className="full-container">
+        <PostCard initialLimit={3} maxLimit={3} />
+        <div className="container">
+          <p>Guías, casos y análisis para optimizar tu presencia digital.</p>
+          <Link to={'/news'} className="read-more-link">
+            Ver todas las notas
+            <svg
+              height="21"
+              viewBox="0 0 21 21"
+              width="21"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g
+                fill="none"
+                fillRule="evenodd"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                transform="translate(4 6)"
+              >
+                <path d="m9.5.497 4 4.002-4 4.001" />
+                <path d="m.5 4.5h13" />
+              </g>
+            </svg>
+          </Link>
+        </div>
+      </section>
+
+      <section className="full-container testimonial-wrapper">
+        <div className="container testimonial-header">
+          <h4>La voz de nuestros clientes.</h4>
+          <p>
+            Testimonios de profesionales que
+            han visto resultados concretos
+            en sus proyectos.
+          </p>
+        </div>
+        <div className="container">          
+          <Testimoniales/>
         </div>
       </section>
 

@@ -30,9 +30,8 @@ const PostCard = ({ initialLimit = 999, maxLimit = 1000, category, tag, type = "
   }
 
   return (
-    <div className="post-card-container">
-      <div className="card-container">
-        {posts.slice(0, visiblePosts).map((post) => {
+    <div className="post-card-container full-container">
+      {posts.slice(0, visiblePosts).map((post) => {
           // Usar el título y la primera categoría
           const title = post?.title || "Sin título";
           const category = post?.categories?.[0] || "Sin categoría"; // Obtener la primera categoría
@@ -41,21 +40,35 @@ const PostCard = ({ initialLimit = 999, maxLimit = 1000, category, tag, type = "
           const featuredImage = post?.featured_image || "/assets/postImg/post.png"; 
 
           return (
-            <div className="post-card" key={post.id} style={{
+            <div className="full-container post-card" key={post.id} style={{
               backgroundImage: `url(${featuredImage})`
             }}>
-              <div className="info-container">
-                <p className="post-category text">{truncateText(category, 100)}</p> {/* Mostrar la categoría como texto */}
-                <h3 className="post-title">{title}</h3>
+              <h3 className="post-title">{title}</h3>
                 {/* <a href={`/posts/post/${post.slug}`} className="read-more-link">Ver más</a> */}
                 <Link to={`/post/${post.slug}`} className="read-more-link">
-                  Ver más
+                  Ver nota
+                  <svg
+                    height="21"
+                    viewBox="0 0 21 21"
+                    width="21"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g
+                      fill="none"
+                      fillRule="evenodd"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      transform="translate(4 6)"
+                    >
+                      <path d="m9.5.497 4 4.002-4 4.001" />
+                      <path d="m.5 4.5h13" />
+                    </g>
+                  </svg>
                 </Link>
-              </div>
             </div>
           );
         })}
-      </div>
     </div>
   );
 };
