@@ -140,6 +140,18 @@ p{
 @media (min-width: 1280px) {
   .container{
     width: 100%;
-    max-width: 955px;
+    max-width: 1200px;
+  }
+
+  .read-more-link{
+    font-size: 19px;
+    font-weight: 400;
+  }
+}
+
+@media (min-width: 1366px) {
+  .container{
+    width: 100%;
+    max-width: 1300px;
   }
 }

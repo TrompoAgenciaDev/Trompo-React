@@ -34,16 +34,18 @@ const PostCard = ({ initialLimit = 999, maxLimit = 1000, category, tag, type = "
       {posts.slice(0, visiblePosts).map((post) => {
           // Usar el título y la primera categoría
           const title = post?.title || "Sin título";
-          const category = post?.categories?.[0] || "Sin categoría"; // Obtener la primera categoría
+          const category = post?.categories?.[0] || "Sin categoría";
 
-          // Manejar la imagen de portada, si no hay una imagen, usar una imagen por defecto
+          // si no hay una imagen, usar una imagen por defecto
           const featuredImage = post?.featured_image || "/assets/postImg/post.png"; 
 
           return (
-            <div className="container post-card" key={post.id} style={{
+            <div className="full-container post-card" key={post.id} style={{
               backgroundImage: `url(${featuredImage})`
             }}>
-              <h3 className="post-title">{title}</h3>
+
+              <div className="container">
+                <h3 className="post-title">{title}</h3>
                 {/* <a href={`/posts/post/${post.slug}`} className="read-more-link">Ver más</a> */}
                 <Link to={`/post/${post.slug}`} className="read-more-link">
                   Ver nota
@@ -66,6 +68,7 @@ const PostCard = ({ initialLimit = 999, maxLimit = 1000, category, tag, type = "
                     </g>
                   </svg>
                 </Link>
+              </div>
             </div>
           );
         })}

@@ -1,5 +1,5 @@
 .social-post-container{
-    height: fit-content;
+  height: fit-content;
 }
 
 .publi-slider-container {
@@ -9,7 +9,6 @@
   justify-content: center;
   align-items: stretch;
   min-height: 120px;
-  margin: 24px 0;
 }
 
 .publi-slide {
@@ -39,9 +38,32 @@
 
 @media (min-width: 768px) {
   .publi-slider-container {
-    height: 500px;
+    height: 320px;
   }
   .publi-slide-item {
     height: 100%;
+  }
+  .social-post-container{
+    padding: 50px 0;
+  }
+}
+
+
+@media (min-width: 1280px) {
+  .social-post-container{
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    justify-content: center;    
+    align-items: flex-start;
+  }
+
+  .social-post-container .text-show-effect span{
+    font-size: 22px;
+  }
+
+  .publi-slider-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
   }
 }

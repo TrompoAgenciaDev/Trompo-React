@@ -242,25 +242,28 @@ const Home = () => {
             className="text-show-effect"
             initial="hidden"
             whileInView="visible"
-            viewport={{ margin: "-200px" }}
+            viewport={{ margin: "-300px" }}
             variants={{
               hidden: {},
               visible: {},
             }}
           >
-            {"Creamos contenido relevante, gestionamos comunidades y potenciamos tu marca en redes sociales con estrategia, diseño y foco en resultados."
-              .split("")
-              .map((char, idx) => (
-                <motion.span
-                  key={idx}
-                  style={{ display: "inline-block" }}
-                  initial={{ opacity: 0.2 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: idx * 0.01, duration: 0.7 }}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
+            {[
+              "Creamos contenido relevante, gestionamos",
+              "comunidades y potenciamos tu marca en",
+              "redes sociales con estrategia, diseño y foco",
+              "en resultados.",
+            ].map((line, idx) => (
+              <motion.span
+                key={idx}
+                style={{ display: "block" }}
+                initial={{ opacity: 0.2 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: idx * 0.3, duration: 1 }}
+              >
+                {line}
+              </motion.span>
+            ))}
           </motion.p>
           <PubliSlides />
         </div>

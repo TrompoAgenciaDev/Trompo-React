@@ -41,9 +41,11 @@ p{
 }
 
 .hover-show{
+  width: 100%;
   opacity: 0;
   transition: opacity .3s ease-in-out;
 }
+
 
 .hover-show:hover{
   opacity: 1;
@@ -71,6 +73,8 @@ p{
   text-align: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 20px;
   padding: 50px 0;
   font-size: 17px;
@@ -153,6 +157,14 @@ p{
     max-width: 550px;
   }
 
+  .title-grid{
+    font-size: 18px;
+  }
+
+  .hover-show p{
+    font-size: 16px;
+  }
+
   .grid-text{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -163,7 +175,50 @@ p{
     height: 80px;
   }
 
+  .text-home p{
+    width: 700px;
+    font-size: 18px;
+  }
+
+  .grid-text-home{
+    font-size: 22px;
+  }
+
   .social-post-container{
     height: 500px;
+  }
+}
+
+@media (min-width: 1280px){  
+  .home-content p{
+    font-size: 28px;
+  }
+  .home-content{
+    height: auto;
+    padding: 50px 0;
+  }
+  .bg-yellow .container{
+    padding: 50px 0;
+  }
+  .services-text{
+    font-size: 19px;
+    max-width: 550px;
+  }
+  
+  .title-grid{
+    font-size: 22px;
+  }
+
+  .hover-show p{
+    font-size: 18px;
+    color: #222222;
+  }
+
+}
+
+@media (min-width: 1366px){  
+  .home-content p,
+  .text-show-effect span{
+    font-size: 34px;
   }
 }
