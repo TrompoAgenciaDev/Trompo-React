@@ -213,12 +213,17 @@ p{
     font-size: 18px;
     color: #222222;
   }
-
+  .text-show-effect p{
+    font-size: 24px;
+  }
+  .grid-text-home:nth-child(2){
+    background-color: #fbfbfb;
+  }
 }
 
 @media (min-width: 1366px){  
   .home-content p,
   .text-show-effect span{
-    font-size: 34px;
+    font-size: 28px;
   }
 }

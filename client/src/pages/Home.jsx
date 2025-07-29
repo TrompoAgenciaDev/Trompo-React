@@ -11,6 +11,7 @@ import PubliSlides from "../components/sliders/PubliSlides";
 import Testimoniales from "../components/Testimoniales";
 import PostCard from "../components/posts/PostCard";
 import Hero from "../layout/Hero";
+import ExternalForm from "../components/ExternalForms/ExternalForm";
 
 const Home = () => {
   return (
@@ -309,6 +310,15 @@ const Home = () => {
           <Testimoniales />
         </div>
       </section>
+
+      <div
+        className="full-container prefooter-container"
+        style={{ background: "url('/assets/form-bg.png')" }}
+      >
+        <div className="container">
+          <ExternalForm />
+        </div>
+      </div>
     </main>
   );
 };

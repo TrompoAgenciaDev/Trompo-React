@@ -13,11 +13,6 @@ const slides = [
     alt: "Menta",
   },
   {
-    href: "https://www.yahoo.com",
-    img: "/assets/portfolioImg/femesa.jpg",
-    alt: "Femesa",
-  },
-  {
     href: "https://www.duckduckgo.com",
     img: "/assets/portfolioImg/ranko.jpg",
     alt: "Ranko",
@@ -30,11 +25,12 @@ export default function PubliSlides() {
 
   useEffect(() => {
     function handleResize() {
-      if (!containerRef.current) return;
-      const width = containerRef.current.offsetWidth;
-      if (width > 900) setSlidesToShow(3);
-      else setSlidesToShow(2);
+      const width = window.innerWidth;
+      if (width >= 1024) setSlidesToShow(3);
+      else if(width >= 768) setSlidesToShow(2); 
+      else setSlidesToShow(1);
     }
+
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);

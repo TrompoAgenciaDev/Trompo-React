@@ -15,7 +15,7 @@ function App() {
       <Header onTogglePopup={togglePopup}/>
       <MenuPopup isOpen={isOpen} onClose={togglePopup}/>
       <AppRoutes/>
-      {/* <Footer/> */}
+      <Footer/>
     </BrowserRouter>
   );
 }

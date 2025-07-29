@@ -20,7 +20,7 @@
 
 .testimonial-header h4,
 .testimonial-header p{
-  color: #ffffff;
+  color: #000000;
 }
 
 .testimoniales-container {
@@ -119,19 +119,41 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #ebebeb;
+  background: #555555;
   cursor: pointer;
   transition: background 0.2s;
   border: 1px solid transparent;
 }
 
 .testimoniales-dot.active {
-  background: #ffffff;
+  background: #000000;
   border-color: #000000;
 }
 
 @media (min-width:768px){
   .testimoniales-card {
     height: 350px;
+  }
+}
+
+@media (min-width:1280px){
+  .testimoniales-card {
+    height: 400px;
+  }
+
+  .testimonial-header h4{
+    font-size: 28px;
+  }
+
+  .testimonial-header p{
+    font-size: 20px;
+  }
+
+  .testimoniales-rating,
+  .testimoniales-rating-empty{
+    font-size: 28px;
+  }
+  .testimoniales-text{
+    font-size: 15px;
   }
 }
