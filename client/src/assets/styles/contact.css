@@ -3,7 +3,6 @@
   padding: 0;
 }
 
-<<<<<<< HEAD
 .grid-container{
   width: 100%;
   display: grid;
@@ -19,10 +18,10 @@
   right: 0;
   width: 100%;
   height: 100%;
-=======
+}
+
 .pre-footer{  
   padding: 0;
->>>>>>> d779322c9c1bb5a057eec493ba86b064e92e9df2
   background-color: #000000;
 }
 
