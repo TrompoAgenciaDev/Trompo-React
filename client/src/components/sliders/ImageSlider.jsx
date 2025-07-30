@@ -38,7 +38,9 @@ function ImageSlider() {
 
   const getVisibleCount = () => {
     if (typeof window === "undefined") return 2;
-    if (window.innerWidth >= 1024) return 6;
+    if (window.innerWidth >= 1366) return 6;
+    if (window.innerWidth >= 1280) return 5;
+    if (window.innerWidth >= 1024) return 4;
     if (window.innerWidth >= 768) return 4;
     return 1;
   };

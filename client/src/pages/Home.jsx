@@ -311,10 +311,7 @@ const Home = () => {
         </div>
       </section>
 
-      <div
-        className="full-container prefooter-container"
-        style={{ background: "url('/assets/form-bg.png')" }}
-      >
+      <div className="full-container prefooter-container">
         <div className="container">
           <ExternalForm />
         </div>

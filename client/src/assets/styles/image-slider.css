@@ -49,11 +49,23 @@
 
 @media (min-width: 1024px) {
   .image-slide {
-    flex: 0 0 20%;
+    flex: 0 0 25%;
   }
 
   .image-slide img {
     max-width: 170px;
     height: 70px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .image-slide {
+    flex: 0 0 20%;
+  }
+}
+
+@media (min-width: 1366px) {
+  .image-slide {
+    flex: 0 0 16.5165%;
   }
 }
