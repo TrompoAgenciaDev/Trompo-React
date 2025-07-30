@@ -11,7 +11,7 @@ function App() {
 
 
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/trompo">
       <Header onTogglePopup={togglePopup}/>
       <MenuPopup isOpen={isOpen} onClose={togglePopup}/>
       <AppRoutes/>
