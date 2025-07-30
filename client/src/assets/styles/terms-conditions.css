@@ -1,0 +1,46 @@
+.title {
+  font-size: 24px;
+  margin-top: 40px;
+  font-weight: bold;
+  color: #222;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-top: 30px;
+  font-weight: bold;
+  color: #333;
+}
+
+.paragraph {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 10px 0 20px;
+  color: #444;
+}
+
+.list {
+  margin-left: 20px;
+  padding-left: 15px;
+  list-style: disc;
+  color: #444;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.term-list {
+  margin: 20px 0;
+  padding-left: 20px;
+  list-style-type: decimal;
+  font-size: 16px;
+  color: #444;
+}
+
+.term-list li {
+  margin-bottom: 30px;
+}
+
+.link {
+  color: #0066cc;
+  text-decoration: underline;
+}

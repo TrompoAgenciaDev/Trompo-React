@@ -3,6 +3,7 @@ import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Casos from "../pages/Casos";
 import Trends from "../pages/Trends";
+import Terms from "../pages/terms";
 
 //Servicios
 import Servicios from "../pages/Servicios";
@@ -24,6 +25,7 @@ const routesConfig = {
     { path: "#", label: "Tendencias", Component: Trends },
     { path: "#", label: "Casos", Component: Casos },
     { path: "#", label: "Contacto", Component: Contact },
+    { path: "/terms", label: "Terms", Component: Terms },
   ],
   servicios: [
     { path: "#", label: "Identidad", Component: Identidad },

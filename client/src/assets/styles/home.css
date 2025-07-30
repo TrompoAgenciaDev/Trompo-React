@@ -12,50 +12,65 @@ p{
 .grid-services{
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
   padding-bottom: 50px;
 }
 
 .grid-row{
   width: 100%;
-  padding: 20px 15px;
-}
-
-.grid-row{
   border-top: 2px solid #ffffff;
 }
+
 
 .grid-row:last-child{
   border-bottom: 2px solid #ffffff;
 }
 
 .title-grid{
+  display: flex;
+  flex-wrap: nowrap;
+  text-wrap: nowrap;
   text-transform: uppercase;
   font-weight: 700;
   font-size: 14px;
   color: #2c2c2c;
+  flex-wrap: nowrap;
 }
 
 .title-grid-hover{
+  display: flex;
+  gap: 6px;
   color: #000000;
 }
 
-.hover-show{
+.header-grid .hover-show{
   width: 100%;
   opacity: 0;
   transition: opacity .3s ease-in-out;
+  display: flex;
+  align-items: center;
+  font-weight: 400;
 }
 
-
-.hover-show:hover{
+.header-grid:hover .hover-show{
   opacity: 1;
 }
 
 .grid-row p{
   color: #222222;
   opacity: 0.6;
-  margin-top: 10px;
   font-size: 14px;
+}
+
+.header-grid{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 10px 10px;
+}
+
+.header-grid:hover{
+  background-color: #fdd74b;
 }
 
 .header-grid::after{
@@ -65,8 +80,41 @@ p{
   height: 10px;
   background-color: #ffffff;
   border-radius: 9999px;
-  top: 7px;
-  right: 0;
+  top: 50%;
+  right: 20px;
+  transition: all .2s ease-in-out;
+  transform: translateY(-50%);
+}
+
+.header-grid:hover::after{
+  opacity: 0;
+}
+
+.header-grid .arrow-icon{
+  position: absolute;
+  right: 0px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(-10px);
+  opacity: 0;
+  transition: all .2s ease-in-out;
+}
+
+.header-grid .arrow-icon svg{
+  width: 24px;
+  height: 24px;
+}
+
+.header-grid:hover .arrow-icon{
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+.hover-show p{
+  padding-right: 40px;
+  color: #000000;
 }
 
 .text-home{
@@ -98,8 +146,12 @@ p{
   font-weight: 400;
 }
 
-.grid-text-home:first-child, .grid-text-home:last-child{
+.grid-text-home{
   background-color: #F5F5F5;
+}
+
+.grid-text-home:hover{
+  background-color: #fed332;
 }
 
 .mobile-banner{
@@ -134,7 +186,9 @@ p{
   }
 
   .home-content p{
+    width: 100%;
     font-size: 19px;
+    text-align: left;
   }
 
   .text-show-effect *{
@@ -158,7 +212,7 @@ p{
   }
 
   .title-grid{
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .hover-show p{
@@ -181,7 +235,7 @@ p{
   }
 
   .grid-text-home{
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .social-post-container{
@@ -194,15 +248,39 @@ p{
     font-size: 28px;
   }
   .home-content{
-    height: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
     padding: 50px 0;
   }
+
   .bg-yellow .container{
     padding: 50px 0;
   }
+
   .services-text{
     font-size: 19px;
     max-width: 550px;
+  }
+
+  .header-grid{
+    padding: 36px 20px;
+  }
+
+  .header-grid .arrow-icon{
+    right: 20px;
+    width: 50px;
+    transform: translateX(-20px);
+  }
+
+  .header-grid .arrow-icon svg{
+    width: 40px;
+    height: 40px;
+  }
+
+  .header-grid::after{
+    width: 15px;
+    height: 15px;
   }
   
   .title-grid{
@@ -211,13 +289,26 @@ p{
 
   .hover-show p{
     font-size: 18px;
-    color: #222222;
   }
+
+  .header-grid span:first-child,
+  .header-grid .hover-show{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+  }
+
   .text-show-effect p{
     font-size: 24px;
   }
+
   .grid-text-home:nth-child(2){
     background-color: #fbfbfb;
+  }
+
+  .grid-text-home{
+    font-size: 22px;
   }
 }
 
