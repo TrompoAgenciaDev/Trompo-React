@@ -49,23 +49,8 @@ const PostCard = ({ initialLimit = 999, maxLimit = 1000, category, tag, type = "
                 {/* <a href={`/posts/post/${post.slug}`} className="read-more-link">Ver más</a> */}
                 <Link to={`/post/${post.slug}`} className="read-more-link">
                   Ver nota
-                  <svg
-                    height="21"
-                    viewBox="0 0 21 21"
-                    width="21"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g
-                      fill="none"
-                      fillRule="evenodd"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      transform="translate(4 6)"
-                    >
-                      <path d="m9.5.497 4 4.002-4 4.001" />
-                      <path d="m.5 4.5h13" />
-                    </g>
+                  <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
                 </Link>
               </div>

@@ -99,15 +99,18 @@ p{
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 5px;
-  color: #222222;
+  gap: 20px;
+  color: #444444;
   text-decoration: none;
+  transform: translateX(-10px);
+  transition: all .2s ease-in-out;
 }
 
 .read-more-link svg{
-  width: 35px;
-  height: 35px;
-  fill: #222222;
+  width: 18px;
+  height: 18px;
+  fill: #444444;
+  transition: all .2s ease-in-out;
 }
 
 
@@ -146,6 +149,24 @@ p{
   .read-more-link{
     font-size: 19px;
     font-weight: 400;
+  }
+
+  .read-more-link svg{
+    width: 25px;
+    height: 25px;
+  }
+
+  .read-more-link:hover svg{
+    width: 30px;
+    height: 30px;
+  }
+
+  .read-more-link:hover{
+    transform: translateX(15px);
+    font-size: 21px;
+    transform-origin: left center;
+    color: #000000;
+    font-weight: 600;
   }
 }
 

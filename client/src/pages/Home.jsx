@@ -19,7 +19,7 @@ const Home = () => {
       <Hero />
 
       <section className="section full-container">
-        <div className="container home-content">
+        <div className="container home-content text-post-hero">
           <p>
             Somos una agencia digital que combina{" "}
             <span className="bold">creatividad, estrategia y tecnología </span>
@@ -60,25 +60,11 @@ const Home = () => {
               </motion.span>
             ))}
           </motion.p>
-          <Link href="#" className="read-more-link">
+          <Link href="#" 
+            className="read-more-link">
             Todos los proyectos
-            <svg
-              height="21"
-              viewBox="0 0 21 21"
-              width="21"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g
-                fill="none"
-                fillRule="evenodd"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                transform="translate(4 6)"
-              >
-                <path d="m9.5.497 4 4.002-4 4.001" />
-                <path d="m.5 4.5h13" />
-              </g>
+            <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </Link>
         </div>
@@ -106,60 +92,42 @@ const Home = () => {
             impulsen su crecimiento.
           </p>
         </div>
-
         <div className="container">
           <div className="grid-services">
-            <div className="grid-row">
-              <div className="header-grid">
-                <span className="test-grid-container">
+            <div className="service-section-row">
+              <div className="service-grid">
+                <span className="service-title-grid">
                   <span className="title-grid title-grid-hover">
                     identidad
                     <span className="title-grid title-grid-hover hover-show">
                       que conecta
                     </span>
                   </span>
-                  <span className="hover-show">
-                    <p>
-                      Branding, diseño y multimedia para marcas con propósito.
-                    </p>
-                  </span>
                 </span>
-                <div className="arrow-icon">
-                  <svg
-                    height="21"
-                    viewBox="0 0 21 21"
-                    width="21"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g
-                      fill="none"
-                      fillRule="evenodd"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      transform="translate(4 6)"
-                    >
-                      <path d="m9.5.497 4 4.002-4 4.001" />
-                      <path d="m.5 4.5h13" />
-                    </g>
+                <div className="content-text-grid hover-show">
+                  <p>
+                    Branding, diseño y multimedia para marcas con propósito.
+                  </p>
+                  <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
                 </div>
               </div>
             </div>
-            <div className="grid-row">
-              <div className="header-grid">
-                <span className="test-grid-container">
+            <div className="service-section-row">
+              <div className="service-grid">
+                <span className="service-title-grid">
                   <span className="title-grid title-grid-hover">
                     desarrollo web
                     <span className="title-grid title-grid-hover hover-show">
                       que evoluciona
                     </span>
                   </span>
-                  <span className="hover-show">
-                    <p>Sitios que no se detienen, se adaptan y crecen</p>
-                  </span>
                 </span>
-                <div className="arrow-icon">
+                <div className="content-text-grid hover-show">
+                  <p>
+                    Sitios que no se detienen, se adaptan y crecen
+                  </p>
                   <svg
                     height="21"
                     viewBox="0 0 21 21"
@@ -181,113 +149,63 @@ const Home = () => {
                 </div>
               </div>
             </div>
-            <div className="grid-row">
-              <div className="header-grid">
-                <span className="test-grid-container">
+            <div className="service-section-row">
+              <div className="service-grid">
+                <span className="service-title-grid">
                   <span className="title-grid title-grid-hover">
                     ads
                     <span className="title-grid title-grid-hover hover-show">
                       inteligentes
                     </span>
                   </span>
-                  <span className="hover-show">
-                    <p>Publicidad con dirección, optimización y resultados.</p>
-                  </span>
                 </span>
-                <div className="arrow-icon">
-                  <svg
-                    height="21"
-                    viewBox="0 0 21 21"
-                    width="21"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g
-                      fill="none"
-                      fillRule="evenodd"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      transform="translate(4 6)"
-                    >
-                      <path d="m9.5.497 4 4.002-4 4.001" />
-                      <path d="m.5 4.5h13" />
-                    </g>
+                <div className="content-text-grid hover-show">
+                  <p>
+                    Publicidad con dirección, optimización y resultados.
+                  </p>
+                  <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
                 </div>
               </div>
             </div>
-            <div className="grid-row">
-              <div className="header-grid">
-                <span className="test-grid-container">
+            <div className="service-section-row">
+              <div className="service-grid">
+                <span className="service-title-grid">
                   <span className="title-grid title-grid-hover">
                     redes sociales
                     <span className="title-grid title-grid-hover hover-show">
                       que transforman
                     </span>
                   </span>
-                  <span className="hover-show">
-                    <p>
-                      Estrategias que conectan. Contenidos que provocan
-                      respuesta.
-                    </p>
-                  </span>
                 </span>
-                <div className="arrow-icon">
-                  <svg
-                    height="21"
-                    viewBox="0 0 21 21"
-                    width="21"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g
-                      fill="none"
-                      fillRule="evenodd"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      transform="translate(4 6)"
-                    >
-                      <path d="m9.5.497 4 4.002-4 4.001" />
-                      <path d="m.5 4.5h13" />
-                    </g>
+                <div className="content-text-grid hover-show">
+                  <p>
+                    Estrategias que conectan. Contenidos que provocan
+                    respuesta.
+                  </p>
+                  <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
                 </div>
               </div>
             </div>
-            <div className="grid-row">
-              <div className="header-grid">
-                <span className="test-grid-container">
+            <div className="service-section-row">
+              <div className="service-grid">
+                <span className="service-title-grid">
                   <span className="title-grid title-grid-hover">
                     soporte
                     <span className="title-grid title-grid-hover hover-show">
                       continuo
                     </span>
                   </span>
-                  <span className="hover-show">
-                    <p>
-                      Soporte técnico y creativo para que tu marca no se
-                      detenga.
-                    </p>
-                  </span>
                 </span>
-                <div className="arrow-icon">
-                  <svg
-                    height="21"
-                    viewBox="0 0 21 21"
-                    width="21"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g
-                      fill="none"
-                      fillRule="evenodd"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      transform="translate(4 6)"
-                    >
-                      <path d="m9.5.497 4 4.002-4 4.001" />
-                      <path d="m.5 4.5h13" />
-                    </g>
+                <div className="content-text-grid hover-show">
+                  <p>
+                    Soporte técnico y creativo para que tu marca no se detenga.
+                  </p>
+                  <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
                 </div>
               </div>
@@ -379,23 +297,8 @@ const Home = () => {
           <p>Guías, casos y análisis para optimizar tu presencia digital.</p>
           <Link to={"#"} className="read-more-link">
             Ver todas las notas
-            <svg
-              height="21"
-              viewBox="0 0 21 21"
-              width="21"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g
-                fill="none"
-                fillRule="evenodd"
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                transform="translate(4 6)"
-              >
-                <path d="m9.5.497 4 4.002-4 4.001" />
-                <path d="m.5 4.5h13" />
-              </g>
+            <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084" stroke="#1E1E1E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </Link>
         </div>
