@@ -316,12 +316,6 @@ const Home = () => {
           <Testimoniales />
         </div>
       </section>
-
-      <div className="full-container prefooter-container">
-        <div className="container">
-          <ExternalForm />
-        </div>
-      </div>
     </main>
   );
 };
