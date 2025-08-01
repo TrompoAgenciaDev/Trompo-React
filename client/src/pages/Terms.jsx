@@ -3,7 +3,7 @@ import "../assets/styles/terms-conditions.css";
 function Terms() {
   return (
     <div class="full-container">
-      <div class="container">
+      <div class="container terms">
         <h1 class="title">TÉRMINOS Y CONDICIONES GENERALES</h1>
 
         <ul class="term-list">
@@ -48,7 +48,7 @@ function Terms() {
             <h2 class="subtitle">5. Formas y plazos de pago</h2>
             <ul class="list">
               <li>
-                Servicios puntuales: pago a 30 días corridos contra factura.
+                Servicios puntuales: pago a 30 días corridos contra factura.
               </li>
               <li>
                 Servicios recurrentes: abonarse entre el 1 y el 10 de cada mes.
@@ -81,7 +81,7 @@ function Terms() {
           <li>
             <h2 class="subtitle">8. Cancelación</h2>
             <p class="paragraph">
-              Se requiere aviso con 30 días de anticipación para dar por
+              Se requiere aviso con 30 días de anticipación para dar por
               finalizado cualquier servicio recurrente; de lo contrario, se
               facturará el mes siguiente.
             </p>
