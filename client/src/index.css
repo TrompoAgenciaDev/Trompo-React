@@ -91,6 +91,11 @@ p{
 
 .bg-yellow{
   background-color: #fed332;
+  z-index: 100;
+}
+
+footer{
+  z-index: 1;
 }
 
 

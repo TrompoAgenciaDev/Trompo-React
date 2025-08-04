@@ -10,12 +10,7 @@ header.full-container{
   top: 0;
   left: 0;
   z-index: 99999;
-  background: radial-gradient(circle, 
-    rgba(255, 255, 255, 0) 0%,          /* centro transparente */
-    rgba(255, 255, 255, 0.473) 50%,      /* medio opaco */
-    rgb(255, 255, 255) 90%,      /* se va aclarando hacia blanco */
-    rgb(255, 255, 255) 100%        /* borde blanco sólido */
-  );
+  background: linear-gradient(to bottom, #ffffff9f 20%, rgba(255, 255, 255, 0) 75%);
 
 }
 

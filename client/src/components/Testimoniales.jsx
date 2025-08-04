@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import useFetchTestimonials from "../hooks/useFetchTestimonials";
-import "../assets/styles/testimonials.css"; // Asegúrate de crear este archivo y definir las clases
+import "../assets/styles/testimonials.css";
 
 const SLIDE_DURATION = 3000;
 const ANIMATION_DURATION = 0.6;

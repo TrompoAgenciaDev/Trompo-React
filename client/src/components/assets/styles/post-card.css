@@ -29,6 +29,7 @@
   width: 100%;
   max-width: 400px;
   text-align: left;
+  font-weight: 300;
 }
 
 @media (min-width: 768px){
@@ -38,7 +39,21 @@
 }
 
 @media (min-width: 1280px){
+
+  .post-card-container {
+    grid-template-rows: repeat(3, 290px);
+  }
   .post-card{
     font-size: 16px;
   }
+
+  .post-title{
+    font-size: 32px;
+    max-width: 700px;
+  }
+
+  .post-card .read-more-link{
+    font-size: 22px;
+  }
+
 }

@@ -10,43 +10,29 @@ const Hero = ({ location = "home" }) => {
   return (
     <>
       {location === "home" ? (
-        <div className="hero-video-container">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="hero-video"
-          >
+        <div className="hero-video-container" id="hero">
+          <video autoPlay loop muted playsInline className="hero-video">
             <source src={HomeVideo} type="video/mp4" />
-          </video>        
+          </video>
+        </div>
+      ) : location === "web" ? (
+        <div className="hero-video-container">
+          <video autoPlay loop muted playsInline className="hero-video">
+            <source src={HomeVideo} type="video/mp4" />
+          </video>
         </div>
       ) : (
-        location === "web" ? (
-          <div className="hero-video-container">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="hero-video"
-            >
-              <source src={HomeVideo} type="video/mp4" />
-            </video>        
-          </div>
-        ) : (
-          <div className="hero-container container">
-            <div
-              className="hero-image"
-              style={{
-                backgroundImage: `image-set(
+        <div className="hero-container container">
+          <div
+            className="hero-image"
+            style={{
+              backgroundImage: `image-set(
                   url(${heroImageWebp}) type("image/webp"),
                   url(${heroImagePng}) type("image/png")
                 )`,
-              }}
-            />
-          </div>
-        )
+            }}
+          />
+        </div>
       )}
     </>
   );
