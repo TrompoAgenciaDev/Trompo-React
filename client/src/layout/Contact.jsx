@@ -1,5 +1,3 @@
-import ExternalForm from '../components/ExternalForms/ExternalForm'
-
 import '../assets/styles/contact.css'
 
 function Contact() {
@@ -21,7 +19,7 @@ function Contact() {
             </picture>
           </div>
           <div className="form-container">
-            <ExternalForm/>
+            
           </div>
         </div>
       </div>

@@ -4,18 +4,18 @@ import "../../assets/styles/publi-slider.css";
 const slides = [
   {
     href: "https://www.google.com",
-    img: "/assets/portfolioImg/volvo.jpg",
-    alt: "Volvo",
+    img: "/assets/instagramPublis/search-display.jpg",
+    alt: "ADS",
   },
   {
     href: "https://www.bing.com",
-    img: "/assets/portfolioImg/menta.png",
-    alt: "Menta",
+    img: "/assets/instagramPublis/raulito.jpg",
+    alt: "Mermeladas Raulito",
   },
   {
     href: "https://www.duckduckgo.com",
-    img: "/assets/portfolioImg/ranko.jpg",
-    alt: "Ranko",
+    img: "/assets/instagramPublis/tono-de-voz.jpg",
+    alt: "Trompo Tono de Voz",
   },
 ];
 
@@ -26,9 +26,8 @@ export default function PubliSlides() {
   useEffect(() => {
     function handleResize() {
       const width = window.innerWidth;
-      if (width >= 1024) setSlidesToShow(3);
-      else if(width >= 768) setSlidesToShow(2); 
-      else setSlidesToShow(1);
+      if (width >= 768) setSlidesToShow(3);
+      else setSlidesToShow(2);
     }
 
     handleResize();
@@ -47,14 +46,9 @@ export default function PubliSlides() {
           target="_blank"
           rel="noopener noreferrer"
           className="publi-slide"
-          style={{
-            backgroundImage: `url(${item.img})`,
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-          }}
-          title={item.alt}
-        />
+        >
+          <img src={item.img} alt={item.alt} />
+        </a>
       ))}
     </div>
   );

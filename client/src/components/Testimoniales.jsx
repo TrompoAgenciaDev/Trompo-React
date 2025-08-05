@@ -108,23 +108,28 @@ export default function Testimoniales() {
           }}
           className="testimoniales-card"
         >
+
           <div className="testimoniales-img">
-            <img src={current.image || "/default-avatar.png"} alt={current.author_name || current.author} />
-          </div>
-          
-          <div className="testimoniales-rating">
-            {"★".repeat(current.rating)}
-            <span className="testimoniales-rating-empty">
-              {"★".repeat(5 - current.rating)}
-            </span>
+            <img src={current.image || "/favicon.png"} alt={current.author_name || current.author} />
           </div>
 
-          <div className="testimoniales-author">
-            {current.author_name || current.author}
+          <div className="testimonial-content">              
+            <div className="testimonial-header-card">
+              <div className="testimoniales-rating">
+                {"★".repeat(current.rating)}
+                <span className="testimoniales-rating-empty">
+                  {"★".repeat(5 - current.rating)}
+                </span>
+              </div>
+              <div className="testimoniales-author">
+                {current.author_name || current.author}
+              </div>
+            </div>
+            <div className="testimoniales-text">
+              {current.text}
+            </div>
           </div>
-          <div className="testimoniales-text">
-            {current.text}
-          </div>
+
         </motion.div>
       </AnimatePresence>
       <div className="testimoniales-dots">

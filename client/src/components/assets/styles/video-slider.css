@@ -12,6 +12,9 @@
 .video-slider-track {
   display: flex;
   transition: transform 0.8s ease;
+  -webkit-transition: -webkit-transform 0.8s ease;
+  -moz-transition: -moz-transform 0.8s ease;
+  -o-transition: -o-transform 0.8s ease;
   width: 100%;
   height: 100%;
 }
@@ -29,6 +32,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  -o-object-fit: contain;
   border: none;
   outline: none;
   pointer-events: none;
@@ -46,16 +50,16 @@
   align-items: center;
   pointer-events: none;
   user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }
 
-/* Mostrar 2 slides desde 768px */
 @media (min-width: 768px) {
   .video-slide {
     flex: 0 0 50%;
   }
 }
 
-/* Mostrar 3 slides desde 1024px */
 @media (min-width: 1024px) {
   .video-slide {
     flex: 0 0 25%;

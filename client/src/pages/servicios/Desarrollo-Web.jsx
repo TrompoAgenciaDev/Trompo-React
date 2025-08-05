@@ -1,6 +1,4 @@
 import Hero from "../../layout/Hero.jsx";
-import "../../assets/styles/desarrollo.css";
-import Portfolio from "../../layout/Portfolio.jsx";
 import Contact from "../../layout/Contact.jsx";
 
 const Desarrollo = () => {

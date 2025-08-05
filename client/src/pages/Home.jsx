@@ -11,7 +11,6 @@ import PubliSlides from "../components/sliders/PubliSlides";
 import Testimoniales from "../components/Testimoniales";
 import PostCard from "../components/posts/PostCard";
 import Hero from "../layout/Hero";
-import ExternalForm from "../components/ExternalForms/ExternalForm";
 
 const Home = () => {
   return (
@@ -151,22 +150,19 @@ const Home = () => {
                 <div className="content-text-grid hover-show">
                   <p>Sitios que no se detienen, se adaptan y crecen</p>
                   <svg
-                    height="21"
-                    viewBox="0 0 21 21"
-                    width="21"
+                    width="38"
+                    height="38"
+                    viewBox="0 0 38 38"
+                    fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <g
-                      fill="none"
-                      fillRule="evenodd"
-                      stroke="currentColor"
+                    <path
+                      d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
+                      stroke="#1E1E1E"
+                      strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      transform="translate(4 6)"
-                    >
-                      <path d="m9.5.497 4 4.002-4 4.001" />
-                      <path d="m.5 4.5h13" />
-                    </g>
+                    />
                   </svg>
                 </div>
               </div>
@@ -348,8 +344,8 @@ const Home = () => {
 
       <section className="full-container">
         <PostCard initialLimit={3} maxLimit={3} />
-        <div className="container text-show-effect">
-          <p>Guías, casos y análisis para optimizar tu presencia digital.</p>
+        <div className="container text-show-effect post-notes">
+          <span>Guías, casos y análisis para optimizar tu presencia digital.</span>
           <Link to={"#"} className="read-more-link">
             Ver todas las notas
             <svg

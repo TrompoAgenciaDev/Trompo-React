@@ -20,7 +20,6 @@ p{
   border-top: 2px solid #ffffff;
 }
 
-
 .service-section-row:last-child{
   border-bottom: 2px solid #ffffff;
 }
@@ -51,6 +50,9 @@ p{
   padding: 10px 20px;
   overflow-y: hidden;
   transition: background-color .2s ease-in-out;
+  -webkit-transition: background-color .2s ease-in-out;
+  -moz-transition: background-color .2s ease-in-out;
+  -o-transition: background-color .2s ease-in-out;
 }
 
 .service-grid:hover{
@@ -60,6 +62,9 @@ p{
 .hover-show{
   opacity: 0;
   transition: opacity .2s ease-in-out;
+  -webkit-transition: opacity .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out;
+  -o-transition: opacity .2s ease-in-out;
 }
 
 .title-grid.hover-show{
@@ -85,16 +90,22 @@ p{
   top: 50%;
   right: 20px;
   transition: all .2s ease-in-out;
+  -webkit-transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
   transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
 }
 
 .service-grid:hover::after{
   opacity: 0;
 }
+
 .content-text-grid svg{
   display: none;
 }
-
 
 .service-section-row p{
   color: #222222;
@@ -136,7 +147,7 @@ p{
   font-weight: 400;
 }
 
-.grid-text-home{
+.grid-text-home:not(:nth-child(2)){
   background-color: #F5F5F5;
 }
 
@@ -212,6 +223,7 @@ p{
 
   .grid-text-home{
     height: 80px;
+    font-size: 20px;
   }
 
   .text-home p{
@@ -219,13 +231,6 @@ p{
     font-size: 18px;
   }
 
-  .grid-text-home{
-    font-size: 20px;
-  }
-
-  .social-post-container{
-    height: 500px;
-  }  
   .service-grid{
     padding: 20px 50px;
   }
@@ -234,12 +239,13 @@ p{
     display: grid;
     grid-template-columns: 4fr 1fr;
   }
-
 }
 
 @media (min-width: 1280px){  
   .home-content p{
-    font-size: 28px;
+    font-size: 30px;
+    line-height: 1;
+    max-width: 1024px;
   }
 
   .home-content{
@@ -258,7 +264,7 @@ p{
   }
 
   .text-show-effect span{
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .bg-yellow .container{
@@ -313,7 +319,8 @@ p{
   }
 
   .grid-text-home{
-    font-size: 22px;
+    font-size: 18px;
+    background-color: #F5F5F5;
   }
 }
 

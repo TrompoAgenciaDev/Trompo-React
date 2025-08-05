@@ -42,5 +42,6 @@
 .link {
   color: #0066cc;
   text-decoration: underline;
+  -webkit-text-decoration: underline;
+  -moz-text-decoration: underline;
 }
-

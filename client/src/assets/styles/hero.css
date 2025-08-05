@@ -8,14 +8,16 @@
   gap: 50px;
   background-size: cover;
   background-position: top center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
 
 .hero-video-container,
 .hero-video-container video{
   z-index: 10;
-  
 }
-
 
 @media (min-width: 540px) {
   .hero-text p {
@@ -40,6 +42,8 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    -o-object-fit: cover;
+    -webkit-object-fit: cover;
   }
 }
 
@@ -51,14 +55,6 @@
   }
   .hero-container .social-icons img{
     width: 50px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .hero-text p{
-    font-size: 54px;
-    line-height: 60px;
-    gap: 24px;
   }
 }
 

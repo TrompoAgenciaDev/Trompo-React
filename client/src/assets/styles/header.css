@@ -11,7 +11,8 @@ header.full-container{
   left: 0;
   z-index: 99999;
   background: linear-gradient(to bottom, #ffffff9f 20%, rgba(255, 255, 255, 0) 75%);
-
+  -webkit-backdrop-filter: blur(0);
+  backdrop-filter: blur(0);
 }
 
 .logo-img{
