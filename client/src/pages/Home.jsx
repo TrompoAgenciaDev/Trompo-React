@@ -11,6 +11,7 @@ import PubliSlides from "../components/sliders/PubliSlides";
 import Testimoniales from "../components/Testimoniales";
 import PostCard from "../components/posts/PostCard";
 import Hero from "../layout/Hero";
+import YellowSection from "../layout/YellowSection";
 
 const Home = () => {
   return (
@@ -80,190 +81,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="bg-yellow full-container">
-        <div className="banner full-container">
-          <picture className="full-container mobile-banner">
-            <source srcSet="/banner1-home-mobile.webp" type="image/webp" />
-            <source srcSet="/banner1-home-mobile.png" type="image/png" />
-            <img src="/banner-home.png" alt="Banner Home" />
-          </picture>
-          <picture className="full-container desktop-banner">
-            <source srcSet="/banner1-home-desktop.webp" type="image/webp" />
-            <source srcSet="/banner1-home-desktop.png" type="image/png" />
-            <img src="/banner1-home-desktop.png" alt="Banner Home" />
-          </picture>
-        </div>
-
-        <div className="container">
-          <p className="services-text">
-            Con un Equipo interdisciplinario y años de experiencia, nos
-            especializamos en entender las necesidades de cada cliente y
-            convertirlas en <span className="bold">oportunidades</span> que
-            impulsen su crecimiento.
-          </p>
-          <div className=""></div>
-        </div>
-        <div className="container">
-          <div className="grid-services">
-            <div className="service-section-row">
-              <div className="service-grid">
-                <span className="service-title-grid">
-                  <span className="title-grid title-grid-hover">
-                    identidad
-                    <span className="title-grid title-grid-hover hover-show">
-                      que conecta
-                    </span>
-                  </span>
-                </span>
-                <div className="content-text-grid hover-show">
-                  <p>
-                    Branding, diseño y multimedia para marcas con propósito.
-                  </p>
-                  <svg
-                    width="38"
-                    height="38"
-                    viewBox="0 0 38 38"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-                      stroke="#1E1E1E"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div className="service-section-row">
-              <div className="service-grid">
-                <span className="service-title-grid">
-                  <span className="title-grid title-grid-hover">
-                    desarrollo web
-                    <span className="title-grid title-grid-hover hover-show">
-                      que evoluciona
-                    </span>
-                  </span>
-                </span>
-                <div className="content-text-grid hover-show">
-                  <p>Sitios que no se detienen, se adaptan y crecen</p>
-                  <svg
-                    width="38"
-                    height="38"
-                    viewBox="0 0 38 38"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-                      stroke="#1E1E1E"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div className="service-section-row">
-              <div className="service-grid">
-                <span className="service-title-grid">
-                  <span className="title-grid title-grid-hover">
-                    ads
-                    <span className="title-grid title-grid-hover hover-show">
-                      inteligentes
-                    </span>
-                  </span>
-                </span>
-                <div className="content-text-grid hover-show">
-                  <p>Publicidad con dirección, optimización y resultados.</p>
-                  <svg
-                    width="38"
-                    height="38"
-                    viewBox="0 0 38 38"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-                      stroke="#1E1E1E"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div className="service-section-row">
-              <div className="service-grid">
-                <span className="service-title-grid">
-                  <span className="title-grid title-grid-hover">
-                    redes sociales
-                    <span className="title-grid title-grid-hover hover-show">
-                      que transforman
-                    </span>
-                  </span>
-                </span>
-                <div className="content-text-grid hover-show">
-                  <p>
-                    Estrategias que conectan. Contenidos que provocan respuesta.
-                  </p>
-                  <svg
-                    width="38"
-                    height="38"
-                    viewBox="0 0 38 38"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-                      stroke="#1E1E1E"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div className="service-section-row">
-              <div className="service-grid">
-                <span className="service-title-grid">
-                  <span className="title-grid title-grid-hover">
-                    soporte
-                    <span className="title-grid title-grid-hover hover-show">
-                      continuo
-                    </span>
-                  </span>
-                </span>
-                <div className="content-text-grid hover-show">
-                  <p>
-                    Soporte técnico y creativo para que tu marca no se detenga.
-                  </p>
-                  <svg
-                    width="38"
-                    height="38"
-                    viewBox="0 0 38 38"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-                      stroke="#1E1E1E"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <YellowSection type="services" />
 
       <section className="full-container">
         <div className="slider-conainer container">
@@ -345,7 +163,9 @@ const Home = () => {
       <section className="full-container">
         <PostCard initialLimit={3} maxLimit={3} />
         <div className="container text-show-effect post-notes">
-          <span>Guías, casos y análisis para optimizar tu presencia digital.</span>
+          <span>
+            Guías, casos y análisis para optimizar tu presencia digital.
+          </span>
           <Link to={"#"} className="read-more-link">
             Ver todas las notas
             <svg
@@ -379,6 +199,8 @@ const Home = () => {
           <Testimoniales />
         </div>
       </section>
+
+      <YellowSection type="faqs" />
     </main>
   );
 };
