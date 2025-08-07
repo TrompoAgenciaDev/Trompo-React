@@ -12,21 +12,26 @@ import Testimoniales from "../components/Testimoniales";
 import PostCard from "../components/posts/PostCard";
 import Hero from "../layout/Hero";
 import YellowSection from "../layout/YellowSection";
+import Contact from "../layout/Contact";
+import PostHero from "../components/PostHero.jsx";
 
 const Home = () => {
+
+  const text = (
+    <p>Somos una agencia digital que combina {" "}
+      <span className='bold'>
+        creatividad, estrategia y tecnología
+      </span> 
+      para diseñar soluciones integrales que generan impacto.
+    </p>
+  );
   return (
     <main className="full-container">
       <Hero />
 
-      <section className="section full-container">
-        <div className="container home-content text-post-hero">
-          <p>
-            Somos una agencia digital que combina{" "}
-            <span className="bold">creatividad, estrategia y tecnología </span>
-            para diseñar soluciones integrales que generan impacto.
-          </p>
-        </div>
-      </section>
+      <PostHero
+        text={text}
+      />
 
       <section className="video-section full-container">
         <div className="full-container">
@@ -199,6 +204,8 @@ const Home = () => {
           <Testimoniales />
         </div>
       </section>
+
+      <Contact/>
 
       <YellowSection type="faqs" />
     </main>

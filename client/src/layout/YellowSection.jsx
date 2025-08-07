@@ -5,7 +5,6 @@ import "../assets/styles/yellowSection.css";
 import useFetchServiceFaq from "../hooks/useFetchServiceFaq";
 
 function YellowSection({ type }) {
-  // Guardamos el índice de la pregunta abierta (-1 = ninguna abierta)
   const [openIndex, setOpenIndex] = useState(-1);
 
   const { items, loading, error } = useFetchServiceFaq({ category: type });
@@ -14,8 +13,12 @@ function YellowSection({ type }) {
   if (error) return <p>{error}</p>;
 
   const toggleItem = (index) => {
-    setOpenIndex(openIndex === index ? -1 : index); // Cierra si vuelve a clickear la misma
+    setOpenIndex(openIndex === index ? -1 : index);
   };
+
+  const countList = (id) => {    
+    return id += 1;
+  }
 
   return (
     <section className="bg-yellow full-container">
@@ -92,6 +95,7 @@ function YellowSection({ type }) {
                     onClick={() => toggleItem(index)}
                     className={`accordion-title ${openIndex === index ? "accordion-item-active" : ""}`}
                   >
+                    <span>{countList(item.id)}. {' '}</span>
                     {item.question}
                   </button>
                   <motion.div

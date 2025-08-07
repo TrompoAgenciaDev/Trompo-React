@@ -21,11 +21,10 @@ const routesConfig = {
   main: [
     { path: "/", label: "Home", Component: Home },
     { path: "#", label: "Servicios", Component: Servicios },
-    { path: "#", label: "Quiénes Somos", Component: About },
+    { path: "/about", label: "Quiénes Somos", Component: About },
     { path: "#", label: "Tendencias", Component: Trends },
     { path: "#", label: "Casos", Component: Casos },
-    { path: "#", label: "Contacto", Component: Contact },
-    { path: "/terms", label: "Terms", Component: Terms },
+    { path: "#", label: "Contacto", Component: Contact }
   ],
   servicios: [
     { path: "#", label: "Identidad", Component: Identidad },

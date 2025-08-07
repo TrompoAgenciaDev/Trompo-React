@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, React } from "react";
 import routesConfig from "../config/routesConfig";
 
 import Icons from '../components/Icons';

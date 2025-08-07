@@ -6,6 +6,7 @@ import Footer from "@/layout/Footer";
 import MenuPopup from "@/components/popups/MenuPopup";
 import useTogglePopup from "@/hooks/useTogglePopup";
 import ScrollTop from "@/components/buttons/ScrollTop";
+import React from 'react';
 
 function App() {
   const { isOpen, togglePopup } = useTogglePopup();
