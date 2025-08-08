@@ -16,12 +16,10 @@ import Contact from "../layout/Contact";
 import PostHero from "../components/PostHero.jsx";
 
 const Home = () => {
-
   const text = (
-    <p>Somos una agencia digital que combina {" "}
-      <span className='bold'>
-        creatividad, estrategia y tecnología
-      </span> 
+    <p>
+      Somos una agencia digital que combina{" "}
+      <span className="bold">creatividad, estrategia y tecnología</span>
       para diseñar soluciones integrales que generan impacto.
     </p>
   );
@@ -29,13 +27,11 @@ const Home = () => {
     <main className="full-container">
       <Hero />
 
-      <PostHero
-        text={text}
-      />
+      <PostHero text={text} />
 
       <section className="video-section full-container">
         <div className="full-container">
-          <VideoSlider />
+          <VideoSlider location={"home"} />
         </div>
 
         <div className="container home-content">
@@ -205,7 +201,7 @@ const Home = () => {
         </div>
       </section>
 
-      <Contact/>
+      <Contact />
 
       <YellowSection type="faqs" />
     </main>

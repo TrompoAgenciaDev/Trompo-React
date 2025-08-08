@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React from "react";
 import Menu from "../components/Menu";
 import routesConfig from "../config/routesConfig";
 
@@ -14,41 +13,65 @@ const Footer = () => {
       <div className="container footer-container">
         <div className="footer-grid-item">
           <a className="footer-logo-img" href="/">
-            <Icon iconName="logoBlack"/>
-          </a>          
+            <Icon iconName="logoBlack" />
+          </a>
         </div>
         <div className="footer-grid-item">
           <div className="footer-menu">
-              <Menu
-                menuType="main"
-                routes={routesConfig}
-                classMenu="footer-menu-items"
-              />
-            </div>
-            <div className="footer-menu">
-              <Menu
-                menuType="servicios"
-                routes={routesConfig}
-                classMenu="footer-menu-items"
-              />
-            </div>
-            <div className="social-icons">
-              <Icon iconName="instagram" />
-              <Icon iconName="linkedin" />
-              <Icon iconName="facebook" />
-              <Icon iconName="youtube" />
-            </div>    
+            <Menu
+              menuType="main"
+              routes={routesConfig}
+              classMenu="footer-menu-items"
+            />
+          </div>
+          <div className="footer-menu">
+            <Menu
+              menuType="servicios"
+              routes={routesConfig}
+              classMenu="footer-menu-items"
+            />
+          </div>
+          <div className="social-icons">
+            <Icon
+              iconName="instagram"
+              link="https://www.instagram.com/trompo.agencia/"
+            />
+            <Icon
+              iconName="linkedin"
+              link="https://ar.linkedin.com/company/trompo-agencia"
+            />
+            <Icon
+              iconName="facebook"
+              link="https://www.facebook.com/TrompoAgencia/"
+            />
+            <Icon
+              iconName="youtube"
+              link="https://www.youtube.com/@trompo.agencia"
+            />
+          </div>
         </div>
         <div className="footer-grid-item">
           <a className="footer-logo-img" href="/">
-            <Icon iconName="logoBlack"/>
-          </a>           
+            <Icon iconName="logoBlack" />
+          </a>
           <div className="social-icons">
-            <Icon iconName="instagram" />
-            <Icon iconName="linkedin" />
-            <Icon iconName="facebook" />
-            <Icon iconName="youtube" />
-          </div>    
+            <Icon
+              iconName="instagram"
+              link="https://www.instagram.com/trompo.agencia/"
+            />
+            <Icon
+              iconName="linkedin"
+              link="https://ar.linkedin.com/company/trompo-agencia"
+            />
+            <Icon
+              iconName="facebook"
+              link="https://www.facebook.com/TrompoAgencia/"
+            />
+            <Icon
+              iconName="youtube"
+              link="https://www.youtube.com/@trompo.agencia"
+            />
+          </div>
         </div>
       </div>
     </footer>

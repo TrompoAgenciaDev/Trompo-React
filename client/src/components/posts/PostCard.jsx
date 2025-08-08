@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useJsonConsulting from "../../hooks/useJsonConsulting";
 
-import "../assets/styles/post-card.css";
+import "../../assets/styles/post-card.css";
 
 const PostCard = ({
   initialLimit = 999,

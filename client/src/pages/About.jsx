@@ -1,35 +1,28 @@
-import PostHero from '../components/PostHero';
-import Hero from '../layout/Hero';
-import Members from '../components/Members';
+import PostHero from "../components/PostHero";
+import Hero from "../layout/Hero";
+import Members from "../components/Members";
+import VideoSlider from "../components/sliders/VideoSlider";
 
 // styles
-import '../assets/styles/about.css';
+import "../assets/styles/about.css";
 
 const About = () => {
-
   const text = (
-    <p className='text-posthero'>
-      En Trompo {" "}
-        <span className='bold'>
-          no creemos en soluciones mágicas.{" "}
-        </span> 
-      Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Desde Córdoba Capital, ayudamos a empresas a convertir desafíos digitales en ventajas competitivas.
+    <p className="text-posthero">
+      En Trompo <span className="bold">no creemos en soluciones mágicas. </span>
+      Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real.
+      Desde Córdoba Capital, ayudamos a empresas a convertir desafíos digitales
+      en ventajas competitivas.
     </p>
   );
   return (
     <>
-      <Hero
-        location='about'
-      />
-      <PostHero
-        text={text}
-      />
+      <Hero location="about" />
+      <PostHero text={text} />
 
       <section className="bg-yellow full-container">
         <div className="container about-content">
-          <h4>
-            Lo que nos define
-          </h4>
+          <h4>Lo que nos define</h4>
           <div className="grid-about">
             <div className="grid-about-item">
               <svg
@@ -46,13 +39,14 @@ const About = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-              </svg>              
+              </svg>
               <div className="grid-item-content">
                 <span className="header-item-content">
                   Experiencia con raíces
                 </span>
                 <p className="footer-item-content">
-                  20 años resolviendo problemas reales en mercados locales y nacionales.
+                  20 años resolviendo problemas reales en mercados locales y
+                  nacionales.
                 </p>
               </div>
             </div>
@@ -102,7 +96,8 @@ const About = () => {
                   Equipo multidisciplinario
                 </span>
                 <p className="footer-item-content">
-                  Unimos estrategas, diseñadores y técnicos que trabajan en conjunto.
+                  Unimos estrategas, diseñadores y técnicos que trabajan en
+                  conjunto.
                 </p>
               </div>
             </div>
@@ -138,24 +133,35 @@ const About = () => {
       <section className="full-container about-section">
         <div className="container about-content-text">
           <p>
-            Nuestra mayor satisfacción no son los premios, sino ver crecer negocios que confiaron en nosotros: desde pymes cordobesas hasta marcas  acionales que hoy lideran sus mercados.
+            Nuestra mayor satisfacción no son los premios, sino ver crecer
+            negocios que confiaron en nosotros: desde pymes cordobesas hasta
+            marcas acionales que hoy lideran sus mercados.
           </p>
           <p>
-            Si buscas un proveedor que desaparezca al entregar un proyecto, no somos tu opción. 
+            Si buscas un proveedor que desaparezca al entregar un proyecto, no
+            somos tu opción.
           </p>
-          <p>
-            Si valoras un socio que camine a tu lado, hablemos.
-          </p>
+          <p>Si valoras un socio que camine a tu lado, hablemos.</p>
         </div>
         <div className="container">
-          <Members/>
+          <Members />
         </div>
-        <div className="container">
-
+        <div className="container slider-container">
+          <div className="text-video-slider">
+            <h2>Nuestro trabajo habla por nosotros</h2>
+            <div className="text-highlight">
+              <p>Cada caso es la historia de una colaboración exitosa.</p>
+              <p>
+                Empresas que confiaron en nuestro expertise y hoy ven crecer sus
+                negocios con soluciones sostenibles.
+              </p>
+            </div>
+          </div>
+          <VideoSlider />
         </div>
       </section>
     </>
   );
-}
+};
 
 export default About;

@@ -5,7 +5,7 @@ import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
   base: "/",
-  plugins: [react()],
+  plugins: [react(), svgr()],
   resolve: {
     alias: {
       "@": "/src",
@@ -16,6 +16,4 @@ export default defineConfig({
       "@at": "/src/assets/toolsImg",
     },
   },
-  
-  plugins: [svgr()],
 });

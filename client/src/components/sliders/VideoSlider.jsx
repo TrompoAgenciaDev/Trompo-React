@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
-import "../assets/styles/video-slider.css";
+import "../../assets/styles/video-slider.css";
 
 const sliderVideos = [
   "/assets/portfolioImg/videos/volvo.mp4",
@@ -19,7 +19,11 @@ function isMobile() {
   );
 }
 
-function VideoSlider() {
+function wrapIndex(idx, length) {
+  return (idx + length) % length;
+}
+
+function VideoSlider({ location }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [animating, setAnimating] = useState(true);
@@ -43,6 +47,16 @@ function VideoSlider() {
 
   const nextSlide = () => {
     setIndex((prev) => prev + 1);
+    setAnimating(true);
+  };
+
+  const prevSlide = () => {
+    setIndex((prev) => wrapIndex(prev - 1, totalSlides));
+    setAnimating(true);
+  };
+
+  const goForward = () => {
+    setIndex((prev) => wrapIndex(prev + 1, totalSlides));
     setAnimating(true);
   };
 
@@ -80,7 +94,6 @@ function VideoSlider() {
   const handlePause = () => setPaused(true);
   const handleTouch = () => isMobile() && setPaused(true);
 
-  // Detecta fin del loop y resetea sin animación
   useEffect(() => {
     if (index >= totalSlides) {
       const resetTimeout = setTimeout(() => {
@@ -121,6 +134,45 @@ function VideoSlider() {
       </motion.div>
 
       {paused && <div className="video-slider-overlay"></div>}
+
+      {location !== "home" && (
+        <>
+          <button onClick={prevSlide} className="button-prev">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="33"
+              height="33"
+              viewBox="0 0 33 33"
+              fill="none"
+            >
+              <path
+                d="M31.9687 16.1926L1.08382 16.1926M1.08382 16.1926L16.5263 31.3777M1.08382 16.1926L16.5263 1.00751"
+                stroke="#1D1D1B"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          <button onClick={goForward} className="button-next">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="33"
+              height="33"
+              viewBox="0 0 33 33"
+              fill="none"
+            >
+              <path
+                d="M1.03125 16.1926L31.9161 16.1926M31.9161 16.1926L16.4737 1.00751M31.9161 16.1926L16.4737 31.3777"
+                stroke="#1D1D1B"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </>
+      )}
     </div>
   );
 }

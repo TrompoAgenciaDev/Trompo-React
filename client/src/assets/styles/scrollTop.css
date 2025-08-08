@@ -16,6 +16,7 @@
     -webkit-transition: opacity 0.3s ease;
     -moz-transition: opacity 0.3s ease;
     -o-transition: opacity 0.3s ease;
+    cursor: pointer;
 }
 
 .scroll-top-button.visible {

@@ -83,7 +83,8 @@ img{
 
 .hover-y:hover,
 .hover-y:hover a{
-  color: #fed332;
+  color: #000000;
+  font-weight: 500;
   cursor: pointer;
 }
 
@@ -126,6 +127,32 @@ footer{
   -o-transition: all .2s ease-in-out;
 }
 
+.button-prev,
+.button-next {
+    width: 20px;
+    height: 20px;
+    z-index: 999999;
+    background-color: transparent;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.button-prev svg,
+.button-next svg {
+    width: 100%;
+    height: 100%;
+}
+
+.button-prev {
+    left: -10px;
+}
+
+.button-next {
+    right: -10px;
+}
+
 @media (min-width: 768px) {
   .container{
     width: 100%;
@@ -143,13 +170,38 @@ footer{
   .read-more-link{
     font-size: 17px;
   }
+  
+  .button-prev,
+  .button-next {
+      width: 30px;
+      height: 30px;
+  }
+
+  .button-prev {
+      left: -20px;
+  }
+
+  .button-next {
+      right: -20px;
+  }
 }
+
+
 
 @media (min-width: 1024px) {
   .container{
     width: 100%;
     max-width: 955px;
   }
+
+  .button-prev {
+    left: 10px;
+  }
+
+  .button-next {
+    right: 10px;
+  }
+
 }
 
 @media (min-width: 1280px) {
@@ -179,6 +231,20 @@ footer{
     transform-origin: left center;
     color: #000000;
     font-weight: 600;
+  }
+  
+  .button-prev,
+  .button-next {
+      width: 40px;
+      height: 40px;
+  }
+
+  .button-prev {
+      left: 25px;
+  }
+
+  .button-next {
+      right: 25px;
   }
 }
 

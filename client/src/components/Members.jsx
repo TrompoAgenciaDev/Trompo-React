@@ -1,101 +1,176 @@
-import React, { useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import useMembers from "../hooks/useMembers";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import membersData from "../json/members.json";
-
 import "../assets/styles/members.css";
 
-export default function Members() {
-  const { current, goNext, goPrev, setIndex } = useMembers(membersData);
+const SLIDE_DURATION = 3000;
+const ANIMATION_DURATION = 0.6;
 
-  // Variants para animar slide left/right
+function wrapIndex(idx, length) {
+  return (idx + length) % length;
+}
+
+export default function Members() {
+  const [index, setIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [direction, setDirection] = useState(1);
+  const timerRef = useRef(null);
+  const dragStartX = useRef(0);
+  const dragDelta = useRef(0);
+
+  useEffect(() => {
+    if (!membersData.length) return;
+    if (isPaused || isDragging) return;
+    timerRef.current = setTimeout(() => {
+      setDirection(1);
+      setIndex((prev) => wrapIndex(prev + 1, membersData.length));
+    }, SLIDE_DURATION);
+    return () => clearTimeout(timerRef.current);
+  }, [index, isPaused, isDragging]);
+
+  if (!membersData.length)
+    return <div>No hay miembros de equipo disponibles.</div>;
+
+  function handleDragStart(event, info) {
+    setIsDragging(true);
+    dragStartX.current = info.point.x;
+    dragDelta.current = 0;
+  }
+
+  function handleDrag(event, info) {
+    dragDelta.current = info.point.x - dragStartX.current;
+  }
+
+  function handleDragEnd(event, info) {
+    setIsDragging(false);
+    const threshold = 80;
+    if (dragDelta.current > threshold) {
+      setDirection(-1);
+      setIndex((prev) => wrapIndex(prev - 1, membersData.length));
+    } else if (dragDelta.current < -threshold) {
+      setDirection(1);
+      setIndex((prev) => wrapIndex(prev + 1, membersData.length));
+    }
+    dragDelta.current = 0;
+  }
+
   const variants = {
-    enter: (direction) => ({
-      x: direction > 0 ? 300 : -300,
+    enter: (dir) => ({
+      x: dir > 0 ? 200 : -200,
       opacity: 0,
+      scale: 0.98,
     }),
     center: {
       x: 0,
       opacity: 1,
+      scale: 1,
+      transition: { duration: ANIMATION_DURATION },
     },
-    exit: (direction) => ({
-      x: direction > 0 ? -300 : 300,
+    exit: (dir) => ({
+      x: dir > 0 ? -200 : 200,
       opacity: 0,
+      scale: 0.98,
+      transition: { duration: ANIMATION_DURATION * 0.7 },
     }),
   };
 
-  // Controlamos la dirección de animación para framer-motion drag
-  const [direction, setDirection] = React.useState(1);
-
-  const paginate = (newDirection) => {
-    setDirection(newDirection);
-    if (newDirection > 0) goNext();
-    else goPrev();
-  };
+  const current = membersData[wrapIndex(index, membersData.length)];
 
   return (
-    <div className="slider-container" style={{ overflow: "hidden" }}>
+    <div
+      className="members-container"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => setIsPaused(false)}
+    >
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
-          key={membersData[current].id}
+          key={index}
           custom={direction}
           variants={variants}
           initial="enter"
           animate="center"
           exit="exit"
-          transition={{ duration: 0.5 }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={1}
-          onDragEnd={(e, { offset, velocity }) => {
-            if (offset.x < -100) {
-              paginate(1);
-            } else if (offset.x > 100) {
-              paginate(-1);
-            }
-          }}
+          dragElastic={0.2}
+          onDragStart={handleDragStart}
+          onDrag={handleDrag}
+          onDragEnd={handleDragEnd}
           style={{
-            display: "flex",
-            flexDirection: "row",
-            width: "100%",
-            userSelect: "none",
-            cursor: "grab",
+            cursor: isDragging ? "grabbing" : "grab",
+            touchAction: "pan-y",
           }}
+          className="member-card"
         >
-          {/* Texto */}
-          <div className="text-slide" style={{ flex: 1, padding: "1rem" }}>
-            <h3>
-              <strong>{membersData[current].name}</strong> {membersData[current].position}
-            </h3>
-            <p>{membersData[current].portfolio}</p>
+          <div className="member-content">
+            <div className="member-header-card">
+              <div className="member-author">
+                <strong>{current.name}</strong> - {current.position}
+              </div>
+            </div>
+            <div className="member-text">{current.portfolio}</div>
           </div>
 
-          {/* Imagen */}
-          <div className="image-slide" style={{ flex: 1 }}>
-            <img
-              src={membersData[current].featured_image}
-              alt={membersData[current].name}
-              style={{ width: "100%", height: "auto", objectFit: "cover" }}
-              loading="lazy"
-            />
-          </div>
+          <div
+            style={{
+              backgroundImage: `url(${
+                current.featured_image || "/favicon.png"
+              })`,
+            }}
+            className="member-img"
+          ></div>
         </motion.div>
       </AnimatePresence>
 
-      {/* Flechas */}
       <button
-        onClick={() => paginate(-1)}
-        aria-label="Anterior"
-        style={{ position: "absolute", left: 0, top: "50%" }}
+        onClick={() => {
+          setDirection(-1);
+          setIndex((prev) => wrapIndex(prev - 1, membersData.length));
+        }}
+        className="button-prev"
       >
-        &#8592;
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="33"
+          height="33"
+          viewBox="0 0 33 33"
+          fill="none"
+        >
+          <path
+            d="M31.9687 16.1926L1.08382 16.1926M1.08382 16.1926L16.5263 31.3777M1.08382 16.1926L16.5263 1.00751"
+            stroke="#1D1D1B"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </button>
+
       <button
-        onClick={() => paginate(1)}
-        aria-label="Siguiente"
-        style={{ position: "absolute", right: 0, top: "50%" }}
+        onClick={() => {
+          setDirection(1);
+          setIndex((prev) => wrapIndex(prev + 1, membersData.length));
+        }}
+        className="button-next"
       >
-        &#8594;
+        <svg
+          width="38"
+          height="38"
+          viewBox="0 0 38 38"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
+            stroke="#1E1E1E"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
       </button>
     </div>
   );

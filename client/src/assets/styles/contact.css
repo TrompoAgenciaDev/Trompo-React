@@ -1,13 +1,40 @@
 .contact-section{
-  height: 100dvh;
   background: url(/assets/contact/contact-bg.png);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  padding: 50px 10px;
 }
 
-.grid-cotntact-item{
+.grid-contact{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.grid-contact-item h1{
+  font-size: 18px;
+}
+
+
+@media (min-width:1024px){
+  .grid-contact{
+    flex-direction: row;
+  }
+  .grid-contact-item h1{
+    font-size: 20px;
+  }
+}
+@media (min-width:1280px){
+  .contact-section{
+    padding: 100px 10px;
+  }
+  .grid-contact{
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 100px;
+  }
+  .grid-contact-item h1{
+    font-size: 26px;
+  }
 }

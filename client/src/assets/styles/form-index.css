@@ -1,0 +1,71 @@
+#sib-form *{
+    font-family: "Montserrat", sans-serif;
+}
+
+#sib-form input::placeholder,
+#sib-form textarea::placeholder{
+    color: #9e9e9e;
+}
+
+#sib-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#sib-form input{
+    width: 100%;
+    height: 50px;
+    padding: 0 10px;
+}
+
+#sib-form textarea{
+    width: 100%;
+    padding: 10px;
+}
+
+#sib-form button[type="submit"]{
+    width: 130px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0 20px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .1s ease-in-out;
+}
+
+#sib-form button[type="submit"]:hover{
+    background-color: #ffffff;
+}
+
+#sib-form button[type="submit"] svg{
+    width: 20px;
+    height: 20px;
+}
+
+.subtmit-container{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.phone-input{
+    display: flex;
+}
+
+@media (min-width:768px){
+    #sib-form input,
+    #sib-form textarea{
+        font-size: 15px;
+    }
+}
+
+@media (min-width:1280px){
+    #sib-form input,
+    #sib-form textarea{
+        font-size: 16px;
+    }
+}
