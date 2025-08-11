@@ -19,19 +19,18 @@ import SinglePortfolio from "../templates/singlePortfolio";
 
 const routesConfig = {
   main: [
-    { path: "/", label: "Home", Component: Home },
-    { path: "#", label: "Servicios", Component: Servicios },
-    { path: "/about", label: "Quiénes Somos", Component: About },
-    { path: "#", label: "Tendencias", Component: Trends },
-    { path: "#", label: "Casos", Component: Casos },
-    { path: "#", label: "Contacto", Component: Contact }
+    { path: "/", label: "home", Component: Home },
+    { path: "/about", label: "sobre nosotros", Component: About },
+    { path: "#", label: "servicios", Component: Servicios },
+    { path: "#", label: "casos de éxito", Component: Casos },
+    { path: "/contact", label: "contacto", Component: Contact }
   ],
   servicios: [
-    { path: "#", label: "Identidad", Component: Identidad },
-    { path: "#", label: "Desarrollo web", Component: DesarrolloWeb },
-    { path: "#", label: "Ads", Component: Ads },
-    { path: "#", label: "Redes Sociales", Component: RedesSociales },
-    { path: "#", label: "Soporte", Component: Soporte },
+    { path: "#", label: "identidad", Component: Identidad },
+    { path: "#", label: "desarrollo web", Component: DesarrolloWeb },
+    { path: "#", label: "ads", Component: Ads },
+    { path: "#", label: "redes sociales", Component: RedesSociales },
+    { path: "#", label: "soporte", Component: Soporte },
   ],
 
   posts: [{ path: "/post/:slug", Component: SinglePost }],

@@ -3,6 +3,7 @@ import { useHeroImages } from "../hooks/useHeroImage";
 // Videos
 import HomeVideo from "/assets/hero/home-video.mp4";
 import AboutVideo from "/assets/hero/about-us.mp4";
+import ContactVideo from "/assets/hero/contact.mp4";
 
 // Styles
 import "@as/hero.css";
@@ -10,6 +11,7 @@ import "@as/hero.css";
 const videosByLocation = {
   home: HomeVideo,
   about: AboutVideo,
+  contact: ContactVideo
 };
 
 const Hero = ({ location = "home" }) => {

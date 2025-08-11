@@ -38,7 +38,7 @@
 }
 
 #sib-form button[type="submit"]:hover{
-    background-color: #ffffff;
+    background-color: #fed332;
 }
 
 #sib-form button[type="submit"] svg{
@@ -58,8 +58,25 @@
 
 @media (min-width:768px){
     #sib-form input,
-    #sib-form textarea{
+    #sib-form textarea,
+    #sib-form select{
         font-size: 15px;
+    }
+
+    #sib-form small{
+        font-size: 13.5px;
+    }
+}
+
+@media (min-width:1024px){
+    #sib-form input,
+    #sib-form textarea,
+    #sib-form select{
+        font-size: 16px;
+    }
+
+    #sib-form small{
+        font-size: 14px;
     }
 }
 

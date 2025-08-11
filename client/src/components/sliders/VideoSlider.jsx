@@ -25,8 +25,10 @@ function wrapIndex(idx, length) {
 
 function VideoSlider({ location }) {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [paused, setPaused] = useState(true);
   const [animating, setAnimating] = useState(true);
+  const [interactionAllowed, setInteractionAllowed] = useState(false);
+
   const timerRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -106,6 +108,16 @@ function VideoSlider({ location }) {
 
   const offset = (index * 100) / visibleCount;
 
+  useEffect(() => {
+    const enableInteraction = () => setInteractionAllowed(true);
+    window.addEventListener("click", enableInteraction, { once: true });
+    window.addEventListener("touchstart", enableInteraction, { once: true });
+    return () => {
+      window.removeEventListener("click", enableInteraction);
+      window.removeEventListener("touchstart", enableInteraction);
+    };
+  }, []);
+
   return (
     <div
       ref={containerRef}
@@ -124,10 +136,13 @@ function VideoSlider({ location }) {
             <video
               src={videoSrc}
               muted
-              playsInline
-              autoPlay
               loop
+              playsInline
               className="video-element"
+              onMouseEnter={(e) => {
+                if (interactionAllowed) e.currentTarget.play();
+              }}
+              onMouseLeave={(e) => e.currentTarget.pause()}
             />
           </div>
         ))}

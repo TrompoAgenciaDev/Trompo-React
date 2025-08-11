@@ -47,6 +47,25 @@ p{
   align-items: center;
 }
 
+.home-content p.text-show-effect-1 span{
+  font-size: 18px;
+}
+
+.home-content{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.social-post-container p{
+  font-size: 15px;
+}
+
+.container.post-notes{
+  text-align: left;
+  margin-left: 50px;
+}
+
 @media (min-width: 768px) {
 
   .text-show-effect *{
@@ -81,8 +100,16 @@ p{
     min-height: 300px;
   }
 
-  .text-show-effect span{
+  .container.text-show-effect span{
     font-size: 18px;
+  }
+
+  .home-content p.text-show-effect-1 span{
+    font-size: 18px;
+  }
+
+  .container.home-content{
+    max-width: 1024px;
   }
 
   .bg-yellow .container{

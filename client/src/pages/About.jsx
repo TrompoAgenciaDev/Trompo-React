@@ -1,7 +1,6 @@
 import PostHero from "../components/PostHero";
 import Hero from "../layout/Hero";
 import Members from "../components/Members";
-import VideoSlider from "../components/sliders/VideoSlider";
 
 // styles
 import "../assets/styles/about.css";
@@ -146,20 +145,29 @@ const About = () => {
         <div className="container">
           <Members />
         </div>
-        <div className="container slider-container">
-          <div className="text-video-slider">
-            <h2>Nuestro trabajo habla por nosotros</h2>
-            <div className="text-highlight">
-              <p>Cada caso es la historia de una colaboración exitosa.</p>
-              <p>
-                Empresas que confiaron en nuestro expertise y hoy ven crecer sus
-                negocios con soluciones sostenibles.
-              </p>
+      </section>
+      {/* 
+      <section className="full-container bg-yellow">
+        <div className="grid-content">
+          <div className="grid-item">
+            <h2>¿Por qué contratar una agencia especializada?</h2>
+            <p>
+              En Argentina es común ver proyectos web realizados con bajos
+              presupuestos y sin planificación técnica, lo que genera sitios mal
+              desarrollados, poco escalables y difíciles de mantener.
+            </p>
+            <p>
+              En Trompo ofrecemos una alternativa profesional, con beneficios
+              reales:
+            </p>
+          </div>
+          <div className="grid-item">
+            <div className="container">
+              
             </div>
           </div>
-          <VideoSlider />
         </div>
-      </section>
+      </section> */}
     </>
   );
 };

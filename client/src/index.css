@@ -20,6 +20,7 @@ html,
   margin: 0;
   border: 0;
   outline: 0;
+  scroll-behavior: smooth;
 }
 
 *{
@@ -81,6 +82,10 @@ img{
   font-weight: 700;
 }
 
+.italic{
+  font-style: italic;
+}
+
 .hover-y:hover,
 .hover-y:hover a{
   color: #000000;
@@ -131,7 +136,7 @@ footer{
 .button-next {
     width: 20px;
     height: 20px;
-    z-index: 999999;
+    z-index: 99;
     background-color: transparent;
     position: absolute;
     top: 50%;
@@ -211,7 +216,7 @@ footer{
   }
 
   .read-more-link{
-    font-size: 19px;
+    font-size: 17px;
     font-weight: 400;
   }
 

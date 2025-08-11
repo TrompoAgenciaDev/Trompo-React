@@ -1,4 +1,3 @@
-import React from "react";
 import Menu from "@/components/Menu";
 import routesConfig from "@/config/routesConfig";
 
@@ -13,18 +12,15 @@ const MenuPopup = ({ isOpen, onClose }) => {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="popup-menu noise-bg"
+          className="full-container popup-menu"
           initial={{
             y: -1140,
-            scale: 0.25,
           }}
           animate={{
             y: 0,
-            scale: 1,
           }}
           exit={{
             y: -1140,
-            scale: 0.25,
           }}
           transition={{
             delay: 0.1,
@@ -34,28 +30,53 @@ const MenuPopup = ({ isOpen, onClose }) => {
             stiffness: 250,
           }}
         >
-          <div className="popup-content">
-            <motion.button
-              className="close-button"
-              onClick={onClose}
-              initial={{
-                scale: 0,
-              }}
-              animate={{
-                scale: 1,
-              }}
-              transition={{
-                delay: 0.1,
-              }}
-            >
-              <Icons 
-                iconName="close"
-              />
-            </motion.button>
+          <div className="container header">
+            <motion.a
+          className="logo-img"
+          href="/"
+          initial={{
+            y: -250,
+          }}
+          animate={{
+            y: 0,
+          }}
+          transition={{
+            type: "spring",
+            damping: 20,
+            stiffness: 350,
+          }}
+        >
+          <Icons iconName="logoBlack"/>
+        </motion.a>
+        
+        <motion.button
+          className="nav-button"
+          initial={{
+            y: -250,
+            opacity: 0,
+          }}
+          animate={{
+            y: 0,
+            opacity: 1,
+          }}
+          transition={{
+            delay: 0.3,
+            type: "spring",
+            damping: 28,
+            stiffness: 350,
+          }}
+          onClick={onClose}
+        >
+          <Icons iconName={"close"}/>
+
+        </motion.button>
+          </div>
+          <div className="container menu-popup">
             <Menu
               menuType="main"
               routes={routesConfig}
               classMenu="main-menu"
+              location="header"
               onClose={onClose}
             />
           </div>

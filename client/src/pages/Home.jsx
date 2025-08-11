@@ -6,7 +6,7 @@ import { motion } from "motion/react";
 
 //components
 import VideoSlider from "../components/sliders/VideoSlider";
-import ImageSlider from "../components/sliders/ImageSlider";
+import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import PubliSlides from "../components/sliders/PubliSlides";
 import Testimoniales from "../components/Testimoniales";
 import PostCard from "../components/posts/PostCard";
@@ -36,7 +36,7 @@ const Home = () => {
 
         <div className="container home-content">
           <motion.p
-            className="text-show-effect"
+            className="text-show-effect-1"
             initial="hidden"
             whileInView="visible"
             viewport={{ margin: "-300px" }}
@@ -86,7 +86,7 @@ const Home = () => {
 
       <section className="full-container">
         <div className="slider-conainer container">
-          <ImageSlider />
+          <CustomerSlider />
         </div>
 
         <div className="banner full-container">
@@ -202,8 +202,6 @@ const Home = () => {
       </section>
 
       <Contact />
-
-      <YellowSection type="faqs" />
     </main>
   );
 };

@@ -80,6 +80,19 @@
   height: 30px;
 }
 
+.footer .menu-item-content{
+  font-size: 15px;
+  margin-top: 0;
+}
+
+.footer .servicios-item{
+  color: #1d1d1b;
+  font-size: 15px;
+  font-weight: normal;
+  text-transform: capitalize;
+}
+
+
 @media (min-width:768px){
   .footer-container{
     display: grid;
@@ -114,6 +127,9 @@
   }
   .footer-menu::before{
     width: 130px;
+  }
+  .footer .servicios-item{
+    font-weight: 500;
   }
 }
 

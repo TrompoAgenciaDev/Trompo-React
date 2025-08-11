@@ -22,6 +22,7 @@ const Footer = () => {
               menuType="main"
               routes={routesConfig}
               classMenu="footer-menu-items"
+              location="footer"
             />
           </div>
           <div className="footer-menu">
@@ -29,6 +30,7 @@ const Footer = () => {
               menuType="servicios"
               routes={routesConfig}
               classMenu="footer-menu-items"
+              location="footer"
             />
           </div>
           <div className="social-icons">
