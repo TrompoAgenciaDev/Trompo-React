@@ -27,7 +27,7 @@ const routesConfig = {
   ],
   servicios: [
     { path: "#", label: "identidad", Component: Identidad },
-    { path: "#", label: "desarrollo web", Component: DesarrolloWeb },
+    { path: "/desarrollo-web", label: "desarrollo web", Component: DesarrolloWeb },
     { path: "#", label: "ads", Component: Ads },
     { path: "#", label: "redes sociales", Component: RedesSociales },
     { path: "#", label: "soporte", Component: Soporte },

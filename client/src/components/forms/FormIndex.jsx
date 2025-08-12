@@ -1,7 +1,55 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import "../../assets/styles/form-index.css";
 
 export default function formIndex() {
+  const inited = useRef(false);
+
+  useEffect(() => {
+    if (inited.current) return;
+    inited.current = true;
+
+    // define el callback global de reCAPTCHA si no existe
+    if (typeof window !== "undefined" && !window.handleCaptchaResponse) {
+      window.handleCaptchaResponse = function () {
+        // opcional: podés guardar el token si lo necesitás
+      };
+    }
+
+    // cargar script principal de Brevo (una sola vez)
+    let sibScript = document.querySelector('script[data-sib-main]');
+    if (!sibScript) {
+      sibScript = document.createElement("script");
+      sibScript.src = "https://sibforms.com/forms/end-form/build/main.js";
+      sibScript.defer = true;
+      sibScript.setAttribute("data-sib-main", "true");
+      document.body.appendChild(sibScript);
+    }
+
+    // cargar script de reCAPTCHA (una sola vez)
+    let recaptchaScript = document.querySelector('script[data-recaptcha]');
+    if (!recaptchaScript) {
+      recaptchaScript = document.createElement("script");
+      recaptchaScript.src = "https://www.google.com/recaptcha/api.js?hl=es";
+      recaptchaScript.async = true;
+      recaptchaScript.defer = true;
+      recaptchaScript.setAttribute("data-recaptcha", "true");
+      document.body.appendChild(recaptchaScript);
+    }
+
+    // cuando el de Brevo esté listo (o si ya lo estaba), forzamos el escaneo del DOM
+    const ensureInit = () => {
+      try {
+        window.dispatchEvent(new Event("DOMContentLoaded"));
+        window.dispatchEvent(new Event("load"));
+      } catch {}
+    };
+
+    if (sibScript.readyState === "loaded" || sibScript.readyState === "complete") {
+      ensureInit();
+    } else {
+      sibScript.addEventListener("load", ensureInit, { once: true });
+    }
+  }, []);
   return (
     <div
       className="sib-form"
@@ -41,10 +89,10 @@ export default function formIndex() {
                 placeholder="Ingresa tu email"
                 required
               />
-              <small>
+              {/* <small>
                 Ingrese un email institucional para que su consulta sea
                 asignada. Ej.: info@empresa.com
-              </small>
+              </small> */}
             </div>
             <div>
               <input
@@ -319,11 +367,11 @@ export default function formIndex() {
                   required
                 />
               </div>
-              <small>
+              {/* <small>
                 El campo WHATSAPP debe contener entre 6 y 19 cifras e incluir el
                 prefijo del país sin «+» ni «0» delante (ej.: 34xxxxxxxxxxx para
                 España)
-              </small>
+              </small> */}
             </div>
             <div>
               <textarea

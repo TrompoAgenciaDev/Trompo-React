@@ -35,8 +35,19 @@ const Contact = () => {
       <Hero lotacion="contact" />
 
       <section className="full-container" id="form">
+
         <div className="container form-container">
-          <FormIndex />
+          <div className="grid-item-form">
+            <span>
+              Comenzá hoy con una estrategia que te garantice resultados.
+            </span>
+            <h1>
+              ¡Poné en movimiento el <span className="italic"><span className="br">{"\n"}</span>marketing digital</span> de tu Empresa!
+            </h1>
+          </div>
+          <div className="grid-item-form">
+            <FormIndex />
+          </div>
         </div>
 
         <div className="full-container text-container">
@@ -47,12 +58,11 @@ const Contact = () => {
             </span>
           </div>
         </div>
-      </section>
-
-      <section className="full-container slider-conainer">
-        <div className="container">
-          <ImageSlider />
-        </div>
+        <section className="full-container slider-conainer">
+          <div className="container">
+            <ImageSlider />
+          </div>
+        </section>
       </section>
 
       <YellowSection type="faqs"/>

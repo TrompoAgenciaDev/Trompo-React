@@ -1,0 +1,30 @@
+.diagonal-title{
+  clip-path: polygon(0 0, 100% 0%, 100% 90%, 0% 100%);
+}
+
+.page-title .title-page{
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.page-title .content{
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 10px;
+}
+
+
+@media (min-width: 768px) {
+  .diagonal-title{
+    clip-path: polygon(0 0, 100% 0%, 100% 80%, 0% 100%);
+    padding: 70px 20px;
+  }
+  
+  .page-title .title-page{
+    font-size: 30px;
+  }
+
+  .page-title .content{
+    font-size: 17px;
+  }
+}

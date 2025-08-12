@@ -1,5 +1,6 @@
 import PostHero from "../components/PostHero";
 import Hero from "../layout/Hero";
+import Values from "../layout/Values";
 import Members from "../components/Members";
 
 // styles
@@ -146,28 +147,8 @@ const About = () => {
           <Members />
         </div>
       </section>
-      {/* 
-      <section className="full-container bg-yellow">
-        <div className="grid-content">
-          <div className="grid-item">
-            <h2>¿Por qué contratar una agencia especializada?</h2>
-            <p>
-              En Argentina es común ver proyectos web realizados con bajos
-              presupuestos y sin planificación técnica, lo que genera sitios mal
-              desarrollados, poco escalables y difíciles de mantener.
-            </p>
-            <p>
-              En Trompo ofrecemos una alternativa profesional, con beneficios
-              reales:
-            </p>
-          </div>
-          <div className="grid-item">
-            <div className="container">
-              
-            </div>
-          </div>
-        </div>
-      </section> */}
+      
+      <Values/>
     </>
   );
 };

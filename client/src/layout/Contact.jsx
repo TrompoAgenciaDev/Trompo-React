@@ -7,7 +7,9 @@ function Contact() {
       <div className="container">
         <div className="grid-contact">
           <div className="grid-contact-item">
-            <h1>Transformemos obstáculos en ventajas competitivas</h1>
+            <h1>
+              Transformemos obstáculos en ventajas competitivas
+            </h1>
           </div>
           <div className="grid-contact-item">
             <FormIndex />
