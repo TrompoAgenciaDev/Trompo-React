@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import membersData from "../json/members.json";
+import useMembers from "../hooks/useMembers";
 import "../assets/styles/members.css";
 
 const SLIDE_DURATION = 3000;
@@ -11,62 +11,56 @@ function wrapIndex(idx, length) {
 }
 
 export default function Members() {
+  const { members, loading, error } = useMembers();
+
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [direction, setDirection] = useState(1);
+
   const timerRef = useRef(null);
   const dragStartX = useRef(0);
   const dragDelta = useRef(0);
 
+  // Autoplay
   useEffect(() => {
-    if (!membersData.length) return;
+    if (!members.length) return;
     if (isPaused || isDragging) return;
     timerRef.current = setTimeout(() => {
       setDirection(1);
-      setIndex((prev) => wrapIndex(prev + 1, membersData.length));
+      setIndex((prev) => wrapIndex(prev + 1, members.length));
     }, SLIDE_DURATION);
     return () => clearTimeout(timerRef.current);
-  }, [index, isPaused, isDragging]);
+  }, [index, isPaused, isDragging, members.length]);
 
-  if (!membersData.length)
-    return <div>No hay miembros de equipo disponibles.</div>;
+  if (loading) return <div>Cargando miembros…</div>;
+  if (error) return <div>{error}</div>;
+  if (!members.length) return <div>No hay miembros de equipo disponibles.</div>;
 
-  function handleDragStart(event, info) {
+  function handleDragStart(_e, info) {
     setIsDragging(true);
     dragStartX.current = info.point.x;
     dragDelta.current = 0;
   }
-
-  function handleDrag(event, info) {
+  function handleDrag(_e, info) {
     dragDelta.current = info.point.x - dragStartX.current;
   }
-
-  function handleDragEnd(event, info) {
+  function handleDragEnd() {
     setIsDragging(false);
     const threshold = 80;
     if (dragDelta.current > threshold) {
       setDirection(-1);
-      setIndex((prev) => wrapIndex(prev - 1, membersData.length));
+      setIndex((prev) => wrapIndex(prev - 1, members.length));
     } else if (dragDelta.current < -threshold) {
       setDirection(1);
-      setIndex((prev) => wrapIndex(prev + 1, membersData.length));
+      setIndex((prev) => wrapIndex(prev + 1, members.length));
     }
     dragDelta.current = 0;
   }
 
   const variants = {
-    enter: (dir) => ({
-      x: dir > 0 ? 200 : -200,
-      opacity: 0,
-      scale: 0.98,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      scale: 1,
-      transition: { duration: ANIMATION_DURATION },
-    },
+    enter: (dir) => ({ x: dir > 0 ? 200 : -200, opacity: 0, scale: 0.98 }),
+    center: { x: 0, opacity: 1, scale: 1, transition: { duration: ANIMATION_DURATION } },
     exit: (dir) => ({
       x: dir > 0 ? -200 : 200,
       opacity: 0,
@@ -75,7 +69,7 @@ export default function Members() {
     }),
   };
 
-  const current = membersData[wrapIndex(index, membersData.length)];
+  const current = members[wrapIndex(index, members.length)];
 
   return (
     <div
@@ -99,10 +93,7 @@ export default function Members() {
           onDragStart={handleDragStart}
           onDrag={handleDrag}
           onDragEnd={handleDragEnd}
-          style={{
-            cursor: isDragging ? "grabbing" : "grab",
-            touchAction: "pan-y",
-          }}
+          style={{ cursor: isDragging ? "grabbing" : "grab", touchAction: "pan-y" }}
           className="member-card"
         >
           <div className="member-content">
@@ -115,61 +106,37 @@ export default function Members() {
           </div>
 
           <div
-            style={{
-              backgroundImage: `url(${
-                current.featured_image || "/favicon.png"
-              })`,
-            }}
+            style={{ backgroundImage: `url(${current.featured_image || "/favicon.png"})` }}
             className="member-img"
-          ></div>
+          />
         </motion.div>
       </AnimatePresence>
 
       <button
         onClick={() => {
           setDirection(-1);
-          setIndex((prev) => wrapIndex(prev - 1, membersData.length));
+          setIndex((prev) => wrapIndex(prev - 1, members.length));
         }}
         className="button-prev"
+        aria-label="Anterior"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="33"
-          height="33"
-          viewBox="0 0 33 33"
-          fill="none"
-        >
-          <path
-            d="M31.9687 16.1926L1.08382 16.1926M1.08382 16.1926L16.5263 31.3777M1.08382 16.1926L16.5263 1.00751"
-            stroke="#1D1D1B"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+        <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none">
+          <path d="M31.9687 16.1926L1.08382 16.1926M1.08382 16.1926L16.5263 31.3777M1.08382 16.1926L16.5263 1.00751"
+            stroke="#1D1D1B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
 
       <button
         onClick={() => {
           setDirection(1);
-          setIndex((prev) => wrapIndex(prev + 1, membersData.length));
+          setIndex((prev) => wrapIndex(prev + 1, members.length));
         }}
         className="button-next"
+        aria-label="Siguiente"
       >
-        <svg
-          width="38"
-          height="38"
-          viewBox="0 0 38 38"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-            stroke="#1E1E1E"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+        <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
+            stroke="#1E1E1E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
     </div>

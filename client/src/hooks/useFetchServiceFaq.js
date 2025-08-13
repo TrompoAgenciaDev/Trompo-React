@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import GeneralText from "../json/generaltext.json";
 
 const useFetchServiceFaq = ({ category }) => {
   const [items, setItems] = useState([]);
@@ -7,23 +6,32 @@ const useFetchServiceFaq = ({ category }) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
 
-    try {
-      if (category === "services") {
-        setItems(GeneralText.services || []);
-      } else if (category === "faqs") {
-        setItems(GeneralText.faqs || []);
-      } else {
+      try {
+        const res = await fetch("/generaltext.json", { cache: "no-store" });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        const data = await res.json();
+
+        if (category === "services") {
+          setItems(data.services || []);
+        } else if (category === "faqs") {
+          setItems(data.faqs || []);
+        } else {
+          setItems([]);
+        }
+      } catch (err) {
+        setError(`Hubo un problema al cargar los datos: ${err.message}`);
         setItems([]);
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setError(`Hubo un problema al cargar los datos: ${err.message}`);
-      setItems([]);
-    } finally {
-      setLoading(false);
-    }
+    };
+
+    fetchData();
   }, [category]);
 
   return { items, loading, error };

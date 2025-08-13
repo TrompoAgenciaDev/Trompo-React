@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import { useParams } from "react-router-dom";
-import Posts from "../json/posts.json";
-
+import usePosts from "../hooks/usePosts";
 import "../assets/styles/single-post.css";
 
 const SinglePost = () => {
   const { slug } = useParams();
-  const [post, setPost] = useState(null);
+  const { posts, loading, error } = usePosts();
 
-  useEffect(() => {
-    // Buscar el post por su slug
-    const foundPost = Posts.find((post) => post.slug === slug);
-    setPost(foundPost);
-  }, [slug]); // Se vuelve a ejecutar cada vez que el slug cambia
+  const post = useMemo(
+    () => posts.find((p) => p.slug === slug),
+    [posts, slug]
+  );
 
-  if (!post) {
-    return <p>Post no encontrado</p>;
-  }
+  if (loading) return <p>Cargando post…</p>;
+  if (error)   return <p>{error}</p>;
+  if (!post)   return <p>Post no encontrado</p>;
 
   return (
     <div className="full-container single-post-container">
       <div className="container">
         <div className="post-card">
           <h1 className="title">{post.title}</h1>
-          <img className="featured-image" src={post.featured_image} alt="" />
+          {post.featured_image && (
+            <img className="featured-image" src={post.featured_image} alt="" />
+          )}
           <div
             className="post-content"
             dangerouslySetInnerHTML={{ __html: post.long_description }}

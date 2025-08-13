@@ -1,39 +1,35 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
-export default function useMembers(data, autoPlayDelay = 6000) {
-  const [current, setCurrent] = useState(0);
-  const timeoutRef = useRef(null);
-  const length = data.length;
-
-  const resetTimeout = () => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-  };
+export default function useMembers() {
+  const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    resetTimeout();
-    timeoutRef.current = setTimeout(() => {
-      setCurrent((prev) => (prev === length - 1 ? 0 : prev + 1));
-    }, autoPlayDelay);
+    let alive = true;
 
-    return () => {
-      resetTimeout();
-    };
-  }, [current, length, autoPlayDelay]);
+    const url = `/members.json`;
 
-  const goNext = () => {
-    resetTimeout();
-    setCurrent((prev) => (prev === length - 1 ? 0 : prev + 1));
-  };
+    fetch(url, { cache: "no-store" })
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((data) => {
+        if (alive) {
+          setMembers(Array.isArray(data) ? data : []);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (alive) {
+          setError("No se pudieron cargar los miembros.");
+          setLoading(false);
+        }
+      });
 
-  const goPrev = () => {
-    resetTimeout();
-    setCurrent((prev) => (prev === 0 ? length - 1 : prev - 1));
-  };
+    return () => { alive = false; };
+  }, []);
 
-  const setIndex = (index) => {
-    resetTimeout();
-    if (index >= 0 && index < length) setCurrent(index);
-  };
-
-  return { current, goNext, goPrev, setIndex };
+  return { members, loading, error };
 }

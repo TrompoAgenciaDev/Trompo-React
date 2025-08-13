@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react';
-import Portfolio from '../json/portfolio.json';
-import Posts from '../json/posts.json';
-
-const dataType = {
-  portfolio: Portfolio,
-  posts: Posts,
-};
 
 const useJsonConsulting = ({ quantity, category, tag, type }) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const fileMap = {
+    portfolio: '/portfolio.json',
+    posts: '/posts.json',
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let data = dataType[type];
+        const res = await fetch(fileMap[type], { cache: "no-store" });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        let data = await res.json();
 
         if (category) {
           data = data.filter(item => item.categories.includes(category));
