@@ -77,6 +77,17 @@
   min-width: 300px;
 }
 
+.main-menu{
+  width: 100%;
+  max-width: fit-content;
+}
+
+.menu-item-content span,
+.servicios-item{
+  width: 100%;
+  text-align: left;
+}
+
 @media (min-width:768px){
   .menu-item-content{
     font-size: 22px;
@@ -105,17 +116,40 @@
   }
 }
 
+@media (min-width:1280px){
+
+  .submenu{
+    bottom: 1px;
+    left: 250px;
+  }
+
+  .menu-item-content,
+  .submenu-item{
+    font-size: 30px;
+    margin-top: 20px;
+  }
+
+  .menu-item-content{
+    font-weight: 500;
+  }
+}
+
 @media (min-width: 1366px){
-  .container .menu-popup{
-    width: 90%;
+  .container.menu-popup{
+    width: 100%;
     max-width: 1700px;
   }
 
   .menu-item-content{
-    font-size: 22px;
+    font-size: 32px;
+  }
+
+  .submenu{    
+    left: 250px;
   }
 
   .submenu-item{
-    font-size: 18px;
+    font-size: 30px;
+    margin-top: 21px;
   }
 }

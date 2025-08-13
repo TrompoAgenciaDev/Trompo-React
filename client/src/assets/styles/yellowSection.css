@@ -233,6 +233,13 @@
 
 @media (min-width: 1280px) {
 
+  
+  .bg-yellow .container:first-child,
+  .bg-yellow .container:last-child {
+    display: grid;
+    justify-items: center;
+  }
+
   .services-text{
     font-size: 20px;
     max-width: 850px;
@@ -246,6 +253,10 @@
     align-items: center;
   }
   
+  .grid-services{
+    width: 80%;
+  }
+
   .title-grid{
     font-size: 22px;
   }

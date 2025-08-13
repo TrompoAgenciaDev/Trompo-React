@@ -1,0 +1,129 @@
+.portfolio-section{
+  width: 100%;
+  height: 510px;
+  color: #ffffff;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.portfolio-section .title-section{
+  width: 1140px;
+}
+
+.portfolio-section .title-section .title{
+  color: #ffffff;  
+  font-weight: 300;
+}
+
+.portfolio-section .title-section span{
+  font-weight: 900;
+  letter-spacing: 0.5px;
+}
+
+.portfolio-carrusel{
+  width: 120vw;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  will-change: transform;
+  overflow: visible;
+}
+
+.portfolio-track{
+  display: flex;
+  gap: 20px; 
+  min-width: max-content;
+  height: 100%;
+  align-items: center;
+  cursor: grab;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-x;
+}
+
+.portfolio-track:active{
+  cursor: grabbing;
+}
+
+.portfolio-card{
+  width: 350px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-position: center center;
+  background-size: cover;
+  -webkit-user-drag: none;
+}
+
+.portfolio-card::after{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 10;
+}
+
+.portfolio-card .portfolio-title{
+  opacity: 0;
+  text-transform: uppercase;
+  font-size: 36px;
+  transition: opacity 0.2s ease-in-out;
+  z-index: 20;
+}
+
+.portfolio-card:hover::after{
+  opacity: 0.5;
+}
+
+.portfolio-card:hover .portfolio-title{
+  opacity: 1;
+}
+
+@media (min-width:768px){
+  .portfolio-section{
+    height: 700px;
+  }
+  .portfolio-carrusel{
+    margin-top: 100px;
+    transform: perspective(1200px) rotateX(20deg) rotateY(20deg);
+  } 
+}
+
+@media (min-width:1280px){
+  .portfolio-section{
+    height: 850px;
+  }
+
+  .portfolio-carrusel{
+    height: 600px;
+    margin-top: 180px;
+  } 
+
+  .portfolio-card{
+    width: 400px;
+  }
+}
+
+
+@media (min-width:1366px){
+  .portfolio-section{
+    height: 900px;
+  }
+
+  .portfolio-carrusel{
+    height: 600px;
+    margin-top: 220px;
+  }
+}

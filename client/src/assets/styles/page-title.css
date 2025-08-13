@@ -1,5 +1,8 @@
 .diagonal-title{
   clip-path: polygon(0 0, 100% 0%, 100% 90%, 0% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .page-title .title-page{
@@ -8,6 +11,8 @@
 }
 
 .page-title .content{
+  width: 100%;
+  max-width: 600px;
   font-size: 16px;
   font-weight: 400;
   margin-top: 10px;
@@ -26,5 +31,30 @@
 
   .page-title .content{
     font-size: 17px;
+  }
+}
+
+
+@media (min-width:1280px){
+  .diagonal-title .container.page-title{
+    padding: 10px 30px;
+  }
+}
+
+@media (min-width:1280px){
+  .diagonal-title .container.page-title{
+    padding: 10px 30px;
+  }
+}
+
+@media (min-width:1366px){
+  .diagonal-title .container.page-title{
+    width: 100%;
+    min-width: 1700px;
+    padding: 10px 30px;
+  }
+  
+  .page-title .content{
+    max-width: 800px;
   }
 }

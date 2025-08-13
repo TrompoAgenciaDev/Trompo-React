@@ -10,6 +10,11 @@ const useJsonConsulting = ({ quantity, category, tag, type }) => {
     posts: '/posts.json',
   };
 
+  // helpers
+  const norm = (v) => (v ?? '').toString().trim().toLowerCase();
+  const inArrayCI = (arr, value) =>
+    Array.isArray(arr) && arr.some((x) => norm(x) === norm(value));
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,11 +23,13 @@ const useJsonConsulting = ({ quantity, category, tag, type }) => {
         let data = await res.json();
 
         if (category) {
-          data = data.filter(item => item.categories.includes(category));
+          const catNorm = norm(category);
+          data = data.filter((item) => inArrayCI(item?.categories, catNorm));
         }
 
         if (tag) {
-          data = data.filter(item => item.tags.includes(tag));
+          const tagNorm = norm(tag);
+          data = data.filter((item) => inArrayCI(item?.tags, tagNorm));
         }
 
         if (quantity) {

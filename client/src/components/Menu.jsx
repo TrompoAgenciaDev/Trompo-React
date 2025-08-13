@@ -12,11 +12,11 @@ const Menu = ({
   const menuItems = routes[menuType];
   const getSubmenu = (key) => (Array.isArray(routes[key]) ? routes[key] : []);
 
-  const [isMobile, setIsMobile] = useState(false);      // <=768
-  const [isWide, setIsWide] = useState(false);          // >=1024
-  const [openSub, setOpenSub] = useState(null);         // toggle por click
-  const [hovered, setHovered] = useState(null);         // hover actual
-  const [activeSub, setActiveSub] = useState(null);     // panel lateral
+  const [isMobile, setIsMobile] = useState(false);
+  const [isWide, setIsWide] = useState(false);
+  const [openSub, setOpenSub] = useState(null);
+  const [hovered, setHovered] = useState(null);
+  const [activeSub, setActiveSub] = useState(null);
   const closeTimer = useRef(null);
 
   useEffect(() => {
@@ -27,10 +27,20 @@ const Menu = ({
       setIsWide(mqWide.matches);
     };
     upd();
-    const add = (mq, cb) => (mq.addEventListener ? mq.addEventListener("change", cb) : mq.addListener(cb));
-    const rem = (mq, cb) => (mq.removeEventListener ? mq.removeEventListener("change", cb) : mq.removeListener(cb));
-    add(mqMobile, upd); add(mqWide, upd);
-    return () => { rem(mqMobile, upd); rem(mqWide, upd); };
+    const add = (mq, cb) =>
+      mq.addEventListener
+        ? mq.addEventListener("change", cb)
+        : mq.addListener(cb);
+    const rem = (mq, cb) =>
+      mq.removeEventListener
+        ? mq.removeEventListener("change", cb)
+        : mq.removeListener(cb);
+    add(mqMobile, upd);
+    add(mqWide, upd);
+    return () => {
+      rem(mqMobile, upd);
+      rem(mqWide, upd);
+    };
   }, []);
 
   const handleTopClick = (e, label) => {
@@ -55,14 +65,13 @@ const Menu = ({
       style={{
         display: "flex",
         alignItems: "center",
-        gap: isWide ? 0 : undefined, // evito el :hover de CSS en desktop; la separación la anima el icono
+        gap: isWide ? 0 : undefined,
       }}
       onMouseEnter={() => setHovered(label)}
       onMouseLeave={() => setHovered((h) => (h === label ? null : h))}
     >
       {isWide ? (
         <>
-          {/* placeholder SIEMPRE presente: el texto se corre porque el contenedor gana margen */}
           <motion.div
             className="menu-icon"
             animate={{
@@ -93,7 +102,10 @@ const Menu = ({
       ) : (
         <>
           {showChevronMobile && (
-            <div className="menu-icons" style={{ display: "flex", alignItems: "center" }}>
+            <div
+              className="menu-icons"
+              style={{ display: "flex", alignItems: "center" }}
+            >
               <div className="menu-icon-submenu">
                 <motion.svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +133,15 @@ const Menu = ({
 
   return (
     <nav className="nav-menu">
-      <div className="menu-two-col" style={{ width: "100%", display: "flex", gap: "24px", alignItems: "flex-start" }}>
+      <div
+        className="menu-two-col"
+        style={{
+          width: "100%",
+          display: "flex",
+          gap: "24px",
+          alignItems: "flex-start",
+        }}
+      >
         <ul className={classMenu}>
           {menuItems.map(({ path, label }, index) => {
             const hasSub = getSubmenu(label).length > 0;
@@ -135,17 +155,26 @@ const Menu = ({
                         type="button"
                         onClick={(e) => handleTopClick(e, label)}
                         className={`menu-item ${label}-item`}
-                        style={{ background: "transparent", border: 0, padding: 0, color: "inherit" }}
+                        style={{
+                          background: "transparent",
+                          border: 0,
+                          padding: 0,
+                          color: "inherit",
+                        }}
                         onMouseEnter={() => {
                           if (isWide) {
-                            if (closeTimer.current) clearTimeout(closeTimer.current);
+                            if (closeTimer.current)
+                              clearTimeout(closeTimer.current);
                             setActiveSub(label);
                           }
                         }}
                         onMouseLeave={() => {
                           if (isWide) {
                             closeTimer.current = setTimeout(
-                              () => setActiveSub((cur) => (cur === label ? null : cur)),
+                              () =>
+                                setActiveSub((cur) =>
+                                  cur === label ? null : cur
+                                ),
                               120
                             );
                           }
@@ -157,11 +186,19 @@ const Menu = ({
                       <span className={`menu-item ${label}-item`}>{label}</span>
                     )
                   ) : location === "header" ? (
-                    <Link to={path} onClick={onClose} className={`menu-item ${label}-item`}>
+                    <Link
+                      to={path}
+                      onClick={onClose}
+                      className={`menu-item ${label}-item`}
+                    >
                       {renderIconAndLabel(label, false)}
                     </Link>
                   ) : (
-                    <Link to={path} onClick={onClose} className={`menu-item ${label}-item`}>
+                    <Link
+                      to={path}
+                      onClick={onClose}
+                      className={`menu-item ${label}-item`}
+                    >
                       <span className="menu-item-content">{label}</span>
                     </Link>
                   )}
@@ -183,7 +220,7 @@ const Menu = ({
                 transition={{ duration: 0.2, ease: "easeOut" }}
                 onMouseEnter={() => {
                   if (closeTimer.current) clearTimeout(closeTimer.current);
-                  setHovered(activeSub); // mantiene visible la flecha y su margen
+                  setHovered(activeSub);
                 }}
                 onMouseLeave={() => {
                   setHovered(null);
@@ -191,13 +228,19 @@ const Menu = ({
                 }}
                 style={{ listStyle: "none", margin: 0, padding: 0 }}
               >
-                {getSubmenu(activeSub).map(({ path: subPath, label: subLabel }, subIndex) => (
-                  <li className="submenu-item" key={subIndex}>
-                    <Link to={subPath} className="submenu-item" onClick={onClose}>
-                      {subLabel}
-                    </Link>
-                  </li>
-                ))}
+                {getSubmenu(activeSub).map(
+                  ({ path: subPath, label: subLabel }, subIndex) => (
+                    <li className="submenu-item" key={subIndex}>
+                      <Link
+                        to={subPath}
+                        className="submenu-item"
+                        onClick={onClose}
+                      >
+                        {subLabel}
+                      </Link>
+                    </li>
+                  )
+                )}
               </motion.ul>
             )}
           </AnimatePresence>

@@ -85,7 +85,7 @@ const Home = () => {
       <YellowSection type="services" />
 
       <section className="full-container">
-        <div className="slider-conainer container">
+        <div className="slider-container container">
           <CustomerSlider />
         </div>
 

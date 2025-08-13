@@ -132,7 +132,7 @@ export default function Testimoniales() {
 
         </motion.div>
       </AnimatePresence>
-      {/* <div className="testimoniales-dots">
+      <div className="testimoniales-dots">
         {testimonials.map((_, i) => (
           <div
             key={i}
@@ -143,7 +143,7 @@ export default function Testimoniales() {
             className={`testimoniales-dot${i === wrapIndex(index, testimonials.length) ? " active" : ""}`}
           />
         ))}
-      </div> */}
+      </div>
     </div>
   );
 }

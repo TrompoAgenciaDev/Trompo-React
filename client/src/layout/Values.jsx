@@ -5,7 +5,6 @@ import useFetchValues from "../hooks/useFetchValues";
 
 import "../assets/styles/values.css";
 
-// ---- Collapse con auto-height animado (0 -> scrollHeight) ----
 function Collapse({ isOpen, children }) {
   const innerRef = useRef(null);
   const measure = useCallback(() => (innerRef.current ? innerRef.current.scrollHeight : 0), []);
@@ -38,7 +37,7 @@ function Collapse({ isOpen, children }) {
         opacity: isOpen ? 1 : 0,
       }}
       transition={{
-        height: { duration: 0.3, ease: "easeInOut" },
+        height: { duration: 0.2, ease: "easeInOut" },
         opacity: { duration: 0.2, ease: "easeOut" },
       }}
       style={{ overflow: "hidden" }}
@@ -64,7 +63,6 @@ function Values() {
   return (
     <section className="full-container bg-yellow values-section">
       <div className="container grid-container">
-        {/* Columna de texto fijo */}
         <div className="grid-item">
           <h2>¿Por qué contratar una agencia especializada?</h2>
           <p>
@@ -75,7 +73,6 @@ function Values() {
           <p>En Trompo ofrecemos una alternativa profesional, con beneficios reales:</p>
         </div>
 
-        {/* Columna con la lista de valores */}
         <div className="grid-item">
           {values.map((item, index) => {
             const isOpen = openIndex === index;
@@ -86,7 +83,7 @@ function Values() {
                 className={`grid-value-content ${isOpen ? "item-active" : ""}`}
                 onMouseEnter={() => setOpenIndex(index)}
                 onMouseLeave={() => setOpenIndex(null)}
-                onClick={() => toggleItem(index)} // tap/click en mobile
+                onClick={() => toggleItem(index)}
                 initial={false}
                 animate={{
                   opacity: isOpen ? 1 : 0.9,
@@ -94,7 +91,7 @@ function Values() {
                 }}
                 transition={{
                   opacity: { duration: 0.2, ease: "easeOut" },
-                  backgroundColor: { duration: 0.2, ease: "easeOut" },
+                  backgroundColor: { duration: 0.1, ease: "easeOut" },
                 }}
               >
                 <div className="icon-grid">
@@ -105,14 +102,13 @@ function Values() {
                   <motion.span
                     className="title-item-content"
                     initial={false}
-                    animate={{ scale: isOpen ? 0.99 : 1 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    animate={{ scale: isOpen ? 0.95 : 1 }}
+                    transition={{ duration: 0.1, ease: "easeOut" }}
                     style={{ display: "inline-block", transformOrigin: "left center" }}
                   >
                     {item.title}
                   </motion.span>
 
-                  {/* Contenido colapsable con altura auto animada */}
                   <Collapse isOpen={isOpen}>
                     <p className="text-item-content">{item.content}</p>
                   </Collapse>

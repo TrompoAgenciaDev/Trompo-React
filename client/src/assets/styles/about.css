@@ -1,181 +1,232 @@
-.about-content{
+.about-content {
   width: 100%;
   max-width: 900px;
   padding: 50px 10px;
 }
 
-.container.text-post-hero{
+.container.text-post-hero {
   min-height: 250px;
 }
 
 .about-content,
-.grid-about{
+.grid-about {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
   align-items: center;
+
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
-  
 }
 
-.about-content h4{
+.about-content h4 {
   width: 100%;
 }
 
-.grid-about-item{
+.grid-about-item {
   width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+
   gap: 20px;
   padding: 20px 14px;
+
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
   align-items: center;
 }
 
-.grid-about-item:hover{
+.grid-about-item:hover {
   background-color: #FFDF69;
 }
 
-.grid-item-content{
+.grid-item-content {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+
   gap: 5px;
 }
 
-.header-item-content{
+.header-item-content {
   font-size: 14px;
   font-weight: 700;
 }
 
-.footer-item-content{
+.footer-item-content {
   font-size: 12px;
 }
 
-.about-content-text{
+.about-content-text {
   width: 100%;
   max-width: 900px;
 }
 
-.about-content-text p{
+.about-content-text p {
   font-size: 14px;
 }
 
-.about-section{
+.about-section {
   padding: 30px 10px;
 }
 
-.slider-container{
+.slider-container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+
   gap: 30px;
   padding: 50px 0;
 }
 
 .video-slider-container .button-prev,
-.video-slider-container .button-next{
+.video-slider-container .button-next {
   display: none;
 }
 
-.text-video-slider{
+.text-video-slider {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+
   gap: 10px;
 }
 
-.text-video-slider h2{
+.text-video-slider h2 {
   font-size: 18px;
 }
 
-.text-video-slider p{
+.text-video-slider p {
   font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  .about-content{
+  .about-content {
     gap: 30px;
   }
 
-  .about-content h4{
+  .about-content h4 {
     font-size: 18px;
   }
 
-  .about-content-text p{
+  .about-content-text p {
     width: 100%;
   }
-  
-  .grid-about-item{
+
+  .grid-about-item {
     padding: 30px 20px;
   }
 
-  .header-item-content{
+  .header-item-content {
     font-size: 16px;
   }
 
-  .footer-item-content{
-    font-size: 15px;
-  }
-  
-  .about-content-text p{
+  .footer-item-content {
     font-size: 15px;
   }
 
-  .text-video-slider{
+  .about-content-text p {
+    font-size: 15px;
+  }
+
+  .text-video-slider {
     width: 60%;
   }
 
-  .text-video-slider h2{
+  .text-video-slider h2 {
     font-size: 20px;
   }
 
-  .text-video-slider p{
+  .text-video-slider p {
     font-size: 15px;
   }
 }
 
-@media (min-width: 1024px){
+@media (min-width: 1024px) {
   .video-slider-container .button-prev,
-  .video-slider-container .button-next{
+  .video-slider-container .button-next {
     display: block;
   }
 
-  .text-video-slider h2{
+  .text-video-slider h2 {
     font-size: 24px;
   }
 
-  .text-video-slider p{
+  .text-video-slider p {
     font-size: 17px;
   }
 }
 
 @media (min-width: 1280px) {
-
-  .about-content h4{
+  .about-content h4 {
     font-size: 20px;
   }
 
-  .about-content p{
+  .about-content p {
     text-align: left;
   }
 
-  .grid-about{
+  .grid-about {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: (1fr)[2];
     grid-template-columns: repeat(2, 1fr);
   }
-  
-  .header-item-content{
+
+  .header-item-content {
     font-size: 17px;
   }
 
-  .footer-item-content{
+  .footer-item-content {
     font-size: 16px;
   }
 
-  .about-content-text p{
+  .about-content-text p {
     font-size: 16px;
   }
 
-  .about-section{
+  .about-section {
     padding: 50px 0;
   }
-  
-  .text-video-slider{
+
+  .text-video-slider {
     width: 450px;
   }
 }

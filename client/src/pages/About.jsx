@@ -148,7 +148,9 @@ const About = () => {
         </div>
       </section>
       
-      <Values/>
+      <section className="full-container about-section">
+        <Values/>
+      </section>
     </>
   );
 };
