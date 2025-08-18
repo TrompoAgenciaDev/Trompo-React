@@ -1,47 +1,80 @@
-.diagonal-title{
-  clip-path: polygon(0 0, 100% 0%, 100% 90%, 0% 100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.full-container .diagonal-title{
+  padding: 30px 0 40px;
 }
 
+.diagonal-title .container.page-title{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.diagonal-page-title{
+  clip-path: polygon(0 0, 100% 0%, 100% 80%, 0 100%);
+}
+
+
 .page-title .title-page{
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
 }
 
 .page-title .content{
   width: 100%;
   max-width: 600px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 400;
   margin-top: 10px;
 }
 
-
 @media (min-width: 768px) {
+  .diagonal-title{
+    padding: 70px 20px;
+  }
+
+  .diagonal-title .page-title{
+    width: 100%;
+    max-width: 700px;
+    padding: 50px 20px;
+  }
+  
+  .page-title .title-page{
+    font-size: 28px;
+  }
+
+  .page-title .content{
+    font-size: 15px;
+  }
+}
+
+
+@media (min-width:1280px){
+  .diagonal-title{
+    clip-path: polygon(0 0, 100% 0%, 100% 200px, 0% 100%);
+    height: 280px;
+  }
+
+  .diagonal-title .page-title{
+    width: 100%;
+    max-width: 1200px;
+    padding: 50px 20px;
+  }
+  
+  .page-title .title-page{
+    font-size: 28px;
+  }
+
+  .page-title .content{
+    font-size: 15px;
+  }
+}
+
+@media (min-width:1280px){
   .diagonal-title{
     clip-path: polygon(0 0, 100% 0%, 100% 80%, 0% 100%);
     padding: 70px 20px;
   }
   
-  .page-title .title-page{
-    font-size: 30px;
-  }
-
-  .page-title .content{
-    font-size: 17px;
-  }
-}
-
-
-@media (min-width:1280px){
-  .diagonal-title .container.page-title{
-    padding: 10px 30px;
-  }
-}
-
-@media (min-width:1280px){
   .diagonal-title .container.page-title{
     padding: 10px 30px;
   }
