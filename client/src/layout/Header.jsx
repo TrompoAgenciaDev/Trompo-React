@@ -1,18 +1,14 @@
-import { useState, React } from "react";
-import routesConfig from "../config/routesConfig";
-
+import { useState } from "react";
 import Icons from '../components/Icons';
 
-//styles & animations
 import '../assets/styles/header.css'
 import { motion } from "framer-motion";
 
 const Header = ({onTogglePopup}) => {
-  const [showPopuup, setShowPopup] = useState(false);
 
   return (
-    <header className="full-container">
-      <div className="container header">
+    <header className="full-container header">
+      <div className="container">
         <motion.a
           className="logo-img"
           href="/"
@@ -50,7 +46,7 @@ const Header = ({onTogglePopup}) => {
           onClick={onTogglePopup}
         >
 
-          <Icons iconName={"burguer"}/>
+          {/* <Icons iconName={"burguer"}/> */}
 
         </motion.button>
       </div>

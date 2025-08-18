@@ -11,7 +11,7 @@ import PubliSlides from "../components/sliders/PubliSlides";
 import Testimoniales from "../components/Testimoniales";
 import PostCard from "../components/posts/PostCard";
 import Hero from "../layout/Hero";
-import YellowSection from "../layout/YellowSection";
+import Services from "../layout/Services";
 import Contact from "../layout/Contact";
 import PostHero from "../components/PostHero.jsx";
 
@@ -40,27 +40,28 @@ const Home = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ margin: "-300px" }}
-            variants={{
-              hidden: {},
-              visible: {},
-            }}
+            variants={{ hidden: {}, visible: {} }}
           >
             {[
-              "Detrás de cada proyecto hay un antes de incertidumbre y un después",
-              "con metas superadas. Mostramos el proceso, no solo el brillo final.",
-              "Porque en marketing, lo que no se mide es humo.",
-            ].map((line, idx) => (
-              <motion.span
-                key={idx}
-                style={{ display: "block" }}
-                initial={{ opacity: 0.2 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: idx * 0.3, duration: 1 }}
-              >
-                {line}
-              </motion.span>
-            ))}
+              "Detrás de cada proyecto hay un antes de incertidumbre y un después con metas superadas. Mostramos el proceso, no solo el brillo final. Porque en marketing, lo que no se mide es humo.",
+            ].map((line, lineIdx) =>
+              line.split(" ").map((word, wordIdx) => (
+                <motion.span
+                  key={`${lineIdx}-${wordIdx}`}
+                  style={{ display: "inline-block", marginRight: "0.25em" }}
+                  initial={{ opacity: 0.1 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{
+                    delay: lineIdx * 0.3 + wordIdx * 0.05,
+                    duration: 0.6,
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))
+            )}
           </motion.p>
+
           <Link href="#" className="read-more-link">
             Todos los proyectos
             <svg
@@ -82,7 +83,7 @@ const Home = () => {
         </div>
       </section>
 
-      <YellowSection type="services" />
+      <Services />
 
       <section className="full-container">
         <div className="slider-container container">
@@ -135,28 +136,28 @@ const Home = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ margin: "-300px" }}
-            variants={{
-              hidden: {},
-              visible: {},
-            }}
+            variants={{ hidden: {}, visible: {} }}
           >
             {[
-              "Creamos contenido relevante, gestionamos",
-              "comunidades y potenciamos tu marca en",
-              "redes sociales con estrategia, diseño y foco",
-              "en resultados.",
-            ].map((line, idx) => (
-              <motion.span
-                key={idx}
-                style={{ display: "block" }}
-                initial={{ opacity: 0.2 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: idx * 0.3, duration: 1 }}
-              >
-                {line}
-              </motion.span>
-            ))}
+              "Creamos contenido relevante, gestionamos comunidades y potenciamos tu marca en redes sociales con estrategia, diseño y foco en resultados.",
+            ].map((line, lineIdx) =>
+              line.split(" ").map((word, wordIdx) => (
+                <motion.span
+                  key={`${lineIdx}-${wordIdx}`}
+                  style={{ display: "inline-block", marginRight: "0.25em" }}
+                  initial={{ opacity: 0.1 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{
+                    delay: (lineIdx * 0.3) + wordIdx * 0.05, // escalonado por línea y palabra
+                    duration: 0.6,
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))
+            )}
           </motion.p>
+
           <PubliSlides />
         </div>
       </section>

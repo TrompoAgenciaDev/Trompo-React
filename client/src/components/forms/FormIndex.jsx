@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import "../../assets/styles/form-index.css";
 
 export default function formIndex() {
@@ -8,15 +8,11 @@ export default function formIndex() {
     if (inited.current) return;
     inited.current = true;
 
-    // define el callback global de reCAPTCHA si no existe
     if (typeof window !== "undefined" && !window.handleCaptchaResponse) {
-      window.handleCaptchaResponse = function () {
-        // opcional: podés guardar el token si lo necesitás
-      };
+      window.handleCaptchaResponse = function () {};
     }
 
-    // cargar script principal de Brevo (una sola vez)
-    let sibScript = document.querySelector('script[data-sib-main]');
+    let sibScript = document.querySelector("script[data-sib-main]");
     if (!sibScript) {
       sibScript = document.createElement("script");
       sibScript.src = "https://sibforms.com/forms/end-form/build/main.js";
@@ -25,8 +21,7 @@ export default function formIndex() {
       document.body.appendChild(sibScript);
     }
 
-    // cargar script de reCAPTCHA (una sola vez)
-    let recaptchaScript = document.querySelector('script[data-recaptcha]');
+    let recaptchaScript = document.querySelector("script[data-recaptcha]");
     if (!recaptchaScript) {
       recaptchaScript = document.createElement("script");
       recaptchaScript.src = "https://www.google.com/recaptcha/api.js?hl=es";
@@ -36,7 +31,6 @@ export default function formIndex() {
       document.body.appendChild(recaptchaScript);
     }
 
-    // cuando el de Brevo esté listo (o si ya lo estaba), forzamos el escaneo del DOM
     const ensureInit = () => {
       try {
         window.dispatchEvent(new Event("DOMContentLoaded"));
@@ -44,7 +38,10 @@ export default function formIndex() {
       } catch {}
     };
 
-    if (sibScript.readyState === "loaded" || sibScript.readyState === "complete") {
+    if (
+      sibScript.readyState === "loaded" ||
+      sibScript.readyState === "complete"
+    ) {
       ensureInit();
     } else {
       sibScript.addEventListener("load", ensureInit, { once: true });
@@ -411,7 +408,7 @@ export default function formIndex() {
               </button>
             </div>
 
-            <input type="text" name="email_address_check" value="" hidden />
+            <input type="text" name="email_address_check" hidden />
             <input type="hidden" name="locale" value="es" />
           </form>
         </div>
@@ -420,6 +417,6 @@ export default function formIndex() {
   );
 }
 
-// No olvides importar estos scripts en tu HTML principal o _document.js si usás Next.js:
+// No olviden importar estos scripts en tu HTML principal o _document.js si usás Next.js:
 // <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 // <script src="https://www.google.com/recaptcha/api.js?hl=es"></script>

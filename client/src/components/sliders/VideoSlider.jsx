@@ -7,6 +7,8 @@ const sliderVideos = [
   "/assets/portfolioImg/videos/denso.mp4",
   "/assets/portfolioImg/videos/sw.mp4",
   "/assets/portfolioImg/videos/viditec.mp4",
+  "/assets/portfolioImg/videos/raulito.mp4",
+  "/assets/portfolioImg/videos/agreteq.mp4",
 ];
 
 function isMobile() {
@@ -24,10 +26,14 @@ function wrapIndex(idx, length) {
 }
 
 function VideoSlider({ location }) {
-  const [index, setIndex] = useState(0);
+  const REPEAT = 20; // buffer para infinito suave
+  const totalSlides = sliderVideos.length;
+  const middleIndex = totalSlides * Math.floor(REPEAT / 2);
+
+  const [index, setIndex] = useState(middleIndex);
   const [paused, setPaused] = useState(true);
   const [animating, setAnimating] = useState(true);
-  const [interactionAllowed, setInteractionAllowed] = useState(false);
+  const [interactionAllowed] = useState(true);
 
   const timerRef = useRef(null);
   const containerRef = useRef(null);
@@ -43,9 +49,7 @@ function VideoSlider({ location }) {
   };
 
   const visibleCount = getVisibleCount();
-  const totalSlides = sliderVideos.length;
-  const clonedSlides = [...sliderVideos, ...sliderVideos, ...sliderVideos];
-  const totalCloned = clonedSlides.length;
+  const clonedSlides = Array.from({ length: REPEAT }, () => sliderVideos).flat();
 
   const nextSlide = () => {
     setIndex((prev) => prev + 1);
@@ -53,12 +57,12 @@ function VideoSlider({ location }) {
   };
 
   const prevSlide = () => {
-    setIndex((prev) => wrapIndex(prev - 1, totalSlides));
+    setIndex((prev) => prev - 1);
     setAnimating(true);
   };
 
   const goForward = () => {
-    setIndex((prev) => wrapIndex(prev + 1, totalSlides));
+    setIndex((prev) => prev + 1);
     setAnimating(true);
   };
 
@@ -96,27 +100,18 @@ function VideoSlider({ location }) {
   const handlePause = () => setPaused(true);
   const handleTouch = () => isMobile() && setPaused(true);
 
+  // Normaliza el índice cuando se acerca a los bordes del buffer para que sea infinito sin salto.
   useEffect(() => {
-    if (index >= totalSlides) {
-      const resetTimeout = setTimeout(() => {
-        setAnimating(false);
-        setIndex(0);
-      }, duration);
-      return () => clearTimeout(resetTimeout);
+    const min = totalSlides * 2;
+    const max = totalSlides * (REPEAT - 2);
+    if (index < min || index > max) {
+      const mod = ((index % totalSlides) + totalSlides) % totalSlides;
+      setAnimating(false);
+      setIndex(middleIndex + mod);
     }
-  }, [index]);
+  }, [index, totalSlides, REPEAT, middleIndex]);
 
   const offset = (index * 100) / visibleCount;
-
-  useEffect(() => {
-    const enableInteraction = () => setInteractionAllowed(true);
-    window.addEventListener("click", enableInteraction, { once: true });
-    window.addEventListener("touchstart", enableInteraction, { once: true });
-    return () => {
-      window.removeEventListener("click", enableInteraction);
-      window.removeEventListener("touchstart", enableInteraction);
-    };
-  }, []);
 
   return (
     <div
@@ -130,6 +125,23 @@ function VideoSlider({ location }) {
         className="video-slider-track"
         animate={{ x: `-${offset}%` }}
         transition={animating ? { duration: duration / 1000 } : { duration: 0 }}
+        drag="x"
+        dragMomentum={true}
+        dragElastic={0.05}
+        dragTransition={{ power: 0.2, timeConstant: 200 }}
+        onDragStart={() => {
+          setPaused(true);     // pausa autoplay
+          setAnimating(false); // pausa transición para que no se trabe
+        }}
+        onDragEnd={(_, info) => {
+          const threshold = 50; // px para cambiar de slide
+          setAnimating(true);
+          if (info.offset.x <= -threshold) {
+            goForward();
+          } else if (info.offset.x >= threshold) {
+            prevSlide();
+          }
+        }}
       >
         {clonedSlides.map((videoSrc, i) => (
           <div className="video-slide" key={i}>
@@ -139,16 +151,27 @@ function VideoSlider({ location }) {
               loop
               playsInline
               className="video-element"
-              onMouseEnter={(e) => {
-                if (interactionAllowed) e.currentTarget.play();
+              style={{ pointerEvents: "auto" }}
+              onPointerEnter={(e) => {
+                const v = e.currentTarget;
+                if (interactionAllowed) {
+                  v.muted = true;
+                  const p = v.play();
+                  if (p && p.catch) p.catch(() => {});
+                }
               }}
-              onMouseLeave={(e) => e.currentTarget.pause()}
+              onPointerLeave={(e) => e.currentTarget.pause()}
             />
           </div>
         ))}
       </motion.div>
 
-      {paused && <div className="video-slider-overlay"></div>}
+      {paused && (
+        <div
+          className="video-slider-overlay"
+          style={{ pointerEvents: "none" }}
+        ></div>
+      )}
 
       {location !== "home" && (
         <>

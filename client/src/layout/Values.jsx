@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect, useCallback } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "motion/react";
 import Icons from "../components/Icons";
 import useFetchValues from "../hooks/useFetchValues";
@@ -7,39 +7,17 @@ import "../assets/styles/values.css";
 
 function Collapse({ isOpen, children }) {
   const innerRef = useRef(null);
-  const measure = useCallback(() => (innerRef.current ? innerRef.current.scrollHeight : 0), []);
-  const [contentHeight, setContentHeight] = useState(0);
-
-  useLayoutEffect(() => {
-    const el = innerRef.current;
-    if (!el) return;
-
-    const update = () => setContentHeight(measure());
-    update();
-
-    let ro;
-    if (typeof ResizeObserver !== "undefined") {
-      ro = new ResizeObserver(update);
-      ro.observe(el);
-    }
-    window.addEventListener("resize", update);
-    return () => {
-      window.removeEventListener("resize", update);
-      if (ro) ro.disconnect();
-    };
-  }, [measure]);
 
   return (
     <motion.div
+      layout
       initial={false}
-      animate={{
-        height: isOpen ? contentHeight : 0,
-        opacity: isOpen ? 1 : 0,
-      }}
-      transition={{
-        height: { duration: 0.2, ease: "easeInOut" },
-        opacity: { duration: 0.2, ease: "easeOut" },
-      }}
+      animate={
+        isOpen
+          ? { height: "auto", opacity: 1 }
+          : { height: 0, opacity: 0 }
+      }
+      transition={{ duration: 0.3, ease: "easeOut" }}
       style={{ overflow: "hidden" }}
       aria-hidden={!isOpen}
     >
@@ -70,7 +48,10 @@ function Values() {
             presupuestos y sin planificación técnica, lo que genera sitios mal
             desarrollados, poco escalables y difíciles de mantener.
           </p>
-          <p>En Trompo ofrecemos una alternativa profesional, con beneficios reales:</p>
+          <p>
+            En Trompo ofrecemos una alternativa profesional, con beneficios
+            reales:
+          </p>
         </div>
 
         <div className="grid-item">
@@ -79,10 +60,9 @@ function Values() {
 
             return (
               <motion.div
+                layout
                 key={item.id}
                 className={`grid-value-content ${isOpen ? "item-active" : ""}`}
-                onMouseEnter={() => setOpenIndex(index)}
-                onMouseLeave={() => setOpenIndex(null)}
                 onClick={() => toggleItem(index)}
                 initial={false}
                 animate={{
@@ -100,11 +80,15 @@ function Values() {
 
                 <div className="content-grid">
                   <motion.span
+                    layout
                     className="title-item-content"
                     initial={false}
                     animate={{ scale: isOpen ? 0.95 : 1 }}
                     transition={{ duration: 0.1, ease: "easeOut" }}
-                    style={{ display: "inline-block", transformOrigin: "left center" }}
+                    style={{
+                      display: "inline-block",
+                      transformOrigin: "left center",
+                    }}
                   >
                     {item.title}
                   </motion.span>

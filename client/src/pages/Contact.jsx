@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { motion, useAnimationControls } from "framer-motion";
 import FormIndex from "../components/forms/FormIndex";
 import ImageSlider from "../components/sliders/CustomerSlider";
-import YellowSection from "../layout/YellowSection";
+import Faqs from "../layout/Faqs";
 import Hero from "../layout/Hero";
 
 import "../assets/styles/contact-page.css";
@@ -65,7 +65,7 @@ const Contact = () => {
         </section>
       </section>
 
-      <YellowSection type="faqs"/>
+      <Faqs/>
     </>
   );
 };

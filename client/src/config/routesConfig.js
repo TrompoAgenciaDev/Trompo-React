@@ -19,15 +19,15 @@ import SinglePortfolio from "../templates/singlePortfolio";
 
 const routesConfig = {
   main: [
-    { path: "/", label: "home", Component: Home },
-    { path: "/about", label: "sobre nosotros", Component: About },
+    { path: "#", label: "home", Component: Home },
+    { path: "#", label: "sobre nosotros", Component: About },
     { path: "#", label: "servicios", Component: Servicios },
     { path: "#", label: "casos de éxito", Component: Casos },
-    { path: "/contact", label: "contacto", Component: Contact }
+    { path: "#", label: "contacto", Component: Contact }
   ],
   servicios: [
     { path: "#", label: "identidad", Component: Identidad },
-    { path: "/desarrollo-web", label: "desarrollo web", Component: DesarrolloWeb },
+    { path: "/", label: "desarrollo web", Component: DesarrolloWeb },
     { path: "#", label: "ads", Component: Ads },
     { path: "#", label: "redes sociales", Component: RedesSociales },
     { path: "#", label: "soporte", Component: Soporte },

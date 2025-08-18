@@ -22,9 +22,8 @@ function Portfolio3d() {
   if (error) return <p>{error}</p>;
 
   // Duplicamos para efecto infinito (sin tocar tu layout ni estilos)
-  const duplicatedItems = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items];
+  const duplicatedItems = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items];
 
-  // Slide interno con animación continua
   const PortfolioCarruselItem = ({ id, title, backgroundImage, enlacePortfolio }) => {
     const [velocityReduction, setVelocityReduction] = useState(50);
     const SlowSpeed = () => setVelocityReduction(5);
@@ -52,14 +51,10 @@ function Portfolio3d() {
 
   return (
     <div className="portfolio-section">
-      {/* Título u otros contenidos pueden ir aquí si los usás */}
       <div className="title-section">
-        {/* <h2 className="title">Tu título <span>destacado</span></h2> */}
       </div>
 
-      {/* Mantiene tus estilos, incluidas perspectiva y rotaciones */}
       <div className="portfolio-carrusel">
-        {/* Track draggable: NO pisa el transform del contenedor */}
         <motion.div
           drag="x"
           dragElastic={0.05}

@@ -30,7 +30,7 @@ const MenuPopup = ({ isOpen, onClose }) => {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="full-container popup-menu"
+          className="full-container header popup-menu"
           initial={{ y: -1140 }}
           animate={{ y: 0 }}
           exit={{ y: -1140 }}
@@ -43,7 +43,7 @@ const MenuPopup = ({ isOpen, onClose }) => {
           }}
           ref={popupRef}
         >
-          <div className="container header">
+          <div className="container header-popup">
             <motion.a
               className="logo-img"
               href="/"

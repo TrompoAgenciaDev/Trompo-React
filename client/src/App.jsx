@@ -6,7 +6,7 @@ import Footer from "@/layout/Footer";
 import MenuPopup from "@/components/popups/MenuPopup";
 import useTogglePopup from "@/hooks/useTogglePopup";
 import ScrollTop from "@/components/buttons/ScrollTop";
-import React from 'react';
+import React from "react";
 
 function App() {
   const { isOpen, togglePopup } = useTogglePopup();
@@ -14,10 +14,10 @@ function App() {
   return (
     <BrowserRouter basename="/">
       <Header onTogglePopup={togglePopup} />
-      <MenuPopup isOpen={isOpen} onClose={togglePopup} />
+      {/* <MenuPopup isOpen={isOpen} onClose={togglePopup} /> */}
       <AppRoutes />
       <ScrollTop />
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }

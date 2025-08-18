@@ -41,7 +41,7 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    -webkit-gap: 8px; /* Safari antiguo */
+    -webkit-gap: 8px;
     padding: 0 20px;
     background-color: transparent;
     cursor: pointer;
@@ -50,7 +50,8 @@
 }
 
 #sib-form button[type="submit"]:hover {
-    background-color: #fed332;
+    transform: translateX(15px) scale(1.15);
+    font-weight: 500;
 }
 
 #sib-form button[type="submit"] svg {

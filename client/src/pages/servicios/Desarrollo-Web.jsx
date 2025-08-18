@@ -6,6 +6,8 @@ import Values from "../../layout/Values";
 import PostCard from "../../components/posts/PostCard.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import Portfolio3d from "../../layout/Portfolio3d";
+import Faqs from '../../layout/Faqs';
+import Contact from "../../layout/Contact";
 
 import "../../assets/styles/desarrollo-web.css";
 
@@ -17,7 +19,10 @@ const Desarrollo = () => {
         title="Desarrollo Web"
         highlight="En Trompo convertimos objetivos de negocio en arquitecturas digitales precisas. Combinamos UX estratégica, desarrollo técnico escalable y diseño orientado a conversión para construir soluciones web que funcionan."
       />
+
       <section className="full-container">
+        <div className="full-container diagonal-first">
+        </div>
         <div className="full-container diagonal-invertida">
           <div className="container grid-content">
             <div className="grid-item-service">
@@ -101,7 +106,8 @@ const Desarrollo = () => {
           <Values />
         </div>
       </section>
-      <section className="full-container desarrollo-post">
+      
+      {/* <section className="full-container desarrollo-post">
         <div className="container">
           <h2>Guías, casos y análisis para optimizar tu presencia digital. </h2>
           <PostCard maxLimit={3} category="desarrollo web" />
@@ -126,7 +132,7 @@ const Desarrollo = () => {
             </svg>
           </Link>
         </div>
-      </section>
+      </section> */}
 
       <div className="full-container">
         <Portfolio3d/>
@@ -137,6 +143,9 @@ const Desarrollo = () => {
           <CustomerSlider />
         </div>
       </div>
+
+      <Faqs/>
+      <Contact location="web"/>
     </>
   );
 };
