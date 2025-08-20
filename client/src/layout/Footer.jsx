@@ -1,10 +1,9 @@
 import React from "react";
 import Menu from "../components/Menu";
 import routesConfig from "../config/routesConfig";
-
 import Icon from "../components/Icons";
 
-//styles and animations, if..
+//styles and animations
 import "../assets/styles/footer.css";
 
 const Footer = () => {
@@ -19,7 +18,7 @@ const Footer = () => {
         <div className="footer-grid-item">
           <div className="footer-menu">
             <Menu
-              menuType="main"
+              menuType="mainFooter"
               routes={routesConfig}
               classMenu="footer-menu-items"
               location="footer"
@@ -46,10 +45,7 @@ const Footer = () => {
               iconName="facebook"
               link="https://www.facebook.com/TrompoAgencia/"
             />
-            <Icon
-              iconName="youtube"
-              link="https://www.youtube.com/@trompo.agencia"
-            />
+            <Icon iconName="youtube" link="https://x.com/trompo_agencia" />
           </div>
         </div>
         <div className="footer-grid-item">
@@ -70,7 +66,7 @@ const Footer = () => {
               link="https://www.facebook.com/TrompoAgencia/"
             />
             <Icon
-              iconName="youtube"
+              iconName="x"
               link="https://www.youtube.com/@trompo.agencia"
             />
           </div>

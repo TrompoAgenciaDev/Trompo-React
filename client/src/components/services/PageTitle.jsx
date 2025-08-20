@@ -7,13 +7,13 @@ function PageTitle({ title, highlight }) {
   const container = {
     hidden: {},
     visible: {
-      transition: { staggerChildren: 0.05 }
-    }
+      transition: { staggerChildren: 0.05 },
+    },
   };
 
   const word = {
     hidden: { opacity: 0.1 },
-    visible: { opacity: 1, transition: { duration: 0.6, ease: "easeOut" } }
+    visible: { opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
   return (
@@ -35,8 +35,7 @@ function PageTitle({ title, highlight }) {
                 variants={word}
                 style={{ display: "inline" }}
               >
-                {w}
-                {" "}
+                {w}{" "}
               </motion.span>
             ))}
           </motion.p>

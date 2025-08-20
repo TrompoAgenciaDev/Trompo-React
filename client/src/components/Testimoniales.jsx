@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import useFetchTestimonials from "../hooks/useFetchTestimonials";
 import "../assets/styles/testimonials.css";
 
@@ -10,75 +10,94 @@ function wrapIndex(idx, length) {
   return (idx + length) % length;
 }
 
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(
+    typeof window !== "undefined" ? window.innerWidth >= 1280 : false
+  );
+  useEffect(() => {
+    const onResize = () => setIsDesktop(window.innerWidth >= 1280);
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  return isDesktop;
+}
+
 export default function Testimoniales() {
   const { testimonials, loading, error } = useFetchTestimonials();
   const [index, setIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [direction, setDirection] = useState(1);
   const timerRef = useRef(null);
   const dragStartX = useRef(0);
   const dragDelta = useRef(0);
 
+  const isDesktop = useIsDesktop();
+  const itemsPerSlide = isDesktop ? 2 : 1;
+
+  // autoplay
   useEffect(() => {
     if (!testimonials.length) return;
     if (isPaused || isDragging) return;
     timerRef.current = setTimeout(() => {
-      setDirection(1);
-      setIndex((prev) => wrapIndex(prev + 1, testimonials.length));
+      setIndex((prev) => wrapIndex(prev + itemsPerSlide, testimonials.length));
     }, SLIDE_DURATION);
     return () => clearTimeout(timerRef.current);
-  }, [index, isPaused, isDragging, testimonials.length]);
+  }, [index, isPaused, isDragging, testimonials.length, itemsPerSlide]);
 
   if (loading) return <div>Cargando testimonios...</div>;
   if (error) return <div>{error}</div>;
   if (!testimonials.length) return <div>No hay testimonios disponibles.</div>;
 
-  // Drag handlers
-  function handleDragStart(event, info) {
+  const onDragStart = (_e, info) => {
     setIsDragging(true);
     dragStartX.current = info.point.x;
     dragDelta.current = 0;
-  }
-  function handleDrag(event, info) {
+  };
+  const onDrag = (_e, info) => {
     dragDelta.current = info.point.x - dragStartX.current;
-  }
-  function handleDragEnd(event, info) {
+  };
+  const onDragEnd = () => {
     setIsDragging(false);
-    const threshold = 80; // px
-    if (dragDelta.current > threshold) {
-      setDirection(-1);
-      setIndex((prev) => wrapIndex(prev - 1, testimonials.length));
-    } else if (dragDelta.current < -threshold) {
-      setDirection(1);
-      setIndex((prev) => wrapIndex(prev + 1, testimonials.length));
+    const t = 80;
+    if (dragDelta.current > t) {
+      setIndex((prev) => wrapIndex(prev - itemsPerSlide, testimonials.length));
+    } else if (dragDelta.current < -t) {
+      setIndex((prev) => wrapIndex(prev + itemsPerSlide, testimonials.length));
     }
     dragDelta.current = 0;
-  }
-
-  // Animation variants
-  const variants = {
-    enter: (dir) => ({
-      x: dir > 0 ? 200 : -200,
-      opacity: 0,
-      scale: 0.98,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      scale: 1,
-      transition: { duration: ANIMATION_DURATION },
-    },
-    exit: (dir) => ({
-      x: dir > 0 ? -200 : 200,
-      opacity: 0,
-      scale: 0.98,
-      transition: { duration: ANIMATION_DURATION * 0.7 },
-    }),
   };
 
-  // For infinite loop even with 2 cards, always wrapIndex
-  const current = testimonials[wrapIndex(index, testimonials.length)];
+  const renderCard = (item, key) => (
+    <div className="testimoniales-card" key={key}>
+      <div className="testimoniales-img">
+        <img
+          src={item.image || "/favicon.png"}
+          alt={item.author_name || item.author}
+        />
+      </div>
+      <div className="testimonial-content">
+        <div className="testimonial-header-card">
+          <div className="testimoniales-author">
+            {item.author_name || item.author}
+          </div>
+          <div className="testimoniales-rating">
+            {"★".repeat(item.rating)}
+            <span className="testimoniales-rating-empty">
+              {"★".repeat(5 - item.rating)}
+            </span>
+          </div>
+        </div>
+        <div className="testimoniales-text">{item.text}</div>
+      </div>
+    </div>
+  );
+
+  // ancho de cada paso = 100% viewport / itemsPerSlide
+  const translateX = `-${(index * 100) / itemsPerSlide}%`;
+
+  // paginación corregida
+  const totalPages = Math.ceil(testimonials.length / itemsPerSlide);
+  const currentPage = Math.floor(index / itemsPerSlide);
 
   return (
     <div
@@ -88,59 +107,30 @@ export default function Testimoniales() {
       onTouchStart={() => setIsPaused(true)}
       onTouchEnd={() => setIsPaused(false)}
     >
-      <AnimatePresence initial={false} custom={direction}>
+      <div className="testimoniales-viewport">
         <motion.div
-          key={index}
-          custom={direction}
-          variants={variants}
-          initial="enter"
-          animate="center"
-          exit="exit"
+          className={`testimoniales-track ${isDesktop ? "two-cols" : ""}`}
+          animate={{ x: translateX }}
+          transition={{ duration: ANIMATION_DURATION, ease: "easeInOut" }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.2}
-          onDragStart={handleDragStart}
-          onDrag={handleDrag}
-          onDragEnd={handleDragEnd}
-          style={{
-            cursor: isDragging ? "grabbing" : "grab",
-            touchAction: "pan-y",
-          }}
-          className="testimoniales-card"
+          onDragStart={onDragStart}
+          onDrag={onDrag}
+          onDragEnd={onDragEnd}
+          style={{ cursor: isDragging ? "grabbing" : "grab", touchAction: "pan-y" }}
         >
-
-          <div className="testimoniales-img">
-            <img src={current.image || "/favicon.png"} alt={current.author_name || current.author} />
-          </div>
-
-          <div className="testimonial-content">              
-            <div className="testimonial-header-card">
-              <div className="testimoniales-rating">
-                {"★".repeat(current.rating)}
-                <span className="testimoniales-rating-empty">
-                  {"★".repeat(5 - current.rating)}
-                </span>
-              </div>
-              <div className="testimoniales-author">
-                {current.author_name || current.author}
-              </div>
-            </div>
-            <div className="testimoniales-text">
-              {current.text}
-            </div>
-          </div>
-
+          {testimonials.map((item, i) => renderCard(item, i))}
         </motion.div>
-      </AnimatePresence>
+      </div>
+
+      {/* dots por página */}
       <div className="testimoniales-dots">
-        {testimonials.map((_, i) => (
+        {Array.from({ length: totalPages }).map((_, page) => (
           <div
-            key={i}
-            onClick={() => {
-              setDirection(i > index ? 1 : -1);
-              setIndex(i);
-            }}
-            className={`testimoniales-dot${i === wrapIndex(index, testimonials.length) ? " active" : ""}`}
+            key={page}
+            onClick={() => setIndex(page * itemsPerSlide)}
+            className={`testimoniales-dot${page === currentPage ? " active" : ""}`}
           />
         ))}
       </div>

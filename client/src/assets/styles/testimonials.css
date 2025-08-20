@@ -57,6 +57,24 @@
   overflow: visible;
 }
 
+/* NUEVO: contenedor de las tarjetas */
+.testimoniales-track {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.testimoniales-track.two-cols {
+  display: flex;
+  gap: 20px;
+}
+
+/* AJUSTE: cuando hay dos columnas, las cards no deben ser absolute */
+.testimoniales-track.two-cols .testimoniales-card {
+  position: relative; /* sobrescribe el absolute */
+  flex: 1 1 0;
+}
+
 .testimoniales-card {
   width: 100%;
   background: #ffffff;
@@ -237,9 +255,9 @@
     display: -webkit-flex;
     display: flex;
 
-    -webkit-flex-direction: row-reverse;
-    -ms-flex-direction: row-reverse;
-    flex-direction: row-reverse;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
 
     -webkit-box-align: center;
     -moz-box-align: center;
@@ -252,6 +270,10 @@
     -ms-flex-pack: center;
     -webkit-justify-content: center;
     justify-content: center;
+  }
+
+  .testimonial-header-card div{
+    width: 100%;
   }
 
   .testimonial-content {
@@ -285,7 +307,7 @@
   }
 
   .testimoniales-card {
-    height: 200px;
+    height: 320px;
   }
 
   .testimonial-header {
@@ -319,22 +341,20 @@
 
   .testimoniales-container {
     width: 100%;
-    max-width: 700px;
+    max-width: 1000px;
     height: auto;
     min-height: 240px;
   }
 
   .testimonial-header-card {
     display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 1fr 120px;
-    grid-template-columns: 1fr 120px;
+    display: flex;
     align-items: center;
   }
 
   .testimoniales-rating,
   .testimoniales-rating-empty {
-    font-size: 28px;
+    font-size: 22px;
     grid-column: 2 / 3;
   }
 

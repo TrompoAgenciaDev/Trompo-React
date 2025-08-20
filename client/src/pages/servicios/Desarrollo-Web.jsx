@@ -21,8 +21,8 @@ const Desarrollo = () => {
       />
 
       <section className="full-container">
-        <div className="full-container diagonal-first">
-        </div>
+        {/* <div className="full-container diagonal-first">
+        </div> */}
         <div className="full-container diagonal-invertida">
           <div className="container grid-content">
             <div className="grid-item-service">
@@ -107,7 +107,7 @@ const Desarrollo = () => {
         </div>
       </section>
       
-      {/* <section className="full-container desarrollo-post">
+      <section className="full-container desarrollo-post">
         <div className="container">
           <h2>Guías, casos y análisis para optimizar tu presencia digital. </h2>
           <PostCard maxLimit={3} category="desarrollo web" />
@@ -132,7 +132,7 @@ const Desarrollo = () => {
             </svg>
           </Link>
         </div>
-      </section> */}
+      </section>
 
       <div className="full-container">
         <Portfolio3d/>

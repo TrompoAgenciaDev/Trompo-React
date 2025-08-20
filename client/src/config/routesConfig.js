@@ -19,19 +19,26 @@ import SinglePortfolio from "../templates/singlePortfolio";
 
 const routesConfig = {
   main: [
-    { path: "#", label: "home", Component: Home },
-    { path: "#", label: "sobre nosotros", Component: About },
-    { path: "#", label: "servicios", Component: Servicios },
-    { path: "#", label: "casos de éxito", Component: Casos },
-    { path: "#", label: "contacto", Component: Contact },
-    { path: "/", label: "desarrollo web", Component: DesarrolloWeb },
+    { path: "/", label: "home", Component: Home },
+    { path: "/about-us", label: "sobre nosotros", Component: About },
+    { path: "/identidad", label: "identidad", Component: Identidad },
+    { path: "/desarrollo-web", label: "desarrollo web", Component: DesarrolloWeb },
+    { path: "/ads", label: "ads", Component: Ads },
+    { path: "/redes-sociales", label: "redes sociales", Component: RedesSociales },
+    { path: "/soporte", label: "soporte", Component: Soporte },
+    { path: "/contacto", label: "contacto", Component: Contact },
   ],
   servicios: [
-    { path: "#", label: "identidad", Component: Identidad },
-    { path: "/", label: "desarrollo web", Component: DesarrolloWeb },
-    { path: "#", label: "ads", Component: Ads },
-    { path: "#", label: "redes sociales", Component: RedesSociales },
-    { path: "#", label: "soporte", Component: Soporte },
+    { path: "/identidad", label: "identidad", Component: Identidad },
+    { path: "/desarrollo-web", label: "desarrollo web", Component: DesarrolloWeb },
+    { path: "/ads", label: "ads", Component: Ads },
+    { path: "/redes-sociales", label: "redes sociales", Component: RedesSociales },
+    { path: "/soporte", label: "soporte", Component: Soporte },
+  ],
+  mainFooter: [
+    { path: "/", label: "home", Component: Home },
+    { path: "/about-us", label: "sobre nosotros", Component: About },
+    { path: "/contacto", label: "contacto", Component: Contact },
   ],
 
   posts: [{ path: "/post/:slug", Component: SinglePost }],

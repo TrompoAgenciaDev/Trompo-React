@@ -1,11 +1,10 @@
 import { useState } from "react";
-import Icons from '../components/Icons';
+import Icons from "../components/Icons";
 
-import '../assets/styles/header.css'
+import "../assets/styles/header.css";
 import { motion } from "framer-motion";
 
-const Header = ({onTogglePopup}) => {
-
+const Header = ({ onTogglePopup }) => {
   return (
     <header className="full-container header">
       <div className="container">
@@ -24,9 +23,9 @@ const Header = ({onTogglePopup}) => {
             stiffness: 350,
           }}
         >
-          <Icons iconName="logoBlack"/>
+          <Icons iconName="logoBlack" />
         </motion.a>
-        
+
         <motion.button
           className="nav-button"
           initial={{
@@ -45,9 +44,7 @@ const Header = ({onTogglePopup}) => {
           }}
           onClick={onTogglePopup}
         >
-
-          {/* <Icons iconName={"burguer"}/> */}
-
+          <Icons iconName={"burguer"} />
         </motion.button>
       </div>
     </header>
