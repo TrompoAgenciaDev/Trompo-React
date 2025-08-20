@@ -1,12 +1,33 @@
 // Objeto con las imágenes (rutas desde "public/")
 const bgImages = {
-  home: ["/assets/heroImages/home.png", "/assets/heroImages/home.webp"],
-  gestion: ["/assets/heroImages/gestion.png", "/assets/heroImages/gestion.webp"],
-  web: ["/assets/heroImages/web.png", "/assets/heroImages/web.webp"],
-  gAds: ["/assets/heroImages/googleads.png", "/assets/heroImages/googleads.webp"],
-  mAds: ["/assets/heroImages/metaads.png", "/assets/heroImages/metaads.webp"],
-  social: ["/assets/heroImages/social.png", "/assets/heroImages/social.webp"],
-  branding: ["/assets/heroImages/branding.png", "/assets/heroImages/branding.webp"],
+  home: [
+    `${import.meta.env.BASE_URL}assets/heroImages/home.png`,
+    `${import.meta.env.BASE_URL}assets/heroImages/home.webp`
+  ],
+  gestion: [
+    `${import.meta.env.BASE_URL}assets/heroImages/gestion.png`,
+    `${import.meta.env.BASE_URL}assets/heroImages/gestion.webp`
+  ],
+  web: [
+    `${import.meta.env.BASE_URL}assets/heroImages/web.png`,
+    `${import.meta.env.BASE_URL}assets/heroImages/web.webp`
+  ],
+  gAds: [
+    `${import.meta.env.BASE_URL}assets/heroImages/googleads.png`,
+    `${import.meta.env.BASE_URL}assets/heroImages/googleads.webp`
+  ],
+  mAds: [
+    `${import.meta.env.BASE_URL}assets/heroImages/metaads.png`,
+    `${import.meta.env.BASE_URL}assets/heroImages/metaads.webp`
+  ],
+  social: [
+    `${import.meta.env.BASE_URL}assets/heroImages/social.png`,
+    `${import.meta.env.BASE_URL}assets/heroImages/social.webp`
+  ],
+  branding: [
+    `${import.meta.env.BASE_URL}assets/heroImages/branding.png`,
+    `${import.meta.env.BASE_URL}assets/heroImages/branding.webp`
+  ],
 };
 
 // Hook personalizado

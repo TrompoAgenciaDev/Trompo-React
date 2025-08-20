@@ -8,7 +8,7 @@ export default function useMembers() {
   useEffect(() => {
     let alive = true;
 
-    const url = `/members.json`;
+    const url = `${import.meta.env.BASE_URL}members.json`;
 
     fetch(url, { cache: "no-store" })
       .then((r) => {
@@ -18,14 +18,14 @@ export default function useMembers() {
       .then((data) => {
         if (alive) {
           setMembers(Array.isArray(data) ? data : []);
-          setLoading(false);
+          setError(null);
         }
       })
       .catch(() => {
-        if (alive) {
-          setError("No se pudieron cargar los miembros.");
-          setLoading(false);
-        }
+        if (alive) setError("No se pudieron cargar los miembros.");
+      })
+      .finally(() => {
+        if (alive) setLoading(false);
       });
 
     return () => { alive = false; };

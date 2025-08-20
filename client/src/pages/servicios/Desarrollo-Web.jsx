@@ -35,7 +35,7 @@ const Desarrollo = () => {
               </p>
             </div>
             <div className="grid-item-service">
-              <img src="/assets/desarrollo/institucional.png" alt="" />
+              <img src={`${import.meta.env.BASE_URL}assets/desarrollo/institucional.png`} alt="" />
             </div>
           </div>
         </div>
@@ -52,7 +52,7 @@ const Desarrollo = () => {
               </p>
             </div>
             <div className="grid-item-service">
-              <img src="/assets/desarrollo/landing.png" alt="" />
+              <img src={`${import.meta.env.BASE_URL}assets/desarrollo/landing.png`} alt="" />
             </div>
           </div>
         </div>
@@ -65,7 +65,7 @@ const Desarrollo = () => {
               </p>
             </div>
             <div className="grid-item-service">
-              <img src="/assets/desarrollo/ecommerce.png" alt="" />
+              <img src={`${import.meta.env.BASE_URL}assets/desarrollo/ecommerce.png`} alt="" />
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@ const Desarrollo = () => {
               </p>
             </div>
             <div className="grid-item-service">
-              <img src="/assets/desarrollo/formacion.png" alt="" />
+              <img src={`${import.meta.env.BASE_URL}assets/desarrollo/formacion.png`} alt="" />
             </div>
           </div>
         </div>
@@ -98,7 +98,7 @@ const Desarrollo = () => {
               </p>
             </div>
             <div className="grid-item-service">
-              <img src="/assets/desarrollo/catalogo.png" alt="" />
+              <img src={`${import.meta.env.BASE_URL}assets/desarrollo/catalogo.png`} alt="" />
             </div>
           </div>
         </div>

@@ -3,17 +3,17 @@ import { motion } from "motion/react";
 import "../../assets/styles/customer-slider.css";
 
 const sliderImages = [
-  "/assets/customerImg/denso.png",
-  "/assets/customerImg/femesa.png",
-  "/assets/customerImg/guanaco.png",
-  "/assets/customerImg/lhaka.png",
-  "/assets/customerImg/ranko.png",
-  "/assets/customerImg/raulito.png",
-  "/assets/customerImg/ravana.png",
-  "/assets/customerImg/renault-trucks.png",
-  "/assets/customerImg/sw.png",
-  "/assets/customerImg/viditec.png",
-  "/assets/customerImg/volvo.png",
+  `${import.meta.env.BASE_URL}assets/customerImg/denso.png`,
+  `${import.meta.env.BASE_URL}assets/customerImg/femesa.png`,
+  `${import.meta.env.BASE_URL}assets/customerImg/guanaco.png`,
+  `${import.meta.env.BASE_URL}assets/customerImg/lhaka.png`,
+  `${import.meta.env.BASE_URL}assets/customerImg/ranko.png`,
+  `${import.meta.env.BASE_URL}assets/customerImg/raulito.png`,
+  `${import.meta.env.BASE_URL}assets/customerImg/ravana.png`,
+  `${import.meta.env.BASE_URL}assets/customerImg/renault-trucks.png`,
+  `${import.meta.env.BASE_URL}assets/customerImg/sw.png`,
+  `${import.meta.env.BASE_URL}assets/customerImg/viditec.png`,
+  `${import.meta.env.BASE_URL}assets/customerImg/volvo.png`,
 ];
 
 function isMobile() {
@@ -48,7 +48,6 @@ function ImageSlider() {
   const visibleCount = getVisibleCount();
   const totalSlides = sliderImages.length;
   const clonedSlides = [...sliderImages, ...sliderImages, ...sliderImages];
-  const totalCloned = clonedSlides.length;
 
   const nextSlide = () => {
     setIndex((prev) => prev + 1);
@@ -97,7 +96,7 @@ function ImageSlider() {
       }, duration);
       return () => clearTimeout(resetTimeout);
     }
-  }, [index]);
+  }, [index, totalSlides]);
 
   const offset = (index * 100) / visibleCount;
 

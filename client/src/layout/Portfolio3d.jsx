@@ -5,6 +5,13 @@ import useJsonConsulting from "../hooks/useJsonConsulting";
 // styles
 import "../assets/styles/portfolio.css";
 
+function resolveUrl(src) {
+  if (!src) return "";
+  if (/^(https?:|data:|mailto:|tel:)/i.test(src)) return src;
+  const cleaned = src.replace(/^\/+/, "");
+  return `${import.meta.env.BASE_URL}${cleaned}`;
+}
+
 function Portfolio3d() {
   const [quantity] = useState(12);
   const [category] = useState("");
@@ -22,7 +29,11 @@ function Portfolio3d() {
   if (error) return <p>{error}</p>;
 
   // Duplicamos para efecto infinito (sin tocar tu layout ni estilos)
-  const duplicatedItems = [...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items, ...items];
+  const duplicatedItems = [
+    ...items, ...items, ...items, ...items, ...items, ...items,
+    ...items, ...items, ...items, ...items, ...items, ...items,
+    ...items, ...items, ...items, ...items, ...items, ...items
+  ];
 
   const PortfolioCarruselItem = ({ id, title, backgroundImage, enlacePortfolio }) => {
     const [velocityReduction, setVelocityReduction] = useState(50);
@@ -30,7 +41,7 @@ function Portfolio3d() {
     const NormalSpeed = () => setVelocityReduction(260);
 
     return (
-      <motion.a
+      <motion.div
         onMouseOver={SlowSpeed}
         onMouseLeave={NormalSpeed}
         animate={{ x: ["-0%", "-300%"] }}
@@ -39,20 +50,19 @@ function Portfolio3d() {
           duration: velocityReduction,
           repeat: Infinity,
         }}
-        href={enlacePortfolio}
+        // href={resolveUrl(enlacePortfolio)}
         data-id={id}
         className="portfolio-card"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
+        style={{ backgroundImage: `url(${resolveUrl(backgroundImage)})` }}
       >
         <h2 className="portfolio-title">{title}</h2>
-      </motion.a>
+      </motion.div>
     );
   };
 
   return (
     <div className="portfolio-section">
-      <div className="title-section">
-      </div>
+      <div className="title-section"></div>
 
       <div className="portfolio-carrusel">
         <motion.div

@@ -1,17 +1,14 @@
 import "../assets/styles/contact.css";
 import FormIndex from "../components/forms/FormIndex";
 
-function Contact({location = "home"}) {
-
-  const bg = 
-              location === "web"
-                ? "url(/assets/contact/web-bg.png)"
-                : "url(/assets/contact/contact-bg.png)"
+function Contact({ location = "home" }) {
+  const base = import.meta.env.BASE_URL;
+  const bg = `url(${base}assets/contact/${location === "web" ? "web-bg.png" : "contact-bg.png"})`;
 
   return (
     <section
       className="full-container contact-section"
-      style={{backgroundImage: bg}}
+      style={{ backgroundImage: bg }}
     >
       <div className="container">
         <div className="grid-contact">

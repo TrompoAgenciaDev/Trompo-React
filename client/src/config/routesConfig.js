@@ -23,7 +23,8 @@ const routesConfig = {
     { path: "#", label: "sobre nosotros", Component: About },
     { path: "#", label: "servicios", Component: Servicios },
     { path: "#", label: "casos de éxito", Component: Casos },
-    { path: "#", label: "contacto", Component: Contact }
+    { path: "#", label: "contacto", Component: Contact },
+    { path: "/", label: "desarrollo web", Component: DesarrolloWeb },
   ],
   servicios: [
     { path: "#", label: "identidad", Component: Identidad },

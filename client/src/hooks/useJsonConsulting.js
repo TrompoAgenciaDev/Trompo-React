@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 
 const useJsonConsulting = ({ quantity, category, tag, type }) => {
-  const [items, setItems] = useState([]);
+  const [items, setItems]   = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError]   = useState(null);
 
+  const base = import.meta.env.BASE_URL;
   const fileMap = {
-    portfolio: '/portfolio.json',
-    posts: '/posts.json',
+    portfolio: `${base}portfolio.json`,
+    posts:     `${base}posts.json`,
   };
 
   // helpers
@@ -16,10 +17,19 @@ const useJsonConsulting = ({ quantity, category, tag, type }) => {
     Array.isArray(arr) && arr.some((x) => norm(x) === norm(value));
 
   useEffect(() => {
-    const fetchData = async () => {
+    let alive = true;
+
+    (async () => {
       try {
-        const res = await fetch(fileMap[type], { cache: "no-store" });
+        setLoading(true);
+        setError(null);
+
+        const url = fileMap[type];
+        if (!url) throw new Error(`Tipo desconocido: ${type}`);
+
+        const res = await fetch(url, { cache: 'no-store' });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
         let data = await res.json();
 
         if (category) {
@@ -32,19 +42,17 @@ const useJsonConsulting = ({ quantity, category, tag, type }) => {
           data = data.filter((item) => inArrayCI(item?.tags, tagNorm));
         }
 
-        if (quantity) {
-          data = data.slice(0, quantity);
-        }
+        if (quantity) data = data.slice(0, quantity);
 
-        setItems(data);
+        if (alive) setItems(data);
       } catch (err) {
-        setError(`Hubo un problema al cargar los datos: ${err.message}`);
+        if (alive) setError(`Hubo un problema al cargar los datos: ${err.message}`);
       } finally {
-        setLoading(false);
+        if (alive) setLoading(false);
       }
-    };
+    })();
 
-    fetchData();
+    return () => { alive = false; };
   }, [quantity, category, tag, type]);
 
   return { items, loading, error };

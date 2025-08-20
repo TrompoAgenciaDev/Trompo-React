@@ -12,7 +12,7 @@ function App() {
   const { isOpen, togglePopup } = useTogglePopup();
 
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/2025">
       <Header onTogglePopup={togglePopup} />
       {/* <MenuPopup isOpen={isOpen} onClose={togglePopup} /> */}
       <AppRoutes />
