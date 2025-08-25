@@ -3,15 +3,30 @@
 }
 
 .storical-tabs {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   gap: 10px;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
 }
 
 .storical-tab {
   position: relative;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
   border: 0;
   background: transparent;
@@ -44,6 +59,8 @@
 
 .storical-panel {
   width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
   height: max-content;
   background: #f8fafc;
   border: 1px solid #e5e7eb;
@@ -52,7 +69,9 @@
 }
 
 .storical-list {
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: (1fr)[2];
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 8px 16px;
   list-style: none;
@@ -61,8 +80,20 @@
 }
 
 .storical-item {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   gap: 10px;
   background: #ffffff;
@@ -77,6 +108,8 @@
   height: 8px;
   border-radius: 999px;
   background: #FEE070;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
   flex: 0 0 auto;
 }
 
@@ -92,25 +125,26 @@
   text-align: center;
 }
 
-
 @media (min-width: 768px) {
-  .storical-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .storical-list {
+    -ms-grid-columns: (1fr)[3];
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 1280px) {
-  
   .storical-name {
     font-size: 20px;
     font-weight: 500;
     color: #0f172a;
   }
-  .storical-panel{
+  .storical-panel {
     padding-bottom: 50px;
   }
-  .storical-item{
+  .storical-item {
     min-height: 100px;
   }
-  .storical-tabs{
+  .storical-tabs {
     max-width: 900px;
   }
 }

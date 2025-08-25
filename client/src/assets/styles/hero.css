@@ -1,16 +1,31 @@
 .hero-container{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
+  -webkit-box-align: start;
+  -moz-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
   align-items: flex-start;
   padding: 250px 10px 100px;
   gap: 50px;
   background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
 }
 
 .hero-video-container{
@@ -39,9 +54,8 @@
   .hero-video-container video{
     width: 100%;
     height: 100%;
-    object-fit: cover;
     -o-object-fit: cover;
-    -webkit-object-fit: cover;
+    object-fit: cover;
   }
 }
 

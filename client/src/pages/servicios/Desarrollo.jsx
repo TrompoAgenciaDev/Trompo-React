@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 
-import Hero from "../../layout/Hero";
+import Hero from "../../layout/Hero.jsx";
 import PageTitle from "../../components/services/PageTitle.jsx";
-import Values from "../../layout/Values";
+import Values from "../../layout/Values.jsx";
 import PostCard from "../../components/posts/PostCard.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import Portfolio3d from "../../layout/Portfolio3d";
-import Faqs from '../../layout/Faqs';
-import Contact from "../../layout/Contact";
+import Portfolio3d from "../../layout/Portfolio3d.jsx";
+import Faqs from "../../layout/Faqs.jsx";
+import Contact from "../../layout/Contact.jsx";
 
 import "../../assets/styles/servicios-page.css";
 
@@ -16,7 +16,7 @@ const Desarrollo = () => {
     <>
       <Hero location="desarrollo" />
       <PageTitle
-        title="Desarrollo Web"
+        title="Desarrollo"
         subtitle=""
         highlight="En Trompo convertimos objetivos de negocio en arquitecturas digitales precisas. Combinamos UX estratégica, desarrollo técnico escalable y diseño orientado a conversión para construir soluciones web que funcionan."
         bgc="#FEE070"
@@ -35,7 +35,12 @@ const Desarrollo = () => {
               </p>
             </div>
             <div className="grid-item-service">
-              <img src={`${import.meta.env.BASE_URL}assets/desarrollo/institucional.png`} alt="" />
+              <img
+                src={`${
+                  import.meta.env.BASE_URL
+                }assets/desarrollo/institucional.png`}
+                alt=""
+              />
             </div>
           </div>
         </div>
@@ -52,7 +57,10 @@ const Desarrollo = () => {
               </p>
             </div>
             <div className="grid-item-service">
-              <img src={`${import.meta.env.BASE_URL}assets/desarrollo/landing.png`} alt="" />
+              <img
+                src={`${import.meta.env.BASE_URL}assets/desarrollo/landing.png`}
+                alt=""
+              />
             </div>
           </div>
         </div>
@@ -61,11 +69,17 @@ const Desarrollo = () => {
             <div className="grid-item-service">
               <h2>E-commerce</h2>
               <p>
-                Una tienda online moderna, rápida y funcional, que combina diseño atractivo con conversión optimizada y backend eficiente.
+                Una tienda online moderna, rápida y funcional, que combina
+                diseño atractivo con conversión optimizada y backend eficiente.
               </p>
             </div>
             <div className="grid-item-service">
-              <img src={`${import.meta.env.BASE_URL}assets/desarrollo/ecommerce.png`} alt="" />
+              <img
+                src={`${
+                  import.meta.env.BASE_URL
+                }assets/desarrollo/ecommerce.png`}
+                alt=""
+              />
             </div>
           </div>
         </div>
@@ -82,7 +96,12 @@ const Desarrollo = () => {
               </p>
             </div>
             <div className="grid-item-service">
-              <img src={`${import.meta.env.BASE_URL}assets/desarrollo/formacion.png`} alt="" />
+              <img
+                src={`${
+                  import.meta.env.BASE_URL
+                }assets/desarrollo/formacion.png`}
+                alt=""
+              />
             </div>
           </div>
         </div>
@@ -98,7 +117,12 @@ const Desarrollo = () => {
               </p>
             </div>
             <div className="grid-item-service">
-              <img src={`${import.meta.env.BASE_URL}assets/desarrollo/catalogo.png`} alt="" />
+              <img
+                src={`${
+                  import.meta.env.BASE_URL
+                }assets/desarrollo/catalogo.png`}
+                alt=""
+              />
             </div>
           </div>
         </div>
@@ -106,7 +130,7 @@ const Desarrollo = () => {
           <Values />
         </div>
       </section>
-      
+
       <section className="full-container desarrollo-post">
         <div className="container">
           <h2>Guías, casos y análisis para optimizar tu presencia digital. </h2>
@@ -135,11 +159,11 @@ const Desarrollo = () => {
       </section>
 
       <div className="full-container">
-        <Portfolio3d/>
+        <Portfolio3d />
       </div>
 
-      <Faqs/>
-      <Contact location="web"/>
+      <Faqs />
+      <Contact location="web" />
     </>
   );
 };

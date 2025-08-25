@@ -3,13 +3,22 @@
 }
 
 .identidad-grid{
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr;
   grid-template-columns: 1fr;
   gap: 20px;
 }
 
 .identidad-grid .grid-item-identidad:first-child{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
   gap: 16px;
 }
@@ -24,19 +33,28 @@
 }
 
 .parr-section-container{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
   gap: 10px;
 }
 
 .identidad-diagonal:not(.identidad-diagonal:last-child){
   min-height: 600px;
+  -webkit-clip-path: polygon(0 6%, 100% 0, 100% 94%, 0 100%);
   clip-path: polygon(0 6%, 100% 0, 100% 94%, 0 100%);
   padding: 50px 20px;
   margin-top: -20px;
 }
 
 .identidad-diagonal:last-child{
+  -webkit-clip-path: polygon(0 4%, 100% 0, 100% 100%, 0 100%);
   clip-path: polygon(0 4%, 100% 0, 100% 100%, 0 100%);
   margin-top: -10px;
 }
@@ -62,15 +80,18 @@
   .identidad-diagonal:not(.identidad-diagonal:last-child){
     min-height: 400px;
     margin-top: -15px;
+    -webkit-clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
     clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
     padding-top: 90px;
   }
   .identidad-diagonal:last-child{
+    -webkit-clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
     clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
     padding-top: -40px;
   }
   .identidad-grid{
     max-width: 900px;
+    -ms-grid-columns: 2fr 3fr;
     grid-template-columns: 2fr 3fr;
   }
   .title-section-container h2{
@@ -86,10 +107,12 @@
 
 @media (min-width: 1280px) {  
   .identidad-diagonal:not(.identidad-diagonal:last-child){
+    -webkit-clip-path: polygon(0 14%, 100% 0, 100% 87%, 0 100%);
     clip-path: polygon(0 14%, 100% 0, 100% 87%, 0 100%);
     margin-top: -35px;
   }
   .identidad-diagonal:last-child{
+    -webkit-clip-path: polygon(0 7%, 100% 0, 100% 100%, 0 100%);
     clip-path: polygon(0 7%, 100% 0, 100% 100%, 0 100%);
     margin-top: -25px;
   }

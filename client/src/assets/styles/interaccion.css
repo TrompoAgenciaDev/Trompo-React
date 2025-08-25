@@ -8,20 +8,28 @@
 
 .interaccion-diagonal:not(.interaccion-diagonal:first-child):not(.interaccion-diagonal:last-child){
   height: 70px;
+  -webkit-clip-path: polygon(0 60%, 100% 0, 100% 40%, 0 100%);
   clip-path: polygon(0 60%, 100% 0, 100% 40%, 0 100%);
 }
 
 .interaccion-diagonal:last-child{
+  -webkit-clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
   clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
   padding-top: 50px;
 }
 
 .interaccion-grid{
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr;
   grid-template-columns: 1fr;
 }
 
 .icon-section-container{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   gap: 5px;
 }
@@ -37,15 +45,37 @@
 }
 
 .grid-item-interaccion:last-child{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
   gap: 10px;
 }
 
 .grid-item-interaccion:first-child{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
   align-items: center;
 }
 
@@ -59,7 +89,6 @@
 }
 
 @media (min-width: 768px) {
-
   .grid-item-interaccion:last-child{
     width: 100%;
     max-width: 600px;
@@ -78,10 +107,12 @@
     font-size: 13px;
   }
 }
-@media (min-width: 1024px) {
 
+@media (min-width: 1024px) {
   .interaccion-grid{
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
   }
 
@@ -94,12 +125,14 @@
   .interaccion-diagonal:first-child{
     display: block;
     height: 150px;
+    -webkit-clip-path: polygon(0 27%, 100% 0, 100% 73%, 0 100%);
     clip-path: polygon(0 27%, 100% 0, 100% 73%, 0 100%);
     margin-top: -50px;
   }
 
   .interaccion-diagonal:not(.interaccion-diagonal:first-child):not(.interaccion-diagonal:last-child){
     height: 70px;
+    -webkit-clip-path: polygon(0 60%, 100% 0, 100% 40%, 0 100%);
     clip-path: polygon(0 60%, 100% 0, 100% 40%, 0 100%);
     margin-top: -50px;
   }
@@ -110,13 +143,20 @@
   }
 
   .grid-item-interaccion:last-child{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
     flex-direction: column;
     gap: 10px;
   }
 
-  
   .interaccion-diagonal:last-child{
+    -webkit-clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
     clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
     padding-top: 50px;
   }
@@ -131,15 +171,16 @@
 }
 
 @media (min-width: 1280px) {
-
   .interaccion-diagonal:first-child{
     height: 200px;
+    -webkit-clip-path: polygon(0 30%, 100% 0, 100% 70%, 0 100%);
     clip-path: polygon(0 30%, 100% 0, 100% 70%, 0 100%);
     margin-top: -70px;
   }
 
   .interaccion-diagonal:not(.interaccion-diagonal:first-child):not(.interaccion-diagonal:last-child){
     height: 100px;
+    -webkit-clip-path: polygon(0 70%, 100% 0, 100% 30%, 0 100%);
     clip-path: polygon(0 70%, 100% 0, 100% 30%, 0 100%);
     margin-top: -50px;
   }

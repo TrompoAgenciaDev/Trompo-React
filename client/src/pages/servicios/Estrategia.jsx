@@ -8,9 +8,9 @@ import Faqs from '../../layout/Faqs';
 import Contact from '../../layout/Contact';
 
 //styles
-import "../../assets/styles/ads-page.css";
+import "../../assets/styles/estrategia-page.css";
 
-const Ads = () => {
+const Estrategia = () => {
 
   return (
     <>
@@ -18,7 +18,7 @@ const Ads = () => {
         location='home'
       />
       <PageTitle
-        title="Ads"
+        title="Estrategia"
         highlight="En Trompo te ofrecemos publicidad digital diseñada para maximizar resultados. Gestionamos campañas en Meta y otras plataformas con un enfoque estratégico, optimización continua y visión integral del negocio. No es solo anunciar, es hacer que cada inversión impulse el crecimiento real de tu marca."
       />
       <section className="full-container ads">        
@@ -129,4 +129,4 @@ const Ads = () => {
   );
 }
 
-export default Ads;
+export default Estrategia;

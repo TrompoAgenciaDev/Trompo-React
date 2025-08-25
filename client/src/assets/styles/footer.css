@@ -3,9 +3,26 @@
 }
 
 .footer-container{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
   align-items: center;
   gap: 60px;
   padding: 50px 10px;
@@ -21,8 +38,11 @@
 }
 
 .footer-grid-item:nth-child(2){
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 1fr 40px 1fr;
   grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: 1fr;
   grid-template-rows: 1fr;
   gap: 40px;
 }
@@ -35,10 +55,10 @@
   margin-bottom: 5px;
 }
 
-.footer-menu ul li a{
+.footer-menu ul li a span{
   font-size: 14px;
   color: #1d1d1b;
-  font-weight: normal;
+  font-weight: 300;
   text-decoration: none;
 }
 
@@ -49,7 +69,7 @@
 .footer-menu::before{
   content: '';
   width: 85%;
-  height: 2px;
+  height: 1px;
   position: absolute;
   top: 0;
   left: 0;
@@ -57,20 +77,45 @@
 }
 
 .footer-grid-item:nth-child(3){
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
   align-items: center;
   gap: 10px;
 }
 
 .footer-logo-img img{
   width: 100%;
-  max-width: 200px;
 }
 
 .social-icons{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
   align-items: center;
   gap: 5px;
 }
@@ -88,30 +133,47 @@
 .footer .servicios-item{
   color: #1d1d1b;
   font-size: 15px;
-  font-weight: normal;
+  font-weight: 300;
   text-transform: capitalize;
 }
 
-
 @media (min-width:768px){
   .footer-container{
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 1fr 20px 2fr;
     grid-template-columns: 1fr 2fr;
+    -webkit-box-align: start;
+    -moz-box-align: start;
+    -ms-flex-align: start;
+    -webkit-align-items: flex-start;
+    -moz-align-items: flex-start;
     align-items: flex-start;
     gap: 20px;
   }
   .footer-grid-item:nth-child(2){
+    -ms-grid-columns: 1fr 20px 1fr 20px 1fr;
     grid-template-columns: 1fr 1fr 1fr;
+    -ms-grid-rows: 1fr;
     grid-template-rows: 1fr;
+    -webkit-box-align: start;
+    -moz-box-align: start;
+    -ms-flex-align: start;
+    -webkit-align-items: flex-start;
+    -moz-align-items: flex-start;
     align-items: flex-start;
     gap: 20px;
   }
   .footer-grid-item:nth-child(2) .social-icons,
   .footer-grid-item:nth-child(1){
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
   }
   .footer-menu::before{
-    width: 120px;
+    width: 100px;
   }
   .footer-grid-item:nth-child(3){
     display: none;
@@ -120,9 +182,10 @@
 
 @media (min-width:1024px){
   .footer-container{
+    -ms-grid-columns: 2fr 3fr;
     grid-template-columns: 2fr 3fr;
   }
-  .footer-menu ul li a{
+  .footer-menu ul li a span{
     font-size: 15px;
   }
   .footer-menu::before{
@@ -133,8 +196,31 @@
   }
 }
 
-@media (min-width:1024px){
-  .footer-menu ul li a{
+@media (min-width:1280px){
+  footer{
+    height: 400px;
+  }
+    
+  .footer-menu::before{
+    width: 100px;
+  }
+
+  .footer-container{
+    -ms-grid-columns: 5fr 4fr;
+    grid-template-columns: 5fr 4fr;
+    padding: 0;
+  }
+
+  .footer-menu ul li a span{
     font-size: 16px;
+    font-weight: 300;
+  }
+
+  .social-icons{
+    gap: 15px;
+  }
+
+  .footer-logo-img{
+    width: 220px;
   }
 }

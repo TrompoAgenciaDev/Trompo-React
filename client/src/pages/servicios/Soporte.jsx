@@ -19,6 +19,7 @@ const Soporte = () => {
         title="Soporte"
         subtitle="Web y creativo"
         highlight="En Trompo soporte es pensado para marcas que buscan crecer sin frenos. Desde la gestión y optimización web (código y WordPress) hasta el desarrollo creativo en multimedia y branding, acompañamos cada etapa con soluciones estratégicas. Un servicio continuo que asegura presencia, coherencia y resultados en tu comunicación digital."
+        bgc="#ffffff"
       />
 
       <section className="full-container soporte">

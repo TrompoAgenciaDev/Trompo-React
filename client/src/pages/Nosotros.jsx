@@ -7,7 +7,7 @@ import StoricalClients from "../layout/StoricalClients";
 // styles
 import "../assets/styles/about.css";
 
-const About = () => {
+const Nosotros = () => {
   const text = (
     <p className="text-posthero">
       En Trompo <span className="bold">no creemos en soluciones mágicas. </span>
@@ -158,4 +158,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Nosotros;

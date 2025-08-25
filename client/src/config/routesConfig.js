@@ -1,50 +1,53 @@
 import Home from "../pages/Home";
-import About from "../pages/About";
-import Contact from "../pages/Contact";
+import Nosotros from "../pages/Nosotros.jsx";
+import Contactanos from "../pages/Contactanos";
 import Casos from "../pages/Casos";
 import Trends from "../pages/Trends";
 import Terms from "../pages/terms";
+import Gracias from "../pages/Gracias";
 
 //Servicios
 import Servicios from "../pages/Servicios";
-import Identidad from "../pages/servicios/Identidad";
-import DesarrolloWeb from "../pages/servicios/Desarrollo-Web";
-import Ads from "../pages/servicios/Ads";
-import RedesSociales from "../pages/servicios/Interaccion";
+import Creatividad from "../pages/servicios/Creatividad.jsx";
+import Desarrollo from "../pages/servicios/Desarrollo.jsx";
+import Estrategia from "../pages/servicios/Estrategia";
+import Interaccion from "../pages/servicios/Interaccion";
 import Soporte from "../pages/servicios/Soporte";
 
 //templates
 import SinglePost from "../templates/singlePost";
 import SinglePortfolio from "../templates/singlePortfolio";
+import NotFound from "../pages/NotFound";
+import Maintenance from "../pages/Maintenance.jsx";
 
 const routesConfig = {
   main: [
-    { path: "/", label: "home", Component: Home },
-    { path: "/about-us", label: "sobre nosotros", Component: About },
-    { path: "/identidad", label: "identidad", Component: Identidad },
-    { path: "/desarrollo-web", label: "desarrollo web", Component: DesarrolloWeb },
-    { path: "/ads", label: "ads", Component: Ads },
-    { path: "/redes-sociales", label: "interacción", Component: RedesSociales },
-    { path: "/soporte", label: "soporte", Component: Soporte },
-    { path: "/contacto", label: "contacto", Component: Contact },
+    { path: "/", label: "inicio", Component: Home },
+    { path: "/nosotros", label: "nosotros", Component: Nosotros },
+    { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],
   servicios: [
-    { path: "/identidad", label: "identidad", Component: Identidad },
-    { path: "/advertising", label: "ads", Component: Ads },
-    { path: "/desarrollo-web", label: "desarrollo web", Component: DesarrolloWeb },
-    { path: "/redes-sociales", label: "redes sociales", Component: RedesSociales },
+    { path: "/creatividad", label: "Creatividad", Component: Creatividad },
+    { path: "/desarrollo", label: "desarrollo", Component: Desarrollo },
+    { path: "/estrategia", label: "estrategia", Component: Estrategia },
+    { path: "/interaccion", label: "interacción", Component: Interaccion },
     { path: "/soporte", label: "soporte", Component: Soporte },
   ],
   mainFooter: [
     { path: "/", label: "home", Component: Home },
-    { path: "/about-us", label: "sobre nosotros", Component: About },
-    { path: "/contacto", label: "contacto", Component: Contact },
+    { path: "/nosotros", label: "nosotros", Component: Nosotros },
+    { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],
   legal: [
-    { path: "/terms", label: "términos y condiciones", Component: Terms }
+    { path: "/terms", label: "términos y condiciones", Component: Terms },
   ],
-
   posts: [{ path: "/post/:slug", Component: SinglePost }],
+
+  AlternativePAges: [
+    { path: "/404", label: "No encontrado", Component: NotFound },
+    { path: "/maintenance", label: "Mantenimiento", Component: Maintenance },
+    { path: "/gracias", label: "gracias", Component: Gracias },
+  ],
 };
 
 export default routesConfig;

@@ -5,9 +5,24 @@ p{
 
 .text-home{
   text-align: center;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
   align-items: center;
   gap: 20px;
   padding: 50px 0;
@@ -19,14 +34,28 @@ p{
 }
 
 .grid-text{
+  display: -ms-grid;
   display: grid;
+  -ms-grid-columns: (1fr)[1];
   grid-template-columns: repeat(1, 1fr);
 }
 
 .grid-text-home{
   height: 100px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
   align-items: center;
   font-size: 16px;
   font-weight: 400;
@@ -42,8 +71,20 @@ p{
 
 .container.text-show-effect{
   height: 200px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
   align-items: center;
 }
 
@@ -52,8 +93,19 @@ p{
 }
 
 .home-content{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
   justify-content: center;
   gap: 30px;
 }
@@ -68,13 +120,14 @@ p{
 }
 
 @media (min-width: 768px) {
-
   .text-show-effect *{
     font-size: 19px;
   }
 
   .grid-text{
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: (1fr)[3];
     grid-template-columns: repeat(3, 1fr);
     padding: 20px 0;
   }
@@ -90,13 +143,14 @@ p{
   }
 
   .bg-yellow div.container:nth-of-type(2):not(.bg-yellow.testimonial-wrapper .container) {
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 4fr 1fr;
     grid-template-columns: 4fr 1fr;
   }
 }
 
 @media (min-width: 1280px){  
-
   .container.text-post-hero{
     min-height: 300px;
   }
@@ -118,6 +172,7 @@ p{
   }
 
   .bg-yellow .container:first-child{
+    -ms-grid-columns: 2fr 1fr;
     grid-template-columns: 2fr 1fr;
   }
 
@@ -128,5 +183,9 @@ p{
   .grid-text-home{
     font-size: 18px;
     background-color: #F5F5F5;
+  }
+
+  .social-post-container{
+    height: 700px;  
   }
 }

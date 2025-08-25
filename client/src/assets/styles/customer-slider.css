@@ -4,13 +4,31 @@
   overflow: hidden;
   touch-action: manipulation;
   position: relative;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
   justify-content: center;
   padding: 10px 0;
 }
 
 .image-slider-track {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   transition: transform 0.8s ease;
   -webkit-transition: -webkit-transform 0.8s ease;
@@ -21,9 +39,25 @@
 }
 
 .image-slide {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 50%;
   flex: 0 0 50%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
   align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
   justify-content: center;
   height: auto;
   padding: 10px;
@@ -34,19 +68,20 @@
   width: 100%;
   max-width: 121px;  
   height: 50px;
-  object-fit: contain;
   -o-object-fit: contain;
+  object-fit: contain;
   -webkit-user-drag: none;
   border: none;
   pointer-events: none;
-  user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  user-select: none;
 }
 
 @media (min-width: 768px) {
   .image-slide {
+    -ms-flex: 0 0 25%;
     flex: 0 0 25%;
   }
   .image-slide img {
@@ -57,6 +92,7 @@
 
 @media (min-width: 1024px) {
   .image-slide {
+    -ms-flex: 0 0 25%;
     flex: 0 0 25%;
   }
 
@@ -68,12 +104,14 @@
 
 @media (min-width: 1280px) {
   .image-slide {
+    -ms-flex: 0 0 20%;
     flex: 0 0 20%;
   }
 }
 
 @media (min-width: 1366px) {
   .image-slide {
+    -ms-flex: 0 0 16.5165%;
     flex: 0 0 16.5165%;
   }
 }

@@ -1,6 +1,8 @@
 #sib-form *,
 #sib-form *::before,
 #sib-form *::after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     font-family: "Montserrat", sans-serif;
 }
@@ -10,11 +12,40 @@
     color: #9e9e9e;
 }
 
+#sib-form input::-webkit-input-placeholder,
+#sib-form textarea::-webkit-input-placeholder {
+    color: #9e9e9e;
+}
+
+#sib-form input:-moz-placeholder,
+#sib-form textarea:-moz-placeholder {
+    color: #9e9e9e;
+    opacity: 1;
+}
+
+#sib-form input::-moz-placeholder,
+#sib-form textarea::-moz-placeholder {
+    color: #9e9e9e;
+    opacity: 1;
+}
+
+#sib-form input:-ms-input-placeholder,
+#sib-form textarea:-ms-input-placeholder {
+    color: #9e9e9e;
+}
+
 #sib-form {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
     flex-direction: column;
     gap: 10px;
-    -webkit-gap: 10px; /* Safari antiguo */
+    -webkit-gap: 10px;
 }
 
 #sib-form input,
@@ -37,19 +68,40 @@
 #sib-form button[type="submit"] {
     width: 130px;
     height: 40px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
     align-items: center;
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
     justify-content: space-between;
     gap: 8px;
     -webkit-gap: 8px;
     padding: 0 20px;
     background-color: transparent;
     cursor: pointer;
+    -webkit-transition: all 0.1s ease-in-out;
+    -moz-transition: all 0.1s ease-in-out;
+    -o-transition: all 0.1s ease-in-out;
     transition: all 0.1s ease-in-out;
     font-family: inherit;
 }
 
 #sib-form button[type="submit"]:hover {
+    -webkit-transform: translateX(15px) scale(1.15);
+    -moz-transform: translateX(15px) scale(1.15);
+    -ms-transform: translateX(15px) scale(1.15);
+    -o-transform: translateX(15px) scale(1.15);
     transform: translateX(15px) scale(1.15);
     font-weight: 500;
 }
@@ -61,11 +113,24 @@
 
 .subtmit-container {
     width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-box-pack: end;
+    -moz-box-pack: end;
+    -ms-flex-pack: end;
+    -webkit-justify-content: flex-end;
+    -moz-justify-content: flex-end;
     justify-content: flex-end;
 }
 
 .phone-input {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
 }
 

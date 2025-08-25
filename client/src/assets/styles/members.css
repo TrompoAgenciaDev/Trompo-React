@@ -25,9 +25,24 @@
     margin: 0 auto;
     box-sizing: border-box;
     position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-align: end;
+    -moz-box-align: end;
+    -ms-flex-align: end;
+    -webkit-align-items: flex-end;
     align-items: flex-end;
+    -webkit-box-pack: justify;
+    -moz-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
     justify-content: space-between;
     overflow: visible;
 }
@@ -36,22 +51,29 @@
     width: 100%;
     box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
     box-sizing: border-box;
-    transition: box-shadow 0.2s;
     -webkit-transition: box-shadow 0.2s;
     -moz-transition: box-shadow 0.2s;
     -o-transition: box-shadow 0.2s;
+    transition: box-shadow 0.2s;
     position: absolute;
     right: 0;
     top: 0;
     z-index: 1;
+    display: -ms-grid;
     display: grid;
+    -ms-grid-rows: auto 200px;
     grid-template-rows: auto 200px;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
     gap: 20px;
 }
 
 .member-img {
     width: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
@@ -59,7 +81,14 @@
 
 .member-content {
     padding: 20px 20px 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
     flex-direction: column;
     gap: 16px;
 }
@@ -79,7 +108,13 @@
     color: #8E8E8E;
     font-size: 12px;
     text-align: left;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
     flex: 1 1 auto;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     overflow: hidden;
     width: 100%;
@@ -87,6 +122,7 @@
 
 @media (min-width: 768px) {
     .member-card {
+        -ms-grid-rows: auto 250px;
         grid-template-rows: auto 250px;
     }
 
@@ -107,6 +143,8 @@
     }
 
     .member-card {
+        -ms-grid-rows: 270px;
+        -ms-grid-columns: 1fr 1fr;
         grid-template-rows: 270px;
         grid-template-columns: 1fr 1fr;
         overflow: hidden;
@@ -133,6 +171,8 @@
     }
 
     .member-card {
+        -ms-grid-rows: 270px;
+        -ms-grid-columns: 4fr 3fr;
         grid-template-rows: 270px;
         grid-template-columns: 4fr 3fr;
     }
