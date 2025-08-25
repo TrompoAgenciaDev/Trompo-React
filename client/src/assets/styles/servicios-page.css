@@ -1,0 +1,346 @@
+.container.grid-content{
+  width: 100%;
+  max-width: 100%;
+}
+
+.grid-content > .grid-item-service:first-child{
+  padding: 50px 20px 30px;
+}
+
+.grid-content > .grid-item-service:last-child{
+  padding: 0;
+}
+
+.grid-content{
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.diagonal-invertida{
+  clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 90%);
+}
+
+
+.diagonal:not(.diagonal:last-child){
+  clip-path: polygon(0 0, 100% 10%, 100% 90%, 0 100%);
+  background-color: #FEE070;
+  z-index: 999;
+  margin-top: -60px;
+}
+
+.diagonal:last-child{
+  margin-top: -60px;
+  clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 100%);
+}
+
+.diagonal-invertida{
+  margin-top: -25px;
+  overflow: hidden;
+}
+
+.grid-item-service{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.grid-item-service h2{
+  font-size: 17px;
+}
+
+.grid-item-service p{
+  font-size: 12px;
+}
+
+.grid-item-service img{
+  width: 100%;
+  border: none;
+}
+
+.diagonal .values-section{
+  height: 100%;
+  min-height: 900px;
+  padding: 80px 10px;
+}
+
+.desarrollo-post .post-card-container {
+  gap: 20px;
+}
+
+.desarrollo-post{  
+  padding: 50px 0;
+}
+
+.desarrollo-post .container:first-child{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.desarrollo-post .container:first-child h2{
+  color: #8E8E8E;
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+}
+
+.title-section-container{
+  width: 100%;
+  max-width: fit-content;
+}
+
+@media (min-width: 768px) {
+  .grid-content > .grid-item-service:first-child{
+    width: 100%;
+    max-width: 500px;
+    padding: 70px 20px 30px;
+  }
+
+  .grid-item-service h2{
+    font-size: 20px;
+  }
+
+  .grid-item-service p{
+    font-size: 15px;
+  }
+
+  .diagonal-invertida{
+    clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 90%);
+    padding-top: 20px;
+  }
+
+  .diagonal:not(.diagonal:last-child){
+    clip-path: polygon(0 0, 100% 10%, 100% 90%, 0 100%);
+    margin-top: -90px;
+  }
+
+  .diagonal:last-child{
+    clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
+    margin-top: -90px;
+  }
+
+  .diagonal-invertida{
+    margin-top: -80px;
+    overflow: hidden;
+  }
+
+  .values-section .grid-container{
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .desarrollo-post .container:first-child h2{
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .diagonal-invertida .grid-content {
+    display: grid;
+    grid-template-columns: 6fr 5fr;
+    justify-items: flex-end;
+    gap: 0;
+  }
+
+  
+  .grid-content > .grid-item-service:first-child{
+    max-width: 700px;
+  }
+
+  .diagonal .grid-content {
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    gap: 0;
+  }
+  
+  .diagonal-invertida + .diagonal .grid-item-service:first-child {
+    order: 2;
+  }
+  .diagonal-invertida + .diagonal .grid-item-service:last-child {
+    order: 1;
+  }
+
+  .grid-content > .grid-item-service:first-child{
+    padding: 0 50px 0;
+  }
+
+  .diagonal-invertida{
+    clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0 85%);
+  }
+
+  .diagonal:not(.diagonal:last-child){
+    clip-path: polygon(0 0, 100% 5%, 100% 85%, 0 100%);
+  }
+
+  .diagonal:last-child{
+    clip-path: polygon(0 0, 100% 8%, 100% 100%, 0 100%);
+    margin-top: 0px;
+  }
+
+  .grid-item-service h2{
+    font-size: 22px;
+  }
+
+  .grid-item-service p{
+    font-size: 15px;
+  }
+
+  .diagonal-invertida{
+    margin-top: -90px;
+  }
+
+  .diagonal:last-child{
+    margin-top: -70px;
+  }
+
+  .values-section .grid-container{
+    max-width: 955px;
+  }
+
+  .diagonal .values-section{
+    min-height: 700px;
+  }
+
+  .desarrollo-post .container:first-child h2{
+    font-size: 24px;
+  }
+
+  .desarrollo-post .post-card .container{
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1280px) {
+
+  .diagonal-invertida{
+    clip-path: polygon(0 80px, 100% 0%, 100% 100%, 0 80%);
+    margin-top: -80px;
+  }
+  
+  .grid-content > .grid-item-service:first-child{
+    max-width: 800px;
+  }
+
+  .diagonal:not(.diagonal:last-child){
+    clip-path: polygon(0 0, 100% 85px, 100% 320px, 0 100%);
+    margin-top: -85px;
+  } 
+
+  .diagonal:last-child{
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    margin-top: -85px;
+  }
+
+  .diagonal-invertida .grid-content {
+    grid-template-rows: 400px;
+  }
+
+  .diagonal .grid-content {
+    grid-template-rows: 400px;
+  }
+  
+  .diagonal .values-section .grid-container{
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .desarrollo-post .container:first-child h2{
+    font-size: 28px;
+  }
+  
+  .grid-item-service p{    
+    width: 100%;
+    max-width: 800px;
+  }
+  
+  .grid-item-service h2{
+    font-size: 26px;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .diagonal-invertida .grid-item-service:first-child p,
+  .diagonal-invertida .grid-item-service:first-child h2{
+    padding-left: 30px;
+  }
+
+  .diagonal .grid-item-service:first-child p,
+  .diagonal .grid-item-service:first-child h2{
+    padding-right: 20px;
+  }
+}
+
+@media (min-width:1366px){
+
+  .grid-content > .grid-item-service:first-child{
+    max-width: 900px;
+  }
+
+  .diagonal-invertida{
+    clip-path: polygon(0 20%, 100% 0%, 100% 100%, 0 80%);
+    margin-top: 0;
+  }
+
+  .diagonal:not(.diagonal:last-child){
+    clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
+    margin-top: -100px;
+  } 
+
+  .diagonal:last-child{
+    clip-path: polygon(0 0, 100% 12%, 100% 100%, 0 100%);
+    margin-top: 50px;
+    padding-top: 0;
+  }
+
+  .diagonal-invertida .grid-content {
+    grid-template-columns: 4fr 3fr;
+    grid-template-rows: 470px;
+  }
+
+  .diagonal .grid-content {
+    grid-template-columns: 3fr 4fr;
+    grid-template-rows: 470px;
+  }
+
+  .diagonal-invertida{
+    margin-top: -100px;
+  }
+
+  .diagonal:last-child{
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    margin-top: -100px;
+  }
+
+  .grid-item-service h2{
+    font-size: 26px;
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .diagonal-invertida .grid-item-service:first-child p{
+    width: 100%;
+    max-width: 700px;
+    font-size: 16px;
+  }
+
+  .diagonal .grid-item-service:first-child p{
+    width: 100%;
+    max-width: 700px;
+    font-size: 16px;
+  }
+
+  .diagonal-invertida .grid-item-service:first-child p,
+  .diagonal-invertida .grid-item-service:first-child h2{
+    padding-left: 50px;
+  }
+
+  .diagonal .grid-item-service:first-child p,
+  .diagonal .grid-item-service:first-child h2{
+    padding-right: 70px;
+  }
+}

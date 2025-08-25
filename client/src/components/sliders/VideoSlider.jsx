@@ -26,7 +26,7 @@ function wrapIndex(idx, length) {
 }
 
 function VideoSlider({ location }) {
-  const REPEAT = 20; // buffer para infinito suave
+  const REPEAT = 5;
   const totalSlides = sliderVideos.length;
   const middleIndex = totalSlides * Math.floor(REPEAT / 2);
 

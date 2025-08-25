@@ -49,6 +49,11 @@ img {
   min-width: 100%;
 }
 
+video{
+  width: 100%;
+  object-fit: cover;
+}
+
 .full-container {
   width: 100%;
   padding: 0;
@@ -119,6 +124,10 @@ p {
 .bg-yellow {
   background-color: #FEE070;
   z-index: 100;
+}
+
+.bg-yellow-2 {
+  background-color: #FEE070;
 }
 
 footer {

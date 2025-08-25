@@ -66,7 +66,7 @@ function Services() {
                 </div>
               </div>
             );
-            return item.service === "/desarrollo-web" ? (
+            return (              
               <Link
                 to={item.service}
                 className="service-section-row"
@@ -74,11 +74,7 @@ function Services() {
               >
                 {content}
               </Link>
-            ) : (
-              <div className="service-section-row" key={item.id}>
-                {content}
-              </div>
-            );
+            )
           })}
         </div>
       </div>

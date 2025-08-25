@@ -1,8 +1,10 @@
 .full-container .diagonal-title{
-  padding: 30px 0 40px;
+  width: 100%;
+  max-width: 420px;
+  padding: 30px 20px 60px;
 }
 
-.diagonal-title .container{
+.title-container{
   display: grid;
   grid-template-columns: 1fr;
   justify-content: flex-start;
@@ -14,8 +16,12 @@
   font-weight: 700;
 }
 
+.title-page .subtitle-page{
+  font-weight: 400;
+  color: #8E8E8E;
+}
+
 .diagonal-page-title{
-  background-color: #FEE070;
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   z-index: 9999;
 }
@@ -29,23 +35,19 @@
 }
 
 @media (min-width: 768px) {
-
   .diagonal-title{
     padding: 70px 20px;
+    max-width: 700px;
   }
 
-  .diagonal-title .diagonal-page-title{
+  .diagonal-page-title .diagonal-title {
     width: 100%;
-    max-width: 700px;
+    max-width: 900px;
     padding: 50px 20px;
   }
   
   .diagonal-page-title .title-page{
-    font-size: 28px;
-  }
-
-  .diagonal-page-title .content{
-    font-size: 15px;
+    font-size: 24px;
   }
 
   .diagonal-page-title{
@@ -53,9 +55,8 @@
   }
 }
 
-@media (min-width: 1024px){  
-
-  .diagonal-title .container{
+@media (min-width: 1024px){
+  .title-container{
     width: 100%;
     display: grid;
     grid-template-columns: 2fr 3fr;
@@ -64,12 +65,11 @@
   }  
 }
 
-
 @media (min-width:1280px){
 
-  .diagonal-title .container{
-    max-width: 1140px;
-    gap: 150px;
+  .title-container{
+    width: 900px;
+    gap: 50px;
   }
 
   .diagonal-page-title{
@@ -83,7 +83,7 @@
   }
   
   .diagonal-page-title .title-page{
-    font-size: 40px;
+    font-size: 32px;
   }
 
   .diagonal-page-title .content{
@@ -91,18 +91,13 @@
   }
 }
 
-@media (min-width:1366){
+@media (min-width:1366px){
+
   .diagonal-title{
     clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 80%);
     padding: 70px 20px;
   }
-  
-  .diagonal-title .container.page-title{
-    padding: 10px 30px;
-  }
-}
 
-@media (min-width:1366px){
   .diagonal-title .container.page-title{
     width: 100%;
     min-width: 1700px;

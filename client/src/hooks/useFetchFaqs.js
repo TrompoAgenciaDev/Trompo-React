@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 
-const useFetchFaqs = () => {
-  const [items, setItems] = useState([]);
+const useFetchFaqs = (section = "home") => {
+  const [items, setItems]   = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError]   = useState(null);
 
   useEffect(() => {
     let alive = true;
@@ -18,7 +18,17 @@ const useFetchFaqs = () => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
         const data = await res.json();
-        const list = Array.isArray(data) ? data : data.faqs || [];
+
+        // Compat: si antes era array, úsalo tal cual; si es objeto, usa la clave pedida.
+        const key = String(section || "home").toLowerCase();
+        const list =
+          Array.isArray(data)
+            ? data
+            : Array.isArray(data?.[key])
+              ? data[key]
+              : [];
+
+        if (!Array.isArray(list)) throw new Error(`Sección "${key}" no encontrada`);
         if (alive) setItems(list);
       } catch (err) {
         if (alive) {
@@ -30,10 +40,8 @@ const useFetchFaqs = () => {
       }
     })();
 
-    return () => {
-      alive = false;
-    };
-  }, []);
+    return () => { alive = false; };
+  }, [section]);
 
   return { items, loading, error };
 };

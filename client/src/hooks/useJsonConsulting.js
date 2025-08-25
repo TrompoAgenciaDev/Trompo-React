@@ -1,20 +1,50 @@
 import { useState, useEffect } from 'react';
 
 const useJsonConsulting = ({ quantity, category, tag, type }) => {
-  const [items, setItems]   = useState([]);
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError]   = useState(null);
+  const [error, setError] = useState(null);
 
-  const base = import.meta.env.BASE_URL;
   const fileMap = {
-    portfolio: `${base}portfolio.json`,
-    posts:     `${base}posts.json`,
+    portfolio: `${import.meta.env.BASE_URL}portfolio.json`,
+    posts:     `${import.meta.env.BASE_URL}posts.json`,
   };
 
-  // helpers
   const norm = (v) => (v ?? '').toString().trim().toLowerCase();
-  const inArrayCI = (arr, value) =>
-    Array.isArray(arr) && arr.some((x) => norm(x) === norm(value));
+
+  const toArray = (v) => {
+    if (!v) return [];
+    if (Array.isArray(v)) return v;
+    if (typeof v === 'string') return [v];
+    if (typeof v === 'object') {
+      const keys = Object.keys(v);
+      const vals = Object.values(v).flatMap((x) => Array.isArray(x) ? x : x != null ? [x] : []);
+      return [...keys, ...vals];
+    }
+    return [];
+  };
+
+  const containsCI = (listLike, value) =>
+    toArray(listLike).some((x) => norm(x) === norm(value));
+
+  const getCategories = (item) => toArray(item?.categories ?? item?.category);
+  const getTags = (item) => toArray(item?.tags);
+
+  // NUEVO: resolver rutas a absolutas
+  const resolveUrl = (p) => {
+    if (!p) return '';
+    if (/^https?:\/\//i.test(p)) return p;
+    const clean = p.replace(/^\.?\//, ''); // quita "./" o "/"
+    return `${import.meta.env.BASE_URL}${clean}`;
+  };
+
+  // opcional: normalizar galería
+  const normalizeItem = (it) => ({
+    ...it,
+    featured_image: resolveUrl(it.featured_image),
+    featured_video: it.featured_video,
+    gallery: Array.isArray(it.gallery) ? it.gallery.map(resolveUrl) : [],
+  });
 
   useEffect(() => {
     let alive = true;
@@ -33,17 +63,15 @@ const useJsonConsulting = ({ quantity, category, tag, type }) => {
         let data = await res.json();
 
         if (category) {
-          const catNorm = norm(category);
-          data = data.filter((item) => inArrayCI(item?.categories, catNorm));
+          data = data.filter((item) => containsCI(getCategories(item), category));
+        }
+        if (tag) {
+          data = data.filter((item) => containsCI(getTags(item), tag));
         }
 
-        if (tag) {
-          const tagNorm = norm(tag);
-          data = data.filter((item) => inArrayCI(item?.tags, tagNorm));
-        }
+        data = data.map(normalizeItem); // APLICAR RESOLUCIÓN
 
         if (quantity) data = data.slice(0, quantity);
-
         if (alive) setItems(data);
       } catch (err) {
         if (alive) setError(`Hubo un problema al cargar los datos: ${err.message}`);

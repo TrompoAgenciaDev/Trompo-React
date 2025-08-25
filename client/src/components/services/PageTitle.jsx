@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import "../../assets/styles/page-title.css";
 
-function PageTitle({ title, highlight }) {
+function PageTitle({ title, subtitle = "", highlight, bgc = "#ffffff" }) {
   const words = highlight ? highlight.split(" ") : [];
 
   const container = {
@@ -17,10 +17,18 @@ function PageTitle({ title, highlight }) {
   };
 
   return (
-    <section className="full-container diagonal-page-title">
+    <section className="full-container diagonal-page-title"
+      style={{backgroundColor: bgc}}>
       <div className="full-container diagonal-title">
-        <div className="container">
-          <h1 className="title-page">{title}</h1>
+        <div className="title-container">
+          <h1 
+            className="title-page">
+              {title}
+              {" "}
+              {
+                subtitle ? <span className="subtitle-page">{subtitle}</span> : ""
+              }
+            </h1>
 
           <motion.p
             className="content"

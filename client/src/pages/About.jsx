@@ -2,6 +2,7 @@ import PostHero from "../components/PostHero";
 import Hero from "../layout/Hero";
 import Values from "../layout/Values";
 import Members from "../components/Members";
+import StoricalClients from "../layout/StoricalClients";
 
 // styles
 import "../assets/styles/about.css";
@@ -147,8 +148,10 @@ const About = () => {
           <Members />
         </div>
       </section>
+
+      <StoricalClients/>
       
-      <section className="full-container about-section">
+      <section className="full-container">
         <Values/>
       </section>
     </>

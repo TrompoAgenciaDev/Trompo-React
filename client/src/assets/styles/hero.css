@@ -13,8 +13,7 @@
   -o-background-size: cover;
 }
 
-.hero-video-container,
-.hero-video-container video{
+.hero-video-container{
   z-index: 10;
 }
 

@@ -8,7 +8,7 @@ import { motion } from "motion/react";
 import VideoSlider from "../components/sliders/VideoSlider";
 import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import PubliSlides from "../components/sliders/PubliSlides";
-import Testimoniales from "../components/Testimoniales";
+import Testimonials from "../components/Testimonials";
 import PostCard from "../components/posts/PostCard";
 import Hero from "../layout/Hero";
 import Services from "../layout/Services";
@@ -148,7 +148,7 @@ const Home = () => {
                   initial={{ opacity: 0.1 }}
                   whileInView={{ opacity: 1 }}
                   transition={{
-                    delay: (lineIdx * 0.3) + wordIdx * 0.05, // escalonado por línea y palabra
+                    delay: (lineIdx * 0.3) + wordIdx * 0.05,
                     duration: 0.6,
                   }}
                 >
@@ -163,8 +163,8 @@ const Home = () => {
       </section>
 
       <section className="full-container">
-        <PostCard initialLimit={3} maxLimit={3} />
-        <div className="container text-show-effect post-notes">
+        <PostCard initialLimit={3} maxLimit={3} category={"desarrollo web"} />
+        {/* <div className="container text-show-effect post-notes">
           <span>
             Guías, casos y análisis para optimizar tu presencia digital.
           </span>
@@ -186,10 +186,10 @@ const Home = () => {
               />
             </svg>
           </Link>
-        </div>
+        </div> */}
       </section>
 
-      <section className="full-container testimonial-wrapper">
+      <section className="full-container bg-yellow testimonial-wrapper">
         <div className="container testimonial-header">
           <h4>La voz de nuestros clientes.</h4>
           <p>
@@ -198,7 +198,7 @@ const Home = () => {
           </p>
         </div>
         <div className="container">
-          <Testimoniales />
+          <Testimonials size={2} />
         </div>
       </section>
 

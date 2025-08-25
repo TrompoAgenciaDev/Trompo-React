@@ -15,6 +15,7 @@ function App() {
     <BrowserRouter basename="/">
       <Header onTogglePopup={togglePopup} />
       <MenuPopup isOpen={isOpen} onClose={togglePopup} />
+      <ScrollTop />
       <AppRoutes />
       <ScrollTop />
       <Footer />

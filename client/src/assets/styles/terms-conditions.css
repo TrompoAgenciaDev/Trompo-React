@@ -1,37 +1,43 @@
-.title {
-  font-size: 24px;
+.terms{
+  width: 100%;
+  max-width: 800px;
+  padding-top: 60px;
+}
+
+.terms-title {
+  font-size: 16px;
   margin-top: 40px;
   font-weight: bold;
   color: #222;
 }
 
-.subtitle {
-  font-size: 18px;
+.terms-subtitle {
+  font-size: 15px;
   margin-top: 30px;
   font-weight: bold;
   color: #333;
 }
 
-.paragraph {
-  font-size: 16px;
+.terms-paragraph {
+  font-size: 12px;
   line-height: 1.6;
   margin: 10px 0 20px;
   color: #444;
 }
 
-.list {
+.terms-list {
   margin-left: 20px;
   padding-left: 15px;
   list-style: disc;
   color: #444;
-  font-size: 16px;
+  font-size: 12px;
   line-height: 1.6;
 }
 
 .term-list {
   margin: 20px 0;
   list-style: none;
-  font-size: 16px;
+  font-size: 12px;
   color: #444;
 }
 
@@ -44,4 +50,28 @@
   text-decoration: underline;
   -webkit-text-decoration: underline;
   -moz-text-decoration: underline;
+}
+
+@media (min-width: 1024px) {
+  .terms{
+    width: 100%;
+    max-width: 800px;
+    padding-top: 80px;
+  }
+
+  .terms-title {
+    font-size: 24px;
+  }
+
+  .terms-subtitle {
+    font-size: 15px;
+  }
+
+  .terms-paragraph {
+    font-size: 12px;
+  }
+
+  .terms-list {
+    font-size: 12px;
+  }
 }

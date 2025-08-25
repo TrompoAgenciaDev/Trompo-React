@@ -11,20 +11,19 @@ import "@as/hero.css";
 
 const videosByLocation = {
   home: HomeVideo,
-  about: AboutVideo,
-  contact: ContactVideo,
-  desarrollo: Desarrollo,
+  about: HomeVideo,
+  contact: HomeVideo,
+  desarrollo: HomeVideo,
 };
 
 const Hero = ({ location = "home" }) => {
   const [heroImagePng, heroImageWebp] = useHeroImages(location);
-
   const videoSrc = videosByLocation[location];
 
   return (
     <div className="full-container hero-video-container" id={location === "home" ? "hero" : undefined}>
       {videoSrc && (
-        <video autoPlay loop muted playsInline className="hero-video">
+        <video autoPlay loop muted playsInline className="">
           <source src={videoSrc} type="video/mp4" />
         </video>
       )}

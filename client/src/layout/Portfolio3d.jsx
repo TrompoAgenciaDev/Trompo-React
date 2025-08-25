@@ -12,7 +12,7 @@ function resolveUrl(src) {
   return `${import.meta.env.BASE_URL}${cleaned}`;
 }
 
-function Portfolio3d() {
+function Portfolio3d({cat = "3d"}) {
   const [quantity] = useState(12);
   const [category] = useState("");
   const [tag] = useState("");
@@ -81,15 +81,20 @@ function Portfolio3d() {
           }}
           whileTap={{ cursor: "grabbing" }}
         >
-          {duplicatedItems.map((item, index) => (
-            <PortfolioCarruselItem
-              key={`${item.id}-${index}`}
-              id={item.id}
-              title={item.title}
-              backgroundImage={item.featured_image}
-              enlacePortfolio={item.enlacePortfolio}
-            />
-          ))}
+          {
+            duplicatedItems.map((item, index) => (
+            item.category.includes(cat) && (
+              <PortfolioCarruselItem
+                key={`${item.id}-${index}`}
+                id={item.id}
+                title={item.title}
+                backgroundImage={item.vertical_image}
+                enlacePortfolio={item.enlacePortfolio}
+              />
+            )
+          ))
+          }
+          
         </motion.div>
       </div>
     </div>

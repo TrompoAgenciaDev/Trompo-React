@@ -8,7 +8,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   overflow: hidden;
-  padding-top: 50px;
+  margin-bottom: 30px;
 }
 
 .portfolio-section .title-section{
@@ -34,6 +34,7 @@
   position: relative;
   will-change: transform;
   overflow: visible;
+  padding-bottom: 20px;
 }
 
 .portfolio-track{
@@ -124,7 +125,7 @@
   }
 
   .portfolio-carrusel{
-    height: 600px;
+    height: 550px;
     margin-top: 220px;
   }
 }

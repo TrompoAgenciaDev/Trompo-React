@@ -9,7 +9,7 @@ import Portfolio3d from "../../layout/Portfolio3d";
 import Faqs from '../../layout/Faqs';
 import Contact from "../../layout/Contact";
 
-import "../../assets/styles/desarrollo-web.css";
+import "../../assets/styles/servicios-page.css";
 
 const Desarrollo = () => {
   return (
@@ -17,12 +17,12 @@ const Desarrollo = () => {
       <Hero location="desarrollo" />
       <PageTitle
         title="Desarrollo Web"
+        subtitle=""
         highlight="En Trompo convertimos objetivos de negocio en arquitecturas digitales precisas. Combinamos UX estratégica, desarrollo técnico escalable y diseño orientado a conversión para construir soluciones web que funcionan."
+        bgc="#FEE070"
       />
 
       <section className="full-container">
-        {/* <div className="full-container diagonal-first">
-        </div> */}
         <div className="full-container diagonal-invertida">
           <div className="container grid-content">
             <div className="grid-item-service">
@@ -136,12 +136,6 @@ const Desarrollo = () => {
 
       <div className="full-container">
         <Portfolio3d/>
-      </div>
-
-      <div className="full-container">
-        <div className="container">
-          <CustomerSlider />
-        </div>
       </div>
 
       <Faqs/>
