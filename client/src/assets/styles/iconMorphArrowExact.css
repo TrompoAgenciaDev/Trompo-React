@@ -1,0 +1,40 @@
+/* src/assets/styles/iconMorphArrowExact.css */
+.iconmorph{
+  --im-size: 10px;
+  width:var(--im-size);
+  height:var(--im-size);
+  display:inline-block;
+  vertical-align:middle;
+  position:relative;
+  flex:0 0 var(--im-size);
+  padding:0;
+}
+
+.item-menu-icon{
+    width: 10px;
+    padding-top: 5px;
+}
+
+
+.iconmorph__svg,
+.item-menu-icon svg{
+  width: 100%;
+  height: 100%;
+  overflow:visible;
+  display:block;
+}
+
+.iconmorph__dot{ fill:#ffdf69; }
+.iconmorph__arrow{
+  stroke:#1e1e1e;
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+  transform-box:fill-box;
+  transform-origin:50% 50%;
+}
+
+@media (min-width:1024px){
+  .iconmorph{ --im-size:30px; }
+}

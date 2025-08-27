@@ -8,7 +8,7 @@ const BGS = {
   interaccion: "form-interaccion.png",
   desarrollo: "form-desarrollo.png",
   soporte: "form-soporte.png",
-  web: "web-bg.png",
+  home: "web-bg.png",
   default: "contact-bg.png",
 };
 

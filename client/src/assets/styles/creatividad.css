@@ -58,6 +58,10 @@
   background-color: #ffffff;
 }
 
+.creatividad-video-section{
+  padding: 50px 0;
+}
+
 @media (min-width: 768px) {
   .identidad-grid{
     width: 100%;
@@ -93,6 +97,9 @@
   }
   .identidad-grid .grid-item-identidad:last-child{
     margin-top: -70px;
+  }
+  .creatividad-video-section{
+    padding: 150px 0;
   }
 }
 

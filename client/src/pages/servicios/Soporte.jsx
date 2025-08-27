@@ -5,7 +5,7 @@ import PageTitle from "../../components/services/PageTitle";
 import Values from "../../layout/Values";
 import PostCard from "../../components/posts/PostCard";
 import Portfolio3d from "../../layout/Portfolio3d";
-import Faqs from '../../layout/Faqs';
+import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 
 //styles
@@ -14,7 +14,7 @@ import "../../assets/styles/soporte-page.css";
 const Soporte = () => {
   return (
     <>
-      <Hero location="desarrollo"/>
+      <Hero location="desarrollo" />
       <PageTitle
         title="Soporte"
         subtitle="Web y creativo"
@@ -24,7 +24,10 @@ const Soporte = () => {
 
       <section className="full-container soporte">
         <div className="full-container soporte-diagonal-invertida">
-          <img src={`${import.meta.env.BASE_URL}assets/support/full-img-1.png`} alt="" />
+          <img
+            src={`${import.meta.env.BASE_URL}assets/support/full-img-1.png`}
+            alt=""
+          />
         </div>
         <div className="full-container soporte-diagonal bg-yellow-2">
           <div className="container soporte-grid">
@@ -36,33 +39,43 @@ const Soporte = () => {
             </div>
             <div className="grid-item-soporte">
               <p>
-                Construimos experiencias focalizadas que transforman tráfico en leads cualificados, ventas directas o adopción de promociones.
-                Método basado en arquitectura conversiva, microcopys estratégicos y eliminación sistemática de fricciones para maximizar ROI por visita.
+                Construimos experiencias focalizadas que transforman tráfico en
+                leads cualificados, ventas directas o adopción de promociones.
+                Método basado en arquitectura conversiva, microcopys
+                estratégicos y eliminación sistemática de fricciones para
+                maximizar ROI por visita.
               </p>
             </div>
           </div>
         </div>
         <div className="full-container soporte-diagonal-invertida">
-          <img src={`${import.meta.env.BASE_URL}assets/support/full-img-2.png`} alt="" />
+          <img
+            src={`${import.meta.env.BASE_URL}assets/support/full-img-2.png`}
+            alt=""
+          />
         </div>
-        <div className="full-container soporte-diagonal bg-yellow-2"
-            style={{backgroundColor: "#ffffff"}}
+        <div
+          className="full-container soporte-diagonal bg-yellow-2"
+          style={{ backgroundColor: "#ffffff" }}
         >
           <div className="container soporte-grid">
             <div className="grid-item-soporte">
               <div className="title-section-container">
-                <h2>Creativo</h2> 
+                <h2>Creativo</h2>
                 <span>Branding y Multimedia</span>
               </div>
             </div>
             <div className="grid-item-soporte">
               <p>
-                Impulsamos tu marca con soluciones visuales y de comunicación que conectan. Desde producción multimedia hasta branding estratégico, creamos piezas que transmiten identidad, generan impacto y fortalecen el posicionamiento de tu negocio en cada punto de contacto.
+                Impulsamos tu marca con soluciones visuales y de comunicación
+                que conectan. Desde producción multimedia hasta branding
+                estratégico, creamos piezas que transmiten identidad, generan
+                impacto y fortalecen el posicionamiento de tu negocio en cada
+                punto de contacto.
               </p>
             </div>
           </div>
         </div>
-        
       </section>
 
       <div className="full-container">
@@ -70,20 +83,24 @@ const Soporte = () => {
           <div className="container"></div>
           <div className="container">
             <h3>Proyectos con impacto</h3>
-            <p>Transformamos ideas en plataformas digitales de alto rendimiento. Arquitectura técnica impecable, experiencia de usuario intuitiva y resultados medibles en cada proyecto.</p>
+            <p>
+              Transformamos ideas en plataformas digitales de alto rendimiento.
+              Arquitectura técnica impecable, experiencia de usuario intuitiva y
+              resultados medibles en cada proyecto.
+            </p>
           </div>
         </div>
-        <Portfolio3d/>
+        <Portfolio3d />
       </div>
-      
-      <Contact location="web"/>
 
-      <Faqs location="desarrollo"/>
-      
+      <Contact location="soporte" />
+
+      <Faqs location="soporte" />
+
       <section className="full-container desarrollo-post">
         <div className="container">
           <h2>Guías, casos y análisis para optimizar tu presencia digital.</h2>
-          <PostCard maxLimit={3} category="desarrollo web"/>
+          <PostCard maxLimit={3} category="soporte" />
         </div>
         {/* <div className="container">
           <Link to={"#"} className="read-more-link">

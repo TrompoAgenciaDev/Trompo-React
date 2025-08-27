@@ -5,6 +5,7 @@ import PostCard from "../../components/posts/PostCard";
 import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 import Portfolio3d from "../../layout/Portfolio3d";
+import CreatividadSlider from "../../components/sliders/CreatividadSlider";
 
 //styles
 import "../../assets/styles/creatividad.css";
@@ -89,17 +90,22 @@ const Creatividad = () => {
         </div>
       </section>
 
-      <div className="full-container">
-
+      <div className="full-container creatividad-video-section">
+        <div className="container">
+          <CreatividadSlider/>
+        </div>
+        <div className="container">
+          <CreatividadSlider type="video"/>
+        </div>
       </div>
 
       <Contact location="creatividad" />
-      <Faqs location="desarrollo" />
+      <Faqs location="creatividad" />
 
       <section className="full-container desarrollo-post">
         <div className="container">
           <h2>Guías, casos y análisis para optimizar tu presencia digital.</h2>
-          <PostCard maxLimit={3} category="desarrollo web" />
+          <PostCard maxLimit={3} category="creatividad" />
         </div>
         {/* <div className="container">
           <Link to={"#"} className="read-more-link">

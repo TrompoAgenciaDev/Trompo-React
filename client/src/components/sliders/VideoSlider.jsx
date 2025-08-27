@@ -66,12 +66,14 @@ function VideoSlider({ location }) {
     setAnimating(true);
   };
 
+  /* --- AUTOPLAY DESACTIVADO ---
   useEffect(() => {
     if (!paused) {
       timerRef.current = setInterval(nextSlide, interval);
     }
     return () => clearInterval(timerRef.current);
   }, [paused, index]);
+  --- */
 
   useEffect(() => {
     const handleScrollOrClickOutside = (e) => {
@@ -100,7 +102,7 @@ function VideoSlider({ location }) {
   const handlePause = () => setPaused(true);
   const handleTouch = () => isMobile() && setPaused(true);
 
-  // Normaliza el índice cuando se acerca a los bordes del buffer para que sea infinito sin salto.
+  /* --- NORMALIZACIÓN INFINITA DESACTIVADA ---
   useEffect(() => {
     const min = totalSlides * 2;
     const max = totalSlides * (REPEAT - 2);
@@ -110,6 +112,7 @@ function VideoSlider({ location }) {
       setIndex(middleIndex + mod);
     }
   }, [index, totalSlides, REPEAT, middleIndex]);
+  --- */
 
   const offset = (index * 100) / visibleCount;
 
@@ -123,18 +126,21 @@ function VideoSlider({ location }) {
     >
       <motion.div
         className="video-slider-track"
+        /* --- MOVIMIENTO DESACTIVADO ---
         animate={{ x: `-${offset}%` }}
         transition={animating ? { duration: duration / 1000 } : { duration: 0 }}
+        --- */
+        /* --- DRAG DESACTIVADO ---
         drag="x"
         dragMomentum={true}
         dragElastic={0.05}
         dragTransition={{ power: 0.2, timeConstant: 200 }}
         onDragStart={() => {
-          setPaused(true);     // pausa autoplay
-          setAnimating(false); // pausa transición para que no se trabe
+          setPaused(true);
+          setAnimating(false);
         }}
         onDragEnd={(_, info) => {
-          const threshold = 50; // px para cambiar de slide
+          const threshold = 50;
           setAnimating(true);
           if (info.offset.x <= -threshold) {
             goForward();
@@ -142,6 +148,7 @@ function VideoSlider({ location }) {
             prevSlide();
           }
         }}
+        --- */
       >
         {clonedSlides.map((videoSrc, i) => (
           <div className="video-slide" key={i}>
@@ -154,7 +161,7 @@ function VideoSlider({ location }) {
               style={{ pointerEvents: "auto" }}
               onPointerEnter={(e) => {
                 const v = e.currentTarget;
-                if (interactionAllowed) {
+                if (interactionAllowed && !isMobile()) {
                   v.muted = true;
                   const p = v.play();
                   if (p && p.catch) p.catch(() => {});
@@ -166,6 +173,7 @@ function VideoSlider({ location }) {
         ))}
       </motion.div>
 
+      {/* --- OVERLAY DE PAUSA MANTENIDO --- */}
       {paused && (
         <div
           className="video-slider-overlay"
@@ -175,7 +183,14 @@ function VideoSlider({ location }) {
 
       {location !== "home" && (
         <>
-          <button onClick={prevSlide} className="button-prev">
+          {/* --- NAVEGACIÓN DESACTIVADA --- */}
+          <button
+            /* onClick={prevSlide} */
+            className="button-prev"
+            disabled
+            aria-disabled="true"
+            tabIndex={-1}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="33"
@@ -192,7 +207,13 @@ function VideoSlider({ location }) {
               />
             </svg>
           </button>
-          <button onClick={goForward} className="button-next">
+          <button
+            /* onClick={goForward} */
+            className="button-next"
+            disabled
+            aria-disabled="true"
+            tabIndex={-1}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="33"

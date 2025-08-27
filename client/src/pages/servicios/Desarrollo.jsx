@@ -142,9 +142,9 @@ const Desarrollo = () => {
         <Portfolio3d location="desarrollo" />
       </div>
 
-      <Contact location="web" />
+      <Contact location="desarrollo" />
       
-      <Faqs />
+      <Faqs location="desarrollo" />
 
       <section className="full-container desarrollo-post">
         <div className="container">

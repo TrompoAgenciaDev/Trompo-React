@@ -1,3 +1,4 @@
+/* menuPopup.css (completo, modificado) */
 .popup-menu {
   position: fixed;
   top: 0;
@@ -19,9 +20,16 @@
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
+  z-index: 9999999;
+  padding-bottom: 50px;
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .28);
+  backdrop-filter: saturate(120%) blur(1px);
   z-index: 99999;
-  padding: 0;
-  gap: 100px;
 }
 
 .header-popup{
@@ -68,7 +76,6 @@
   -ms-flex-pack: start;
   -webkit-justify-content: flex-start;
   justify-content: flex-start;
-  margin-top: 20px;
   font-size: 17px;
   text-transform: capitalize;
 }
@@ -80,9 +87,8 @@
   color: #000000;
 }
 
-.menu-item-content:hover{
-  gap: 10px;
-}
+/* eliminado el hover previo que alteraba el gap */
+/* .menu-item-content:hover{ gap: 10px; } */
 
 .menu-item-content .menu-icon svg,
 .menu-item-content .menu-icon-submenu svg{
@@ -113,12 +119,51 @@
   max-width: -webkit-fit-content;
   max-width: -moz-fit-content;
   max-width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .menu-item-content span,
 .servicios-item{
   width: 100%;
   text-align: left;
+}
+
+/* control del espaciado por clase, no inline */
+.nav-menu-item{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  transition: gap .2s ease;
+}
+.nav-menu-item.is-active{
+  gap: 20px;
+}
+
+footer .item-menu-icon,
+footer .iconmorph{
+  display: none !important;
+}
+
+.item-menu-container {
+  width: 100%;
+}
+
+/* icono móvil 10px controlado por contenedor */
+.item-menu-icon{
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  flex: 0 0 10px;
+  line-height: 0;
+}
+.item-menu-icon__svg{
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 @media (min-width:768px){
@@ -131,35 +176,92 @@
 }
 
 @media (min-width:1024px){
-  .submenu{
-    width: 500px;
+  .nav-menu{
+    width: 100%;
+  }
+  
+  ul.main-menu{
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  ul.submenu{
     position: absolute;
-    bottom: 3px;
-    left: 200px;
-    z-index: 999999;
+    bottom: 70px;
+    left: 260px;
+    z-index: 9999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    gap: 30px;
+  }
+
+  .submenu-item{
+    margin-left: 0;
+  }
+
+  ul li.submenu-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    transition: all .2s ease-in-out;
+  }
+
+  ul li.submenu-item a{
+    font-size: 20px;
+    color: #8E8E8E;
+  }
+
+  ul li.submenu-item:hover{
+    font-weight: 800;
+  }
+
+  ul li a.submenu-item{
+    margin: 0;
+  }
+
+  .menu-overlay {
+    background: rgba(0, 0, 0, .38);
+  }
+
+  .nav-menu-item span{
+    font-weight: 300;
+    font-size: 28px;
+  }
+
+  .nav-menu-item:hover *{
+    cursor: pointer !important;
   }
 
   .menu-item-content,
   .submenu-item{
     font-size: 18px;
-    margin-top: 20px;
   }
 
   .menu-item-content{
     font-weight: 500;
   }
+  
+  .nav-menu-item{
+    transition: gap .2s ease, transform .2s ease;
+  } 
 }
 
 @media (min-width:1280px){
-  .submenu{
-    bottom: 1px;
-    left: 250px;
+  ul.submenu{
+    bottom: 68px;
+    left: 270px;
+  }
+  
+  ul li.submenu-item a{
+    font-size: 22px;
   }
 
   .menu-item-content,
   .submenu-item{
     font-size: 30px;
-    margin-top: 20px;
   }
 
   .menu-item-content{

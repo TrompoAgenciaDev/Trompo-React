@@ -1,6 +1,8 @@
+// src/components/Menu.jsx
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
+import IconMorphArrowExact from "./IconMorphArrowExact";
 
 const Menu = ({
   menuType = "",
@@ -51,45 +53,18 @@ const Menu = ({
     onClose();
   };
 
-  if (!menuItems || menuItems.length === 0) {
-    return <p>No se encontró el menú</p>;
-  }
+  if (!menuItems || menuItems.length === 0) return <p>No se encontró el menú</p>;
 
   const renderIconAndLabel = (label, showChevronMobile = false) => (
-    <motion.div
-      className="menu-item-content"
-      style={{ display: "flex", alignItems: "center", gap: isWide ? 0 : undefined }}
-      onMouseEnter={() => setHovered(label)}
-      onMouseLeave={() => setHovered((h) => (h === label ? null : h))}
-    >
+    <motion.div className="menu-item-content">
       {isWide ? (
-        <>
-          <motion.div
-            className="menu-icon"
-            animate={{ opacity: hovered === label ? 1 : 0, marginRight: hovered === label ? 10 : 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            style={{ display: "flex" }}
-            aria-hidden="true"
-          >
-            <svg className="icon-default" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43 45" fill="none">
-              <path
-                d="M2.04492 22.5148H41.0449M41.0449 22.5148L21.5449 2.08618M41.0449 22.5148L21.5449 42.9433"
-                stroke="#1E1E1E"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </motion.div>
-          <span>{label}</span>
-        </>
+        <span>{label}</span>
       ) : (
         <>
           {showChevronMobile && (
-            <div className="menu-icons" style={{ display: "flex", alignItems: "center" }}>
+            <div className="menu-icons">
               <div className="menu-icon-submenu">
                 <motion.svg
-                  xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 43 45"
                   fill="none"
                   animate={{ rotate: isMobile && openSub === label ? 180 : 0 }}
@@ -108,23 +83,38 @@ const Menu = ({
   );
 
   return (
-    <nav className="nav-menu">
-      <div
-        className="menu-two-col"
-        style={{ width: "100%", display: "flex", gap: "24px", alignItems: "flex-start" }}
-      >
+    <nav className="nav-menu" onPointerDownCapture={(e) => e.stopPropagation()}>
+      <div className="menu-two-col">
         <ul className={classMenu}>
           {menuItems.map(({ path, label }, index) => {
             const hasSub = getSubmenu(label).length > 0;
+            const isHovered = hovered === label;
+            const activeClass = isWide && (isHovered || activeSub === label) ? "is-active" : "";
 
             return (
-              <li className="nav-menu-item" key={index}>
+              <li
+                className={`nav-menu-item nav-menu-item--inline ${activeClass}`}
+                key={index}
+                onMouseEnter={() => isWide && setHovered(label)}
+                onMouseLeave={() => isWide && setHovered((h) => (h === label ? null : h))}
+              >
+                {isWide ? (
+                  <IconMorphArrowExact active={isHovered || activeSub === label} />
+                ) : (
+                  <div className="item-menu-icon">
+                    <svg viewBox="0 0 14 15" className="item-menu-icon__svg">
+                      <circle cx="7" cy="7.46326" r="7" fill="#FFDF69" />
+                    </svg>
+                  </div>
+                )}
+
                 <div className="item-menu-container">
                   {hasSub ? (
                     location === "header" ? (
                       <>
                         <button
                           type="button"
+                          onPointerDownCapture={(e) => e.stopPropagation()}
                           onClick={(e) => handleTopClick(e, label)}
                           className={`menu-item ${label}-item`}
                           aria-expanded={openSub === label}
@@ -157,11 +147,15 @@ const Menu = ({
                                 animate={{ height: "auto", opacity: 1 }}
                                 exit={{ height: 0, opacity: 0 }}
                                 transition={{ duration: 0.25, ease: "easeOut" }}
-                                style={{ listStyle: "none", margin: 0, padding: "8px 0 0 0" }}
                               >
                                 {getSubmenu(label).map(({ path: subPath, label: subLabel }, subIndex) => (
-                                  <li className="submenu-item" key={subIndex} style={{ padding: "8px 0" }}>
-                                    <Link to={subPath} className="submenu-item" onClick={onClose}>
+                                  <li className="submenu-item" key={subIndex}>
+                                    <Link
+                                      to={subPath}
+                                      className="submenu-item"
+                                      onPointerDownCapture={(e) => e.stopPropagation()}
+                                      onClick={onClose}
+                                    >
                                       {subLabel}
                                     </Link>
                                   </li>
@@ -175,11 +169,21 @@ const Menu = ({
                       <span className={`menu-item ${label}-item`}>{label}</span>
                     )
                   ) : location === "header" ? (
-                    <Link to={path} onClick={onClose} className={`menu-item ${label}-item`}>
+                    <Link
+                      to={path}
+                      onPointerDownCapture={(e) => e.stopPropagation()}
+                      onClick={onClose}
+                      className={`menu-item ${label}-item`}
+                    >
                       {renderIconAndLabel(label, false)}
                     </Link>
                   ) : (
-                    <Link to={path} onClick={onClose} className={`menu-item ${label}-item`}>
+                    <Link
+                      to={path}
+                      onPointerDownCapture={(e) => e.stopPropagation()}
+                      onClick={onClose}
+                      className={`menu-item ${label}-item`}
+                    >
                       <span className="menu-item-content">{label}</span>
                     </Link>
                   )}
@@ -207,11 +211,15 @@ const Menu = ({
                   setHovered(null);
                   setActiveSub(null);
                 }}
-                style={{ listStyle: "none", margin: 0, padding: 0 }}
               >
                 {getSubmenu(activeSub).map(({ path: subPath, label: subLabel }, subIndex) => (
                   <li className="submenu-item" key={subIndex}>
-                    <Link to={subPath} className="submenu-item" onClick={onClose}>
+                    <Link
+                      to={subPath}
+                      className="submenu-item"
+                      onPointerDownCapture={(e) => e.stopPropagation()}
+                      onClick={onClose}
+                    >
                       {subLabel}
                     </Link>
                   </li>

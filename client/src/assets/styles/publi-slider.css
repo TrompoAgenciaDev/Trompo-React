@@ -51,12 +51,12 @@
     padding: 50px 0;
   }
   .social-post-container > p.text-show-effect span{
-    font-size: 20px;
+    font-size: 18px;
   }
   .publi-slider-container {
     -ms-grid-columns: 1fr 20px 1fr 20px 1fr;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 30px;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
@@ -67,13 +67,22 @@
   .social-post-container{
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 2fr 3fr;
-    grid-template-columns: 2fr 3fr;
+    -ms-grid-columns: 3fr 5fr;
+    grid-template-columns: 3fr 5fr;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;    
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    gap: 40px;
+  }
+
+  .publi-slide{
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .publi-slide:hover{
+    transform: scale(1.1);
   }
 }

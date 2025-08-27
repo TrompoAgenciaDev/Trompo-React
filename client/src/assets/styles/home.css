@@ -89,10 +89,11 @@ p{
 }
 
 .home-content p.text-show-effect-1 span{
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .home-content{
+  height: 300px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -164,6 +165,7 @@ p{
   }
 
   .container.home-content{
+    height: 300px;
     max-width: 1024px;
   }
 
