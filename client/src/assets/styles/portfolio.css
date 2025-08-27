@@ -118,6 +118,8 @@
   -o-background-size: cover;
   background-size: cover;
   -webkit-user-drag: none;
+  text-decoration: none;
+  color: #ffffff;
 }
 
 .portfolio-card::after{

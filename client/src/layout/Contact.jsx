@@ -1,15 +1,25 @@
 import "../assets/styles/contact.css";
 import FormIndex from "../components/forms/FormIndex";
 
+const BGS = {
+  home: "form-home.png",
+  estrategia: "form-estrategia.png",
+  creatividad: "form-creatividad.png",
+  interaccion: "form-interaccion.png",
+  desarrollo: "form-desarrollo.png",
+  soporte: "form-soporte.png",
+  web: "web-bg.png",
+  default: "contact-bg.png",
+};
+
 function Contact({ location = "home" }) {
   const base = import.meta.env.BASE_URL;
-  const bg = `url(${base}assets/contact/${location === "web" ? "web-bg.png" : "contact-bg.png"})`;
+  const key = String(location).toLowerCase();
+  const file = BGS[key] || BGS.default;
+  const bg = `url(${base}assets/contact/${file})`;
 
   return (
-    <section
-      className="full-container contact-section"
-      style={{ backgroundImage: bg }}
-    >
+    <section className="full-container contact-section" style={{ backgroundImage: bg }}>
       <div className="container">
         <div className="grid-contact">
           <div className="grid-contact-item">
@@ -20,12 +30,8 @@ function Contact({ location = "home" }) {
               </svg>
             </div>
             <div className="grid-item-title">
-              <h1>
-                Transformemos obstáculos en ventajas competitivas
-              </h1>
-              <p>
-                Comenzá hoy con una estrategia que te garantice resultados.
-              </p>
+              <h1>Transformemos obstáculos en ventajas competitivas</h1>
+              <p>Comenzá hoy con una estrategia que te garantice resultados.</p>
             </div>
           </div>
           <div className="grid-contact-item">

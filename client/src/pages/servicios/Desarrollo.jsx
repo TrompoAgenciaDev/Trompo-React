@@ -127,9 +127,24 @@ const Desarrollo = () => {
           </div>
         </div>
         <div className="full-container diagonal">
-          <Values />
+          {/* <Values /> */}
         </div>
       </section>
+
+      <div className="full-container">
+        <div className="full-container title-portfolio-container">
+          <div className="container"></div>
+          <div className="container">
+            <h3>Proyectos con impacto</h3>
+            <p>Transformamos ideas en plataformas digitales de alto rendimiento. Arquitectura técnica impecable, experiencia de usuario intuitiva y resultados medibles en cada proyecto.</p>
+          </div>
+        </div>
+        <Portfolio3d location="desarrollo" />
+      </div>
+
+      <Contact location="web" />
+      
+      <Faqs />
 
       <section className="full-container desarrollo-post">
         <div className="container">
@@ -157,13 +172,6 @@ const Desarrollo = () => {
           </Link>
         </div>
       </section>
-
-      <div className="full-container">
-        <Portfolio3d />
-      </div>
-
-      <Faqs />
-      <Contact location="web" />
     </>
   );
 };

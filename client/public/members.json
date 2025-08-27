@@ -22,10 +22,10 @@
   },
   {
     "id": 3,
-    "name": "Melisa Chanampa",
-    "position": "Diseñadora Gráfica",
-    "portfolio": "Licenciada en Diseño Gráfico por la Universidad Blas Pascal. Cuenta con más de cinco años de experiencia en agencias de publicidad y como profesional freelance, desarrollándose en áreas como branding, diseño editorial y digital, redes sociales, diseño web, campañas de marketing, edición fotográfica y preparación de originales para impresión.",
-    "featured_image": "/assets/members/meli.png"
+    "name": "Micaela Labrone",
+    "position": "Social media",
+    "portfolio": "Social Media Manager de la agencia. Estudió Marketing y Publicidad Digital en la Universidad Siglo 21. Tiene experiencia en agencias y gestiona las principales cuentas de Social Media de la agencia. Especialista en estrategias de contenido, análisis de buyer persona, Benchmark y dirección de arte, con foco en estrategia, estética y resultados.",
+    "featured_image": "/assets/members/mica.png"
   },
   {
     "id": 4,
@@ -36,10 +36,10 @@
   },
   {
     "id": 5,
-    "name": "Micaela Labrone",
-    "position": "Social media",
-    "portfolio": "Social Media Manager de la agencia. Estudió Marketing y Publicidad Digital en la Universidad Siglo 21. Tiene experiencia en agencias y gestiona las principales cuentas de Social Media de la agencia. Especialista en estrategias de contenido, análisis de buyer persona, Benchmark y dirección de arte, con foco en estrategia, estética y resultados.",
-    "featured_image": "/assets/members/alejo.png"
+    "name": "Melisa Chanampa",
+    "position": "Diseñadora Gráfica",
+    "portfolio": "Licenciada en Diseño Gráfico por la Universidad Blas Pascal. Cuenta con más de cinco años de experiencia en agencias de publicidad y como profesional freelance, desarrollándose en áreas como branding, diseño editorial y digital, redes sociales, diseño web, campañas de marketing, edición fotográfica y preparación de originales para impresión.",
+    "featured_image": "/assets/members/meli.png"
   },
   {
     "id": 6,
@@ -47,5 +47,12 @@
     "position": "Diseñadora Gráfica",
     "portfolio": "Recibida de Técnica Universitaria en Diseño Gráfico en la Universidad Provincial de Córdoba. Cuenta con formación académica sólida y actualizada, su perfil combina creatividad, manejo técnico y una visión estratégica aplicada al diseño, aportando soluciones efectivas en áreas como social media, diseño web, campañas de marketing, y presentaciones digitales.",
     "featured_image": "/assets/members/alfon.png"
+  },
+  {
+    "id": 7,
+    "name": "Ivan Varela",
+    "position": "Diseñador Gráfico",
+    "portfolio": "Estudió Diseño Gráfico Publicitario en La Metro. Cuenta con experiencia en proyectos de comunicación visual y desarrollo creativo, explorando diversos estilos y herramientas para marcas, emprendimientos y trabajos colectivos. Se especializa en branding, diseño web y diseño digital.",
+    "featured_image": "/assets/members/ivan.png"
   }
 ]

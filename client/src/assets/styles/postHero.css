@@ -76,8 +76,8 @@
     display: flex;
   }
 
-  p.text-posthero {
-    font-size: 20px;
+  .text-post-hero p {
+    font-size: 18px;
   }
 }
 

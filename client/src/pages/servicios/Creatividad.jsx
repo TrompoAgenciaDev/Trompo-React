@@ -85,9 +85,16 @@ const Creatividad = () => {
         </div>
 
         <div className="full-container bg-yellow-2 identidad-diagonal">
-          <Values />
+          
         </div>
       </section>
+
+      <div className="full-container">
+
+      </div>
+
+      <Contact location="creatividad" />
+      <Faqs location="desarrollo" />
 
       <section className="full-container desarrollo-post">
         <div className="container">
@@ -115,11 +122,6 @@ const Creatividad = () => {
           </Link>
         </div> */}
       </section>
-
-      <div className="full-container"></div>
-
-      <Faqs location="desarrollo" />
-      <Contact location="web" />
     </>
   );
 };

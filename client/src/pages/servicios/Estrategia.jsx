@@ -66,10 +66,10 @@ const Estrategia = () => {
           </div>
         </div>
 
-        <div className="full-container section-ads-2">
+                <div className="full-container section-ads-2">
           <div className="container ads-grid-2">
             <div className="grid-item-ads">
-              <img src={`${import.meta.env.BASE_URL}assets/ads/ads-1.png`} alt=""/>
+              <img src={`${import.meta.env.BASE_URL}assets/estrategia/planning.png`} alt=""/>
             </div>
             <div className="grid-item-ads">
               <div className="grid-item-header">
@@ -86,10 +86,43 @@ const Estrategia = () => {
             </div>
           </div>
         </div>
+
         <div className="full-container bg-yellow-2 ads-values-diagonal">
-          <Values />
+          <div className="container ads-grid-2">
+            <div className="grid-item-ads">
+              <img src={`${import.meta.env.BASE_URL}assets/estrategia/ads.png`} alt=""/>
+            </div>
+            <div className="grid-item-ads">
+              <div className="grid-item-header">
+                <h2>Data & Analytics</h2>
+              </div>
+              <div className="grid-item-body">
+                <p>
+                  En un entorno digital donde cada clic deja una huella, la analítica web se convierte en la brújula estratégica de cualquier marca que quiera evolucionar con datos, no con suposiciones. 
+                </p>
+                <p>
+                  Nuestro servicio de Data & Analytics va más allá de instalar un pixel o leer un dashboard. Se trata de transformar los datos en decisiones concretas y acciones que escalen resultados.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
+
+      <div className="full-container">
+        <div className="full-container ads-title-portfolio-container">
+          <div className="container"></div>
+          <div className="container">
+            <h3>Proyectos con impacto</h3>
+            <p>Combinamos planificación estratégica, analytics avanzado y ejecución en plataformas para maximizar conversiones y reducir CAC.</p>
+          </div>
+        </div>
+        <Portfolio3d/>
+      </div>
+      
+      <Contact location="web"/>
+
+      <Faqs location="metaads"/>
       
       <section className="full-container desarrollo-post">
         <div className="container">
@@ -117,13 +150,6 @@ const Estrategia = () => {
           </Link>
         </div> */}
       </section>
-
-      <div className="full-container">
-        <Portfolio3d/>
-      </div>
-
-      <Faqs location="metaads"/>
-      <Contact location="web"/>
 
     </>
   );

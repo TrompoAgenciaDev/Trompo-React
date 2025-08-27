@@ -59,6 +59,31 @@
   font-size: 15px;
 }
 
+/* portfolio 3d*/
+.soporte-title-portfolio-container{
+  -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
+  clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  justify-items: center;
+  margin-bottom: 20px;
+  height: 200px;
+}
+
+.soporte-title-portfolio-container .container:first-child{
+  display: none;
+}
+
+.soporte-title-portfolio-container h3{
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.soporte-title-portfolio-container p{
+  font-size: 13px;
+}
+
 @media (min-width: 768px) {
   .soporte-diagonal-invertida{
     margin-top: -45px;
@@ -66,6 +91,25 @@
   .soporte-diagonal:not(.soporte-diagonal:last-child){
     height: 250px;
     margin-top: -60px;
+  }
+  .soporte-title-portfolio-container .container:first-child{
+    display: block;
+  }
+
+  .soporte-title-portfolio-container{
+    height: 500px;
+    grid-template-columns: 1fr 4fr;
+    align-items: flex-start;
+    margin-bottom:-380px;
+    padding-top: 35px;
+  }
+
+  .soporte-title-portfolio-container h3{
+    font-size: 28px;
+  }
+
+  .soporte-title-portfolio-container p{
+    font-size: 15px;
   }
 }
 
@@ -90,6 +134,17 @@
   .soporte-grid .grid-item-soporte p{
     font-size: 14px;
   }
+  .soporte-title-portfolio-container{
+    -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
+    clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
+    grid-template-columns: 2fr 3fr;
+    margin-bottom:-300px;
+    padding-top: 100px;
+  }
+
+  .soporte-title-portfolio-container h3{
+    font-size: 28px;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -102,9 +157,7 @@
     height: 450px;
     margin-top: -80px;
   }
-  .soporte-diagonal:last-child{
-    margin-top: -80px;
-  }
+  
   .soporte-diagonal .soporte-grid{
     max-width: 900px;
     -ms-grid-columns: 2fr 3fr !important;
@@ -115,5 +168,25 @@
   }
   .soporte-grid .grid-item-soporte .title-section-container{
     font-size: 18px;
+  }
+
+  .soporte-title-portfolio-container{
+    height: 700px;
+    -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
+    clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0 100%);
+    grid-template-columns: 1fr 1fr;
+    margin-bottom:-500px;
+    padding-top: 150px;
+
+  }
+
+  .soporte-title-portfolio-container .container{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .soporte-title-portfolio-container h3{
+    font-size: 32px;
   }
 }

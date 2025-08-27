@@ -12,7 +12,7 @@ function resolveUrl(src) {
   return `${import.meta.env.BASE_URL}${cleaned}`;
 }
 
-function Portfolio3d({cat = "3d"}) {
+function Portfolio3d({cat = "3d", location='desarrollo'}) {
   const [quantity] = useState(12);
   const [category] = useState("");
   const [tag] = useState("");
@@ -41,7 +41,7 @@ function Portfolio3d({cat = "3d"}) {
     const NormalSpeed = () => setVelocityReduction(260);
 
     return (
-      <motion.div
+      <motion.a
         onMouseOver={SlowSpeed}
         onMouseLeave={NormalSpeed}
         animate={{ x: ["-0%", "-300%"] }}
@@ -50,13 +50,14 @@ function Portfolio3d({cat = "3d"}) {
           duration: velocityReduction,
           repeat: Infinity,
         }}
-        // href={resolveUrl(enlacePortfolio)}
+        href={location === "desarrollo" ? resolveUrl(enlacePortfolio) : undefined}
+        target="_blank"
         data-id={id}
         className="portfolio-card"
         style={{ backgroundImage: `url(${resolveUrl(backgroundImage)})` }}
       >
         <h2 className="portfolio-title">{title}</h2>
-      </motion.div>
+      </motion.a>
     );
   };
 

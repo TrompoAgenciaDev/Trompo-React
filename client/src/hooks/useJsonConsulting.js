@@ -44,6 +44,7 @@ const useJsonConsulting = ({ quantity, category, tag, type }) => {
     featured_image: resolveUrl(it.featured_image),
     featured_video: it.featured_video,
     gallery: Array.isArray(it.gallery) ? it.gallery.map(resolveUrl) : [],
+    enlacePortfolio: it.url_client ? resolveUrl(it.url_client) : undefined,
   });
 
   useEffect(() => {
@@ -69,7 +70,7 @@ const useJsonConsulting = ({ quantity, category, tag, type }) => {
           data = data.filter((item) => containsCI(getTags(item), tag));
         }
 
-        data = data.map(normalizeItem); // APLICAR RESOLUCIÓN
+        data = data.map(normalizeItem);
 
         if (quantity) data = data.slice(0, quantity);
         if (alive) setItems(data);

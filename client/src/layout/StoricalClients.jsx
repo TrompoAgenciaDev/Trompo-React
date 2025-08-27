@@ -35,7 +35,10 @@ export default function StoricalClients() {
 
   return (
     <section className="full-container storical">
-      {/* Fila de categorías */}
+      <div className="title-historical-container">
+        <h3>Trayectoria y Confianza: <strong>Las Empresas que Escribieron Nuestra Historia</strong></h3>
+        <p>Un vistazo a los diversos sectores que han depositado su confianza en nuestra agencia para lograr sus objetivos</p>
+      </div>
       <div className="storical-tabs" role="tablist" aria-label="Categorías de clientes">
         {categories.map((key) => {
           const active = key === selectedCategory;
@@ -98,6 +101,14 @@ export default function StoricalClients() {
             ))}
           </motion.ul>
         </AnimatePresence>
+        <div className="legal-footer-historical">
+
+          <p>La presencia de una marca no implica relación comercial vigente al día de hoy.</p>
+          <p>El listado refleja colaboraciones históricas (proyectos, campañas y/o consultorías) en distintos períodos.</p>
+          <p>Los nombres que se muestran son con fines descriptivos del trabajo realizado.</p>
+          <p>Algunas colaboraciones se realizaron a través de concesionarios, partners o terceros.</p>
+
+        </div>
       </div>
     </section>
   );

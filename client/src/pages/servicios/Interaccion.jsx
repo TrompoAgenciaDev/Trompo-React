@@ -70,11 +70,26 @@ const Interaccion = () => {
               </div>
             </div>
           </div>
-        </div>        
-        <div className="full-container interaccion-diagonal bg-yellow-2">
-          <Values />
         </div>
+        {/* <div className="full-container interaccion-diagonal bg-yellow-2">
+          <Values />
+        </div> */}
       </section>
+
+      <div className="full-container">
+        <div className="full-container interaccion-title-portfolio-container bg-yellow-2">
+          <div className="container"></div>
+          <div className="container">
+            <h3>Proyectos con impacto</h3>
+            <p>Transformamos ideas en plataformas digitales de alto rendimiento. Arquitectura técnica impecable, experiencia de usuario intuitiva y resultados medibles en cada proyecto.</p>
+          </div>
+        </div>
+        <Portfolio3d location='interaccion'/>
+      </div>
+      
+      <Contact location="web"/>
+
+      <Faqs location="desarrollo"/>
       
       <section className="full-container desarrollo-post">
         <div className="container">
@@ -102,13 +117,6 @@ const Interaccion = () => {
           </Link>
         </div> */}
       </section>
-
-      <div className="full-container">
-        <Portfolio3d/>
-      </div>
-
-      <Faqs location="desarrollo"/>
-      <Contact location="web"/>
     </>
   );
 }

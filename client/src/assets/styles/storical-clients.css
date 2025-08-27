@@ -125,6 +125,34 @@
   text-align: center;
 }
 
+.title-historical-container{
+  padding: 20px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title-historical-container h3{
+  text-align: center;
+  font-weight: 400;
+}
+
+.legal-footer-historical{
+  text-align: center;
+  margin-top: 20px;
+}
+
+.legal-footer-historical p{
+  font-size: 12px;
+}
+
 @media (min-width: 768px) {
   .storical-list {
     -ms-grid-columns: (1fr)[3];
@@ -146,5 +174,11 @@
   }
   .storical-tabs {
     max-width: 900px;
+  }
+  .legal-footer-historical{
+    margin-top: 30px;
+  }
+  .legal-footer-historical p{
+    font-size: 14px;
   }
 }

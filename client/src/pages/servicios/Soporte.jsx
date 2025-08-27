@@ -23,9 +23,7 @@ const Soporte = () => {
       />
 
       <section className="full-container soporte">
-        <div 
-          className="full-container soporte-diagonal-invertida"
-        >
+        <div className="full-container soporte-diagonal-invertida">
           <img src={`${import.meta.env.BASE_URL}assets/support/full-img-1.png`} alt="" />
         </div>
         <div className="full-container soporte-diagonal bg-yellow-2">
@@ -45,7 +43,7 @@ const Soporte = () => {
           </div>
         </div>
         <div className="full-container soporte-diagonal-invertida">
-            <img src={`${import.meta.env.BASE_URL}assets/support/full-img-2.png`} alt="" />
+          <img src={`${import.meta.env.BASE_URL}assets/support/full-img-2.png`} alt="" />
         </div>
         <div className="full-container soporte-diagonal bg-yellow-2"
             style={{backgroundColor: "#ffffff"}}
@@ -65,10 +63,22 @@ const Soporte = () => {
           </div>
         </div>
         
-        <div className="full-container bg-yellow-2 soporte-diagonal">
-          <Values />
-        </div>
       </section>
+
+      <div className="full-container">
+        <div className="full-container soporte-title-portfolio-container bg-yellow-2">
+          <div className="container"></div>
+          <div className="container">
+            <h3>Proyectos con impacto</h3>
+            <p>Transformamos ideas en plataformas digitales de alto rendimiento. Arquitectura técnica impecable, experiencia de usuario intuitiva y resultados medibles en cada proyecto.</p>
+          </div>
+        </div>
+        <Portfolio3d/>
+      </div>
+      
+      <Contact location="web"/>
+
+      <Faqs location="desarrollo"/>
       
       <section className="full-container desarrollo-post">
         <div className="container">
@@ -96,13 +106,6 @@ const Soporte = () => {
           </Link>
         </div> */}
       </section>
-
-      <div className="full-container">
-        <Portfolio3d/>
-      </div>
-
-      <Faqs location="desarrollo"/>
-      <Contact location="web"/>
     </>
   );
 };
