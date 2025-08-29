@@ -22,7 +22,7 @@ import Maintenance from "../pages/Maintenance.jsx";
 
 const routesConfig = {
   main: [
-    { path: "/", label: "inicio", Component: Home },
+    { path: "/", label: "inicio", Component: Desarrollo },
     { path: "/nosotros", label: "nosotros", Component: Nosotros },
     { path: "", label: "servicios", Component: Nosotros },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
@@ -31,11 +31,11 @@ const routesConfig = {
     { path: "/estrategia", label: "estrategia", Component: Estrategia },
     { path: "/creatividad", label: "Creatividad", Component: Creatividad },
     { path: "/interaccion", label: "interacción", Component: Interaccion },
-    { path: "/desarrollo", label: "desarrollo", Component: Desarrollo },
+    { path: "/", label: "desarrollo", Component: Desarrollo },
     { path: "/soporte", label: "soporte", Component: Soporte },
   ],
   mainFooter: [
-    { path: "/", label: "inicio", Component: Home },
+    { path: "/", label: "inicio", Component: Desarrollo },
     { path: "/nosotros", label: "nosotros", Component: Nosotros },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],

@@ -19,7 +19,7 @@ function Contact({ location = "home" }) {
   const bg = `url(${base}assets/contact/${file})`;
 
   return (
-    <section className="full-container contact-section" style={{ backgroundImage: bg }}>
+    <section id="contact" className="full-container contact-section" style={{ backgroundImage: bg }}>
       <div className="container">
         <div className="grid-contact">
           <div className="grid-contact-item">

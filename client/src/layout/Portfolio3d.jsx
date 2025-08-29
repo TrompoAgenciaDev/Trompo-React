@@ -3,16 +3,8 @@ import { motion } from "framer-motion";
 import usePortfolioData from "../hooks/usePortfolioData";
 import "../assets/styles/portfolio.css";
 
-function resolveUrl(src) {
-  if (!src) return "";
-  if (/^(https?:|data:|mailto:|tel:)/i.test(src)) return src;
-  const cleaned = src.replace(/^\/+/, "");
-  return `${import.meta.env.BASE_URL}${cleaned}`;
-}
-
 function Portfolio3d({ location = "desarrollo", categoria }) {
-  const draggingRef = useRef(false); // <-- siempre se ejecuta
-
+  const draggingRef = useRef(false);
   const quantity = 12;
 
   const { items, loading, error } = usePortfolioData({
@@ -24,21 +16,14 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
   const duplicatedItems = Array.from({ length: 5 }, () => items).flat();
 
   const PortfolioCarruselItem = ({
-    id,
-    title,
-    backgroundImage,
-    enlacePortfolio,
-    draggingRef,
+    id, title, backgroundImage, enlacePortfolio, draggingRef,
   }) => {
     const [velocityReduction, setVelocityReduction] = useState(50);
     const SlowSpeed = () => setVelocityReduction(5);
     const NormalSpeed = () => setVelocityReduction(260);
 
     const handleClick = (e) => {
-      if (draggingRef.current) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
+      if (draggingRef.current) { e.preventDefault(); e.stopPropagation(); }
     };
 
     return (
@@ -47,12 +32,12 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
         onMouseLeave={NormalSpeed}
         animate={{ x: ["-0%", "-300%"] }}
         transition={{ ease: "linear", duration: velocityReduction, repeat: Infinity }}
-        href={location === "desarrollo" ? resolveUrl(enlacePortfolio) : undefined}
+        href={location === "desarrollo" ? enlacePortfolio : undefined}  // <- sin resolveUrl
         target="_blank"
         rel="noreferrer"
         data-id={id}
         className="portfolio-card"
-        style={{ backgroundImage: `url(${resolveUrl(backgroundImage)})` }}
+        style={{ backgroundImage: `url(${backgroundImage})` }}         // <- sin resolveUrl
         onClick={handleClick}
         draggable={false}
       >
@@ -66,36 +51,28 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
 
   return (
     <div className="portfolio-section">
-      <div className="title-section"></div>
-
+      <div className="title-section" />
       <div className="portfolio-carrusel">
         <motion.div
           drag="x"
           dragElastic={0.05}
-          dragMomentum={true}
+          dragMomentum
           dragTransition={{ power: 0.2, timeConstant: 200 }}
-          style={{
-            display: "flex",
-            gap: "20px",
-            cursor: "grab",
-            willChange: "transform",
-            minWidth: "max-content",
-            height: "100%",
-            alignItems: "center",
-          }}
+          style={{ display: "flex", gap: "20px", cursor: "grab", willChange: "transform",
+                   minWidth: "max-content", height: "100%", alignItems: "center" }}
           whileTap={{ cursor: "grabbing" }}
           onDragStart={() => { draggingRef.current = true; }}
           onDragEnd={() => { requestAnimationFrame(() => { draggingRef.current = false; }); }}
         >
           {duplicatedItems.map((item, index) => {
-            if (categoria && !item.category?.includes(categoria)) return null;
+            if (categoria && !item.categories?.includes(categoria)) return null;
             return (
               <PortfolioCarruselItem
                 key={`${item.id}-${index}`}
                 id={item.id}
                 title={item.title}
-                backgroundImage={item.vertical_image || item.featured_image}
-                enlacePortfolio={item.enlacePortfolio}
+                backgroundImage={item.vertical_image}     // ya normalizada por el hook
+                enlacePortfolio={item.enlacePortfolio}    // externa https, no resolver
                 draggingRef={draggingRef}
               />
             );

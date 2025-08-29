@@ -60,7 +60,7 @@ export default function formIndex() {
           <form
             id="sib-form"
             method="POST"
-            action="https://48b3dfdb.sibforms.com/serve/MUIFAETNRRz6c-hMe3e6v3VvBHGT294q4YsMb6a4GE0o_lvCniY2i6DoiiKwnrqUCVj07lKGREYDZpkcnRjFniUEdgm753L8Znbqu0mOHCTiveMRBBUQgkEq4r28i-LpWv-qkBgXKrwn6fYL0mtc-LxjTHCQibF-3XSp3GCQhD6ffNZ_M9ry2KpnOKKl7dwGWGb4tqSkBGBVVctS"
+            action="https://48b3dfdb.sibforms.com/serve/MUIFANAvJmM1e6-CVs5gllmByGpbGgqWwj87zT9PDzW_X6KWFnTP0QH3YnueHUunRfqld1PINVUkSLxPXIUgzjn7r4ws0Bsb8hvj95sX3hj2CRh_Hb1Qc7tfuk_mnqGVMbSrWwn1Hlhf49w92MdSrzo92gEOvByWsm3T-bR25fdaJkkplqUqqP95cmA1qnxBhl1USEyImy5oTILO"
             data-type="subscription"
           >
             <div>
@@ -378,6 +378,80 @@ export default function formIndex() {
                 required
               ></textarea>
             </div>
+
+
+            {/* Colocar dentro de esta sección el codigo que alta */}
+
+            <div className="sib-checkbox-group sib-form-block" data-required="true">
+              <div className="form__entry entry_mcq">
+                <div className="form__label-row form__label-row--horizontal">
+                  <label className="entry__label" data-required="*">Presupuesto</label>
+
+                  <div className="mcq-choices">
+                    <div className="entry__choice">
+                      <label className="checkbox__label">
+                        <input
+                          type="checkbox"
+                          className="input_replaced"
+                          name="PRESUPUESTO[]"
+                          value="Hasta $500.000"
+                          data-required="true"
+                        />
+                        <span className="checkbox checkbox_tick_positive" />
+                        <span className="checkbox-text">Hasta $500.000</span>
+                      </label>
+                    </div>
+
+                    <div className="entry__choice">
+                      <label className="checkbox__label">
+                        <input
+                          type="checkbox"
+                          className="input_replaced"
+                          name="PRESUPUESTO[]"
+                          value="$500.000 a $1.000.000"
+                          data-required="true"
+                        />
+                        <span className="checkbox checkbox_tick_positive" />
+                        <span className="checkbox-text">$500.000 a $1.000.000</span>
+                      </label>
+                    </div>
+
+                    <div className="entry__choice">
+                      <label className="checkbox__label">
+                        <input
+                          type="checkbox"
+                          className="input_replaced"
+                          name="PRESUPUESTO[]"
+                          value="$1.000.000 a $2.000.000"
+                          data-required="true"
+                        />
+                        <span className="checkbox checkbox_tick_positive" />
+                        <span className="checkbox-text">$1.000.000 a $2.000.000</span>
+                      </label>
+                    </div>
+
+                    <div className="entry__choice">
+                      <label className="checkbox__label">
+                        <input
+                          type="checkbox"
+                          className="input_replaced"
+                          name="PRESUPUESTO[]"
+                          value="Más de $2.000.000"
+                          data-required="true"
+                        />
+                        <span className="checkbox checkbox_tick_positive" />
+                        <span className="checkbox-text">Más de $2.000.000</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <label className="entry__error entry__error--primary" />
+              </div>
+            </div>
+
+
+            {/* end */}
 
             <div>
               <div

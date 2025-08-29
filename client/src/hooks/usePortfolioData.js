@@ -1,12 +1,20 @@
+// src/hooks/usePortfolioData.js
 import { useEffect, useState } from "react";
+
+const ABS = /^(https?:|data:|blob:|mailto:|tel:)/i;
+const BASE = (import.meta.env.BASE_URL || "/").replace(/\/+$/,"/");
+const BASE_SEG = BASE.replace(/^\/|\/$/g,"");
+const STRIP = BASE_SEG ? new RegExp(`^(?:${BASE_SEG}\\/)+`, "i") : null;
 
 const norm = (v) => (v ?? "").toString().trim().toLowerCase();
 const toArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
-const resolveUrl = (p) => {
+
+const toPublic = (p = "") => {
   if (!p) return "";
-  if (/^(https?:|data:|mailto:|tel:)/i.test(p)) return p;
-  const cleaned = p.replace(/^\/+/, "");
-  return `${import.meta.env.BASE_URL}${cleaned}`;
+  if (ABS.test(p)) return p;
+  let s = String(p).trim().replace(/^\/+/, "");
+  if (STRIP) s = s.replace(STRIP, "");
+  return `${BASE}${s}`.replace(/\/{2,}/g, "/");
 };
 
 export default function usePortfolioData({ location, category, limit }) {
@@ -20,27 +28,25 @@ export default function usePortfolioData({ location, category, limit }) {
       try {
         setLoading(true);
         setError(null);
-        const url = `${import.meta.env.BASE_URL}portfolio.json`;
+
+        const url = `${BASE}portfolio.json`;
         const res = await fetch(url, { cache: "no-store" });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
         const data = await res.json();
 
-        // fuente según location; si no hay location, usa todo
         const base = location ? toArray(data[location]) : Object.values(data).flat();
-        // filtra por categoría si viene
+
         const filtered = category
-          ? base.filter((it) =>
-              toArray(it?.category).map(norm).includes(norm(category))
-            )
+          ? base.filter((it) => toArray(it?.category).map(norm).includes(norm(category)))
           : base;
 
         const normalized = filtered.map((it) => ({
           ...it,
-          featured_image: resolveUrl(it.featured_image),
-          vertical_image: resolveUrl(it.vertical_image),
-          featured_video: it.featured_video ? resolveUrl(it.featured_video) : "",
+          vertical_image: toPublic(it.vertical_image),
           enlacePortfolio: it.url_client || "",
           categories: toArray(it.category),
+          gallery: Array.isArray(it.gallery) ? it.gallery.map(toPublic) : [],
         }));
 
         const limited = limit ? normalized.slice(0, limit) : normalized;

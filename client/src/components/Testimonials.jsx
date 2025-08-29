@@ -4,9 +4,9 @@ import { motion } from "motion/react";
 import useFetchTestimonials from "../hooks/useFetchTestimonials"; // ajusta la ruta si cambia
 import "../assets/styles/testimonials.css";
 
-const INTERVAL = 100000;       // autoplay ms
-const TRANSITION_S = 0.6;    // duración animación
-const REPEAT = 5;            // buffer para bucle infinito
+const INTERVAL = 100000;
+const TRANSITION_S = 0.6;
+const REPEAT = 5;
 
 function isDesktop() {
   if (typeof window === "undefined") return false;
@@ -134,20 +134,23 @@ export default function Testimonials({ size = 1 }) {
               <div className="testimoniales-card">
                 <div className="testimoniales-img">
                   <img src={item.image} />
+                  <div className="testimoniales-author">
+                    {item.author}
+                  </div>
                 </div>
                 <div className="testimonial-content">
                   <div className="testimonial-header-card">
-                    <div className="testimoniales-author">
-                      {item.author}
-                    </div>
-                    <div className="testimoniales-rating">
+                    {/* <div className="testimoniales-rating">
                       {"★".repeat(item.rating)}
                       <span className="testimoniales-rating-empty">
                         {"★".repeat(5 - item.rating)}
                       </span>
-                    </div>
+                    </div> */}
                   </div>
-                  <div className="testimoniales-text">{item.text}</div>
+                  <div className="testimoniales-text">
+                    {/* <span className="testimoniales-rating">{"★ "}</span> */}
+                    {item.text}
+                  </div>
                 </div>
               </div>
             </div>

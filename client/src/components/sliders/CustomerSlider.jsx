@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { motion } from "motion/react";
+import { motion, useMotionValue } from "motion/react";
 import "../../assets/styles/customer-slider.css";
 
 const sliderImages = [
   `${import.meta.env.BASE_URL}assets/customerImg/denso.webp`,
   `${import.meta.env.BASE_URL}assets/customerImg/agreteq.webp`,
-  `${import.meta.env.BASE_URL}assets/customerImg/gesevi.webp`,
   `${import.meta.env.BASE_URL}assets/customerImg/menta.webp`,
   `${import.meta.env.BASE_URL}assets/customerImg/molinos.webp`,
   `${import.meta.env.BASE_URL}assets/customerImg/ranko.webp`,
@@ -17,113 +16,121 @@ const sliderImages = [
   `${import.meta.env.BASE_URL}assets/customerImg/volvo.webp`,
 ];
 
-function isMobile() {
-  return (
-    typeof window !== "undefined" &&
-    (window.matchMedia("(pointer: coarse)").matches ||
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      ))
-  );
+function colsForWidth(w) {
+  if (w >= 1366) return 6;
+  if (w >= 1280) return 5;
+  if (w >= 1024) return 4;
+  if (w >= 768)  return 4;
+  return 1;
 }
 
-function ImageSlider() {
-  const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [animating, setAnimating] = useState(true);
-  const timerRef = useRef(null);
+export default function ImageSlider() {
   const containerRef = useRef(null);
+  const rafRef = useRef(0);
+  const lastTsRef = useRef(0);
+  const loopWRef = useRef(0);
+  const draggingRef = useRef(false);
+  const x = useMotionValue(0);
 
-  const duration = 800;
-  const interval = 2800;
+  // velocidad
+  const baseSpeed = useRef(80);      // px/s hacia la IZQ
+  const vRef = useRef(-baseSpeed.current); // vx actual
+  const targetRef = useRef(-baseSpeed.current); // objetivo al que amortigua
 
-  const getVisibleCount = () => {
-    if (typeof window === "undefined") return 2;
-    if (window.innerWidth >= 1366) return 6;
-    if (window.innerWidth >= 1280) return 5;
-    if (window.innerWidth >= 1024) return 4;
-    if (window.innerWidth >= 768) return 4;
-    return 1;
-  };
+  const [cols, setCols] = useState(4);
 
-  const visibleCount = getVisibleCount();
-  const totalSlides = sliderImages.length;
-  const clonedSlides = [...sliderImages, ...sliderImages, ...sliderImages];
-
-  const nextSlide = () => {
-    setIndex((prev) => prev + 1);
-    setAnimating(true);
-  };
-
+  // medir y ajustar columnas
   useEffect(() => {
-    if (!paused) {
-      timerRef.current = setInterval(nextSlide, interval);
-    }
-    return () => clearInterval(timerRef.current);
-  }, [paused, index]);
-
-  useEffect(() => {
-    const handleScrollOrClickOutside = (e) => {
-      if (containerRef.current && !containerRef.current.contains(e.target)) {
-        setPaused(false);
-      }
+    const update = () => {
+      const w = containerRef.current?.offsetWidth || window.innerWidth || 1280;
+      setCols(colsForWidth(w));
     };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
-    const events = ["scroll", "mousedown", "touchstart"];
-    if (paused) {
-      events.forEach((ev) =>
-        window.addEventListener(ev, handleScrollOrClickOutside, true)
-      );
-    } else {
-      events.forEach((ev) =>
-        window.removeEventListener(ev, handleScrollOrClickOutside, true)
-      );
-    }
-
-    return () =>
-      events.forEach((ev) =>
-        window.removeEventListener(ev, handleScrollOrClickOutside, true)
-      );
-  }, [paused]);
-
-  const handlePause = () => setPaused(true);
-  const handleTouch = () => isMobile() && setPaused(true);
-
+  // calcular ancho de un loop (un set de imágenes) según columnas
   useEffect(() => {
-    if (index >= totalSlides) {
-      const resetTimeout = setTimeout(() => {
-        setAnimating(false);
-        setIndex(0);
-      }, duration);
-      return () => clearTimeout(resetTimeout);
-    }
-  }, [index, totalSlides]);
+    const el = containerRef.current;
+    if (!el) return;
+    const w = el.offsetWidth || 0;
+    const slideW = w / Math.max(1, cols);
+    loopWRef.current = slideW * sliderImages.length;
+  }, [cols]);
 
-  const offset = (index * 100) / visibleCount;
+  // animación continua
+  useEffect(() => {
+    const tick = (ts) => {
+      const last = lastTsRef.current || ts;
+      const dt = Math.min(0.05, (ts - last) / 1000); // seg, cap 50ms
+      lastTsRef.current = ts;
+
+      // si no se está arrastrando, avanzamos
+      if (!draggingRef.current) {
+        // amortiguar v hacia target
+        const v = vRef.current;
+        const tgt = targetRef.current;
+        // amortiguación dependiente del tiempo
+        const k = 6; // mayor = más rápido vuelve
+        vRef.current = v + (tgt - v) * (1 - Math.exp(-k * dt));
+
+        const nx = x.get() + vRef.current * dt;
+        const width = loopWRef.current || 1;
+
+        // wrap infinito dentro de [-width, 0)
+        let wrapped = nx;
+        if (wrapped <= -width) wrapped += width;
+        if (wrapped > 0) wrapped -= width;
+        x.set(wrapped);
+      }
+
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [x]);
+
+  // drag handlers
+  const onDragStart = () => {
+    draggingRef.current = true;
+    // al empezar drag, fijamos target actual para no tirar del amortiguador
+    targetRef.current = vRef.current;
+  };
+
+  const onDragEnd = (_e, info) => {
+    draggingRef.current = false;
+    // velocidad inicial post-drag = velocidad del gesto
+    const vx = (info?.velocity?.x ?? 0); // px/s, signo según dirección del gesto
+    vRef.current = vx;
+    // objetivo: velocidad base hacia la izquierda
+    targetRef.current = -baseSpeed.current;
+  };
+
+  // 3 copias para margen al arrastrar
+  const cloned = [...sliderImages, ...sliderImages, ...sliderImages];
 
   return (
     <div
       ref={containerRef}
       className="image-slider-container container"
-      style={{ cursor: paused ? "pointer" : "default" }}
-      onMouseEnter={!isMobile() ? handlePause : undefined}
-      onTouchStart={handleTouch}
+      style={{ "--cols": cols }}
     >
       <motion.div
         className="image-slider-track"
-        animate={{ x: `-${offset}%` }}
-        transition={animating ? { duration: duration / 1000 } : { duration: 0 }}
+        style={{ x }}
+        drag="x"
+        dragElastic={0}
+        dragMomentum={false}
+        onDragStart={onDragStart}
+        onDragEnd={onDragEnd}
       >
-        {clonedSlides.map((imgSrc, i) => (
+        {cloned.map((src, i) => (
           <div className="image-slide" key={i}>
-            <img src={imgSrc} alt={`slide-${i}`} className="image-element" />
+            <img className="image-element" src={src} alt={`slide-${i}`} />
           </div>
         ))}
       </motion.div>
-
-      {paused && <div className="image-slider-overlay"></div>}
     </div>
   );
 }
-
-export default ImageSlider;

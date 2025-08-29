@@ -13,14 +13,28 @@ function Services() {
     <section className="bg-yellow full-container services">
       <div className="banner full-container">
         <picture className="full-container mobile-banner">
-          <source srcSet="/banner1-home-mobile.webp" type="image/webp" />
-          <source srcSet="/banner1-home-mobile.png" type="image/png" />
-          <img src="/banner-home.png" alt="Banner Home" />
+          <source
+            srcSet={`${
+              import.meta.env.BASE_URL
+            }assets/services/services-bg.webp`}
+            type="image/webp"
+          />
+          <img
+            src={`${import.meta.env.BASE_URL}assets/services/services-bg.webp`}
+            alt="Banner Home"
+          />
         </picture>
         <picture className="full-container desktop-banner">
-          <source srcSet="/banner1-home-desktop.webp" type="image/webp" />
-          <source srcSet="/banner1-home-desktop.png" type="image/png" />
-          <img src="/banner1-home-desktop.png" alt="Banner Home" />
+          <source
+            srcSet={`${
+              import.meta.env.BASE_URL
+            }assets/services/services-bg.webp`}
+            type="image/webp"
+          />
+          <img
+            src={`${import.meta.env.BASE_URL}assets/services/services-bg.webp`}
+            alt="Banner Home"
+          />
         </picture>
       </div>
 
@@ -66,7 +80,7 @@ function Services() {
                 </div>
               </div>
             );
-            return (              
+            return (
               <Link
                 to={item.service}
                 className="service-section-row"
@@ -74,7 +88,7 @@ function Services() {
               >
                 {content}
               </Link>
-            )
+            );
           })}
         </div>
       </div>

@@ -8,6 +8,7 @@ import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import Portfolio3d from "../../layout/Portfolio3d.jsx";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
+import Testimonials from "../../components/Testimonials.jsx";
 
 import "../../assets/styles/servicios-page.css";
 
@@ -33,6 +34,24 @@ const Desarrollo = () => {
                 clara, elementos de credibilidad demostrable (casos de estudio,
                 certificaciones) y presentación efectiva de valor.
               </p>
+              <a className="more-info-button" href="#contact">
+                Más info
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="48"
+                  height="46"
+                  viewBox="0 0 48 46"
+                  fill="none"
+                >
+                  <path
+                    d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
+                    stroke="#1D1D1B"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
             </div>
             <div className="grid-item-service">
               <img
@@ -55,10 +74,30 @@ const Desarrollo = () => {
                 estratégicos y eliminación sistemática de fricciones para
                 maximizar ROI por visita.
               </p>
+              <a className="more-info-button" href="#contact">
+                Más info
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="48"
+                  height="46"
+                  viewBox="0 0 48 46"
+                  fill="none"
+                >
+                  <path
+                    d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
+                    stroke="#1D1D1B"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
             </div>
             <div className="grid-item-service">
               <img
-                src={`${import.meta.env.BASE_URL}assets/desarrollo/landing.webp`}
+                src={`${
+                  import.meta.env.BASE_URL
+                }assets/desarrollo/landing.webp`}
                 alt=""
               />
             </div>
@@ -72,6 +111,24 @@ const Desarrollo = () => {
                 Una tienda online moderna, rápida y funcional, que combina
                 diseño atractivo con conversión optimizada y backend eficiente.
               </p>
+              <a className="more-info-button" href="#contact">
+                Más info
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="48"
+                  height="46"
+                  viewBox="0 0 48 46"
+                  fill="none"
+                >
+                  <path
+                    d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
+                    stroke="#1D1D1B"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
             </div>
             <div className="grid-item-service">
               <img
@@ -94,6 +151,24 @@ const Desarrollo = () => {
                 estratégicos y eliminación sistemática de fricciones para
                 maximizar ROI por visita.
               </p>
+              <a className="more-info-button" href="#contact">
+                Más info
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="48"
+                  height="46"
+                  viewBox="0 0 48 46"
+                  fill="none"
+                >
+                  <path
+                    d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
+                    stroke="#1D1D1B"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
             </div>
             <div className="grid-item-service">
               <img
@@ -115,6 +190,24 @@ const Desarrollo = () => {
                 clara, elementos de credibilidad demostrable (casos de estudio,
                 certificaciones) y presentación efectiva de valor.
               </p>
+              <a className="more-info-button" href="#contact">
+                Más info
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="48"
+                  height="46"
+                  viewBox="0 0 48 46"
+                  fill="none"
+                >
+                  <path
+                    d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
+                    stroke="#1D1D1B"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
             </div>
             <div className="grid-item-service">
               <img
@@ -126,9 +219,6 @@ const Desarrollo = () => {
             </div>
           </div>
         </div>
-        <div className="full-container diagonal">
-          {/* <Values /> */}
-        </div>
       </section>
 
       <div className="full-container">
@@ -136,14 +226,31 @@ const Desarrollo = () => {
           <div className="container"></div>
           <div className="container">
             <h3>Proyectos con impacto</h3>
-            <p>Transformamos ideas en plataformas digitales de alto rendimiento. Arquitectura técnica impecable, experiencia de usuario intuitiva y resultados medibles en cada proyecto.</p>
+            <p>
+              Transformamos ideas en plataformas digitales de alto rendimiento.
+              Arquitectura técnica impecable, experiencia de usuario intuitiva y
+              resultados medibles en cada proyecto.
+            </p>
           </div>
         </div>
         <Portfolio3d location="desarrollo" categoria="3d" />
       </div>
 
       <Contact location="desarrollo" />
-      
+
+      <section className="full-container bg-yellow testimonial-wrapper">
+        <div className="container testimonial-header">
+          <h4>La voz de nuestros clientes.</h4>
+          <p>
+            Testimonios de profesionales que han visto resultados concretos en
+            sus proyectos.
+          </p>
+        </div>
+        <div className="full-container">
+          <Testimonials size={4} />
+        </div>
+      </section>
+
       <Faqs location="desarrollo" />
 
       <section className="full-container desarrollo-post">
@@ -172,6 +279,9 @@ const Desarrollo = () => {
           </Link>
         </div>
       </section>
+      <div className="full-container">
+        <CustomerSlider />
+      </div>
     </>
   );
 };
