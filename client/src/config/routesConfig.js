@@ -35,7 +35,7 @@ const routesConfig = {
     { path: "/soporte", label: "soporte", Component: Soporte },
   ],
   mainFooter: [
-    { path: "/", label: "home", Component: Home },
+    { path: "/", label: "inicio", Component: Home },
     { path: "/nosotros", label: "nosotros", Component: Nosotros },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],
@@ -45,7 +45,7 @@ const routesConfig = {
   posts: [{ path: "/post/:slug", Component: SinglePost }],
 
   AlternativePAges: [
-    { path: "/404", label: "No encontrado", Component: NotFound },
+    { path: "/not-found", label: "No encontrado", Component: NotFound },
     { path: "/maintenance", label: "Mantenimiento", Component: Maintenance },
     { path: "/gracias", label: "gracias", Component: Gracias },
   ],

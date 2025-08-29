@@ -1,8 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import useJsonConsulting from "../hooks/useJsonConsulting";
-
-// styles
+import usePortfolioData from "../hooks/usePortfolioData";
 import "../assets/styles/portfolio.css";
 
 function resolveUrl(src) {
@@ -12,54 +10,59 @@ function resolveUrl(src) {
   return `${import.meta.env.BASE_URL}${cleaned}`;
 }
 
-function Portfolio3d({cat = "3d", location='desarrollo'}) {
-  const [quantity] = useState(12);
-  const [category] = useState("");
-  const [tag] = useState("");
-  const [type] = useState("portfolio");
+function Portfolio3d({ location = "desarrollo", categoria }) {
+  const draggingRef = useRef(false); // <-- siempre se ejecuta
 
-  const { items, loading, error } = useJsonConsulting({
-    quantity,
-    category,
-    tag,
-    type,
+  const quantity = 12;
+
+  const { items, loading, error } = usePortfolioData({
+    location,
+    category: categoria || undefined,
+    limit: quantity,
   });
 
-  if (loading) return <p>Cargando...</p>;
-  if (error) return <p>{error}</p>;
+  const duplicatedItems = Array.from({ length: 5 }, () => items).flat();
 
-  // Duplicamos para efecto infinito (sin tocar tu layout ni estilos)
-  const duplicatedItems = [
-    ...items, ...items, ...items, ...items, ...items, ...items,
-    ...items, ...items, ...items, ...items, ...items, ...items,
-    ...items, ...items, ...items, ...items, ...items, ...items
-  ];
-
-  const PortfolioCarruselItem = ({ id, title, backgroundImage, enlacePortfolio }) => {
+  const PortfolioCarruselItem = ({
+    id,
+    title,
+    backgroundImage,
+    enlacePortfolio,
+    draggingRef,
+  }) => {
     const [velocityReduction, setVelocityReduction] = useState(50);
     const SlowSpeed = () => setVelocityReduction(5);
     const NormalSpeed = () => setVelocityReduction(260);
+
+    const handleClick = (e) => {
+      if (draggingRef.current) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
 
     return (
       <motion.a
         onMouseOver={SlowSpeed}
         onMouseLeave={NormalSpeed}
         animate={{ x: ["-0%", "-300%"] }}
-        transition={{
-          ease: "linear",
-          duration: velocityReduction,
-          repeat: Infinity,
-        }}
+        transition={{ ease: "linear", duration: velocityReduction, repeat: Infinity }}
         href={location === "desarrollo" ? resolveUrl(enlacePortfolio) : undefined}
         target="_blank"
+        rel="noreferrer"
         data-id={id}
         className="portfolio-card"
         style={{ backgroundImage: `url(${resolveUrl(backgroundImage)})` }}
+        onClick={handleClick}
+        draggable={false}
       >
         <h2 className="portfolio-title">{title}</h2>
       </motion.a>
     );
   };
+
+  if (loading) return <p>Cargando...</p>;
+  if (error) return <p>{error}</p>;
 
   return (
     <div className="portfolio-section">
@@ -81,21 +84,22 @@ function Portfolio3d({cat = "3d", location='desarrollo'}) {
             alignItems: "center",
           }}
           whileTap={{ cursor: "grabbing" }}
+          onDragStart={() => { draggingRef.current = true; }}
+          onDragEnd={() => { requestAnimationFrame(() => { draggingRef.current = false; }); }}
         >
-          {
-            duplicatedItems.map((item, index) => (
-            item.category.includes(cat) && (
+          {duplicatedItems.map((item, index) => {
+            if (categoria && !item.category?.includes(categoria)) return null;
+            return (
               <PortfolioCarruselItem
                 key={`${item.id}-${index}`}
                 id={item.id}
                 title={item.title}
-                backgroundImage={item.vertical_image}
+                backgroundImage={item.vertical_image || item.featured_image}
                 enlacePortfolio={item.enlacePortfolio}
+                draggingRef={draggingRef}
               />
-            )
-          ))
-          }
-          
+            );
+          })}
         </motion.div>
       </div>
     </div>

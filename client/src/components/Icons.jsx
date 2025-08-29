@@ -1,6 +1,6 @@
 import React from "react";
-import LogoAmarillo from "/assets/logo-amarillo.png";
-import LogoBlack from "/assets/logo-black.png";
+import LogoAmarillo from "/assets/logo-amarillo.webp";
+import LogoBlack from "/assets/logo-black.webp";
 
 const iconComponents = {
   facebook: () => (

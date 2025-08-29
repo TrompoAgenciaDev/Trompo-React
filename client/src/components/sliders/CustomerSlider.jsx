@@ -3,17 +3,18 @@ import { motion } from "motion/react";
 import "../../assets/styles/customer-slider.css";
 
 const sliderImages = [
-  `${import.meta.env.BASE_URL}assets/customerImg/denso.png`,
-  `${import.meta.env.BASE_URL}assets/customerImg/femesa.png`,
-  `${import.meta.env.BASE_URL}assets/customerImg/guanaco.png`,
-  `${import.meta.env.BASE_URL}assets/customerImg/lhaka.png`,
-  `${import.meta.env.BASE_URL}assets/customerImg/ranko.png`,
-  `${import.meta.env.BASE_URL}assets/customerImg/raulito.png`,
-  `${import.meta.env.BASE_URL}assets/customerImg/ravana.png`,
-  `${import.meta.env.BASE_URL}assets/customerImg/renault-trucks.png`,
-  `${import.meta.env.BASE_URL}assets/customerImg/sw.png`,
-  `${import.meta.env.BASE_URL}assets/customerImg/viditec.png`,
-  `${import.meta.env.BASE_URL}assets/customerImg/volvo.png`,
+  `${import.meta.env.BASE_URL}assets/customerImg/denso.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/agreteq.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/gesevi.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/menta.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/molinos.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/ranko.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/raulito.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/ravana.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/renault-trucks.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/sw.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/viditec.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/volvo.webp`,
 ];
 
 function isMobile() {

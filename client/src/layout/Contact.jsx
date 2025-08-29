@@ -2,14 +2,14 @@ import "../assets/styles/contact.css";
 import FormIndex from "../components/forms/FormIndex";
 
 const BGS = {
-  home: "form-home.png",
-  estrategia: "form-estrategia.png",
-  creatividad: "form-creatividad.png",
-  interaccion: "form-interaccion.png",
-  desarrollo: "form-desarrollo.png",
-  soporte: "form-soporte.png",
-  home: "web-bg.png",
-  default: "contact-bg.png",
+  home: "form-home.webp",
+  estrategia: "form-estrategia.webp",
+  creatividad: "form-creatividad.webp",
+  interaccion: "form-interaccion.webp",
+  desarrollo: "form-desarrollo.webp",
+  soporte: "form-soporte.webp"
+  // home: "web-bg.webp",
+  // default: "contact-bg.webp",
 };
 
 function Contact({ location = "home" }) {

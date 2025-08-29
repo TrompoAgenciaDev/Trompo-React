@@ -46,7 +46,7 @@ const Creatividad = () => {
               <img
                 src={`${
                   import.meta.env.BASE_URL
-                }assets/identidad/identidad.png`}
+                }assets/identidad/identidad.webp`}
                 alt=""
               />
             </div>
@@ -93,9 +93,6 @@ const Creatividad = () => {
       <div className="full-container creatividad-video-section">
         <div className="container">
           <CreatividadSlider/>
-        </div>
-        <div className="container">
-          <CreatividadSlider type="video"/>
         </div>
       </div>
 

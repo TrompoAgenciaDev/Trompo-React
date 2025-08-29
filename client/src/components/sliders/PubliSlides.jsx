@@ -4,17 +4,17 @@ import "../../assets/styles/publi-slider.css";
 const slides = [
   {
     href: "https://www.google.com",
-    img: "/assets/instagramPublis/search-display.jpg",
+    img: "/assets/instagramPublis/search-display.webp",
     alt: "ADS",
   },
   {
     href: "https://www.bing.com",
-    img: "/assets/instagramPublis/raulito.jpg",
+    img: "/assets/instagramPublis/raulito.webp",
     alt: "Mermeladas Raulito",
   },
   {
     href: "https://www.duckduckgo.com",
-    img: "/assets/instagramPublis/tono-de-voz.jpg",
+    img: "/assets/instagramPublis/tono-de-voz.webp",
     alt: "Trompo Tono de Voz",
   },
 ];

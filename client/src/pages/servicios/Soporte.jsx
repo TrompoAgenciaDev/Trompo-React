@@ -25,7 +25,7 @@ const Soporte = () => {
       <section className="full-container soporte">
         <div className="full-container soporte-diagonal-invertida">
           <img
-            src={`${import.meta.env.BASE_URL}assets/support/full-img-1.png`}
+            src={`${import.meta.env.BASE_URL}assets/support/full-img-1.webp`}
             alt=""
           />
         </div>
@@ -50,7 +50,7 @@ const Soporte = () => {
         </div>
         <div className="full-container soporte-diagonal-invertida">
           <img
-            src={`${import.meta.env.BASE_URL}assets/support/full-img-2.png`}
+            src={`${import.meta.env.BASE_URL}assets/support/full-img-2.webp`}
             alt=""
           />
         </div>
@@ -90,7 +90,7 @@ const Soporte = () => {
             </p>
           </div>
         </div>
-        <Portfolio3d />
+        <Portfolio3d categoria="3d"/>
       </div>
 
       <Contact location="soporte" />

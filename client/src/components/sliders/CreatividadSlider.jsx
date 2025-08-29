@@ -3,34 +3,37 @@ import { motion } from "framer-motion";
 
 const galleries = {
   airon: [
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/airon1.png`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/airon2.png`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/airon3.png`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/airon4.png`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/airon1.webp`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/airon2.webp`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/airon3.webp`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/airon4.webp`,
   ],
   ayni: [
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/ayni1.png`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/ayni2.png`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/ayni3.png`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/ayni1.webp`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/ayni2.webp`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/ayni3.webp`,
   ],
   lema: [
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/lema1.png`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/lema2.png`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/lema3.png`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/lema1.webp`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/lema2.webp`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/lema3.webp`,
   ],
-  qsltec: [`${import.meta.env.BASE_URL}assets/creatividad/slide/qsltec1.png`],
+  qsltec: [
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/qsltec1.webp`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/qsltec2.webp`
+  ],
   smartshop: [
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/smartshop1.png`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/smartshop2.png`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/smartshop1.webp`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/smartshop2.webp`,
   ],
   tearratua: [
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/terratua1.png`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/terratua2.png`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/terratua1.webp`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/terratua2.webp`,
   ],
   vox: [
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/vox1.png`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/vox2.png`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/vox3.png`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/vox1.webp`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/vox2.webp`,
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/vox3.webp`,
   ],
 };
 
@@ -43,32 +46,13 @@ const videoGallery = [
   `${import.meta.env.BASE_URL}assets/creatividad/videos/wester-union.mp4`,
 ];
 
-/* Inner slider infinito 4:3 (desplazamiento continuo slide a slide) */
+/* Inner slider infinito 4:3 */
 function InnerAutoSlider({ list, interval = 2200, direction = 1 }) {
   const len = list.length;
-
   if (len <= 1) {
     return (
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          paddingTop: "75%",
-          overflow: "hidden",
-        }}
-      >
-        <img
-          src={list[0]}
-          alt=""
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: "block",
-          }}
-        />
+      <div style={{ position: "relative", width: "100%", paddingTop: "75%", overflow: "hidden" }}>
+        <img src={list[0]} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
       </div>
     );
   }
@@ -103,33 +87,15 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1 }) {
   const offsetPct = idx * 100;
 
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "100%",
-        paddingTop: "75%",
-        overflow: "hidden",
-      }}
-    >
+    <div style={{ position: "relative", width: "100%", paddingTop: "75%", overflow: "hidden" }}>
       <motion.div
         style={{ position: "absolute", inset: 0, display: "flex" }}
         animate={{ x: `-${offsetPct}%` }}
-        transition={
-          anim ? { duration: 0.45, ease: "easeOut" } : { duration: 0 }
-        }
+        transition={anim ? { duration: 0.45, ease: "easeOut" } : { duration: 0 }}
       >
         {extended.map((src, i) => (
           <div key={i} style={{ width: "100%", flex: "0 0 100%" }}>
-            <img
-              src={src}
-              alt=""
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                display: "block",
-              }}
-            />
+            <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
           </div>
         ))}
       </motion.div>
@@ -140,14 +106,7 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1 }) {
 /* Video único por slide 4:3 */
 function VideoSlide({ src }) {
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "100%",
-        paddingTop: "75%",
-        overflow: "hidden",
-      }}
-    >
+    <div style={{ position: "relative", width: "100%", paddingTop: "75%", overflow: "hidden" }}>
       <video
         src={src}
         muted
@@ -155,25 +114,29 @@ function VideoSlide({ src }) {
         autoPlay
         loop
         preload="metadata"
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          display: "block",
-        }}
+        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
       />
     </div>
   );
 }
 
-export default function CreatividadSlider({ type = "image" }) {
-  const baseItems = type === "video" ? videoGallery : Object.keys(galleries);
+export default function CreatividadSlider() {
+  const brandKeys = Object.keys(galleries);
+  const imgCount = brandKeys.length;
+  const vidCount = videoGallery.length;
+  const baseLen = Math.max(imgCount, vidCount) * 2; // imagen, video, imagen, video…
+
+  // construye secuencia intercalada
+  const interleaved = [];
+  for (let i = 0; i < Math.max(imgCount, vidCount); i++) {
+    const imgKey = brandKeys[i % imgCount];
+    const vidSrc = videoGallery[i % vidCount];
+    interleaved.push({ kind: "image", key: imgKey });
+    interleaved.push({ kind: "video", src: vidSrc });
+  }
 
   const REPEAT = 5;
-  const slides = Array.from({ length: REPEAT }, () => baseItems).flat();
-  const baseLen = baseItems.length;
+  const slides = Array.from({ length: REPEAT }, () => interleaved).flat();
   const middleIndex = baseLen * Math.floor(REPEAT / 2);
 
   const [index, setIndex] = useState(middleIndex);
@@ -226,20 +189,8 @@ export default function CreatividadSlider({ type = "image" }) {
           height: 40,
         }}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="33"
-          height="33"
-          viewBox="0 0 33 33"
-          fill="none"
-        >
-          <path
-            d="M31.9687 16.1926L1.08382 16.1926M1.08382 16.1926L16.5263 31.3777M1.08382 16.1926L16.5263 1.00751"
-            stroke="#1D1D1B"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+        <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none">
+          <path d="M31.9687 16.1926L1.08382 16.1926M1.08382 16.1926L16.5263 31.3777M1.08382 16.1926L16.5263 1.00751" stroke="#1D1D1B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
       <button
@@ -256,22 +207,11 @@ export default function CreatividadSlider({ type = "image" }) {
           height: 40,
         }}
       >
-        <svg
-          width="38"
-          height="38"
-          viewBox="0 0 38 38"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-            stroke="#1E1E1E"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
+        <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084" stroke="#1E1E1E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
+
       <div
         style={{ position: "relative", overflow: "hidden", width: "100%" }}
         onMouseEnter={() => setPaused(true)}
@@ -295,7 +235,7 @@ export default function CreatividadSlider({ type = "image" }) {
         >
           {slides.map((item, i) => (
             <div
-              key={`${type}-${i}-${typeof item === "string" ? item : "k"}`}
+              key={`${item.kind}-${i}`}
               style={{
                 width: `${slideWidthPct}%`,
                 flex: `0 0 ${slideWidthPct}%`,
@@ -303,14 +243,10 @@ export default function CreatividadSlider({ type = "image" }) {
                 boxSizing: "border-box",
               }}
             >
-              {type === "video" ? (
-                <VideoSlide src={item} />
+              {item.kind === "video" ? (
+                <VideoSlide src={item.src} />
               ) : (
-                <InnerAutoSlider
-                  list={galleries[item]}
-                  interval={2200}
-                  direction={1}
-                />
+                <InnerAutoSlider list={galleries[item.key]} interval={2200} direction={1} />
               )}
             </div>
           ))}

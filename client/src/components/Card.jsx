@@ -17,7 +17,7 @@ function Card({ title, subtitle, description, className, id }) {
         <p>{description}</p>
       </div>
       <div className="card-footer">
-        <img src="./card-footer.png" alt={title} />
+        <img src="./card-footer.webp" alt={title} />
       </div>
     </div>
   );

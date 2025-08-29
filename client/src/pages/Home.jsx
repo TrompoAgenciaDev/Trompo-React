@@ -202,7 +202,7 @@ const Home = () => {
         </div>
       </section>
 
-      <Contact />
+      <Contact location="home" />
     </main>
   );
 };

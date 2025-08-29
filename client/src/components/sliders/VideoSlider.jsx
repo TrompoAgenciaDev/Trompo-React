@@ -26,7 +26,7 @@ function wrapIndex(idx, length) {
 }
 
 function VideoSlider({ location }) {
-  const REPEAT = 5;
+  const REPEAT = 1;
   const totalSlides = sliderVideos.length;
   const middleIndex = totalSlides * Math.floor(REPEAT / 2);
 

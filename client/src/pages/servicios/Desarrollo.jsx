@@ -38,7 +38,7 @@ const Desarrollo = () => {
               <img
                 src={`${
                   import.meta.env.BASE_URL
-                }assets/desarrollo/institucional.png`}
+                }assets/desarrollo/institucional.webp`}
                 alt=""
               />
             </div>
@@ -58,7 +58,7 @@ const Desarrollo = () => {
             </div>
             <div className="grid-item-service">
               <img
-                src={`${import.meta.env.BASE_URL}assets/desarrollo/landing.png`}
+                src={`${import.meta.env.BASE_URL}assets/desarrollo/landing.webp`}
                 alt=""
               />
             </div>
@@ -77,7 +77,7 @@ const Desarrollo = () => {
               <img
                 src={`${
                   import.meta.env.BASE_URL
-                }assets/desarrollo/ecommerce.png`}
+                }assets/desarrollo/ecommerce.webp`}
                 alt=""
               />
             </div>
@@ -99,7 +99,7 @@ const Desarrollo = () => {
               <img
                 src={`${
                   import.meta.env.BASE_URL
-                }assets/desarrollo/formacion.png`}
+                }assets/desarrollo/formacion.webp`}
                 alt=""
               />
             </div>
@@ -120,7 +120,7 @@ const Desarrollo = () => {
               <img
                 src={`${
                   import.meta.env.BASE_URL
-                }assets/desarrollo/catalogo.png`}
+                }assets/desarrollo/catalogo.webp`}
                 alt=""
               />
             </div>
@@ -139,7 +139,7 @@ const Desarrollo = () => {
             <p>Transformamos ideas en plataformas digitales de alto rendimiento. Arquitectura técnica impecable, experiencia de usuario intuitiva y resultados medibles en cada proyecto.</p>
           </div>
         </div>
-        <Portfolio3d location="desarrollo" />
+        <Portfolio3d location="desarrollo" categoria="3d" />
       </div>
 
       <Contact location="desarrollo" />

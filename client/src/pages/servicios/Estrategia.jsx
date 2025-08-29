@@ -79,7 +79,7 @@ const Estrategia = () => {
               <img
                 src={`${
                   import.meta.env.BASE_URL
-                }assets/estrategia/planning.png`}
+                }assets/estrategia/planning.webp`}
                 alt=""
               />
             </div>
@@ -109,7 +109,7 @@ const Estrategia = () => {
           <div className="container ads-grid-2">
             <div className="grid-item-ads">
               <img
-                src={`${import.meta.env.BASE_URL}assets/estrategia/ads.png`}
+                src={`${import.meta.env.BASE_URL}assets/estrategia/ads.webp`}
                 alt=""
               />
             </div>
@@ -148,7 +148,7 @@ const Estrategia = () => {
             </p>
           </div>
         </div>
-        <Portfolio3d />
+        <Portfolio3d location="estrategia"/>
       </div>
 
       <Contact location="estrategia" />

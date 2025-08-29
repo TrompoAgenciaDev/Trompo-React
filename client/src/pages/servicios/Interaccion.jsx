@@ -28,7 +28,7 @@ const Interaccion = () => {
         <div className="full-container">
           <div className="container interaccion-grid">
             <div className="grid-item-interaccion">
-              <img className='interaccion-img' src={`${import.meta.env.BASE_URL}assets/interaccion/interaccion-1.png`} alt=""/>
+              <img className='interaccion-img' src={`${import.meta.env.BASE_URL}assets/interaccion/interaccion-1.webp`} alt=""/>
             </div>
             <div className="grid-item-interaccion">
               <div className="title-section-container">
@@ -54,7 +54,7 @@ const Interaccion = () => {
         <div className="full-container">
           <div className="container interaccion-grid">
             <div className="grid-item-interaccion">
-              <img src={`${import.meta.env.BASE_URL}assets/interaccion/interaccion-2.png`} alt=""/>
+              <img src={`${import.meta.env.BASE_URL}assets/interaccion/interaccion-2.webp`} alt=""/>
             </div>
             <div className="grid-item-interaccion">
               <div className="title-section-container">
