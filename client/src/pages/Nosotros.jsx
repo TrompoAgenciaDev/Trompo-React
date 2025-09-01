@@ -134,9 +134,7 @@ const Nosotros = () => {
       <section className="full-container about-section">
         <div className="container about-content-text">
           <p>
-            Nuestra mayor satisfacción no son los premios, sino ver crecer
-            negocios que confiaron en nosotros: desde pymes cordobesas hasta
-            marcas acionales que hoy lideran sus mercados.
+            En Trompo creemos que las marcas que crecen nunca se quedan quietas. Por eso, nuestro equipo tampoco. Somos profesionales del marketing, la creatividad, la tecnología y la estrategia, con una misma convicción: trabajar codo a codo con cada cliente, como parte de su equipo.
           </p>
           <p>
             Si buscas un proveedor que desaparezca al entregar un proyecto, no

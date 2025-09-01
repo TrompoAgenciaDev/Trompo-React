@@ -22,20 +22,20 @@ import Maintenance from "../pages/Maintenance.jsx";
 
 const routesConfig = {
   main: [
-    { path: "/", label: "inicio", Component: Desarrollo },
+    { path: "/", label: "inicio", Component: Home },
     { path: "/nosotros", label: "nosotros", Component: Nosotros },
-    { path: "", label: "servicios", Component: Nosotros },
+    { path: "", label: "servicios", Component: Servicios },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],
   servicios: [
     { path: "/estrategia", label: "estrategia", Component: Estrategia },
     { path: "/creatividad", label: "Creatividad", Component: Creatividad },
     { path: "/interaccion", label: "interacción", Component: Interaccion },
-    { path: "/", label: "desarrollo", Component: Desarrollo },
+    { path: "/desarrollo", label: "desarrollo", Component: Desarrollo },
     { path: "/soporte", label: "soporte", Component: Soporte },
   ],
   mainFooter: [
-    { path: "/", label: "inicio", Component: Desarrollo },
+    { path: "/", label: "inicio", Component: Home },
     { path: "/nosotros", label: "nosotros", Component: Nosotros },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],

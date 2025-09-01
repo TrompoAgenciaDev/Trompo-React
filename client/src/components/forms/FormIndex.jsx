@@ -370,15 +370,7 @@ export default function formIndex() {
                 España)
               </small> */}
             </div>
-            <div>
-              <textarea
-                name="CONSULTA"
-                placeholder="Dejanos tu consulta"
-                rows="4"
-                required
-              ></textarea>
-            </div>
-
+            
 
             {/* Colocar dentro de esta sección el codigo que alta */}
 
@@ -390,6 +382,7 @@ export default function formIndex() {
                   <div className="mcq-choices">
                     <div className="entry__choice">
                       <label className="checkbox__label">
+                        <span className="checkbox-text">Hasta $500.000</span>
                         <input
                           type="checkbox"
                           className="input_replaced"
@@ -397,13 +390,12 @@ export default function formIndex() {
                           value="Hasta $500.000"
                           data-required="true"
                         />
-                        <span className="checkbox checkbox_tick_positive" />
-                        <span className="checkbox-text">Hasta $500.000</span>
                       </label>
                     </div>
 
                     <div className="entry__choice">
                       <label className="checkbox__label">
+                        <span className="checkbox-text">$500.000 a $1.000.000</span>
                         <input
                           type="checkbox"
                           className="input_replaced"
@@ -411,13 +403,12 @@ export default function formIndex() {
                           value="$500.000 a $1.000.000"
                           data-required="true"
                         />
-                        <span className="checkbox checkbox_tick_positive" />
-                        <span className="checkbox-text">$500.000 a $1.000.000</span>
                       </label>
                     </div>
 
                     <div className="entry__choice">
                       <label className="checkbox__label">
+                        <span className="checkbox-text">$1.000.000 a $2.000.000</span>
                         <input
                           type="checkbox"
                           className="input_replaced"
@@ -425,13 +416,12 @@ export default function formIndex() {
                           value="$1.000.000 a $2.000.000"
                           data-required="true"
                         />
-                        <span className="checkbox checkbox_tick_positive" />
-                        <span className="checkbox-text">$1.000.000 a $2.000.000</span>
                       </label>
                     </div>
 
                     <div className="entry__choice">
                       <label className="checkbox__label">
+                        <span className="checkbox-text">Más de $2.000.000</span>
                         <input
                           type="checkbox"
                           className="input_replaced"
@@ -439,8 +429,6 @@ export default function formIndex() {
                           value="Más de $2.000.000"
                           data-required="true"
                         />
-                        <span className="checkbox checkbox_tick_positive" />
-                        <span className="checkbox-text">Más de $2.000.000</span>
                       </label>
                     </div>
                   </div>
@@ -450,11 +438,19 @@ export default function formIndex() {
               </div>
             </div>
 
-
             {/* end */}
+            <div>
+              <textarea
+                name="CONSULTA"
+                placeholder="Dejanos tu consulta"
+                rows="4"
+                required
+              ></textarea>
+            </div>
 
             <div>
               <div
+                id="sib-captcha"
                 className="g-recaptcha"
                 data-sitekey="6LfisDkoAAAAAFIZ8MptwMl2XB2Nn_LVtE1tUV2n"
                 data-callback="handleCaptchaResponse"
@@ -482,7 +478,7 @@ export default function formIndex() {
               </button>
             </div>
 
-            <input type="text" name="email_address_check" hidden />
+            <input type="text" name="email_address_check" className="input--hidden" />
             <input type="hidden" name="locale" value="es" />
           </form>
         </div>

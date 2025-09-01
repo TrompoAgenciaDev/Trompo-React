@@ -1,55 +1,50 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { motion } from "framer-motion";
 import usePostsData from "../../hooks/usePostsData";
 import "../../assets/styles/post-card.css";
 
-const BASE = import.meta.env.BASE_URL || "/";
-const toSrc = (src) => (/^(https?:|data:|blob:)/i.test(src) ? src : `${BASE}${(src || "assets/postImg/post.webp").replace(/^\/+/, "")}`);
+const toSrc = (src) =>
+  /^(https?:|data:|blob:)/i.test(src)
+    ? src
+    : (src || "assets/postImg/post.webp").replace(/^\/+/, "");
 
-const PostCard = ({ initialLimit, maxLimit = 1000, category, tag }) => {
-  const hardLimit = maxLimit; // tope real de fetch
-  const [visiblePosts] = useState(
-    Math.min(initialLimit ?? hardLimit, hardLimit)
-  );
-
-  const { items: posts, loading, error } = usePostsData({
-    limit: hardLimit,
-    category,
-    tag,
-  });
-
+export default function PostGrid3({ category, tag }) {
+  const {
+    items: posts,
+    loading,
+    error,
+  } = usePostsData({ limit: 3, category, tag });
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
-  const list = posts.slice(0, visiblePosts);
-
   return (
-    <div className="post-card-container full-container">
-      {list.map((post) => {
+    <div className="post-grid">
+      {posts.map((post, i) => {
         const title = post?.title || "Sin título";
-        const firstCategory = post?.categories?.[0] || "Sin categoría";
-        const featuredImage = toSrc(post?.featured_image);
+        const img = toSrc(post?.featured_image);
+        const href = post?.slug ? `post/${post.slug}` : "#";
+        const featured = i === 1; // la del medio
 
         return (
-          <Link to={post?.slug ? `/post/${post.slug}` : "#"} className="read-more-link">
-            <div
-              className="post-card"
-              key={post?.id ?? post?.slug ?? title}
-              style={{
-                backgroundImage: `url("${featuredImage}")`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            >
-            </div>
-            <div className="container">
-              <h3 className="post-title">{title}</h3>                
-            </div>
-          </Link>
+          <article
+            className={`post-card${featured ? " post-card--featured" : ""}`}
+            key={post?.id ?? post?.slug ?? title}
+          >
+            <a className="post-link" href={href} rel="noopener">
+              <div className="post-media-wrap">
+                <motion.img
+                  src={img}
+                  alt={title}
+                  className="post-media"
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ duration: 0.45, ease: "easeOut" }}
+                />
+              </div>
+              <h3 className="post-title">{title}</h3>
+            </a>
+          </article>
         );
       })}
     </div>
   );
-};
-
-export default PostCard;
+}

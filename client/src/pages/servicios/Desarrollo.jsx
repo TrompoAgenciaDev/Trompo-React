@@ -255,10 +255,10 @@ const Desarrollo = () => {
 
       <section className="full-container desarrollo-post">
         <div className="container">
-          <h2>Guías, casos y análisis para optimizar tu presencia digital. </h2>
+          <h2 className="post-title-section">Novedades </h2>
           <PostCard maxLimit={3} category="desarrollo web" />
         </div>
-        <div className="container">
+        {/* <div className="container">
           <Link to={"#"} className="read-more-link">
             Ver todas las notas
             <svg
@@ -277,7 +277,7 @@ const Desarrollo = () => {
               />
             </svg>
           </Link>
-        </div>
+        </div> */}
       </section>
       <div className="full-container">
         <CustomerSlider />
