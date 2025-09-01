@@ -10,7 +10,7 @@ const Header = ({ onTogglePopup }) => {
       <div className="container">
         <motion.a
           className="logo-img"
-          // href="/"
+          href="/"
           initial={{
             y: -250,
           }}
@@ -26,7 +26,7 @@ const Header = ({ onTogglePopup }) => {
           <Icons iconName="logoBlack" />
         </motion.a>
 
-        {/* <motion.button
+        <motion.button
           className="nav-button"
           initial={{
             y: -250,
@@ -45,7 +45,7 @@ const Header = ({ onTogglePopup }) => {
           onClick={onTogglePopup}
         >
           <Icons iconName={"burguer"}/>
-        </motion.button> */}
+        </motion.button>
       </div>
     </header>
   );
