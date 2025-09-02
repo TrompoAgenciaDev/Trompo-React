@@ -17,9 +17,9 @@ const Desarrollo = () => {
     <>
       <Hero location="desarrollo" />
       <PageTitle
-        title="Desarrollo"
+        title="Desarrollo web"
         subtitle=""
-        highlight="En Trompo convertimos objetivos de negocio en arquitecturas digitales precisas. Combinamos UX estratégica, desarrollo técnico escalable y diseño orientado a conversión para construir soluciones web que funcionan."
+        highlight="En Trompo transformamos objetivos de negocio en  <strong>plataformas digitales con propósito.</strong> Unimos estrategia UX</strong>, diseño enfocado en conversión e infraestructura escalable para que tu web no sea solo presencia online, sino un  <strong>activo estratégico que impulsa resultados medibles.</strong>"
         bgc="#FEE070"
       />
 
@@ -28,36 +28,33 @@ const Desarrollo = () => {
           <div className="container grid-content">
             <div className="grid-item-service">
               <h2>Web Institucional</h2>
-              <p>
-                Desarrollamos sitios web institucionales que superan lo básico:
-                plataformas estratégicas donde convergen narrativa de marca
-                clara, elementos de credibilidad demostrable (casos de estudio,
-                certificaciones) y presentación efectiva de valor.
-              </p>
-              <a className="more-info-button" href="#contact">
-                Más info
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="46"
-                  viewBox="0 0 48 46"
-                  fill="none"
-                >
-                  <path
-                    d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
-                    stroke="#1D1D1B"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
+              <div className="service-container-text">                
+                <p>
+                  Diseñamos sitios que trascienden lo informativo: <strong>espacios digitales que transmiten confianza, autoridad y valor diferencial</strong>. Integramos narrativa de marca clara, credenciales tangibles (casos de éxito, certificaciones) y una estética profesional que refuerza tu posicionamiento frente a clientes y competidores
+                </p>
+                <a className="more-info-button" href="#contact">
+                  Más info
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="46"
+                    viewBox="0 0 48 46"
+                    fill="none"
+                  >
+                    <path
+                      d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
+                      stroke="#1D1D1B"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </a>
+              </div>
             </div>
             <div className="grid-item-service">
               <img
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/desarrollo/institucional.webp`}
+                src={`${import.meta.env.BASE_URL}assets/desarrollo/institucional.webp`}
                 alt=""
               />
             </div>
@@ -67,37 +64,33 @@ const Desarrollo = () => {
           <div className="container grid-content">
             <div className="grid-item-service">
               <h2>Landing Page</h2>
-              <p>
-                Construimos experiencias focalizadas que transforman tráfico en
-                leads cualificados, ventas directas o adopción de promociones.
-                Método basado en arquitectura conversiva, microcopys
-                estratégicos y eliminación sistemática de fricciones para
-                maximizar ROI por visita.
-              </p>
-              <a className="more-info-button" href="#contact">
-                Más info
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="46"
-                  viewBox="0 0 48 46"
-                  fill="none"
-                >
-                  <path
-                    d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
-                    stroke="#1D1D1B"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
+              <div className="service-container-text">
+                <p>
+                  Creamos páginas de destino con un único objetivo: <strong>convertir visitantes en oportunidades reales</strong>. Cada elemento está pensado para guiar la acción: arquitectura conversiva, microcopys persuasivos y un diseño sin fricciones que multiplica el ROI de cada clic invertido.
+                </p>
+                <a className="more-info-button" href="#contact">
+                  Más info
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="46"
+                    viewBox="0 0 48 46"
+                    fill="none"
+                  >
+                    <path
+                      d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
+                      stroke="#1D1D1B"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </a>
+              </div>
             </div>
             <div className="grid-item-service">
               <img
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/desarrollo/landing.webp`}
+                src={`${import.meta.env.BASE_URL}assets/desarrollo/landing.webp`}
                 alt=""
               />
             </div>
@@ -107,34 +100,33 @@ const Desarrollo = () => {
           <div className="container grid-content">
             <div className="grid-item-service">
               <h2>E-commerce</h2>
-              <p>
-                Una tienda online moderna, rápida y funcional, que combina
-                diseño atractivo con conversión optimizada y backend eficiente.
-              </p>
-              <a className="more-info-button" href="#contact">
-                Más info
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="46"
-                  viewBox="0 0 48 46"
-                  fill="none"
-                >
-                  <path
-                    d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
-                    stroke="#1D1D1B"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
+              <div className="service-container-text">
+                <p>
+                  Desarrollamos tiendas online que combinan <strong>diseño atractivo, performance ágil y procesos de compra optimizados</strong>. Desde la primera impresión hasta el checkout, tu marca ofrece una experiencia fluida, confiable y diseñada para <strong>vender más y fidelizar clientes</strong>.
+                </p>
+                <a className="more-info-button" href="#contact">
+                  Más info
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="46"
+                    viewBox="0 0 48 46"
+                    fill="none"
+                  >
+                    <path
+                      d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
+                      stroke="#1D1D1B"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </a>
+              </div>
             </div>
             <div className="grid-item-service">
               <img
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/desarrollo/ecommerce.webp`}
+                src={`${import.meta.env.BASE_URL}assets/desarrollo/ecommerce.webp`}
                 alt=""
               />
             </div>
@@ -144,37 +136,34 @@ const Desarrollo = () => {
           <div className="container grid-content">
             <div className="grid-item-service">
               <h2>Formación online</h2>
-              <p>
-                Construimos experiencias focalizadas que transforman tráfico en
-                leads cualificados, ventas directas o adopción de promociones.
-                Método basado en arquitectura conversiva, microcopys
-                estratégicos y eliminación sistemática de fricciones para
-                maximizar ROI por visita.
-              </p>
-              <a className="more-info-button" href="#contact">
-                Más info
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="46"
-                  viewBox="0 0 48 46"
-                  fill="none"
-                >
-                  <path
-                    d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
-                    stroke="#1D1D1B"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
+              <div className="service-container-text">
+                <p>
+                  Creamos plataformas e-learning que unen <strong>pedagogía digital, experiencia de usuario y escalabilidad tecnológica</strong>. Desde cursos autogestionados hasta programas con integraciones avanzadas, ofrecemos soluciones que facilitan el aprendizaje y <strong>convierten conocimiento en valor de negocio</strong>.
+
+                </p>
+                <a className="more-info-button" href="#contact">
+                  Más info
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="46"
+                    viewBox="0 0 48 46"
+                    fill="none"
+                  >
+                    <path
+                      d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
+                      stroke="#1D1D1B"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </a>
+              </div>
             </div>
             <div className="grid-item-service">
               <img
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/desarrollo/formacion.webp`}
+                src={`${import.meta.env.BASE_URL}assets/desarrollo/formacion.webp`}
                 alt=""
               />
             </div>
@@ -184,36 +173,33 @@ const Desarrollo = () => {
           <div className="container grid-content">
             <div className="grid-item-service">
               <h2>Catálogo</h2>
-              <p>
-                Desarrollamos sitios web institucionales que superan lo básico:
-                plataformas estratégicas donde convergen narrativa de marca
-                clara, elementos de credibilidad demostrable (casos de estudio,
-                certificaciones) y presentación efectiva de valor.
-              </p>
-              <a className="more-info-button" href="#contact">
-                Más info
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="46"
-                  viewBox="0 0 48 46"
-                  fill="none"
-                >
-                  <path
-                    d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
-                    stroke="#1D1D1B"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </a>
+              <div className="service-container-text">
+                <p>
+                  Diseñamos catálogos digitales dinámicos que combinan <strong>diseño visual impactante, navegabilidad intuitiva y presentación estratégica de productos</strong>. Una herramienta que potencia ventas, facilita consultas y refuerza la credibilidad de tu marca frente a clientes y distribuidores.
+                </p>
+                <a className="more-info-button" href="#contact">
+                  Más info
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="46"
+                    viewBox="0 0 48 46"
+                    fill="none"
+                  >
+                    <path
+                      d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
+                      stroke="#1D1D1B"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </a>
+              </div>
             </div>
             <div className="grid-item-service">
               <img
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/desarrollo/catalogo.webp`}
+                src={`${import.meta.env.BASE_URL}assets/desarrollo/catalogo.webp`}
                 alt=""
               />
             </div>
@@ -225,11 +211,9 @@ const Desarrollo = () => {
         <div className="full-container title-portfolio-container">
           <div className="container"></div>
           <div className="container">
-            <h3>Proyectos con impacto</h3>
+            <h3>Transformamos ideas en plataformas digitales que impulsan negocios</h3>
             <p>
-              Transformamos ideas en plataformas digitales de alto rendimiento.
-              Arquitectura técnica impecable, experiencia de usuario intuitiva y
-              resultados medibles en cada proyecto.
+              Arquitectura técnica impecable, experiencias de usuario intuitivas y resultados medibles que convierten cada proyecto en un activo de crecimiento.
             </p>
           </div>
         </div>
@@ -240,10 +224,9 @@ const Desarrollo = () => {
 
       <section className="full-container bg-yellow testimonial-wrapper">
         <div className="container testimonial-header">
-          <h4>La voz de nuestros clientes.</h4>
+          <h4>Más que clientes, aliados estratégicos.</h4>
           <p>
-            Testimonios de profesionales que han visto resultados concretos en
-            sus proyectos.
+            Historias que muestran el valor de trabajar en equipo.
           </p>
         </div>
         <div className="full-container">
@@ -253,12 +236,12 @@ const Desarrollo = () => {
 
       <Faqs location="desarrollo" />
 
-      <section className="full-container desarrollo-post">
+      {/* <section className="full-container desarrollo-post">
         <div className="container">
           <h2 className="post-title-section">Novedades </h2>
           <PostCard maxLimit={3} category="desarrollo web" />
         </div>
-        {/* <div className="container">
+        <div className="container">
           <Link to={"#"} className="read-more-link">
             Ver todas las notas
             <svg
@@ -277,8 +260,8 @@ const Desarrollo = () => {
               />
             </svg>
           </Link>
-        </div> */}
-      </section>
+        </div>
+      </section> */}
       <div className="full-container">
         <CustomerSlider />
       </div>

@@ -1,14 +1,10 @@
 import { motion } from "motion/react";
 import "../../assets/styles/page-title.css";
 
-function PageTitle({ title, subtitle = "", highlight, bgc = "#ffffff" }) {
-  const words = highlight ? highlight.split(" ") : [];
-
+function PageTitle({ title, subtitle = "", highlight = "", bgc = "#ffffff" }) {
   const container = {
     hidden: {},
-    visible: {
-      transition: { staggerChildren: 0.05 },
-    },
+    visible: { transition: { staggerChildren: 0.05 } },
   };
 
   const word = {
@@ -16,19 +12,54 @@ function PageTitle({ title, subtitle = "", highlight, bgc = "#ffffff" }) {
     visible: { opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
+  // Respeta <strong>/<b> en highlight y anima palabra por palabra
+  function renderHighlight(html) {
+    if (!html) return null;
+
+    const tokens = String(html).split(/(<\/?strong>|<\/?b>)/gi);
+    let inStrong = false;
+    const out = [];
+
+    tokens.forEach((tok, i) => {
+      if (/^<(strong|b)>$/i.test(tok)) {
+        inStrong = true;
+        return;
+      }
+      if (/^<\/(strong|b)>$/i.test(tok)) {
+        inStrong = false;
+        return;
+      }
+
+      const chunks = tok.split(/(\s+)/); // conserva espacios
+      chunks.forEach((chunk, j) => {
+        if (!chunk) return;
+
+        if (/^\s+$/.test(chunk)) {
+          out.push(" ");
+          return;
+        }
+
+        const span = (
+          <motion.span key={`w-${i}-${j}`} variants={word} style={{ display: "inline" }}>
+            {chunk}
+          </motion.span>
+        );
+
+        out.push(inStrong ? <strong key={`s-${i}-${j}`}>{span}</strong> : span);
+      });
+    });
+
+    return out;
+  }
+
   return (
-    <section className="full-container diagonal-page-title"
-      style={{backgroundColor: bgc}}>
+    <section className="full-container diagonal-page-title" style={{ backgroundColor: bgc }}>
       <div className="full-container diagonal-title">
         <div className="title-container">
-          <h1 
-            className="title-page">
-              {title}
-              {" "}
-              {
-                subtitle ? <span className="subtitle-page">{subtitle}</span> : ""
-              }
-            </h1>
+          <h1 className="title-page">
+            {title}{" "}
+            {subtitle ? <span className="subtitle-page">{subtitle}</span> : ""}
+          </h1>
 
           <motion.p
             className="content"
@@ -37,15 +68,7 @@ function PageTitle({ title, subtitle = "", highlight, bgc = "#ffffff" }) {
             viewport={{ margin: "-200px", once: true }}
             variants={container}
           >
-            {words.map((w, i) => (
-              <motion.span
-                key={i}
-                variants={word}
-                style={{ display: "inline" }}
-              >
-                {w}{" "}
-              </motion.span>
-            ))}
+            {renderHighlight(highlight)}
           </motion.p>
         </div>
       </div>

@@ -22,7 +22,7 @@ import Maintenance from "../pages/Maintenance.jsx";
 
 const routesConfig = {
   main: [
-    { path: "/", label: "inicio", Component: Home },
+    { path: "/", label: "inicio", Component: Desarrollo },
     { path: "/nosotros", label: "nosotros", Component: Nosotros },
     { path: "", label: "servicios", Component: Servicios },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },

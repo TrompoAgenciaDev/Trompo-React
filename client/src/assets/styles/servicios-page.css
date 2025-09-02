@@ -140,7 +140,7 @@
 
 .title-portfolio-container h3{
   font-size: 26px;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .title-portfolio-container p{
@@ -156,17 +156,15 @@
   justify-content: start;;
   align-items: center;
   gap: 8px;
-  padding-left: 30px;
   transition: font-weight .3s ease-in-out;
 }
 
 .more-info-button svg{
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   transform: rotate(-45deg);
   transition: transform .3s ease-in-out;
 }
-
 
 .more-info-button:hover {
   font-weight: 700;
@@ -174,6 +172,17 @@
 .more-info-button:hover svg{
   transform: rotate(45deg);
 }
+
+.service-container-text{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-container-text a{
+  font-size: 13px;
+}
+
 
 @media (min-width: 768px) {
   .grid-content > .grid-item-service:first-child{
@@ -371,6 +380,16 @@
     grid-template-columns: 1fr 1fr;
   }
 
+  .diagonal-invertida .more-info-button{
+    padding-left: 30px;
+    font-size: 16px;
+  }
+
+  .more-info-button svg{
+    width: 24px;
+    height: 24px;
+  }
+
   .desarrollo-post .container:first-child h2{
     font-size: 28px;
   }
@@ -397,7 +416,7 @@
   }
 
   .title-portfolio-container{
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 3fr 4fr;
     margin: 120px 0 -120px;
   }
 

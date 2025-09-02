@@ -133,14 +133,12 @@ const Nosotros = () => {
 
       <section className="full-container about-section">
         <div className="container about-content-text">
+          <h2>
+            Un equipo que se mueve con vos
+          </h2>
           <p>
             En Trompo creemos que las marcas que crecen nunca se quedan quietas. Por eso, nuestro equipo tampoco. Somos profesionales del marketing, la creatividad, la tecnología y la estrategia, con una misma convicción: trabajar codo a codo con cada cliente, como parte de su equipo.
           </p>
-          <p>
-            Si buscas un proveedor que desaparezca al entregar un proyecto, no
-            somos tu opción.
-          </p>
-          <p>Si valoras un socio que camine a tu lado, hablemos.</p>
         </div>
         <div className="container">
           <Members />

@@ -34,10 +34,10 @@
 
 .hero-contactanos{
   position: relative;
-  height: 100svh;      /* viewport estable */
-  min-height: 100dvh;  /* fallback */
-  overflow: hidden;    /* evita crecimiento */
-  display: block;      /* sin grid aquí */
+  height: 100svh;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: block;
   text-align: center;
 }
 

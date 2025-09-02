@@ -4,7 +4,7 @@ import svgr from 'vite-plugin-svgr';
 
 
 export default defineConfig({
-  base: "/",
+  base: "/2025/",
   plugins: [react(), svgr()],
   resolve: {
     alias: {

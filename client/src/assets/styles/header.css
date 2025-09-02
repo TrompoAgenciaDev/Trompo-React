@@ -26,9 +26,6 @@
 }
 
 header.full-container{
-  position: fixed;
-  top: 0;
-  left: 0;
   z-index: 99999;
   background: -webkit-linear-gradient(top, #ffffff9f 20%, rgba(255, 255, 255, 0) 75%);
   background: linear-gradient(to bottom, #ffffff9f 20%, rgba(255, 255, 255, 0) 75%);

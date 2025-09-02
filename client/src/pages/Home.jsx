@@ -27,13 +27,24 @@ const Home = () => {
     <main className="full-container">
       <Hero />
 
-      <PostHero text={text} />
+      <section className="post-hero-section full-container">
+        <PostHero text={text} />
+        <p>
+          En Trompo entendemos que una marca no se mantiene estática: evoluciona. Por eso combinamos estrategia, creatividad e innovación tecnológica para diseñar soluciones digitales que impulsan el crecimiento, fortalecen la identidad y generan resultados medibles. Nos involucramos en cada etapa del proceso, acompañando a nuestros clientes con una visión integral que conecta a las marcas con sus audiencias de manera auténtica, relevante y sostenida en el tiempo
+        </p>
 
+      </section>
+      
+      {/* Servicios que se ofrecen */}
+      <Services />
+
+      {/* Portfolio - clientes grandes */}
       <section className="video-section full-container">
         <div className="full-container">
           <VideoSlider location={"home"} />
         </div>
 
+        {/* Todos los Proyectos */}
         <div className="container home-content">
           <motion.p
             className="text-show-effect-1"
@@ -83,8 +94,12 @@ const Home = () => {
         </div>
       </section>
 
-      <Services />
+      
+      {/* formulario */}
+      <Contact location="home" />
 
+      
+      {/* Carrusel de logos + imagen grande */}
       <section className="full-container">
         <div className="slider-container container">
           <CustomerSlider />
@@ -92,17 +107,33 @@ const Home = () => {
 
         <div className="banner full-container">
           <picture className="full-container mobile-banner">
-            <source srcSet="/banner2-home-mobile.webp" type="image/webp" />
-            <source srcSet="/banner2-home-mobile.png" type="image/png" />
-            <img src="/banner2-home-mobile.png" alt="Banner Home" />
+            <source srcSet={`${
+                  import.meta.env.BASE_URL
+                }banner2-home-mobile.webp`}type="image/webp" />
+            <source srcSet={`${
+                  import.meta.env.BASE_URL
+                }banner2-home-mobile.png`}
+              type="image/png" />
+            <img src={`${
+                  import.meta.env.BASE_URL
+                }banner2-home-mobile.png`}
+              alt="Banner Home" />
           </picture>
           <picture className="full-container desktop-banner">
-            <source srcSet="/banner2-home-desktop.webp" type="image/webp" />
-            <source srcSet="/banner2-home-desktop.png" type="image/png" />
-            <img src="/banner2-home-desktop.png" alt="Banner Home" />
+            <source srcSet={`${
+                  import.meta.env.BASE_URL
+                }banner2-home-desktop.webp`}type="image/webp" />
+            <source srcSet={`${
+                  import.meta.env.BASE_URL
+                }banner2-home-desktop.png`}type="image/png" />
+            <img src={`${
+                  import.meta.env.BASE_URL
+                }banner2-home-desktop.png`}
+              alt="Banner Home" />
           </picture>
         </div>
       </section>
+
 
       <section className="full-container">
         <div className="container text-home">
@@ -202,7 +233,6 @@ const Home = () => {
         </div>
       </section>
 
-      <Contact location="home" />
     </main>
   );
 };

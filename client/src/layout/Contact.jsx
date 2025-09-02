@@ -50,11 +50,10 @@ function Contact({ location = "home" }) {
             </div>
             <div className="grid-item-title">
               <h1>
-                La transformación empieza con un paso
+                Hablemos de lo que tu marca necesita. 
               </h1>
               <p>
-                Completá el formulario, contanos tu necesidad y diseñamos juntos
-                una solución hecha a tu medida.
+                Cada proyecto es único. Completá el formulario y diseñemos la estrategia que tu marca necesita para evolucionar
               </p>
             </div>
           </div>

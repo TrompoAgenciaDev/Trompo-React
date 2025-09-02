@@ -12,7 +12,7 @@ function App() {
   const { isOpen, togglePopup } = useTogglePopup();
 
   return (
-    <BrowserRouter basename="/">
+    <BrowserRouter basename={`${import.meta.env.BASE_URL}`}>
       <Header onTogglePopup={togglePopup} />
       <MenuPopup isOpen={isOpen} onClose={togglePopup} />
       <ScrollTop />
