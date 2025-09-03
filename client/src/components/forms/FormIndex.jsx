@@ -1,62 +1,11 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import "../../assets/styles/form-index.css";
 
-export default function formIndex() {
-  const inited = useRef(false);
-
-  useEffect(() => {
-    if (inited.current) return;
-    inited.current = true;
-
-    if (typeof window !== "undefined" && !window.handleCaptchaResponse) {
-      window.handleCaptchaResponse = function () {};
-    }
-
-    let sibScript = document.querySelector("script[data-sib-main]");
-    if (!sibScript) {
-      sibScript = document.createElement("script");
-      sibScript.src = "https://sibforms.com/forms/end-form/build/main.js";
-      sibScript.defer = true;
-      sibScript.setAttribute("data-sib-main", "true");
-      document.body.appendChild(sibScript);
-    }
-
-    let recaptchaScript = document.querySelector("script[data-recaptcha]");
-    if (!recaptchaScript) {
-      recaptchaScript = document.createElement("script");
-      recaptchaScript.src = "https://www.google.com/recaptcha/api.js?hl=es";
-      recaptchaScript.async = true;
-      recaptchaScript.defer = true;
-      recaptchaScript.setAttribute("data-recaptcha", "true");
-      document.body.appendChild(recaptchaScript);
-    }
-
-    const ensureInit = () => {
-      try {
-        window.dispatchEvent(new Event("DOMContentLoaded"));
-        window.dispatchEvent(new Event("load"));
-      } catch {}
-    };
-
-    if (
-      sibScript.readyState === "loaded" ||
-      sibScript.readyState === "complete"
-    ) {
-      ensureInit();
-    } else {
-      sibScript.addEventListener("load", ensureInit, { once: true });
-    }
-  }, []);
+export default function FormIndex() {
   return (
-    <div
-      className="sib-form"
-      style={{ textAlign: "left", backgroundColor: "transparent" }}
-    >
+    <div className="sib-form" style={{ textAlign: "left", backgroundColor: "transparent" }}>
       <div id="sib-form-container" className="sib-form-container">
-        <div
-          id="sib-container"
-          className="sib-container--large sib-container--horizontal"
-        >
+        <div id="sib-container" className="sib-container--large sib-container--horizontal">
           <form
             id="sib-form"
             method="POST"
@@ -64,41 +13,18 @@ export default function formIndex() {
             data-type="subscription"
           >
             <div>
-              <input
-                type="text"
-                name="NOMBRE"
-                placeholder="Ingresa tu nombre"
-                required
-              />
+              <input type="text" name="NOMBRE" placeholder="Ingresa tu nombre" required />
             </div>
             <div>
-              <input
-                type="text"
-                name="APELLIDOS"
-                placeholder="Ingresa tu apellido"
-                required
-              />
+              <input type="text" name="APELLIDOS" placeholder="Ingresa tu apellido" required />
             </div>
             <div>
-              <input
-                type="email"
-                name="EMAIL"
-                placeholder="Ingresa tu email"
-                required
-              />
-              {/* <small>
-                Ingrese un email institucional para que su consulta sea
-                asignada. Ej.: info@empresa.com
-              </small> */}
+              <input type="email" name="EMAIL" placeholder="Ingresa tu email" required />
             </div>
             <div>
-              <input
-                type="text"
-                name="EMPRESA"
-                placeholder="Ingresa tu empresa"
-                required
-              />
+              <input type="text" name="EMPRESA" placeholder="Ingresa tu empresa" required />
             </div>
+
             <div>
               <div className="phone-input">
                 <select name="SMS__COUNTRY_CODE" required defaultValue={"+54"}>
@@ -357,123 +283,58 @@ export default function formIndex() {
                   <option value="+260">+260 ZM</option>
                   <option value="+263">+263 ZW</option>
                 </select>
-                <input
-                  type="tel"
-                  name="SMS"
-                  placeholder="Número de teléfono"
-                  required
-                />
+                <input type="tel" name="SMS" placeholder="Número de teléfono" required />
               </div>
-              {/* <small>
-                El campo WHATSAPP debe contener entre 6 y 19 cifras e incluir el
-                prefijo del país sin «+» ni «0» delante (ej.: 34xxxxxxxxxxx para
-                España)
-              </small> */}
             </div>
-            
-
-            {/* Colocar dentro de esta sección el codigo que alta */}
 
             <div className="sib-checkbox-group sib-form-block" data-required="true">
               <div className="form__entry entry_mcq">
                 <div className="form__label-row form__label-row--horizontal">
                   <label className="entry__label" data-required="*">Presupuesto</label>
-
                   <div className="mcq-choices">
                     <div className="entry__choice">
                       <label className="checkbox__label">
                         <span className="checkbox-text">Hasta $500.000</span>
-                        <input
-                          type="checkbox"
-                          className="input_replaced"
-                          name="PRESUPUESTO[]"
-                          value="Hasta $500.000"
-                          data-required="true"
-                        />
+                        <input type="checkbox" className="input_replaced" name="PRESUPUESTO[]" value="Hasta $500.000" data-required="true" />
                       </label>
                     </div>
-
                     <div className="entry__choice">
                       <label className="checkbox__label">
                         <span className="checkbox-text">$500.000 a $1.000.000</span>
-                        <input
-                          type="checkbox"
-                          className="input_replaced"
-                          name="PRESUPUESTO[]"
-                          value="$500.000 a $1.000.000"
-                          data-required="true"
-                        />
+                        <input type="checkbox" className="input_replaced" name="PRESUPUESTO[]" value="$500.000 a $1.000.000" data-required="true" />
                       </label>
                     </div>
-
                     <div className="entry__choice">
                       <label className="checkbox__label">
                         <span className="checkbox-text">$1.000.000 a $2.000.000</span>
-                        <input
-                          type="checkbox"
-                          className="input_replaced"
-                          name="PRESUPUESTO[]"
-                          value="$1.000.000 a $2.000.000"
-                          data-required="true"
-                        />
+                        <input type="checkbox" className="input_replaced" name="PRESUPUESTO[]" value="$1.000.000 a $2.000.000" data-required="true" />
                       </label>
                     </div>
-
                     <div className="entry__choice">
                       <label className="checkbox__label">
                         <span className="checkbox-text">Más de $2.000.000</span>
-                        <input
-                          type="checkbox"
-                          className="input_replaced"
-                          name="PRESUPUESTO[]"
-                          value="Más de $2.000.000"
-                          data-required="true"
-                        />
+                        <input type="checkbox" className="input_replaced" name="PRESUPUESTO[]" value="Más de $2.000.000" data-required="true" />
                       </label>
                     </div>
                   </div>
                 </div>
-
                 <label className="entry__error entry__error--primary" />
               </div>
             </div>
 
-            {/* end */}
             <div>
-              <textarea
-                name="CONSULTA"
-                placeholder="Dejanos tu consulta"
-                rows="4"
-                required
-              ></textarea>
+              <textarea name="CONSULTA" placeholder="Dejanos tu consulta" rows="4" required></textarea>
             </div>
 
             <div>
-              <div
-                id="sib-captcha"
-                className="g-recaptcha"
-                data-sitekey="6LfisDkoAAAAAFIZ8MptwMl2XB2Nn_LVtE1tUV2n"
-                data-callback="handleCaptchaResponse"
-              ></div>
+              <div id="sib-captcha" className="g-recaptcha" data-sitekey="6LfisDkoAAAAAFIZ8MptwMl2XB2Nn_LVtE1tUV2n"></div>
             </div>
 
             <div className="subtmit-container">
               <button type="submit">
                 Enviar
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="33"
-                  height="33"
-                  viewBox="0 0 33 33"
-                  fill="none"
-                >
-                  <path
-                    d="M1.03125 16.1926L31.9161 16.1926M31.9161 16.1926L16.4737 1.00751M31.9161 16.1926L16.4737 31.3777"
-                    stroke="#1D1D1B"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none">
+                  <path d="M1.03125 16.1926L31.9161 16.1926M31.9161 16.1926L16.4737 1.00751M31.9161 16.1926L16.4737 31.3777" stroke="#1D1D1B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
             </div>
@@ -486,7 +347,3 @@ export default function formIndex() {
     </div>
   );
 }
-
-// No olviden importar estos scripts en tu HTML principal o _document.js si usás Next.js:
-// <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
-// <script src="https://www.google.com/recaptcha/api.js?hl=es"></script>
