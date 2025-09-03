@@ -39,7 +39,11 @@ function PageTitle({ title, subtitle = "", highlight = "", bgc = "#ffffff" }) {
         }
 
         const span = (
-          <motion.span key={`w-${i}-${j}`} variants={word} style={{ display: "inline" }}>
+          <motion.span
+            key={`w-${i}-${j}`}
+            variants={word}
+            style={{ display: "inline" }}
+          >
             {chunk}
           </motion.span>
         );
@@ -52,23 +56,26 @@ function PageTitle({ title, subtitle = "", highlight = "", bgc = "#ffffff" }) {
   }
 
   return (
-    <section className="full-container diagonal-page-title" style={{ backgroundColor: bgc }}>
+    <section
+      className="full-container diagonal-page-title"
+      style={{ backgroundColor: bgc }}
+    >
       <div className="full-container diagonal-title">
         <div className="title-container">
           <h1 className="title-page">
-            {title}{" "}
+           {renderHighlight(title)}{" "}
             {subtitle ? <span className="subtitle-page">{subtitle}</span> : ""}
           </h1>
 
-          <motion.p
+          <p
             className="content"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ margin: "-200px", once: true }}
-            variants={container}
+            // initial="hidden"
+            // whileInView="visible"
+            // viewport={{ margin: "-200px", once: true }}
+            // variants={container}
           >
             {renderHighlight(highlight)}
-          </motion.p>
+          </p>
         </div>
       </div>
     </section>

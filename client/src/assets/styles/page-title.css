@@ -18,9 +18,12 @@
 }
 
 .diagonal-page-title .title-page{
-  font-size: 24px;
+  font-family: var(--title-font);
+  font-size: 48px;
   font-weight: 700;
+  line-height: 1;
 }
+
 
 .title-page .subtitle-page{
   font-weight: 400;
@@ -28,8 +31,6 @@
 }
 
 .diagonal-page-title{
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   z-index: 9999;
 }
 
@@ -54,12 +55,7 @@
   }
   
   .diagonal-page-title .title-page{
-    font-size: 24px;
-  }
-
-  .diagonal-page-title{
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
-    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+    font-size: 54px;
   }
 }
 
@@ -70,19 +66,29 @@
     display: grid;
     -ms-grid-columns: 2fr 3fr;
     grid-template-columns: 2fr 3fr;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
-    align-items: flex-start;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-  }  
+    gap: 50px;
+  }
+  .diagonal-page-title .title-page{
+    font-size: 70px;
+    text-align: right;
+    line-height: .5;
+  }
+
+  .diagonal-page-title .title-page strong{
+    font-size: 140px;
+  }
 }
 
 @media (min-width:1280px){
   .title-container{
     width: 1140px;
-    gap: 50px;
+    gap: 70px;
   }
 
   .diagonal-page-title{
@@ -96,8 +102,11 @@
   }
   
   .diagonal-page-title .title-page{
-    font-size: 48px;
-    font-weight: 700;
+    font-size: 100px;
+  }
+
+  .diagonal-page-title .title-page strong{
+    font-size: 170px;
   }
 
   .diagonal-page-title .content{
@@ -107,8 +116,6 @@
 
 @media (min-width:1366px){
   .diagonal-title{
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 80%);
-    clip-path: polygon(0 0, 100% 0, 100% 80%, 0% 80%);
     padding: 70px 20px;
   }
 

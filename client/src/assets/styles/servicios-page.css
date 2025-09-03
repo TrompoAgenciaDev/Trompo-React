@@ -29,12 +29,18 @@
   align-items: center;
 }
 
-.diagonal-invertida{
+.diagonal-invertida:nth-child(2){
   -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 90%);
   clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 90%);
 }
 
-.diagonal:not(.diagonal:last-child){
+.diagonal-invertida:nth-child(1){
+  margin-top: 0px;
+  -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 100%);
+}
+
+.diagonal{
   -webkit-clip-path: polygon(0 0, 100% 10%, 100% 90%, 0 100%);
   clip-path: polygon(0 0, 100% 10%, 100% 90%, 0 100%);
   background-color: #FEE070;
@@ -42,14 +48,7 @@
   margin-top: -60px;
 }
 
-.diagonal:last-child{
-  margin-top: -60px;
-  -webkit-clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 100%);
-  clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 100%);
-}
-
 .diagonal-invertida{
-  margin-top: -25px;
   overflow: hidden;
 }
 
@@ -226,24 +225,23 @@
   }
 
   .grid-item-service p{
-    font-size: 15px;
+    font-size: 14px;
   }
 
-  .diagonal-invertida{
+  .diagonal-invertida:nth-child(2){
     -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 90%);
     clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 90%);
     padding-top: 20px;
   }
 
-  .diagonal:not(.diagonal:last-child){
-    -webkit-clip-path: polygon(0 0, 100% 10%, 100% 90%, 0 100%);
-    clip-path: polygon(0 0, 100% 10%, 100% 90%, 0 100%);
-    margin-top: -90px;
+  .diagonal-invertida:last-child{
+    -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
+    clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
   }
 
-  .diagonal:last-child{
-    -webkit-clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
-    clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
+  .diagonal{
+    -webkit-clip-path: polygon(0 0, 100% 10%, 100% 90%, 0 100%);
+    clip-path: polygon(0 0, 100% 10%, 100% 90%, 0 100%);
     margin-top: -90px;
   }
 
@@ -272,7 +270,7 @@
   }
 
   .title-portfolio-container p{
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 
@@ -285,6 +283,7 @@
     justify-items: flex-end;
     gap: 0;
   }
+  
 
   .grid-content > .grid-item-service:first-child{
     max-width: 700px;
@@ -313,20 +312,26 @@
     padding: 0 50px 0;
   }
 
-  .diagonal-invertida{
+  .diagonal-invertida:first-child{
+    margin-top: -50px;
+    margin-bottom: 20px;
+  }
+
+  .diagonal-invertida:nth-child(2){
     -webkit-clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0 85%);
     clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0 85%);
   }
 
-  .diagonal:not(.diagonal:last-child){
-    -webkit-clip-path: polygon(0 0, 100% 5%, 100% 85%, 0 100%);
-    clip-path: polygon(0 0, 100% 5%, 100% 85%, 0 100%);
+  .diagonal-invertida:last-child{
+    margin-top: -60px;
+    -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
+    clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
   }
 
-  .diagonal:last-child{
-    -webkit-clip-path: polygon(0 0, 100% 8%, 100% 100%, 0 100%);
-    clip-path: polygon(0 0, 100% 8%, 100% 100%, 0 100%);
-    margin-top: 0px;
+  .diagonal{
+    -webkit-clip-path: polygon(0 0, 100% 5%, 100% 85%, 0 100%);
+    clip-path: polygon(0 0, 100% 5%, 100% 85%, 0 100%);
+    margin-top: -50px;
   }
 
   .grid-item-service h2{
@@ -334,15 +339,7 @@
   }
 
   .grid-item-service p{
-    font-size: 15px;
-  }
-
-  .diagonal-invertida{
-    margin-top: -90px;
-  }
-
-  .diagonal:last-child{
-    margin-top: -70px;
+    font-size: 14px;
   }
 
   .values-section .grid-container{
@@ -376,9 +373,13 @@
 }
 
 @media (min-width: 1280px) {
-  .diagonal-invertida{
+  .diagonal-invertida:nth-child(2){
     -webkit-clip-path: polygon(0 80px, 100% 0%, 100% 100%, 0 80%);
     clip-path: polygon(0 80px, 100% 0%, 100% 100%, 0 80%);
+    margin-top: -80px;
+  }
+
+  .diagonal-invertida:last-child{
     margin-top: -80px;
   }
   
@@ -386,16 +387,10 @@
     max-width: 800px;
   }
 
-  .diagonal:not(.diagonal:last-child){
+  .diagonal{
     -webkit-clip-path: polygon(0 0, 100% 85px, 100% 320px, 0 100%);
     clip-path: polygon(0 0, 100% 85px, 100% 320px, 0 100%);
-    margin-top: -85px;
-  } 
-
-  .diagonal:last-child{
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    margin-top: -85px;
+    margin-top: -110px;
   }
 
   .diagonal-invertida .grid-content {
@@ -415,7 +410,7 @@
 
   .diagonal-invertida .more-info-button{
     padding-left: 30px;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .more-info-button svg{
@@ -484,32 +479,21 @@
   .diagonal-invertida{
     -webkit-clip-path: polygon(0 20%, 100% 0%, 100% 100%, 0 80%);
     clip-path: polygon(0 20%, 100% 0%, 100% 100%, 0 80%);
-    margin-top: 0;
+  }  
+
+  .diagonal-invertida:last-child{
+    margin-top: -110px;
   }
 
-  .diagonal:not(.diagonal:last-child){
+  .diagonal{
     -webkit-clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
     clip-path: polygon(0 0, 100% 20%, 100% 80%, 0 100%);
-    margin-top: -100px;
-  } 
-
-  .diagonal:last-child{
-    -webkit-clip-path: polygon(0 0, 100% 12%, 100% 100%, 0 100%);
-    clip-path: polygon(0 0, 100% 12%, 100% 100%, 0 100%);
-    margin-top: 50px;
-    padding-top: 0;
+    margin-top: -120px;
   }
 
   .diagonal-invertida .grid-content {
     -ms-grid-columns: 4fr 3fr;
     grid-template-columns: 4fr 3fr;
-    -ms-grid-rows: 470px;
-    grid-template-rows: 470px;
-  }
-
-  .diagonal .grid-content {
-    -ms-grid-columns: 3fr 4fr;
-    grid-template-columns: 3fr 4fr;
     -ms-grid-rows: 470px;
     grid-template-rows: 470px;
   }
@@ -524,6 +508,13 @@
     margin-top: -100px;
   }
 
+  .diagonal .grid-content {
+    -ms-grid-columns: 3fr 4fr;
+    grid-template-columns: 3fr 4fr;
+    -ms-grid-rows: 470px;
+    grid-template-rows: 470px;
+  }
+
   .grid-item-service h2{
     font-size: 26px;
     width: 100%;
@@ -533,13 +524,13 @@
   .diagonal-invertida .grid-item-service:first-child p{
     width: 100%;
     max-width: 700px;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .diagonal .grid-item-service:first-child p{
     width: 100%;
     max-width: 700px;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .service-container-text{
@@ -548,7 +539,7 @@
 
   .diagonal-invertida .more-info-button,
   .diagonal .more-info-button{
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .more-info-button svg{

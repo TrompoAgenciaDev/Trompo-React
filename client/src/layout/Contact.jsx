@@ -8,8 +8,6 @@ const BGS = {
   interaccion: "form-interaccion.webp",
   desarrollo: "form-desarrollo.webp",
   soporte: "form-soporte.webp",
-  // home: "web-bg.webp",
-  // default: "contact-bg.webp",
 };
 
 function Contact({ location = "home" }) {
