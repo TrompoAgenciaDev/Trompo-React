@@ -1,11 +1,10 @@
-// testimonios.jsx
 import { useState, useEffect, useRef, useMemo } from "react";
 import { motion } from "motion/react";
 import useFetchTestimonials from "../hooks/useFetchTestimonials"; // ajusta la ruta si cambia
 import "../assets/styles/testimonials.css";
 
-const INTERVAL = 100000;
-const TRANSITION_S = 0.6;
+const INTERVAL = 4000;
+const TRANSITION_S = 1.2;
 const REPEAT = 5;
 
 function isDesktop() {

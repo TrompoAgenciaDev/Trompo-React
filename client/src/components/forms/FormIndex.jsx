@@ -478,7 +478,7 @@ export default function formIndex() {
               </button>
             </div>
 
-            <input type="text" name="email_address_check" className="input--hidden" />
+            <input hidden type="hidden" name="email_address_check" className="input--hidden" />
             <input type="hidden" name="locale" value="es" />
           </form>
         </div>

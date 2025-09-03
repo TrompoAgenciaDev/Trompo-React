@@ -45,7 +45,7 @@ const Footer = () => {
               iconName="facebook"
               link="https://www.facebook.com/TrompoAgencia/"
             />
-            <Icon iconName="youtube" link="https://x.com/trompo_agencia" />
+            <Icon iconName="x" link="https://x.com/trompo_agencia" />
           </div>
         </div>
         <div className="footer-grid-item">

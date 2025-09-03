@@ -12,7 +12,6 @@ function PageTitle({ title, subtitle = "", highlight = "", bgc = "#ffffff" }) {
     visible: { opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
   };
 
-  // Respeta <strong>/<b> en highlight y anima palabra por palabra
   function renderHighlight(html) {
     if (!html) return null;
 
@@ -30,7 +29,7 @@ function PageTitle({ title, subtitle = "", highlight = "", bgc = "#ffffff" }) {
         return;
       }
 
-      const chunks = tok.split(/(\s+)/); // conserva espacios
+      const chunks = tok.split(/(\s+)/);
       chunks.forEach((chunk, j) => {
         if (!chunk) return;
 
