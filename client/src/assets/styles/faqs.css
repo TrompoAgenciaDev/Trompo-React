@@ -125,6 +125,7 @@
   -moz-transition: background-color .2s ease-in-out;
   -o-transition: background-color .2s ease-in-out;
   transition: background-color .2s ease-in-out;
+  color: #222222;
 }
 
 .accordion-content{
@@ -134,6 +135,7 @@
 .accordion-text{
   padding: 20px 40px 30px;
   font-size: 12px;
+  color: #222222;
 }
 
 .accordion-text ul{
