@@ -15,14 +15,13 @@ import "../../assets/styles/servicios-page.css";
 const Desarrollo = () => {
   return (
     <>
-      <Hero location="desarrollo" />
+      <Hero location="home" />
       <PageTitle
-        title="Desarrollo <strong>.</strong>web"
+        title="Desarrollo <strong>web</strong>"
         subtitle=""
         highlight="<strong>En Trompo</strong> transformamos objetivos de negocio en  <strong>plataformas digitales con propósito.</strong> Unimos estrategia UX</strong>, diseño enfocado en conversión e infraestructura escalable para que tu web no sea solo presencia online, sino un  <strong>activo estratégico que impulsa resultados medibles.</strong>"
         bgc="#FEE070"
-      />
-      
+      />     
 
       <section className="full-container">
         <div className="full-container diagonal-invertida">

@@ -1,17 +1,65 @@
-import React, { useState } from "react"; import ReCAPTCHA from "react-google-recaptcha"; import useFormDesarrollo from
-"../../hooks/useFormDesarrollo"; import "../../assets/styles/form-index.css"; export default function FormIndex() {
-const { loading, error, submitForm } = useFormDesarrollo(); const [captchaToken, setCaptchaToken] = useState(null);
-const handleSubmit = (e) => { e.preventDefault(); if (!captchaToken) { alert("Validá el reCAPTCHA antes de enviar");
-return; } const formData = new FormData(e.target); formData.append("captchaToken", captchaToken); submitForm(formData);
-}; return ( 
+import React, { useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import useFormDesarrollo from "../../hooks/useFormDesarrollo";
+import "../../assets/styles/form-index.css";
+
+export default function FormIndex() {
+  const { loading, error, submitForm, result } = useFormDesarrollo();
+  const [captchaToken, setCaptchaToken] = useState(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!captchaToken) {
+      alert("Validá el reCAPTCHA antes de enviar");
+      return;
+    }
+    console.log("Token generado por reCAPTCHA:", captchaToken); // <<< DEBUG
+    const formData = new FormData(e.target);
+    formData.append("captchaToken", captchaToken);
+    submitForm(formData);
+  };
+
+  return (
     <div className="sib-form">
       <form id="sib-form" onSubmit={handleSubmit}>
-        <div> <input type="text" name="NOMBRE" placeholder="Ingresa tu nombre" required /> </div>
-        <div> <input type="text" name="APELLIDOS" placeholder="Ingresa tu apellido" required /> </div>
-        <div> <input type="email" name="EMAIL" placeholder="Ingresa tu email" required /> </div>
-        <div> <input type="text" name="EMPRESA" placeholder="Ingresa tu empresa" required /> </div>
-        <div className="sms-section"> 
-          <select name="SMS__COUNTRY_CODE" defaultValue="+54">
+        <div>
+          {" "}
+          <input
+            type="text"
+            name="NOMBRE"
+            placeholder="Ingresa tu nombre"
+            required
+          />{" "}
+        </div>
+        <div>
+          {" "}
+          <input
+            type="text"
+            name="APELLIDOS"
+            placeholder="Ingresa tu apellido"
+            required
+          />{" "}
+        </div>
+        <div>
+          {" "}
+          <input
+            type="email"
+            name="EMAIL"
+            placeholder="Ingresa tu email"
+            required
+          />{" "}
+        </div>
+        <div>
+          {" "}
+          <input
+            type="text"
+            name="EMPRESA"
+            placeholder="Ingresa tu empresa"
+            required
+          />{" "}
+        </div>
+        <div className="sms-section">
+          <select name="SMS_COUNTRY_CODE" defaultValue="+54">
             <option value="+93">+93 AF</option>
             <option value="+358">+358 AX</option>
             <option value="+355">+355 AL</option>
@@ -22,7 +70,7 @@ return; } const formData = new FormData(e.target); formData.append("captchaToken
             <option value="+1264">+1264 AI</option>
             <option value="+672">+672 AQ</option>
             <option value="+1268">+1268 AG</option>
-            <option value="+54" selected>+54 AR</option>
+            <option value="+54">+54 AR</option>
             <option value="+374">+374 AM</option>
             <option value="+297">+297 AW</option>
             <option value="+61">+61 AU</option>
@@ -198,25 +246,53 @@ return; } const formData = new FormData(e.target); formData.append("captchaToken
             <option value="+84">+84 VN</option>
             <option value="+260">+260 ZM</option>
             <option value="+263">+263 ZW</option>
-          </select> <input type="tel" name="SMS" placeholder="Número de teléfono" required /> </div>
-        <div> <textarea name="CONSULTA" placeholder="Dejanos tu consulta" rows="4" required />
-
-          </div> 
-            <ReCAPTCHA 
-              sitekey="6LcJBb4rAAAAANkqq3hQH7SIu8JX7-CNFTSkvX1z" 
-              onChange={setCaptchaToken} 
-            />
-            <div className="subtmit-container"> 
-              <button type="submit" disabled={loading}> {loading ? "Enviando..." : "Enviar"} 
-                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="28" viewBox="0 0 27 28" fill="none"> <path d="M0.742188 14.1016H26.4137M26.4137 14.1016L13.5779 1.26831M26.4137 14.1016L13.5779 26.935" stroke="#1E1E1E" strokeLinecap="round" strokeLinejoin="round"/> 
-                </svg> 
-              </button> 
-            </div> 
-        
+          </select>{" "}
+          <input
+            type="tel"
+            name="SMS"
+            placeholder="Número de teléfono"
+            required
+          />{" "}
+        </div>
+        <div>
+          {" "}
+          <textarea
+            name="CONSULTA"
+            placeholder="Dejanos tu consulta"
+            rows="4"
+            required
+          />
+        </div>
+        <div style={{ width: "100%", minWidth: "300px", height:"70px", minHeight:"70px", overflow: "visible" }}>
+          <ReCAPTCHA
+            sitekey="6LfeT8IrAAAAAFB4c-ZQEAnGGXWZM0BlN1sDmHdk"
+            onChange={setCaptchaToken}
+          />
+        </div>
+        <div className="submit-container">
+          <button type="submit" disabled={loading}>
+            {" "}
+            {loading ? "Enviando..." : "Enviar"}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="27"
+              height="28"
+              viewBox="0 0 27 28"
+              fill="none"
+            >
+              {" "}
+              <path
+                d="M0.742188 14.1016H26.4137M26.4137 14.1016L13.5779 1.26831M26.4137 14.1016L13.5779 26.935"
+                stroke="#1E1E1E"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
       </form>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
-
-    </div> 
-  ); 
+    </div>
+  );
 }

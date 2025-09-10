@@ -5,11 +5,11 @@ import Icons from "../components/Icons";
 import "@as/hero.css";
 
 // Videos Desktop
-import HomeVideo from "/assets/hero/home-video.mp4";
+import HomeVideo from "/assets/hero/home.mp4";
 import AboutVideo from "/assets/hero/about-us.mp4";
 import Desarrollo from "/assets/hero/desarrollo-web.mp4";
 // Videos Mobile
-import HomeVideoMobile from "/assets/hero/mobile/home.mp4";
+import HomeVideoMobile from "/assets/hero/mobile/home-mobile.mp4";
 
 const videosByLocation = {
   home: { desktop: HomeVideo, mobile: HomeVideoMobile },

@@ -62,7 +62,7 @@ function PageTitle({ title, subtitle = "", highlight = "", bgc = "#ffffff" }) {
     >
       <div className="full-container diagonal-title">
         <div className="title-container">
-          <h1 className="title-page">
+          <h1 className="title-page condensed">
            {renderHighlight(title)}{" "}
             {subtitle ? <span className="subtitle-page">{subtitle}</span> : ""}
           </h1>

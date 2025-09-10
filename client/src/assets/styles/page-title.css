@@ -18,12 +18,15 @@
 }
 
 .diagonal-page-title .title-page{
-  font-family: var(--title-font);
   font-size: 48px;
-  font-weight: 700;
-  line-height: 1;
+  text-transform: capitalize;
+  color: #DAB013;
 }
 
+.diagonal-page-title .title-page strong{
+  font-family: var(--subtitle-font);
+  font-style: italic;
+}
 
 .title-page .subtitle-page{
   font-weight: 400;
@@ -75,13 +78,8 @@
     gap: 50px;
   }
   .diagonal-page-title .title-page{
-    font-size: 70px;
-    text-align: right;
-    line-height: .5;
-  }
-
-  .diagonal-page-title .title-page strong{
-    font-size: 140px;
+    font-size: 44px;
+    line-height: 1;
   }
 }
 
@@ -102,11 +100,7 @@
   }
   
   .diagonal-page-title .title-page{
-    font-size: 100px;
-  }
-
-  .diagonal-page-title .title-page strong{
-    font-size: 170px;
+    font-size: 80px;
   }
 
   .diagonal-page-title .content{

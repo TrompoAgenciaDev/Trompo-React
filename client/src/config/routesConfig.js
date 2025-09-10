@@ -14,6 +14,9 @@ import Estrategia from "../pages/servicios/Estrategia";
 import Interaccion from "../pages/servicios/Interaccion";
 import Soporte from "../pages/servicios/Soporte";
 
+//Landings
+import Primavera from "../pages/landings/Primavera.jsx";
+
 //templates
 import SinglePost from "../templates/singlePost";
 import SinglePortfolio from "../templates/singlePortfolio";
@@ -48,6 +51,7 @@ const routesConfig = {
     { path: "/not-found", label: "No encontrado", Component: NotFound },
     { path: "/maintenance", label: "Mantenimiento", Component: Maintenance },
     { path: "/gracias", label: "gracias", Component: Gracias },
+    { path: "/primavera", label: "Landing Primavera", Component: Primavera },
   ],
 };
 

@@ -1,25 +1,34 @@
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useState } from "react";
 
 export default function useFormDesarrollo() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const navigate = useNavigate();
+  const [result, setResult] = useState(null);
+
   const submitForm = async (formData) => {
     setLoading(true);
     setError(null);
+    setResult(null);
+
     try {
-      const response = await fetch(`${import.meta.env.BASE_URL}form-handler.php`, {
-        method: "POST",
-        body: formData,
-      });
-      const result = await response.json();
-      if (result.success) {
+      const response = await fetch(
+        `${import.meta.env.BASE_URL}form-handler.php`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      const json = await response.json();
+      console.log("Respuesta del PHP:", json);
+      setResult(json);
+
+      if (json.success) {
         setSuccess(true);
-        navigate("/gracias");
+        window.location.href = `${import.meta.env.BASE_URL}gracias`;
       } else {
-        throw new Error(result.error || "Error al enviar el formulario");
+        throw new Error(json.error || "Error al enviar el formulario");
       }
     } catch (err) {
       setError(err.message || "Hubo un error desconocido.");
@@ -27,10 +36,6 @@ export default function useFormDesarrollo() {
       setLoading(false);
     }
   };
-  return {
-    loading,
-    error,
-    success,
-    submitForm
-  };
+
+  return { loading, error, success, submitForm, result };
 }
