@@ -1,0 +1,29 @@
+# Dependencias
+node_modules/
+.pnp
+.pnp.js
+
+# Archivos de build y cache
+dist/
+build/
+.cache/
+.vite/
+*.log
+
+# Configs locales
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# SO
+.DS_Store
+Thumbs.db
+
+# Archivos temporales y backups
+*.zip
+*.tar
+*.tmp
+*.bak
+*.swp

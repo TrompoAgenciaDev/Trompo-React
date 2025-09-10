@@ -12,25 +12,36 @@ export default function useFormDesarrollo() {
     setResult(null);
 
     try {
-      const response = await fetch(
-        `${import.meta.env.BASE_URL}form-handler.php`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const url = `${import.meta.env.BASE_URL}form-handler.php`;
+      console.log("Enviando a:", url);
 
-      const json = await response.json();
-      console.log("Respuesta del PHP:", json);
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
+
+      console.log("HTTP status:", response.status);
+
+      const text = await response.text();
+      console.log("Respuesta cruda del PHP:", text);
+
+      let json;
+      try {
+        json = JSON.parse(text);
+      } catch {
+        throw new Error("La respuesta del servidor no es JSON válido");
+      }
+
+      console.log("Respuesta parseada:", json);
       setResult(json);
 
       if (json.success) {
         setSuccess(true);
         window.location.href = `${import.meta.env.BASE_URL}gracias`;
-      } else {
-        throw new Error(json.error || "Error al enviar el formulario");
       }
+      
     } catch (err) {
+      console.error("Error en fetch:", err);
       setError(err.message || "Hubo un error desconocido.");
     } finally {
       setLoading(false);
