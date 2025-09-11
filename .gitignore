@@ -5,7 +5,9 @@ node_modules/
 
 # Archivos de build y cache
 dist/
+client/dist/
 build/
+client/build/
 .cache/
 .vite/
 *.log
