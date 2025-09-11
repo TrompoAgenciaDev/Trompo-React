@@ -43,14 +43,16 @@ $payload = [
     "updateEnabled" => true,
     "email" => $email,
     "attributes" => [
-        "FIRSTNAME" => $nombre,
-        "LASTNAME"  => $apellidos,
-        "COMPANY"   => $empresa,
+        "NOMBRE"    => $nombre,
+        "APELLIDOS" => $apellidos,
+        "EMPRESA"   => $empresa,
         "SMS"       => $smsCode . $smsNum,
+        "WHATSAPP"  => $smsCode . $smsNum,
         "CONSULTA"  => $consulta
     ],
     "listIds" => [(int)$listId]
 ];
+
 // print_r($payload);
 
 // === Enviar a Brevo ===
