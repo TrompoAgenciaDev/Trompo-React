@@ -3,8 +3,6 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// composer require getbrevo/brevo-php "1.x.x"
-
 header('Content-Type: application/json; charset=utf-8');
 
 // === CARGAR .ENV MANUALMENTE ===
@@ -53,7 +51,7 @@ $payload = [
     ],
     "listIds" => [(int)$listId]
 ];
-//print_r($payload);
+// print_r($payload);
 
 // === Enviar a Brevo ===
 $ch = curl_init("https://api.brevo.com/v3/contacts");
@@ -66,9 +64,9 @@ curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
 
 $response = curl_exec($ch);
-echo "resultado: ";
-print_r($response);
-echo 'fin resultado';
+// echo "resultado: ";
+// print_r($response);
+// echo 'fin resultado';
 
 if ($response === false) {
     echo json_encode([
