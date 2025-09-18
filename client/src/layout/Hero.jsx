@@ -64,8 +64,15 @@ const Hero = ({ location = "home" }) => {
         id={location === "home" ? "hero" : undefined}
       >
         {videoSrc && (
-          <video key={videoSrc} autoPlay loop muted playsInline>
-            <source src={videoSrc} type="video/mp4" />
+          <video 
+            key={videoSrc}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            >
+              <source src={videoSrc} type="video/mp4" />
           </video>
         )}
       </div>
