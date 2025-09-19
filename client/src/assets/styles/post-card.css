@@ -28,7 +28,8 @@
   width: 100%;
   aspect-ratio: 4/5;
   overflow: hidden;
-  background: #eee
+  background: #eeeeee;
+  border-radius: 20px;
 }
 
 .post-media {
@@ -74,7 +75,7 @@
   }
 
   .post-title {
-    font-size: 18px;
+    font-size: 15px;
   }
 
   .desarrollo-post .post-title-section{
@@ -92,6 +93,7 @@
   }
 
   .post-title {
-    font-size: 24px;
+    font-size: 18px;
+    padding: 0 10px;
   }
 }

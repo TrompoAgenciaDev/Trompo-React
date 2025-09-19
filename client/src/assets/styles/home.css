@@ -190,4 +190,16 @@ p{
   .social-post-container{
     height: 700px;  
   }
+  .post-container-home{
+    padding: 50px 0 100px;
+  }  
+  .separator{
+    height: 70px;
+  }
+
+  .max-text{
+    width: 100%;
+    max-width: 1024px;
+    padding: 80px 0;
+  }
 }

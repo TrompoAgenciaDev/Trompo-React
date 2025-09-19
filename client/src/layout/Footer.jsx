@@ -16,7 +16,7 @@ const Footer = () => {
           </a>
         </div>
         <div className="footer-grid-item">
-          {/* <div className="footer-menu">
+          <div className="footer-menu">
             <Menu
               menuType="mainFooter"
               routes={routesConfig}
@@ -31,7 +31,7 @@ const Footer = () => {
               classMenu="footer-menu-items"
               location="footer"
             />
-          </div> */}
+          </div>
           <div className="social-icons">
             <Icon
               iconName="instagram"

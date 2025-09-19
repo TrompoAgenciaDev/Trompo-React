@@ -20,6 +20,7 @@ const Home = () => {
     <p>
       Somos una agencia digital que combina{" "}
       <span className="bold">creatividad, estrategia y tecnología</span>
+      {" "}
       para diseñar soluciones integrales que generan impacto.
     </p>
   );
@@ -29,12 +30,26 @@ const Home = () => {
 
       <section className="post-hero-section full-container">
         <PostHero text={text} />
-        <p>
-          En Trompo entendemos que una marca no se mantiene estática: evoluciona. Por eso combinamos estrategia, creatividad e innovación tecnológica para diseñar soluciones digitales que impulsan el crecimiento, fortalecen la identidad y generan resultados medibles. Nos involucramos en cada etapa del proceso, acompañando a nuestros clientes con una visión integral que conecta a las marcas con sus audiencias de manera auténtica, relevante y sostenida en el tiempo
-        </p>
-
       </section>
-      
+
+      <section className="post-hero-section full-container">
+        <div className="bg-yellow separator full-container"></div>
+        <div className="container max-text">
+          <p>
+            <strong>
+              En Trompo entendemos que una marca no se mantiene estática:
+              evoluciona.
+            </strong>{" "}
+            Por eso combinamos estrategia, creatividad e innovación tecnológica
+            para diseñar soluciones digitales que impulsan el crecimiento,
+            fortalecen la identidad y generan resultados medibles. Nos
+            involucramos en cada etapa del proceso, acompañando a nuestros
+            clientes con una visión integral que conecta a las marcas con sus
+            audiencias de manera auténtica, relevante y sostenida en el tiempo
+          </p>
+        </div>
+      </section>
+
       {/* Servicios que se ofrecen */}
       <Services />
 
@@ -45,7 +60,7 @@ const Home = () => {
         </div>
 
         {/* Todos los Proyectos */}
-        <div className="container home-content">
+        {/* <div className="container home-content">
           <motion.p
             className="text-show-effect-1"
             initial="hidden"
@@ -91,75 +106,13 @@ const Home = () => {
               />
             </svg>
           </Link>
-        </div>
+        </div> */}
       </section>
 
-      
       {/* formulario */}
       <Contact location="home" />
 
-      
-      {/* Carrusel de logos + imagen grande */}
-      <section className="full-container">
-        <div className="slider-container container">
-          <CustomerSlider />
-        </div>
-
-        <div className="banner full-container">
-          <picture className="full-container mobile-banner">
-            <source srcSet={`${
-                  import.meta.env.BASE_URL
-                }banner2-home-mobile.webp`}type="image/webp" />
-            <source srcSet={`${
-                  import.meta.env.BASE_URL
-                }banner2-home-mobile.png`}
-              type="image/png" />
-            <img src={`${
-                  import.meta.env.BASE_URL
-                }banner2-home-mobile.png`}
-              alt="Banner Home" />
-          </picture>
-          <picture className="full-container desktop-banner">
-            <source srcSet={`${
-                  import.meta.env.BASE_URL
-                }banner2-home-desktop.webp`}type="image/webp" />
-            <source srcSet={`${
-                  import.meta.env.BASE_URL
-                }banner2-home-desktop.png`}type="image/png" />
-            <img src={`${
-                  import.meta.env.BASE_URL
-                }banner2-home-desktop.png`}
-              alt="Banner Home" />
-          </picture>
-        </div>
-      </section>
-
-
-      <section className="full-container">
-        <div className="container text-home">
-          <h3 className="bold">
-            En Trompo, cada estrategia se construye sobre valores fundamentales.
-          </h3>
-          <p>
-            Con 20 años de trayectoria, aprendimos que la confianza se construye
-            con acciones concretas. Así garantizamos no solo éxito inmediato,
-            sino crecimiento perdurable para su marca.
-          </p>
-        </div>
-      </section>
-
-      <section className="full-container grid-text">
-        <div className="grid-text-home">
-          <span>Resultados medibles</span>
-        </div>
-        <div className="grid-text-home">
-          <span>Transparencia total</span>
-        </div>
-        <div className="grid-text-home">
-          <span>Compromiso a largo plazo</span>
-        </div>
-      </section>
-
+      {/* Redes Sociales */}
       <section className="full-container">
         <div className="container social-post-container">
           <motion.p
@@ -179,7 +132,7 @@ const Home = () => {
                   initial={{ opacity: 0.1 }}
                   whileInView={{ opacity: 1 }}
                   transition={{
-                    delay: (lineIdx * 0.3) + wordIdx * 0.05,
+                    delay: lineIdx * 0.3 + wordIdx * 0.05,
                     duration: 0.6,
                   }}
                 >
@@ -193,7 +146,8 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="full-container">
+      {/* Blog - notas */}
+      <section className="full-container post-container-home">
         <PostCard initialLimit={3} maxLimit={3} category={"desarrollo web"} />
         {/* <div className="container text-show-effect post-notes">
           <span>
@@ -220,6 +174,69 @@ const Home = () => {
         </div> */}
       </section>
 
+      {/* Carrusel de logos + imagen grande */}
+      <section className="full-container">
+        <div className="slider-container container">
+          <CustomerSlider />
+        </div>
+
+        <div className="banner full-container">
+          <picture className="full-container mobile-banner">
+            <source
+              srcSet={`${import.meta.env.BASE_URL}banner2-home-mobile.webp`}
+              type="image/webp"
+            />
+            <source
+              srcSet={`${import.meta.env.BASE_URL}banner2-home-mobile.png`}
+              type="image/png"
+            />
+            <img
+              src={`${import.meta.env.BASE_URL}banner2-home-mobile.png`}
+              alt="Banner Home"
+            />
+          </picture>
+          <picture className="full-container desktop-banner">
+            <source
+              srcSet={`${import.meta.env.BASE_URL}banner2-home-desktop.webp`}
+              type="image/webp"
+            />
+            <source
+              srcSet={`${import.meta.env.BASE_URL}banner2-home-desktop.png`}
+              type="image/png"
+            />
+            <img
+              src={`${import.meta.env.BASE_URL}banner2-home-desktop.png`}
+              alt="Banner Home"
+            />
+          </picture>
+        </div>
+      </section>
+
+      <section className="full-container">
+        <div className="container text-home">
+          <h3 className="bold">
+            En Trompo, cada estrategia se construye sobre valores fundamentales.
+          </h3>
+          <p>
+            Con 20 años de trayectoria, aprendimos que la confianza se construye
+            con acciones concretas. Así garantizamos no solo éxito inmediato,
+            sino crecimiento perdurable para su marca.
+          </p>
+        </div>
+      </section>
+
+      <section className="full-container grid-text">
+        <div className="grid-text-home">
+          <span>Resultados medibles</span>
+        </div>
+        <div className="grid-text-home">
+          <span>Transparencia total</span>
+        </div>
+        <div className="grid-text-home">
+          <span>Compromiso a largo plazo</span>
+        </div>
+      </section>
+
       <section className="full-container bg-yellow testimonial-wrapper">
         <div className="container testimonial-header">
           <h4>La voz de nuestros clientes.</h4>
@@ -232,7 +249,6 @@ const Home = () => {
           <Testimonials size={2} />
         </div>
       </section>
-
     </main>
   );
 };
