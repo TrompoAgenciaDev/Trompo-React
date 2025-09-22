@@ -120,6 +120,15 @@ p{
   margin-left: 50px;
 }
 
+.portfolio-home-3d:before{
+  content: "";
+  width: 100%;
+  height: 60%;
+  background-color: #FEE070;
+  position: absolute;
+  top: 0;
+}
+
 @media (min-width: 768px) {
   .text-show-effect *{
     font-size: 19px;

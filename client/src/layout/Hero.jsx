@@ -64,15 +64,15 @@ const Hero = ({ location = "home" }) => {
         id={location === "home" ? "hero" : undefined}
       >
         {videoSrc && (
-          <video 
+          <video
             key={videoSrc}
             autoPlay
             loop
             muted
             playsInline
             preload="metadata"
-            >
-              <source src={videoSrc} type="video/mp4" />
+          >
+            <source src={videoSrc} type="video/mp4" />
           </video>
         )}
       </div>
@@ -86,7 +86,13 @@ const Hero = ({ location = "home" }) => {
       if (window.scrollY >= 40) setRevealed(true);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    const timer = setTimeout(() => setRevealed(true), 2000);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (

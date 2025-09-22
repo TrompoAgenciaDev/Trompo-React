@@ -8,18 +8,25 @@ import StoricalClients from "../layout/StoricalClients";
 import "../assets/styles/about.css";
 
 const Nosotros = () => {
-  const text = (
-    <p className="text-posthero">
-      En Trompo <span className="bold">no creemos en soluciones mágicas. </span>
-      Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real.
-      Desde Córdoba Capital, ayudamos a empresas a convertir desafíos digitales
-      en ventajas competitivas.
-    </p>
-  );
   return (
     <>
       <Hero location="about" />
-      <PostHero text={text} />
+      <section className="post-hero-section full-container">
+        <div className="container max-text">
+          <p>
+            <strong>
+              En Trompo entendemos que una marca no se mantiene estática:
+              evoluciona.
+            </strong>{" "}
+            Por eso combinamos estrategia, creatividad e innovación tecnológica
+            para diseñar soluciones digitales que impulsan el crecimiento,
+            fortalecen la identidad y generan resultados medibles. Nos
+            involucramos en cada etapa del proceso, acompañando a nuestros
+            clientes con una visión integral que conecta a las marcas con sus
+            audiencias de manera auténtica, relevante y sostenida en el tiempo
+          </p>
+        </div>
+      </section>
 
       <section className="bg-yellow full-container">
         <div className="container about-content">
@@ -133,11 +140,13 @@ const Nosotros = () => {
 
       <section className="full-container about-section">
         <div className="container about-content-text">
-          <h2>
-            Un equipo que se mueve con vos
-          </h2>
+          <h2>Un equipo que se mueve con vos</h2>
           <p>
-            En Trompo creemos que las marcas que crecen nunca se quedan quietas. Por eso, nuestro equipo tampoco. Somos profesionales del marketing, la creatividad, la tecnología y la estrategia, con una misma convicción: trabajar codo a codo con cada cliente, como parte de su equipo.
+            En Trompo creemos que las marcas que crecen nunca se quedan quietas.
+            Por eso, nuestro equipo tampoco. Somos profesionales del marketing,
+            la creatividad, la tecnología y la estrategia, con una misma
+            convicción: trabajar codo a codo con cada cliente, como parte de su
+            equipo.
           </p>
         </div>
         <div className="container">
@@ -145,11 +154,11 @@ const Nosotros = () => {
         </div>
       </section>
 
-      <StoricalClients/>
-      
       <section className="full-container">
-        <Values/>
+        <Values />
       </section>
+
+      <StoricalClients />
     </>
   );
 };

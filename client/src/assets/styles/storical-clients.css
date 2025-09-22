@@ -161,6 +161,9 @@
 }
 
 @media (min-width: 1280px) {
+  .storical{
+    padding-top: 50px;
+  }
   .storical-name {
     font-size: 20px;
     font-weight: 500;

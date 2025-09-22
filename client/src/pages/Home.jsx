@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
-
 //styles
 import "../assets/styles/home.css";
 import { motion } from "motion/react";
 
 //components
-import VideoSlider from "../components/sliders/VideoSlider";
 import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import PubliSlides from "../components/sliders/PubliSlides";
 import Testimonials from "../components/Testimonials";
@@ -13,15 +11,15 @@ import PostCard from "../components/posts/PostCard";
 import Hero from "../layout/Hero";
 import Services from "../layout/Services";
 import Contact from "../layout/Contact";
-import PostHero from "../components/PostHero.jsx";
+import PostHero from "../components/PostHero";
+import Portfolio3d from "../layout/Portfolio3d";
 
 const Home = () => {
   const text = (
     <p>
       Somos una agencia digital que combina{" "}
-      <span className="bold">creatividad, estrategia y tecnología</span>
-      {" "}
-      para diseñar soluciones integrales que generan impacto.
+      <span className="bold">creatividad, estrategia y tecnología</span> para
+      diseñar soluciones integrales que generan impacto.
     </p>
   );
   return (
@@ -54,60 +52,9 @@ const Home = () => {
       <Services />
 
       {/* Portfolio - clientes grandes */}
-      <section className="video-section full-container">
-        <div className="full-container">
-          <VideoSlider location={"home"} />
-        </div>
-
-        {/* Todos los Proyectos */}
-        {/* <div className="container home-content">
-          <motion.p
-            className="text-show-effect-1"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ margin: "-300px" }}
-            variants={{ hidden: {}, visible: {} }}
-          >
-            {[
-              "Detrás de cada proyecto hay un antes de incertidumbre y un después con metas superadas. Mostramos el proceso, no solo el brillo final. Porque en marketing, lo que no se mide es humo.",
-            ].map((line, lineIdx) =>
-              line.split(" ").map((word, wordIdx) => (
-                <motion.span
-                  key={`${lineIdx}-${wordIdx}`}
-                  style={{ display: "inline-block", marginRight: "0.25em" }}
-                  initial={{ opacity: 0.1 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{
-                    delay: lineIdx * 0.3 + wordIdx * 0.05,
-                    duration: 0.6,
-                  }}
-                >
-                  {word}
-                </motion.span>
-              ))
-            )}
-          </motion.p>
-
-          <Link href="#" className="read-more-link">
-            Todos los proyectos
-            <svg
-              width="38"
-              height="38"
-              viewBox="0 0 38 38"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-                stroke="#1E1E1E"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Link>
-        </div> */}
-      </section>
+      <div className="full-container portfolio-home-3d">
+        <Portfolio3d location="desarrollo" categoria="3d"/>
+      </div>
 
       {/* formulario */}
       <Contact location="home" />
@@ -149,29 +96,6 @@ const Home = () => {
       {/* Blog - notas */}
       <section className="full-container post-container-home">
         <PostCard initialLimit={3} maxLimit={3} category={"desarrollo web"} />
-        {/* <div className="container text-show-effect post-notes">
-          <span>
-            Guías, casos y análisis para optimizar tu presencia digital.
-          </span>
-          <Link to={"#"} className="read-more-link">
-            Ver todas las notas
-            <svg
-              width="38"
-              height="38"
-              viewBox="0 0 38 38"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-                stroke="#1E1E1E"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Link>
-        </div> */}
       </section>
 
       {/* Carrusel de logos + imagen grande */}

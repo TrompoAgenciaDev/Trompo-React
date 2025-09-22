@@ -32,12 +32,12 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
         onMouseLeave={NormalSpeed}
         animate={{ x: ["-0%", "-300%"] }}
         transition={{ ease: "linear", duration: velocityReduction, repeat: Infinity }}
-        href={location === "desarrollo" ? enlacePortfolio : undefined}  // <- sin resolveUrl
+        href={location === "desarrollo" ? enlacePortfolio : undefined}
         target="_blank"
         rel="noreferrer"
         data-id={id}
         className="portfolio-card"
-        style={{ backgroundImage: `url(${backgroundImage})` }}         // <- sin resolveUrl
+        style={{ backgroundImage: `url(${backgroundImage})` }}
         onClick={handleClick}
         draggable={false}
       >
