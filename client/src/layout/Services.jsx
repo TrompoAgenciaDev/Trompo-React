@@ -12,30 +12,12 @@ function Services() {
   return (
     <section className="bg-yellow full-container services">
       <div className="banner full-container">
-        <picture className="full-container mobile-banner">
-          <source
-            srcSet={`${
-              import.meta.env.BASE_URL
-            }assets/services/services-bg.webp`}
-            type="image/webp"
-          />
-          <img
-            src={`${import.meta.env.BASE_URL}assets/services/services-bg.webp`}
-            alt="Banner Home"
-          />
-        </picture>
-        <picture className="full-container desktop-banner">
-          <source
-            srcSet={`${
-              import.meta.env.BASE_URL
-            }assets/services/services-bg.webp`}
-            type="image/webp"
-          />
-          <img
-            src={`${import.meta.env.BASE_URL}assets/services/services-bg.webp`}
-            alt="Banner Home"
-          />
-        </picture>
+        <video
+          src={`${import.meta.env.BASE_URL}assets/services/loop.mp4`}
+          autoPlay
+          muted
+          loop
+        ></video>
       </div>
 
       <div className="container">

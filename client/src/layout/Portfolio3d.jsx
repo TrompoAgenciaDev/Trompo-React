@@ -71,8 +71,8 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
                 key={`${item.id}-${index}`}
                 id={item.id}
                 title={item.title}
-                backgroundImage={item.vertical_image}     // ya normalizada por el hook
-                enlacePortfolio={item.enlacePortfolio}    // externa https, no resolver
+                backgroundImage={item.vertical_image}
+                enlacePortfolio={item.enlacePortfolio}
                 draggingRef={draggingRef}
               />
             );

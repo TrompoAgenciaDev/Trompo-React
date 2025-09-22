@@ -53,14 +53,30 @@ const Home = () => {
 
       {/* Portfolio - clientes grandes */}
       <div className="full-container portfolio-home-3d">
-        <Portfolio3d location="desarrollo" categoria="3d"/>
+        <div className="full-container title-portfolio-container">
+          <div className="container"></div>
+          <div className="container">
+            <h3 className="portfolio3d-title">Proyectos con impacto</h3>
+            <p>
+              Cada proyecto en nuestro portfolio muestra cómo transformamos
+              ideas en experiencias tangibles. A través de colaboraciones
+              estratégicas, desarrollamos soluciones que conectan con las
+              audiencias y generan valor perdurable para cada negocio.
+            </p>
+          </div>
+        </div>
+        <Portfolio3d location="desarrollo" categoria="3d" />
+
+        <div className="slider-container container">
+          <CustomerSlider />
+        </div>
       </div>
 
       {/* formulario */}
       <Contact location="home" />
 
       {/* Redes Sociales */}
-      <section className="full-container">
+      <section className="full-container social-post-container-full">
         <div className="container social-post-container">
           <motion.p
             className="text-show-effect"
@@ -93,43 +109,34 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Blog - notas */}
-      <section className="full-container post-container-home">
-        <PostCard initialLimit={3} maxLimit={3} category={"desarrollo web"} />
-      </section>
-
       {/* Carrusel de logos + imagen grande */}
       <section className="full-container">
-        <div className="slider-container container">
-          <CustomerSlider />
-        </div>
-
         <div className="banner full-container">
           <picture className="full-container mobile-banner">
             <source
-              srcSet={`${import.meta.env.BASE_URL}banner2-home-mobile.webp`}
+              srcSet={`${import.meta.env.BASE_URL}sala.webp`}
               type="image/webp"
             />
             <source
-              srcSet={`${import.meta.env.BASE_URL}banner2-home-mobile.png`}
+              srcSet={`${import.meta.env.BASE_URL}sala-d.png`}
               type="image/png"
             />
             <img
-              src={`${import.meta.env.BASE_URL}banner2-home-mobile.png`}
+              src={`${import.meta.env.BASE_URL}sala-d.png`}
               alt="Banner Home"
             />
           </picture>
           <picture className="full-container desktop-banner">
             <source
-              srcSet={`${import.meta.env.BASE_URL}banner2-home-desktop.webp`}
+              srcSet={`${import.meta.env.BASE_URL}sala.webp`}
               type="image/webp"
             />
             <source
-              srcSet={`${import.meta.env.BASE_URL}banner2-home-desktop.png`}
+              srcSet={`${import.meta.env.BASE_URL}sala-d.png`}
               type="image/png"
             />
             <img
-              src={`${import.meta.env.BASE_URL}banner2-home-desktop.png`}
+              src={`${import.meta.env.BASE_URL}sala-d.png`}
               alt="Banner Home"
             />
           </picture>
@@ -159,6 +166,11 @@ const Home = () => {
         <div className="grid-text-home">
           <span>Compromiso a largo plazo</span>
         </div>
+      </section>
+
+      {/* Blog - notas */}
+      <section className="full-container post-container-home">
+        <PostCard initialLimit={3} maxLimit={3} category={"desarrollo web"} />
       </section>
 
       <section className="full-container bg-yellow testimonial-wrapper">
