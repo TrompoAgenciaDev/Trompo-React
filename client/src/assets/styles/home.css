@@ -151,7 +151,14 @@ p{
   justify-content: center;
   align-items: center;
   padding: 50px 40px 100px;
-}  
+}
+
+
+.separator{
+  width: 100%;
+  height: 30px;
+}
+
 
 @media (min-width: 768px) {
   .text-show-effect *{
