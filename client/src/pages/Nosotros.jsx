@@ -1,8 +1,8 @@
 import PostHero from "../components/PostHero";
 import Hero from "../layout/Hero";
-import Values from "../layout/Values";
 import Members from "../components/Members";
 import StoricalClients from "../layout/StoricalClients";
+import Contact from "../layout/Contact.jsx";
 
 // styles
 import "../assets/styles/about.css";
@@ -14,16 +14,29 @@ const Nosotros = () => {
       <section className="post-hero-section full-container">
         <div className="container max-text">
           <p>
+            Hace más de una década, Trompo nació con una idea clara: una agencia
+            no es un proveedor, es un <strong>aliado estratégico.</strong>
+            <br />
+            <br />
+            Desde el inicio, nos propusimos involucrarnos de verdad. Entender el
+            ADN de cada marca, sus valores, su visión, su forma de trabajar.
+            Porque solo así se construyen estrategias que importan y relaciones
+            que trascienden.
+            <br />
+            <br />
+            Fuimos testigos —y protagonistas— de la transformación digital:
+            cuando la pauta online era solo un 5% del mix, cuando el "mobile
+            first" todavía no existía. Hoy, con un ecosistema donde{" "}
+            <strong>tecnología, datos, contenido y audiencias</strong> conviven
+            en tiempo real, seguimos acompañando a nuestros clientes con la
+            misma convicción de siempre: <strong>estar cerca.</strong>
+            <br />
+            <br />
+            En Trompo, combinamos{" "}
             <strong>
-              En Trompo entendemos que una marca no se mantiene estática:
-              evoluciona.
-            </strong>{" "}
-            Por eso combinamos estrategia, creatividad e innovación tecnológica
-            para diseñar soluciones digitales que impulsan el crecimiento,
-            fortalecen la identidad y generan resultados medibles. Nos
-            involucramos en cada etapa del proceso, acompañando a nuestros
-            clientes con una visión integral que conecta a las marcas con sus
-            audiencias de manera auténtica, relevante y sostenida en el tiempo
+              Estrategia, Creatividad, Interacción, Desarrollo y Soporte
+            </strong>
+            , para brindar soluciones integrales que generen impacto real.
           </p>
         </div>
       </section>
@@ -154,9 +167,8 @@ const Nosotros = () => {
         </div>
       </section>
 
-      <section className="full-container">
-        <Values />
-      </section>
+      {/* formulario */}
+      <Contact />
 
       <StoricalClients />
     </>

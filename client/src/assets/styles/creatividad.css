@@ -54,7 +54,7 @@
 }
 
 
-.identidad-diagonal:hover:not(.identidad-diagonal:last-child){
+.identidad-diagonal:first-child:not(.identidad-diagonal:last-child){
   background-color: #ffffff;
 }
 
@@ -118,5 +118,9 @@
   
   .identidad-diagonal:nth-child(2) .grid-item-identidad:last-child{
     margin-top: 0;
+  }
+  .identidad-grid{
+    max-width: 1140px;
+    gap: 100px;
   }
 }

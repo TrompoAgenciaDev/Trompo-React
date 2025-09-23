@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 
 import Hero from "../../layout/Hero.jsx";
 import PageTitle from "../../components/services/PageTitle.jsx";
-import Values from "../../layout/Values.jsx";
-import PostCard from "../../components/posts/PostCard.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import Portfolio3d from "../../layout/Portfolio3d.jsx";
 import Faqs from "../../layout/Faqs.jsx";
@@ -15,13 +13,13 @@ import "../../assets/styles/servicios-page.css";
 const Desarrollo = () => {
   return (
     <>
-      <Hero location="home" />
+      <Hero />
       <PageTitle
         title="Desarrollo <strong>web</strong>"
         subtitle=""
         highlight="<strong>En Trompo</strong> transformamos objetivos de negocio en  <strong>plataformas digitales con propósito.</strong> Unimos estrategia UX</strong>, diseño enfocado en conversión e infraestructura escalable para que tu web no sea solo presencia online, sino un  <strong>activo estratégico que impulsa resultados medibles.</strong>"
         bgc="#FEE070"
-      />     
+      />
 
       <section className="full-container">
         <div className="full-container diagonal-invertida">
@@ -250,24 +248,7 @@ const Desarrollo = () => {
         </div>
       </section>
 
-      <div className="full-container bg-yellow-2">
-        <div className="full-container title-portfolio-container">
-          <div className="container"></div>
-          <div className="container">
-            <h3>
-              Transformamos ideas en plataformas digitales que impulsan negocios
-            </h3>
-            <p>
-              Arquitectura técnica impecable, experiencias de usuario intuitivas
-              y resultados medibles que convierten cada proyecto en un activo de
-              crecimiento.
-            </p>
-          </div>
-        </div>
-        <Portfolio3d location="desarrollo" categoria="3d" />
-      </div>
-
-      <Contact location="home" />
+      <Contact />
 
       <section className="full-container bg-yellow testimonial-wrapper">
         <div className="container testimonial-header">
@@ -279,34 +260,8 @@ const Desarrollo = () => {
         </div>
       </section>
 
-      <Faqs location="desarrollo" />
+      <Faqs location="creatividad" />
 
-      {/* <section className="full-container desarrollo-post">
-        <div className="container">
-          <h2 className="post-title-section">Novedades </h2>
-          <PostCard maxLimit={3} category="desarrollo web" />
-        </div>
-        <div className="container">
-          <Link to={"#"} className="read-more-link">
-            Ver todas las notas
-            <svg
-              width="38"
-              height="38"
-              viewBox="0 0 38 38"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-                stroke="#1E1E1E"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Link>
-        </div>
-      </section> */}
       <div className="full-container">
         <CustomerSlider />
       </div>

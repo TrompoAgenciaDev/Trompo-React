@@ -162,7 +162,13 @@
 
 @media (min-width: 1280px) {
   .storical{
-    padding-top: 50px;
+    padding-top: 100px;
+  }
+  .title-historical-container h3{
+    font-size: 28px;
+  }
+  .title-historical-container p{
+    text-align: center;
   }
   .storical-name {
     font-size: 20px;
@@ -170,7 +176,7 @@
     color: #0f172a;
   }
   .storical-panel {
-    padding-bottom: 50px;
+    padding-bottom: 100px;
   }
   .storical-item {
     min-height: 100px;
@@ -182,6 +188,6 @@
     margin-top: 30px;
   }
   .legal-footer-historical p{
-    font-size: 14px;
+    font-size: 12px;
   }
 }

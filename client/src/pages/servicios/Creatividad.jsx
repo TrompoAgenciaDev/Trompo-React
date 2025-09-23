@@ -1,11 +1,11 @@
 import Hero from "../../layout/Hero";
 import PageTitle from "../../components/services/PageTitle";
-import Values from "../../layout/Values";
-import PostCard from "../../components/posts/PostCard";
 import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 import Portfolio3d from "../../layout/Portfolio3d";
 import CreatividadSlider from "../../components/sliders/CreatividadSlider";
+import Testimonials from "../../components/Testimonials.jsx";
+import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 
 //styles
 import "../../assets/styles/creatividad.css";
@@ -88,7 +88,24 @@ const Creatividad = () => {
         <div className="full-container bg-yellow-2 identidad-diagonal">
           
         </div>
+        
       </section>
+            <div className="full-container bg-yellow-2">
+        <div className="full-container title-portfolio-container">
+          <div className="container"></div>
+          <div className="container">
+            <h3>
+              Transformamos ideas en plataformas digitales que impulsan negocios
+            </h3>
+            <p>
+              Arquitectura técnica impecable, experiencias de usuario intuitivas
+              y resultados medibles que convierten cada proyecto en un activo de
+              crecimiento.
+            </p>
+          </div>
+        </div>
+        <Portfolio3d location="desarrollo" categoria="3d" />
+      </div>
 
       <div className="full-container creatividad-video-section">
         <div className="container">
@@ -96,35 +113,22 @@ const Creatividad = () => {
         </div>
       </div>
 
-      <Contact location="creatividad" />
+      <Contact />
+      
+      <section className="full-container bg-yellow testimonial-wrapper">
+        <div className="container testimonial-header">
+          <h4>Más que clientes, aliados estratégicos.</h4>
+          <p>Historias que muestran el valor de trabajar en equipo.</p>
+        </div>
+        <div className="full-container">
+          <Testimonials size={4} />
+        </div>
+      </section>
       <Faqs location="creatividad" />
 
-      <section className="full-container desarrollo-post">
-        <div className="container">
-          <h2>Guías, casos y análisis para optimizar tu presencia digital.</h2>
-          <PostCard maxLimit={3} category="creatividad" />
-        </div>
-        {/* <div className="container">
-          <Link to={"#"} className="read-more-link">
-            Ver todas las notas
-            <svg
-              width="38"
-              height="38"
-              viewBox="0 0 38 38"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-                stroke="#1E1E1E"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Link>
-        </div> */}
-      </section>
+      <div className="full-container">
+        <CustomerSlider />
+      </div>
     </>
   );
 };
