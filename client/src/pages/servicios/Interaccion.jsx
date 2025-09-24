@@ -6,6 +6,7 @@ import Faqs from '../../layout/Faqs';
 import Contact from '../../layout/Contact';
 import Portfolio3d from '../../layout/Portfolio3d';
 import Icons from '../../components/Icons';
+import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 
 
 //styles
@@ -73,8 +74,8 @@ const Interaccion = () => {
         </div>
       </section>
 
-      <div className="full-container">
-        <div className="full-container interaccion-title-portfolio-container bg-yellow-2">
+      <div className="full-container interaccion-title-portfolio-container bg-yellow-2">
+        <div className="full-container">
           <div className="container"></div>
           <div className="container">
             <h3>Proyectos con impacto</h3>
@@ -84,36 +85,13 @@ const Interaccion = () => {
         <Portfolio3d location='interaccion'/>
       </div>
       
-      <Contact location="interaccion"/>
+      <Contact/>
 
       <Faqs location="interaccion"/>
       
-      <section className="full-container desarrollo-post">
-        <div className="container">
-          <h2>Guías, casos y análisis para optimizar tu presencia digital.</h2>
-          <PostCard maxLimit={3} category="interaccion"/>
-        </div>
-        {/* <div className="container">
-          <Link to={"#"} className="read-more-link">
-            Ver todas las notas
-            <svg
-              width="38"
-              height="38"
-              viewBox="0 0 38 38"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-                stroke="#1E1E1E"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Link>
-        </div> */}
-      </section>
+      <div className="full-container">
+        <CustomerSlider />
+      </div>
     </>
   );
 }

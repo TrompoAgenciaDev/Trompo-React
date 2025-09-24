@@ -260,7 +260,7 @@ const Desarrollo = () => {
         </div>
       </section>
 
-      <Faqs location="creatividad" />
+      <Faqs location="desarrollo" />
 
       <div className="full-container">
         <CustomerSlider />

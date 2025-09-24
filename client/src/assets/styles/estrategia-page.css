@@ -147,7 +147,8 @@
   .ads-grid{
     -ms-grid-columns: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
-    width: 900px;
+    width: 1140px;
+    gap: 70px;
   }
   .grid-item-header{
     height: 50px;

@@ -150,23 +150,6 @@ const Estrategia = () => {
           </div>
         </div>
         <Portfolio3d location="estrategia"/>
-      </div>      
-
-      <div className="full-container bg-yellow-2">
-        <div className="full-container title-portfolio-container">
-          <div className="container"></div>
-          <div className="container">
-            <h3>
-              Transformamos ideas en plataformas digitales que impulsan negocios
-            </h3>
-            <p>
-              Arquitectura técnica impecable, experiencias de usuario intuitivas
-              y resultados medibles que convierten cada proyecto en un activo de
-              crecimiento.
-            </p>
-          </div>
-        </div>
-        <Portfolio3d location="desarrollo" categoria="3d" />
       </div>
 
       <Contact/>
@@ -181,7 +164,7 @@ const Estrategia = () => {
         </div>
       </section>
 
-      <Faqs location="desarrollo" />
+      <Faqs location="estrategia" />
 
 
 

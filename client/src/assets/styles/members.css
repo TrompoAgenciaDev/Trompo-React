@@ -137,7 +137,7 @@
 
 @media (min-width: 1024px) {
     .members-container {
-        max-width: 900px;
+        max-width: 800px;
         height: auto;
         min-height: 270px;
     }
@@ -165,7 +165,7 @@
 
 @media (min-width: 1280px) {
     .members-container {
-        max-width: 1140px;
+        max-width: 955px;
         height: auto;
         min-height: 270px;
     }

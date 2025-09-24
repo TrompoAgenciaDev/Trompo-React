@@ -140,7 +140,6 @@
     height: 500px;
     grid-template-columns: 1fr 4fr;
     align-items: flex-start;
-    margin-bottom:-380px;
     padding-top: 35px;
   }
 
@@ -217,7 +216,6 @@
     -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
     clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
     grid-template-columns: 2fr 3fr;
-    margin-bottom:-300px;
     padding-top: 100px;
   }
 
@@ -259,11 +257,10 @@
   }
 
   .interaccion-title-portfolio-container{
-    height: 700px;
+    height: 1000px;
     -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
     clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0 100%);
     grid-template-columns: 1fr 1fr;
-    margin-bottom:-500px;
     padding-top: 150px;
 
   }
