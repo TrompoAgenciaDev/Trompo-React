@@ -18,6 +18,11 @@
   padding-top: 50px;
 }
 
+.interaccion-portfolio-container{
+  -webkit-clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+}
+
 .interaccion-grid{
   display: -ms-grid;
   display: grid;
@@ -89,29 +94,7 @@
 }
 
 /* portfolio 3d*/
-.interaccion-title-portfolio-container{
-  -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
-  clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-content: center;
-  justify-items: center;
-  margin-bottom: 20px;
-  height: 200px;
-}
 
-.interaccion-title-portfolio-container .container:first-child{
-  display: none;
-}
-
-.interaccion-title-portfolio-container h3{
-  font-size: 26px;
-  font-weight: 400;
-}
-
-.interaccion-title-portfolio-container p{
-  font-size: 13px;
-}
 
 @media (min-width: 768px) {
   .grid-item-interaccion:last-child{
@@ -130,25 +113,6 @@
 
   .parr-section-container p{
     font-size: 13px;
-  }
-
-  .interaccion-title-portfolio-container .container:first-child{
-    display: block;
-  }
-
-  .interaccion-title-portfolio-container{
-    height: 500px;
-    grid-template-columns: 1fr 4fr;
-    align-items: flex-start;
-    padding-top: 35px;
-  }
-
-  .interaccion-title-portfolio-container h3{
-    font-size: 28px;
-  }
-
-  .interaccion-title-portfolio-container p{
-    font-size: 15px;
   }
 }
 
@@ -212,16 +176,6 @@
   .parr-section-container p{
     font-size: 14px;
   }
-  .interaccion-title-portfolio-container{
-    -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
-    clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
-    grid-template-columns: 2fr 3fr;
-    padding-top: 100px;
-  }
-
-  .interaccion-title-portfolio-container h3{
-    font-size: 28px;
-  }
 }
 
 @media (min-width: 1280px) {
@@ -237,6 +191,11 @@
     -webkit-clip-path: polygon(0 70%, 100% 0, 100% 30%, 0 100%);
     clip-path: polygon(0 70%, 100% 0, 100% 30%, 0 100%);
     margin-top: -50px;
+  }
+
+  .interaccion-portfolio-container{
+    -webkit-clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
   }
     
   .grid-item-interaccion:first-child .interaccion-img{
@@ -254,24 +213,5 @@
 
   .parr-section-container p{
     font-size: 15px;
-  }
-
-  .interaccion-title-portfolio-container{
-    height: 1000px;
-    -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
-    clip-path: polygon(0 15%, 100% 0%, 100% 100%, 0 100%);
-    grid-template-columns: 1fr 1fr;
-    padding-top: 150px;
-
-  }
-
-  .interaccion-title-portfolio-container .container{
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .interaccion-title-portfolio-container h3{
-    font-size: 32px;
   }
 }
