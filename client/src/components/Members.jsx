@@ -106,7 +106,7 @@ export default function Members() {
           </div>
 
           <div
-            style={{ backgroundImage: `url(${current.featured_image || "/favicon.png"})` }}
+            style={{ backgroundImage: `url(${current.featured_image})` }}
             className="member-img"
           />
         </motion.div>

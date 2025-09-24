@@ -77,6 +77,12 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    filter: grayscale(100%);
+    transition: filter 0.1s ease-in-out;
+}
+
+.members-container:hover .member-img{
+    filter: grayscale(0%);
 }
 
 .member-content {
