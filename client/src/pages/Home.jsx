@@ -69,7 +69,7 @@ const Home = () => {
       </div>
 
       {/* formulario */}
-      <Contact/>
+      <Contact form="home"/>
 
       <section className="full-container">      
 

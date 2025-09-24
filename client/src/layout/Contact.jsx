@@ -10,7 +10,7 @@ const BGS = {
   soporte: "form-soporte.webp",
 };
 
-function Contact({ location = "home" }) {
+function Contact({ location = "home", form }) {
   const base = import.meta.env.BASE_URL;
   const key = String(location).toLowerCase();
   const file = BGS[key] || BGS.default;
@@ -56,7 +56,7 @@ function Contact({ location = "home" }) {
             </div>
           </div>
           <div className="grid-contact-item">
-            <FormIndex />
+            <FormIndex location={form}/>
           </div>
         </div>
       </div>

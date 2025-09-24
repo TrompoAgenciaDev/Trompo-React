@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 
-import useFormDesarrollo from "../../hooks/useFormDesarrollo";
+import useFormBrevo from "../../hooks/useFormBrevo";
 import "../../assets/styles/form-index.css";
 
-export default function FormIndex() {
-  const { loading, error, submitForm } = useFormDesarrollo();
+export default function FormIndex({ location = "home" }) {
+  const { loading, error, submitForm } = useFormBrevo();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
+    submitForm(formData);
+    formData.append("LOCATION", location);
+
     submitForm(formData);
   };
 
@@ -260,22 +263,6 @@ export default function FormIndex() {
             required
           />{" "}
         </div>{" "}
-        {/* ReCAPTCHA deshabilitado
-        <div
-          style={{
-            width: "100%",
-            minWidth: "300px",
-            height: "70px",
-            minHeight: "70px",
-            overflow: "visible",
-          }}
-        >
-          <ReCAPTCHA
-            sitekey="6LeFCsUrAAAAAG44QGkOlXPlbq-HdqYVCoFFX_mP"
-            onChange={setCaptchaToken}
-          />
-        </div>
-        */}
         <div className="submit-container">
           <button type="submit" disabled={loading}>
             {loading ? "Enviando..." : "Enviar"}

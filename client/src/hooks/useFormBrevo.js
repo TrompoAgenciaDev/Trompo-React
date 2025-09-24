@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useFormDesarrollo() {
+export default function useFormBrevo() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -39,7 +39,6 @@ export default function useFormDesarrollo() {
         setSuccess(true);
         window.location.href = `${import.meta.env.BASE_URL}gracias`;
       }
-      
     } catch (err) {
       console.error("Error en fetch:", err);
       setError(err.message || "Hubo un error desconocido.");
