@@ -3,7 +3,7 @@
 }
 
 .testimonial-wrapper{
-  padding: 30px 0;
+  display: none;
 }
 
 .testimonial-header {
@@ -171,6 +171,12 @@
 }
 
 @media (min-width:768px) {
+  .testimonial-wrapper{
+    display: flex;
+    padding: 30px 0;
+    gap: 20px;
+  }
+
   .testimoniales-card {
     -ms-grid-columns: 1fr;
     grid-template-columns: 1fr;
@@ -190,6 +196,7 @@
     height: 100%;
     object-fit: contain;
   }
+
   .testimoniales-author {
     font-size: 14px;
   }

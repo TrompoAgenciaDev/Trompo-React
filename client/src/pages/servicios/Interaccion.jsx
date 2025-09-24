@@ -71,9 +71,6 @@ const Interaccion = () => {
             </div>
           </div>
         </div>
-        {/* <div className="full-container interaccion-diagonal bg-yellow-2">
-          <Values />
-        </div> */}
       </section>
 
       <div className="full-container">

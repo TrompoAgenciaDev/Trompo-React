@@ -58,6 +58,11 @@
   background-color: #ffffff;
 }
 
+.identidad-diagonal-last{
+  -webkit-clip-path: polygon(0 6%, 100% 0, 100% 94%, 0 100%);
+  clip-path: polygon(0 6%, 100% 0, 100% 94%, 0 100%);
+}
+
 .creatividad-video-section{
   padding: 50px 0;
 }
@@ -109,9 +114,11 @@
     clip-path: polygon(0 14%, 100% 0, 100% 87%, 0 100%);
     margin-top: -35px;
   }
+  
   .title-section-container h2{
     font-size: 22px;
   }
+
   .parr-section-container p{
     font-size: 15px;
   }
@@ -119,8 +126,14 @@
   .identidad-diagonal:nth-child(2) .grid-item-identidad:last-child{
     margin-top: 0;
   }
+
   .identidad-grid{
     max-width: 1140px;
     gap: 100px;
+  }
+
+  .identidad-diagonal-last{
+    -webkit-clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 6%, 100% 0, 100% 100%, 0 100%);
   }
 }

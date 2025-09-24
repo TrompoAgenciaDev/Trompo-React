@@ -85,36 +85,17 @@ const Creatividad = () => {
           </div>
         </div>
 
-        <div className="full-container bg-yellow-2 identidad-diagonal">
-          
-        </div>
-        
+        <div className="full-container identidad-diagonal"></div>
       </section>
-            <div className="full-container bg-yellow-2">
-        <div className="full-container title-portfolio-container">
-          <div className="container"></div>
-          <div className="container">
-            <h3>
-              Transformamos ideas en plataformas digitales que impulsan negocios
-            </h3>
-            <p>
-              Arquitectura técnica impecable, experiencias de usuario intuitivas
-              y resultados medibles que convierten cada proyecto en un activo de
-              crecimiento.
-            </p>
-          </div>
-        </div>
-        <Portfolio3d location="desarrollo" categoria="3d" />
-      </div>
 
       <div className="full-container creatividad-video-section">
         <div className="container">
-          <CreatividadSlider/>
+          <CreatividadSlider />
         </div>
       </div>
 
       <Contact />
-      
+
       <section className="full-container bg-yellow testimonial-wrapper">
         <div className="container testimonial-header">
           <h4>Más que clientes, aliados estratégicos.</h4>
@@ -124,6 +105,7 @@ const Creatividad = () => {
           <Testimonials size={4} />
         </div>
       </section>
+
       <Faqs location="creatividad" />
 
       <div className="full-container">
