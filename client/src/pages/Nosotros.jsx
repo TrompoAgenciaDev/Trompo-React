@@ -66,7 +66,7 @@ const Nosotros = () => {
                   Experiencia con raíces
                 </span>
                 <p className="footer-item-content">
-                  20 años resolviendo problemas reales en mercados locales y
+                  más de 10 años resolviendo problemas reales en mercados locales y
                   nacionales.
                 </p>
               </div>
@@ -92,7 +92,7 @@ const Nosotros = () => {
                   Compromiso verificable
                 </span>
                 <p className="footer-item-content">
-                  92% de nuestros clientes renuevan su confianza año tras año.
+                  90% de nuestros clientes renuevan su confianza año tras año.
                 </p>
               </div>
             </div>

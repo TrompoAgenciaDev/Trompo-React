@@ -21,15 +21,6 @@ function Services() {
       </div>
 
       <div className="container">
-        <p className="services-text">
-          Con un Equipo interdisciplinario y años de experiencia, nos
-          especializamos en entender las necesidades de cada cliente y
-          convertirlas en <span className="bold">oportunidades</span> que
-          impulsen su crecimiento.
-        </p>
-      </div>
-
-      <div className="container">
         <div className="grid-services">
           {items.map((item) => {
             const content = (

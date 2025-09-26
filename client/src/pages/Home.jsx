@@ -13,6 +13,7 @@ import Services from "../layout/Services";
 import Contact from "../layout/Contact";
 import PostHero from "../components/PostHero";
 import Portfolio3d from "../layout/Portfolio3d";
+import CreatividadSlider from "../components/sliders/CreatividadSlider.jsx";
 
 const Home = () => {
   const text = (
@@ -51,21 +52,11 @@ const Home = () => {
       {/* Servicios que se ofrecen */}
       <Services />
 
-      {/* Portfolio - clientes grandes */}
-      <div className="full-container bg-yellow-2">
-        <div className="full-container title-portfolio-container">
-          <div className="container"></div>
-          <div className="container">
-            <h3 className="portfolio3d-title">Proyectos con impacto</h3>
-            <p>
-              Cada proyecto en nuestro portfolio muestra cómo transformamos
-              ideas en experiencias tangibles. A través de colaboraciones
-              estratégicas, desarrollamos soluciones que conectan con las
-              audiencias y generan valor perdurable para cada negocio.
-            </p>
-          </div>
+      {/* Portfolio - clientes grandes */}      
+      <div className="full-container creatividad-video-section">
+        <div className="container">
+          <CreatividadSlider />
         </div>
-        <Portfolio3d location="desarrollo" categoria="3d" />
       </div>
 
       {/* formulario */}

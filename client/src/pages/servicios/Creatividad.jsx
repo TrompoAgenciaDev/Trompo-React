@@ -16,6 +16,7 @@ const Creatividad = () => {
       <Hero location="home" />
       <PageTitle
         title="Creatividad"
+        subtitle="que conecta"
         highlight="En Trompo te ofrecemos publicidad digital diseñada para maximizar resultados. Gestionamos campañas en Meta y otras plataformas con un enfoque estratégico, optimización continua y visión integral del negocio. No es solo anunciar, es hacer que cada inversión impulse el crecimiento real de tu marca."
         bgc="#FEE070"
       />
@@ -96,7 +97,7 @@ const Creatividad = () => {
 
       <Contact />
 
-      <section className="full-container bg-yellow testimonial-wrapper">
+      {/* <section className="full-container bg-yellow testimonial-wrapper">
         <div className="container testimonial-header">
           <h4>Más que clientes, aliados estratégicos.</h4>
           <p>Historias que muestran el valor de trabajar en equipo.</p>
@@ -104,7 +105,7 @@ const Creatividad = () => {
         <div className="full-container">
           <Testimonials size={4} />
         </div>
-      </section>
+      </section> */}
 
       <Faqs location="creatividad" />
 

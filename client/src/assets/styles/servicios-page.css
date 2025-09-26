@@ -79,6 +79,7 @@
 
 .grid-item-service h2{
   font-size: 17px;
+  font-family: var(--font-portfolio);
 }
 
 .grid-item-service p{

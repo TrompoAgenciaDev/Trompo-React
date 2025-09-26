@@ -19,18 +19,28 @@
 
 .diagonal-page-title .title-page{
   font-size: 48px;
-  text-transform: capitalize;
   color: #DAB013;
+  font-family: var(--font-portfolio);
+  line-height: 0.7;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
-.diagonal-page-title .title-page strong{
+.diagonal-page-title .title-page:not(.diagonal-page-title .title-page strong, .diagonal-page-title .subtitle-page){
+  text-transform: capitalize;
+}
+
+.diagonal-page-title .title-page strong,
+.diagonal-page-title .subtitle-page{
   font-family: var(--subtitle-font);
   font-style: italic;
+  text-transform: lowercase;
 }
 
 .title-page .subtitle-page{
-  font-weight: 400;
-  color: #8E8E8E;
+  font-size: 36px;
 }
 
 .diagonal-page-title{
@@ -79,13 +89,14 @@
   }
   .diagonal-page-title .title-page{
     font-size: 44px;
-    line-height: 1;
+    gap: 24px;
+    margin-bottom: 0;
   }
 }
 
 @media (min-width:1280px){
   .title-container{
-    width: 1140px;
+    width: 1200px;
     gap: 70px;
   }
 
@@ -101,6 +112,11 @@
   
   .diagonal-page-title .title-page{
     font-size: 80px;
+  }
+
+  .diagonal-page-title .title-page strong,
+  .diagonal-page-title .subtitle-page{
+    font-size: 40px;
   }
 
   .diagonal-page-title .content{

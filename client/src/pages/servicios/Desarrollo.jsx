@@ -268,7 +268,7 @@ const Desarrollo = () => {
 
       <Contact/>
 
-      <section className="full-container bg-yellow testimonial-wrapper">
+      {/* <section className="full-container bg-yellow testimonial-wrapper">
         <div className="container testimonial-header">
           <h4>Más que clientes, aliados estratégicos.</h4>
           <p>Historias que muestran el valor de trabajar en equipo.</p>
@@ -276,7 +276,7 @@ const Desarrollo = () => {
         <div className="full-container">
           <Testimonials size={4} />
         </div>
-      </section>
+      </section> */}
 
       <Faqs location="desarrollo" />
       

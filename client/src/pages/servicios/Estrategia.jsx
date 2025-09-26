@@ -16,6 +16,7 @@ const Estrategia = () => {
       <Hero location="home" />
       <PageTitle
         title="Estrategia"
+        subtitle="inteligente"
         highlight="En Trompo te ofrecemos publicidad digital diseñada para maximizar resultados. Gestionamos campañas en Meta y otras plataformas con un enfoque estratégico, optimización continua y visión integral del negocio. No es solo anunciar, es hacer que cada inversión impulse el crecimiento real de tu marca."
       />
 

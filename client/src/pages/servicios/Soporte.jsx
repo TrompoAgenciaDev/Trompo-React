@@ -18,6 +18,7 @@ const Soporte = () => {
       <Hero location="desarrollo" />
       <PageTitle
         title="Soporte"
+        subtitle="continuo"
         highlight="En Trompo soporte es pensado para marcas que buscan crecer sin frenos. Desde la gestión y optimización web (código y WordPress) hasta el desarrollo creativo en multimedia y branding, acompañamos cada etapa con soluciones estratégicas. Un servicio continuo que asegura presencia, coherencia y resultados en tu comunicación digital."
         bgc="#ffffff"
       />

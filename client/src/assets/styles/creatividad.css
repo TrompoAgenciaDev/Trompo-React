@@ -25,6 +25,7 @@
 
 .title-section-container h2{
   font-size: 18px;
+  font-family: var(--font-portfolio);
 }
 
 .parr-section-container p{

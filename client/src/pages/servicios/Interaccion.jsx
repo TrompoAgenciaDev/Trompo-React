@@ -17,6 +17,7 @@ const Interaccion = () => {
       <Hero location="home" />
       <PageTitle
         title="Interacción"
+        subtitle="que transforma"
         highlight="En Trompo las Redes Sociales son el canal clave para conectar marcas con personas en tiempo real. Potenciamos tu presencia digital con estrategias que generan comunidad, posicionan tu mensaje y convierten seguidores en clientes. Un servicio esencial para destacar y crecer en un entorno cada vez más competitivo."
         bgc="#FEE070"
       />
