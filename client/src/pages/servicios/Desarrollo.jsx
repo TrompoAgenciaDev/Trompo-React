@@ -14,7 +14,7 @@ import "../../assets/styles/servicios-page.css";
 const Desarrollo = () => {
   return (
     <>
-      <Hero location="home" />
+      <Hero location="desarrollo" />
       <PageTitle
         title="Desarrollo <strong>web</strong>"
         subtitle=""

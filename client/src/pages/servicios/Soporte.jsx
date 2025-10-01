@@ -51,31 +51,6 @@ const Soporte = () => {
         </div>
         <div className="full-container soporte-diagonal-invertida">
           <img
-            src={`${import.meta.env.BASE_URL}assets/support/full-img-1.webp`}
-            alt=""
-          />
-        </div>
-        <div className="full-container soporte-diagonal bg-yellow-2">
-          <div className="container soporte-grid">
-            <div className="grid-item-soporte">
-              <div className="title-section-container">
-                <h2>Soporte personalizado</h2>
-                <span>Wordpress & Code</span>
-              </div>
-            </div>
-            <div className="grid-item-soporte">
-              <p>
-                Construimos experiencias focalizadas que transforman tráfico en
-                leads cualificados, ventas directas o adopción de promociones.
-                Método basado en arquitectura conversiva, microcopys
-                estratégicos y eliminación sistemática de fricciones para
-                maximizar ROI por visita.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="full-container soporte-diagonal-invertida">
-          <img
             src={`${import.meta.env.BASE_URL}assets/support/full-img-2.webp`}
             alt=""
           />

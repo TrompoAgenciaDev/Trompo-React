@@ -6,15 +6,14 @@ import "@as/hero.css";
 
 // Videos Desktop
 import HomeVideo from "/assets/hero/home.mp4";
-import AboutVideo from "/assets/hero/about-us.mp4";
-import Desarrollo from "/assets/hero/desarrollo-web.mp4";
+import Desarrollo from "/assets/hero/desarrollo-hero.mp4";
 // Videos Mobile
 import HomeVideoMobile from "/assets/hero/mobile/home-mobile.mp4";
+import DesarrolloMobile from "/assets/hero/mobile/desarrollo-hero-mobile.mp4";
 
 const videosByLocation = {
   home: { desktop: HomeVideo, mobile: HomeVideoMobile },
-  about: { desktop: AboutVideo, mobile: HomeVideoMobile },
-  desarrollo: { desktop: Desarrollo, mobile: HomeVideoMobile },
+  desarrollo: { desktop: Desarrollo, mobile: DesarrolloMobile },
 };
 
 const titleVar = {
