@@ -114,8 +114,7 @@ const Hero = ({ location = "home" }) => {
             animate="show"
           >
             <motion.p className="contacto-subtitle" variants={itemVar}>
-              Contanos tus objetivos y construyamos juntos el camino más
-              eficiente hacia resultados medibles.
+              Cada proyecto es único. Completá el formulario y diseñemos la estrategia que tu marca necesita para evolucionar.
             </motion.p>
             <motion.a
               href="#contacto"

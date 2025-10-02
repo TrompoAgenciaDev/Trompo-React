@@ -17,7 +17,7 @@ const Creatividad = () => {
       <PageTitle
         title="Creatividad"
         subtitle="que conecta"
-        highlight="En Trompo te ofrecemos publicidad digital diseñada para maximizar resultados. Gestionamos campañas en Meta y otras plataformas con un enfoque estratégico, optimización continua y visión integral del negocio. No es solo anunciar, es hacer que cada inversión impulse el crecimiento real de tu marca."
+        highlight="La creatividad aplicada al marketing <strong>cuenta tu historia y mueve métricas</strong>. Llevamos tu propósito a <strong>sistemas y piezas multiformat</strong> que destacan, ordenan la marca y te diferencian <strong>dónde está tu audiencia</strong>. Consistencia visual, <strong>velocidad de producción</strong> y foco en performance. <strong>Procesos</strong> para escalar la identidad y cultura de tu marca. "
         bgc="#FEE070"
       />
       <section className="full-container identidad">
@@ -25,21 +25,11 @@ const Creatividad = () => {
           <div className="container identidad-grid">
             <div className="grid-item-identidad">
               <div className="title-section-container">
-                <h2>Branding</h2>
+                <h2>Branding digital</h2>
               </div>
               <div className="parr-section-container">
                 <p>
-                  Este servicio está orientado al desarrollo integral de la
-                  identidad de marca. Desde la creación de isologotipos hasta el
-                  diseño de material editorial y publicitario, busca construir
-                  una identidad visual coherente, profesional y alineada a los
-                  valores y objetivos estratégicos de la empresa.
-                </p>
-                <p>
-                  <strong>
-                    Es ideal para marcas que inician o necesitan reposicionarse
-                    con solidez en un mercado cada vez más competitivo.
-                  </strong>
+                  Diseñamos o renovamos la identidad de tu marca de punta a punta. Del <strong>posicionamiento y la narrativa</strong> al <strong>sistema visual y verbal</strong>: logo y variantes, paleta, tipografías, iconografía, tono y principios de movimiento. Lo dejamos <strong>operativo</strong> en web, redes y campañas con <strong>manuales y lineamientos de marca</strong>. Resultado: una marca <strong>coherente, profesional y reconocible</strong> que <strong>ordena, diferencia y escala.</strong> Ideal para <strong>lanzamientos</strong> o <strong>reposicionamientos</strong> en mercados competitivos.
                 </p>
               </div>
             </div>
@@ -61,15 +51,7 @@ const Creatividad = () => {
               </div>
               <div className="parr-section-container">
                 <p>
-                  Este servicio está pensado para marcas y agencias que
-                  necesitan producir contenidos visuales impactantes, dinámicos
-                  y alineados a campañas específicas.
-                </p>
-                <p>
-                  Desde animaciones hasta diseño de piezas para plataformas
-                  digitales, el foco está puesto en la creatividad, la
-                  optimización y la coherencia con los lineamientos de marca
-                  existentes.
+                  Contenido que <strong>mueve gente</strong>. De reels y stories a banners y presentaciones, producimos materiales que <strong>dicen lo importante sin vueltas</strong> y mantienen la <strong>misma línea de marca</strong> en todas las plataformas. Resultado: <strong>más alcance, más interacción y más oportunidades</strong>.
                 </p>
               </div>
             </div>

@@ -10,7 +10,7 @@ function Services() {
   if (error) return <p>{error}</p>;
 
   return (
-    <section className="bg-yellow full-container services">
+    <section className="full-container services  bg-yellow-2">
       <div className="banner full-container">
         <video
           src={`${import.meta.env.BASE_URL}assets/services/loop.mp4`}
@@ -20,7 +20,10 @@ function Services() {
         ></video>
       </div>
 
-      <div className="container">
+      <div className="container services-link-container">
+        <p className="services-title">
+          Con más de 10 años de experiencia, diseñamos soluciones integrales a través de cinco pilares clave:
+        </p>
         <div className="grid-services">
           {items.map((item) => {
             const content = (

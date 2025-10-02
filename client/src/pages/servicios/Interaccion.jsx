@@ -18,7 +18,7 @@ const Interaccion = () => {
       <PageTitle
         title="Interacción"
         subtitle="que transforma"
-        highlight="En Trompo las Redes Sociales son el canal clave para conectar marcas con personas en tiempo real. Potenciamos tu presencia digital con estrategias que generan comunidad, posicionan tu mensaje y convierten seguidores en clientes. Un servicio esencial para destacar y crecer en un entorno cada vez más competitivo."
+        highlight="Relevancia sostenida en <strong>Social Media</strong> —grilla con intención, formatos nativos y conversación real— más <strong>Automation Marketing</strong> que toma la posta con emails y flujos segmentados. Menos ruido, más señal: consistencia de mensajes, continuidad de contacto y una relación que se traduce en oportunidades."
         bgc="#FEE070"
       />
       <section className="full-container interaccion">
@@ -40,11 +40,7 @@ const Interaccion = () => {
               </div>
               <div className="parr-section-container">
                 <p>
-                  Social Media es el proceso de planificar y crear contenido
-                  estratégico, organizado en una matriz que asegura coherencia y
-                  relevancia. Cada pieza se adapta a un diseño con el social
-                  brand de la marca, potenciando su identidad y generando
-                  conexión real con la audiencia digital.
+                  Social Media es el proceso de planificar y crear contenido estratégico, organizado en una matriz que asegura coherencia y relevancia. Creamos un sistemas alineado a la marca, cada tópico se adapta a un diseño con el social brand de la marca, potenciando su identidad y generando conexión real con la audiencia digital.
                 </p>
                 <div className="icon-section-container">
                   <Icons iconName="instagram2" />
@@ -71,15 +67,11 @@ const Interaccion = () => {
             </div>
             <div className="grid-item-interaccion">
               <div className="title-section-container">
-                <h2>Inbound Marketing</h2>
+                <h2>Automation Marketing</h2>
               </div>
               <div className="parr-section-container">
                 <p>
-                  Es la estrategia que atrae clientes de forma orgánica y
-                  sostenida. Creamos contenidos de valor que informan, educan y
-                  generan confianza en cada etapa del proceso de compra. El
-                  objetivo: convertir visitas en oportunidades reales de negocio
-                  y relaciones duraderas con tu marca.
+                  Construimos un sistema de <strong>conversación continua</strong> con tus audiencias: <strong>flujos automatizados</strong>, newsletters y mensajes por comportamiento que acompañan todo el ciclo (bienvenida, nutrición, activación, postventa y reactivación). Segmentación real, timing correcto e integración con CRM para convertir atención en <strong>leads y ventas</strong> sin depender del algoritmo. El contenido inbound acompaña, la <strong>automatización</strong> hace que suceda.
                 </p>
                 <div className="icon-section-container">
                   <Icons iconName="mail2" />

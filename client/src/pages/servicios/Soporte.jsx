@@ -35,16 +35,15 @@ const Soporte = () => {
             <div className="grid-item-soporte">
               <div className="title-section-container">
                 <h2>Soporte Wordpress</h2>
-                <span>Wordpress & Code</span>
               </div>
             </div>
             <div className="grid-item-soporte">
               <p>
-                Construimos experiencias focalizadas que transforman tráfico en
-                leads cualificados, ventas directas o adopción de promociones.
-                Método basado en arquitectura conversiva, microcopys
-                estratégicos y eliminación sistemática de fricciones para
-                maximizar ROI por visita.
+                Wordpress en movimiento es nuestro sistema de gestión evolutiva
+                para sitios WordPress. Un servicio pensado para empresas que
+                necesitan mantener su web actualizada, funcional y alineada al
+                negocio, sin depender de imprevistos técnicos ni cuellos de
+                botella.
               </p>
             </div>
           </div>
@@ -55,23 +54,44 @@ const Soporte = () => {
             alt=""
           />
         </div>
-        <div className="full-container soporte-diagonal bg-yellow-2"
-          style={{ backgroundColor: "#ffffff" }}
-        >
+        <div className="full-container soporte-diagonal bg-yellow-2">
           <div className="container soporte-grid">
             <div className="grid-item-soporte">
               <div className="title-section-container">
-                <h2>Creativo</h2>
-                <span>Branding y Multimedia</span>
+                <h2>Soporte Personalizado</h2>
               </div>
             </div>
             <div className="grid-item-soporte">
               <p>
-                Impulsamos tu marca con soluciones visuales y de comunicación
-                que conectan. Desde producción multimedia hasta branding
-                estratégico, creamos piezas que transmiten identidad, generan
-                impacto y fortalecen el posicionamiento de tu negocio en cada
-                punto de contacto.
+                Soporte personalizado para desarrollos a medida. Mantenemos tu
+                plataforma estable y segura, resolvemos incidencias, sumamos
+                funcionalidades, integramos sistemas (APIs, ERP/CRM) y ajustamos
+                servidores para que todo rinda como debe. Si falla, lo
+                arreglamos; si puede ir mejor, lo optimizamos.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="bg-yellow-2 full-container soporte-diagonal-invertida">
+          <img
+            src={`${import.meta.env.BASE_URL}assets/support/full-img-2.webp`}
+            alt=""
+          />
+        </div>
+        <div className="full-container soporte-diagonal bg-yellow-2">
+          <div className="container soporte-grid">
+            <div className="grid-item-soporte">
+              <div className="title-section-container">
+                <h2>Soporte Creativo</h2>
+              </div>
+            </div>
+            <div className="grid-item-soporte">
+              <p>
+                Soporte personalizado para desarrollos a medida. Mantenemos tu
+                plataforma estable y segura, resolvemos incidencias, sumamos
+                funcionalidades, integramos sistemas (APIs, ERP/CRM) y ajustamos
+                servidores para que todo rinda como debe. Si falla, lo
+                arreglamos; si puede ir mejor, lo optimizamos.
               </p>
             </div>
           </div>

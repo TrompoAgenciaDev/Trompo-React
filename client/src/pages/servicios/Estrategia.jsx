@@ -17,7 +17,7 @@ const Estrategia = () => {
       <PageTitle
         title="Estrategia"
         subtitle="inteligente"
-        highlight="En Trompo te ofrecemos publicidad digital diseñada para maximizar resultados. Gestionamos campañas en Meta y otras plataformas con un enfoque estratégico, optimización continua y visión integral del negocio. No es solo anunciar, es hacer que cada inversión impulse el crecimiento real de tu marca."
+        highlight="De la visión al impacto. <strong>Planificación Estratégica</strong> que alinea negocio, audiencias y objetivos de negocio; <strong>Plataformas Ads</strong> que combinan performance y posicionamiento optimizando presupuesto; <strong>Data & Analítica Digital</strong> que convierte datos en decisiones. Un sistema disciplinado para invertir mejor y vender más, hoy y a escala."
       />
 
       <section className="full-container ads">

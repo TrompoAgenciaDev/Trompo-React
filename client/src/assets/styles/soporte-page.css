@@ -36,9 +36,10 @@
 }
 
 .soporte-diagonal:last-child{  
-  -webkit-clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0 100%);
-  clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0 100%);
-  padding: 30px 0;
+  -webkit-clip-path: polygon(0 0%, 100% 12%, 100% 100%, 0 100%);
+  clip-path: polygon(0 0%, 100% 12%, 100% 100%, 0 100%);
+  padding: 50px 0 50px;
+  margin-top: -44px;
 }
 
 .soporte-grid{
@@ -126,6 +127,11 @@
     height: 350px;
     margin-top: -60px;
   }
+  .soporte-diagonal:last-child{  
+    -webkit-clip-path: polygon(0 0%, 100% 22%, 100% 100%, 0 100%);
+    clip-path: polygon(0 0%, 100% 22%, 100% 100%, 0 100%);
+    margin-top: -54px;
+  }
   .soporte-diagonal .soporte-grid{
     width: 100%;
     max-width: 800px;
@@ -160,6 +166,9 @@
   .soporte-diagonal:not(.soporte-diagonal:last-child){
     height: 450px;
     margin-top: -80px;
+  }
+  .soporte-diagonal:last-child{
+    padding-top: 30px 0 20px;
   }
   
   .soporte-diagonal .soporte-grid{
