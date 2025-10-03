@@ -6,6 +6,8 @@
   display: grid;
   -ms-flex-line-pack: center;
   align-content: center;
+  justify-content: center;
+  justify-items: center;
 }
 
 .ads-values-diagonal{
@@ -20,6 +22,7 @@
   display: grid;
   -ms-grid-columns: 1fr;
   grid-template-columns: 1fr;
+  gap: 50px;
 }
 
 .grid-item-ads{
@@ -38,11 +41,11 @@
   -webkit-align-items: center;
   -moz-align-items: center;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
 }
 
 .grid-item-header{
-  width: 130px;
+  width: 90px;
 }
 
 .grid-item-header svg{
@@ -100,6 +103,10 @@
   font-size: 13px;
 }
 
+.portfolio-ads-section{
+  padding: 50px 0;
+}
+
 @media (min-width: 768px) {
   .ads-grid{
     width: 600px;
@@ -145,8 +152,8 @@
     align-items: center;
   }
   .ads-grid{
-    -ms-grid-columns: 1fr 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     width: 1140px;
     gap: 70px;
   }

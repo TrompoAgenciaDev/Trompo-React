@@ -13,6 +13,19 @@
   padding: 50px 0;
 }
 
+.secondary-font{
+  font-family: var(--subtitle-font);  
+  font-style: italic;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.services-title{
+  font-weight: normal;
+  font-family: var(--font-portfolio);
+  font-size: 24px;
+}
+
 .grid-services{
   width: 100%;
   display: -ms-grid;
@@ -185,6 +198,14 @@
 
   .services-text{
     font-size: 16px;
+  }
+
+  .secondary-font{
+    font-size: 34px;
+  }
+
+  .services-title{
+    font-size: 30px;
   }
 
   .service-grid{

@@ -30,12 +30,19 @@ const routesConfig = {
     { path: "", label: "servicios", Component: Servicios },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],
+  agencia: [
+    { path: "/", label: "inicio", Component: Home },
+    { path: "/nosotros", label: "nosotros", Component: Nosotros }
+  ],
   servicios: [
     { path: "/estrategia", label: "estrategia", Component: Estrategia },
     { path: "/creatividad", label: "Creatividad", Component: Creatividad },
     { path: "/interaccion", label: "interacción", Component: Interaccion },
     { path: "/desarrollo", label: "desarrollo", Component: Desarrollo },
     { path: "/soporte", label: "soporte", Component: Soporte },
+  ],
+  contacto: [
+    { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],
   mainFooter: [
     { path: "/", label: "inicio", Component: Home },

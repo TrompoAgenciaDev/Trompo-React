@@ -21,61 +21,104 @@ const Estrategia = () => {
       />
 
       <section className="full-container ads">
-        <div className="full-container ads-diagonal bg-yellow-2">
-          <div className="container ads-grid">
+        <div className="full-container section-ads-2 bg-yellow-2 ads-diagonal">
+          <div className="container ads-grid-2">
             <div className="grid-item-ads">
-              <div className="grid-item-header">
-                <Icons iconName="meta" />
-              </div>
-              <div className="grid-item-body">
-                <p>
-                  Meta Ads es un servicio de gestión profesional de campañas
-                  publicitarias en Instagram y Facebook.
-                </p>
-                <p>
-                  Creamos estrategias personalizadas orientadas a resultados,
-                  con optimización constante y una visión 360° del negocio.
-                </p>
-              </div>
+              <img
+                src={`${
+                  import.meta.env.BASE_URL
+                }assets/estrategia/planning.webp`}
+                alt=""
+              />
             </div>
             <div className="grid-item-ads">
               <div className="grid-item-header">
-                <Icons iconName="ads" />
+                <h2>Planificación Digital Estratégica</h2>
               </div>
               <div className="grid-item-body">
                 <p>
-                  Es mucho más que aparecer en los primeros resultados de
-                  búsqueda: es un ecosistema estratégico para generar
-                  oportunidades comerciales reales, escalar resultados y
-                  optimizar cada peso invertido.
-                </p>
-                <p>
-                  En Trompo, lo trabajamos como parte integral de tu embudo de
-                  ventas y experiencia digital.
-                </p>
-              </div>
-            </div>
-            <div className="grid-item-ads">
-              <div className="grid-item-header">
-                <Icons iconName="tiktok" />
-              </div>
-              <div className="grid-item-body">
-                <p>
-                  TikTok es hoy uno de los espacios más poderosos para captar
-                  atención real en poco tiempo.
-                </p>
-                <p>
-                  Nuestro servicio de TikTok Ads está diseñado para marcas que
-                  quieren aprovechar el potencial de esta plataforma en formato
-                  vertical, ágil y nativo, pero sin descuidar la estrategia ni
-                  los objetivos.
+                  <strong>Dirección clara, crecimiento medible</strong>. Pasamos
+                  del hacer por hacer, a una{" "}
+                  <strong>
+                    planificación con propósito, prioridades, presupuesto y
+                    objetivos
+                  </strong>
+                  . Definimos un marco de acción, analizamos audiencias, creamos
+                  un mix digital eficiente y un plan de medición con indicadores
+                  claros, que generen procesos orientados al crecimiento
+                  sostenible. Menos dispersión,{" "}
+                  <strong>más foco y más data</strong>.
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="full-container section-ads-2">
+        <div className="full-container">
+          <div className="container ads-grid-2">
+            <div className="grid-item-ads">
+              <img
+                src={`${import.meta.env.BASE_URL}assets/estrategia/ads.webp`}
+                alt=""
+              />
+            </div>
+            <div className="grid-item-ads">
+              <div className="grid-item-header">
+                <h2>Ads</h2>
+              </div>
+              <div className="grid-item-body">
+                <p>
+                  Planificamos por mercado y audiencia, seleccionando
+                  plataformas precisas. Proceso validado 10+ años en estructura,
+                  medición y ejecución; seguimiento riguroso, control de gasto y
+                  mejora continua. Datos en tiempo real para optimizar
+                  inversión, posicionar marca y generar oportunidades de venta.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="full-container ">
+            <div className="container ads-grid">
+              <div className="grid-item-ads">
+                <div className="grid-item-header">
+                  <Icons iconName="meta" />
+                </div>
+                <div className="grid-item-body">
+                  <p>
+                    Meta Ads orientado a negocio: seleccionamos las plataformas y
+                    ubicaciones que rinden para cada audiencia, configuramos
+                    medición completa (Pixel + CAPI) e integramos leads al CRM.
+                    Ajustes semanales sobre pujas, segmentación y creatividad, con
+                    límites de gasto y dashboards 24/7. Objetivo: eficiencia de
+                    inversión y ventas consistentes.
+                  </p>
+                </div>
+              </div>
+              <div className="grid-item-ads">
+                <div className="grid-item-header">
+                  <Icons iconName="ads" />
+                </div>
+                <div className="grid-item-body">
+                  <p>
+                    Construimos campañas de <strong>Búsqueda</strong> orientadas a
+                    resultados (llamadas, formularios, ventas) y optimizamos
+                    mediante un proceso de mejora continua comprobado.{" "}
+                    <strong>Display</strong> refuerza la marca en sitios top a
+                    bajo costo; <strong>YouTube</strong> acompaña cuando tiene
+                    sentido. Métricas simples:{" "}
+                    <strong>
+                      CPL/CPA, tasa de conversión e impresiones ganadas
+                    </strong>
+                    .
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>                
+
+        <div className="full-container section-ads-2 bg-yellow-2 ads-diagonal">
           <div className="container ads-grid-2">
             <div className="grid-item-ads">
               <img
@@ -88,49 +131,18 @@ const Estrategia = () => {
             <div className="grid-item-ads">
               <div className="grid-item-header">
                 <h2>Data & Analytics</h2>
+                <span className="subtitle">
+                  Analítica para crecer con control
+                </span>
               </div>
               <div className="grid-item-body">
                 <p>
-                  En un entorno digital donde cada clic deja una huella, la
-                  analítica web se convierte en la brújula estratégica de
-                  cualquier marca que quiera evolucionar con datos, no con
-                  suposiciones.
-                </p>
-                <p>
-                  Nuestro servicio de Data & Analytics va más allá de instalar
-                  un pixel o leer un dashboard. Se trata de transformar los
-                  datos en decisiones concretas y acciones que escalen
-                  resultados.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="full-container bg-yellow-2 ads-values-diagonal">
-          <div className="container ads-grid-2">
-            <div className="grid-item-ads">
-              <img
-                src={`${import.meta.env.BASE_URL}assets/estrategia/ads.webp`}
-                alt=""
-              />
-            </div>
-            <div className="grid-item-ads">
-              <div className="grid-item-header">
-                <h2>Data & Analytics</h2>
-              </div>
-              <div className="grid-item-body">
-                <p>
-                  En un entorno digital donde cada clic deja una huella, la
-                  analítica web se convierte en la brújula estratégica de
-                  cualquier marca que quiera evolucionar con datos, no con
-                  suposiciones.
-                </p>
-                <p>
-                  Nuestro servicio de Data & Analytics va más allá de instalar
-                  un pixel o leer un dashboard. Se trata de transformar los
-                  datos en decisiones concretas y acciones que escalen
-                  resultados.
+                  La base de la analítica web, es el análisis de las
+                  interacciones que realizan los usuarios en Internet, para
+                  identificar patrones que puedan determinar estrategias
+                  digitales sólidas asegurando la consistencia de la
+                  información. Las decisiones correctas se basan en datos
+                  correctos.
                 </p>
               </div>
             </div>
@@ -138,7 +150,7 @@ const Estrategia = () => {
         </div>
       </section>
 
-      <div className="full-container">
+      <div className="full-container portfolio-ads-section">
         <div className="full-container ads-title-portfolio-container">
           <div className="container"></div>
           <div className="container">
@@ -150,10 +162,10 @@ const Estrategia = () => {
             </p>
           </div>
         </div>
-        <Portfolio3d location="estrategia"/>
+        <Portfolio3d location="estrategia" />
       </div>
 
-      <Contact/>
+      <Contact />
 
       <section className="full-container bg-yellow testimonial-wrapper">
         <div className="container testimonial-header">
@@ -166,8 +178,6 @@ const Estrategia = () => {
       </section>
 
       <Faqs location="estrategia" />
-
-
 
       <div className="full-container">
         <CustomerSlider />

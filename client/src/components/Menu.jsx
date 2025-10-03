@@ -1,4 +1,3 @@
-// src/components/Menu.jsx
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
@@ -176,6 +175,15 @@ const Menu = ({
                       className={`menu-item ${label}-item`}
                     >
                       {renderIconAndLabel(label, false)}
+                    </Link>
+                  ) : location === "gsap" ? (
+                    <Link
+                      to={path}
+                      onPointerDownCapture={(e) => e.stopPropagation()}
+                      onClick={onClose}
+                      className={`menu-item ${label}-item`}
+                    >
+                      <span className="menu-item-content">{label}</span>
                     </Link>
                   ) : (
                     <Link
