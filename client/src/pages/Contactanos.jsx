@@ -13,7 +13,7 @@ const Contactanos = () => {
       <Hero location="contactanos" />
 
       <div id="contacto"></div>
-      <Contact/>
+      <Contact form="home"/>
       
       <section className="full-container bg-yellow testimonial-wrapper">
         <div className="container testimonial-header">

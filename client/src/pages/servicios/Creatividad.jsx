@@ -13,7 +13,7 @@ import "../../assets/styles/creatividad.css";
 const Creatividad = () => {
   return (
     <>
-      <Hero location="home" />
+      <Hero location="creatividad" />
       <PageTitle
         title="Creatividad"
         subtitle="que conecta"
@@ -77,7 +77,7 @@ const Creatividad = () => {
         </div>
       </div>
 
-      <Contact />
+      <Contact form="creatividad" />
 
       {/* <section className="full-container bg-yellow testimonial-wrapper">
         <div className="container testimonial-header">

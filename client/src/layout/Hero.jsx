@@ -7,13 +7,19 @@ import "@as/hero.css";
 // Videos Desktop
 import HomeVideo from "/assets/hero/home.mp4";
 import Desarrollo from "/assets/hero/desarrollo-hero.mp4";
+import Creatividad from "/assets/hero/creatividad-hero.mp4";
+import Estrategia from "/assets/hero/estrategia-hero.mp4";
 // Videos Mobile
 import HomeVideoMobile from "/assets/hero/mobile/home-mobile.mp4";
 import DesarrolloMobile from "/assets/hero/mobile/desarrollo-hero-mobile.mp4";
+import CreatividadMobile from "/assets/hero/mobile/creatividad-hero-mobile.mp4";
+import EstrategiaMobile from "/assets/hero/mobile/estrategia-hero-mobile.mp4";
 
 const videosByLocation = {
   home: { desktop: HomeVideo, mobile: HomeVideoMobile },
   desarrollo: { desktop: Desarrollo, mobile: DesarrolloMobile },
+  creatividad: { desktop: Creatividad, mobile: CreatividadMobile },
+  estrategia: { desktop: Estrategia, mobile: EstrategiaMobile },
 };
 
 const titleVar = {
@@ -114,7 +120,8 @@ const Hero = ({ location = "home" }) => {
             animate="show"
           >
             <motion.p className="contacto-subtitle" variants={itemVar}>
-              Cada proyecto es único. Completá el formulario y diseñemos la estrategia que tu marca necesita para evolucionar.
+              Cada proyecto es único. Completá el formulario y diseñemos la
+              estrategia que tu marca necesita para evolucionar.
             </motion.p>
             <motion.a
               href="#contacto"

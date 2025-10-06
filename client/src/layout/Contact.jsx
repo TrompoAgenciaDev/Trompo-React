@@ -3,11 +3,6 @@ import FormIndex from "../components/forms/FormIndex";
 
 const BGS = {
   home: "form-home.webp",
-  estrategia: "form-estrategia.webp",
-  creatividad: "form-creatividad.webp",
-  interaccion: "form-interaccion.webp",
-  desarrollo: "form-desarrollo.webp",
-  soporte: "form-soporte.webp",
 };
 
 function Contact({ location = "home", form }) {

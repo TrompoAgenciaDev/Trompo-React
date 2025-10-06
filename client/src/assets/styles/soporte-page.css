@@ -127,7 +127,7 @@
     height: 350px;
     margin-top: -60px;
   }
-  .soporte-diagonal:last-child{  
+  .soporte-diagonal:last-child{
     -webkit-clip-path: polygon(0 0%, 100% 22%, 100% 100%, 0 100%);
     clip-path: polygon(0 0%, 100% 22%, 100% 100%, 0 100%);
     margin-top: -54px;
@@ -168,7 +168,11 @@
     margin-top: -80px;
   }
   .soporte-diagonal:last-child{
-    padding-top: 30px 0 20px;
+    min-height: 350px;
+    -webkit-clip-path: polygon(0 0%, 100% 24%, 100% 100%, 0 100%);
+    clip-path: polygon(0 0%, 100% 24%, 100% 100%, 0 100%);
+    padding: 70px 0 20px;
+    margin-top: -100px;
   }
   
   .soporte-diagonal .soporte-grid{

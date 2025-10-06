@@ -201,7 +201,6 @@
     clip-path: polygon(0 0, 100% 20%, 100% 80%, 0% 100%);
     padding-top: 100px;
   }
-
   
   .ads-title-portfolio-container{
     grid-template-columns: 1fr 1fr;
@@ -216,5 +215,12 @@
 
   .ads-title-portfolio-container h3{
     font-size: 32px;
+  }
+  .ads-title-portfolio-container p,
+  .ads-title-portfolio-container h3{
+    text-align: right;
+  }
+  .ads-title-portfolio-container h3{
+    font-weight: 700;
   }
 }

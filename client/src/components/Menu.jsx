@@ -29,9 +29,13 @@ const Menu = ({
     };
     upd();
     const add = (mq, cb) =>
-      mq.addEventListener ? mq.addEventListener("change", cb) : mq.addListener(cb);
+      mq.addEventListener
+        ? mq.addEventListener("change", cb)
+        : mq.addListener(cb);
     const rem = (mq, cb) =>
-      mq.removeEventListener ? mq.removeEventListener("change", cb) : mq.removeListener(cb);
+      mq.removeEventListener
+        ? mq.removeEventListener("change", cb)
+        : mq.removeListener(cb);
     add(mqMobile, upd);
     add(mqWide, upd);
     return () => {
@@ -52,7 +56,8 @@ const Menu = ({
     onClose();
   };
 
-  if (!menuItems || menuItems.length === 0) return <p>No se encontró el menú</p>;
+  if (!menuItems || menuItems.length === 0)
+    return <p>No se encontró el menú</p>;
 
   const renderIconAndLabel = (label, showChevronMobile = false) => (
     <motion.div className="menu-item-content">
@@ -70,7 +75,13 @@ const Menu = ({
                   transition={{ duration: 0.2, ease: "easeOut" }}
                   style={{ width: 20, height: 20 }}
                 >
-                  <path d="M10 16L21.5 27L33 16" stroke="#1E1E1E" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                  <path
+                    d="M10 16L21.5 27L33 16"
+                    stroke="#1E1E1E"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </motion.svg>
               </div>
             </div>
@@ -88,24 +99,32 @@ const Menu = ({
           {menuItems.map(({ path, label }, index) => {
             const hasSub = getSubmenu(label).length > 0;
             const isHovered = hovered === label;
-            const activeClass = isWide && (isHovered || activeSub === label) ? "is-active" : "";
+            const activeClass =
+              isWide && (isHovered || activeSub === label) ? "is-active" : "";
 
             return (
               <li
                 className={`nav-menu-item nav-menu-item--inline ${activeClass}`}
                 key={index}
-                onMouseEnter={() => isWide && setHovered(label)}
-                onMouseLeave={() => isWide && setHovered((h) => (h === label ? null : h))}
               >
-                {isWide ? (
-                  <IconMorphArrowExact active={isHovered || activeSub === label} />
-                ) : (
-                  <div className="item-menu-icon">
-                    <svg viewBox="0 0 14 15" className="item-menu-icon__svg">
-                      <circle cx="7" cy="7.46326" r="7" fill="#FFDF69" />
-                    </svg>
-                  </div>
-                )}
+                <div className="item-menu-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="13"
+                    height="13"
+                    viewBox="0 0 13 13"
+                    fill="none"
+                  >
+                    <path
+                      d="M1.3033 11.91L11.9099 1.30339M11.9099 1.30339L1.3033 1.30339M11.9099 1.30339L11.9099 11.91"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
 
                 <div className="item-menu-container">
                   {hasSub ? (
@@ -117,17 +136,26 @@ const Menu = ({
                           onClick={(e) => handleTopClick(e, label)}
                           className={`menu-item ${label}-item`}
                           aria-expanded={openSub === label}
-                          style={{ background: "transparent", border: 0, padding: 0, color: "inherit" }}
+                          style={{
+                            background: "transparent",
+                            border: 0,
+                            padding: 0,
+                            color: "inherit",
+                          }}
                           onMouseEnter={() => {
                             if (isWide) {
-                              if (closeTimer.current) clearTimeout(closeTimer.current);
+                              if (closeTimer.current)
+                                clearTimeout(closeTimer.current);
                               setActiveSub(label);
                             }
                           }}
                           onMouseLeave={() => {
                             if (isWide) {
                               closeTimer.current = setTimeout(
-                                () => setActiveSub((cur) => (cur === label ? null : cur)),
+                                () =>
+                                  setActiveSub((cur) =>
+                                    cur === label ? null : cur
+                                  ),
                                 120
                               );
                             }
@@ -147,18 +175,25 @@ const Menu = ({
                                 exit={{ height: 0, opacity: 0 }}
                                 transition={{ duration: 0.25, ease: "easeOut" }}
                               >
-                                {getSubmenu(label).map(({ path: subPath, label: subLabel }, subIndex) => (
-                                  <li className="submenu-item" key={subIndex}>
-                                    <Link
-                                      to={subPath}
-                                      className="submenu-item"
-                                      onPointerDownCapture={(e) => e.stopPropagation()}
-                                      onClick={onClose}
-                                    >
-                                      {subLabel}
-                                    </Link>
-                                  </li>
-                                ))}
+                                {getSubmenu(label).map(
+                                  (
+                                    { path: subPath, label: subLabel },
+                                    subIndex
+                                  ) => (
+                                    <li className="submenu-item" key={subIndex}>
+                                      <Link
+                                        to={subPath}
+                                        className="submenu-item"
+                                        onPointerDownCapture={(e) =>
+                                          e.stopPropagation()
+                                        }
+                                        onClick={onClose}
+                                      >
+                                        {subLabel}
+                                      </Link>
+                                    </li>
+                                  )
+                                )}
                               </motion.ul>
                             )}
                           </AnimatePresence>
@@ -220,18 +255,20 @@ const Menu = ({
                   setActiveSub(null);
                 }}
               >
-                {getSubmenu(activeSub).map(({ path: subPath, label: subLabel }, subIndex) => (
-                  <li className="submenu-item" key={subIndex}>
-                    <Link
-                      to={subPath}
-                      className="submenu-item"
-                      onPointerDownCapture={(e) => e.stopPropagation()}
-                      onClick={onClose}
-                    >
-                      {subLabel}
-                    </Link>
-                  </li>
-                ))}
+                {getSubmenu(activeSub).map(
+                  ({ path: subPath, label: subLabel }, subIndex) => (
+                    <li className="submenu-item" key={subIndex}>
+                      <Link
+                        to={subPath}
+                        className="submenu-item"
+                        onPointerDownCapture={(e) => e.stopPropagation()}
+                        onClick={onClose}
+                      >
+                        {subLabel}
+                      </Link>
+                    </li>
+                  )
+                )}
               </motion.ul>
             )}
           </AnimatePresence>

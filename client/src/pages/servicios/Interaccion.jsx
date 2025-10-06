@@ -99,7 +99,7 @@ const Interaccion = () => {
         <Portfolio3d location="interaccion" categoria="3d" />
       </div>
 
-      <Contact />
+      <Contact form="interaccion" />
 
       <Faqs location="interaccion" />
 

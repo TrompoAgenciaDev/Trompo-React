@@ -13,7 +13,7 @@ import "../../assets/styles/estrategia-page.css";
 const Estrategia = () => {
   return (
     <>
-      <Hero location="home" />
+      <Hero location="estrategia" />
       <PageTitle
         title="Estrategia"
         subtitle="inteligente"
@@ -151,7 +151,7 @@ const Estrategia = () => {
       </section>
 
       <div className="full-container portfolio-ads-section">
-        <div className="full-container ads-title-portfolio-container">
+        <div className="container ads-title-portfolio-container">
           <div className="container"></div>
           <div className="container">
             <h3>Proyectos con impacto</h3>
@@ -165,7 +165,7 @@ const Estrategia = () => {
         <Portfolio3d location="estrategia" />
       </div>
 
-      <Contact />
+      <Contact form="estrategia" />
 
       <section className="full-container bg-yellow testimonial-wrapper">
         <div className="container testimonial-header">

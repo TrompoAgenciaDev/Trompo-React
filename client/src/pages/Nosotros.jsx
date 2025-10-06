@@ -10,7 +10,7 @@ import "../assets/styles/about.css";
 const Nosotros = () => {
   return (
     <>
-      <Hero location="about" />
+      <Hero location="home" />
       <section className="post-hero-section full-container">
         <div className="container max-text">
           <p>
@@ -66,8 +66,8 @@ const Nosotros = () => {
                   Experiencia con raíces
                 </span>
                 <p className="footer-item-content">
-                  más de 10 años resolviendo problemas reales en mercados locales y
-                  nacionales.
+                  más de 10 años resolviendo problemas reales en mercados
+                  locales y nacionales.
                 </p>
               </div>
             </div>

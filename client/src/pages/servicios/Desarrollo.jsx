@@ -266,7 +266,7 @@ const Desarrollo = () => {
         <Portfolio3d location="desarrollo" categoria="3d" />
       </div>
 
-      <Contact/>
+      <Contact form="desarrollo"/>
 
       {/* <section className="full-container bg-yellow testimonial-wrapper">
         <div className="container testimonial-header">

@@ -38,12 +38,12 @@ const galleries = {
 };
 
 const videoGallery = [
-  `${import.meta.env.BASE_URL}assets/creatividad/videos/agreteq.mp4`,
-  `${import.meta.env.BASE_URL}assets/creatividad/videos/denso.mp4`,
-  `${import.meta.env.BASE_URL}assets/creatividad/videos/raulito.mp4`,
-  `${import.meta.env.BASE_URL}assets/creatividad/videos/viditec.mp4`,
-  `${import.meta.env.BASE_URL}assets/creatividad/videos/volvo.mp4`,
-  `${import.meta.env.BASE_URL}assets/creatividad/videos/wester-union.mp4`,
+  `${import.meta.env.BASE_URL}assets/creatividad/videos/agreteq-new.mp4`,
+  `${import.meta.env.BASE_URL}assets/creatividad/videos/denso-new.mp4`,
+  `${import.meta.env.BASE_URL}assets/creatividad/videos/raulito-new.mp4`,
+  `${import.meta.env.BASE_URL}assets/creatividad/videos/viditec-new.mp4`,
+  `${import.meta.env.BASE_URL}assets/creatividad/videos/volvo-new.mp4`,
+  `${import.meta.env.BASE_URL}assets/creatividad/videos/wu.mp4`,
 ];
 
 /* Inner slider infinito 4:3 */

@@ -52,18 +52,22 @@ const Home = () => {
       {/* Servicios que se ofrecen */}
       <Services />
 
-      {/* Portfolio - clientes grandes */}      
+      {/* Portfolio - clientes grandes */}
       <div className="full-container creatividad-video-section">
+        <div className="container">
+          <h1 className="services-title">
+            Nuestros <span className="secondary-font">proyectos</span>
+          </h1>
+        </div>
         <div className="container">
           <CreatividadSlider />
         </div>
       </div>
 
       {/* formulario */}
-      <Contact form="home"/>
+      <Contact form="home" />
 
-      <section className="full-container">      
-
+      <section className="full-container">
         <div className="slider-container container">
           <CustomerSlider />
         </div>

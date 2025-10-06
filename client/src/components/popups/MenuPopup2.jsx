@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import Menu from "@/components/Menu";
 import routesConfig from "@/config/routesConfig";
-import Icon from "../Icons";
+import Icons from "../Icons";
 import "@as/menuPopup.css";
 
 
@@ -54,17 +54,34 @@ const MenuPopup = ({ isOpen, onClose }) => {
             className="menu-overlay"
             onPointerDownCapture={handleOverlayPointerDown}
             aria-hidden="true"
-          />
+          />         
 
           <div className="full-container header popup-menu" role="dialog" aria-modal="true">
-            <div className="menu-options">
+            <div className="container header-popup">
+              <a
+                className="logo-img"
+                href="/"
+              >
+                <Icons iconName="logoBlack" />
+              </a>
+
+              <button
+                className="nav-button"
+                onClick={onClose}
+                aria-label="Cerrar menú"
+              >
+                <Icons iconName="close" />
+              </button>
+            </div>
+            <div className="container">
+              <div className="menu-options">
                 <div className="menu-popup">
                     <h3>Agencia</h3>
                     <div className="menu-container">
                         <Menu
                             menuType="agencia"
                             routes={routesConfig}
-                            classMenu="main-menu"
+                            classMenu="main-menu-header"
                             location="gsap"
                             onClose={onClose}
                         />
@@ -76,7 +93,7 @@ const MenuPopup = ({ isOpen, onClose }) => {
                         <Menu
                             menuType="servicios"
                             routes={routesConfig}
-                            classMenu="main-menu"
+                            classMenu="main-menu-header"
                             location="gsap"
                             onClose={onClose}
                         />
@@ -88,27 +105,29 @@ const MenuPopup = ({ isOpen, onClose }) => {
                         <Menu
                             menuType="contacto"
                             routes={routesConfig}
-                            classMenu="main-menu"
+                            classMenu="main-menu-header"
                             location="gsap"
                             onClose={onClose}
                         />
                         <div className="social-icons">
-                            <Icon
+                            <Icons
                             iconName="instagram"
                             link="https://www.instagram.com/trompo.agencia/"
                             />
-                            <Icon
+                            <Icons
                             iconName="linkedin"
                             link="https://ar.linkedin.com/company/trompo-agencia"
                             />
-                            <Icon
+                            <Icons
                             iconName="facebook"
                             link="https://www.facebook.com/TrompoAgencia/"
                             />
-                            <Icon iconName="x" link="https://x.com/trompo_agencia" />
+                            <Icons iconName="x" link="https://x.com/trompo_agencia" />
                         </div>
                     </div>
                 </div>
+
+              </div>
             </div>
           </div>
         </>
