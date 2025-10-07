@@ -1,5 +1,4 @@
-/* menuPopup.css (completo, modificado) */
-.popup-menu {
+/* .popup-menu {
   position: fixed;
   top: 0;
   left: 0;
@@ -115,9 +114,6 @@
   color: #000000;
 }
 
-/* eliminado el hover previo que alteraba el gap */
-/* .menu-item-content:hover{ gap: 10px; } */
-
 .menu-item-content .menu-icon svg,
 .menu-item-content .menu-icon-submenu svg{
   width: 100%;
@@ -151,7 +147,6 @@
   text-align: left;
 }
 
-/* control del espaciado por clase, no inline */
 .nav-menu-item{
   display: flex;
   flex-direction: row;
@@ -308,4 +303,4 @@ footer .iconmorph{
   .menu-item-content{
     font-size: 32px;
   }
-}
+} */

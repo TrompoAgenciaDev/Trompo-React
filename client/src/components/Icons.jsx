@@ -377,7 +377,21 @@ const iconComponents = {
         d="M21 0C32.5998 0 42 9.40024 42 21C42 32.5998 32.5998 42 21 42C9.40024 42 0 32.5998 0 21C0 9.40024 9.40024 0 21 0ZM34.3315 29.1412V13.5355L26.5287 21.3384L34.3315 29.1412ZM9.33555 29.4597H32.6595L25.5284 22.3287L23.6374 24.2197C22.9806 24.8765 22.0848 25.2498 21.1543 25.2498H21.0299C19.9799 25.2498 18.9697 24.8318 18.2232 24.0853L16.4616 22.3237L9.33057 29.4547L9.33555 29.4597ZM7.66848 13.5306V29.1363L15.4713 21.3334L7.66848 13.5306ZM33.3363 12.5403H8.66374L19.1687 23.0453C19.6813 23.5578 20.378 23.8464 21.1045 23.8464H21.1791C21.7216 23.8464 22.2441 23.6325 22.6273 23.2443L33.3363 12.5353V12.5403Z"
         fill="#FED332" />
     </svg>
-  )
+  ),
+  plus: () => (
+    <svg height="21" viewBox="0 0 21 21" width="21" xmlns="http://www.w3.org/2000/svg">
+      <g fill="none" fillRule="evenodd" stroke="#000000" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="m5.5 10.5h10"/>
+        <path d="m10.5 5.5v10"/>
+      </g>
+    </svg>
+  ),
+  minus: () => (
+    <svg height="21" viewBox="0 0 21 21" width="21" xmlns="http://www.w3.org/2000/svg">
+      <path d="m5.5 10.5h10" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+
+  ),
 };
 
 const imageIcons = {

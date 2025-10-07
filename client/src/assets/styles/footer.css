@@ -137,6 +137,15 @@
   text-transform: capitalize;
 }
 
+.footer-menu .nav-menu-item .menu-item span  {
+  color: #1d1d1b !important;
+}
+
+.menu-item{
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
 @media (min-width:768px){
   .footer-container{
     display: -ms-grid;

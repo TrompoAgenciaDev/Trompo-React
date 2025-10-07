@@ -107,7 +107,7 @@ const Menu = ({
                 className={`nav-menu-item nav-menu-item--inline ${activeClass}`}
                 key={index}
               >
-                <div className="item-menu-icon">
+                {/* <div className="item-menu-icon">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="13"
@@ -124,7 +124,7 @@ const Menu = ({
                       strokeLinejoin="round"
                     />
                   </svg>
-                </div>
+                </div> */}
 
                 <div className="item-menu-container">
                   {hasSub ? (

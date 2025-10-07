@@ -1,0 +1,219 @@
+.popup-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  z-index: 9999999;
+  padding: 20px 10px 50px;
+}
+
+.container.mobile-header {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+
+.grid-menu li {
+  list-style: none;
+}
+
+.grid-menu li * a {
+  text-decoration: none;
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.38);
+  backdrop-filter: saturate(120%) blur(1px);
+  z-index: 99999;
+}
+
+/* --- Estilo unificado para todos los ítems principales del menú --- */
+.menu-popup {
+  border-bottom: 1px solid #ddd;
+}
+
+.menu-popup h3,
+.menu-popup span {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  padding: 16px 0;
+  margin: 0;
+  text-transform: capitalize;
+  color: #000;
+  cursor: pointer;
+}
+
+.servicios-options span{
+  padding: 0;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.menu-popup h3:hover,
+.menu-popup span:hover {
+  color: #fed332;
+}
+
+.servicios-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  border-bottom: 1px solid #ddd;
+  color: #000;
+  cursor: pointer;
+}
+
+.submenu-servicios {
+  overflow: hidden;
+  padding: 8px 0 12px 8px;
+}
+
+.submenu-servicios li a {
+  display: block;
+  padding: 6px 0;
+  text-decoration: none;
+  color: #222;
+}
+
+/* --- Hover visual consistente --- */
+.submenu-servicios li a:hover {
+  color: #fed332;
+}
+
+/* --- Desktop hover dropdown --- */
+@media (min-width: 1024px) {
+  .menu-overlay {
+    background: rgba(0, 0, 0, 0.38);
+  }
+
+  .full-container.popup-menu{
+    padding: 0;
+  }
+
+  .mobile-header{
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99999;
+  }
+
+  .menu-options-container{
+    width: 100% !important;
+    min-width: 100% !important;
+    padding: 0;
+  }
+
+  .menu-options{
+    width: 100%;
+    height: 380px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .menu-popup{
+    width: 100%;
+    padding: 0;
+  }
+
+  .menu-popup * a:not(.submenu-servicios a),
+  .servicios-header{
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 0 20px 20px 80px;
+  }
+
+  .servicios-header span:last-child{
+    display: none;
+  }
+
+  .menu-popup,
+  .servicios-header {
+    border-bottom: none;
+  }
+
+  .menu-popup{
+    border-right: 1px solid #ddd;
+  }
+
+  .menu-popup:hover{
+    background-color: #fed332;
+    border: none;
+  }
+
+  .menu-popup h3,
+  .menu-popup span{
+    font-weight: 700;
+    font-size: 22px;
+  }
+
+  .menu-popup h3:hover,
+  .menu-popup span:hover{
+    color: #222222;
+  }
+
+  .servicios-options a span{
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .submenu-servicios {
+    position: absolute;
+    width: 100%;
+    background: transparent;
+    top: 90px;
+    left: 80px;
+    z-index: 999999;
+    padding: 0;
+  }  
+}
+
+@media (min-width: 1280px) {
+  .menu-options,
+  .menu-popup * a:not(.submenu-servicios a),
+  .servicios-header{
+    height: 450px;
+  }
+
+  .menu-popup h3,
+  .menu-popup span {
+    font-weight: 700;
+    font-size: 26px;
+  }
+
+  .submenu-servicios {
+    top: 150px;
+    left: 80px;
+  }  
+
+  .servicios-options a span{
+    font-size: 18px;
+    font-weight: 600;
+    color: #666;
+  }
+
+  .servicios-options a:hover span{
+    color: #212121;
+  }
+}
