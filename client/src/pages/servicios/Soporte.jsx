@@ -87,11 +87,7 @@ const Soporte = () => {
             </div>
             <div className="grid-item-soporte">
               <p>
-                Soporte personalizado para desarrollos a medida. Mantenemos tu
-                plataforma estable y segura, resolvemos incidencias, sumamos
-                funcionalidades, integramos sistemas (APIs, ERP/CRM) y ajustamos
-                servidores para que todo rinda como debe. Si falla, lo
-                arreglamos; si puede ir mejor, lo optimizamos.
+                Soporte Creativo es la operación continua que ordena y escala tus piezas: social media, web, adaptaciones, motion y presentaciones, siempre alineadas al negocio. Entregas ágiles, plantillas escalables y control de calidad para sostener coherencia y velocidad.
               </p>
             </div>
           </div>
