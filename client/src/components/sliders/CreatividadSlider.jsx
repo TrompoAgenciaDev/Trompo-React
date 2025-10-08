@@ -20,7 +20,7 @@ const galleries = {
   ],
   qsltec: [
     `${import.meta.env.BASE_URL}assets/creatividad/slide/qsltec1.webp`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/qsltec2.webp`
+    `${import.meta.env.BASE_URL}assets/creatividad/slide/qsltec2.webp`,
   ],
   smartshop: [
     `${import.meta.env.BASE_URL}assets/creatividad/slide/smartshop1.webp`,
@@ -51,8 +51,26 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1 }) {
   const len = list.length;
   if (len <= 1) {
     return (
-      <div style={{ position: "relative", width: "100%", paddingTop: "75%", overflow: "hidden" }}>
-        <img src={list[0]} alt="" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          paddingTop: "75%",
+          overflow: "hidden",
+        }}
+      >
+        <img
+          src={list[0]}
+          alt=""
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
       </div>
     );
   }
@@ -87,15 +105,33 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1 }) {
   const offsetPct = idx * 100;
 
   return (
-    <div style={{ position: "relative", width: "100%", paddingTop: "75%", overflow: "hidden" }}>
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        paddingTop: "75%",
+        overflow: "hidden",
+      }}
+    >
       <motion.div
         style={{ position: "absolute", inset: 0, display: "flex" }}
         animate={{ x: `-${offsetPct}%` }}
-        transition={anim ? { duration: 0.45, ease: "easeOut" } : { duration: 0 }}
+        transition={
+          anim ? { duration: 0.45, ease: "easeOut" } : { duration: 0 }
+        }
       >
         {extended.map((src, i) => (
           <div key={i} style={{ width: "100%", flex: "0 0 100%" }}>
-            <img src={src} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            <img
+              src={src}
+              alt=""
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                display: "block",
+              }}
+            />
           </div>
         ))}
       </motion.div>
@@ -106,7 +142,14 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1 }) {
 /* Video único por slide 4:3 */
 function VideoSlide({ src }) {
   return (
-    <div style={{ position: "relative", width: "100%", paddingTop: "75%", overflow: "hidden" }}>
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        paddingTop: "75%",
+        overflow: "hidden",
+      }}
+    >
       <video
         src={src}
         muted
@@ -114,7 +157,14 @@ function VideoSlide({ src }) {
         autoPlay
         loop
         preload="metadata"
-        style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          display: "block",
+        }}
       />
     </div>
   );
@@ -189,8 +239,20 @@ export default function CreatividadSlider() {
           height: 40,
         }}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none">
-          <path d="M31.9687 16.1926L1.08382 16.1926M1.08382 16.1926L16.5263 31.3777M1.08382 16.1926L16.5263 1.00751" stroke="#1D1D1B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="33"
+          height="33"
+          viewBox="0 0 33 33"
+          fill="none"
+        >
+          <path
+            d="M31.9687 16.1926L1.08382 16.1926M1.08382 16.1926L16.5263 31.3777M1.08382 16.1926L16.5263 1.00751"
+            stroke="#1D1D1B"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </button>
       <button
@@ -207,8 +269,20 @@ export default function CreatividadSlider() {
           height: 40,
         }}
       >
-        <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084" stroke="#1E1E1E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <svg
+          width="38"
+          height="38"
+          viewBox="0 0 38 38"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
+            stroke="#1E1E1E"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </button>
 
@@ -246,7 +320,11 @@ export default function CreatividadSlider() {
               {item.kind === "video" ? (
                 <VideoSlide src={item.src} />
               ) : (
-                <InnerAutoSlider list={galleries[item.key]} interval={2200} direction={1} />
+                <InnerAutoSlider
+                  list={galleries[item.key]}
+                  interval={2200}
+                  direction={1}
+                />
               )}
             </div>
           ))}

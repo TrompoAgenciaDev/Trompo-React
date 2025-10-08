@@ -4,71 +4,48 @@ import { useHeroImages } from "../hooks/useHeroImage";
 import Icons from "../components/Icons";
 import "@as/hero.css";
 
-// Videos Desktop
-import HomeVideo from "/assets/hero/home.mp4";
-import Desarrollo from "/assets/hero/desarrollo-hero.mp4";
-import Creatividad from "/assets/hero/creatividad-hero.mp4";
-import Estrategia from "/assets/hero/estrategia-hero.mp4";
-// Videos Mobile
-import HomeVideoMobile from "/assets/hero/mobile/home-mobile.mp4";
-import DesarrolloMobile from "/assets/hero/mobile/desarrollo-hero-mobile.mp4";
-import CreatividadMobile from "/assets/hero/mobile/creatividad-hero-mobile.mp4";
-import EstrategiaMobile from "/assets/hero/mobile/estrategia-hero-mobile.mp4";
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 
 const videosByLocation = {
-  home: { desktop: HomeVideo, mobile: HomeVideoMobile },
-  desarrollo: { desktop: Desarrollo, mobile: DesarrolloMobile },
-  creatividad: { desktop: Creatividad, mobile: CreatividadMobile },
-  estrategia: { desktop: Estrategia, mobile: EstrategiaMobile },
-};
-
-const titleVar = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
-
-const groupVar = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { duration: 0.5, ease: "easeOut", staggerChildren: 0.12 },
+  home: {
+    desktop: `${base}assets/hero/home.mp4`,
+    mobile: `${base}assets/hero/mobile/home-mobile.mp4`,
+  },
+  desarrollo: {
+    desktop: `${base}assets/hero/desarrollo-hero.mp4`,
+    mobile: `${base}assets/hero/mobile/desarrollo-hero-mobile.mp4`,
+  },
+  creatividad: {
+    desktop: `${base}assets/hero/creatividad-hero.mp4`,
+    mobile: `${base}assets/hero/mobile/creatividad-hero-mobile.mp4`,
+  },
+  estrategia: {
+    desktop: `${base}assets/hero/estrategia-hero.mp4`,
+    mobile: `${base}assets/hero/mobile/estrategia-hero-mobile.mp4`,
   },
 };
 
-const itemVar = {
-  hidden: { opacity: 0, y: 10 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
-};
-
 const Hero = ({ location = "home" }) => {
-  const [heroImagePng, heroImageWebp] = useHeroImages(location);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767.98px)");
     const handler = (e) => setIsMobile(e.matches);
     handler(mq);
-    mq.addEventListener
-      ? mq.addEventListener("change", handler)
-      : mq.addListener(handler);
-    return () => {
-      mq.removeEventListener
-        ? mq.removeEventListener("change", handler)
-        : mq.removeListener(handler);
-    };
+    mq.addEventListener?.("change", handler);
+    return () => mq.removeEventListener?.("change", handler);
   }, []);
 
   const videoSrc = isMobile
     ? videosByLocation[location]?.mobile
     : videosByLocation[location]?.desktop;
 
+  // HERO PRINCIPAL
   if (location !== "contactanos") {
     return (
-      <div
-        className="full-container hero-video-container"
-        id={location === "home" ? "hero" : undefined}
-      >
-        {videoSrc && (
+      videoSrc && (
           <video
             key={videoSrc}
             autoPlay
@@ -76,14 +53,16 @@ const Hero = ({ location = "home" }) => {
             muted
             playsInline
             preload="metadata"
+            disablePictureInPicture
+            controlsList="nodownload noremoteplayback"
           >
             <source src={videoSrc} type="video/mp4" />
           </video>
-        )}
-      </div>
+        )
     );
   }
 
+  // CONTACTANOS (idéntico)
   const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
@@ -91,9 +70,7 @@ const Hero = ({ location = "home" }) => {
       if (window.scrollY >= 40) setRevealed(true);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
-
     const timer = setTimeout(() => setRevealed(true), 2000);
-
     return () => {
       window.removeEventListener("scroll", onScroll);
       clearTimeout(timer);
@@ -103,31 +80,21 @@ const Hero = ({ location = "home" }) => {
   return (
     <div className="full-container hero-contactanos bg-yellow">
       <div className="contacto-wrap">
-        <motion.h1
-          className="contacto-title"
-          variants={titleVar}
-          initial="hidden"
-          animate="show"
-        >
+        <motion.h1 className="contacto-title" initial="hidden" animate="show">
           Hablemos de tu proyecto
         </motion.h1>
 
         {revealed && (
           <motion.div
             className="contacto-reveal"
-            variants={groupVar}
             initial="hidden"
             animate="show"
           >
-            <motion.p className="contacto-subtitle" variants={itemVar}>
+            <motion.p className="contacto-subtitle">
               Cada proyecto es único. Completá el formulario y diseñemos la
               estrategia que tu marca necesita para evolucionar.
             </motion.p>
-            <motion.a
-              href="#contacto"
-              className="contacto-cta"
-              variants={itemVar}
-            >
+            <motion.a href="#contacto" className="contacto-cta">
               <Icons iconName="down" link="#contacto" />
             </motion.a>
           </motion.div>
