@@ -137,25 +137,21 @@ const MenuPopup = ({ isOpen, onClose }) => {
                       </motion.span>
                     </div>
 
-                    <AnimatePresence initial={false}>
-                      {isServiciosOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.2, ease: "easeInOut" }}
-                          className="submenu-servicios"
-                        >
-                          <Menu
-                            menuType="servicios"
-                            routes={routesConfig}
-                            classMenu="servicios-options grid-menu"
-                            location="gsap"
-                            onClose={onClose}
-                          />
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    <div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.2, ease: "easeInOut" }}
+                      className="submenu-servicios"
+                    >
+                      <Menu
+                        menuType="servicios"
+                        routes={routesConfig}
+                        classMenu="servicios-options grid-menu"
+                        location="gsap"
+                        onClose={onClose}
+                      />
+                    </div>
                   </div>
                 </motion.div>
 

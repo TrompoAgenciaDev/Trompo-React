@@ -185,14 +185,6 @@
 }
 
 @media (min-width: 1280px) {
-  .about-content h4 {
-    font-size: 20px;
-  }
-
-  .about-content p {
-    text-align: left;
-  }
-
   .grid-about {
     display: -ms-grid;
     display: grid;

@@ -17,6 +17,7 @@ const Nosotros = () => {
     <>
       {/* Desktop */}
       <video
+        src={`${base}assets/hero/home.mp4`}
         className="hero-video desktop-only"
         autoPlay
         loop
@@ -27,11 +28,11 @@ const Nosotros = () => {
         controlsList="nodownload noremoteplayback"
         poster={`${base}assets/hero/home.webp`}
       >
-        <source src={`${base}assets/hero/home.mp4`} type="video/mp4" />
       </video>
 
       {/* Mobile */}
       <video
+        src={`${base}assets/hero/mobile/home-mobile.mp4`}
         className="hero-video mobile-only"
         autoPlay
         loop
@@ -41,8 +42,8 @@ const Nosotros = () => {
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
         poster={`${base}assets/hero/mobile/home.webp`}
+
       >
-        <source src={`${base}assets/hero/mobile/home-mobile.mp4`} type="video/mp4" />
       </video>
 
       <section className="post-hero-section full-container">
@@ -61,7 +62,7 @@ const Nosotros = () => {
             Fuimos testigos —y protagonistas— de la transformación digital:
             cuando la pauta online era solo un 5% del mix, cuando el "mobile
             first" todavía no existía. Hoy, con un ecosistema donde{" "}
-            <strong>tecnología, datos, contenido y audiencias</strong> conviven
+            <strong>tecnología, datos, IA, contenido y audiencias</strong> conviven
             en tiempo real, seguimos acompañando a nuestros clientes con la
             misma convicción de siempre: <strong>estar cerca.</strong>
             <br />
@@ -75,117 +76,7 @@ const Nosotros = () => {
         </div>
       </section>
 
-      <section className="bg-yellow full-container">
-        <div className="container about-content">
-          <h4>Lo que nos define</h4>
-          <div className="grid-about">
-            <div className="grid-about-item">
-              <svg
-                width="38"
-                height="38"
-                viewBox="0 0 38 38"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-                  stroke="#1E1E1E"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <div className="grid-item-content">
-                <span className="header-item-content">
-                  Experiencia con raíces
-                </span>
-                <p className="footer-item-content">
-                  más de 10 años resolviendo problemas reales en mercados
-                  locales y nacionales.
-                </p>
-              </div>
-            </div>
-            <div className="grid-about-item">
-              <svg
-                width="38"
-                height="38"
-                viewBox="0 0 38 38"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-                  stroke="#1E1E1E"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <div className="grid-item-content">
-                <span className="header-item-content">
-                  Compromiso verificable
-                </span>
-                <p className="footer-item-content">
-                  90% de nuestros clientes renuevan su confianza año tras año.
-                </p>
-              </div>
-            </div>
-            <div className="grid-about-item">
-              <svg
-                width="38"
-                height="38"
-                viewBox="0 0 38 38"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-                  stroke="#1E1E1E"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <div className="grid-item-content">
-                <span className="header-item-content">
-                  Equipo multidisciplinario
-                </span>
-                <p className="footer-item-content">
-                  Unimos estrategas, diseñadores y técnicos que trabajan en
-                  conjunto.
-                </p>
-              </div>
-            </div>
-            <div className="grid-about-item">
-              <svg
-                width="38"
-                height="38"
-                viewBox="0 0 38 38"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
-                  stroke="#1E1E1E"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <div className="grid-item-content">
-                <span className="header-item-content">
-                  Transparencia operativa
-                </span>
-                <p className="footer-item-content">
-                  Hablamos claro sobre lo que podemos lograr (y lo que no).
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="full-container about-section">
+      <section className="full-container about-section bg-yellow-2">
         <div className="container about-content-text">
           <h2>Un equipo que se mueve con vos</h2>
           <p>
@@ -201,10 +92,10 @@ const Nosotros = () => {
         </div>
       </section>
 
+      <StoricalClients />
+
       {/* formulario */}
       <Contact />
-
-      <StoricalClients />
     </>
   );
 };

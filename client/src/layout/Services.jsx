@@ -28,7 +28,7 @@ function Services() {
 
       <div className="container services-link-container">
         <h1 className="services-title">
-          Con más de 10 años de experiencia, diseñamos soluciones integrales a través de cinco <span className="secondary-font">pilares clave</span>:
+          Con más de 10 años de experiencia, diseñamos soluciones integrales <span className="jump-br"><br/></span> a través de cinco  <span className="secondary-font">pilares clave</span>:
         </h1>
         <div className="grid-services">
           {items.map((item) => {

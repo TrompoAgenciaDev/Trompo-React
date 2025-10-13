@@ -126,36 +126,9 @@ const Soporte = () => {
         </div>
       </section>
 
-      <div className="full-container">
-        <div className="full-container title-portfolio-container">
-          <div className="container"></div>
-          <div className="container">
-            <h3>
-              Transformamos ideas en plataformas digitales que impulsan negocios
-            </h3>
-            <p>
-              Arquitectura técnica impecable, experiencias de usuario intuitivas
-              y resultados medibles que convierten cada proyecto en un activo de
-              crecimiento.
-            </p>
-          </div>
-        </div>
-        <Portfolio3d location="desarrollo" categoria="3d" />
-      </div>
+      <Faqs location="soporte" />
 
       <Contact form="soporte"/>
-
-      <section className="full-container bg-yellow testimonial-wrapper">
-        <div className="container testimonial-header">
-          <h4>Más que clientes, aliados estratégicos.</h4>
-          <p>Historias que muestran el valor de trabajar en equipo.</p>
-        </div>
-        <div className="full-container">
-          <Testimonials size={4} />
-        </div>
-      </section>
-
-      <Faqs location="soporte" />
 
       <div className="full-container">
         <CustomerSlider />

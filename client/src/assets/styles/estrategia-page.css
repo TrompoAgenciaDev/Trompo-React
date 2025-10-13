@@ -10,11 +10,10 @@
   justify-items: center;
 }
 
-.ads-values-diagonal{
-  -webkit-clip-path: polygon(0 0%, 100% 10%, 100% 90%, 0% 100%);
-  clip-path: polygon(0 0%, 100% 10%, 100% 90%, 0% 100%);
-  padding: 30px 0;
-  margin-bottom: 50px;
+.ads .faqs{
+  -webkit-clip-path: polygon(0 5%, 100% 0, 100% 100%, 0% 100%);
+  clip-path: polygon(0 5%, 100% 0, 100% 100%, 0% 100%);
+  padding-top: 50px;
 }
 
 .ads-grid{
@@ -118,9 +117,6 @@
   .grid-item-body p{
     font-size: 13px;
   }
-  .ads-values-diagonal{
-    padding-bottom: 70px;
-  }
   .ads-title-portfolio-container{
     grid-template-columns: 1fr 4fr;
     margin: 0 0 -60px;
@@ -132,6 +128,10 @@
 
   .ads-title-portfolio-container p{
     font-size: 15px;
+  }
+  .ads .faqs{
+    -webkit-clip-path: polygon(0 7%, 100% 0, 100% 100%, 0% 100%);
+    clip-path: polygon(0 7%, 100% 0, 100% 100%, 0% 100%);
   }
 }
 
@@ -187,6 +187,10 @@
   .ads-title-portfolio-container h3{
     font-size: 28px;
   }
+  .ads .faqs{
+    -webkit-clip-path: polygon(0 4%, 100% 0, 100% 100%, 0% 100%);
+    clip-path: polygon(0 4%, 100% 0, 100% 100%, 0% 100%);
+  }
 }
 
 @media (min-width: 1280px) {
@@ -196,12 +200,13 @@
     height: 600px;
   }
 
-  .ads-values-diagonal{
-    -webkit-clip-path: polygon(0 0, 100% 20%, 100% 100%, 0% 100%);
-    clip-path: polygon(0 0, 100% 20%, 100% 80%, 0% 100%);
-    padding-top: 100px;
+  .ads .faqs{
+    -webkit-clip-path: polygon(0 17%, 100% 0, 100% 100%, 0% 100%);
+    clip-path: polygon(0 17%, 100% 0, 100% 100%, 0% 100%);
+    padding-top: 150px;
+    margin-top: -100px;
   }
-  
+
   .ads-title-portfolio-container{
     grid-template-columns: 1fr 1fr;
     margin: 70px 0 -20px;

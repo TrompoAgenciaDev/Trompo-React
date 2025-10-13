@@ -200,7 +200,6 @@
     
   .grid-item-interaccion:first-child .interaccion-img{
     max-width: 400px;
-    margin-top: -180px;
   }
 
   .interaccion .interaccion-grid:first-child .grid-item-interaccion:last-child{

@@ -19,6 +19,7 @@ const Estrategia = () => {
   return (
     <>
       <video
+        src={`${base}assets/hero/estrategia-hero.mp4`}
         className="hero-video desktop-only"
         autoPlay
         loop
@@ -27,12 +28,11 @@ const Estrategia = () => {
         preload="metadata"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
-        poster={`${base}assets/hero/estrategia-hero-poster.webp`}
-      >
-        <source src={`${base}assets/hero/estrategia-hero.mp4`} type="video/mp4" />
-      </video>
+        // poster={`${base}assets/hero/estrategia-hero-poster.webp`}
+      ></video>
 
       <video
+        src={`${base}assets/hero/mobile/estrategia-hero-mobile.mp4`}
         className="hero-video mobile-only"
         autoPlay
         loop
@@ -41,10 +41,8 @@ const Estrategia = () => {
         preload="metadata"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
-        poster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
-      >
-        <source src={`${base}assets/hero/mobile/estrategia-hero-mobile.mp4`} type="video/mp4" />
-      </video>
+        // poster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
+      ></video>
 
       <PageTitle
         title="Estrategia"
@@ -57,7 +55,9 @@ const Estrategia = () => {
           <div className="container ads-grid-2">
             <div className="grid-item-ads">
               <img
-                src={`${import.meta.env.BASE_URL}assets/estrategia/planning.webp`}
+                src={`${
+                  import.meta.env.BASE_URL
+                }assets/estrategia/planning.webp`}
                 alt=""
               />
             </div>
@@ -116,12 +116,12 @@ const Estrategia = () => {
                 </div>
                 <div className="grid-item-body">
                   <p>
-                    Meta Ads orientado a negocio: seleccionamos las plataformas y
-                    ubicaciones que rinden para cada audiencia, configuramos
+                    Meta Ads orientado a negocio: seleccionamos las plataformas
+                    y ubicaciones que rinden para cada audiencia, configuramos
                     medición completa (Pixel + CAPI) e integramos leads al CRM.
-                    Ajustes semanales sobre pujas, segmentación y creatividad, con
-                    límites de gasto y dashboards 24/7. Objetivo: eficiencia de
-                    inversión y ventas consistentes.
+                    Ajustes semanales sobre pujas, segmentación y creatividad,
+                    con límites de gasto y dashboards 24/7. Objetivo: eficiencia
+                    de inversión y ventas consistentes.
                   </p>
                 </div>
               </div>
@@ -131,8 +131,8 @@ const Estrategia = () => {
                 </div>
                 <div className="grid-item-body">
                   <p>
-                    Construimos campañas de <strong>Búsqueda</strong> orientadas a
-                    resultados (llamadas, formularios, ventas) y optimizamos
+                    Construimos campañas de <strong>Búsqueda</strong> orientadas
+                    a resultados (llamadas, formularios, ventas) y optimizamos
                     mediante un proceso de mejora continua comprobado.{" "}
                     <strong>Display</strong> refuerza la marca en sitios top a
                     bajo costo; <strong>YouTube</strong> acompaña cuando tiene
@@ -146,13 +146,15 @@ const Estrategia = () => {
               </div>
             </div>
           </div>
-        </div>                
+        </div>
 
         <div className="full-container section-ads-2 bg-yellow-2 ads-diagonal">
           <div className="container ads-grid-2">
             <div className="grid-item-ads">
               <img
-                src={`${import.meta.env.BASE_URL}assets/estrategia/planning.webp`}
+                src={`${
+                  import.meta.env.BASE_URL
+                }assets/estrategia/planning.webp`}
                 alt=""
               />
             </div>
@@ -176,36 +178,11 @@ const Estrategia = () => {
             </div>
           </div>
         </div>
-      </section>
 
-      <div className="full-container portfolio-ads-section">
-        <div className="container ads-title-portfolio-container">
-          <div className="container"></div>
-          <div className="container">
-            <h3>Proyectos con impacto</h3>
-            <p>
-              Combinamos planificación estratégica, analytics avanzado y
-              ejecución en plataformas para maximizar conversiones y reducir
-              CAC.
-            </p>
-          </div>
-        </div>
-        <Portfolio3d location="estrategia" />
-      </div>
+        <Faqs location="estrategia" />
+      </section>
 
       <Contact form="estrategia" />
-
-      <section className="full-container bg-yellow testimonial-wrapper">
-        <div className="container testimonial-header">
-          <h4>Más que clientes, aliados estratégicos.</h4>
-          <p>Historias que muestran el valor de trabajar en equipo.</p>
-        </div>
-        <div className="full-container">
-          <Testimonials size={4} />
-        </div>
-      </section>
-
-      <Faqs location="estrategia" />
 
       <div className="full-container">
         <CustomerSlider />

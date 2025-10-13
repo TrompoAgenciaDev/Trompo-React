@@ -68,8 +68,7 @@ const Contactanos = () => {
               animate="show"
             >
               <motion.p className="contacto-subtitle" variants={itemVar}>
-                Cada proyecto es único. Completá el formulario y diseñemos la
-                estrategia que tu marca necesita para evolucionar.
+                Cada proyecto es único. Completá el formulario y diseñemos la estrategia que tu marca necesita.
               </motion.p>
               <motion.a
                 href="#contacto"
@@ -85,16 +84,6 @@ const Contactanos = () => {
 
       <div id="contacto"></div>
       <Contact form="home"/>
-      
-      <section className="full-container bg-yellow testimonial-wrapper">
-        <div className="container testimonial-header">
-          <h4>Más que clientes, aliados estratégicos.</h4>
-          <p>Historias que muestran el valor de trabajar en equipo.</p>
-        </div>
-        <div className="full-container">
-          <Testimonials size={4} />
-        </div>
-      </section>
 
       <Faqs/>
       

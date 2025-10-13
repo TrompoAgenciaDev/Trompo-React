@@ -33,33 +33,29 @@ const Home = () => {
     <main className="full-container">
       {/* Desktop */}
       <video
+        src={`${base}assets/hero/home.mp4`}
         className="hero-video desktop-only"
         autoPlay
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="auto"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
-        poster={`${base}assets/hero/home.webp`}
-      >
-        <source src={`${base}assets/hero/home.mp4`} type="video/mp4" />
-      </video>
+      ></video>
 
       {/* Mobile */}
       <video
+        src={`${base}assets/hero/mobile/home-mobile.mp4`}
         className="hero-video mobile-only"
         autoPlay
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="auto"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
-        poster={`${base}assets/hero/mobile/home.webp`}
-      >
-        <source src={`${base}assets/hero/mobile/home-mobile.mp4`} type="video/mp4" />
-      </video>
+      ></video>
 
       <section className="post-hero-section full-container">
         <PostHero text={text} />
@@ -78,7 +74,7 @@ const Home = () => {
             fortalecen la identidad y generan resultados medibles. Nos
             involucramos en cada etapa del proceso, acompañando a nuestros
             clientes con una visión integral que conecta a las marcas con sus
-            audiencias de manera auténtica, relevante y sostenida en el tiempo
+            audiencias de manera auténtica, relevante y sostenida en el tiempo.
           </p>
         </div>
       </section>
@@ -88,11 +84,6 @@ const Home = () => {
 
       {/* Portfolio - clientes grandes */}
       <div className="full-container creatividad-video-section">
-        <div className="container">
-          <h1 className="services-title">
-            Nuestros <span className="secondary-font">proyectos</span>
-          </h1>
-        </div>
         <div className="container">
           <CreatividadSlider />
         </div>

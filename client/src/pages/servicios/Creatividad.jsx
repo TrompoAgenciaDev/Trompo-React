@@ -19,6 +19,7 @@ const Creatividad = () => {
   return (
     <>
       <video
+        src={`${base}assets/hero/creatividad-hero.mp4`}
         className="hero-video desktop-only"
         autoPlay
         loop
@@ -29,10 +30,10 @@ const Creatividad = () => {
         controlsList="nodownload noremoteplayback"
         poster={`${base}assets/hero/creatividad-hero-poster.webp`}
       >
-        <source src={`${base}assets/hero/creatividad-hero.mp4`} type="video/mp4" />
       </video>
 
       <video
+        src={`${base}assets/hero/mobile/creatividad-hero-mobile.mp4`}
         className="hero-video mobile-only"
         autoPlay
         loop
@@ -43,13 +44,12 @@ const Creatividad = () => {
         controlsList="nodownload noremoteplayback"
         poster={`${base}assets/hero/mobile/creatividad-hero-mobile-poster.webp`}
       >
-        <source src={`${base}assets/hero/mobile/creatividad-hero-mobile.mp4`} type="video/mp4" />
       </video>
 
       <PageTitle
         title="Creatividad"
         subtitle="que conecta"
-        highlight="La creatividad aplicada al marketing <strong>cuenta tu historia y mueve métricas</strong>. Llevamos tu propósito a <strong>sistemas y piezas multiformat</strong> que destacan, ordenan la marca y te diferencian <strong>dónde está tu audiencia</strong>. Consistencia visual, <strong>velocidad de producción</strong> y foco en performance. <strong>Procesos</strong> para escalar la identidad y cultura de tu marca. "
+        highlight="De la idea a la experiencia. Branding digital que define identidad y narrativa de marca; diseño aplicado a comunicación y campañas para mantener coherencia estética; presencia social que traduce la marca a formatos nativos; y diseño web que convierte la identidad en UI, layouts, banners y elementos visuales. Un sistema creativo que hace reconocible tu marca y potencia el rendimiento en todos los canales. "
         bgc="#FEE070"
       />
       <section className="full-container identidad">
@@ -106,9 +106,9 @@ const Creatividad = () => {
         </div>
       </div>
 
-      <Contact form="creatividad" />
-
       <Faqs location="creatividad" />
+
+      <Contact form="creatividad" />
 
       <div className="full-container">
         <CustomerSlider />
