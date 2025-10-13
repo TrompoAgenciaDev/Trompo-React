@@ -9,11 +9,43 @@ import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 
 //styles
 import "../../assets/styles/estrategia-page.css";
+import "@as/hero.css";
+
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 
 const Estrategia = () => {
   return (
     <>
-      <Hero location="estrategia" />
+      <video
+        className="hero-video desktop-only"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        disablePictureInPicture
+        controlsList="nodownload noremoteplayback"
+        poster={`${base}assets/hero/estrategia-hero-poster.webp`}
+      >
+        <source src={`${base}assets/hero/estrategia-hero.mp4`} type="video/mp4" />
+      </video>
+
+      <video
+        className="hero-video mobile-only"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        disablePictureInPicture
+        controlsList="nodownload noremoteplayback"
+        poster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
+      >
+        <source src={`${base}assets/hero/mobile/estrategia-hero-mobile.mp4`} type="video/mp4" />
+      </video>
+
       <PageTitle
         title="Estrategia"
         subtitle="inteligente"
@@ -25,9 +57,7 @@ const Estrategia = () => {
           <div className="container ads-grid-2">
             <div className="grid-item-ads">
               <img
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/estrategia/planning.webp`}
+                src={`${import.meta.env.BASE_URL}assets/estrategia/planning.webp`}
                 alt=""
               />
             </div>
@@ -122,9 +152,7 @@ const Estrategia = () => {
           <div className="container ads-grid-2">
             <div className="grid-item-ads">
               <img
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/estrategia/planning.webp`}
+                src={`${import.meta.env.BASE_URL}assets/estrategia/planning.webp`}
                 alt=""
               />
             </div>

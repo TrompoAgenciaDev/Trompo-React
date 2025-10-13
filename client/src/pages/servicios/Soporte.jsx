@@ -11,11 +11,43 @@ import Testimonials from "../../components/Testimonials.jsx";
 
 //styles
 import "../../assets/styles/soporte-page.css";
+import "@as/hero.css";
+
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 
 const Soporte = () => {
   return (
     <>
-      <Hero location="desarrollo" />
+      <video
+        className="hero-video desktop-only"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        disablePictureInPicture
+        controlsList="nodownload noremoteplayback"
+        poster={`https://trompoagencia.com/assets/hero/soporte-hero-poster.webp`}
+      >
+        <source src={`https://trompoagencia.com/assets/hero/soporte-hero.mp4`} type="video/mp4" />
+      </video>
+
+      <video
+        className="hero-video mobile-only"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        disablePictureInPicture
+        controlsList="nodownload noremoteplayback"
+        poster={`https://trompoagencia.com/assets/hero/mobile/soporte-hero-mobile-poster.webp`}
+      >
+        <source src={`https://trompoagencia.com/assets/hero/mobile/soporte-hero-mobile.mp4`} type="video/mp4" />
+      </video>
+
       <PageTitle
         title="Soporte"
         subtitle="continuo"

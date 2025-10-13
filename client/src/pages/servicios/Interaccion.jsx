@@ -10,11 +10,45 @@ import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 
 //styles
 import "../../assets/styles/interaccion.css";
+import "@as/hero.css";
+
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 
 const Interaccion = () => {
   return (
     <>
-      <Hero location="home" />
+      {/* Desktop */}
+      <video
+        className="hero-video desktop-only"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        disablePictureInPicture
+        controlsList="nodownload noremoteplayback"
+        poster={`${base}assets/hero/home-poster.webp`}
+      >
+        <source src={`${base}assets/hero/interaccion.mp4`} type="video/mp4" />
+      </video>
+
+      {/* Mobile */}
+      <video
+        className="hero-video mobile-only"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        disablePictureInPicture
+        controlsList="nodownload noremoteplayback"
+        poster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
+      >
+        <source src={`${base}assets/hero/mobile/interaccion-mobile.mp4`} type="video/mp4" />
+      </video>
+
       <PageTitle
         title="Interacción"
         subtitle="que transforma"
@@ -28,9 +62,7 @@ const Interaccion = () => {
             <div className="grid-item-interaccion">
               <img
                 className="interaccion-img"
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/interaccion/interaccion-1.webp`}
+                src={`${import.meta.env.BASE_URL}assets/interaccion/interaccion-1.webp`}
                 alt=""
               />
             </div>
@@ -59,9 +91,7 @@ const Interaccion = () => {
           <div className="container interaccion-grid">
             <div className="grid-item-interaccion">
               <img
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/interaccion/interaccion-2.webp`}
+                src={`${import.meta.env.BASE_URL}assets/interaccion/interaccion-2.webp`}
                 alt=""
               />
             </div>

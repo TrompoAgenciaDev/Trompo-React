@@ -9,11 +9,43 @@ import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 
 //styles
 import "../../assets/styles/creatividad.css";
+import "@as/hero.css";
+
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 
 const Creatividad = () => {
   return (
     <>
-      <Hero location="creatividad" />
+      <video
+        className="hero-video desktop-only"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        disablePictureInPicture
+        controlsList="nodownload noremoteplayback"
+        poster={`${base}assets/hero/creatividad-hero-poster.webp`}
+      >
+        <source src={`${base}assets/hero/creatividad-hero.mp4`} type="video/mp4" />
+      </video>
+
+      <video
+        className="hero-video mobile-only"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        disablePictureInPicture
+        controlsList="nodownload noremoteplayback"
+        poster={`${base}assets/hero/mobile/creatividad-hero-mobile-poster.webp`}
+      >
+        <source src={`${base}assets/hero/mobile/creatividad-hero-mobile.mp4`} type="video/mp4" />
+      </video>
+
       <PageTitle
         title="Creatividad"
         subtitle="que conecta"
@@ -35,9 +67,7 @@ const Creatividad = () => {
             </div>
             <div className="grid-item-identidad">
               <img
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/identidad/identidad.webp`}
+                src={`${import.meta.env.BASE_URL}assets/identidad/identidad.webp`}
                 alt=""
               />
             </div>
@@ -58,11 +88,10 @@ const Creatividad = () => {
             <div className="grid-item-identidad">
               <video
                 className="identidad-video"
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/identidad/volvo-identidad.mp4`}
+                src={`${import.meta.env.BASE_URL}assets/identidad/volvo-identidad.mp4`}
                 muted
                 autoPlay
+                poster={`${base}assets/identidad/volvo-identidad-poster.webp`}
               ></video>
             </div>
           </div>
@@ -78,16 +107,6 @@ const Creatividad = () => {
       </div>
 
       <Contact form="creatividad" />
-
-      {/* <section className="full-container bg-yellow testimonial-wrapper">
-        <div className="container testimonial-header">
-          <h4>Más que clientes, aliados estratégicos.</h4>
-          <p>Historias que muestran el valor de trabajar en equipo.</p>
-        </div>
-        <div className="full-container">
-          <Testimonials size={4} />
-        </div>
-      </section> */}
 
       <Faqs location="creatividad" />
 

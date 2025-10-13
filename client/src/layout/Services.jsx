@@ -13,11 +13,17 @@ function Services() {
     <section className="full-container services  bg-yellow-2">
       <div className="banner full-container">
         <video
+          className="services-video"
           src={`${import.meta.env.BASE_URL}assets/services/loop.mp4`}
           autoPlay
           muted
           loop
-        ></video>
+          playsInline
+          preload="metadata"
+          disablePictureInPicture
+          controlsList="nodownload noremoteplayback"
+          poster={`${import.meta.env.BASE_URL}assets/services/loop-poster.webp`}
+        />
       </div>
 
       <div className="container services-link-container">

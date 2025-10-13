@@ -99,6 +99,10 @@
   width: 100%;
 }
 
+.footer-logo-img{
+  width: 150px;
+}
+
 .social-icons{
   display: -webkit-box;
   display: -moz-box;

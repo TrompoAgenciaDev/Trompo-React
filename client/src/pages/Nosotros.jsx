@@ -6,11 +6,45 @@ import Contact from "../layout/Contact.jsx";
 
 // styles
 import "../assets/styles/about.css";
+import "@as/hero.css";
+
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 
 const Nosotros = () => {
   return (
     <>
-      <Hero location="home" />
+      {/* Desktop */}
+      <video
+        className="hero-video desktop-only"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        disablePictureInPicture
+        controlsList="nodownload noremoteplayback"
+        poster={`${base}assets/hero/home.webp`}
+      >
+        <source src={`${base}assets/hero/home.mp4`} type="video/mp4" />
+      </video>
+
+      {/* Mobile */}
+      <video
+        className="hero-video mobile-only"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        disablePictureInPicture
+        controlsList="nodownload noremoteplayback"
+        poster={`${base}assets/hero/mobile/home.webp`}
+      >
+        <source src={`${base}assets/hero/mobile/home-mobile.mp4`} type="video/mp4" />
+      </video>
+
       <section className="post-hero-section full-container">
         <div className="container max-text">
           <p>

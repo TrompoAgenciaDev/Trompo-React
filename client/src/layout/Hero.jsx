@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import videojs from "video.js";
+import "video.js/dist/video-js.css";
 import { motion } from "framer-motion";
-import { useHeroImages } from "../hooks/useHeroImage";
 import Icons from "../components/Icons";
 import "@as/hero.css";
 
@@ -29,6 +30,8 @@ const videosByLocation = {
 
 const Hero = ({ location = "home" }) => {
   const [isMobile, setIsMobile] = useState(false);
+  const videoRef = useRef(null);
+  const playerRef = useRef(null);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767.98px)");
@@ -42,23 +45,45 @@ const Hero = ({ location = "home" }) => {
     ? videosByLocation[location]?.mobile
     : videosByLocation[location]?.desktop;
 
+  useEffect(() => {
+    if (videoRef.current && videoSrc) {
+      if (playerRef.current) {
+        playerRef.current.dispose();
+      }
+
+      playerRef.current = videojs(videoRef.current, {
+        autoplay: true,
+        loop: true,
+        muted: true,
+        controls: false,
+        preload: "metadata",
+        playsinline: true,
+      });
+
+      playerRef.current.src({ src: videoSrc, type: "video/mp4" });
+    }
+
+    return () => {
+      if (playerRef.current) {
+        playerRef.current.dispose();
+        playerRef.current = null;
+      }
+    };
+  }, [videoSrc]);
+
   // HERO PRINCIPAL
   if (location !== "contactanos") {
     return (
       videoSrc && (
+        <div data-vjs-player>
           <video
-            key={videoSrc}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
+            ref={videoRef}
+            className="video-js vjs-default-skin"
             disablePictureInPicture
             controlsList="nodownload noremoteplayback"
-          >
-            <source src={videoSrc} type="video/mp4" />
-          </video>
-        )
+          />
+        </div>
+      )
     );
   }
 

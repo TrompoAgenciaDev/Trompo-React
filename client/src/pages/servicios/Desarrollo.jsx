@@ -10,11 +10,43 @@ import Contact from "../../layout/Contact.jsx";
 import Testimonials from "../../components/Testimonials.jsx";
 
 import "../../assets/styles/servicios-page.css";
+import "@as/hero.css";
+
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 
 const Desarrollo = () => {
   return (
     <>
-      <Hero location="desarrollo" />
+      <video
+        className="hero-video desktop-only"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        disablePictureInPicture
+        controlsList="nodownload noremoteplayback"
+        poster={`${base}assets/hero/desarrollo-hero-poster.webp`}
+      >
+        <source src={`${base}assets/hero/desarrollo-hero.mp4`} type="video/mp4" />
+      </video>
+
+      <video
+        className="hero-video mobile-only"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        disablePictureInPicture
+        controlsList="nodownload noremoteplayback"
+        poster={`${base}assets/hero/mobile/desarrollo-hero-mobile-poster.webp`}
+      >
+        <source src={`${base}assets/hero/mobile/desarrollo-hero-mobile.mp4`} type="video/mp4" />
+      </video>
+      
       <PageTitle
         title="Desarrollo <strong>web</strong>"
         subtitle=""
@@ -61,9 +93,7 @@ const Desarrollo = () => {
             </div>
             <div className="grid-item-service">
               <img
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/desarrollo/institucional.webp`}
+                src={`${import.meta.env.BASE_URL}assets/desarrollo/institucional.webp`}
                 alt=""
               />
             </div>
@@ -103,9 +133,7 @@ const Desarrollo = () => {
             </div>
             <div className="grid-item-service">
               <img
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/desarrollo/landing.webp`}
+                src={`${import.meta.env.BASE_URL}assets/desarrollo/landing.webp`}
                 alt=""
               />
             </div>
@@ -148,9 +176,7 @@ const Desarrollo = () => {
             </div>
             <div className="grid-item-service">
               <img
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/desarrollo/ecommerce.webp`}
+                src={`${import.meta.env.BASE_URL}assets/desarrollo/ecommerce.webp`}
                 alt=""
               />
             </div>
@@ -194,9 +220,7 @@ const Desarrollo = () => {
             </div>
             <div className="grid-item-service">
               <img
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/desarrollo/formacion.webp`}
+                src={`${import.meta.env.BASE_URL}assets/desarrollo/formacion.webp`}
                 alt=""
               />
             </div>
@@ -239,9 +263,7 @@ const Desarrollo = () => {
             </div>
             <div className="grid-item-service">
               <img
-                src={`${
-                  import.meta.env.BASE_URL
-                }assets/desarrollo/catalogo.webp`}
+                src={`${import.meta.env.BASE_URL}assets/desarrollo/catalogo.webp`}
                 alt=""
               />
             </div>
@@ -267,16 +289,6 @@ const Desarrollo = () => {
       </div>
 
       <Contact form="desarrollo"/>
-
-      {/* <section className="full-container bg-yellow testimonial-wrapper">
-        <div className="container testimonial-header">
-          <h4>Más que clientes, aliados estratégicos.</h4>
-          <p>Historias que muestran el valor de trabajar en equipo.</p>
-        </div>
-        <div className="full-container">
-          <Testimonials size={4} />
-        </div>
-      </section> */}
 
       <Faqs location="desarrollo" />
       
