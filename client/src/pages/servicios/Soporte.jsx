@@ -8,6 +8,7 @@ import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import Testimonials from "../../components/Testimonials.jsx";
+import SafariVideo from "../../components/SafariVideo";
 
 //styles
 import "../../assets/styles/soporte-page.css";
@@ -20,8 +21,10 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
 const Soporte = () => {
   return (
     <>
-      <video
+      <SafariVideo
+        src={`${base}assets/hero/soporte-hero.mp4`}
         className="hero-video desktop-only"
+        poster={`${base}assets/hero/soporte-hero-poster.webp`}
         autoPlay
         loop
         muted
@@ -29,13 +32,14 @@ const Soporte = () => {
         preload="metadata"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
-        poster={`https://trompoagencia.com/assets/hero/soporte-hero-poster.webp`}
-      >
-        <source src={`https://trompoagencia.com/assets/hero/soporte-hero.mp4`} type="video/mp4" />
-      </video>
+        onError={(error) => console.log('Error en video soporte desktop:', error)}
+        onLoad={() => console.log('Video soporte desktop cargado')}
+      />
 
-      <video
+      <SafariVideo
+        src={`${base}assets/hero/mobile/soporte-hero-mobile.mp4`}
         className="hero-video mobile-only"
+        poster={`${base}assets/hero/mobile/soporte-hero-mobile-poster.webp`}
         autoPlay
         loop
         muted
@@ -43,10 +47,9 @@ const Soporte = () => {
         preload="metadata"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
-        poster={`https://trompoagencia.com/assets/hero/mobile/soporte-hero-mobile-poster.webp`}
-      >
-        <source src={`https://trompoagencia.com/assets/hero/mobile/soporte-hero-mobile.mp4`} type="video/mp4" />
-      </video>
+        onError={(error) => console.log('Error en video soporte mobile:', error)}
+        onLoad={() => console.log('Video soporte mobile cargado')}
+      />
 
       <PageTitle
         title="Soporte"

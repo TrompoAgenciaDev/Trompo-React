@@ -7,6 +7,7 @@ import Contact from "../../layout/Contact";
 import Portfolio3d from "../../layout/Portfolio3d";
 import Icons from "../../components/Icons";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
+import SafariVideo from "../../components/SafariVideo";
 
 //styles
 import "../../assets/styles/interaccion.css";
@@ -20,8 +21,10 @@ const Interaccion = () => {
   return (
     <>
       {/* Desktop */}
-      <video
+      <SafariVideo
+        src={`${base}assets/hero/interaccion.mp4`}
         className="hero-video desktop-only"
+        poster={`${base}assets/hero/home-poster.webp`}
         autoPlay
         loop
         muted
@@ -29,14 +32,15 @@ const Interaccion = () => {
         preload="metadata"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
-        poster={`${base}assets/hero/home-poster.webp`}
-      >
-        <source src={`${base}assets/hero/interaccion.mp4`} type="video/mp4" />
-      </video>
+        onError={(error) => console.log('Error en video interaccion desktop:', error)}
+        onLoad={() => console.log('Video interaccion desktop cargado')}
+      />
 
       {/* Mobile */}
-      <video
+      <SafariVideo
+        src={`${base}assets/hero/mobile/interaccion-mobile.mp4`}
         className="hero-video mobile-only"
+        poster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
         autoPlay
         loop
         muted
@@ -44,13 +48,9 @@ const Interaccion = () => {
         preload="metadata"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
-        poster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
-      >
-        <source
-          src={`${base}assets/hero/mobile/interaccion-mobile.mp4`}
-          type="video/mp4"
-        />
-      </video>
+        onError={(error) => console.log('Error en video interaccion mobile:', error)}
+        onLoad={() => console.log('Video interaccion mobile cargado')}
+      />
 
       <PageTitle
         title="Interacción"

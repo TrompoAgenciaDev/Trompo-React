@@ -6,15 +6,11 @@ import "@as/hero.css";
 
 //components
 import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
-import PubliSlides from "../components/sliders/PubliSlides";
-import Testimonials from "../components/Testimonials";
-import PostCard from "../components/posts/PostCard";
 // import Hero from "../layout/Hero";
 import Services from "../layout/Services";
 import Contact from "../layout/Contact";
 import PostHero from "../components/PostHero";
-import Portfolio3d from "../layout/Portfolio3d";
-import CreatividadSlider from "../components/sliders/CreatividadSlider.jsx";
+import SafariVideo from "../components/SafariVideo";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -32,30 +28,36 @@ const Home = () => {
   return (
     <main className="full-container">
       {/* Desktop */}
-      <video
+      <SafariVideo
         src={`${base}assets/hero/home.mp4`}
         className="hero-video desktop-only"
+        poster={`${base}assets/hero/home-poster.webp`}
         autoPlay
         loop
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
-      ></video>
+        onError={(error) => console.log('Error en video desktop:', error)}
+        onLoad={() => console.log('Video desktop cargado')}
+      />
 
       {/* Mobile */}
-      <video
+      <SafariVideo
         src={`${base}assets/hero/mobile/home-mobile.mp4`}
         className="hero-video mobile-only"
+        poster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
         autoPlay
         loop
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
-      ></video>
+        onError={(error) => console.log('Error en video mobile:', error)}
+        onLoad={() => console.log('Video mobile cargado')}
+      />
 
       <section className="post-hero-section full-container">
         <PostHero text={text} />

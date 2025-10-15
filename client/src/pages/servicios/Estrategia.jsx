@@ -6,6 +6,7 @@ import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 import Testimonials from "../../components/Testimonials.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
+import SafariVideo from "../../components/SafariVideo";
 
 //styles
 import "../../assets/styles/estrategia-page.css";
@@ -18,9 +19,10 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
 const Estrategia = () => {
   return (
     <>
-      <video
+      <SafariVideo
         src={`${base}assets/hero/estrategia-hero.mp4`}
         className="hero-video desktop-only"
+        poster={`${base}assets/hero/estrategia-hero-poster.webp`}
         autoPlay
         loop
         muted
@@ -28,12 +30,14 @@ const Estrategia = () => {
         preload="metadata"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
-        // poster={`${base}assets/hero/estrategia-hero-poster.webp`}
-      ></video>
+        onError={(error) => console.log('Error en video estrategia desktop:', error)}
+        onLoad={() => console.log('Video estrategia desktop cargado')}
+      />
 
-      <video
+      <SafariVideo
         src={`${base}assets/hero/mobile/estrategia-hero-mobile.mp4`}
         className="hero-video mobile-only"
+        poster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
         autoPlay
         loop
         muted
@@ -41,8 +45,9 @@ const Estrategia = () => {
         preload="metadata"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
-        // poster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
-      ></video>
+        onError={(error) => console.log('Error en video estrategia mobile:', error)}
+        onLoad={() => console.log('Video estrategia mobile cargado')}
+      />
 
       <PageTitle
         title="Estrategia"

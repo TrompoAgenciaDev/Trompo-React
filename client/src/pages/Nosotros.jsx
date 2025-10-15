@@ -4,6 +4,7 @@ import Members from "../components/Members";
 import StoricalClients from "../layout/StoricalClients";
 import Contact from "../layout/Contact.jsx";
 import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
+import SafariVideo from "../components/SafariVideo";
 
 // styles
 import "../assets/styles/about.css";
@@ -17,9 +18,10 @@ const Nosotros = () => {
   return (
     <>
       {/* Desktop */}
-      <video
+      <SafariVideo
         src={`${base}assets/hero/home.mp4`}
         className="hero-video desktop-only"
+        poster={`${base}assets/hero/home.webp`}
         autoPlay
         loop
         muted
@@ -27,14 +29,15 @@ const Nosotros = () => {
         preload="metadata"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
-        poster={`${base}assets/hero/home.webp`}
-      >
-      </video>
+        onError={(error) => console.log('Error en video nosotros desktop:', error)}
+        onLoad={() => console.log('Video nosotros desktop cargado')}
+      />
 
       {/* Mobile */}
-      <video
+      <SafariVideo
         src={`${base}assets/hero/mobile/home-mobile.mp4`}
         className="hero-video mobile-only"
+        poster={`${base}assets/hero/mobile/home.webp`}
         autoPlay
         loop
         muted
@@ -42,10 +45,9 @@ const Nosotros = () => {
         preload="metadata"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
-        poster={`${base}assets/hero/mobile/home.webp`}
-
-      >
-      </video>
+        onError={(error) => console.log('Error en video nosotros mobile:', error)}
+        onLoad={() => console.log('Video nosotros mobile cargado')}
+      />
 
       <section className="post-hero-section full-container">
         <div className="container max-text">
@@ -82,10 +84,7 @@ const Nosotros = () => {
           <h2>Un equipo que se mueve con vos</h2>
           <p>
             En Trompo creemos que las marcas que crecen nunca se quedan quietas.
-            Por eso, nuestro equipo tampoco. Somos profesionales del marketing,
-            la creatividad, la tecnología y la estrategia, con una misma
-            convicción: trabajar codo a codo con cada cliente, como parte de su
-            equipo.
+            Por eso, nuestro equipo tampoco.
           </p>
         </div>
         <div className="container">
@@ -97,12 +96,6 @@ const Nosotros = () => {
 
       {/* formulario */}
       <Contact />
-      
-      <section className="full-container">
-        <div className="slider-container container">
-          <CustomerSlider />
-        </div>
-      </section>
     </>
   );
 };

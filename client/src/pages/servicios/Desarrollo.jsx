@@ -8,6 +8,7 @@ import Portfolio3d from "../../layout/Portfolio3d.jsx";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import Testimonials from "../../components/Testimonials.jsx";
+import SafariVideo from "../../components/SafariVideo";
 
 import "../../assets/styles/servicios-page.css";
 import "@as/hero.css";
@@ -19,22 +20,10 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
 const Desarrollo = () => {
   return (
     <>
-      <video
+      <SafariVideo
+        src={`${base}assets/hero/desarrollo-hero.mp4`}
         className="hero-video desktop-only"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        disablePictureInPicture
-        controlsList="nodownload noremoteplayback"
         poster={`${base}assets/hero/desarrollo-hero-poster.webp`}
-      >
-        <source src={`${base}assets/hero/desarrollo-hero.mp4`} type="video/mp4" />
-      </video>
-
-      <video
-        className="hero-video mobile-only"
         autoPlay
         loop
         muted
@@ -42,10 +31,24 @@ const Desarrollo = () => {
         preload="metadata"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
+        onError={(error) => console.log('Error en video desarrollo desktop:', error)}
+        onLoad={() => console.log('Video desarrollo desktop cargado')}
+      />
+
+      <SafariVideo
+        src={`${base}assets/hero/mobile/desarrollo-hero-mobile.mp4`}
+        className="hero-video mobile-only"
         poster={`${base}assets/hero/mobile/desarrollo-hero-mobile-poster.webp`}
-      >
-        <source src={`${base}assets/hero/mobile/desarrollo-hero-mobile.mp4`} type="video/mp4" />
-      </video>
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        disablePictureInPicture
+        controlsList="nodownload noremoteplayback"
+        onError={(error) => console.log('Error en video desarrollo mobile:', error)}
+        onLoad={() => console.log('Video desarrollo mobile cargado')}
+      />
       
       <PageTitle
         title="Desarrollo <strong>web</strong>"

@@ -40,7 +40,7 @@ export default function StoricalClients() {
       <div className="title-historical-container">
         <h3>
           Trayectoria y Confianza:{" "}
-          <strong>Las Empresas que Escribieron Nuestra Historia</strong>
+          <strong>Las verticales que Escribieron Nuestra Historia</strong>
         </h3>
         <p>
           Un vistazo a los diversos sectores que han depositado su confianza en

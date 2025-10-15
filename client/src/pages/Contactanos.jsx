@@ -87,9 +87,7 @@ const Contactanos = () => {
       <Contact form="home"/>
       
       <section className="full-container slider-conainer">
-        <div className="container">
-          <ImageSlider />
-        </div>
+        <Testimonials/>
       </section>
 
     </>
