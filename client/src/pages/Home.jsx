@@ -82,13 +82,6 @@ const Home = () => {
       {/* Servicios que se ofrecen */}
       <Services />
 
-      {/* Portfolio - clientes grandes */}
-      <div className="full-container creatividad-video-section">
-        <div className="container">
-          <CreatividadSlider />
-        </div>
-      </div>
-
       {/* formulario */}
       <Contact form="home" />
 

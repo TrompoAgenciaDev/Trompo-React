@@ -83,9 +83,8 @@ const Contactanos = () => {
       </div>
 
       <div id="contacto"></div>
-      <Contact form="home"/>
 
-      <Faqs/>
+      <Contact form="home"/>
       
       <section className="full-container slider-conainer">
         <div className="container">

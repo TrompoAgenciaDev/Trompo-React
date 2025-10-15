@@ -3,6 +3,7 @@ import Hero from "../layout/Hero";
 import Members from "../components/Members";
 import StoricalClients from "../layout/StoricalClients";
 import Contact from "../layout/Contact.jsx";
+import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 
 // styles
 import "../assets/styles/about.css";
@@ -96,6 +97,12 @@ const Nosotros = () => {
 
       {/* formulario */}
       <Contact />
+      
+      <section className="full-container">
+        <div className="slider-container container">
+          <CustomerSlider />
+        </div>
+      </section>
     </>
   );
 };

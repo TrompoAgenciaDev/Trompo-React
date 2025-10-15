@@ -3,7 +3,7 @@ import "../assets/styles/contact.css";
 import FormIndex from "../components/forms/FormIndex";
 
 const BGS = {
-  home: "form-home.webp",
+  home: "form.webp",
 };
 
 function Contact({ location = "home", form }) {

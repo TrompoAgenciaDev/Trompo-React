@@ -292,9 +292,11 @@ const Desarrollo = () => {
 
       <Faqs location="desarrollo" />
       
-      <div className="full-container">
-        <CustomerSlider />
-      </div>
+      <section className="full-container">
+        <div className="slider-container container">
+          <CustomerSlider />
+        </div>
+      </section>
     </>
   );
 };

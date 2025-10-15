@@ -206,10 +206,12 @@ const Interaccion = () => {
       <Faqs location="interaccion" />
 
       <Contact form="interaccion" />
-
-      <div className="full-container">
-        <CustomerSlider />
-      </div>
+      
+      <section className="full-container">
+        <div className="slider-container container">
+          <CustomerSlider />
+        </div>
+      </section>
     </>
   );
 };
