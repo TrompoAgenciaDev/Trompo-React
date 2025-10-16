@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue } from "motion/react";
+import LazyImage from "../LazyImage";
 import "../../assets/styles/customer-slider.css";
 
 const sliderImages = [
@@ -127,7 +128,12 @@ export default function ImageSlider() {
       >
         {cloned.map((src, i) => (
           <div className="image-slide" key={i}>
-            <img className="image-element" src={src} alt={`slide-${i}`} />
+            <LazyImage 
+              src={src} 
+              alt={`slide-${i}`}
+              className="image-element"
+              placeholder="#ffffff"
+            />
           </div>
         ))}
       </motion.div>

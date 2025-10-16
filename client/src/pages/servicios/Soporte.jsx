@@ -8,7 +8,7 @@ import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import Testimonials from "../../components/Testimonials.jsx";
-import SafariVideo from "../../components/SafariVideo";
+import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 
 //styles
 import "../../assets/styles/soporte-page.css";
@@ -21,34 +21,11 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
 const Soporte = () => {
   return (
     <>
-      <SafariVideo
-        src={`${base}assets/hero/soporte-hero.mp4`}
-        className="hero-video desktop-only"
-        poster={`${base}assets/hero/soporte-hero-poster.webp`}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        disablePictureInPicture
-        controlsList="nodownload noremoteplayback"
-        onError={(error) => console.log('Error en video soporte desktop:', error)}
-        onLoad={() => console.log('Video soporte desktop cargado')}
-      />
-
-      <SafariVideo
-        src={`${base}assets/hero/mobile/soporte-hero-mobile.mp4`}
-        className="hero-video mobile-only"
-        poster={`${base}assets/hero/mobile/soporte-hero-mobile-poster.webp`}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        disablePictureInPicture
-        controlsList="nodownload noremoteplayback"
-        onError={(error) => console.log('Error en video soporte mobile:', error)}
-        onLoad={() => console.log('Video soporte mobile cargado')}
+      <SimpleHeroVideo
+        desktopSrc={`${base}assets/hero/soporte-hero.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/soporte-hero-mobile.mp4`}
+        desktopPoster={`${base}assets/hero/soporte-hero-poster.webp`}
+        mobilePoster={`${base}assets/hero/mobile/soporte-hero-mobile-poster.webp`}
       />
 
       <PageTitle

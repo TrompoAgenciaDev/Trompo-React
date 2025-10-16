@@ -10,7 +10,7 @@ import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import Services from "../layout/Services";
 import Contact from "../layout/Contact";
 import PostHero from "../components/PostHero";
-import SafariVideo from "../components/SafariVideo";
+import SimpleHeroVideo from "../components/SimpleHeroVideo";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -27,36 +27,11 @@ const Home = () => {
 
   return (
     <main className="full-container">
-      {/* Desktop */}
-      <SafariVideo
-        src={`${base}assets/hero/home.mp4`}
-        className="hero-video desktop-only"
-        poster={`${base}assets/hero/home-poster.webp`}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        disablePictureInPicture
-        controlsList="nodownload noremoteplayback"
-        onError={(error) => console.log('Error en video desktop:', error)}
-        onLoad={() => console.log('Video desktop cargado')}
-      />
-
-      {/* Mobile */}
-      <SafariVideo
-        src={`${base}assets/hero/mobile/home-mobile.mp4`}
-        className="hero-video mobile-only"
-        poster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        disablePictureInPicture
-        controlsList="nodownload noremoteplayback"
-        onError={(error) => console.log('Error en video mobile:', error)}
-        onLoad={() => console.log('Video mobile cargado')}
+      <SimpleHeroVideo
+        desktopSrc={`${base}assets/hero/home.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/home-mobile.mp4`}
+        desktopPoster={`${base}assets/hero/home.webp`}
+        mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
 
       <section className="post-hero-section full-container">

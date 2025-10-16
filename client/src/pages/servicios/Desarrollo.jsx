@@ -8,7 +8,7 @@ import Portfolio3d from "../../layout/Portfolio3d.jsx";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import Testimonials from "../../components/Testimonials.jsx";
-import SafariVideo from "../../components/SafariVideo";
+import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 
 import "../../assets/styles/servicios-page.css";
 import "@as/hero.css";
@@ -20,34 +20,11 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
 const Desarrollo = () => {
   return (
     <>
-      <SafariVideo
-        src={`${base}assets/hero/desarrollo-hero.mp4`}
-        className="hero-video desktop-only"
-        poster={`${base}assets/hero/desarrollo-hero-poster.webp`}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        disablePictureInPicture
-        controlsList="nodownload noremoteplayback"
-        onError={(error) => console.log('Error en video desarrollo desktop:', error)}
-        onLoad={() => console.log('Video desarrollo desktop cargado')}
-      />
-
-      <SafariVideo
-        src={`${base}assets/hero/mobile/desarrollo-hero-mobile.mp4`}
-        className="hero-video mobile-only"
-        poster={`${base}assets/hero/mobile/desarrollo-hero-mobile-poster.webp`}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        disablePictureInPicture
-        controlsList="nodownload noremoteplayback"
-        onError={(error) => console.log('Error en video desarrollo mobile:', error)}
-        onLoad={() => console.log('Video desarrollo mobile cargado')}
+      <SimpleHeroVideo
+        desktopSrc={`${base}assets/hero/desarrollo-hero.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/desarrollo-hero-mobile.mp4`}
+        desktopPoster={`${base}assets/hero/desarrollo-hero-poster.webp`}
+        mobilePoster={`${base}assets/hero/mobile/desarrollo-hero-mobile-poster.webp`}
       />
       
       <PageTitle

@@ -1,0 +1,46 @@
+/* 404 Page styles */
+.cuatro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.cuatro-title {
+  font-size: 8rem;
+  font-weight: 900;
+  color: #FED332;
+  margin: 0;
+  line-height: 1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cuatro-text {
+  font-size: 1.5rem;
+  color: #666;
+  margin: 20px 0 0 0;
+  font-weight: 400;
+}
+
+@media (min-width: 768px) {
+  .cuatro-title {
+    font-size: 10rem;
+  }
+  
+  .cuatro-text {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cuatro-title {
+    font-size: 12rem;
+  }
+  
+  .cuatro-text {
+    font-size: 2.5rem;
+  }
+}

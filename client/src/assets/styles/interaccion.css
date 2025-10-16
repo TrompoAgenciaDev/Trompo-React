@@ -37,6 +37,7 @@
   display: -webkit-flex;
   display: flex;
   gap: 5px;
+  margin-top: 16px;
 }
 
 .icon-section-container .icon svg{
@@ -94,6 +95,22 @@
 }
 
 /* portfolio 3d*/
+.title-portfolio-container{
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: 1fr;
+  margin: 20px 0;
+}
+
+.title-portfolio-container h3{
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.title-portfolio-container p{
+  font-size: 13px;
+}
 
 
 @media (min-width: 768px) {
@@ -113,6 +130,20 @@
 
   .parr-section-container p{
     font-size: 13px;
+  }
+
+  .title-portfolio-container{
+    -ms-grid-columns: 1fr 4fr;
+    grid-template-columns: 1fr 4fr;
+    margin: 100px 0 -60px;
+  }
+
+  .title-portfolio-container h3{
+    font-size: 28px;
+  }
+
+  .title-portfolio-container p{
+    font-size: 14px;
   }
 }
 
@@ -176,6 +207,16 @@
   .parr-section-container p{
     font-size: 14px;
   }
+
+  .title-portfolio-container{
+    -ms-grid-columns: 2fr 3fr;
+    grid-template-columns: 2fr 3fr;
+    margin: 100px 0 -70px;
+  }
+
+  .title-portfolio-container h3{
+    font-size: 28px;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -212,5 +253,28 @@
 
   .parr-section-container p{
     font-size: 15px;
+  }
+
+  .title-portfolio-container{
+    -ms-grid-columns: 3fr 4fr;
+    grid-template-columns: 3fr 4fr;
+    margin: 120px 0 -120px;
+  }
+
+  .title-portfolio-container .container{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .title-portfolio-container h3{
+    font-size: 32px;
   }
 }

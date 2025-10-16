@@ -1,4 +1,5 @@
 // import { useHover } from "../context/HoverContext";
+import LazyImage from "./LazyImage";
 import '../assets/styles/card.css';
 
 function Card({ title, subtitle, description, className, id }) {
@@ -17,7 +18,11 @@ function Card({ title, subtitle, description, className, id }) {
         <p>{description}</p>
       </div>
       <div className="card-footer">
-        <img src="./card-footer.webp" alt={title} />
+        <LazyImage 
+          src="./card-footer.webp" 
+          alt={title}
+          placeholder="#f0f0f0"
+        />
       </div>
     </div>
   );

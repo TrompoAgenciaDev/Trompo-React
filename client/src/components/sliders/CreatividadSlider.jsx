@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import LazyImage from "../LazyImage";
 
 const galleries = {
   airon: [
@@ -122,9 +123,10 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1 }) {
       >
         {extended.map((src, i) => (
           <div key={i} style={{ width: "100%", flex: "0 0 100%" }}>
-            <img
+            <LazyImage
               src={src}
               alt=""
+              placeholder="#f0f0f0"
               style={{
                 width: "100%",
                 height: "100%",
@@ -156,7 +158,7 @@ function VideoSlide({ src }) {
         playsInline
         autoPlay
         loop
-        preload="metadata"
+        preload="none"
         style={{
           position: "absolute",
           inset: 0,

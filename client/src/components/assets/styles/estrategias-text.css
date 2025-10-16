@@ -1,0 +1,93 @@
+/* EstrategiesText component styles */
+.et-container {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.et-text {
+  text-align: center;
+}
+
+.et-text h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.hover-y {
+  color: #FED332;
+  transition: color 0.3s ease;
+}
+
+.hover-y:hover {
+  color: #333;
+}
+
+.showText {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 20px 0;
+  padding: 10px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.showText:hover {
+  background-color: rgba(254, 211, 50, 0.1);
+}
+
+.description-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.description-container.animated-height {
+  max-height: 500px;
+}
+
+.et-description {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.text-bold {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.et-footer {
+  font-size: 14px;
+  color: #888;
+  font-style: italic;
+}
+
+@media (min-width: 768px) {
+  .et-text h1 {
+    font-size: 3rem;
+  }
+  
+  .et-description {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .et-text h1 {
+    font-size: 3.5rem;
+  }
+  
+  .et-description {
+    font-size: 20px;
+  }
+}

@@ -1,27 +1,30 @@
-import Home from "../pages/Home";
-import Nosotros from "../pages/Nosotros.jsx";
-import Contactanos from "../pages/Contactanos";
-import Casos from "../pages/Casos";
-import Trends from "../pages/Trends";
-import Terms from "../pages/terms";
-import Gracias from "../pages/Gracias";
+import { lazy } from "react";
+
+// Code splitting - Lazy loading de todas las páginas
+const Home = lazy(() => import("../pages/Home"));
+const Nosotros = lazy(() => import("../pages/Nosotros.jsx"));
+const Contactanos = lazy(() => import("../pages/Contactanos"));
+const Casos = lazy(() => import("../pages/Casos"));
+const Trends = lazy(() => import("../pages/Trends"));
+const Terms = lazy(() => import("../pages/terms"));
+const Gracias = lazy(() => import("../pages/Gracias"));
 
 //Servicios
-import Servicios from "../pages/Servicios";
-import Creatividad from "../pages/servicios/Creatividad.jsx";
-import Desarrollo from "../pages/servicios/Desarrollo.jsx";
-import Estrategia from "../pages/servicios/Estrategia";
-import Interaccion from "../pages/servicios/Interaccion";
-import Soporte from "../pages/servicios/Soporte";
+const Servicios = lazy(() => import("../pages/Servicios"));
+const Creatividad = lazy(() => import("../pages/servicios/Creatividad.jsx"));
+const Desarrollo = lazy(() => import("../pages/servicios/Desarrollo.jsx"));
+const Estrategia = lazy(() => import("../pages/servicios/Estrategia"));
+const Interaccion = lazy(() => import("../pages/servicios/Interaccion"));
+const Soporte = lazy(() => import("../pages/servicios/Soporte"));
 
 //Landings
-import Primavera from "../pages/landings/Primavera.jsx";
+const Primavera = lazy(() => import("../pages/landings/Primavera.jsx"));
 
 //templates
-import SinglePost from "../templates/singlePost";
-import SinglePortfolio from "../templates/singlePortfolio";
-import NotFound from "../pages/NotFound";
-import Maintenance from "../pages/Maintenance.jsx";
+const SinglePost = lazy(() => import("../templates/singlePost"));
+const SinglePortfolio = lazy(() => import("../templates/singlePortfolio"));
+const NotFound = lazy(() => import("../pages/NotFound"));
+const Maintenance = lazy(() => import("../pages/Maintenance.jsx"));
 
 const routesConfig = {
   main: [

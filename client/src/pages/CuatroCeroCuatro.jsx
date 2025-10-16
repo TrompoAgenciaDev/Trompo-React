@@ -1,4 +1,4 @@
-import '/assets/styles/cuatrocerocuatro-page.css'
+import '../assets/styles/cuatrocerocuatro-page.css'
 
 
 

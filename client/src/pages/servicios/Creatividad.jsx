@@ -6,7 +6,7 @@ import Portfolio3d from "../../layout/Portfolio3d";
 import CreatividadSlider from "../../components/sliders/CreatividadSlider";
 import Testimonials from "../../components/Testimonials.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import SafariVideo from "../../components/SafariVideo";
+import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 
 //styles
 import "../../assets/styles/creatividad.css";
@@ -19,34 +19,11 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
 const Creatividad = () => {
   return (
     <>
-      <SafariVideo
-        src={`${base}assets/hero/creatividad-hero.mp4`}
-        className="hero-video desktop-only"
-        poster={`${base}assets/hero/creatividad-hero-poster.webp`}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        disablePictureInPicture
-        controlsList="nodownload noremoteplayback"
-        onError={(error) => console.log('Error en video creatividad desktop:', error)}
-        onLoad={() => console.log('Video creatividad desktop cargado')}
-      />
-
-      <SafariVideo
-        src={`${base}assets/hero/mobile/creatividad-hero-mobile.mp4`}
-        className="hero-video mobile-only"
-        poster={`${base}assets/hero/mobile/creatividad-hero-mobile-poster.webp`}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        disablePictureInPicture
-        controlsList="nodownload noremoteplayback"
-        onError={(error) => console.log('Error en video creatividad mobile:', error)}
-        onLoad={() => console.log('Video creatividad mobile cargado')}
+      <SimpleHeroVideo
+        desktopSrc={`${base}assets/hero/creatividad-hero.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/creatividad-hero-mobile.mp4`}
+        desktopPoster={`${base}assets/hero/creatividad-hero-poster.webp`}
+        mobilePoster={`${base}assets/hero/mobile/creatividad-hero-mobile-poster.webp`}
       />
 
       <PageTitle

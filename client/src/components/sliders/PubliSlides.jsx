@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
+import LazyImage from "../LazyImage";
 import "../../assets/styles/publi-slider.css";
 
 const slides = [
@@ -47,7 +48,11 @@ export default function PubliSlides() {
           rel="noopener noreferrer"
           className="publi-slide"
         >
-          <img src={item.img} alt={item.alt} />
+          <LazyImage 
+            src={item.img} 
+            alt={item.alt}
+            placeholder="#f0f0f0"
+          />
         </a>
       ))}
     </div>
