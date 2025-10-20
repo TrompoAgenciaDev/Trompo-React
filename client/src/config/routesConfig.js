@@ -34,6 +34,17 @@ const routesConfig = {
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],
 
+  menuMobile: [
+    { path: "/", label: "inicio", Component: Home },
+    { path: "/nosotros", label: "nosotros", Component: Nosotros },
+    { path: "/estrategia", label: "estrategia", Component: Estrategia },
+    { path: "/creatividad", label: "Creatividad", Component: Creatividad },
+    { path: "/interaccion", label: "interacción", Component: Interaccion },
+    { path: "/desarrollo", label: "desarrollo", Component: Desarrollo },
+    { path: "/soporte", label: "soporte", Component: Soporte },
+    { path: "/contactanos", label: "contactanos", Component: Contactanos },
+  ],
+
   home: [
     { path: "/", label: "inicio", Component: Home },
   ],
