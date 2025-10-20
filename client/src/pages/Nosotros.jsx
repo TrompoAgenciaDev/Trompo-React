@@ -18,8 +18,8 @@ const Nosotros = () => {
   return (
     <>
       <SimpleHeroVideo
-        desktopSrc={`${base}assets/hero/home2.mp4`}
-        mobileSrc={`${base}assets/hero/mobile/home-mobile2.mp4`}
+        desktopSrc={`${base}assets/hero/home.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/home-hero-mobile.mp4`}
         desktopPoster={`${base}assets/hero/home.webp`}
         mobilePoster={`${base}assets/hero/mobile/home.webp`}
       />

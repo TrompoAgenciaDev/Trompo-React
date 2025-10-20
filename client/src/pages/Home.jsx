@@ -29,7 +29,7 @@ const Home = () => {
     <main className="full-container">
       <SimpleHeroVideo
         desktopSrc={`${base}assets/hero/home.mp4`}
-        mobileSrc={`${base}assets/hero/mobile/home-mobile.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/home-hero-mobile.mp4`}
         desktopPoster={`${base}assets/hero/home.webp`}
         mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
