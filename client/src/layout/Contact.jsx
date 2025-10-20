@@ -4,6 +4,8 @@ import FormIndex from "../components/forms/FormIndex";
 
 const BGS = {
   home: "form.webp",
+  contactanos: "contact-bg.webp", // Nueva imagen específica para contacto
+  default: "form.webp", // Fallback
 };
 
 function Contact({ location = "home", form }) {

@@ -70,6 +70,21 @@
   border-bottom: 1px solid #ddd;
 }
 
+/* --- Estilos específicos para menú mobile --- */
+.mobile-menu li {
+  border-bottom: 1px solid #3f3e3e;
+  list-style: none;
+}
+
+.mobile-menu li:last-child {
+  border-bottom: none;
+}
+
+/* Quitar borde inferior del contenedor cuando se usa menú mobile */
+.menu-popup-mobile {
+  border-bottom: none;
+}
+
 .menu-popup h3,
 .menu-popup span {
   display: -webkit-box;

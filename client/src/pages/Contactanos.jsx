@@ -84,7 +84,7 @@ const Contactanos = () => {
 
       <div id="contacto"></div>
 
-      <Contact form="home"/>
+      <Contact form="contactanos" location="contactanos"/>
 
       <section className="full-container bg-yellow testimonial-wrapper">
         <div className="container testimonial-header">

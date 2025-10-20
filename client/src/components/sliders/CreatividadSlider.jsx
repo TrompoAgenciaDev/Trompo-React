@@ -2,53 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import LazyImage from "../LazyImage";
 
-const galleries = {
-  airon: [
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/airon1.webp`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/airon2.webp`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/airon3.webp`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/airon4.webp`,
-  ],
-  ayni: [
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/ayni1.webp`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/ayni2.webp`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/ayni3.webp`,
-  ],
-  lema: [
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/lema1.webp`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/lema2.webp`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/lema3.webp`,
-  ],
-  qsltec: [
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/qsltec1.webp`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/qsltec2.webp`,
-  ],
-  smartshop: [
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/smartshop1.webp`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/smartshop2.webp`,
-  ],
-  tearratua: [
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/terratua1.webp`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/terratua2.webp`,
-  ],
-  vox: [
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/vox1.webp`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/vox2.webp`,
-    `${import.meta.env.BASE_URL}assets/creatividad/slide/vox3.webp`,
-  ],
-};
-
-const videoGallery = [
-  `${import.meta.env.BASE_URL}assets/creatividad/videos/agreteq-new.mp4`,
-  `${import.meta.env.BASE_URL}assets/creatividad/videos/denso-new.mp4`,
-  `${import.meta.env.BASE_URL}assets/creatividad/videos/raulito-new.mp4`,
-  `${import.meta.env.BASE_URL}assets/creatividad/videos/viditec-new.mp4`,
-  `${import.meta.env.BASE_URL}assets/creatividad/videos/volvo-new.mp4`,
-  `${import.meta.env.BASE_URL}assets/creatividad/videos/wu.mp4`,
-];
+// Carga dinámica desde portfolio.json
+async function fetchCreatividadData() {
+  const ts = Date.now();
+  const res = await fetch(`${import.meta.env.BASE_URL}portfolio.json?v=${ts}`, {
+    cache: "no-store",
+  });
+  if (!res.ok) throw new Error("No se pudo cargar portfolio.json");
+  const data = await res.json();
+  return Array.isArray(data?.creatividad) ? data.creatividad : [];
+}
 
 /* Inner slider infinito 4:3 */
-function InnerAutoSlider({ list, interval = 2200, direction = 1 }) {
+function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef }) {
   const len = list.length;
   if (len <= 1) {
     return (
@@ -87,11 +53,13 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1 }) {
 
   useEffect(() => {
     t.current = setInterval(() => {
-      setIdx((p) => p + (direction > 0 ? 1 : -1));
-      setAnim(true);
+      if (!draggingRef?.current) {
+        setIdx((p) => p + (direction > 0 ? 1 : -1));
+        setAnim(true);
+      }
     }, interval);
     return () => clearInterval(t.current);
-  }, [interval, direction]);
+  }, [interval, direction, draggingRef]);
 
   useEffect(() => {
     const min = baseLen * 2;
@@ -172,73 +140,153 @@ function VideoSlide({ src }) {
   );
 }
 
-export default function CreatividadSlider() {
-  const brandKeys = Object.keys(galleries);
-  const imgCount = brandKeys.length;
-  const vidCount = videoGallery.length;
-  const baseLen = Math.max(imgCount, vidCount) * 2; // imagen, video, imagen, video…
-
-  // construye secuencia intercalada
-  const interleaved = [];
-  for (let i = 0; i < Math.max(imgCount, vidCount); i++) {
-    const imgKey = brandKeys[i % imgCount];
-    const vidSrc = videoGallery[i % vidCount];
-    interleaved.push({ kind: "image", key: imgKey });
-    interleaved.push({ kind: "video", src: vidSrc });
-  }
-
-  const REPEAT = 5;
-  const slides = Array.from({ length: REPEAT }, () => interleaved).flat();
-  const middleIndex = baseLen * Math.floor(REPEAT / 2);
-
-  const [index, setIndex] = useState(middleIndex);
+export default function CreatividadSlider({ tipo = "mix" }) {
+  const [slides, setSlides] = useState([]);
+  const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(() =>
-    typeof window === "undefined" ? 1 : window.innerWidth >= 1024 ? 4 : 1
+    typeof window === "undefined" ? 1 : window.innerWidth >= 1024 ? 4 : window.innerWidth >= 768 ? 2 : 1
   );
   const [paused, setPaused] = useState(false);
+  const [touchDelay, setTouchDelay] = useState(false);
   const timer = useRef(null);
+  const draggingRef = useRef(false);
+
+  // Carga inicial desde JSON y preparación de slides
+  useEffect(() => {
+    let mounted = true;
+    (async () => {
+      try {
+        const items = await fetchCreatividadData();
+        const brandingSlides = [];
+        const multimediaSlides = [];
+        const brandingWebSlides = [];
+
+        const tipoLower = (tipo || "mix").toLowerCase();
+        const isTipoMix = tipoLower === "mix" || tipoLower === "slider";
+
+        const matchesTipo = (cats) => {
+          const c = Array.isArray(cats) ? cats.map((x) => String(x).toLowerCase()) : [];
+          const hasSlider = c.includes("slider");
+          if (!hasSlider) return false;
+          if (isTipoMix) return true;
+          if (tipoLower === "branding") return c.includes("branding") && !c.includes("branding-web");
+          if (tipoLower === "multimedia") return c.includes("multimedia");
+          if (tipoLower === "branding-web") return c.includes("branding-web");
+          return false;
+        };
+
+        for (const it of items) {
+          const categories = Array.isArray(it.category) ? it.category : [];
+          const isCreatividad = categories.includes("creatividad");
+          const isBranding = categories.includes("branding") && !categories.includes("branding-web");
+          const isMultimedia = categories.includes("multimedia");
+          const isBrandingWeb = categories.includes("branding-web");
+
+          if (!isCreatividad || !matchesTipo(categories)) continue;
+
+          // Videos (multimedia)
+          if (isMultimedia && it.featured_video) {
+            multimediaSlides.push({ kind: "video", src: `${import.meta.env.BASE_URL}${it.featured_video}` });
+            continue;
+          }
+
+          // Videos (branding-web)
+          if (isBrandingWeb && it.featured_video) {
+            brandingWebSlides.push({ kind: "video", src: `${import.meta.env.BASE_URL}${it.featured_video}` });
+            continue;
+          }
+
+          // Branding: usar featured + gallery
+          if (isBranding) {
+            const base = [];
+            if (it.featured_image) base.push(`${import.meta.env.BASE_URL}${it.featured_image}`);
+            if (Array.isArray(it.gallery)) {
+              for (const g of it.gallery) base.push(`${import.meta.env.BASE_URL}${g}`);
+            }
+            if (base.length > 0) {
+              brandingSlides.push({ kind: "image", images: base });
+            }
+          }
+        }
+
+        let baseSlides = [];
+        if (tipoLower === "branding") baseSlides = brandingSlides;
+        else if (tipoLower === "multimedia") baseSlides = multimediaSlides;
+        else if (tipoLower === "branding-web") baseSlides = brandingWebSlides;
+        else {
+          // Modo mix: intercalar todas las categorías
+          const imgCount = brandingSlides.length;
+          const vidCount = multimediaSlides.length;
+          const webCount = brandingWebSlides.length;
+          const maxLen = Math.max(imgCount, vidCount, webCount);
+          
+          for (let i = 0; i < maxLen; i++) {
+            if (imgCount) baseSlides.push(brandingSlides[i % imgCount]);
+            if (vidCount) baseSlides.push(multimediaSlides[i % vidCount]);
+            if (webCount) baseSlides.push(brandingWebSlides[i % webCount]);
+          }
+        }
+
+        // repetición para carrusel infinito
+        const REPEAT = 5;
+        const expanded = Array.from({ length: REPEAT }, () => baseSlides).flat();
+        if (mounted) setSlides(expanded);
+        if (mounted) setIndex(baseSlides.length * Math.floor(REPEAT / 2));
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
-    const onResize = () => setVisible(window.innerWidth >= 1024 ? 4 : 1);
+    const onResize = () => {
+      if (window.innerWidth >= 1024) setVisible(4);
+      else if (window.innerWidth >= 768) setVisible(2);
+      else setVisible(1);
+    };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
   useEffect(() => {
-    if (paused) return;
-    timer.current = setInterval(() => setIndex((p) => p + 1), 4000);
+    if (paused || slides.length === 0 || draggingRef.current || touchDelay) return;
+    
+    // Intervalo más rápido en mobile
+    const interval = window.innerWidth < 768 ? 2000 : 4000;
+    timer.current = setInterval(() => setIndex((p) => p + 1), interval);
     return () => clearInterval(timer.current);
-  }, [paused]);
-
-  useEffect(() => {
-    const min = baseLen * 2;
-    const max = baseLen * (REPEAT - 2);
-    if (index < min || index > max) {
-      const mod = ((index % baseLen) + baseLen) % baseLen;
-      setIndex(middleIndex + mod);
-    }
-  }, [index, baseLen, REPEAT, middleIndex]);
+  }, [paused, slides.length, touchDelay]);
 
   const slideWidthPct = 100 / visible;
   const offsetPct = index * slideWidthPct;
 
-  const next = () => setIndex((p) => p + 1);
-  const prev = () => setIndex((p) => p - 1);
+  const next = () => {
+    clearInterval(timer.current);
+    setIndex((p) => p + 1);
+  };
+  const prev = () => {
+    clearInterval(timer.current);
+    setIndex((p) => p - 1);
+  };
 
   return (
-    <div className="container">
+    <div style={{ position: "relative", width: "100%" }}>
       <button
         aria-label="Prev"
         onClick={prev}
         style={{
           position: "absolute",
-          left: -30,
+          left: -50,
           top: "50%",
           transform: "translateY(-50%)",
           background: "transparent",
           borderRadius: 999,
           width: 40,
           height: 40,
+          zIndex: 10,
         }}
       >
         <svg
@@ -262,13 +310,14 @@ export default function CreatividadSlider() {
         onClick={next}
         style={{
           position: "absolute",
-          right: -30,
+          right: -50,
           top: "50%",
           transform: "translateY(-50%)",
           background: "transparent",
           borderRadius: 999,
           width: 40,
           height: 40,
+          zIndex: 10,
         }}
       >
         <svg
@@ -289,44 +338,51 @@ export default function CreatividadSlider() {
       </button>
 
       <div
-        style={{ position: "relative", overflow: "hidden", width: "100%" }}
+        style={{ 
+          position: "relative", 
+          overflow: "hidden", 
+          width: "100%",
+          margin: "0 auto"
+        }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
+        onTouchStart={() => {
+          // Solo aplicar retraso en mobile
+          if (window.innerWidth < 768) {
+            setTouchDelay(true);
+            clearInterval(timer.current);
+            setTimeout(() => {
+              setTouchDelay(false);
+            }, 1000);
+          }
+        }}
       >
         <motion.div
           className="showcase-track"
-          style={{ display: "flex" }}
+          style={{ 
+            display: "flex",
+            width: "100%",
+            alignItems: "center",
+            willChange: "transform"
+          }}
           animate={{ x: `-${offsetPct}%` }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.08}
-          onDragStart={() => setPaused(true)}
-          onDragEnd={(_, info) => {
-            const thr = 50;
-            if (info.offset.x <= -thr) next();
-            if (info.offset.x >= thr) prev();
-            setPaused(false);
-          }}
         >
           {slides.map((item, i) => (
             <div
-              key={`${item.kind}-${i}`}
+              key={`${i}`}
               style={{
                 width: `${slideWidthPct}%`,
                 flex: `0 0 ${slideWidthPct}%`,
-                padding: 8,
+                padding: window.innerWidth < 768 ? "4px" : window.innerWidth < 1024 ? "6px" : "8px",
                 boxSizing: "border-box",
+                minWidth: 0,
               }}
             >
               {item.kind === "video" ? (
                 <VideoSlide src={item.src} />
               ) : (
-                <InnerAutoSlider
-                  list={galleries[item.key]}
-                  interval={2200}
-                  direction={1}
-                />
+                <InnerAutoSlider list={item.images} interval={2200} direction={1} draggingRef={draggingRef} />
               )}
             </div>
           ))}

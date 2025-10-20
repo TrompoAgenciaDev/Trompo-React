@@ -68,6 +68,53 @@
   padding: 50px 0;
 }
 
+/* Estilos para el slider de creatividad */
+.creatividad-video-section {
+  overflow: visible !important;
+}
+
+.creatividad-video-section .container {
+  position: relative;
+  max-width: 100%;
+  overflow: visible;
+}
+
+.showcase-track {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.showcase-track > div {
+  flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .creatividad-video-section .container {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  
+  .creatividad-video-section .container button {
+    display: none !important;
+  }
+  
+  .showcase-track > div {
+    padding: 4px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .creatividad-video-section .container {
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+  }
+  
+  .showcase-track > div {
+    padding: 6px;
+  }
+}
+
 @media (min-width: 768px) {
   .identidad-grid{
     width: 100%;

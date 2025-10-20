@@ -80,9 +80,9 @@ const Creatividad = () => {
         <div className="full-container identidad-diagonal"></div>
       </section>
 
-      <div className="full-container creatividad-video-section">
-        <div className="container">
-          <CreatividadSlider />
+      <div className="full-container creatividad-video-section" style={{ overflow: "visible" }}>
+        <div className="container" style={{ position: "relative", paddingLeft: "60px", paddingRight: "60px" }}>
+          <CreatividadSlider/>
         </div>
       </div>
 

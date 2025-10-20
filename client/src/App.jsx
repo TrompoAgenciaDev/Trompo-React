@@ -3,7 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "@/routes/AppRoutes";
 import Header from "@/layout/Header";
 import Footer from "@/layout/Footer";
-import MenuPopup2 from "@/components/popups/MenuPopup2";
+import MenuPopup from "@/components/popups/MenuPopup";
 import useTogglePopup from "@/hooks/useTogglePopup";
 import ScrollTop from "@/components/buttons/ScrollTop";
 import { usePreloadResources } from "@/hooks/usePreloadResources";
@@ -23,7 +23,7 @@ function AppContent() {
   return (
     <>
       <Header onTogglePopup={togglePopup} />
-      <MenuPopup2 isOpen={isOpen} onClose={togglePopup} />
+      <MenuPopup isOpen={isOpen} onClose={togglePopup} />
       <ScrollTop />
       <AppRoutes />
       <ScrollTop />

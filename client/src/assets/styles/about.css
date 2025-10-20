@@ -126,6 +126,11 @@
   font-size: 14px;
 }
 
+.post-hero-section p{
+  font-size: 14px;;
+  font-weight: normal;
+}
+
 @media (min-width: 768px) {
   .about-content {
     gap: 30px;
@@ -182,6 +187,14 @@
   .text-video-slider p {
     font-size: 17px;
   }
+
+  .post-hero-section p{
+    font-size: 15px;
+  }
+
+  .post-hero-section{
+    padding: 50px 0;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -210,5 +223,9 @@
 
   .text-video-slider {
     width: 450px;
+  }
+  
+  .post-hero-section p{
+    font-size: 18px;
   }
 }

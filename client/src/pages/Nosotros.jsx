@@ -25,7 +25,7 @@ const Nosotros = () => {
       />
 
       <section className="post-hero-section full-container">
-        <div className="container max-text">
+        <div className="container">
           <p>
             Hace más de una década, Trompo nació con una idea clara: una agencia
             no es un proveedor, es un <strong>aliado estratégico.</strong>

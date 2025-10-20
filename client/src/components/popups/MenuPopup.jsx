@@ -1,26 +1,22 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Menu from "@/components/Menu";
 import routesConfig from "@/config/routesConfig";
 import Icons from "../Icons";
-import "@as/menuPopup.css";
-import { motion, AnimatePresence } from "framer-motion";
-
-const overlayVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-  exit: { opacity: 0 },
-};
-
-const panelTransition = {
-  delay: 0.1,
-  duration: 0.3,
-  type: "tween",
-  damping: 26,
-  stiffness: 250,
-};
+import "@as/menuPopup2.css";
 
 const MenuPopup = ({ isOpen, onClose }) => {
   const popupRef = useRef(null);
+  const [isServiciosOpen, setIsServiciosOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // Detectar si está en modo desktop
+  useEffect(() => {
+    const checkViewport = () => setIsDesktop(window.innerWidth >= 1024);
+    checkViewport();
+    window.addEventListener("resize", checkViewport);
+    return () => window.removeEventListener("resize", checkViewport);
+  }, []);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -34,9 +30,7 @@ const MenuPopup = ({ isOpen, onClose }) => {
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("touchstart", handleClickOutside, {
-      passive: true,
-    });
+    document.addEventListener("touchstart", handleClickOutside, { passive: true });
     document.addEventListener("keydown", handleEsc);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -60,72 +54,137 @@ const MenuPopup = ({ isOpen, onClose }) => {
     onClose();
   };
 
+  // --- CONTROL DE APERTURA SEGÚN DISPOSITIVO ---
+  const handleServiciosClick = () => {
+    if (!isDesktop) setIsServiciosOpen((prev) => !prev);
+  };
+
+  const handleHoverStart = () => {
+    if (isDesktop) setIsServiciosOpen(true);
+  };
+
+  const handleHoverEnd = () => {
+    if (isDesktop) setIsServiciosOpen(false);
+  };
+
   return (
-    <AnimatePresence>
+    <>
       {isOpen && (
         <>
-          <motion.div
+          <div
             className="menu-overlay"
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            variants={overlayVariants}
-            transition={{ duration: 0.2 }}
             onPointerDownCapture={handleOverlayPointerDown}
             aria-hidden="true"
           />
 
-          <motion.div
-            className="full-container header popup-menu"
-            initial={{ y: -1140 }}
-            animate={{ y: 0 }}
-            exit={{ y: -1140 }}
-            transition={panelTransition}
-            ref={popupRef}
-            role="dialog"
-            aria-modal="true"
-          >
-            <div className="container header-popup">
-              <motion.a
-                className="logo-img"
-                href="/"
-                initial={{ y: -250 }}
-                animate={{ y: 0 }}
-                transition={{ type: "spring", damping: 20, stiffness: 350 }}
-              >
+          <div className="full-container popup-menu" role="dialog" aria-modal="true" ref={popupRef}>
+            <div className="container mobile-header">
+              <a className="logo-img" href="/">
                 <Icons iconName="logoBlack" />
-              </motion.a>
+              </a>
 
-              <motion.button
-                className="nav-button"
-                initial={{ y: -250, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{
-                  delay: 0.3,
-                  type: "spring",
-                  damping: 28,
-                  stiffness: 350,
-                }}
+              <button
+                className="nav-button close-menu-button"
                 onClick={onClose}
                 aria-label="Cerrar menú"
               >
                 <Icons iconName="close" />
-              </motion.button>
+              </button>
             </div>
 
-            <div className="container menu-popup">
-              <Menu
-                menuType="main"
-                routes={routesConfig}
-                classMenu="main-menu"
-                location="header"
-                onClose={onClose}
-              />
+            <div className="container menu-options-container">
+              <div className="menu-options">
+                {isDesktop ? (
+                  <>
+                    <div className="menu-popup">
+                      <Menu
+                        menuType="home"
+                        routes={routesConfig}
+                        classMenu="grid-menu"
+                        location="gsap"
+                        onClose={onClose}
+                      >
+                        <h3>Inicio</h3>
+                      </Menu>
+                    </div>
+
+                    <div className="menu-popup">
+                      <Menu
+                        menuType="us"
+                        routes={routesConfig}
+                        classMenu="grid-menu"
+                        location="gsap"
+                        onClose={onClose}
+                      >
+                        <h3>Nosotros</h3>
+                      </Menu>
+                    </div>
+
+                    <motion.div
+                      className="menu-popup"
+                      onClick={handleServiciosClick}
+                      onHoverStart={handleHoverStart}
+                      onHoverEnd={handleHoverEnd}
+                    >
+                      <div className="grid-menu servicios-menu" style={{ cursor: "pointer" }}>
+                        <div className="servicios-header">
+                          <span>Servicios</span>
+                          <motion.span
+                            initial={{ rotate: 0 }}
+                            animate={{ rotate: isServiciosOpen ? 45 : 0 }}
+                            transition={{ duration: 0.2 }}
+                          >
+                            <Icons iconName="plus" />
+                          </motion.span>
+                        </div>
+
+                        <div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2, ease: "easeInOut" }}
+                          className="submenu-servicios"
+                        >
+                          <Menu
+                            menuType="servicios"
+                            routes={routesConfig}
+                            classMenu="servicios-options grid-menu"
+                            location="gsap"
+                            onClose={onClose}
+                          />
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    <div className="menu-popup">
+                      <Menu
+                        menuType="contacto"
+                        routes={routesConfig}
+                        classMenu="grid-menu"
+                        location="gsap"
+                        onClose={onClose}
+                      >
+                        <h3>Contactanos</h3>
+                      </Menu>
+                    </div>
+                  </>
+                ) : (
+                  <div className="menu-popup menu-popup-mobile">
+                    <Menu
+                      menuType="menuMobile"
+                      routes={routesConfig}
+                      classMenu="mobile-menu"
+                      location="gsap"
+                      onClose={onClose}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
-          </motion.div>
+          </div>
         </>
       )}
-    </AnimatePresence>
+    </>
   );
 };
 
