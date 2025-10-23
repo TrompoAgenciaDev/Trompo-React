@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Menu from "@/components/Menu";
 import routesConfig from "@/config/routesConfig";
 import Icons from "../Icons";
-import "@as/menuPopup2.css";
+import "@as/menuPopup.css";
 
 const MenuPopup = ({ isOpen, onClose }) => {
   const popupRef = useRef(null);

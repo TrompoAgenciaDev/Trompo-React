@@ -31,6 +31,17 @@ const Footer = () => {
             </div>
           </div>         
         </div>
+        <div className="footer-grid-item footer-menu-desktop">
+          <div className="footer-menu footer-menu-desktop">
+            <h3>Institucional</h3>
+            <Menu
+              menuType="footerInstitucional"
+              routes={routesConfig}
+              classMenu="footer-menu-items"
+              location="footer"
+            />
+          </div>
+        </div>
         <div className="footer-grid-item">
           <div className="footer-menu footer-menu-mobile">
             <h3>Institucional</h3>

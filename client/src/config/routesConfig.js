@@ -60,6 +60,13 @@ const routesConfig = {
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],
 
+  footerInstitucional: [
+    { path: "/", label: "inicio", Component: Home },
+    { path: "/nosotros", label: "nosotros", Component: Nosotros },
+    { path: "/contactanos", label: "contactanos", Component: Contactanos },
+  ],
+
+
   servicios: [
     { path: "/estrategia", label: "estrategia", Component: Estrategia },
     { path: "/creatividad", label: "Creatividad", Component: Creatividad },
