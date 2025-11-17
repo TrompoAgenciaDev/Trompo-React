@@ -25,6 +25,7 @@ const SinglePost = lazy(() => import("../templates/singlePost"));
 const SinglePortfolio = lazy(() => import("../templates/singlePortfolio"));
 const NotFound = lazy(() => import("../pages/NotFound"));
 const Maintenance = lazy(() => import("../pages/Maintenance.jsx"));
+const ClearCache = lazy(() => import("../pages/ClearCache"));
 
 const routesConfig = {
   main: [
@@ -98,6 +99,7 @@ const routesConfig = {
     { path: "/maintenance", label: "Mantenimiento", Component: Maintenance },
     { path: "/gracias", label: "gracias", Component: Gracias },
     { path: "/primavera", label: "Landing Primavera", Component: Primavera },
+    { path: "/clear-cache", label: "Limpiar Caché", Component: ClearCache },
   ],
 };
 

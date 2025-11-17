@@ -74,6 +74,7 @@ src/
 - `/portfolio/:id` - Casos de estudio
 - `/gracias` - Página de confirmación
 - `/terms` - Términos y condiciones
+- `/clear-cache` - Página de limpieza de caché (excluida de analíticas)
 
 ## 🎨 Sistema de Estilos
 
@@ -222,6 +223,91 @@ src/
 - Verificar que el code splitting esté activo
 - Comprobar que lazy loading funcione
 - Revisar bundle size en DevTools
+
+### **Error 403 (Forbidden)**
+Si encuentras errores 403 en alguna página, especialmente en `/soporte`, verifica:
+
+1. **Archivos de recursos faltantes**
+   - Verificar que todos los archivos referenciados existan (videos, imágenes, posters)
+   - Los posters de videos deben existir o usar archivos alternativos (ej: `home.webp`)
+
+2. **Rutas y URLs**
+   - Asegurar consistencia en el uso de `BASE_URL` (usar variable `base` con barra final)
+   - Verificar que las rutas de assets sean correctas
+
+3. **Configuración del servidor**
+   - Revisar permisos de archivos y directorios
+   - Verificar que `.htaccess` permita acceso a archivos estáticos
+   - Comprobar que no haya conflictos con `.htaccess` anidados
+
+4. **Caché del navegador**
+   - El error 403 puede ser causado por caché obsoleta
+   - Usar la página de limpieza de caché: `/clear-cache`
+   - O agregar `?nocache=timestamp` a la URL
+
+## 🧹 Manejo de Caché
+
+### **Sistema de Limpieza de Caché**
+
+El proyecto incluye un sistema completo para manejar y limpiar la caché cuando sea necesario.
+
+#### **Página de Limpieza de Caché**
+- **URL**: `/clear-cache`
+- **Funcionalidades**:
+  - Limpia Service Workers registrados
+  - Limpia Cache API del navegador
+  - Fuerza recarga sin caché
+  - Interfaz visual con barra de progreso
+  - **Excluida de Google Analytics** (no aparece en las métricas)
+
+#### **Métodos para Limpiar Caché**
+
+**Opción 1: Página Dedicada**
+```
+https://tudominio.com/clear-cache
+```
+Visita esta URL para limpiar automáticamente toda la caché del navegador.
+
+**Opción 2: Parámetro en URL**
+Agrega `?nocache=timestamp` a cualquier URL:
+```
+https://tudominio.com/soporte?nocache=1234567890
+```
+El servidor desactivará automáticamente el caché para esa solicitud específica.
+
+**Opción 3: Atajos de Teclado**
+- **Windows/Linux**: `Ctrl + Shift + R`
+- **Mac**: `Cmd + Shift + R`
+Esto fuerza una recarga completa sin usar caché.
+
+**Opción 4: DevTools**
+1. Abre DevTools (F12)
+2. Ve a la pestaña **Network**
+3. Marca la opción **"Disable cache"**
+4. Recarga la página
+
+#### **Configuración en .htaccess**
+
+El archivo `.htaccess` incluye reglas automáticas para:
+- Detectar el parámetro `?nocache=` en las URLs
+- Desactivar caché para la página `/clear-cache`
+- Mantener caché normal para el resto del sitio (optimización de performance)
+
+#### **Cuándo Usar la Limpieza de Caché**
+
+Usa la limpieza de caché cuando:
+- ✅ Encuentres errores 403 o 404 inesperados
+- ✅ Los cambios no se reflejen después de un deploy
+- ✅ Los recursos (imágenes, videos) no se actualicen
+- ✅ Haya problemas de visualización después de actualizaciones
+- ✅ Necesites forzar una recarga completa del sitio
+
+#### **Notas Importantes**
+
+- La página `/clear-cache` está **excluida de Google Analytics** para no afectar las métricas
+- La limpieza de caché solo afecta al navegador del usuario, no al servidor
+- Los recursos estáticos (videos, imágenes) tienen caché de 1 año para optimización
+- El sistema mantiene el balance entre performance (caché) y actualizaciones (limpieza)
 
 ## 📈 Métricas de Performance
 

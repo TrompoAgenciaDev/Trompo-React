@@ -1,6 +1,12 @@
 import React from "react";
-import LogoAmarillo from "/assets/logo-amarillo.webp";
-import LogoBlack from "/assets/logo-black.webp";
+
+// Construir rutas de logos usando BASE_URL
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const LogoAmarillo = `${base}assets/logo-amarillo.webp`;
+const LogoBlack = `${base}assets/logo-black.webp`;
 
 const iconComponents = {
   facebook: () => (

@@ -24,8 +24,8 @@ const Soporte = () => {
       <SimpleHeroVideo
         desktopSrc={`${base}assets/hero/soporte-hero.mp4`}
         mobileSrc={`${base}assets/hero/mobile/soporte-hero-mobile.mp4`}
-        desktopPoster={`${base}assets/hero/soporte-hero-poster.webp`}
-        mobilePoster={`${base}assets/hero/mobile/soporte-hero-mobile-poster.webp`}
+        desktopPoster={`${base}assets/hero/home.webp`}
+        mobilePoster={`${base}assets/hero/mobile/home.webp`}
       />
 
       <PageTitle
@@ -38,7 +38,7 @@ const Soporte = () => {
       <section className="full-container soporte">
         <div className="full-container soporte-diagonal-invertida">
           <img
-            src={`${import.meta.env.BASE_URL}assets/support/soporte-img-2.webp`}
+            src={`${base}assets/support/soporte-img-2.webp`}
             alt=""
           />
         </div>
@@ -62,7 +62,7 @@ const Soporte = () => {
         </div>
         <div className="full-container soporte-diagonal-invertida">
           <img
-            src={`${import.meta.env.BASE_URL}assets/support/soporte-img.webp`}
+            src={`${base}assets/support/soporte-img.webp`}
             alt=""
           />
         </div>
@@ -86,7 +86,7 @@ const Soporte = () => {
         </div>
         <div className="bg-yellow-2 full-container soporte-diagonal-invertida">
           <img
-            src={`${import.meta.env.BASE_URL}assets/support/full-img-2.webp`}
+            src={`${base}assets/support/full-img-2.webp`}
             alt=""
           />
         </div>
