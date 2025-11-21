@@ -6,6 +6,8 @@ import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 
 //styles
 import "@as/hero.css";
+import "../../assets/styles/google-ads.css";
+
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -33,8 +35,18 @@ const Google = () => {
       case "graficos":
         return (
           <div className="tab-content">
-            <h2>Anuncios Gráficos</h2>
-            <p>Contenido para anuncios gráficos...</p>
+            <div className="container grid-tab">
+              <img src={`${base}assets/estrategia/google-ads/display-google-ads.png`} alt="Anuncios Gráficos Google Ads" />
+              <div className="text-container">
+                <h3>
+                  <strong>Anuncios gráficos </strong> 
+                  “banners” en los principales medios digitales.
+                </h3>
+                <p>
+                  La red display es la red más grande de publicidad digital, compuesta por el 80% de los principales medios digitales.
+                </p>
+              </div>
+            </div>
           </div>
         );
       case "video":
@@ -52,10 +64,10 @@ const Google = () => {
   return (
     <>
       <SimpleHeroVideo
-        desktopSrc={`${base}assets/hero/creatividad-hero.mp4`}
-        mobileSrc={`${base}assets/hero/mobile/creatividad-hero-mobile.mp4`}
-        desktopPoster={`${base}assets/hero/creatividad-hero-poster.webp`}
-        mobilePoster={`${base}assets/hero/mobile/creatividad-hero-mobile-poster.webp`}
+        desktopSrc={`${base}assets/hero/estrategia-hero.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/estrategia-hero-mobile.mp4`}
+        desktopPoster={`${base}assets/hero/estrategia-hero-poster.webp`}
+        mobilePoster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
       />
 
       <div className="full-container">
@@ -79,15 +91,17 @@ const Google = () => {
             </div>
           </div>
           <div className="container">
-          <svg xmlns="http://www.w3.org/2000/svg" width={253} height={253} viewBox="0 0 253 253" fill="none">
-            <path
-              d="M129.191 61.9043L129.191 193.787M129.191 193.787L193.787 127.846M129.191 193.787L64.5956 127.846"
-              stroke="#1D1D1B"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+            <div className="icon-container">
+              <svg xmlns="http://www.w3.org/2000/svg" width={62} height={62} viewBox="0 0 62 62" fill="none">
+                <path
+                  d="M31 7L31 55M31 55L55 31M31 55L7 31"
+                  stroke="#1D1D1B"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
           </div>
         </div>
       </div>

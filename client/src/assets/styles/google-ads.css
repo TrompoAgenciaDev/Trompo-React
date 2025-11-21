@@ -1,0 +1,41 @@
+.title-container{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding-top: 30px;
+}
+
+.grid-container{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.grid-tab img{
+    width: 100%;
+}
+
+.title-google h1{
+    color: #E1C025;
+}
+
+.grid-container svg{
+    width: 100%;
+    height: 100%;
+}
+
+.icon-container{
+    width: 120px;
+    height: 120px;
+}
+
+@media (min-width: 1024px) {
+    .title-container{
+        padding-top: 70px;
+    }
+    .grid-tab {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
