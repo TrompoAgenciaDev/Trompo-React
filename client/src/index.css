@@ -246,6 +246,10 @@ footer {
   right: -10px;
 }
 
+.display-title{
+  color: #9A7A00;
+}
+
 @media (min-width: 768px) {
   .container {
     width: 100%;
