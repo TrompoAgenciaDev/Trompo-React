@@ -181,10 +181,11 @@ const Google = () => {
       </div>
 
       <div className="full-container container-avanzado">
-        <h1>Avanzado y Personalizado</h1>
+        <div className="container title-avanzado-container">
+          <h2>Avanzado y Personalizado</h2>
+        </div>
 
-        <div className="container">
-          <div className="container">
+        <div className="container grid-avanzado-container">
             <div className="grid-avanzado">
               <div className="grid-item-avanzado">
                 <div className="icon-section-avanzado">
@@ -197,8 +198,9 @@ const Google = () => {
                     />
                   </svg>
                 </div>
-                <div className="title-section-avanzado"></div>
-                <div className="content-avanzado"></div>
+                <div className="title-section-avanzado bold"><h3>Remarketing Dinámico</h3></div>
+                <div className="content-avanzado"><p>Impacto solo a usuarios que visitaron tu sitio. 
+                Creatividades personalizadas según navegación.</p></div>
               </div>
 
               <div className="grid-item-avanzado">
@@ -210,8 +212,8 @@ const Google = () => {
                     />
                   </svg>
                 </div>
-                <div className="title-section-avanzado"></div>
-                <div className="content-avanzado"></div>
+                <div className="title-section-avanzado bold"><h3>Extensiones de anuncio</h3></div>
+                <div className="content-avanzado"><p>Información adicional: llamada, ubicación, enlaces, promociones, etc. Mejora el CTR.</p></div>
               </div>
 
               <div className="grid-item-avanzado">
@@ -250,8 +252,8 @@ const Google = () => {
                     </defs>
                   </svg>
                 </div>
-                <div className="title-section-avanzado"></div>
-                <div className="content-avanzado"></div>
+                <div className="title-section-avanzado bold"><h3>Feeds de Productos</h3></div>
+                <div className="content-avanzado"><p>Ideal para ecommerce o empresas con múltiples servicios/productos.</p></div>
               </div>
 
               <div className="grid-item-avanzado">
@@ -272,8 +274,8 @@ const Google = () => {
                     </defs>
                   </svg>
                 </div>
-                <div className="title-section-avanzado"></div>
-                <div className="content-avanzado"></div>
+                <div className="title-section-avanzado bold"><h3>Campañas de Máximo Rendimiento</h3></div>
+                <div className="content-avanzado"><p>Anuncios automatizados multired con señales de conversión. Alta performance y alcance.</p></div>
               </div>
 
               <div className="grid-item-avanzado">
@@ -296,11 +298,10 @@ const Google = () => {
                     </defs>
                   </svg>
                 </div>
-                <div className="title-section-avanzado"></div>
-                <div className="content-avanzado"></div>
+                <div className="title-section-avanzado bold"><h3>Ubicaciones geográficas precisas</h3></div>
+                <div className="content-avanzado"><p>Activación solo en zonas estratégicas por región o ciudad.</p></div>
               </div>
             </div>
-          </div>
         </div>
       </div>
 
