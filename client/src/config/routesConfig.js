@@ -17,6 +17,7 @@ const Estrategia = lazy(() => import("../pages/servicios/Estrategia"));
 const Interaccion = lazy(() => import("../pages/servicios/Interaccion"));
 const Soporte = lazy(() => import("../pages/servicios/Soporte"));
 const Google = lazy(() => import("../pages/estrategias/Google.jsx"));
+const Meta = lazy(() => import("../pages/estrategias/Meta.jsx"));
 
 //Landings
 const Primavera = lazy(() => import("../pages/landings/Primavera.jsx"));
@@ -105,6 +106,7 @@ const routesConfig = {
 
   estrategias: [
     { path: "/servicios/estrategias/google-ads", label: "Google Ads", Component: Google },
+    { path: "/servicios/estrategias/meta-ads", label: "Meta Ads", Component: Meta },
   ],
 };
 

@@ -13,71 +13,7 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
-const Meta = () => {
-  const [activeTab, setActiveTab] = useState("graficos");
-
-  const tabs = [
-    { id: "busqueda", label: "Anuncios de búsqueda" },
-    { id: "graficos", label: "Anuncios Gráficos" },
-    { id: "video", label: "Anuncios de video" },
-  ];
-
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case "busqueda":
-        return (
-          <div className="tab-content">
-            <div className="container grid-tab">
-              <img src={`${base}assets/estrategia/meta-ads/busqueda.png`} alt="Busqueda Meta Ads" />
-              <div className="text-container">
-                <h3>
-                  <strong>Anuncios de búsqueda </strong> en Meta y buscadores asociados.
-                </h3>
-                <p>
-                  Meta Ads permite publicar anuncios en los resultados de búsqueda mediante palabras claves de interés.
-                </p>
-              </div>
-            </div>
-          </div>
-        );
-      case "graficos":
-        return (
-          <div className="tab-content">
-            <div className="container grid-tab">
-              <img src={`${base}assets/estrategia/meta-ads/display.png`} alt="Anuncios Gráficos Meta Ads" />
-              <div className="text-container">
-                <h3>
-                  <strong>Anuncios gráficos </strong> 
-                  "banners" en los principales medios digitales.
-                </h3>
-                <p>
-                  La red display de Meta es una de las redes más grandes de publicidad digital.
-                </p>
-              </div>
-            </div>
-          </div>
-        );
-      case "video":
-        return (
-          <div className="tab-content">
-            <div className="container grid-tab">
-              <img src={`${base}assets/estrategia/meta-ads/video.png`} alt="Anuncios de video Meta Ads" />
-              <div className="text-container">
-                <h3>
-                  <strong>Anuncios de video </strong> 
-                  en Meta, Instagram y más.
-                </h3>
-                <p>
-                  Llega a millones de personas con anuncios de video en las principales plataformas de Meta.
-                </p>
-              </div>
-            </div>
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
+const Meta = () => {  
 
   return (
     <>
@@ -88,239 +24,80 @@ const Meta = () => {
         mobilePoster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
       />
 
-      <div className="full-container title-container-meta">
+      <div className="full-container title-container-google">
         <div className="container title-container">
           <h3 className="display-title">[Estrategia]</h3>
-          <svg xmlns="http://www.w3.org/2000/svg" width={110} height={101} viewBox="0 0 110 101" fill="none">
-            <path d="M37.4324 12.6788C38.4956 9.88269 39.9575 7.3085 42.1282 5.22252C50.8112 -3.25454 65.1646 -1.12418 71.0566 9.52763C75.4866 17.6053 80.1825 25.5053 84.7455 33.4942L107.605 73.3497C113.94 84.4897 107.073 98.559 94.4916 100.467C86.7833 101.621 79.5623 98.0708 75.5752 91.1471L55.4627 56.1737C55.3298 55.9074 55.1526 55.6855 54.9754 55.4636C54.2666 54.8866 53.9565 54.0433 53.5135 53.2888L38.7171 27.5913C36.9894 24.5733 36.192 21.289 36.2806 17.8272C36.4135 16.0519 36.635 14.2766 37.4324 12.6788Z" fill="#3C8BD9"/>
-            <path d="M37.4347 12.6788C37.0359 14.2766 36.6815 15.8744 36.5929 17.5609C36.46 21.289 37.3903 24.7509 39.251 27.9908L53.8259 53.2445C54.2689 53.999 54.6233 54.7535 55.0663 55.4636L47.0479 69.2666L35.8398 88.6173C35.6626 88.6173 35.6183 88.5286 35.574 88.3954C35.5297 88.0404 35.6626 87.7297 35.7512 87.3746C37.5676 80.7172 36.0613 74.8144 31.4984 69.7548C28.7074 66.6924 25.1634 64.9615 21.0877 64.3845C15.7716 63.63 11.0758 65.0058 6.8672 68.3345C6.11409 68.9115 5.62678 69.7548 4.74077 70.1986C4.56357 70.1986 4.47496 70.1098 4.43066 69.9767L10.7657 58.9254L37.1245 13.167C37.2131 12.9895 37.346 12.8564 37.4347 12.6788Z" fill="#FABC04"/>
-            <path d="M4.60629 70.1097L7.13142 67.8462C17.8965 59.3247 34.0662 65.4939 36.4142 78.9862C36.9901 82.2261 36.68 85.3329 35.7053 88.4397C35.661 88.706 35.6167 88.9279 35.5281 89.1942C35.1294 89.9043 34.775 90.6588 34.332 91.3689C30.3893 97.8931 24.5859 101.133 16.9662 100.645C8.23894 100.024 1.37234 93.4549 0.176222 84.7559C-0.399687 80.5396 0.442026 76.5895 2.61276 72.9502C3.05576 72.1513 3.58737 71.4412 4.07468 70.6423C4.29618 70.4647 4.20758 70.1097 4.60629 70.1097Z" fill="#34A852"/>
-            <path d="M4.60747 70.1097C4.43027 70.2872 4.43027 70.5979 4.12017 70.6422C4.07587 70.3316 4.25307 70.154 4.43027 69.9321L4.60747 70.1097Z" fill="#FABC04"/>
-            <path d="M35.528 89.1941C35.3508 88.8834 35.528 88.6615 35.7052 88.4396L35.8824 88.6171L35.528 89.1941Z" fill="#E1C025"/>
+          <svg xmlns="http://www.w3.org/2000/svg" width={110} height={72} viewBox="0 0 291.26 191">
+            <defs>
+              <linearGradient id="Degradado_sin_nombre" x1="62.34" y1="101.45" x2="260.34" y2="91.45" gradientTransform="translate(0 192) scale(1 -1)" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stopColor="#0064e1"/>
+                <stop offset="0.4" stopColor="#0064e1"/>
+                <stop offset="0.83" stopColor="#0073ee"/>
+                <stop offset="1" stopColor="#0082fb"/>
+              </linearGradient>
+              <linearGradient id="Degradado_sin_nombre_2" x1="41.42" y1="53" x2="41.42" y2="126" gradientTransform="translate(0 192) scale(1 -1)" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stopColor="#0082fb"/>
+                <stop offset="1" stopColor="#0064e0"/>
+              </linearGradient>
+            </defs>
+            <path fill="#0081fb" d="M31.06,125.96c0,10.98,2.41,19.41,5.56,24.51,4.13,6.68,10.29,9.51,16.57,9.51,8.1,0,15.51-2.01,29.79-21.76,11.44-15.83,24.92-38.05,33.99-51.98l15.36-23.6c10.67-16.39,23.02-34.61,37.18-46.96C181.07,5.6,193.54,0,206.09,0,227.16,0,247.23,12.21,262.59,35.11c16.81,25.08,24.97,56.67,24.97,89.27,0,19.38-3.82,33.62-10.32,44.87-6.28,10.88-18.52,21.75-39.11,21.75v-31.02c17.63,0,22.03-16.2,22.03-34.74,0-26.42-6.16-55.74-19.73-76.69-9.63-14.86-22.11-23.94-35.84-23.94-14.85,0-26.8,11.2-40.23,31.17-7.14,10.61-14.47,23.54-22.7,38.13l-9.06,16.05c-18.2,32.27-22.81,39.62-31.91,51.75-15.95,21.24-29.57,29.29-47.5,29.29-21.27,0-34.72-9.21-43.05-23.09C3.34,156.6,0,141.76,0,124.85l31.06,1.11Z"/>
+            <path fill="url(#Degradado_sin_nombre)" d="M24.49,37.3C38.73,15.35,59.28,0,82.85,0c13.65,0,27.22,4.04,41.39,15.61,15.5,12.65,32.02,33.48,52.63,67.81l7.39,12.32c17.84,29.72,27.99,45.01,33.93,52.22,7.64,9.26,12.99,12.02,19.94,12.02,17.63,0,22.03-16.2,22.03-34.74l27.4-.86c0,19.38-3.82,33.62-10.32,44.87-6.28,10.88-18.52,21.75-39.11,21.75-12.8,0-24.14-2.78-36.68-14.61-9.64-9.08-20.91-25.21-29.58-39.71l-25.79-43.08c-12.94-21.62-24.81-37.74-31.68-45.04-7.39-7.85-16.89-17.33-32.05-17.33-12.27,0-22.69,8.61-31.41,21.78l-26.45-15.71Z"/>
+            <path fill="url(#Degradado_sin_nombre_2)" d="M82.35,31.23c-12.27,0-22.69,8.61-31.41,21.78-12.33,18.61-19.88,46.33-19.88,72.95,0,10.98,2.41,19.41,5.56,24.51l-26.48,17.44C3.34,156.6,0,141.76,0,124.85,0,94.1,8.44,62.05,24.49,37.3,38.73,15.35,59.28,0,82.85,0l-.5,31.23Z"/>
           </svg>
         </div>
         <div className="container grid-container">
           <div className="container">
-            <div className="title-meta">
-              <h1>Empieza a convertir nuevos clientes con Meta Ads</h1>
+            <div className="title-google">
+              <h1>Tus clientes están aquí: <br/> encuéntralos con los anuncios de Meta</h1>
               <p>
-                Llega a millones de personas en Meta con campañas de máximo rendimiento. Capta más ventas en la Búsqueda, YouTube, Gmail y más, todo desde una sola campaña.
+                Llega a clientes nuevos y a los actuales cuando conecten con otras personas y busquen comunidades en Facebook, Instagram, Messenger y WhatsApp.
               </p>
             </div>
           </div>
           <div className="container">
             <div className="icon-container">
-            <svg width="161" height="107" viewBox="0 0 161 107" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="-0.146484" y="-0.174561" width="161" height="107.151" fill="url(#pattern0_2395_2075)"/>
-                <defs>
-                <pattern id="pattern0_2395_2075" patternContentUnits="objectBoundingBox" width="1" height="1">
-                <use href="#image0_2395_2075" transform="scale(0.0027248 0.00411523)"/>
-                </pattern>
-                <image id="image0_2395_2075" width="367" height="243" preserveAspectRatio="none" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAW8AAADzCAIAAADGjQDPAAAACXBIWXMAABcRAAAXEQHKJvM/AAAgAElEQVR4Xu3d+XYcx5Um8MJG6rHgttQvYmohKUuiRIA7BUr+a7zIW7t75vTY7XmD8dL2uM+Y1FuMbVkkZVkkRRAAwZ2UjKms3GK59343lsxakHG+8aipElBAVfx4b0Rk1uhgGPXY+t+746z/t1ujb13PnvGXHX/xq//vCXoWw8g/tq59Pc76L1+MrjzPlfFXK78s+uaHaIzQAxZ8lIJAC7Kn/L7o2Q0jfly98Y/sgggZZDk4tJp0V4OEpqxZ0PMdhnaUiMDJ313KmgU9zcUch0uTcaMxI4j4GVhJHH1WIpqMn8yYNvSsF2ocFk2m0s7EZVheCR3TLUZgDk+psuCazHIxImf8tAdT4JhxR8wchlJlYTWZX0ecDO0POebIETOLbcoCarIwjpgZTGnGnDpiZlFNWShNFtIRM4e89xnPQDhR5yhjU9BPPGdjcTSZo3XWlBza9ZSZ2q/JmEVao10ETcazC07CBcvYFPRbWZyxAK2NnIVpfOZek8VubeQchiJl/Zdfja68mARPy7nOAjQ+c6zJISxJ/Cxw4zNZJXlhB8/Jec9cFynzqslhLkn8LB4oRkly6ECZ3yJl/jQZShIyC7OSMv7LuaDkgxeqoJk5p5nTlZQ50+SQbNxE5tjcFylFdwMFORygjAuxuQNlnjQZuhspx6ps/Wpez7ltffw1tuOwaFJ1duMyDf3aZmjMhyZDd4NzrM36d+ev6wnobhZfE2upaI5AmQNNBkpwjhGZo64nnpIFBIVce56PrmfWNRkWSlShNJkLUGIWShZZE5qSeQFlpjUZFkpUYSiZ/a4nDyWHRpPZB2V2NRko0UbUZHTsxvr3bqNf9hRGNkoWBxRASZlZvq5nRjUZKAmISMno1SKzBkpmShZBE+xIk5ldl51FTQZKwiJQUmsyyc2rf3qKfvd9jPyUHDJNZhaUmdNkoCQ4AiWtJjfLTB2UTiiZe1AwH3MBymxpMlASGY4ST5PpgtIhJXOsCYZjXkCZIU0GSuLDUXLMpWT02mfjTAWUbik5lJrMGiizoslASVI4ShxNJpRMBZTOKZlXTbAXMLMDykxoMlCSGtKRShO3MCny+jh/6w2UPigpg2fvrAVjocmMbBtPX5OBkjwJpKTIG32A0h8lH8ydJpgJfWbhYNuUNRkoyRZZk9duGpR8VlJS5uqfOwSlV0o+ONSazAIo09RkuJwvW3BhwmoyOv55R6C0t2KECmQMnsOzEwxEaKYLytQ0GSjJmdjCZExJmS5Acd/rEIIswXN4doJ1iAh6WToc09FkoCRzEgoTA5Rn6HULGOyNXSEHKcETeKaCaYjIFLd4pqMJnh5DgpJWmIxO/L3IyS9ygcLfI3oSiEJE8NSdwWAa4jItUKagybDymj8uJTcMSgI0Gb15Kx2U+kP50JseAqEPnrezGfQrSshU9oz71mSgpJPkKEzGlBT5dtLVxvbn8uE3PZZCQqQJnLezGfTLSUv/K7K9ajIsl3QVZWHyhqdJQ4mhyfqPd9ArSY+r1/8x2up7zkwC5+1sBv5cqUGvWObRnyYDJR1GVZh8pqGkyFt31n8cfOP7ipIyvU4bOGlnNvBHS03PCyj9aTL0OB1GKExkSuwep9GkAOUnYaCM3n/WatIrKHDSzmzgj5aY4rv0uYDSkyYDJd0GUtJo4lclpSY2JaO3vxy9c3fr94/QC1uN9V+8mGhShtSku/kDJ+3MBv5oKWm/UW8LKH1oMvQ43UZfmPhVidfjFI5MKClyavvqJ7j3Xv/F84KSMlMABU7amQ380aLjfi/0GuYZfWiC58OQlARpEkLJ6N1748igXL3+9ej9p5NQoHRuCpyxsxz408WF+F79fFJ655oMPU63Ua2/qlZeXUpqTUbv7XCgGJQYoGyZgTMqZbLBrzDjgT9gRNhv10O/060mQ4/TbUhKXq0psW8+EKxJTcno9O76vz0gX9/R5Se2JrUp2UAR5h58/FwE6hAU8O3IFzHj6FYTPB+GRIelhDyxVp5VK9scipJ65dUqTCaUjDZ2R5t76//20Hlx13/+jNHkqa3JJOiNflgDgdAHfq/O+50ONRl6nG6TVJhQlJSatJRYmozO3F//H+0Wz9YfX4wuPWY1mUdQzGfY37OFRigDv1GVTvudrjQpepxjaD4MiY6KkkYTvjBxKGEKkzElo7P3R+f2r35anIa6+unXBSWlJvryJMsUzfJFzK8mB36FDIFSaAK/Sxs0d+NHV5q4n8kAp8cQfSAlTmFiauIXJiwlOxUllSb7o3MPRucfjEEZXXwUqUlonJnA/auIaQ+/Nfcc8gdKAQO/hZXu+p1ONFn/7i36I6PgPBmiiUqTv7WFyRt+YYJ6HIKS/TElowsPi4w1gaDAWRqUKyHzP3vQ/MwRSEYqImY66nfya1L1OBkDZ9ehShAlVpvzhV2YUD1OQ4nT45ydUHLeoKRnTbaeLaEHdBs0PzMFCpKESJOOypP8mrCFSXTgBDtUCdLELUxu2YWJQ4nX4zSUTHocixJHEx8UOD9DsmQHPr6roFmaKV0hYqaL63cya7L1q12sQ2jgBDtsAeuvTmHyd7swuW0VJqrlEkYTuTyRp2XzAPjIFpGnS9GsKL6LNmiW5ksniJhBszl4ZNYE0xAROLvyxvzLHz54KlFqElaY8D1OQwlZm4Rq4vdEYpY0Gcsy+Qf41bRPMjLP6aBZPa1k73dyapK/x+lZE9MRJ/C/7TNks+N3Oq0m4ooJ2eM4i6/neUq61AQ70kEQGZlAmQ1r8i7HZtMk/+Jrz6AIlMygKbA8aSg5zm/liGfVzF1hiRIOlDRHDEqeMHEegJnQh/0RVFGAMjOVS97yJJsm69+9bUw8pENo4OxKCURkBk0xn48PCr2VY6+YvO1fjzMpTDZQYcJREqJJMWkvP1lq/kMvS3GRmYAPIE2JlIU0hflzNOc7TcbyJI8mk8KEmnivZpIFzq64QDhmGZRvGc/f1MTpcfwVE6vH4ShhChOBEkETv+KwFVBQ8tiO+YeIGDl6UOJlUcSc4f36krE8yaOJXZjUjnCBdvSjCSRj9kGxfuFyYXKL3sppKGl6nM379laOd1yNo8QBxaPEqhGoUJo8dnPJ+xNCmeRoTGnzjA4UhARlGjVLrvIkgyZbv9oDfNCmlEGOdKFJ9WWRFzDwG/WQhpK2MKk3hs2tHP8cPblcIuwKB1HSaOI4wlNSZkLJhAw2jyZ5XP8vE+iFMummBLAyzSYIzXLVyKAJhgOAopAFTipimslBUmgCn0M/KTVprs15o7lcWFx8bfdxdt3lkqbHEQoTmZJSE7938KerBIcjCAz8Oo/bbwodoVhBoDCyYEdEUHoxJcthtlRNisIEqhEACsMKnFHuBOuekmOzAcqx8jfJaeIVJuRVwg0l5j5OUI/jz6j6DEgCJbQayxcfjpPKimANYgVRwgdrMk1Q0FzHI1UT7AUMmLHhoABKsmpybKqgHGMogbvCVmGyxy6XXIiqSlIpMeAoc7HMQz9LFx/hQEQiWIFwxIPiU0I9DNEQkfTyJEmTSWFyE3sBA2esXpMslGifVR34rEgI0r/msZISasXEXHylD5h4K69nnB6n3McJdsSgZHIShJiNxASuyXDiCXLhQRGClSYIF70v0JTil/C0CEQkzBQekU5Z2UotT5I0MU46IC80kWaXrkJJpyT4ialn/rcU310ZgpLP2vuYkCsm/uLr6aYw0VCidcTSxBGk2ZSxUkxvgMiFMg+YPDSz1EQExfx2iazYv5mnVpJMCQ/0ghLETGJ5Eq9JXZjczGkKO4VsFLrQJP65GTM8BY7Q71g8ZqKJdVf6ujAx767WbgnftQuTZrmkpsTqcRhK8KyoCxPTEZOPJu3cnlhw8aFDgwvH+f02oixLfujapwZFY4rIClG4cb+uTkFpEoKIGTTvpRGvSf2hLf2AQtGQhRL4fPBzS0j7xW8yYb5vtSVMFSbmx/e5DY59Pc6GsVxyVkGJbjLYhQnlSIVI1ZsgQcrs83ngppZlyf3KXnxTlKxQuLCgQFYgDSlRCGLm6vX4syeRmmz9eq/VhGAFTcvgScsbodWEnMOBgTqQkb4mJYgLtP+LrR1pF1+NT97yKXFPlzgXChuUuD0OPxnYt69ZmFSzbtlaT6XWQS54IpCCnLvfRinLebcV0poSy0okKOWvNH5rWRNMyTjr/xF/NDZSE4ISlxU0M8PmLcQCBn1HZaAdxDcSdGhKDPmX6T++vo/0Gzwl4zjdjbMlvFn2ODwlrSaiI9VffZN/JgoTxhGXEqb0OFcgskKllmW/DZRFxsUHJZSViSzxRcoMaJJSnsRocvVPT4v3sTwH2smA5qdq6kIsxMBvlB4LEcQH68hnXqjHWB+UU3+6hdTg2CUJcbqkpuRCICVtFV3+iV+YUJSY7YwLRxWSj5Wze1YsUzxZWl8YVjhZOFOCcIkHxStYcgZTklKexGiy/v077QfcQk0SWUnUBH79/IFkIEFeN0L/q9oRucEpF0rMeyCZR0vKldd2uURByfvGm9Jd1Zv8OVmYmJSYjriU3CdqkLOeIHSKRy6frU05y+ASZMqEFRYUDStwVQVSkl8TLShx5UmwJlVh4gRSkmjKq+GgwC+YLaUaN0IEMRzxf5lSPEfKkoSjxD1Xsuc6cm5SlZyvKbloUmLucT6TKLlS/vnTkVeYLDX7NbYjK+f329QlhoqPM7ttmMcsl7K0vvgFSwgrWU1xZYGa5AcFUzKK3SoO1sQqTKJN6ZQV+BXCgroVVSUiFiCkGm3qPyQd8T9L2DlUIpckZlXSUEJqwlJSFyaUJsutJhIlRBfj2yFlz0oBShnTFIoVUhbKFHCAJRwUS5ZeNdGCgiQgRrAmaBoEsoInM59O7LiBnzP9g5B/rrTDEOQNlBPeiRLzfNo45MH5ZpXEPFdiNThPJEo0mtBtDrHa6jpiUgLh2NyxIuLimhJarfimRBcpcwjK1rWvEAbuCNNk69f30ZSYBitxgU8pNeiXUwoC+ZBLEv8TtoSjrn5341NyqaaEKExITco/JwqTpYu2JpP1EbseuU9XIpsUHKq4rCy3pnisnFWwcqEPU3DXg3UIjUxJ9TDkgTvCNEFzY7ZNgd89W8TfBlTDR8Raav3CKkmcT9hq76XmHE5jSpKL9aGSTgqTRw4lyyUlZ21H5OrDy6qZjXu0KRYrVhM0yX0zLivONtAFwpSFBqV9TOhabIAmW7+5X7y5oR3prEAXQgO/Y8YkOlLaYeYEouQdsyrZsasSsyQxD5WYC67NdSUGJcrCpPlXpiZCYWL2NdUMN+qRxouNe6FZ2YClimQKBUqaKQIolCl4XRbrEBGJknFCt4oDNFn/wZftmx7C0Skr8mPgl9UE/gjKhNphOVIiUsbsbsqFEuaejM6RedqRx1YZ4ieiMJHXX01KTEc2Qxw5vU2kBaVJUKlimEKfhZNMybU6G7BzjI0ICu1IE6SCNbSaFBvDzkyAE0kZOLFf88iAj08JfMKa0HYgPlxHmt3fsiTRUeKcTDvHbNyQV7g6p0siCxNPk8nJNIOSBpHakY0dQIaT9+4W8VhZcbNjy7Jry0KY4u7+kCdruylSAkDJKYtEyThBa7FaTao2hwMlFzRwqndKCXx6coIKkBM2HE7MUySVIxQlp5ojat6lN+4FwY/ckqQ9we2/Talj3aAwsTUhC5PxdLUoMRA5XcaQQh/PmhBTiN7HPVlLntb3i5RkUEZTA0VKULOj1YSdKjBwEpKBMz8l8LtDIMwfTXiALwhpB3CkRKShpFko4aqS5k4l3FV8JiVMrLcU3+NsyeuvD6tdYbMwMR0xEfEdefdL9/+cZK3+B8GUlSoCKx4ohinLkikCKLGmJILSsSn6tViVJkSbExc4e8lAHTSB38UJ/FmECM2LBYdhhxnXkTt1PWJT4n/cp3WPaM4R8Z2nccQvTJpyvS1Mak3Ol4XJvlWYjCk5bVDyXuXI2kQKkFN31kxQHFNsWVhTiPUUB5Q9u0i5r+l68F2aECiuJqG4IBfiom92VJqs/+AunkKhgfPZDyQjDg4n8Jlz0SBykkfEceTbpiMlIpOcCqWk3vd9f1KSiE2yHZ4SUZPqqjmzMDlrFCYVJSUijSN3LS+UkU2ZZKU1ZZsFxTHFOAJjg8KYYhQpNSi8KcJNsDWgQFPwyxoTJEQ1VJrQ84SbP3DW+YEzvJ8ITHB/zkXuYlxE6nXWdvfXWB+xWhvqWj720/keW6utJBD0HqHoiEOJsP5a9Th1YTLpcVZLTUpH3q0dIbF45zYd+2GrpilMqUIVKRwouxgUdrvHAUUwhQUlVZNuTFE2O1iTrd/sS9OGCxRECJz22cM9E/hjOlEtiNh8NCkdIUqSu0Y9YlKyQ1PS7AQ3JUn1nkBGNL7gxxiacIWJ0+OYlEyWSCaIlBHtePuW+w8eKy4o/KqKCwrd9XiguKZI+8dLLiiMKUyRkkeT3KYomx2syfpHd/EsEgLtoEHxrnnrKJ06QtQgtzxEzNbGOd5qb9xUN0+bZKOhxPl0vvpDcKr35dNqKQQCERRfk3oy1D1OXZgYPc5qtfK63bY2pCNjNeRQpqyWEUxp12jNwyneds8ZIxYoQoXidj32/WiDQTG3jekFWuhIB6YgJ4qBNbGmB5xUXCAfEij25XChLoQG/iycHXJH4/JhIOKutpKUbFeOVOfTyA/6NCgxCxOoQ2gYTazC5JyxKzymZLPZxNlee8+i5Mjbt6S89UUZyZSmSDFDFCkGKKeNQ7QCKGeM8sQ1hTmTwoJCscJ9nJj4mcpYkA5A0TQ7QJOt3+6DmRMKDZzMTnxNukucHTIiJ7/wKpHbNiLMKglZlVgNTt3jyJT0rEnV4zww93FW6R6HoaTmo8i3/27+n2uyKSUr79zWgbLdgEKYcsY2hQWFKVIqUDhTSFA8U3hQgsuTHKZomh2gyfpH23gWxbGil6UjSuDT01DCCSI78pbvyB3PEYESY7nE/Pjx5uZpzbutC0oYTcx9HJuSXYkS0w4TET96U0hQWlOICqXqfTZ3rNhFinstsmxKpYmuSCFBuSyCAu3owBTZigOoCbYj3RQVLp/XURsRRIaTFEFOkosjjiPmERJzA7hGpOlurBvNGz0OTckjl5J+NLlUnzEZa3Jun6NkjaOEtOPNz4swrKw1EdsfXYWybXQ999yux258DFB8U0xNHFAUpkigUFcJQjU60AQ2O5ImW7994M4TiEhXrHzeBv7n0YE/Sygib/p9jeMIRcm7dkli3SCa2Q82KbncHC15ptqgicjkvUUUJmZVYq6VvGeslbxjUOLYIUQ2xWFFAIWoUPyuxylSDE1cUKjGhwWF3O55KGnSBSiIDCGw2ZE0Wf/hNpg/cPqlmHL8c5cS+PigwOesEUSDSLPpS9cj/h6w44hHyRl/P7j+7PHLzQGTvjS51FyVU/Y4k00cPSWNFyf/Vv1vE4UpGlDW2ArFM2XDNCULKPtLLigPcoGC4cityQg1O5ImeCKFmhLBSnS3cvxz+tvBZ5hLEJaSLy1KTtklCedIdW9XZhPHWXxt3zTIhbhseW1Ofa3wpDAxll3fa9ZKPEpMR+ocpSKbQoNCbiG3FYp7vI0qUoofwV9GWa6SDMrFCFCmr4nc7LCaEG1OLlOgAkGB3w6mefJBdmgoaRxxt2x0lDiOtLcsMShxC5PmTda8AxANESk1udzcGMm4JKfRpKxKmnMl41n9dkvJ0Tc/r9KoceKzKiQoYqmyZpqSHRSvSFlu4hQpJijnbVAIUyhQLjnJDQrCAkZudlhN1n+0XR3ZhI7EmeIEqpGRjxOK6kPpiCyI44i7ROKdcG02bpxDJU2DQ/Y4/nV94E6uaSkpKe6N9NgpTJarC4XLlVezwbEoOWIiYjpCxgTFMSW8QnEPztJdj7PX44CysxwHikYTAZTZ0ES+QQGriXEAvEdTmkyLDxmRMRaajsai5MtUSkxHVDcueYrvmZaSLb8wqa7uW24WTSZnXovCRKbEt+P4TWwKV6FkB4U94SaAIrY8572WB5cnj2xNHk9Xk5G4dEJrsvWfD1xNIkypUl84W81qNO2zpPmm+OlFFSDQERMR8yCJQIl5osSvSkpKrMJkBjS52GjSFiYrVZszKUzeudOeSTMpMfngQoGSq0JZY7ue7dqUFhTyDL4BirCGYp1DWfJBcTXh+50sa7FICk2EZofXpDz67U6tFFaMQA4AFuXX+TsV9K1P1s8/URBNMcI54i6UeFWJU5iYlLj3nTc1edqHJi0odW1y3mlz6oNqp750ll2PnvxcSwlpSlZQrArlXVuTJFComy2d40HRL6CQmgSBgqTQJFgT+1oScdbBqasJ5OOEjgk55JW7ekRIOzhEHEfc4618SaKkhLvV61Q0MWuTzfrSvnrF5Mhbt9yqRObjjRtFZgEU2xQRFOqDe1hQHmBQuH7HMyXgOkDEhD4kGgdaTWRQqmRpi+pE80E0aPCZe5fPpDpCIWKdcGUWSuQGx6dk1jQ5U2vSrL+amzgcJSUffkhNQkEhD6FwuzxlNKBs1Fs8Y1A2fVCcjxZkQDkfC8olChRoCjJCH26fmNCkbXPIwJkp+JKuzMkvpK+sF8S/ilePyNgLiIh52Z6JiH/djZ4Sp8dpKJmaJs1hk0aTXVYTkxKODwGUlAqFP9VGlCetKSYo9wxQdgAoZ0hQ9s0sEaBQFwfqQNHerAAZoQ/X7BCarP94pzgD3s6rRFMoZTAZGhoUDzOfrfUj+HbU/6uvQYAj3hU35g1KICXOJo6Skulo8tDS5HR9Yq3YzZloYhYmUBBOEw8U+tSsfAhFD4pboXCg7Bqg7FkxQTnrg/KABkW5YWyYMnJA4UxBRujD7RMTmlhXuAp/dZPcYEqEKHTwI5RRRDxBzGt5CUFEROR6hHNEOFTSViWox3EoYTVBLkSnAKU8clJrUm7otPdDMpZgnTYHIqLRpA9Q6H6HA2UlCJTzPijMvQtkTcyDixCUfKb4bhz4mlz9yzN7jgWxcpufxiHWyI/HZPB8KBGRHfEFcRBpKXEc2RFLEo+Sc6gwaSih2xzdbRnjslUvnTS1yVmiNnE1CQLFX2HJVaH4msAFFJ0mLihieVLeDAVrogFFr0kmXMilE1eTrd89pDUJMwWx4ksBH6//yuaD2Z+F5MO+lMYSxNujaR3ZphxxKDEckSk541HCrbxqCpOeNClv2mjXJqfqq3L8YyYaUDhKwisUeg1FW57QoFjLsUJ5Ii+gnHdAQfd/7EKTWFzIpRNXk/Wf7BbTif4bmzIlzJ1b/J8jF8j/xPxGAoKkI29ziXXkXdIRpiTZqG965FYl92lKND1O87FbW7UmEIXoOJqcbzTZITUJA0WgxNfkxGdHEChgz1gAxT3SVoGywuzvVOFAIfZ3HrSgXFCCktzs9KaJO7W4RoCDRgjrAsWK/BXg9yIiI8IVI2hlxO9rVCWJrsE5j1Ze3cLkWU+FSaPJJbs22WRqk1BQQjUxQYnod4QNY+ZIm3Hve6rfOVODclbUxAZlWVOeCKD4mkSAghAxAzS5+pfn9GTDmgTK4iSJCT5s9eEJ8g4ZfpuGbGq4pVbyZFrlCEPJeZMSXY9jaWJ8Pg50IS5b9g6x0+m0R9eMu6spQZEpoUA50nt5siKXJ+XtqX1QmPNsIiieJhdDNAkCBfERpkmxaFLMLmb6YUcgLvpHOiEfRn0RIMgdkQ/KkVOeI+96iDh9jVWS7PKU+N3NJKmUdK/JlrlDXN6h3rje7727rSbO7RpNUExTgiiBmpigpO/vEJfwbBOaUOVJect7CRRPk2VNeUKBwmqiBwXx4cRvdixN1n+6W8wlbi/DDZy3WTAyjAggw0+cIAiRCEesEyVmSWJTcsGg5KK6x3EKk45AKW685h02MTQxbkRwa40ExS9S9JQEaVKDsgbLExoUU5O7oDzZcMoTBxSlJroPIQ3SRAkK4iNME3eCYVCiWHESXFwERVeJnCJDHWP1OxoXEb61AZQ8yEFJ95q0hcmjujCp25z6IGxTm0igpGhig0Jo4pUna0HlCb7CmOt36PKkBeVcIChqTTKUJ4gPPyGahJkSDU30f8j9t5PIgtB8GI6868dBhHRk1ypJOEfOcI48qO8abd5wIEgTj5LsoJCFyZn2tiZWbcJoktrpGJocgZpMQHE1geXJKbLfCdncacoT9lONgSYSKKGaaEBBdgRosvX7R3Wpz8xAbEfHeaf+X+7psXzIdtjxHXER8TZr5L6Go8TdvjGrkrjChKEEaPJi9MELjEhNyajeGF66QBYm9RKsoQldmPiUpGgiNztvfr4mlCeUJm6/Q4ByzwCFuHjHaXbYTyA974FiaFKZkkUTCAqyw49zho3URBlh9iYbBL8sSYb1z+QiiI4PwREXEa+vkUsS4nAaQ8lFvjAhF19jNJk4YkZFiXexn7k3/K5bmARQEgRKoCZp5Ym0W+weZhPLE1Wzc8EFRdns9K+Js3TSarL+0z3Ehz5w5mcJehp+/0K3MEiQAhHKEQcRpSOgJKEanMyFyYsqHzDBmjyqbkRgFianzRWTagnW/7ALtsfpTRP16sma0+x0Up7QB0/cZkdXnsyQJnhypkZHgPSfT/5XqDLKRzp8KBHRO7JBOsIck3ccsa4Jpii56FUllxhKlJr4iMiUcKZsUYVJ9UFcOytVj+Ouv7aFiZISvSY1KKwmmmZHPHtigwLLE0oTby12xd3cYTQ5H6MJACU3JSPvYmJDE/98px8853MH9imkHcCRe6wdUiVCObKJHJEoecgslJjdTTolL4hASnxTGk2cFZPN9jS9W5hEUBIEikmJQpOAzZ13DE0IUEIuBfTKE+W52AaUWdZkZC/EVpps/f4xpgQG0qAMhgMJ4iJC7uySjnCI2JQ4iJCUmIiYjlgX8vmO6CiBmpCIhFJimrL1zDn82hQmkx7H1IRYLgmgJFoT2Oy8GXP2BJUnrSar6GhsffaEvYuSr4l9NBaDMhua/J/HxayDXkQHCi2k7Y0AAB0ZSURBVFI5In6R4hmix5yy+dA4Qi+sCpXIroeIc4qEp+S8Q8kjmpJLIZT4mmSl5OqNf6z/4vmovSqnPvw62RVeOX3PKEwoTTQrr3GgQE2Y8kR1NJYoT9CNlKSTbKYmJij7EijzoIm5dFJpsv4v96u/xuFc7T9wvYMsQ4STZsT+rry2aiKyayNSU3LWc+ScXY8QVYnjiJoSuTAJoOSrIh9OwlCy/svivXL1+td2j3N/+Yx1jV8xx0hKnMKkVABSotTk+M1oTSpTpPKk1cQtT95lNHHLE/Mk2x5dnvigGJos9aYJIiNMk2KmwWk5Dpz50Wm+b5gg1JO0HNlxo3fEr0TO+KHqkXMUJZqSxKfkMqJEr4kpSJMP7VCFSVW9/vF5s1yyXC+XrLg9zp21t2tN4nqcYE3SQFGXJ2sR5Ymm2fFBMTVxLwLEmkig9KrJe+LMhDFdgGTEGWFWGdy/bR8mI7LrnjfjNmhoR+7b9Yh92R6JiHtvAX8P2C9JbEqq1z6Okq+IfMjELkya8Y1/f1K8y8vlko2dujCxt3LGmrx1K6nHCQLF1wSCYmsignKnBuXLut+5C8oT97MB6fJEowlxCyUflBnQZGQsnRSaXP3kBZio8YFwGIL4KxomEyBeDcIdexcQ2SDPsHIrI0bOeZSct5dICEoeS5RctilpX/hnMZoEUWJo0hQm5bj26VfF2/0MWZh8aW3lFJTE9jiBpgSXJ3azUzVlMeWJqck2o8kOrckZ3OyoNNE3O51R4mpSLMFysxR7kRwshRqR0yIihCN7RXxBSESwIwwlZmtzgXOE725IREhNslBSa7L18dcH3vjGf384mRs7k11h74zJ25PP4qoLk8geJ5QVTXkiNjsUKLfJ8mSNK09OK8qTM3x54mmyNMea/OFJNfGUsxcCkZMP3ZIHkShENj1BaEfs2wgQF+8FUSJ0N6QgTTqgpNbEp6QcbWHSaGKtv9468m1Pk3RKZFNCQcmmCQUKV56csUCRm50lDpSZ1KS5WqfQZP1f9615CEsAN1CEwGApeDhAOyM74iHiL47QjuwbjjjH0hhH/OMkMiXEqxjV40BKJpqQhUk5rvzhcb0rbBYmd5wVkww9jh6UE1S/44DCakI2O7dVoPCaVKDEaeJ+2k6O8qQzSkbGQmyhCT1FMSJZccFk2BHWPoIE4RAhN319RyxEGEdoSnxH9JQ8J6KhRKeJs/jqj2/+7L69K8wUJrl6HAjKCUV5otAkuDxxNdlmNNnxmx156WSuNdnFs9eCJjQMTPAbxQuCEOEEaR3Zd8OujxiUXPBLEr+7eUJRwi+UQErI4/OxlIzjLL7649onz4v1yLbBmdzEpKhKvK0cDSWvX28DH0xqwpUnlibm/ZP48uQtrAkNymmqPOE16XvppF9NdoNNkZMIRxlMhmGHUH1oEfEEcR15wDhCUaLZA75kOwIpoa/uzUnJ+v9iexxzfPNfdpuSpG5wmqok5JP9TEr86EEhy5OTn/GafM5oEluenKbKk027PBGanalogpjQp3xXjCZLsM6iA5rkqsdEBathBNqhEUTlyAPJEetmAiGUOI74a67tq9XUIApK0jSBhUkzbEq8s2o1JS9NEqmJYAqliQuKq8nfutHEK082mPJEv3QiLMT6oMy2JrUp5tRtHRGCsIhGZIxCF4gIlDiIuJQ4l/8alLDHW8UTrmxJ4nQ03VKy9bGWkvH44HcPnO7miLMlfPzmS7UmZsIoCQTF6ndOGqAQmhCgSJq8Y2jSgBKkib7ZMY+czJkmcDJHRKMM/CKQjGhBWEQ8QbjTaD4lkiOGJpf9hRKyJCHXR5AmJCVqTWQ+/PHyj7dbSkhNjhOaVIGCYE1u+Joc1WjClydrztKJtjzJvXTSjyb0XmFMyvfDWJOn1YLlxh47q/sMJCMFEa6jSXJEuAiYdOQJW5K8TyES1OYkaBJUmJTj4788MzT520STz6ja5Hqb1+nEgkJqcpPXhGl2vk1qom92+J0dQhPF0kmQJh4ohCY0KNzhg+CUR05G1YTc2OvPlM3wtiVaEIEPlSMPeUf8K4AfUY7koESpCXldn1oTRAc9Xv7R3aYw8TU5erzWhEEkQJaI8uSkAcqbZHni7ux41+wka5KwdJL5fH2XmpTbOiNrim7YESYzJIP0IoWPMul2QEccQVxH/Mt/6xCOPLYdeWI44mkiUNK9JvrFV380hYmlyYlQTT6t8tqnrCm0Jjd8TSpQTgaXJ2tss+MunYBmJ2LpxNvW6UmTHKBQmkwlsL6AgWqkUGIKwjlCU+JXm7GUaDT5IF4T5a4wNz787X2GEkeTT4m8xoSrU+TyxNLEAwWXJ74mgeUJ2CcOXjoh7kvQhSbJoMyAJpAJGEiGbAcuSR4R0XQ3/mvpvpzOCxlByXOKEgaUzgqTcrz8wy+PUJQcbdZNIB+MJq4pecoTqInqGJu22UlYOqE1iVuItf4m896EaaDk0ATO9u4SrYbSEUwJt3GjeSFDqpKwwoTSpMvCpBwf//kpQUmlyfVWk9f+OsHir14SQJE0uWloQpUnXrNDa8I0O8p94oClk0XWxJ/DfSJS6uD/SRZHxlhwjpCIXPAQ4RZc8avovHgIEVibeDdMC9IEQaEdr3x0p5rGHCWvk45oNWlNkcuTEzYosiaqZif30kmgJssZNRH+VksDpdYEzuquA5uUXIhwNYiWEv8KYAMRd+OGe/0cTTQ1SIQmL5SaROwKC8Oh5Gi7Jdz0OJwmAaC8FFCefHY0pya6Zidw6WSZu4t9R5p0A0o3msDJnyvQDr0gHCIOHzQlnCMiJVtdU6LVBPkQNj78zR6m5NVPXno1VRMXFL0mAUsnsQux2qUTqEnSHaepN2SH5UmaJnC2d5QsdkBKBEcueo5wJUlQg4PtyK9J+uKrP1756HY5w9kep9QkHRSiPKE0sUBRaRJ56kRsdqhOZ1evSabahHxndqGJf49C/9Ye0006IlwXo6fEQYQ8S2KmQ0qei5TYoFCUZFl89cfHf3piFCYkJZ/woFCacKA4l/zQ5UmlyVFBkzczaRJ0wU6wJllqE/GdmaTJ861rxdtpZMzYfh2BTYoy6XxARxxBCEo4RJ5Sr1MWSlI16aIwKccrP7hl9zg+JbUmLiizokmfFxN3pIl66SQDJaQmWTOe5xnJCEKkB0cueS+P9nXKRckksZp0VJiUY1yeIEoMTTSg8Jp4oFCatKBQ9zpJ1US1SYw02TM0uW9ost+xJumFyXOdJs4tCyEfndpxTtzTDUVE6GUgIi0lnCPeK9QRJViTF/0XJuX4zq937ZVXUZNXkSZKUIhrdvJpYoKi1WR7oTWx3sy1Jv4Nk4mgqd5RZDuyIwIdGb8Ml+Ic6YASFSgEJXl3hbkhUpIJFOeeKYImFSgKTUxQUG1Cf9r5aajJjrkQO5+aPHfSaFJO3Sk5AqVIdwQKonSEi+SI+0vPTEmUJsiBPKPod+geh9Hk1WRN3sCaHA3SxAQlTZOVDJo8kChRaYIo0WpCvJ8dTcx06QgEIpEPqEYPjrzPO5KXEg0o0yhMyvHP3/uCp4TSRAZF1OSlIE1O4k7HLU+0mtylT685968nNNkzNLlvarKk0cSjpDNN6Lexp4lzu1PoQndk6O3oDhHZkcu8Iz1TEqJJp4uv/vj4T49FTQRQYjR5ydHkOK3JUVkTGxRPk2bd5I6lyXu5NTlvaHKhL02gI/ybsNaEuP06n9nhI9oRiMgl77efi5KONLmCQKlN6Xrx1R/f+dW9YE04UBSauKCYmpxoNTkasRDrUaLShPvoP1KTc51qoqipBUrQO7DRpJzJyJE2SISgQCyyCBKGCO+IUCJOkZIrCk0+eNFzYdKMGE1ejdTEa3Z4TRTNjrEKa9Qmp/za5MsETXaRJvvT1wS+/TxNNKYgGvSBXqQLUgKhcYQrCAlHREpkTdDrkRqkSf+FSTnEfidRE2/pxN3WEWqTz2dDE1ibeJpcLAMosTXx38xqTeAbbxJSk8YUxEFEoBcpiEAyMCLQEWHNtW4sZ1UT4XOFexj//L2/h2lCdzoeKLk00bY5+TTZpDSh101ya4LfxmbQu65OrQnxoTBeoBT98xGNCO0IRYnsCPmrnxYlZXhN0HzvdvDlCekItwoLNHHbHF4TVZuDNGkpsTShPwojWpOl8/vunk5HmiRQMjI0eYQ10eMCsUjkIw8iVA1CI0L99smCcOqUXGE1mW5hUo7v/GoHayIcYHvd0+QNT5Pj2toEauJe9ZeiyekITYzChN4hDtXEeM9rC5Owt66pSTgoDSsQi6kjUlEiCsI68lT8jYuOoBegk3iUrP+yp+NqcEiU4Et1kjUxKcmuCXedziQVJRsGJcYtTuTTaz1pkkbJyNNEMAW5EBRIRkZENJUIi0igI+jX3VM8Taa1+OoPr98hKREKk089SkRN3NNrM6DJBqXJGaUm/LF6rIn5VoeaxLyla00u+hP+EfGHcYFSdMKHDhHJkafUbznDL72PzGRhUg57OdZ3RC5MSE2u25QATY4oNPFubkJs6KxamtyVOx1Qm/CaLHWiiQdKjne1oQkMVKPlIwoRyASAIxCRLI6g3+/UMpOFSTna8oRwBGritzm+JjdVmojbw+GaSOsmK2Jtskxosm9o8iCTJk/stz3qccLf3iGaOKY4f2g9DMGRgggrSBZE6l+05Ih2+33KmcnCpBzFcixLiaAJR0lAbUIXJuGarObRZM+oTei7JbGa6EBxJwj+KzOSklG4Jj4H8AGCI9RdEVWCmDroHMGC1FkAR8rMwK6wMJIooTQxKLlhUKLTxKTE/DydHJpMKJE0WVZqAu8yjTWhPhwuEyUjpAniICiXuATZoQskgwiqR+aLkklmYVeYG+3NCvJrcpPT5EgmTVa71WQ/lybEp8Th9zx+X7HvN1sTe+ZDIGAEMqpwt9WOpQSrUf8ewU7N3FMyDprRUx7FzQoUmhwdx/iUP4qS60cVtcmRFE3sDR29JitpmliUhGjSTj1BE/qtjt9XXBpN+CJC6YX/HwJHZER0lGA1PDtCEZlPR8aZtcVXf1DliUfJ6xYl9ceGOsGUuIVJwvbwKqmJeazeuFtS/5q4EzBUE/S+EuJpQovwuKojwpLiCK8JtkNEJMiRtF/uFLP+y9ldMTGHV544JYlGkxtHFW2OW5hk18SpTSpKojQRQBE1oadhqCZ0bfLCC/EwW5MAGkIowWooKMF28I5AMhbIkTKzX5g0g9SkdoSi5HXbEUVhAiihNOEu0llN16ShZNPYHs6hCQ1KmCbcEqyvCYFLrYnSBTre47EUMGmIQCkWFJEy5Ys6L+M7v97hKeEKE/8j/tiN4SNQE3vRpNHkSJomK40mG44mO/GaIFC60QRSUgVqAimxg5lAwWRQgUYsuiBm0PyduVH3O2Z3w1FyQ0fJTS0lIZqsTl0Th5LMmnDbw9gRQRNERrQj4x9gdhBBc3JOM1+FSTnK5VjbEa7HUWpiUBKkiXh/ab0mK6GamJT0U5sQk4LUBCPia4KwSEEkGosBkcDMy+KrP175/hdYE5+SN9jCJIYSrjCZaLIaoMndYE3iapPQdRMwicjrVzEiOTSBgmSnBEpxiB0pM0eLr/7IQMlxj5IgTbjCJFST03xtYlKyubscqgkCJUET8k4aWJA0TaAd2R2BTMCgSbgYmd/CpBzjfidKE+IaP5YS/fprqCbmeROgyU5/mgiTccqaQDtmDZFD40gZNFvnYNT9jpKSm25SChOhzeE0YdocY3t4u6ZkSrVJkiaYD0aT5ltGOwJ1UAYCoQyaewuWeVx89Uddnig08Sk5jihJaHMCNDm9rdXkzBQ18afMcw8UzAfSxAp3pD0rHzGImD/2YXdkNP89jjk+/PUupoQpTI7ImiQUJgGHTU7bR9dMTTbnR5PifYX5gJqgS2NiDpXZP0b8UXePT7rZO3SZ68VXf8RQchxRIq+YiLs5+Fi91+ZUoGwATYL3dFI0sUBB86t6a2FBSE0QH6mOMJfMYFCQIIcYkTKLVJiUY9LvBGriUJJQmGg1ERdNdJrsaTQJ2iTWacJNOnJOYURCNHk/BRGFI6wmAyKqoLk5l+OV798KoMQvTBI04dqctXcU90kyKClCLJrsmIWJ5vTaslCbBG0PX/amJDfj3PcYdoTRBOugDxJEqkoGRFRZjMVXcugXXzNSIhUm7ef7qdocV5PN3jXxl0EjNXkOHSlTdtwj5EJQEB/AEZ4SNLUOWxavxzHHh7/Z02iCKZFXTBxKdJqsaTTZaD7ib2Y0uRytyXNIyTjlCzfauvoVMsILa4GYOErQvDqcWbDFV3+88oPbgJLQxVe5x1G0OQG1SbQmFiW2JvGLJk3zIfyNDudadk2gF6kZEFFlgXucZhTLsb1QAm4E62sCKXE0ISgJ0IQFJbMmzxSTLlETPP8zBv4wQ6rI83BhRtXvaCiByyW2Jmvm/V9DCpNQTVZ70URHSZkUTcxYlDR/vY2K/zdNRJ4NxUhQFr7HMUfR70RQQmmyViLSJF0T5yP+Wk3MNkfSZAUsmtia8B/QpV40MUDxpyF64/EhNcHTPnuG1iYsi7346o+P//w0CyVHoinh2pwxJc5nD5u3qjcPmzCLJoQm9ofp5NTEbTuYyYjeflyav+EKTdZ/8RxN++wZHImJOPUWc7zy0R1pE0ejSdPdaDRxKJE1qUDZXrFukrRNUaKoTQRNLoRo4jc72kUM/A6U35aFJsXSCZ7/uTIIEpnDsPhKjiRKfE1iCxOuNllxNKELkx2CEp0myxfSNAlYEo2cm80r1Zcm6AkNkXPYehxzjPudREqyaLLKLprcZTTZETShlmBjNZFBCdUkEBTzL7lR9f9BDuKCnsoQZQ7V4qs/Xv7oTgwlviaxlNiFiacJWZjwmjBX6Ny3KdFqApZOSE1oUGLWH7rXBD2DIUE5tD2OOVIoya/Je5Ymq9I9TSxKlqV7EQRpIoLiLMRGaKIGxfx7rtIkT7ODvvGQiBzmHsccVr+j0cQ+rkZoEkLJmlWY0IdN3MLE02QZaLJPaHKhSi+axIBivka1JteSNUHfdUhcDnmPY46q39FQQmqSUJiMNVlDmqye5jVpKcmhyUVXE4mSFE0QKM5fdaP2n6AXAyW9Z+hxnBFHCdZEQckaoqRMS4mhyTKpiUkJockDWhOZElKTAFA8TURQnPdnq8n6f7zAagyO9Jihx/FH0e+Ea5KlMFFqskq0OTvLm6gwMTU5x2viUULs6WTXhAfFKZxbTWKaHTQfhqRk6HHI8fIPvwyiBGsiUyJpsu1qQp+pN0FJ0ORibk2SQXFemlaTq9f/gfkYHOkrQ48jDP3ia6VJjsKkAsXazRE0ocqTTV2nc66mpD0Fay/ByjvEHWnigeK/RVtNDvRLJ2gmDEnM0OPIo+p3+i1MCE1O25pseJps2JSoNbFvkuRR4h9g60cTGxSgCWh20BwYkitDjwPHyz+6CylJP2PiUiJoYtyFYNXWZJnVRDpvwt51bbqaGKD4L4qlCdXssC3TkI4yUKIcLii+Iz4lQYWJ4wh1aI3UpOpu2sLEbHMcTfZ4TVCFkr6nkwAKWT5bmhxUOztsbTOk6ww9jn4U/Y6niXStcBAlp8QzJhpNNuM1cSkJ0oQEJa8mW/S6nqvJ+EGDI1OM/woNQxgf/ud+Scma4wikBGriHH6VCxOgyS6hyVlWkyWiMJE6HUxJB5qQL4erSfFHgyNTytDjRIxxvzMFSvJo4iyaMJqQlAjrJhlqEwDKuIMhXwtCk6LZQe/7IdkzbAlHj2BKHE1sStzP3wosTBxNvDaH0uScrUkZXWFSJUWT8PLk6nX6rz1Ck2ItFr31h+TNsFySMj7+y7MslBAf5RdemHiamI6YmviUtJvEM6CJBAr3QhCaHAzlSe8ZepzE8fKPt1X7wXyPQ3/MsKYwkTVxKdl1V0w8SqgjJ1iTJVmTPM1O8edb177iXgVak2ItFk2AIbkyUJJlFKBEUbIaRAnSxDpTL1EiaeJu6Pig9KEJHeEloDUp/gWaA0OyZFguyTWKfieIkndurzqUaDQJKUyMOyR1rEkqKBiRMtz6azlYTYbypIcMyyV5hwVKF5REadKaYlGyxy2auAdhZ0kTbv21HKwmB0N50n2EX/4w4sYHv3ugKUwISnSaWJ904d5vjbh02AJF0sS9gDhOkyVZExYU+QPCVYXJgazJUJ50mmG5pKPx8k/uCZSslomiZNWhhNBkR9BkpRdNlmI0UYEiFyYHsiYHQ3nSWQZKOh0kJasCJSpNqtbG0MQrTDZ4SiaalKk0sdqc+44mLii5NHE/SNTWhAcFFiYHUJPxmx5OjCGhGZZLuh7FAoqhyWoEJViTe54m7j1NjE+9sDSpTCEpyaHJEtSE/DhRERRYmBxATcZj/NaH02OIPgMl/YwSlFWHEmWPQ1Ji3BuJ0gRRcsamhFuCNTRZFjTxQXE0YUF5yoDyTABFU5gcaDQZypOMGSjpc3zw+4eRlPCFSa3JvRRNqA0dotORNIG1iUaTy7wmNihXr6vOMWBNDobyJF+G5ZKexzd/upOHEu+mjbYm7k3q7c8w360+e9hcNAGaeM1OSG0ibus8ZUDxNKlBWf+FdvNRpcnBsBybIwMlUxkVKHpKgjXZ8TTZ5TSxzq2RezrOB/1F1Sbg1AkNCqVJkafoF9wOrSZDv5OYgZIpjgKUREresyhZJQsTVpO96pPMe9EEXP5HakLv8hTZuspeleMPrSYHQ7+TkOH4/NSHlhJQmNwz41KyYVNia8LfIYlchW01WQ7sdEb5QNH3OOUI0ORgACUqw8rrLIxrnzxPpsTT5LRWE/rWjR1o4lISpIkHinLxtRlhmgz9TmgGSmZnFKCEUeJu5YDCZMOmZNOmRNJkX9ZkWdfpEJQkgBLU45QjTJODAZSQDJTM2gCg+Jq41/iZlPiFya6vyXKkJg+610QCJbTHKUewJgdDv6PLQMlsDhaUYEpQm7NpU+Lccq0FZT9GEw8UlpIoTdBvkR4xmhwMoKAMlMzyIEDBlGx7lPi7OW5tEquJR4lCk3ygPAldLmlGpCYHAyh8Bkpmf7igYEq2PUr8Q2tIk7MxmmhPr/kfb67SxE00JQcpmhwMoFAZKJmX0YISScnMaRJbnrTZupr07k3S5GA4I2tnoGS+RgGKihLqrkiNJpu0JlSb42niL8Hamkgn60NBQZSs/1y656tmpGpyMFQodYYjavM4xqB882d7JCXifUxqTTbVmvgbOmRhkq5JFCjplBxk0eRgAGU4OD/nowDFFQRqshOgiX8KlitMDE2k+5vwmoB+h5IlCyUHuTQ5ONygDJQswPinn90PoQQUJtPVJAiUXJQcZNTk4FCCMiyULNIYdz0BmmymaUKeW+Mo4TQRyhMNKFkpOcirycEhOyk7ULJ4wwPFv11juCZngzVxKQnXRFOepGwGkyOzJgeHBpShu1ngYXQ9nCY7siZMYbJnU9K1JhIo2Sk56EKTcixw1zP+0QZKFn5MihT/do01JV1qQlASp0kFimvK+s8jD87D0ZUmBwtapAzbwIdq/NO/7us0US6a7NmU5NCEB4XUZOuPHbbnHWpSjoUpUoaS5HCOa5+8ICjpTBOaEqCJcPCk1WRcknTR3Zijc00OJkXKvJsyOHLIx5U/PLYoEY7AbpYfYM5ocq4DTRhQRgYoXTtSjj40KcecmjK0NsNoxsQUS5PlIrtuznAbOqA2WRI0CSxPRnW2/hhzp5K40Z8m5ZgjUwZHhkGOK394Umqy3IUmcaBcdEHp2ZFy9K1JOcamzOxHpo+xGxwZBhxjU2hNhDYH7enk0qR/R8oxHU2aMZ63s1OqjJ/MsD4yjKBx7a8vrvzXk2BNmNNrCk24I/ZFvvE/n177dJp/EU5Zk2ZMkZXxtx6KkWEkjpYVqc3pRJNv/PuTrf87nWLEGbOiSTPKJqhrWcp2ZqhEhpF9lKxc+a+nQBPvqr8lrSYPGkGufRp8W/lOx/8H/BKZGFvsPWgAAAAASUVORK5CYII="/>
-                </defs>
+              <svg xmlns="http://www.w3.org/2000/svg" width={62} height={62} viewBox="0 0 62 62" fill="none">
+                <path
+                  d="M31 7L31 55M31 55L55 31M31 55L7 31"
+                  stroke="#1D1D1B"
+                  strokeWidth={1}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="full-container bg-yellow-2 tabs-container-meta">
-        <div className="container tabs">
-          <div className="tabs-container">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="full-container tab-content-container">
-          <div className="container">
-            {renderTabContent()}
-          </div>
+      <div className="full-container bg-yellow-2 diagonal-container">
+        <div className="container">
+          <h3>
+            Miles de millones de personas usan las aplicaciones de Meta para conectar con gente y descubrir temas que les importan. 
+          </h3>
         </div>
       </div>
 
-      <div className="full-container trazabilidad-container">
-        <div className="container title-trazabilidad">
-          <h1>Trazabilidad y Rendimiento</h1>
-          <h2>Nuestra metodología garantiza trazabilidad total:</h2>
+      <div className="full-container"> 
+        <div className="container">
+          <h4>Tus anuncios de Meta pueden aparecer mientras tus clientes exploran el feed de Facebook, ven reels de Instagram o consultan la bandeja de entrada de Messenger.</h4>
         </div>
-        <div className="container">          
-          <div className="grid-trazabilidad">
-            <div className="grid-item-trazabilidad">
-              <svg xmlns="http://www.w3.org/2000/svg" width="73" height="73" viewBox="0 0 73 73" fill="none">
-                <path fillRule="evenodd" clipRule="evenodd" d="M19.6488 36.8785C19.7073 39.4118 20.336 41.8993 21.488 44.1563C22.6401 46.4132 24.2859 48.3816 26.3031 49.9151C28.3204 51.4486 30.6573 52.5078 33.1401 53.0141C35.623 53.5204 38.188 53.4607 40.6447 52.8394C40.9378 52.7621 41.2481 52.7815 41.5292 52.8948C41.8104 53.0081 42.0475 53.2092 42.2051 53.4682L46.7071 60.7042C46.8193 60.8846 46.8898 61.0879 46.9133 61.2991C46.9369 61.5103 46.9129 61.7241 46.8432 61.9248C46.7735 62.1255 46.6598 62.3082 46.5105 62.4593C46.3611 62.6104 46.1798 62.7263 45.9799 62.7984C42.9391 63.8943 39.7308 64.453 36.4985 64.4496C21.1887 64.4496 8.75608 52.1397 8.55319 36.878H1.39548C1.14688 36.8814 0.902097 36.8165 0.687803 36.6904C0.473509 36.5644 0.297917 36.3819 0.180147 36.1629C0.0564466 35.9473 -0.00572024 35.7018 0.000413782 35.4532C0.0065478 35.2047 0.0807476 34.9626 0.214936 34.7533L6.51033 24.6349L12.9473 14.2893C13.0721 14.0887 13.246 13.9232 13.4525 13.8084C13.6591 13.6936 13.8914 13.6334 14.1277 13.6334C14.364 13.6334 14.5964 13.6936 14.8029 13.8084C15.0094 13.9232 15.1833 14.0887 15.3081 14.2893L21.7451 24.6349L28.0405 34.7533C28.1713 34.9638 28.2435 35.2055 28.2496 35.4533C28.2556 35.7011 28.1954 35.946 28.075 36.1626C27.9545 36.3793 27.7784 36.5598 27.5648 36.6856C27.3512 36.8113 27.1078 36.8776 26.8599 36.8777L19.6488 36.8785ZM64.4488 36.5C64.4488 21.0636 51.9352 8.54982 36.4986 8.54982C33.1223 8.5459 29.7734 9.15523 26.6148 10.3482C26.4178 10.4227 26.2397 10.5399 26.0934 10.6915C25.9471 10.8431 25.8362 11.0252 25.7687 11.2247C25.7012 11.4242 25.6787 11.6363 25.7029 11.8455C25.7271 12.0548 25.7974 12.2561 25.9087 12.4349L30.39 19.6377C30.5507 19.9013 30.7935 20.1049 31.0812 20.217C31.3688 20.3292 31.6854 20.3437 31.9821 20.2583C34.486 19.5641 37.1164 19.4578 39.6682 19.9478C42.22 20.4377 44.624 21.5106 46.6928 23.0828C48.7615 24.655 50.439 26.684 51.5944 29.0114C52.7498 31.3387 53.3518 33.9016 53.3534 36.5C53.3534 36.6265 53.352 36.7527 53.3492 36.8785H46.1399C45.892 36.8786 45.6487 36.9449 45.435 37.0706C45.2214 37.1963 45.0453 37.3769 44.9249 37.5936C44.8045 37.8102 44.7442 38.0552 44.7503 38.303C44.7564 38.5508 44.8286 38.7924 44.9595 39.0029L51.2548 49.1211L57.6916 59.4669C57.8164 59.6675 57.9903 59.833 58.1969 59.9477C58.4034 60.0624 58.6358 60.1226 58.8721 60.1226C59.1083 60.1226 59.3407 60.0624 59.5473 59.9477C59.7538 59.833 59.9277 59.6675 60.0526 59.4669L66.4895 49.1211L72.7849 39.0029C72.9158 38.7924 72.988 38.5508 72.994 38.303C73.0001 38.0552 72.9398 37.8103 72.8194 37.5936C72.699 37.377 72.5229 37.1964 72.3093 37.0707C72.0957 36.945 71.8524 36.8786 71.6045 36.8785H64.4462C64.448 36.7525 64.4488 36.6263 64.4488 36.5Z" fill="#E1C025"/>
-              </svg>
-              <p>Integración con GA4, Tag Manager, CRMs o sistemas propios.</p>
+        <div className="container">
+          <div className="tab-social-container">
+            <div className="social-item">
+              <img src="" alt="" />
+              <p></p>
             </div>
-            <div className="grid-item-trazabilidad">
-              <svg xmlns="http://www.w3.org/2000/svg" width="73" height="73" viewBox="0 0 73 73" fill="none">
-                <path d="M67.8974 22.0962C67.8974 20.8965 66.925 19.9241 65.7254 19.9241H56.4099C55.2102 19.9241 54.2378 20.8965 54.2378 22.0962V58.3567H67.8974V22.0962Z" fill="#E1C025"/>
-                <path d="M51.519 29.1594C51.519 27.9597 50.546 26.9873 49.3469 26.9873H40.0315C38.8318 26.9873 37.8594 27.9597 37.8594 29.1594V58.3567H51.519V29.1594Z" fill="#E1C025"/>
-                <path d="M35.1406 37.4001C35.1406 36.2005 34.1682 35.228 32.9685 35.228H23.653C22.4539 35.228 21.481 36.2005 21.481 37.4001V58.3569H35.1406V37.4001Z" fill="#E1C025"/>
-                <path d="M18.7622 45.6407C18.7622 44.441 17.7892 43.468 16.5901 43.468H7.27463C6.07497 43.468 5.10254 44.441 5.10254 45.6407V58.3568H18.7622V45.6407Z" fill="#E1C025"/>
-                <path d="M70.8279 62.7009H2.17209C0.972427 62.7009 0 63.6734 0 64.873C0 66.0727 0.972427 67.0451 2.17209 67.0451H70.8279C72.0276 67.0451 73 66.0727 73 64.873C73 63.6734 72.0276 62.7009 70.8279 62.7009Z" fill="#E1C025"/>
-                <path d="M11.1229 29.3092C11.1858 29.3092 11.2493 29.3065 11.3128 29.3009C11.8068 29.258 23.525 28.1864 33.2442 22.5563C39.7777 18.7718 43.5115 15.5026 45.291 13.722L45.2609 15.2575C45.2369 16.4566 46.1899 17.4485 47.3895 17.4719C47.404 17.4725 47.4185 17.4725 47.433 17.4725C48.6131 17.4725 49.5805 16.5279 49.6039 15.3433L49.7454 8.20211C49.7571 7.62623 49.5393 7.06928 49.14 6.65436C48.7407 6.23888 48.1926 5.99883 47.6168 5.98769L40.4756 5.84623C39.2765 5.82005 38.2846 6.77521 38.2606 7.97488C38.2372 9.17454 39.1902 10.1659 40.3898 10.1898L42.6299 10.2338C41.4074 11.5332 37.9705 14.7975 31.0666 18.7969C22.2055 23.9303 11.0516 24.9628 10.9363 24.9729C9.74166 25.0776 8.85778 26.1302 8.96138 27.3248C9.0594 28.456 10.0079 29.3092 11.1229 29.3092Z" fill="#E1C025"/>
-              </svg>
-              <p>Medición de conversiones offline (formularios, ventas, cotizaciones).</p>
-            </div>
-            <div className="grid-item-trazabilidad">
-              <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 76 76" fill="none">
-                <path d="M52.9766 41.7999C49.1766 49.6234 41.1295 55.2117 31.7413 55.2117C19.0001 55.2117 8.27072 44.7058 8.27072 31.7411C8.27072 18.9999 18.5531 8.27048 31.7413 8.27048C38.0001 8.27048 44.0354 10.7293 48.506 15.1999C51.1884 17.8822 52.9766 21.0117 54.0942 24.3646L59.2354 19.2234C57.6707 15.8705 55.659 12.9646 52.9766 10.2822C47.1648 4.69401 39.5648 1.34106 31.5178 1.34106C14.9766 1.56459 1.34131 15.1999 1.34131 31.7411C1.34131 48.5058 14.9766 61.9175 31.5178 61.9175C47.1648 61.9175 59.6825 50.0705 61.4707 35.5411C58.1178 38.6705 56.7766 41.7999 52.9766 41.7999Z" fill="#E1C025"/>
-                <path d="M71.9768 71.9763C68.6238 75.3292 63.0356 75.3292 59.4591 71.9763L49.1768 61.6939C51.6356 60.1292 54.0944 58.341 56.1062 56.3292C58.3415 54.0939 60.1297 51.8586 61.6944 49.1763L71.9768 59.4586C75.3297 62.8116 75.5532 68.3998 71.9768 71.9763Z" fill="#E1C025"/>
-                <path d="M69.9648 21.0117L65.7177 25.2587L54.0942 36.6587C53.2001 37.5528 51.8589 37.5528 50.9648 36.6587L43.5883 29.2823L31.9648 40.9058C31.0707 41.7999 29.7295 41.7999 28.8354 40.9058L23.6942 35.7646L16.3177 43.1411C15.4236 42.0234 14.5295 40.4587 13.8589 39.1176L22.1295 31.294C23.0236 30.3999 24.3648 30.3999 25.2589 31.294L30.4001 36.4352L42.0236 24.8117C42.9177 23.9176 44.2589 23.9176 45.153 24.8117L50.5177 30.1764L52.5295 32.1881L64.3765 20.3411L66.8354 17.8823C67.7295 16.9881 69.0706 16.9881 69.9648 17.8823C70.8589 18.7764 70.8589 20.1176 69.9648 21.0117Z" fill="#E1C025"/>
-              </svg>
-              <p>Análisis de rutas de conversión, valor por clic y valor por adquisición.</p>
-            </div>
-            <div className="grid-item-trazabilidad">
-              <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" viewBox="0 0 75 75" fill="none">
-                <path d="M66.1992 5.73047H8.80078C5.23828 5.73047 2.34375 8.625 2.34375 12.1875V50.6719C2.34375 54.2344 5.23828 57.1289 8.80078 57.1289H32.6484L26.6484 67.5117C26.4492 67.875 26.4492 68.3203 26.6484 68.6836C26.8594 69.0469 27.2461 69.2695 27.668 69.2695H47.332C47.7539 69.2695 48.1406 69.0469 48.3516 68.6836C48.5508 68.3203 48.5508 67.875 48.3516 67.5117L42.3516 57.1289H66.1992C69.7617 57.1289 72.6562 54.2344 72.6562 50.6719V12.1875C72.6562 8.625 69.7617 5.73047 66.1992 5.73047ZM45.3047 66.9258H29.6953L35.3555 57.1289H39.6445L45.3047 66.9258ZM70.3125 44.9414H4.6875V12.1875C4.6875 9.92578 6.52734 8.07422 8.80078 8.07422H66.1992C68.4727 8.07422 70.3125 9.92578 70.3125 12.1875V44.9414Z" fill="#E1C025"/>
-                <path d="M33.6094 27.2695H22.5117V16.1836C22.5117 15.5391 21.9844 15.0117 21.3398 15.0117C13.9336 15.0117 7.91016 21.0352 7.91016 28.4414C7.91016 35.8477 13.9336 41.8711 21.3398 41.8711C28.7461 41.8711 34.7812 35.8477 34.7812 28.4414C34.7812 27.7969 34.2539 27.2695 33.6094 27.2695Z" fill="#E1C025"/>
-                <path d="M25.3008 11.0625C24.6562 11.0625 24.1289 11.5898 24.1289 12.2344V24.4805C24.1289 25.1367 24.6562 25.6523 25.3008 25.6523H37.5586C38.2031 25.6523 38.7305 25.1367 38.7305 24.4805C38.7305 17.0859 32.707 11.0625 25.3008 11.0625Z" fill="#E1C025"/>
-                <rect x="42.457" y="13.9102" width="8.15625" height="8.16797" rx="1.17187" fill="#E1C025"/>
-                <rect x="52.8096" y="15.1829" width="14.7058" height="2.34372" rx="1.17186" fill="#E1C025"/>
-                <rect x="52.8096" y="18.4617" width="14.7058" height="2.34372" rx="1.17186" fill="#E1C025"/>
-                <rect x="42.457" y="24.3633" width="8.15625" height="8.15625" rx="1.17187" fill="#E1C025"/>
-                <rect x="52.8096" y="25.6289" width="14.7058" height="2.34375" rx="1.17186" fill="#E1C025"/>
-                <rect x="52.8096" y="28.9089" width="14.7058" height="2.34375" rx="1.17186" fill="#E1C025"/>
-                <rect x="42.457" y="34.8047" width="8.15625" height="8.16797" rx="1.17187" fill="#E1C025"/>
-                <rect x="52.8096" y="36.0762" width="14.7058" height="2.34372" rx="1.17186" fill="#E1C025"/>
-                <rect x="52.8096" y="39.355" width="14.7058" height="2.34371" rx="1.17186" fill="#E1C025"/>
-              </svg>
-              <p>Dashboard online disponible 24/7.</p>
+            <div className="social-item">
+              <img src="" alt="" />
+              <p></p>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="full-container container-avanzado">
-        <div className="container title-avanzado-container">
-          <h2>Avanzado y Personalizado</h2>
-        </div>
+      <div className="full-container">
 
-        <div className="container grid-avanzado-container">
-            <div className="grid-avanzado">
-              <div className="grid-item-avanzado">
-                <div className="icon-section-avanzado">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
-                    <path
-                      fillRule="evenodd"
-                      clipRule="evenodd"
-                      d="M19.545 41.7089L24.7464 48.4689C25.2185 49.0825 25.1357 49.9511 24.5623 50.4713L22.7736 52.0946C22.4541 52.3845 22.0696 52.5134 21.64 52.4746C21.2105 52.4358 20.8567 52.239 20.593 51.8977L14.8264 44.4331L19.545 41.7089ZM48.0776 24.3601H53.3749C54.2223 24.3601 54.9079 23.6681 54.9062 22.8218C54.9044 21.9745 54.2135 21.2898 53.3673 21.2898H48.0699C47.2226 21.2898 46.5369 21.9818 46.5387 22.828C46.5403 23.6755 47.2312 24.3601 48.0776 24.3601ZM41.7897 10.4124L44.4385 5.82475C44.8616 5.09182 44.6142 4.1512 43.8812 3.72595C43.1493 3.30135 42.2071 3.54909 41.7835 4.28289L39.1347 8.87051C38.7116 9.60343 38.959 10.5441 39.692 10.9693C40.424 11.3939 41.366 11.1462 41.7897 10.4124ZM47.9187 15.9076L52.2677 13.3967C53.006 12.9704 53.2589 12.0266 52.8327 11.2882C52.4064 10.55 51.4626 10.2971 50.7242 10.7233L46.3753 13.2344C45.637 13.6606 45.3841 14.6044 45.8103 15.3428C46.2366 16.0809 47.1804 16.3338 47.9187 15.9076ZM41.0786 22.8166L46.2083 31.7016C47.1714 33.3696 46.5945 35.5225 44.9264 36.4856C43.3698 37.3844 41.3912 36.9419 40.351 35.5232H40.3508C34.6727 34.6595 27.2763 35.5873 19.9216 38.4544L12.851 26.2078C19.0136 21.2772 23.5292 15.3671 25.6204 10.0179L25.6205 10.0176C24.8859 8.4002 25.4893 6.44239 27.0581 5.53665C28.7263 4.57349 30.879 5.15045 31.8422 6.81853L36.9719 15.7035C37.1179 15.5906 37.2731 15.4862 37.4374 15.3913C39.4195 14.2469 41.9541 14.9261 43.0985 16.9083C44.2429 18.8905 43.5638 21.4251 41.5816 22.5695C41.4174 22.6643 41.2493 22.7466 41.0786 22.8166ZM18.1437 39.7499L10.7348 26.9174L4.84482 30.318C1.26585 32.3843 0.0283782 37.0031 2.09458 40.5819L2.09469 40.582C4.161 44.1609 8.77969 45.3985 12.3587 43.3323L18.2486 39.9317L18.1437 39.7499Z"
-                      fill="#757575"
-                    />
-                  </svg>
-                </div>
-                <div className="title-section-avanzado bold"><h3>Remarketing Dinámico</h3></div>
-                <div className="content-avanzado"><p>Impacto solo a usuarios que visitaron tu sitio. 
-                Creatividades personalizadas según navegación.</p></div>
-              </div>
-
-              <div className="grid-item-avanzado">
-                <div className="icon-section-avanzado">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45" fill="none">
-                    <path
-                      d="M22.5 1.40625C18.3281 1.40625 14.2498 2.64338 10.7809 4.96119C7.3121 7.279 4.60846 10.5734 3.01193 14.4278C1.41539 18.2822 0.997663 22.5234 1.81157 26.6152C2.62548 30.707 4.63446 34.4655 7.58448 37.4155C10.5345 40.3655 14.293 42.3745 18.3848 43.1884C22.4766 44.0023 26.7179 43.5846 30.5722 41.9881C34.4266 40.3915 37.721 37.6879 40.0388 34.2191C42.3566 30.7502 43.5938 26.6719 43.5938 22.5C43.5917 16.9062 41.3687 11.5421 37.4133 7.5867C33.4579 3.63129 28.0938 1.40827 22.5 1.40625ZM32.0766 25.5797H25.5797V32.0766C25.5797 32.8933 25.2552 33.6767 24.6777 34.2542C24.1001 34.8318 23.3168 35.1562 22.5 35.1562C21.6832 35.1562 20.8999 34.8318 20.3223 34.2542C19.7448 33.6767 19.4203 32.8933 19.4203 32.0766V25.5797H12.9234C12.1067 25.5797 11.3233 25.2552 10.7458 24.6777C10.1682 24.1001 9.84376 23.3168 9.84376 22.5C9.84376 21.6832 10.1682 20.8999 10.7458 20.3223C11.3233 19.7448 12.1067 19.4203 12.9234 19.4203H19.4203V12.9234C19.4203 12.1067 19.7448 11.3233 20.3223 10.7458C20.8999 10.1682 21.6832 9.84375 22.5 9.84375C23.3168 9.84375 24.1001 10.1682 24.6777 10.7458C25.2552 11.3233 25.5797 12.1067 25.5797 12.9234V19.4203H32.0766C32.8934 19.4203 33.6767 19.7448 34.2542 20.3223C34.8318 20.8999 35.1563 21.6832 35.1563 22.5C35.1563 23.3168 34.8318 24.1001 34.2542 24.6777C33.6767 25.2552 32.8934 25.5797 32.0766 25.5797Z"
-                      fill="#757575"
-                    />
-                  </svg>
-                </div>
-                <div className="title-section-avanzado bold"><h3>Extensiones de anuncio</h3></div>
-                <div className="content-avanzado"><p>Información adicional: llamada, ubicación, enlaces, promociones, etc. Mejora el CTR.</p></div>
-              </div>
-
-              <div className="grid-item-avanzado">
-                <div className="icon-section-avanzado">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
-                    <g clipPath="url(#clip0_2333_2404)">
-                      <path
-                        d="M0 25.2083V42.1667C0 43.1787 0.821333 44 1.83333 44H11C12.012 44 12.8333 43.1787 12.8333 42.1667V25.2083C12.8333 24.1963 12.012 23.375 11 23.375H1.83333C0.821333 23.375 0 24.1963 0 25.2083Z"
-                        fill="#757575"
-                      />
-                      <path
-                        d="M11 0H1.83333C0.821333 0 0 0.821333 0 1.83333V18.7917C0 19.8037 0.821333 20.625 1.83333 20.625H11C12.012 20.625 12.8333 19.8037 12.8333 18.7917V1.83333C12.8333 0.821333 12.012 0 11 0Z"
-                        fill="#757575"
-                      />
-                      <path
-                        d="M28.4168 18.7917V1.83333C28.4168 0.821333 27.5955 0 26.5835 0H17.4168C16.4048 0 15.5835 0.821333 15.5835 1.83333V18.7917C15.5835 19.8037 16.4048 20.625 17.4168 20.625H26.5835C27.5955 20.625 28.4168 19.8037 28.4168 18.7917Z"
-                        fill="#757575"
-                      />
-                      <path
-                        d="M32.9998 44H42.1665C43.1785 44 43.9998 43.1787 43.9998 42.1667V25.2083C43.9998 24.1963 43.1785 23.375 42.1665 23.375H32.9998C31.9878 23.375 31.1665 24.1963 31.1665 25.2083V42.1667C31.1665 43.1787 31.9878 44 32.9998 44Z"
-                        fill="#757575"
-                      />
-                      <path
-                        d="M15.5835 25.2083V42.1667C15.5835 43.1787 16.4048 44 17.4168 44H26.5835C27.5955 44 28.4168 43.1787 28.4168 42.1667V25.2083C28.4168 24.1963 27.5955 23.375 26.5835 23.375H17.4168C16.4048 23.375 15.5835 24.1963 15.5835 25.2083Z"
-                        fill="#757575"
-                      />
-                      <path
-                        d="M42.1665 0H32.9998C31.9878 0 31.1665 0.821333 31.1665 1.83333V18.7917C31.1665 19.8037 31.9878 20.625 32.9998 20.625H42.1665C43.1785 20.625 43.9998 19.8037 43.9998 18.7917V1.83333C43.9998 0.821333 43.1785 0 42.1665 0Z"
-                        fill="#757575"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_2333_2404">
-                        <rect width="44" height="44" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </div>
-                <div className="title-section-avanzado bold"><h3>Feeds de Productos</h3></div>
-                <div className="content-avanzado"><p>Ideal para ecommerce o empresas con múltiples servicios/productos.</p></div>
-              </div>
-
-              <div className="grid-item-avanzado">
-                <div className="icon-section-avanzado">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
-                    <g clipPath="url(#clip0_2333_2412)">
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M21.5 42.1602C17.3261 42.1602 13.442 40.9212 10.1934 38.7927C6.68709 40.6131 4.89352 41.1735 1.16276 41.1943C1.0582 41.195 0.968592 41.1361 0.927691 41.0398C0.886791 40.9436 0.906695 40.8381 0.979846 40.7632C3.60243 38.0794 4.149 35.9318 4.20728 32.8066C2.07853 29.5582 0.839844 25.6739 0.839844 21.5C0.839844 10.0897 10.0897 0.839844 21.5 0.839844C32.9103 0.839844 42.1602 10.0897 42.1602 21.5C42.1602 32.9103 32.9103 42.1602 21.5 42.1602ZM13.8263 26.392H10.954L11.5484 30.7957C11.5788 31.0211 11.6884 31.2043 11.8744 31.3353C12.0604 31.4663 12.2699 31.5088 12.4923 31.4607L13.7373 31.191C14.1363 31.1045 14.4032 30.7296 14.3494 30.3249L13.8263 26.392ZM26.7261 11.3263C25.7708 11.3263 24.9789 12.0613 24.8879 12.9937L24.8878 12.9938C22.6235 14.8044 19.2093 16.2643 15.3126 16.9357V24.5644C19.2097 25.24 22.6257 26.7163 24.89 28.527L24.8901 28.5271C24.9922 29.4592 25.788 30.1731 26.7261 30.1731C27.7419 30.1731 28.5731 29.342 28.5731 28.3262V22.9156C28.6696 22.9286 28.7679 22.9354 28.868 22.9354C30.0751 22.9354 31.0536 21.9568 31.0536 20.7498C31.0536 19.5427 30.0751 18.5642 28.868 18.5642C28.768 18.5642 28.6696 18.571 28.5731 18.584V13.1734C28.5731 12.1575 27.742 11.3263 26.7261 11.3263ZM13.6329 24.7123V16.787H10.0461C7.86665 16.787 6.08349 18.5703 6.08349 20.7497C6.08349 22.9291 7.86665 24.7122 10.0461 24.7122H13.6329V24.7123ZM31.9869 25.4661L34.4063 26.8629C34.7933 27.0863 35.2889 26.9511 35.5113 26.5641C35.7339 26.1766 35.5989 25.6818 35.2124 25.4586L32.793 24.0618C32.406 23.8384 31.9104 23.9736 31.688 24.3605C31.4653 24.748 31.6004 25.2429 31.9869 25.4661ZM32.793 17.4378L35.2124 16.0409C35.599 15.8177 35.7339 15.3229 35.5113 14.9354C35.289 14.5485 34.7933 14.4132 34.4063 14.6366L31.9869 16.0335C31.6004 16.2567 31.4653 16.7515 31.688 17.1389C31.9104 17.5259 32.406 17.6612 32.793 17.4378ZM34.1432 21.5637H36.7916C37.2412 21.5637 37.6056 21.1993 37.6056 20.7498C37.6056 20.3001 37.2413 19.9358 36.7916 19.9358H34.1432C33.6936 19.9358 33.3292 20.3002 33.3292 20.7498C33.3292 21.1993 33.6936 21.5637 34.1432 21.5637Z"
-                        fill="#757575"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_2333_2412">
-                        <rect width="43" height="43" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </div>
-                <div className="title-section-avanzado bold"><h3>Campañas de Máximo Rendimiento</h3></div>
-                <div className="content-avanzado"><p>Anuncios automatizados multired con señales de conversión. Alta performance y alcance.</p></div>
-              </div>
-
-              <div className="grid-item-avanzado">
-                <div className="icon-section-avanzado">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
-                    <g clipPath="url(#clip0_2333_2415)">
-                      <path
-                        d="M23 0C14.9172 0 8.17578 6.51098 8.17578 14.8242C8.17578 17.9869 9.12615 20.8071 10.9501 23.4498L21.8655 40.4823C22.3951 41.3103 23.606 41.3087 24.1345 40.4823L35.0973 23.3918C36.8819 20.8689 37.8242 17.9065 37.8242 14.8242C37.8242 6.65014 31.1741 0 23 0ZM23 21.5625C19.2847 21.5625 16.2617 18.5395 16.2617 14.8242C16.2617 11.1089 19.2847 8.08594 23 8.08594C26.7153 8.08594 29.7383 11.1089 29.7383 14.8242C29.7383 18.5395 26.7153 21.5625 23 21.5625Z"
-                        fill="#757575"
-                      />
-                      <path
-                        d="M33.5354 30.9688L26.7494 41.5781C24.9929 44.3167 20.9973 44.3078 19.2492 41.5807L12.4522 30.9715C6.47181 32.3542 2.78516 34.8872 2.78516 37.9141C2.78516 43.1666 13.2006 46.0001 23 46.0001C32.7994 46.0001 43.2148 43.1666 43.2148 37.9141C43.2148 34.885 39.5231 32.3507 33.5354 30.9688Z"
-                        fill="#757575"
-                      />
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_2333_2415">
-                        <rect width="46" height="46" fill="white" />
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </div>
-                <div className="title-section-avanzado bold"><h3>Ubicaciones geográficas precisas</h3></div>
-                <div className="content-avanzado"><p>Activación solo en zonas estratégicas por región o ciudad.</p></div>
-              </div>
-            </div>
-        </div>
       </div>
 
       <Faqs location="estrategia" />
