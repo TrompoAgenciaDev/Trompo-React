@@ -333,8 +333,20 @@ h3.display-title,
 
     .grid-container{
         display: grid;
-        grid-template-columns: 3fr 1fr;
+        grid-template-columns: 5fr 2fr;
         gap: 50px;
+    }
+
+    .icon-container{
+        width: 250px;
+        height: 250px;
+        padding: 40px;
+        border-radius: 999px;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .icon-container:hover{        
+        background-color: #FEE070;
     }
 
     .title-google{
@@ -344,7 +356,7 @@ h3.display-title,
     }
 
     .title-google h1{
-        font-size: 48px;
+        font-size: 60px;
         line-height: 1.1;
     }
 
