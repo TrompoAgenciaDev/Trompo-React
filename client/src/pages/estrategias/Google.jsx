@@ -633,7 +633,7 @@ const Google = () => {
         mobilePoster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
       />
 
-      <div className="full-container title-container-google">
+      <div className="full-container title-container-ads">
         <div className="container title-container">
           <h3 className="display-title">[Estrategia]</h3>
           <svg xmlns="http://www.w3.org/2000/svg" width={110} height={101} viewBox="0 0 110 101" fill="none">
@@ -646,7 +646,7 @@ const Google = () => {
         </div>
         <div className="container grid-container">
           <div className="container">
-            <div className="title-google">
+            <div className="title-ads">
               <h1>Empieza a convertir nuevos clientes con Google Ads</h1>
               <p>
                 Llega a millones de personas en Google con campañas de máximo rendimiento. Capta más ventas en la Búsqueda, YouTube, Gmail y más, todo desde una sola campaña.
@@ -669,7 +669,7 @@ const Google = () => {
         </div>
       </div>
 
-      <div className="full-container bg-yellow-2 tabs-container-google">
+      <div className="full-container bg-yellow-2 tabs-container-ads">
         <div className="container tabs">
           <div className="tabs-container">
             {tabs.map((tab) => (
