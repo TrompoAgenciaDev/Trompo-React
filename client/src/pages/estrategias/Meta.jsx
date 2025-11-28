@@ -18,10 +18,10 @@ const Meta = () => {
   const [activeImage, setActiveImage] = useState("imagen");
 
   const formatos = {
-    imagen: "imagen.png",
-    secuencia: "secuencia.png",
-    video: "videos.png",
-    coleccion: "coleccion.png"
+    imagen: "imagen.webp",
+    secuencia: "secuencia.webp",
+    video: "videos.webp",
+    coleccion: "coleccion.webp"
   };
 
   return (
@@ -94,13 +94,13 @@ const Meta = () => {
         <div className="container">
           <div className="grid-social-container">
             <div className="grid-social-item">
-              <img src={`${base}assets/estrategia/meta-ads/face.png`} alt="" />
+              <img src={`${base}assets/estrategia/meta-ads/face.webp`} alt="" />
               <p>
                 <strong>Permite alcanzar audiencias hipersegmentadas</strong> a través de múltiples ubicaciones (feed, marketplace, reels, stories, etc.) y con objetivos como conversiones, tráfico, alcance, interacciones o ventas por catálogo.
               </p>
             </div>
             <div className="grid-social-item">
-              <img src={`${base}assets/estrategia/meta-ads/instagram.png`} alt="" />
+              <img src={`${base}assets/estrategia/meta-ads/instagram.webp`} alt="" />
               <p>
                 Ideal para formatos visuales de alto impacto (reels, historias, feed, colecciones), con un fuerte componente emocional, aspiracional y estético. <strong>Fundamental para audiencias más jóvenes y engagement orgánico + pago.</strong></p>
             </div>

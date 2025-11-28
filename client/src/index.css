@@ -250,6 +250,14 @@ footer {
   color: #9A7A00;
 }
 
+.yellow {
+  color: #FEE070;
+}
+
+.black {
+  color: #000000;
+}
+
 @media (min-width: 768px) {
   .container {
     width: 100%;

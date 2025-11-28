@@ -1,0 +1,384 @@
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Faqs from "../../layout/Faqs";
+import Contact from "../../layout/Contact";
+import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
+import SimpleHeroVideo from "../../components/SimpleHeroVideo";
+
+//styles
+import "@as/hero.css";
+import "../../assets/styles/ads.css";
+
+
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+
+const Analitica = () => {
+  const [activeCard, setActiveCard] = useState(null);
+
+  return (
+    <>
+      <SimpleHeroVideo
+        desktopSrc={`${base}assets/hero/estrategia-hero.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/estrategia-hero-mobile.mp4`}
+        desktopPoster={`${base}assets/hero/estrategia-hero-poster.webp`}
+        mobilePoster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
+      />
+
+      <div className="full-container title-container-ads">
+        <div className="container title-container">
+          <h3 className="display-title">[Estrategia]</h3>
+          <svg xmlns="http://www.w3.org/2000/svg" width={110} height={101} viewBox="0 0 110 101" fill="none">
+            <path d="M37.4324 12.6788C38.4956 9.88269 39.9575 7.3085 42.1282 5.22252C50.8112 -3.25454 65.1646 -1.12418 71.0566 9.52763C75.4866 17.6053 80.1825 25.5053 84.7455 33.4942L107.605 73.3497C113.94 84.4897 107.073 98.559 94.4916 100.467C86.7833 101.621 79.5623 98.0708 75.5752 91.1471L55.4627 56.1737C55.3298 55.9074 55.1526 55.6855 54.9754 55.4636C54.2666 54.8866 53.9565 54.0433 53.5135 53.2888L38.7171 27.5913C36.9894 24.5733 36.192 21.289 36.2806 17.8272C36.4135 16.0519 36.635 14.2766 37.4324 12.6788Z" fill="#3C8BD9"/>
+            <path d="M37.4347 12.6788C37.0359 14.2766 36.6815 15.8744 36.5929 17.5609C36.46 21.289 37.3903 24.7509 39.251 27.9908L53.8259 53.2445C54.2689 53.999 54.6233 54.7535 55.0663 55.4636L47.0479 69.2666L35.8398 88.6173C35.6626 88.6173 35.6183 88.5286 35.574 88.3954C35.5297 88.0404 35.6626 87.7297 35.7512 87.3746C37.5676 80.7172 36.0613 74.8144 31.4984 69.7548C28.7074 66.6924 25.1634 64.9615 21.0877 64.3845C15.7716 63.63 11.0758 65.0058 6.8672 68.3345C6.11409 68.9115 5.62678 69.7548 4.74077 70.1986C4.56357 70.1986 4.47496 70.1098 4.43066 69.9767L10.7657 58.9254L37.1245 13.167C37.2131 12.9895 37.346 12.8564 37.4347 12.6788Z" fill="#FABC04"/>
+            <path d="M4.60629 70.1097L7.13142 67.8462C17.8965 59.3247 34.0662 65.4939 36.4142 78.9862C36.9901 82.2261 36.68 85.3329 35.7053 88.4397C35.661 88.706 35.6167 88.9279 35.5281 89.1942C35.1294 89.9043 34.775 90.6588 34.332 91.3689C30.3893 97.8931 24.5859 101.133 16.9662 100.645C8.23894 100.024 1.37234 93.4549 0.176222 84.7559C-0.399687 80.5396 0.442026 76.5895 2.61276 72.9502C3.05576 72.1513 3.58737 71.4412 4.07468 70.6423C4.29618 70.4647 4.20758 70.1097 4.60629 70.1097Z" fill="#34A852"/>
+            <path d="M4.60747 70.1097C4.43027 70.2872 4.43027 70.5979 4.12017 70.6422C4.07587 70.3316 4.25307 70.154 4.43027 69.9321L4.60747 70.1097Z" fill="#FABC04"/>
+            <path d="M35.528 89.1941C35.3508 88.8834 35.528 88.6615 35.7052 88.4396L35.8824 88.6171L35.528 89.1941Z" fill="#E1C025"/>
+          </svg>
+        </div>
+        <div className="container grid-container">
+          <div className="container">
+            <div className="title-ads">
+              <h1 className="black"><span className="yellow">La analítica web</span> se convierte en la brújula estratégica de cualquier marca que quiera evolucionar con datos, no con suposiciones</h1>
+            </div>
+          </div>
+          <div className="container">
+            <div className="icon-container">
+              <svg xmlns="http://www.w3.org/2000/svg" width={62} height={62} viewBox="0 0 62 62" fill="none">
+                <path
+                  d="M31 7L31 55M31 55L55 31M31 55L7 31"
+                  stroke="#1D1D1B"
+                  strokeWidth={1}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="full-container management-container">
+        <div className="container">
+            <div className="grid-management">
+                <div className="grid-item-management">
+                    <h2>Ambas plataformas comparten el administador de anuncios de Meta, que permite</h2>
+                </div>
+                <div className="grid-cards-management">
+                    <motion.div 
+                        className="grid-card-item"
+                        onHoverStart={() => setActiveCard(1)}
+                        onHoverEnd={() => setActiveCard(null)}
+                        onClick={() => setActiveCard(activeCard === 1 ? null : 1)}
+                    >
+                        <div className="card-item">
+                            <span>01</span>
+                            <h3>Definición Estratégica</h3>
+                        </div>
+                        <AnimatePresence>
+                            {activeCard === 1 && (
+                                <motion.div 
+                                    className="card-item"
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: "auto" }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                >
+                                    <div><span></span></div>
+                                    <div className="card-item-content">
+                                        <p>Relevamiento de objetivos de negocio y digitales.</p>
+                                        <p>Establecimiento de KPIs clave por canal y unidad de negocio.</p>
+                                        <p>Mapeo de audiencias, puntos de contacto y microconversiones.</p>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </motion.div>
+                    <motion.div 
+                        className="grid-card-item"
+                        onHoverStart={() => setActiveCard(2)}
+                        onHoverEnd={() => setActiveCard(null)}
+                        onClick={() => setActiveCard(activeCard === 2 ? null : 2)}
+                    >
+                        <div className="card-item">
+                            <span>02</span>
+                            <h3>Setup Técnico & Tagging</h3>
+                        </div>
+                        <AnimatePresence>
+                            {activeCard === 2 && (
+                                <motion.div 
+                                    className="card-item"
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: "auto" }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                >
+                                    <div></div>
+                                    <div className="card-item-content">
+                                        <p>Configuración profesional de GA4 y Tag Manager.</p>
+                                        <p>Etiquetado de eventos, scrolls, clics, formularios, e-commerce y comportamiento.</p>
+                                        <p>Instalación de códigos de terceros (Meta, Google Ads, LinkedIn, etc.).</p>
+                                        <p>Parametrización de UTM y seguimiento cross-device.</p>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </motion.div>
+                    <motion.div 
+                        className="grid-card-item"
+                        onHoverStart={() => setActiveCard(3)}
+                        onHoverEnd={() => setActiveCard(null)}
+                        onClick={() => setActiveCard(activeCard === 3 ? null : 3)}
+                    >
+                        <div className="card-item">
+                            <span>03</span>
+                            <h3>Dashboard & Reporting</h3>
+                        </div>
+                        <AnimatePresence>
+                            {activeCard === 3 && (
+                                <motion.div 
+                                    className="card-item"
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: "auto" }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                >
+                                    <div></div>
+                                    <div className="card-item-content">
+                                        <p>Diseño de paneles personalizados (Google Looker Studio, Power BI). </p>
+                                        <p>Visualización de KPIs en tiempo real.</p>
+                                        <p>Integración con herramientas externas (CRMs, plataformas de venta, etc.).</p>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </motion.div>
+                    <motion.div 
+                        className="grid-card-item"
+                        onHoverStart={() => setActiveCard(4)}
+                        onHoverEnd={() => setActiveCard(null)}
+                        onClick={() => setActiveCard(activeCard === 4 ? null : 4)}
+                    >
+                        <div className="card-item">
+                            <span>04</span>
+                            <h3>Seguimiento & Optimización</h3>
+                        </div>
+                        <AnimatePresence>
+                            {activeCard === 4 && (
+                                <motion.div 
+                                    className="card-item"
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: "auto" }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                >
+                                    <div></div>
+                                    <div className="card-item-content">
+                                        <p>Revisión mensual de datos y performance.</p>
+                                        <p>Identificación de insights accionables.</p>
+                                        <p>Recomendaciones técnicas y estratégicas.</p>
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </motion.div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+      <div className="full-container trazabilidad-container">
+        <div className="container title-trazabilidad">
+          <h1>Trazabilidad y Rendimiento</h1>
+          <h2>Nuestra metodología garantiza trazabilidad total:</h2>
+        </div>
+        <div className="container">          
+          <div className="grid-trazabilidad">
+            <div className="grid-item-trazabilidad">
+              <svg xmlns="http://www.w3.org/2000/svg" width="73" height="73" viewBox="0 0 73 73" fill="none">
+                <path fillRule="evenodd" clipRule="evenodd" d="M19.6488 36.8785C19.7073 39.4118 20.336 41.8993 21.488 44.1563C22.6401 46.4132 24.2859 48.3816 26.3031 49.9151C28.3204 51.4486 30.6573 52.5078 33.1401 53.0141C35.623 53.5204 38.188 53.4607 40.6447 52.8394C40.9378 52.7621 41.2481 52.7815 41.5292 52.8948C41.8104 53.0081 42.0475 53.2092 42.2051 53.4682L46.7071 60.7042C46.8193 60.8846 46.8898 61.0879 46.9133 61.2991C46.9369 61.5103 46.9129 61.7241 46.8432 61.9248C46.7735 62.1255 46.6598 62.3082 46.5105 62.4593C46.3611 62.6104 46.1798 62.7263 45.9799 62.7984C42.9391 63.8943 39.7308 64.453 36.4985 64.4496C21.1887 64.4496 8.75608 52.1397 8.55319 36.878H1.39548C1.14688 36.8814 0.902097 36.8165 0.687803 36.6904C0.473509 36.5644 0.297917 36.3819 0.180147 36.1629C0.0564466 35.9473 -0.00572024 35.7018 0.000413782 35.4532C0.0065478 35.2047 0.0807476 34.9626 0.214936 34.7533L6.51033 24.6349L12.9473 14.2893C13.0721 14.0887 13.246 13.9232 13.4525 13.8084C13.6591 13.6936 13.8914 13.6334 14.1277 13.6334C14.364 13.6334 14.5964 13.6936 14.8029 13.8084C15.0094 13.9232 15.1833 14.0887 15.3081 14.2893L21.7451 24.6349L28.0405 34.7533C28.1713 34.9638 28.2435 35.2055 28.2496 35.4533C28.2556 35.7011 28.1954 35.946 28.075 36.1626C27.9545 36.3793 27.7784 36.5598 27.5648 36.6856C27.3512 36.8113 27.1078 36.8776 26.8599 36.8777L19.6488 36.8785ZM64.4488 36.5C64.4488 21.0636 51.9352 8.54982 36.4986 8.54982C33.1223 8.5459 29.7734 9.15523 26.6148 10.3482C26.4178 10.4227 26.2397 10.5399 26.0934 10.6915C25.9471 10.8431 25.8362 11.0252 25.7687 11.2247C25.7012 11.4242 25.6787 11.6363 25.7029 11.8455C25.7271 12.0548 25.7974 12.2561 25.9087 12.4349L30.39 19.6377C30.5507 19.9013 30.7935 20.1049 31.0812 20.217C31.3688 20.3292 31.6854 20.3437 31.9821 20.2583C34.486 19.5641 37.1164 19.4578 39.6682 19.9478C42.22 20.4377 44.624 21.5106 46.6928 23.0828C48.7615 24.655 50.439 26.684 51.5944 29.0114C52.7498 31.3387 53.3518 33.9016 53.3534 36.5C53.3534 36.6265 53.352 36.7527 53.3492 36.8785H46.1399C45.892 36.8786 45.6487 36.9449 45.435 37.0706C45.2214 37.1963 45.0453 37.3769 44.9249 37.5936C44.8045 37.8102 44.7442 38.0552 44.7503 38.303C44.7564 38.5508 44.8286 38.7924 44.9595 39.0029L51.2548 49.1211L57.6916 59.4669C57.8164 59.6675 57.9903 59.833 58.1969 59.9477C58.4034 60.0624 58.6358 60.1226 58.8721 60.1226C59.1083 60.1226 59.3407 60.0624 59.5473 59.9477C59.7538 59.833 59.9277 59.6675 60.0526 59.4669L66.4895 49.1211L72.7849 39.0029C72.9158 38.7924 72.988 38.5508 72.994 38.303C73.0001 38.0552 72.9398 37.8103 72.8194 37.5936C72.699 37.377 72.5229 37.1964 72.3093 37.0707C72.0957 36.945 71.8524 36.8786 71.6045 36.8785H64.4462C64.448 36.7525 64.4488 36.6263 64.4488 36.5Z" fill="#E1C025"/>
+              </svg>
+              <p>Integración con GA4, Tag Manager, CRMs o sistemas propios.</p>
+            </div>
+            <div className="grid-item-trazabilidad">
+              <svg xmlns="http://www.w3.org/2000/svg" width="73" height="73" viewBox="0 0 73 73" fill="none">
+                <path d="M67.8974 22.0962C67.8974 20.8965 66.925 19.9241 65.7254 19.9241H56.4099C55.2102 19.9241 54.2378 20.8965 54.2378 22.0962V58.3567H67.8974V22.0962Z" fill="#E1C025"/>
+                <path d="M51.519 29.1594C51.519 27.9597 50.546 26.9873 49.3469 26.9873H40.0315C38.8318 26.9873 37.8594 27.9597 37.8594 29.1594V58.3567H51.519V29.1594Z" fill="#E1C025"/>
+                <path d="M35.1406 37.4001C35.1406 36.2005 34.1682 35.228 32.9685 35.228H23.653C22.4539 35.228 21.481 36.2005 21.481 37.4001V58.3569H35.1406V37.4001Z" fill="#E1C025"/>
+                <path d="M18.7622 45.6407C18.7622 44.441 17.7892 43.468 16.5901 43.468H7.27463C6.07497 43.468 5.10254 44.441 5.10254 45.6407V58.3568H18.7622V45.6407Z" fill="#E1C025"/>
+                <path d="M70.8279 62.7009H2.17209C0.972427 62.7009 0 63.6734 0 64.873C0 66.0727 0.972427 67.0451 2.17209 67.0451H70.8279C72.0276 67.0451 73 66.0727 73 64.873C73 63.6734 72.0276 62.7009 70.8279 62.7009Z" fill="#E1C025"/>
+                <path d="M11.1229 29.3092C11.1858 29.3092 11.2493 29.3065 11.3128 29.3009C11.8068 29.258 23.525 28.1864 33.2442 22.5563C39.7777 18.7718 43.5115 15.5026 45.291 13.722L45.2609 15.2575C45.2369 16.4566 46.1899 17.4485 47.3895 17.4719C47.404 17.4725 47.4185 17.4725 47.433 17.4725C48.6131 17.4725 49.5805 16.5279 49.6039 15.3433L49.7454 8.20211C49.7571 7.62623 49.5393 7.06928 49.14 6.65436C48.7407 6.23888 48.1926 5.99883 47.6168 5.98769L40.4756 5.84623C39.2765 5.82005 38.2846 6.77521 38.2606 7.97488C38.2372 9.17454 39.1902 10.1659 40.3898 10.1898L42.6299 10.2338C41.4074 11.5332 37.9705 14.7975 31.0666 18.7969C22.2055 23.9303 11.0516 24.9628 10.9363 24.9729C9.74166 25.0776 8.85778 26.1302 8.96138 27.3248C9.0594 28.456 10.0079 29.3092 11.1229 29.3092Z" fill="#E1C025"/>
+              </svg>
+              <p>Medición de conversiones offline (formularios, ventas, cotizaciones).</p>
+            </div>
+            <div className="grid-item-trazabilidad">
+              <svg xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 76 76" fill="none">
+                <path d="M52.9766 41.7999C49.1766 49.6234 41.1295 55.2117 31.7413 55.2117C19.0001 55.2117 8.27072 44.7058 8.27072 31.7411C8.27072 18.9999 18.5531 8.27048 31.7413 8.27048C38.0001 8.27048 44.0354 10.7293 48.506 15.1999C51.1884 17.8822 52.9766 21.0117 54.0942 24.3646L59.2354 19.2234C57.6707 15.8705 55.659 12.9646 52.9766 10.2822C47.1648 4.69401 39.5648 1.34106 31.5178 1.34106C14.9766 1.56459 1.34131 15.1999 1.34131 31.7411C1.34131 48.5058 14.9766 61.9175 31.5178 61.9175C47.1648 61.9175 59.6825 50.0705 61.4707 35.5411C58.1178 38.6705 56.7766 41.7999 52.9766 41.7999Z" fill="#E1C025"/>
+                <path d="M71.9768 71.9763C68.6238 75.3292 63.0356 75.3292 59.4591 71.9763L49.1768 61.6939C51.6356 60.1292 54.0944 58.341 56.1062 56.3292C58.3415 54.0939 60.1297 51.8586 61.6944 49.1763L71.9768 59.4586C75.3297 62.8116 75.5532 68.3998 71.9768 71.9763Z" fill="#E1C025"/>
+                <path d="M69.9648 21.0117L65.7177 25.2587L54.0942 36.6587C53.2001 37.5528 51.8589 37.5528 50.9648 36.6587L43.5883 29.2823L31.9648 40.9058C31.0707 41.7999 29.7295 41.7999 28.8354 40.9058L23.6942 35.7646L16.3177 43.1411C15.4236 42.0234 14.5295 40.4587 13.8589 39.1176L22.1295 31.294C23.0236 30.3999 24.3648 30.3999 25.2589 31.294L30.4001 36.4352L42.0236 24.8117C42.9177 23.9176 44.2589 23.9176 45.153 24.8117L50.5177 30.1764L52.5295 32.1881L64.3765 20.3411L66.8354 17.8823C67.7295 16.9881 69.0706 16.9881 69.9648 17.8823C70.8589 18.7764 70.8589 20.1176 69.9648 21.0117Z" fill="#E1C025"/>
+              </svg>
+              <p>Análisis de rutas de conversión, valor por clic y valor por adquisición.</p>
+            </div>
+            <div className="grid-item-trazabilidad">
+              <svg xmlns="http://www.w3.org/2000/svg" width="75" height="75" viewBox="0 0 75 75" fill="none">
+                <path d="M66.1992 5.73047H8.80078C5.23828 5.73047 2.34375 8.625 2.34375 12.1875V50.6719C2.34375 54.2344 5.23828 57.1289 8.80078 57.1289H32.6484L26.6484 67.5117C26.4492 67.875 26.4492 68.3203 26.6484 68.6836C26.8594 69.0469 27.2461 69.2695 27.668 69.2695H47.332C47.7539 69.2695 48.1406 69.0469 48.3516 68.6836C48.5508 68.3203 48.5508 67.875 48.3516 67.5117L42.3516 57.1289H66.1992C69.7617 57.1289 72.6562 54.2344 72.6562 50.6719V12.1875C72.6562 8.625 69.7617 5.73047 66.1992 5.73047ZM45.3047 66.9258H29.6953L35.3555 57.1289H39.6445L45.3047 66.9258ZM70.3125 44.9414H4.6875V12.1875C4.6875 9.92578 6.52734 8.07422 8.80078 8.07422H66.1992C68.4727 8.07422 70.3125 9.92578 70.3125 12.1875V44.9414Z" fill="#E1C025"/>
+                <path d="M33.6094 27.2695H22.5117V16.1836C22.5117 15.5391 21.9844 15.0117 21.3398 15.0117C13.9336 15.0117 7.91016 21.0352 7.91016 28.4414C7.91016 35.8477 13.9336 41.8711 21.3398 41.8711C28.7461 41.8711 34.7812 35.8477 34.7812 28.4414C34.7812 27.7969 34.2539 27.2695 33.6094 27.2695Z" fill="#E1C025"/>
+                <path d="M25.3008 11.0625C24.6562 11.0625 24.1289 11.5898 24.1289 12.2344V24.4805C24.1289 25.1367 24.6562 25.6523 25.3008 25.6523H37.5586C38.2031 25.6523 38.7305 25.1367 38.7305 24.4805C38.7305 17.0859 32.707 11.0625 25.3008 11.0625Z" fill="#E1C025"/>
+                <rect x="42.457" y="13.9102" width="8.15625" height="8.16797" rx="1.17187" fill="#E1C025"/>
+                <rect x="52.8096" y="15.1829" width="14.7058" height="2.34372" rx="1.17186" fill="#E1C025"/>
+                <rect x="52.8096" y="18.4617" width="14.7058" height="2.34372" rx="1.17186" fill="#E1C025"/>
+                <rect x="42.457" y="24.3633" width="8.15625" height="8.15625" rx="1.17187" fill="#E1C025"/>
+                <rect x="52.8096" y="25.6289" width="14.7058" height="2.34375" rx="1.17186" fill="#E1C025"/>
+                <rect x="52.8096" y="28.9089" width="14.7058" height="2.34375" rx="1.17186" fill="#E1C025"/>
+                <rect x="42.457" y="34.8047" width="8.15625" height="8.16797" rx="1.17187" fill="#E1C025"/>
+                <rect x="52.8096" y="36.0762" width="14.7058" height="2.34372" rx="1.17186" fill="#E1C025"/>
+                <rect x="52.8096" y="39.355" width="14.7058" height="2.34371" rx="1.17186" fill="#E1C025"/>
+              </svg>
+              <p>Dashboard online disponible 24/7.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="full-container container-avanzado">
+        <div className="container title-avanzado-container">
+          <h2>Avanzado y Personalizado</h2>
+        </div>
+
+        <div className="container grid-avanzado-container">
+            <div className="grid-avanzado">
+              <div className="grid-item-avanzado">
+                <div className="icon-section-avanzado">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M19.545 41.7089L24.7464 48.4689C25.2185 49.0825 25.1357 49.9511 24.5623 50.4713L22.7736 52.0946C22.4541 52.3845 22.0696 52.5134 21.64 52.4746C21.2105 52.4358 20.8567 52.239 20.593 51.8977L14.8264 44.4331L19.545 41.7089ZM48.0776 24.3601H53.3749C54.2223 24.3601 54.9079 23.6681 54.9062 22.8218C54.9044 21.9745 54.2135 21.2898 53.3673 21.2898H48.0699C47.2226 21.2898 46.5369 21.9818 46.5387 22.828C46.5403 23.6755 47.2312 24.3601 48.0776 24.3601ZM41.7897 10.4124L44.4385 5.82475C44.8616 5.09182 44.6142 4.1512 43.8812 3.72595C43.1493 3.30135 42.2071 3.54909 41.7835 4.28289L39.1347 8.87051C38.7116 9.60343 38.959 10.5441 39.692 10.9693C40.424 11.3939 41.366 11.1462 41.7897 10.4124ZM47.9187 15.9076L52.2677 13.3967C53.006 12.9704 53.2589 12.0266 52.8327 11.2882C52.4064 10.55 51.4626 10.2971 50.7242 10.7233L46.3753 13.2344C45.637 13.6606 45.3841 14.6044 45.8103 15.3428C46.2366 16.0809 47.1804 16.3338 47.9187 15.9076ZM41.0786 22.8166L46.2083 31.7016C47.1714 33.3696 46.5945 35.5225 44.9264 36.4856C43.3698 37.3844 41.3912 36.9419 40.351 35.5232H40.3508C34.6727 34.6595 27.2763 35.5873 19.9216 38.4544L12.851 26.2078C19.0136 21.2772 23.5292 15.3671 25.6204 10.0179L25.6205 10.0176C24.8859 8.4002 25.4893 6.44239 27.0581 5.53665C28.7263 4.57349 30.879 5.15045 31.8422 6.81853L36.9719 15.7035C37.1179 15.5906 37.2731 15.4862 37.4374 15.3913C39.4195 14.2469 41.9541 14.9261 43.0985 16.9083C44.2429 18.8905 43.5638 21.4251 41.5816 22.5695C41.4174 22.6643 41.2493 22.7466 41.0786 22.8166ZM18.1437 39.7499L10.7348 26.9174L4.84482 30.318C1.26585 32.3843 0.0283782 37.0031 2.09458 40.5819L2.09469 40.582C4.161 44.1609 8.77969 45.3985 12.3587 43.3323L18.2486 39.9317L18.1437 39.7499Z"
+                      fill="#757575"
+                    />
+                  </svg>
+                </div>
+                <div className="title-section-avanzado bold"><h3>Remarketing Dinámico</h3></div>
+                <div className="content-avanzado"><p>Impacto solo a usuarios que visitaron tu sitio. 
+                Creatividades personalizadas según navegación.</p></div>
+              </div>
+
+              <div className="grid-item-avanzado">
+                <div className="icon-section-avanzado">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45" fill="none">
+                    <path
+                      d="M22.5 1.40625C18.3281 1.40625 14.2498 2.64338 10.7809 4.96119C7.3121 7.279 4.60846 10.5734 3.01193 14.4278C1.41539 18.2822 0.997663 22.5234 1.81157 26.6152C2.62548 30.707 4.63446 34.4655 7.58448 37.4155C10.5345 40.3655 14.293 42.3745 18.3848 43.1884C22.4766 44.0023 26.7179 43.5846 30.5722 41.9881C34.4266 40.3915 37.721 37.6879 40.0388 34.2191C42.3566 30.7502 43.5938 26.6719 43.5938 22.5C43.5917 16.9062 41.3687 11.5421 37.4133 7.5867C33.4579 3.63129 28.0938 1.40827 22.5 1.40625ZM32.0766 25.5797H25.5797V32.0766C25.5797 32.8933 25.2552 33.6767 24.6777 34.2542C24.1001 34.8318 23.3168 35.1562 22.5 35.1562C21.6832 35.1562 20.8999 34.8318 20.3223 34.2542C19.7448 33.6767 19.4203 32.8933 19.4203 32.0766V25.5797H12.9234C12.1067 25.5797 11.3233 25.2552 10.7458 24.6777C10.1682 24.1001 9.84376 23.3168 9.84376 22.5C9.84376 21.6832 10.1682 20.8999 10.7458 20.3223C11.3233 19.7448 12.1067 19.4203 12.9234 19.4203H19.4203V12.9234C19.4203 12.1067 19.7448 11.3233 20.3223 10.7458C20.8999 10.1682 21.6832 9.84375 22.5 9.84375C23.3168 9.84375 24.1001 10.1682 24.6777 10.7458C25.2552 11.3233 25.5797 12.1067 25.5797 12.9234V19.4203H32.0766C32.8934 19.4203 33.6767 19.7448 34.2542 20.3223C34.8318 20.8999 35.1563 21.6832 35.1563 22.5C35.1563 23.3168 34.8318 24.1001 34.2542 24.6777C33.6767 25.2552 32.8934 25.5797 32.0766 25.5797Z"
+                      fill="#757575"
+                    />
+                  </svg>
+                </div>
+                <div className="title-section-avanzado bold"><h3>Extensiones de anuncio</h3></div>
+                <div className="content-avanzado"><p>Información adicional: llamada, ubicación, enlaces, promociones, etc. Mejora el CTR.</p></div>
+              </div>
+
+              <div className="grid-item-avanzado">
+                <div className="icon-section-avanzado">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
+                    <g clipPath="url(#clip0_2333_2404)">
+                      <path
+                        d="M0 25.2083V42.1667C0 43.1787 0.821333 44 1.83333 44H11C12.012 44 12.8333 43.1787 12.8333 42.1667V25.2083C12.8333 24.1963 12.012 23.375 11 23.375H1.83333C0.821333 23.375 0 24.1963 0 25.2083Z"
+                        fill="#757575"
+                      />
+                      <path
+                        d="M11 0H1.83333C0.821333 0 0 0.821333 0 1.83333V18.7917C0 19.8037 0.821333 20.625 1.83333 20.625H11C12.012 20.625 12.8333 19.8037 12.8333 18.7917V1.83333C12.8333 0.821333 12.012 0 11 0Z"
+                        fill="#757575"
+                      />
+                      <path
+                        d="M28.4168 18.7917V1.83333C28.4168 0.821333 27.5955 0 26.5835 0H17.4168C16.4048 0 15.5835 0.821333 15.5835 1.83333V18.7917C15.5835 19.8037 16.4048 20.625 17.4168 20.625H26.5835C27.5955 20.625 28.4168 19.8037 28.4168 18.7917Z"
+                        fill="#757575"
+                      />
+                      <path
+                        d="M32.9998 44H42.1665C43.1785 44 43.9998 43.1787 43.9998 42.1667V25.2083C43.9998 24.1963 43.1785 23.375 42.1665 23.375H32.9998C31.9878 23.375 31.1665 24.1963 31.1665 25.2083V42.1667C31.1665 43.1787 31.9878 44 32.9998 44Z"
+                        fill="#757575"
+                      />
+                      <path
+                        d="M15.5835 25.2083V42.1667C15.5835 43.1787 16.4048 44 17.4168 44H26.5835C27.5955 44 28.4168 43.1787 28.4168 42.1667V25.2083C28.4168 24.1963 27.5955 23.375 26.5835 23.375H17.4168C16.4048 23.375 15.5835 24.1963 15.5835 25.2083Z"
+                        fill="#757575"
+                      />
+                      <path
+                        d="M42.1665 0H32.9998C31.9878 0 31.1665 0.821333 31.1665 1.83333V18.7917C31.1665 19.8037 31.9878 20.625 32.9998 20.625H42.1665C43.1785 20.625 43.9998 19.8037 43.9998 18.7917V1.83333C43.9998 0.821333 43.1785 0 42.1665 0Z"
+                        fill="#757575"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_2333_2404">
+                        <rect width="44" height="44" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+                <div className="title-section-avanzado bold"><h3>Feeds de Productos</h3></div>
+                <div className="content-avanzado"><p>Ideal para ecommerce o empresas con múltiples servicios/productos.</p></div>
+              </div>
+
+              <div className="grid-item-avanzado">
+                <div className="icon-section-avanzado">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43" fill="none">
+                    <g clipPath="url(#clip0_2333_2412)">
+                      <path
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M21.5 42.1602C17.3261 42.1602 13.442 40.9212 10.1934 38.7927C6.68709 40.6131 4.89352 41.1735 1.16276 41.1943C1.0582 41.195 0.968592 41.1361 0.927691 41.0398C0.886791 40.9436 0.906695 40.8381 0.979846 40.7632C3.60243 38.0794 4.149 35.9318 4.20728 32.8066C2.07853 29.5582 0.839844 25.6739 0.839844 21.5C0.839844 10.0897 10.0897 0.839844 21.5 0.839844C32.9103 0.839844 42.1602 10.0897 42.1602 21.5C42.1602 32.9103 32.9103 42.1602 21.5 42.1602ZM13.8263 26.392H10.954L11.5484 30.7957C11.5788 31.0211 11.6884 31.2043 11.8744 31.3353C12.0604 31.4663 12.2699 31.5088 12.4923 31.4607L13.7373 31.191C14.1363 31.1045 14.4032 30.7296 14.3494 30.3249L13.8263 26.392ZM26.7261 11.3263C25.7708 11.3263 24.9789 12.0613 24.8879 12.9937L24.8878 12.9938C22.6235 14.8044 19.2093 16.2643 15.3126 16.9357V24.5644C19.2097 25.24 22.6257 26.7163 24.89 28.527L24.8901 28.5271C24.9922 29.4592 25.788 30.1731 26.7261 30.1731C27.7419 30.1731 28.5731 29.342 28.5731 28.3262V22.9156C28.6696 22.9286 28.7679 22.9354 28.868 22.9354C30.0751 22.9354 31.0536 21.9568 31.0536 20.7498C31.0536 19.5427 30.0751 18.5642 28.868 18.5642C28.768 18.5642 28.6696 18.571 28.5731 18.584V13.1734C28.5731 12.1575 27.742 11.3263 26.7261 11.3263ZM13.6329 24.7123V16.787H10.0461C7.86665 16.787 6.08349 18.5703 6.08349 20.7497C6.08349 22.9291 7.86665 24.7122 10.0461 24.7122H13.6329V24.7123ZM31.9869 25.4661L34.4063 26.8629C34.7933 27.0863 35.2889 26.9511 35.5113 26.5641C35.7339 26.1766 35.5989 25.6818 35.2124 25.4586L32.793 24.0618C32.406 23.8384 31.9104 23.9736 31.688 24.3605C31.4653 24.748 31.6004 25.2429 31.9869 25.4661ZM32.793 17.4378L35.2124 16.0409C35.599 15.8177 35.7339 15.3229 35.5113 14.9354C35.289 14.5485 34.7933 14.4132 34.4063 14.6366L31.9869 16.0335C31.6004 16.2567 31.4653 16.7515 31.688 17.1389C31.9104 17.5259 32.406 17.6612 32.793 17.4378ZM34.1432 21.5637H36.7916C37.2412 21.5637 37.6056 21.1993 37.6056 20.7498C37.6056 20.3001 37.2413 19.9358 36.7916 19.9358H34.1432C33.6936 19.9358 33.3292 20.3002 33.3292 20.7498C33.3292 21.1993 33.6936 21.5637 34.1432 21.5637Z"
+                        fill="#757575"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_2333_2412">
+                        <rect width="43" height="43" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+                <div className="title-section-avanzado bold"><h3>Campañas de Máximo Rendimiento</h3></div>
+                <div className="content-avanzado"><p>Anuncios automatizados multired con señales de conversión. Alta performance y alcance.</p></div>
+              </div>
+
+              <div className="grid-item-avanzado">
+                <div className="icon-section-avanzado">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" viewBox="0 0 46 46" fill="none">
+                    <g clipPath="url(#clip0_2333_2415)">
+                      <path
+                        d="M23 0C14.9172 0 8.17578 6.51098 8.17578 14.8242C8.17578 17.9869 9.12615 20.8071 10.9501 23.4498L21.8655 40.4823C22.3951 41.3103 23.606 41.3087 24.1345 40.4823L35.0973 23.3918C36.8819 20.8689 37.8242 17.9065 37.8242 14.8242C37.8242 6.65014 31.1741 0 23 0ZM23 21.5625C19.2847 21.5625 16.2617 18.5395 16.2617 14.8242C16.2617 11.1089 19.2847 8.08594 23 8.08594C26.7153 8.08594 29.7383 11.1089 29.7383 14.8242C29.7383 18.5395 26.7153 21.5625 23 21.5625Z"
+                        fill="#757575"
+                      />
+                      <path
+                        d="M33.5354 30.9688L26.7494 41.5781C24.9929 44.3167 20.9973 44.3078 19.2492 41.5807L12.4522 30.9715C6.47181 32.3542 2.78516 34.8872 2.78516 37.9141C2.78516 43.1666 13.2006 46.0001 23 46.0001C32.7994 46.0001 43.2148 43.1666 43.2148 37.9141C43.2148 34.885 39.5231 32.3507 33.5354 30.9688Z"
+                        fill="#757575"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_2333_2415">
+                        <rect width="46" height="46" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </div>
+                <div className="title-section-avanzado bold"><h3>Ubicaciones geográficas precisas</h3></div>
+                <div className="content-avanzado"><p>Activación solo en zonas estratégicas por región o ciudad.</p></div>
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <Faqs location="estrategia" />
+
+      <Contact form="estrategia" />
+
+      <section className="full-container">
+        <div className="slider-container container">
+          <CustomerSlider />
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default Analitica;
