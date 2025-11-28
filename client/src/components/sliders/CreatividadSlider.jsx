@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import LazyImage from "../LazyImage";
 
@@ -13,8 +13,8 @@ async function fetchCreatividadData() {
   return Array.isArray(data?.creatividad) ? data.creatividad : [];
 }
 
-/* Inner slider infinito 4:3 */
-function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef }) {
+/* Inner slider infinito 4:3 con lazy loading */
+function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef, isVisible }) {
   const len = list.length;
   if (len <= 1) {
     return (
@@ -42,16 +42,42 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef }) 
     );
   }
 
-  const REPEAT = 5;
+  // Reducir copias de 5 a 3 para mejor rendimiento
+  const REPEAT = 3;
   const extended = Array.from({ length: REPEAT }, () => list).flat();
   const baseLen = len;
   const middleIndex = baseLen * Math.floor(REPEAT / 2);
 
   const [idx, setIdx] = useState(middleIndex);
   const [anim, setAnim] = useState(true);
+  const [shouldRender, setShouldRender] = useState(false);
   const t = useRef(null);
+  const containerRef = useRef(null);
+
+  // Lazy loading: solo renderizar cuando está visible
+  useEffect(() => {
+    if (!isVisible || shouldRender) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldRender(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "100px" }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isVisible, shouldRender]);
 
   useEffect(() => {
+    if (!shouldRender) return;
+    
     t.current = setInterval(() => {
       if (!draggingRef?.current) {
         setIdx((p) => p + (direction > 0 ? 1 : -1));
@@ -59,7 +85,7 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef }) 
       }
     }, interval);
     return () => clearInterval(t.current);
-  }, [interval, direction, draggingRef]);
+  }, [interval, direction, draggingRef, shouldRender]);
 
   useEffect(() => {
     const min = baseLen * 2;
@@ -73,8 +99,24 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef }) 
 
   const offsetPct = idx * 100;
 
+  if (!shouldRender) {
+    return (
+      <div
+        ref={containerRef}
+        style={{
+          position: "relative",
+          width: "100%",
+          paddingTop: "75%",
+          overflow: "hidden",
+          backgroundColor: "#f0f0f0",
+        }}
+      />
+    );
+  }
+
   return (
     <div
+      ref={containerRef}
       style={{
         position: "relative",
         width: "100%",
@@ -109,39 +151,93 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef }) 
   );
 }
 
-/* Video único por slide 4:3 */
-function VideoSlide({ src }) {
+/* Video único por slide 4:3 con lazy loading */
+function VideoSlide({ src, isVisible }) {
+  const containerRef = useRef(null);
+  const videoRef = useRef(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    // Si ya está visible desde el prop, cargar inmediatamente
+    if (isVisible && !shouldLoad) {
+      setShouldLoad(true);
+      return;
+    }
+    
+    if (shouldLoad || !containerRef.current) return;
+    
+    // Cargar video solo cuando está visible o cerca de serlo
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "100px" }
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, [isVisible, shouldLoad]);
+
+  useEffect(() => {
+    if (shouldLoad && videoRef.current) {
+      videoRef.current.load();
+    }
+  }, [shouldLoad]);
+
   return (
     <div
+      ref={containerRef}
       style={{
         position: "relative",
         width: "100%",
         paddingTop: "75%",
         overflow: "hidden",
+        backgroundColor: "#f0f0f0",
       }}
     >
-      <video
-        src={src}
-        muted
-        playsInline
-        autoPlay
-        loop
-        preload="none"
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          display: "block",
-        }}
-      />
+      {shouldLoad ? (
+        <video
+          ref={videoRef}
+          src={src}
+          muted
+          playsInline
+          autoPlay
+          loop
+          preload="metadata"
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
+      ) : (
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "#f0f0f0",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        />
+      )}
     </div>
   );
 }
 
 export default function CreatividadSlider({ tipo = "mix" }) {
   const [slides, setSlides] = useState([]);
+  const [baseSlidesLength, setBaseSlidesLength] = useState(0);
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(() =>
     typeof window === "undefined" ? 1 : window.innerWidth >= 1024 ? 4 : window.innerWidth >= 768 ? 2 : 1
@@ -150,6 +246,7 @@ export default function CreatividadSlider({ tipo = "mix" }) {
   const [touchDelay, setTouchDelay] = useState(false);
   const timer = useRef(null);
   const draggingRef = useRef(false);
+  const isResettingRef = useRef(false);
 
   // Carga inicial desde JSON y preparación de slides
   useEffect(() => {
@@ -227,11 +324,15 @@ export default function CreatividadSlider({ tipo = "mix" }) {
           }
         }
 
-        // repetición para carrusel infinito
-        const REPEAT = 5;
+        // repetición para carrusel infinito (reducido de 5 a 3 para mejor rendimiento)
+        const REPEAT = 3;
         const expanded = Array.from({ length: REPEAT }, () => baseSlides).flat();
-        if (mounted) setSlides(expanded);
-        if (mounted) setIndex(baseSlides.length * Math.floor(REPEAT / 2));
+        const middleIndex = baseSlides.length * Math.floor(REPEAT / 2);
+        if (mounted) {
+          setSlides(expanded);
+          setBaseSlidesLength(baseSlides.length);
+          setIndex(middleIndex);
+        }
       } catch (e) {
         console.error(e);
       }
@@ -251,25 +352,72 @@ export default function CreatividadSlider({ tipo = "mix" }) {
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
+  // Función helper para verificar y resetear el índice si es necesario
+  const checkAndResetIndex = useCallback((currentIndex, direction = 1) => {
+    if (baseSlidesLength === 0 || isResettingRef.current) return currentIndex;
+    
+    const REPEAT = 3;
+    const middleStart = baseSlidesLength * Math.floor(REPEAT / 2);
+    const middleEnd = baseSlidesLength * (Math.floor(REPEAT / 2) + 1);
+    
+    if (direction > 0) {
+      // Avanzando: si se acerca al final (último 15% del último bloque), resetear
+      const lastBlockStart = baseSlidesLength * (REPEAT - 1);
+      const threshold = lastBlockStart + (baseSlidesLength * 0.85);
+      if (currentIndex >= threshold) {
+        isResettingRef.current = true;
+        setTimeout(() => {
+          isResettingRef.current = false;
+        }, 50);
+        return middleStart;
+      }
+    } else {
+      // Retrocediendo: si se acerca al inicio (primer 15% del primer bloque), resetear
+      const threshold = baseSlidesLength * 0.15;
+      if (currentIndex <= threshold) {
+        isResettingRef.current = true;
+        setTimeout(() => {
+          isResettingRef.current = false;
+        }, 50);
+        return middleEnd - 1;
+      }
+    }
+    
+    return currentIndex;
+  }, [baseSlidesLength]);
+
   useEffect(() => {
-    if (paused || slides.length === 0 || draggingRef.current || touchDelay) return;
+    if (paused || slides.length === 0 || draggingRef.current || touchDelay || isResettingRef.current) return;
     
     // Intervalo más rápido en mobile
     const interval = window.innerWidth < 768 ? 2000 : 4000;
-    timer.current = setInterval(() => setIndex((p) => p + 1), interval);
+    timer.current = setInterval(() => {
+      setIndex((p) => {
+        const newIndex = p + 1;
+        return checkAndResetIndex(newIndex, 1);
+      });
+    }, interval);
     return () => clearInterval(timer.current);
-  }, [paused, slides.length, touchDelay]);
+  }, [paused, slides.length, touchDelay, checkAndResetIndex]);
 
   const slideWidthPct = 100 / visible;
   const offsetPct = index * slideWidthPct;
 
+  // Calcular qué slides están visibles o cerca de serlo (buffer de 2 slides a cada lado)
+  const visibleRange = useMemo(() => {
+    const buffer = 2;
+    const start = Math.max(0, index - buffer);
+    const end = Math.min(slides.length - 1, index + visible + buffer);
+    return { start, end };
+  }, [index, visible, slides.length]);
+
   const next = () => {
     clearInterval(timer.current);
-    setIndex((p) => p + 1);
+    setIndex((p) => checkAndResetIndex(p + 1, 1));
   };
   const prev = () => {
     clearInterval(timer.current);
-    setIndex((p) => p - 1);
+    setIndex((p) => checkAndResetIndex(p - 1, -1));
   };
 
   return (
@@ -366,26 +514,36 @@ export default function CreatividadSlider({ tipo = "mix" }) {
             willChange: "transform"
           }}
           animate={{ x: `-${offsetPct}%` }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={isResettingRef.current ? { duration: 0 } : { duration: 0.6, ease: "easeOut" }}
         >
-          {slides.map((item, i) => (
-            <div
-              key={`${i}`}
-              style={{
-                width: `${slideWidthPct}%`,
-                flex: `0 0 ${slideWidthPct}%`,
-                padding: window.innerWidth < 768 ? "4px" : window.innerWidth < 1024 ? "6px" : "8px",
-                boxSizing: "border-box",
-                minWidth: 0,
-              }}
-            >
-              {item.kind === "video" ? (
-                <VideoSlide src={item.src} />
-              ) : (
-                <InnerAutoSlider list={item.images} interval={2200} direction={1} draggingRef={draggingRef} />
-              )}
-            </div>
-          ))}
+          {slides.map((item, i) => {
+            const isVisible = i >= visibleRange.start && i <= visibleRange.end;
+            
+            return (
+              <div
+                key={`${i}`}
+                style={{
+                  width: `${slideWidthPct}%`,
+                  flex: `0 0 ${slideWidthPct}%`,
+                  padding: window.innerWidth < 768 ? "4px" : window.innerWidth < 1024 ? "6px" : "8px",
+                  boxSizing: "border-box",
+                  minWidth: 0,
+                }}
+              >
+                {item.kind === "video" ? (
+                  <VideoSlide src={item.src} isVisible={isVisible} />
+                ) : (
+                  <InnerAutoSlider 
+                    list={item.images} 
+                    interval={2200} 
+                    direction={1} 
+                    draggingRef={draggingRef}
+                    isVisible={isVisible}
+                  />
+                )}
+              </div>
+            );
+          })}
         </motion.div>
       </div>
     </div>
