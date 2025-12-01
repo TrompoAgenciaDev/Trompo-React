@@ -101,19 +101,20 @@ h3.display-title{
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    gap: 50px;
+    gap: 20px;
 }
 
 .tab-button{
     width: 100%;
     max-width: 230px;
     background-color: transparent;
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 700;
-    padding: 16px 20px;
+    padding: 10px 5px;
     border-top: 1px solid #9A7A00;
     border-bottom: 1px solid #9A7A00;
     cursor: pointer;
+    text-align: center;
 }
 
 h3.display-title,
@@ -127,7 +128,8 @@ h3.display-title,
 .aplicacion-meta h3,
 .formato-item h3,
 .grid-item-management h2,
-.card-item h3{
+.card-item h3,
+.grid-item-indicadores h3{
     font-family: var(--font-portfolio);
 }
 
@@ -245,7 +247,7 @@ h3.display-title,
 .grafico-slide {
     -ms-flex-negative: 0;
     flex-shrink: 0;
-    width: 100%; /* Mobile first: 1 slide */
+    width: 290px;
     background-color: #fff;
     padding: 20px;
     display: -webkit-box;
@@ -261,13 +263,18 @@ h3.display-title,
     gap: 20px;
 }
 
+.grafico-slide .item-header, 
+.grafico-slide .item-body{
+    width: 100%;
+}
+
 .grafico-slide .item-header h3{
-    font-size: 20px;
+    font-size: 17px;
     font-weight: 600;
 }
 
 .grafico-slide .item-body p{
-    font-size: 15px;
+    font-size: 12px;
 }
 
 /* Estilos para el slider automático de videos */
@@ -367,6 +374,8 @@ h3.display-title,
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 30px;
 }
 
@@ -715,18 +724,61 @@ h3.display-title,
     clip-path: polygon(0 0, 100% 0%, 100% 80%, 0 100%);
 }
 
+.indicadores{
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-container-indicadores{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.grid-item-indicadores ul li{
+    list-style: none;
+    padding: 12px 0;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+}
+
+.grid-item-indicadores ul li:not(:last-child)::before{
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: #9A7A00;
+    z-index: 9999;
+}
+
+.grid-item-indicadores h3{
+    font-weight: 700;
+}
+
+.diagonal-inverdtida-ads{
+    padding-bottom: 100px;
+    -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 93%);
+    padding: 30px 0 80px;
+}
+
 @media (min-width: 540px) {
     .grafico-slide {
         width: -webkit-calc((100% - 16px) / 2);
         width: calc((100% - 16px) / 2);
+        max-width: 350px;
+        min-width: 0;
     }
 
     .video-slide {
         width: -webkit-calc((100% - 16px) / 2);
         width: calc((100% - 16px) / 2);
+        max-width: 350px;
+        min-width: 0;
     }
 }
-
 @media (min-width: 768px) {
 
     .social-container h4{
@@ -804,16 +856,44 @@ h3.display-title,
     .management-container::before{
         height: 450px;
     }
+
+    .graficos-slider-container {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .grafico-slide {
+        width: 300px;
+        min-width: 0;
+        flex: 0 0 auto;
+        box-sizing: border-box;
+    }
+
+    .video-slide {
+        width: 300px;
+        min-width: 0;
+        flex: 0 0 auto;
+        box-sizing: border-box;
+    }
 }
 
 @media (min-width: 1024px) {
     .title-container-ads{
-        padding: 50px 0;
+        padding: 50px 0 150px;
     }
     
     .grafico-slide {
         width: -webkit-calc((100% - 32px) / 3);
         width: calc((100% - 32px) / 3);
+    }
+
+    
+    .grafico-slide .item-header h3{
+        font-size: 20px;
+    }
+
+    .grafico-slide .item-body p{
+        font-size: 15px;
     }
 
     .video-slide {
@@ -873,6 +953,11 @@ h3.display-title,
     
     .tab-content{
         gap: 70px;
+    }
+
+    .tab-button{
+        font-size: 20px;
+        padding: 16px 20px;
     }
 
     .grid-tab {
@@ -1151,6 +1236,25 @@ h3.display-title,
     .management-container::before{
         height: 400px;
     }
+
+    .indicadores{
+        gap: 50px;
+    }
+
+    .grid-item-indicadores h3{
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .grid-container-indicadores:last-child{
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .grid-item-indicadores ul li{
+        font-size: 22px;
+    }
+
+
 }
 
 @media (min-width: 1280px) {
@@ -1266,5 +1370,10 @@ h3.display-title,
     
     .card-item-content p{
         font-size: 17px;
+    }
+
+    .grid-item-indicadores h3{
+        font-size: 28px;
+        font-weight: 700;
     }
 }

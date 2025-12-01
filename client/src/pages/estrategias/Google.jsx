@@ -389,7 +389,7 @@ const Google = () => {
             </div>
             <div className="container">
               <AutoSlider isActive={activeTab === "graficos"}>
-                <div className="grafico-slide">
+                <div key="temas" className="grafico-slide">
                   <div className="item-header">
                     <div className="icon-header">
                       <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
@@ -403,7 +403,7 @@ const Google = () => {
                     </p>
                   </div>
                 </div>
-                <div className="grafico-slide">
+                <div key="ubicacion" className="grafico-slide">
                   <div className="item-header">
                     <div className="icon-header">
                       <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 52 52" fill="none">
@@ -417,7 +417,7 @@ const Google = () => {
                     <p>Seleccionar páginas web clasificadas por ubicación</p>
                   </div>
                 </div>
-                <div className="grafico-slide">
+                <div key="demografia" className="grafico-slide">
                   <div className="item-header">
                     <div className="icon-header">
                       <svg xmlns="http://www.w3.org/2000/svg" width="63" height="63" viewBox="0 0 63 63" fill="none">
@@ -435,7 +435,7 @@ const Google = () => {
                     <p>Se orientan los anuncios a públicos determinados según datos tales como edad, sexo o estado civil.</p>
                   </div>
                 </div>
-                <div className="grafico-slide">
+                <div key="interes" className="grafico-slide">
                   <div className="item-header">
                     <div className="icon-header">
                       <svg xmlns="http://www.w3.org/2000/svg" width="52" height="48" viewBox="0 0 52 48" fill="none">
@@ -458,7 +458,7 @@ const Google = () => {
                     <p>Se orientan los anuncios a públicos determinados según sus intereses, cookies y comportamientos</p>
                   </div>
                 </div>
-                <div className="grafico-slide">
+                <div key="remarketing" className="grafico-slide">
                   <div className="item-header">
                     <div className="icon-header">
                       <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
@@ -471,7 +471,7 @@ const Google = () => {
                     <p>Muestra anuncios a públicos que han visitado anteriormente la página web, generando audiencias con distintos intereses con creatividades personalizadas.</p>
                   </div>
                 </div>
-                <div className="grafico-slide">
+                <div key="dispositivos" className="grafico-slide">
                   <div className="item-header">
                     <div className="icon-header">
                       <svg xmlns="http://www.w3.org/2000/svg" width="66" height="66" viewBox="0 0 66 66" fill="none">
@@ -493,7 +493,7 @@ const Google = () => {
                       Muestra los anuncios a personas interesadas en productos /servicios relacionados a su historial de navegación.</p>
                   </div>
                 </div>
-                <div className="grafico-slide">
+                <div key="keywords" className="grafico-slide">
                   <div className="item-header">
                     <div className="icon-header">
                       <svg xmlns="http://www.w3.org/2000/svg" width="55" height="55" viewBox="0 0 55 55" fill="none">
@@ -547,7 +547,7 @@ const Google = () => {
                 sliderClass="videos-slider"
                 infinite={false}
               >
-                <div className="video-slide">
+                <div key="instream" className="video-slide">
                   <div className="item-header">
                     <div className="title-item"><h3>Anuncios <strong>In-stream</strong></h3></div>
                     <div className="img-header">
@@ -560,7 +560,7 @@ const Google = () => {
                     </p>
                   </div>
                 </div>
-                <div className="video-slide">
+                <div key="instream-no-omitir" className="video-slide">
                   <div className="item-header">
                     <div className="title-item"><h3>Anuncios <strong>In-stream no se omiten</strong></h3></div>
                     <div className="img-header">
@@ -573,7 +573,7 @@ const Google = () => {
                     </p>
                   </div>
                 </div>
-                <div className="video-slide">
+                <div key="video-discovery" className="video-slide">
                   <div className="item-header">
                     <div className="title-item"><h3>Anuncios <strong>Video discovery</strong></h3></div>
                     <div className="img-header">
@@ -586,7 +586,7 @@ const Google = () => {
                     </p>
                   </div>
                 </div>
-                <div className="video-slide">
+                <div key="outstream" className="video-slide">
                   <div className="item-header">
                     <div className="title-item"><h3>Anuncios <strong>Out-stream</strong></h3></div>
                     <div className="img-header">
@@ -599,7 +599,7 @@ const Google = () => {
                     </p>
                   </div>
                 </div>
-                <div className="video-slide">
+                <div key="bumpers" className="video-slide">
                   <div className="item-header">
                     <div className="title-item"><h3>Bumpers <strong>Publicitarios</strong></h3></div>
                     <div className="img-header">
