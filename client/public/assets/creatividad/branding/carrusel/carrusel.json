@@ -1,0 +1,126 @@
+{
+  "clients": [
+    {
+      "id": "airon",
+      "name": "Airon",
+      "description": "Desarrollo de identidad visual completa para Airon, incluyendo logotipo, paleta de colores y aplicaciones en diferentes soportes.",
+      "gallery": [
+        "airon1.webp",
+        "airon2.webp",
+        "airon3.webp",
+        "airon4.webp"
+      ],
+      "logo": null
+    },
+    {
+      "id": "ayni",
+      "name": "Ayni",
+      "description": "Branding institucional para Ayni con enfoque en valores culturales y conexión emocional con la audiencia.",
+      "gallery": [
+        "ayni1.webp",
+        "ayni2.webp",
+        "ayni3.webp"
+      ],
+      "logo": null
+    },
+    {
+      "id": "eleva",
+      "name": "Eleva",
+      "description": "Identidad de marca moderna y dinámica para Eleva, reflejando innovación y crecimiento empresarial.",
+      "gallery": [
+        "eleva1.webp",
+        "eleva2.webp",
+        "eleva3.webp",
+        "eleva4.webp"
+      ],
+      "logo": null
+    },
+    {
+      "id": "ishvara",
+      "name": "Ishvara",
+      "description": "Branding espiritual y minimalista para Ishvara, transmitiendo serenidad y conexión con valores esenciales.",
+      "gallery": [
+        "ishvara1.webp",
+        "ishvara2.webp",
+        "ishvara3.webp",
+        "ishvara4.webp"
+      ],
+      "logo": null
+    },
+    {
+      "id": "kindom",
+      "name": "Kindom",
+      "description": "Identidad visual contemporánea para Kindom, combinando elegancia y modernidad en cada aplicación.",
+      "gallery": [
+        "kindom1.webp",
+        "kindom2.webp",
+        "kindom3.webp"
+      ],
+      "logo": null
+    },
+    {
+      "id": "kotur",
+      "name": "Kotur",
+      "description": "Branding institucional para Kotur con diseño sofisticado y profesional, adecuado para el mercado corporativo.",
+      "gallery": [
+        "kotur1.webp",
+        "kotur2.webp",
+        "kotur3.webp"
+      ],
+      "logo": null
+    },
+    {
+      "id": "lema",
+      "name": "Lema",
+      "description": "Desarrollo de identidad de marca para Lema, enfocada en comunicación clara y efectiva.",
+      "gallery": [
+        "lema1.webp",
+        "lema2.webp",
+        "lema3.webp"
+      ],
+      "logo": null
+    },
+    {
+      "id": "qsltec",
+      "name": "QSLTec",
+      "description": "Branding tecnológico para QSLTec, reflejando innovación y soluciones tecnológicas avanzadas.",
+      "gallery": [
+        "qsltec1.webp",
+        "qsltec2.webp"
+      ],
+      "logo": null
+    },
+    {
+      "id": "smartshop",
+      "name": "SmartShop",
+      "description": "Identidad visual para SmartShop, diseñada para destacar en el mercado digital y e-commerce.",
+      "gallery": [
+        "smartshop1.webp",
+        "smartshop2.webp"
+      ],
+      "logo": null
+    },
+    {
+      "id": "terratua",
+      "name": "Terratua",
+      "description": "Branding institucional para Terratua, combinando elementos naturales con diseño profesional.",
+      "gallery": [
+        "terratua1.webp",
+        "terratua2.webp"
+      ],
+      "logo": null
+    },
+    {
+      "id": "vox",
+      "name": "Vox",
+      "description": "Identidad de marca para Vox, con diseño moderno y comunicativo que refleja dinamismo y energía.",
+      "gallery": [
+        "vox1.webp",
+        "vox2.webp",
+        "vox3.webp"
+      ],
+      "logo": null
+    }
+  ]
+}
+

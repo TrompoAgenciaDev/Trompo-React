@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence, useMotionValue, useAnimation, useTransform } from "framer-motion";
+import React, { useState } from "react";
 import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo";
+import BrandingCarrusel from "../../components/branding/branding-carrusel.jsx";
 
 //styles
 import "@as/hero.css";
@@ -14,307 +14,6 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
-// Componente de slider automático genérico y reutilizable con drag & drop
-const AutoSlider = ({ 
-  children, 
-  isActive, 
-  slideSelector = '.grafico-slide',
-  containerClass = 'graficos-slider-container',
-  sliderClass = 'graficos-slider',
-  infinite = true // Por defecto infinito, pero puede desactivarse
-}) => {
-  const sliderRef = useRef(null);
-  const containerRef = useRef(null);
-  const x = useMotionValue(0);
-  const controls = useAnimation();
-  const timeoutRef = useRef(null);
-  const isAnimatingRef = useRef(false);
-  const loopWidthRef = useRef(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [slideWidth, setSlideWidth] = useState(0);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const [totalWidth, setTotalWidth] = useState(0);
-  const [totalSlides, setTotalSlides] = useState(0);
-  
-  // Clonar children solo si infinite es true
-  const childrenArray = React.Children.toArray(children);
-  const clonedChildren = infinite ? [...childrenArray, ...childrenArray, ...childrenArray] : childrenArray;
-
-  // Calcular dimensiones
-  useEffect(() => {
-    if (!sliderRef.current || !containerRef.current) return;
-
-    const updateDimensions = () => {
-      const container = containerRef.current;
-      const slider = sliderRef.current;
-      if (!container || !slider) return;
-
-      const containerRect = container.getBoundingClientRect();
-      const sliderRect = slider.getBoundingClientRect();
-      
-      const slideElements = slider.querySelectorAll(slideSelector);
-      if (slideElements.length > 0) {
-        const firstSlide = slideElements[0];
-        const slideRect = firstSlide.getBoundingClientRect();
-        const computedStyle = window.getComputedStyle(slider);
-        const gap = parseFloat(computedStyle.gap) || 16;
-        const width = slideRect.width + gap;
-        
-        // Calcular el ancho de un loop (un set de slides originales) solo si es infinito
-        if (infinite) {
-          const originalSlidesCount = childrenArray.length;
-          const loopWidth = width * originalSlidesCount;
-          loopWidthRef.current = loopWidth;
-          
-          // Inicializar desde el segundo loop (el del medio) para tener margen en ambos lados
-          if (x.get() === 0 && loopWidth > 0) {
-            const initialX = -loopWidth;
-            x.set(initialX);
-            setCurrentSlideIndex(originalSlidesCount);
-          }
-        } else {
-          loopWidthRef.current = 0; // No usar loop si no es infinito
-        }
-        
-        setSlideWidth(width);
-        setContainerWidth(containerRect.width);
-        setTotalWidth(sliderRect.width);
-        setTotalSlides(slideElements.length);
-      }
-    };
-
-    // Usar setTimeout para asegurar que el DOM esté renderizado
-    const timeoutId = setTimeout(updateDimensions, 100);
-    window.addEventListener('resize', updateDimensions);
-    
-    return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener('resize', updateDimensions);
-    };
-  }, [children, isActive, slideSelector, infinite]);
-
-  // Función memoizada para mover al siguiente slide
-  const moveToNextSlide = useCallback(() => {
-    // Validaciones antes de ejecutar - usar refs para evitar dependencias
-    if (isDragging || isAnimatingRef.current || !isActive) {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
-      return;
-    }
-
-    // Usar valores actuales de los refs y estados
-    const currentSlideWidth = slideWidth;
-    const currentLoopWidth = loopWidthRef.current;
-    
-    if (!currentSlideWidth) {
-      return;
-    }
-    
-    if (infinite && (!currentLoopWidth || currentLoopWidth <= 0)) {
-      return;
-    }
-
-    isAnimatingRef.current = true;
-
-    setCurrentSlideIndex((prevIndex) => {
-      // Incrementar el índice
-      const nextIndex = prevIndex + 1;
-      let targetX = -nextIndex * currentSlideWidth;
-      const currentPos = x.get();
-      
-      // Calcular el máximo offset permitido
-      // Para el último slide, no necesitamos el gap extra, así que ajustamos el cálculo
-      const maxOffset = Math.max(0, totalWidth - containerWidth);
-      // Ajustar para que el último slide no se corte: usar Math.ceil en lugar de Math.floor
-      const maxSlideIndex = Math.ceil(maxOffset / currentSlideWidth);
-      
-      // Si no es infinito y llegamos al final, volver al inicio
-      if (!infinite && nextIndex > maxSlideIndex) {
-        // Volver al inicio con animación
-        const resetX = 0;
-        
-        controls.start({
-          x: resetX,
-          transition: {
-            duration: 0.5,
-            ease: "easeInOut"
-          }
-        }).then(() => {
-          x.set(resetX);
-          isAnimatingRef.current = false;
-          if (!isDragging && isActive) {
-            timeoutRef.current = setTimeout(moveToNextSlide, 2800);
-          }
-        });
-        
-        return 0;
-      }
-      
-      // Wrap infinito: si nos salimos del primer loop, resetear a la posición equivalente en el segundo loop
-      if (infinite && targetX <= -currentLoopWidth) {
-        // Resetear a la posición equivalente en el segundo loop (sin animación visible)
-        const wrappedX = targetX + currentLoopWidth;
-        const wrappedIndex = Math.floor(-wrappedX / currentSlideWidth);
-        
-        // Actualizar directamente sin animación para el wrap (instantáneo)
-        x.set(wrappedX);
-        
-        // Esperar el tiempo completo (2.8s) antes de continuar
-        setTimeout(() => {
-          isAnimatingRef.current = false;
-          if (!isDragging && isActive) {
-            timeoutRef.current = setTimeout(moveToNextSlide, 2800);
-          }
-        }, 2800);
-        
-        return wrappedIndex;
-      }
-      
-      // Animar al siguiente slide usando controls
-      controls.start({
-        x: targetX,
-        transition: {
-          duration: 0.5,
-          ease: "easeInOut"
-        }
-      }).then(() => {
-        x.set(targetX);
-        isAnimatingRef.current = false;
-        
-        // Esperar 2.8 segundos después de que termine la animación antes de mover al siguiente slide
-        if (!isDragging && isActive) {
-          timeoutRef.current = setTimeout(moveToNextSlide, 2800);
-        }
-      });
-      
-      return nextIndex;
-    });
-  }, [isActive, isDragging, slideWidth, x, infinite, containerWidth, totalWidth, controls]);
-
-  // Animación automática slide por slide
-  useEffect(() => {
-    if (!isActive || isDragging || !slideWidth || !containerWidth || !totalWidth || totalSlides === 0) {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
-      isAnimatingRef.current = false;
-      return;
-    }
-
-    if (infinite) {
-      const loopWidth = loopWidthRef.current;
-      if (!loopWidth || loopWidth <= 0) return;
-    }
-
-    // Limpiar cualquier timeout existente antes de iniciar uno nuevo
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-
-    // Iniciar el ciclo de animación después de 2.8 segundos
-    timeoutRef.current = setTimeout(moveToNextSlide, 2800);
-
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
-      isAnimatingRef.current = false;
-    };
-  }, [isActive, isDragging, slideWidth, containerWidth, totalWidth, totalSlides, infinite, moveToNextSlide]);
-
-  const handleDragStart = () => {
-    setIsDragging(true);
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-  };
-
-  const handleDragEnd = (event, info) => {
-    if (!slideWidth || !containerWidth || !totalWidth) {
-      setIsDragging(false);
-      isAnimatingRef.current = false;
-      return;
-    }
-
-    const maxOffset = Math.max(0, totalWidth - containerWidth);
-    const currentX = x.get();
-    
-    // Calcular el índice más cercano para snap
-    const index = Math.round(-currentX / slideWidth);
-    const maxSlideIndex = Math.ceil(maxOffset / slideWidth);
-    const clampedIndex = Math.max(0, Math.min(index, maxSlideIndex));
-    const targetX = -clampedIndex * slideWidth;
-    const clampedX = Math.max(-maxOffset, Math.min(0, targetX));
-
-    // Actualizar el índice actual
-    setCurrentSlideIndex(clampedIndex);
-    isAnimatingRef.current = true;
-
-    // Animar al snap position usando controls
-    controls.start({
-      x: clampedX,
-      transition: {
-        type: "spring",
-        stiffness: 300,
-        damping: 30
-      }
-    }).then(() => {
-      x.set(clampedX);
-      isAnimatingRef.current = false;
-      setIsDragging(false);
-    });
-  };
-
-  if (!isActive) {
-    return <div className={sliderClass} ref={sliderRef}>{children}</div>;
-  }
-
-  const maxOffset = Math.max(0, totalWidth - containerWidth);
-
-  return (
-    <div className={containerClass} ref={containerRef} style={{ overflow: 'hidden', width: '100%' }}>
-      <motion.div
-        className={sliderClass}
-        ref={sliderRef}
-        animate={controls}
-        style={{ x }}
-        drag="x"
-        dragConstraints={{ 
-          left: -Math.max(0, totalWidth - containerWidth), 
-          right: 0 
-        }}
-        dragElastic={0.1}
-        dragMomentum={false}
-        onDragStart={handleDragStart}
-        onDragEnd={handleDragEnd}
-        onUpdate={(latest) => {
-          // Wrap infinito durante el drag también
-          if (isDragging && infinite && loopWidthRef.current > 0) {
-            const currentX = typeof latest.x === 'number' ? latest.x : x.get();
-            const loopWidth = loopWidthRef.current;
-            
-            if (currentX <= -loopWidth) {
-              x.set(currentX + loopWidth);
-            } else if (currentX > 0) {
-              x.set(currentX - loopWidth);
-            }
-          }
-        }}
-        whileDrag={{ cursor: 'grabbing' }}
-      >
-        {clonedChildren}
-      </motion.div>
-    </div>
-  );
-};
-
 const Branding = () => {
   const [activeTab, setActiveTab] = useState("graficos");
 
@@ -324,151 +23,95 @@ const Branding = () => {
     { id: "social brand", label: "Social Brand" },
   ];
 
-    // Contenido para cada tab
-    const renderTabContent = () => {
-    switch (activeTab) {
-        case "institucional":
-        return (
-            <>
-              <div className="full-container">
-                <div className="container">
-                  <h2>Branding Institucional</h2>
-                  <p>
-                    <span>"Este servicio está orientado al desarrollo integral de la identidad de marca"</span>
-                    Desde la creación de isologotipos hasta el diseño de material editorial y publicitario, este producto busca construir una identidad visual coherente, profesional y alineada a los valores y objetivos estratégicos de la empresa.
-                  </p>
-                </div>
-              </div>
-              <full-container>
-                <div className="container">
-                  <div className="institucional">
-                    <h2></h2>
-                    <p></p>
-                  </div>
-                </div>
-              </full-container>
-              <full-container>
-                <div className="container">
-                  <div className="institucional">
-                    <h2></h2>
-                    <p></p>
-                  </div>
-                </div>
-              </full-container>
-              <full-container>
-                <div className="container">
-                  <div className="institucional">
-                    <h2></h2>
-                    <p></p>
-                  </div>
-                </div>
-              </full-container>
-              <full-container>
-                <div className="container">
-                  <div className="institucional">
-                    <h2></h2>
-                    <p></p>
-                  </div>
-                </div>
-              </full-container>
-            </>
-        );
-        case "web":
-        return (
-            <>
-              <div className="full-container">
-                <div className="container">
-                  <h2>Branding Web</h2>
-                  <p>
-                    <span>Este servicio está orientado al desarrollo integral de la identidad de marca </span>
-                    Desde la creación de isologotipos hasta el diseño de material editorial y publicitario, este producto busca construir una identidad visual coherente, profesional y alineada a los valores y objetivos estratégicos de la empresa.
-                  </p>
-                </div>
-              </div>
-              <full-container>
-                <div className="container">
-                  <div className="institucional">
-                    <h2></h2>
-                    <p></p>
-                  </div>
-                </div>
-              </full-container>
-              <full-container>
-                <div className="container">
-                  <div className="institucional">
-                    <h2></h2>
-                    <p></p>
-                  </div>
-                </div>
-              </full-container>
-              <full-container>
-                <div className="container">
-                  <div className="institucional">
-                    <h2></h2>
-                    <p></p>
-                  </div>
-                </div>
-              </full-container>
-              <full-container>
-                <div className="container">
-                  <div className="institucional">
-                    <h2></h2>
-                    <p></p>
-                  </div>
-                </div>
-              </full-container>
-            </>
-        );
-        case "social brand":
-        return (
+  // Contenido para cada tab
+  const renderTabContent = () => {
+  switch (activeTab) {
+      case "institucional":
+      return (
           <>
             <div className="full-container">
               <div className="container">
-                <h2>Branding Web</h2>
+                <h2 className="display-title">Branding Institucional</h2>
                 <p>
-                  <span>Este servicio está orientado al desarrollo integral de la identidad de marca </span>
+                  <span>Este servicio está orientado al desarrollo integral de la identidad de marca </span> 
+                  <br />
                   Desde la creación de isologotipos hasta el diseño de material editorial y publicitario, este producto busca construir una identidad visual coherente, profesional y alineada a los valores y objetivos estratégicos de la empresa.
                 </p>
               </div>
             </div>
-            <full-container>
-              <div className="container">
-                <div className="institucional">
-                  <h2></h2>
-                  <p></p>
-                </div>
-              </div>
-            </full-container>
-            <full-container>
-              <div className="container">
-                <div className="institucional">
-                  <h2></h2>
-                  <p></p>
-                </div>
-              </div>
-            </full-container>
-            <full-container>
-              <div className="container">
-                <div className="institucional">
-                  <h2></h2>
-                  <p></p>
-                </div>
-              </div>
-            </full-container>
-            <full-container>
-              <div className="container">
-                <div className="institucional">
-                  <h2></h2>
-                  <p></p>
-                </div>
-              </div>
-            </full-container>
+
+            <></>
           </>
-        );
-        default:
-        return null;
-    }
-    };
+      );
+      case "web":
+      return (
+          <>
+            <div className="full-container">
+              <div className="container">
+                <h2 className="display-title">Branding Web</h2>
+                <p>
+                  <span>Este servicio está orientado al desarrollo integral de la identidad de marca </span> 
+                  <br />
+                  Desde la creación de isologotipos hasta el diseño de material editorial y publicitario, este producto busca construir una identidad visual coherente, profesional y alineada a los valores y objetivos estratégicos de la empresa.
+                </p>
+              </div>
+            </div>
+
+            <BrandingCarrusel clientName="airon"/>
+          </>
+      );
+      case "social brand":
+      return (
+        <>
+          <div className="full-container">
+            <div className="container">
+              <h2 className="display-title">Social Brand</h2>
+              <p>
+                <span>Este servicio está orientado al desarrollo integral de la identidad de marca </span> 
+                <br />
+                Desde la creación de isologotipos hasta el diseño de material editorial y publicitario, este producto busca construir una identidad visual coherente, profesional y alineada a los valores y objetivos estratégicos de la empresa.
+              </p>
+            </div>
+          </div>
+
+          <div className="full-container brand-item">
+            <div className="container">
+              <div className="institucional">
+                <h2></h2>
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <div className="full-container brand-item">
+            <div className="container">
+              <div className="institucional">
+                <h2></h2>
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <div className="full-container brand-item">
+            <div className="container">
+              <div className="institucional">
+                <h2></h2>
+                <p></p>
+              </div>
+            </div>
+          </div>
+          <div className="full-container brand-item">
+            <div className="container">
+              <div className="institucional">
+                <h2></h2>
+                <p></p>
+              </div>
+            </div>
+          </div>
+        </>
+      );
+      default:
+      return null;
+  }
+  };
 
   return (
     <>
@@ -514,7 +157,7 @@ const Branding = () => {
           </div>
         </div>
         
-        <div className="full-container tabs-container-ads">
+        <div className="full-container tabs-container-creative">
           <div className="full-container title-tabs">
             <div className="container tabs">
               <div className="tabs-container">
@@ -531,9 +174,7 @@ const Branding = () => {
             </div>
           </div>
           <div className="full-container tab-content-container">
-            <div className="container">
-              {renderTabContent()}
-            </div>
+            {renderTabContent()}
           </div>
         </div>
       </div>

@@ -248,6 +248,7 @@ footer {
 
 .display-title{
   color: #9A7A00;
+  font-family: var(--font-portfolio);
 }
 
 .yellow {
