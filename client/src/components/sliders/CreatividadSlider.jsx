@@ -16,6 +16,21 @@ async function fetchCreatividadData() {
 /* Inner slider infinito 4:3 con lazy loading */
 function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef, isVisible }) {
   const len = list.length;
+  
+  // Reducir copias de 5 a 3 para mejor rendimiento
+  const REPEAT = 3;
+  const extended = Array.from({ length: REPEAT }, () => list).flat();
+  const baseLen = len;
+  const middleIndex = baseLen > 0 ? baseLen * Math.floor(REPEAT / 2) : 0;
+
+  // Hooks siempre se ejecutan (regla de React)
+  const [idx, setIdx] = useState(middleIndex);
+  const [anim, setAnim] = useState(true);
+  const [shouldRender, setShouldRender] = useState(false);
+  const t = useRef(null);
+  const containerRef = useRef(null);
+
+  // Si solo hay 1 o menos imágenes, retornar simple
   if (len <= 1) {
     return (
       <div
@@ -27,7 +42,7 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef, is
         }}
       >
         <img
-          src={list[0]}
+          src={list[0] || ""}
           alt=""
           style={{
             position: "absolute",
@@ -42,21 +57,9 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef, is
     );
   }
 
-  // Reducir copias de 5 a 3 para mejor rendimiento
-  const REPEAT = 3;
-  const extended = Array.from({ length: REPEAT }, () => list).flat();
-  const baseLen = len;
-  const middleIndex = baseLen * Math.floor(REPEAT / 2);
-
-  const [idx, setIdx] = useState(middleIndex);
-  const [anim, setAnim] = useState(true);
-  const [shouldRender, setShouldRender] = useState(false);
-  const t = useRef(null);
-  const containerRef = useRef(null);
-
-  // Lazy loading: solo renderizar cuando está visible
+  // Lazy loading: solo renderizar cuando está visible (solo si hay más de 1 imagen)
   useEffect(() => {
-    if (!isVisible || shouldRender) return;
+    if (len <= 1 || !isVisible || shouldRender) return;
     
     const observer = new IntersectionObserver(
       (entries) => {
@@ -73,10 +76,10 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef, is
     }
 
     return () => observer.disconnect();
-  }, [isVisible, shouldRender]);
+  }, [len, isVisible, shouldRender]);
 
   useEffect(() => {
-    if (!shouldRender) return;
+    if (len <= 1 || !shouldRender) return;
     
     t.current = setInterval(() => {
       if (!draggingRef?.current) {
@@ -85,9 +88,10 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef, is
       }
     }, interval);
     return () => clearInterval(t.current);
-  }, [interval, direction, draggingRef, shouldRender]);
+  }, [len, interval, direction, draggingRef, shouldRender]);
 
   useEffect(() => {
+    if (len <= 1) return;
     const min = baseLen * 2;
     const max = baseLen * (REPEAT - 2);
     if (idx < min || idx > max) {
@@ -95,7 +99,7 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef, is
       setAnim(false);
       setIdx(middleIndex + mod);
     }
-  }, [idx, baseLen, REPEAT, middleIndex]);
+  }, [len, idx, baseLen, REPEAT, middleIndex]);
 
   const offsetPct = idx * 100;
 

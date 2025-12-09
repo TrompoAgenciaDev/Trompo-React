@@ -7,7 +7,7 @@
 ## 🏗️ Arquitectura del Proyecto
 
 ### **Stack Tecnológico**
-- **Frontend**: React 19.1.0 + Vite 7.0.4
+- **Frontend**: React 19.2.1 + Vite 7.0.4
 - **Routing**: React Router DOM 7.7.0
 - **Animaciones**: Framer Motion 12.23.6
 - **Estilos**: CSS puro con prefijos de compatibilidad

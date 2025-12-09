@@ -1,86 +1,93 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import "../../assets/styles/branding-carrusel.css";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
-const BrandingCarrusel = ({ clientName }) => {
-  const [clientData, setClientData] = useState(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const timeoutRef = useRef(null);
-  const isAnimatingRef = useRef(false);
-  const isHoveredRef = useRef(false);
+const BrandingCarrusel = ({ category }) => {
+  const [clientsData, setClientsData] = useState([]);
+  const [hoveredClientIndex, setHoveredClientIndex] = useState(null);
+  const [currentImageIndices, setCurrentImageIndices] = useState({});
+  const timeoutRefs = useRef({});
+  const isAnimatingRefs = useRef({});
+  const isHoveredRefs = useRef({});
+  const lastHoveredIndexRef = useRef(null);
 
-  // Cargar datos del cliente desde el JSON
+  // Cargar datos de la categoría desde el JSON
   useEffect(() => {
-    const loadClientData = async () => {
+    const loadClientsData = async () => {
       try {
         const response = await fetch(`${base}assets/creatividad/branding/carrusel/carrusel.json`);
         const data = await response.json();
-        const client = data.clients.find(
-          (c) => c.id.toLowerCase() === clientName.toLowerCase() || 
-                 c.name.toLowerCase() === clientName.toLowerCase()
-        );
-        if (client) {
-          setClientData(client);
-        }
+        
+        // Obtener los proyectos de la categoría especificada
+        const categoryData = data[category] || [];
+        setClientsData(categoryData);
+        
+        // Inicializar índices de imagen para cada cliente
+        const initialIndices = {};
+        categoryData.forEach((_, index) => {
+          initialIndices[index] = 0;
+        });
+        setCurrentImageIndices(initialIndices);
       } catch (error) {
-        console.error("Error loading client data:", error);
+        console.error("Error loading clients data:", error);
       }
     };
 
-    if (clientName) {
-      loadClientData();
+    if (category) {
+      loadClientsData();
     }
-  }, [clientName]);
+  }, [category]);
 
-  // Actualizar ref cuando cambia isHovered
+  // Actualizar refs cuando cambia hoveredClientIndex
   useEffect(() => {
-    isHoveredRef.current = isHovered;
-  }, [isHovered]);
+    if (hoveredClientIndex !== null) {
+      isHoveredRefs.current[hoveredClientIndex] = true;
+    }
+  }, [hoveredClientIndex]);
 
-  // Slide automático solo cuando hay hover
+  // Slide automático solo cuando hay hover en un cliente específico
   useEffect(() => {
+    if (hoveredClientIndex === null) return;
+    
+    const clientData = clientsData[hoveredClientIndex];
+    if (!clientData || clientData.gallery.length <= 1) return;
+
     // Limpiar timeout anterior si existe
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-
-    if (!isHovered || !clientData || clientData.gallery.length <= 1) {
-      isAnimatingRef.current = false;
-      return;
+    if (timeoutRefs.current[hoveredClientIndex]) {
+      clearTimeout(timeoutRefs.current[hoveredClientIndex]);
+      timeoutRefs.current[hoveredClientIndex] = null;
     }
 
     // Función recursiva para el slider automático infinito
     const startSlider = () => {
-      // Verificar el estado actual usando el ref
-      if (!isHoveredRef.current || !clientData || clientData.gallery.length <= 1) {
-        isAnimatingRef.current = false;
+      if (!isHoveredRefs.current[hoveredClientIndex] || !clientData || clientData.gallery.length <= 1) {
+        isAnimatingRefs.current[hoveredClientIndex] = false;
         return;
       }
 
-      isAnimatingRef.current = true;
+      isAnimatingRefs.current[hoveredClientIndex] = true;
       
-      timeoutRef.current = setTimeout(() => {
-        // Verificar nuevamente antes de cambiar la imagen
-        if (!isHoveredRef.current || !clientData || clientData.gallery.length <= 1) {
-          isAnimatingRef.current = false;
+      timeoutRefs.current[hoveredClientIndex] = setTimeout(() => {
+        if (!isHoveredRefs.current[hoveredClientIndex] || !clientData || clientData.gallery.length <= 1) {
+          isAnimatingRefs.current[hoveredClientIndex] = false;
           return;
         }
 
         // Actualizar el índice con loop infinito
-        setCurrentImageIndex((prev) => {
-          return (prev + 1) % clientData.gallery.length;
-        });
+        setCurrentImageIndices((prev) => ({
+          ...prev,
+          [hoveredClientIndex]: (prev[hoveredClientIndex] + 1) % clientData.gallery.length
+        }));
 
         // Continuar el slider infinitamente si aún hay hover
-        if (isHoveredRef.current) {
+        if (isHoveredRefs.current[hoveredClientIndex]) {
           startSlider();
         } else {
-          isAnimatingRef.current = false;
+          isAnimatingRefs.current[hoveredClientIndex] = false;
         }
       }, 2000); // Cada slide dura 2 segundos
     };
@@ -89,113 +96,145 @@ const BrandingCarrusel = ({ clientName }) => {
     startSlider();
 
     return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
+      if (timeoutRefs.current[hoveredClientIndex]) {
+        clearTimeout(timeoutRefs.current[hoveredClientIndex]);
+        timeoutRefs.current[hoveredClientIndex] = null;
       }
-      isAnimatingRef.current = false;
+      isAnimatingRefs.current[hoveredClientIndex] = false;
     };
-  }, [isHovered, clientData]);
+  }, [hoveredClientIndex, clientsData]);
 
   // Resetear al salir del hover
   useEffect(() => {
-    if (!isHovered) {
-      // Limpiar timeout
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-        timeoutRef.current = null;
-      }
-      isAnimatingRef.current = false;
-      // Resetear a la primera imagen
-      setCurrentImageIndex(0);
+    if (hoveredClientIndex === null) {
+      // Limpiar todos los timeouts
+      Object.keys(timeoutRefs.current).forEach(key => {
+        if (timeoutRefs.current[key]) {
+          clearTimeout(timeoutRefs.current[key]);
+          timeoutRefs.current[key] = null;
+        }
+      });
+      // Resetear todos los índices a 0
+      const resetIndices = {};
+      clientsData.forEach((_, index) => {
+        resetIndices[index] = 0;
+      });
+      setCurrentImageIndices(resetIndices);
     }
-  }, [isHovered]);
-
-  // Memoizar la primera imagen para optimización
-  // Las imágenes están en assets/creatividad/branding/ (un nivel antes del JSON)
-  const firstImage = useMemo(() => {
-    if (!clientData || !clientData.gallery || clientData.gallery.length === 0) return null;
-    return `${base}assets/creatividad/branding/${clientData.gallery[0]}`;
-  }, [clientData]);
-
-  // Memoizar la imagen actual
-  // Las imágenes están en assets/creatividad/branding/ (un nivel antes del JSON)
-  const currentImage = useMemo(() => {
-    if (!clientData || !clientData.gallery || clientData.gallery.length === 0) return null;
-    return `${base}assets/creatividad/branding/${clientData.gallery[currentImageIndex]}`;
-  }, [clientData, currentImageIndex]);
+  }, [hoveredClientIndex, clientsData]);
 
   // Handlers memoizados para optimización
-  const handleMouseEnter = useCallback(() => {
-    setIsHovered(true);
+  const handleMouseEnter = useCallback((index) => {
+    setHoveredClientIndex(index);
+    isHoveredRefs.current[index] = true;
+    lastHoveredIndexRef.current = index;
   }, []);
 
   const handleMouseLeave = useCallback(() => {
-    setIsHovered(false);
+    const lastIndex = lastHoveredIndexRef.current;
+    
+    // Limpiar timeout del cliente que perdió el hover
+    if (lastIndex !== null && timeoutRefs.current[lastIndex]) {
+      clearTimeout(timeoutRefs.current[lastIndex]);
+      timeoutRefs.current[lastIndex] = null;
+    }
+    
+    // Resetear inmediatamente el índice del cliente que perdió el hover a 0
+    if (lastIndex !== null) {
+      setCurrentImageIndices((prev) => ({
+        ...prev,
+        [lastIndex]: 0
+      }));
+    }
+    
+    setHoveredClientIndex(null);
+    Object.keys(isHoveredRefs.current).forEach(key => {
+      isHoveredRefs.current[key] = false;
+    });
+    lastHoveredIndexRef.current = null;
   }, []);
 
-  if (!clientData) {
+  if (!clientsData || clientsData.length === 0) {
     return null;
   }
 
   return (
-    <div
-      className="full-container brand-item"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {/* Galería de fondo */}
-      <div className="brand-gallery-background">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentImageIndex}
-            initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: 1,
-              transition: { duration: 0.2, ease: "easeIn" }
-            }}
-            exit={{ 
-              opacity: 0,
-              transition: { duration: 0.1, ease: "easeOut" }
-            }}
-            className="brand-gallery-image"
-            style={{
-              backgroundImage: `url(${currentImage || firstImage})`
-            }}
-          />
-        </AnimatePresence>
-      </div>
+    <>
+      {clientsData.map((clientData, index) => {
+        const isHovered = hoveredClientIndex === index;
+        const currentImageIndex = currentImageIndices[index] || 0;
+        // Ruta de imágenes: algunos proyectos están en carrusel/categoria/, otros en la carpeta principal
+        // Lema y Vox están en carrusel/institucional/, Kindom y Airon en la carpeta principal
+        const getImagePath = (imageName) => {
+          // Proyectos que están en la subcarpeta de la categoría
+          const projectsInSubfolder = ['lema', 'vox'];
+          if (category && projectsInSubfolder.includes(clientData.id)) {
+            return `${base}assets/creatividad/branding/carrusel/${category}/${imageName}`;
+          }
+          // Resto de proyectos en la carpeta principal
+          return `${base}assets/creatividad/branding/${imageName}`;
+        };
+        const firstImage = clientData.gallery && clientData.gallery.length > 0
+          ? getImagePath(clientData.gallery[0])
+          : null;
+        const currentImage = clientData.gallery && clientData.gallery.length > 0
+          ? getImagePath(clientData.gallery[currentImageIndex])
+          : null;
 
-      {/* Container vacío */}
-      <div className="container">
-        {/* Panel institucional */}
-        <motion.div
-            className="institucional"
-            initial={{ x: -300, opacity: 0 }}
-            animate={{
-            x: isHovered ? 0 : -300,
-            opacity: isHovered ? 1 : 0
-            }}
-            transition={{
-            duration: 0.5,
-            ease: "easeOut"
-            }}
-        >
-            <h2>
-            {clientData.logo ? (
-                <img
-                src={`${base}assets/creatividad/branding/${clientData.logo}`}
-                alt={clientData.name}
-                style={{ maxWidth: "100%", height: "auto" }}
+        return (
+          <div
+            key={clientData.id || index}
+            className="full-container brand-item"
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={handleMouseLeave}
+          >
+            {/* Galería de fondo */}
+            <div className="brand-gallery-background">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentImageIndex}
+                  initial={{ opacity: 0 }}
+                  animate={{ 
+                    opacity: 1,
+                    transition: { duration: 0.2, ease: "easeIn" }
+                  }}
+                  exit={{ 
+                    opacity: 0,
+                    transition: { duration: 0.1, ease: "easeOut" }
+                  }}
+                  className="brand-gallery-image"
+                  style={{
+                    backgroundImage: `url(${currentImage || firstImage})`
+                  }}
                 />
-            ) : (
-                clientData.name
-            )}
-            </h2>
-            <p>{clientData.description}</p>
-        </motion.div>
-      </div>
-    </div>
+              </AnimatePresence>
+            </div>
+
+            {/* Container vacío */}
+            <div className="container">
+              {/* Panel de contenido del cliente */}
+              <motion.div
+                className="brand-item-panel"
+                initial={{ x: -300, opacity: 0 }}
+                animate={{
+                  x: isHovered ? 0 : -300,
+                  opacity: isHovered ? 1 : 0
+                }}
+                transition={{
+                  duration: 0.5,
+                  ease: "easeOut"
+                }}
+              >
+                <h2 className="brand-item-title">
+                  {clientData.name}
+                </h2>
+                <p dangerouslySetInnerHTML={{ __html: clientData.description }} />
+              </motion.div>
+            </div>
+          </div>
+        );
+      })}
+    </>
   );
 };
 

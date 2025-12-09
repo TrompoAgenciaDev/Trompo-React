@@ -15,12 +15,12 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
   : `${import.meta.env.BASE_URL}/`;
 
 const Branding = () => {
-  const [activeTab, setActiveTab] = useState("graficos");
+  const [activeTab, setActiveTab] = useState("institucional");
 
   const tabs = [
     { id: "institucional", label: "Branding Institucional" },
     { id: "web", label: "Branding Web" },
-    { id: "social brand", label: "Social Brand" },
+    { id: "social", label: "Social Brand" },
   ];
 
   // Contenido para cada tab
@@ -40,7 +40,7 @@ const Branding = () => {
               </div>
             </div>
 
-            <></>
+            <BrandingCarrusel category="institucional" />
           </>
       );
       case "web":
@@ -57,10 +57,10 @@ const Branding = () => {
               </div>
             </div>
 
-            <BrandingCarrusel clientName="airon"/>
+            <BrandingCarrusel category="web" />
           </>
       );
-      case "social brand":
+      case "social":
       return (
         <>
           <div className="full-container">
@@ -74,38 +74,7 @@ const Branding = () => {
             </div>
           </div>
 
-          <div className="full-container brand-item">
-            <div className="container">
-              <div className="institucional">
-                <h2></h2>
-                <p></p>
-              </div>
-            </div>
-          </div>
-          <div className="full-container brand-item">
-            <div className="container">
-              <div className="institucional">
-                <h2></h2>
-                <p></p>
-              </div>
-            </div>
-          </div>
-          <div className="full-container brand-item">
-            <div className="container">
-              <div className="institucional">
-                <h2></h2>
-                <p></p>
-              </div>
-            </div>
-          </div>
-          <div className="full-container brand-item">
-            <div className="container">
-              <div className="institucional">
-                <h2></h2>
-                <p></p>
-              </div>
-            </div>
-          </div>
+          <BrandingCarrusel category="social" />
         </>
       );
       default:

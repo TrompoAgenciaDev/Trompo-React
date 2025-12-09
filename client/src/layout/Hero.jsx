@@ -32,6 +32,9 @@ const Hero = ({ location = "home" }) => {
   const [isMobile, setIsMobile] = useState(false);
   const videoRef = useRef(null);
   const playerRef = useRef(null);
+  
+  // Hooks para contacto (siempre se ejecutan, pero solo tienen efecto si location === "contactanos")
+  const [revealed, setRevealed] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767.98px)");
@@ -46,22 +49,23 @@ const Hero = ({ location = "home" }) => {
     : videosByLocation[location]?.desktop;
 
   useEffect(() => {
-    if (videoRef.current && videoSrc) {
-      if (playerRef.current) {
-        playerRef.current.dispose();
-      }
-
-      playerRef.current = videojs(videoRef.current, {
-        autoplay: true,
-        loop: true,
-        muted: true,
-        controls: false,
-        preload: "metadata",
-        playsinline: true,
-      });
-
-      playerRef.current.src({ src: videoSrc, type: "video/mp4" });
+    // Solo inicializar video si no es la página de contacto
+    if (location === "contactanos" || !videoRef.current || !videoSrc) return;
+    
+    if (playerRef.current) {
+      playerRef.current.dispose();
     }
+
+    playerRef.current = videojs(videoRef.current, {
+      autoplay: true,
+      loop: true,
+      muted: true,
+      controls: false,
+      preload: "metadata",
+      playsinline: true,
+    });
+
+    playerRef.current.src({ src: videoSrc, type: "video/mp4" });
 
     return () => {
       if (playerRef.current) {
@@ -69,7 +73,22 @@ const Hero = ({ location = "home" }) => {
         playerRef.current = null;
       }
     };
-  }, [videoSrc]);
+  }, [location, videoSrc]);
+
+  // Hook para scroll de contacto (solo activo si location === "contactanos")
+  useEffect(() => {
+    if (location !== "contactanos") return;
+    
+    const onScroll = () => {
+      if (window.scrollY >= 40) setRevealed(true);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    const timer = setTimeout(() => setRevealed(true), 2000);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      clearTimeout(timer);
+    };
+  }, [location]);
 
   // HERO PRINCIPAL
   if (location !== "contactanos") {
@@ -86,21 +105,6 @@ const Hero = ({ location = "home" }) => {
       )
     );
   }
-
-  // CONTACTANOS (idéntico)
-  const [revealed, setRevealed] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      if (window.scrollY >= 40) setRevealed(true);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    const timer = setTimeout(() => setRevealed(true), 2000);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      clearTimeout(timer);
-    };
-  }, []);
 
   return (
     <div className="full-container hero-contactanos bg-yellow">
