@@ -55,6 +55,26 @@
   margin-top: 10px;
 }
 
+.grid-item-footer a{
+  border-radius: 999px;
+  padding: 10px;
+  display: flex;
+  box-sizing: border-box;
+
+}
+
+.grid-item-footer a svg{
+  width: 35px;
+  height: 35px;
+  color: #000000;
+}
+
+
+.grid-item-footer:hover a{
+  background-color: #FEE070;
+}
+
+
 @media (min-width: 768px) {
   .diagonal-title{
     padding: 70px 20px;
@@ -88,7 +108,7 @@
     gap: 50px;
   }
   .diagonal-page-title .title-page{
-    font-size: 44px;
+    font-size: 40px;
     gap: 24px;
     margin-bottom: 0;
   }
@@ -111,7 +131,7 @@
   }
   
   .diagonal-page-title .title-page{
-    font-size: 80px;
+    font-size: 70px;
   }
 
   .diagonal-page-title .title-page strong,

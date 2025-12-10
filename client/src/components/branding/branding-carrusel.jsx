@@ -163,15 +163,14 @@ const BrandingCarrusel = ({ category }) => {
       {clientsData.map((clientData, index) => {
         const isHovered = hoveredClientIndex === index;
         const currentImageIndex = currentImageIndices[index] || 0;
-        // Ruta de imágenes: algunos proyectos están en carrusel/categoria/, otros en la carpeta principal
-        // Lema y Vox están en carrusel/institucional/, Kindom y Airon en la carpeta principal
+        // Ruta de imágenes: las imágenes en el JSON ya incluyen la ruta relativa desde carrusel
+        // Por ejemplo: "institucional/lema1.webp" o "vox1.webp"
         const getImagePath = (imageName) => {
-          // Proyectos que están en la subcarpeta de la categoría
-          const projectsInSubfolder = ['lema', 'vox'];
-          if (category && projectsInSubfolder.includes(clientData.id)) {
-            return `${base}assets/creatividad/branding/carrusel/${category}/${imageName}`;
+          // Si la imagen ya incluye una carpeta (tiene /), usar la ruta completa desde carrusel
+          if (imageName.includes('/')) {
+            return `${base}assets/creatividad/branding/carrusel/${imageName}`;
           }
-          // Resto de proyectos en la carpeta principal
+          // Si no tiene carpeta, está en la carpeta principal de branding
           return `${base}assets/creatividad/branding/${imageName}`;
         };
         const firstImage = clientData.gallery && clientData.gallery.length > 0

@@ -1,12 +1,12 @@
-import Hero from "../../layout/Hero";
-import PageTitle from "../../components/services/PageTitle";
-import Icons from "../../components/Icons";
-import Portfolio3d from "../../layout/Portfolio3d";
-import Faqs from "../../layout/Faqs";
-import Contact from "../../layout/Contact";
+import Hero from "../../layout/Hero.jsx";
+import PageTitle from "../../components/services/PageTitle.jsx";
+import Icons from "../../components/Icons.jsx";
+import Portfolio3d from "../../layout/Portfolio3d.jsx";
+import Faqs from "../../layout/Faqs.jsx";
+import Contact from "../../layout/Contact.jsx";
 import Testimonials from "../../components/Testimonials.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import SimpleHeroVideo from "../../components/SimpleHeroVideo";
+import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 
 //styles
 import "../../assets/styles/estrategia-page.css";
@@ -27,7 +27,7 @@ const Estrategia = () => {
       />
 
       <PageTitle
-        title="Estrategia"
+        title="Paid Media"
         subtitle="inteligente"
         highlight="De la visión al impacto. <strong>Planificación Estratégica</strong> que alinea negocio, audiencias y objetivos de negocio; <strong>Plataformas Ads</strong> que combinan performance y posicionamiento optimizando presupuesto; <strong>Data & Analítica Digital</strong> que convierte datos en decisiones. Un sistema disciplinado para invertir mejor y vender más, hoy y a escala."
       />
@@ -106,6 +106,11 @@ const Estrategia = () => {
                     de inversión y ventas consistentes.
                   </p>
                 </div>
+                <div className="grid-item-footer">
+                  <a href="/servicios/paid-media/meta-ads">
+                    <svg height="21" viewBox="0 0 21 21" width="21" xmlns="http://www.w3.org/2000/svg"><g fill="none" fillRule="evenodd" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" transform="translate(4 6)"><path d="m9.5.497 4 4.002-4 4.001"/><path d="m.5 4.5h13"/></g></svg>
+                  </a>
+                </div>
               </div>
               <div className="grid-item-ads">
                 <div className="grid-item-header">
@@ -124,6 +129,11 @@ const Estrategia = () => {
                     </strong>
                     .
                   </p>
+                </div>
+                <div className="grid-item-footer">
+                  <a href="/servicios/paid-media/google-ads">
+                    <svg height="21" viewBox="0 0 21 21" width="21" xmlns="http://www.w3.org/2000/svg"><g fill="none" fillRule="evenodd" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" transform="translate(4 6)"><path d="m9.5.497 4 4.002-4 4.001"/><path d="m.5 4.5h13"/></g></svg>
+                  </a>
                 </div>
               </div>
             </div>

@@ -1,13 +1,13 @@
-import Hero from "../../layout/Hero";
-import PageTitle from "../../components/services/PageTitle";
-import Values from "../../layout/Values";
-import PostCard from "../../components/posts/PostCard";
-import Faqs from "../../layout/Faqs";
-import Contact from "../../layout/Contact";
-import Portfolio3d from "../../layout/Portfolio3d";
-import Icons from "../../components/Icons";
+import Hero from "../../layout/Hero.jsx";
+import PageTitle from "../../components/services/PageTitle.jsx";
+import Values from "../../layout/Values.jsx";
+import PostCard from "../../components/posts/PostCard.jsx";
+import Faqs from "../../layout/Faqs.jsx";
+import Contact from "../../layout/Contact.jsx";
+import Portfolio3d from "../../layout/Portfolio3d.jsx";
+import Icons from "../../components/Icons.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import SimpleHeroVideo from "../../components/SimpleHeroVideo";
+import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 
 //styles
 import "../../assets/styles/interaccion.css";
@@ -28,7 +28,7 @@ const Interaccion = () => {
       />
 
       <PageTitle
-        title="Interacción"
+        title="Social Media"
         subtitle="que transforma"
         highlight="Relevancia sostenida en <strong>Social Media</strong> —grilla con intención, formatos nativos y conversación real— más <strong>Automation Marketing</strong> que toma la posta con emails y flujos segmentados. Menos ruido, más señal: consistencia de mensajes, continuidad de contacto y una relación que se traduce en oportunidades."
         bgc="#FEE070"

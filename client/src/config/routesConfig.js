@@ -11,10 +11,10 @@ const Gracias = lazy(() => import("../pages/Gracias"));
 
 //Servicios
 const Servicios = lazy(() => import("../pages/Servicios"));
-const Diseno = lazy(() => import("../pages/servicios/Creatividad.jsx"));
+const Disenio = lazy(() => import("../pages/servicios/Disenio.jsx"));
 const Desarrollo = lazy(() => import("../pages/servicios/Desarrollo.jsx"));
-const PaidMedia = lazy(() => import("../pages/servicios/Estrategia"));
-const SocialMedia = lazy(() => import("../pages/servicios/Interaccion"));
+const PaidMedia = lazy(() => import("../pages/servicios/PaidMedia.jsx"));
+const SocialMedia = lazy(() => import("../pages/servicios/SocialMedia.jsx"));
 const Multimedia = lazy(() => import("../pages/servicios/Multimedia"));
 const Google = lazy(() => import("../pages/estrategias/Google.jsx"));
 const Meta = lazy(() => import("../pages/estrategias/Meta.jsx"));
@@ -42,11 +42,11 @@ const routesConfig = {
   menuMobile: [
     { path: "/", label: "inicio", Component: Home },
     { path: "/nosotros", label: "nosotros", Component: Nosotros },
-    { path: "/paid-media", label: "Paid Media", Component: PaidMedia },
-    { path: "/diseno", label: "Diseño", Component: Diseno },
-    { path: "/multimedia", label: "Multimedia", Component: Multimedia },
-    { path: "/social-media", label: "Social Media", Component: SocialMedia },
-    { path: "/desarrollo", label: "desarrollo", Component: Desarrollo },
+    { path: "/servicios/disenio", label: "Diseño", Component: Disenio },
+    { path: "/servicios/multimedia", label: "Multimedia", Component: Multimedia },
+    { path: "/servicios/desarrollo", label: "desarrollo", Component: Desarrollo },
+    { path: "/servicios/paid-media", label: "Paid Media", Component: PaidMedia },
+    { path: "/servicios/social-media", label: "Social Media", Component: SocialMedia },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],
 
@@ -57,11 +57,11 @@ const routesConfig = {
   footerMobile: [
     { path: "/", label: "inicio", Component: Home },
     { path: "/nosotros", label: "nosotros", Component: Nosotros },
-    { path: "/paid-media", label: "Paid Media", Component: PaidMedia },
-    { path: "/diseno", label: "Diseño", Component: Diseno },
-    { path: "/multimedia", label: "Multimedia", Component: Multimedia },
-    { path: "/social-media", label: "Social Media", Component: SocialMedia },
-    { path: "/desarrollo", label: "desarrollo", Component: Desarrollo },
+    { path: "/servicios/disenio", label: "Diseño", Component: Disenio },
+    { path: "/servicios/multimedia", label: "Multimedia", Component: Multimedia },
+    { path: "/servicios/desarrollo", label: "desarrollo", Component: Desarrollo },
+    { path: "/servicios/paid-media", label: "Paid Media", Component: PaidMedia },
+    { path: "/servicios/social-media", label: "Social Media", Component: SocialMedia },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],
 
@@ -73,11 +73,11 @@ const routesConfig = {
 
 
   servicios: [
-    { path: "/paid-media", label: "Paid Media", Component: PaidMedia },
-    { path: "/diseno", label: "Diseño", Component: Diseno },
-    { path: "/multimedia", label: "Multimedia", Component: Multimedia },
-    { path: "/social-media", label: "Social Media", Component: SocialMedia },
-    { path: "/desarrollo", label: "desarrollo", Component: Desarrollo },
+    { path: "/servicios/disenio", label: "Diseño", Component: Disenio },
+    { path: "/servicios/multimedia", label: "Multimedia", Component: Multimedia },
+    { path: "/servicios/desarrollo", label: "desarrollo", Component: Desarrollo },
+    { path: "/servicios/paid-media", label: "Paid Media", Component: PaidMedia },
+    { path: "/servicios/social-media", label: "Social Media", Component: SocialMedia },
   ],
 
   us: [
@@ -107,13 +107,13 @@ const routesConfig = {
   ],
 
   estrategias: [
-    { path: "/servicios/estrategias/google-ads", label: "Google Ads", Component: Google },
-    { path: "/servicios/estrategias/meta-ads", label: "Meta Ads", Component: Meta },
-    { path: "/servicios/estrategias/analitica-web", label: "Analítica", Component: Analitica },
+    { path: "/servicios/paid-media/google-ads", label: "Google Ads", Component: Google },
+    { path: "/servicios/paid-media/meta-ads", label: "Meta Ads", Component: Meta },
+    { path: "/servicios/paid-media/analitica-web", label: "Analítica", Component: Analitica },
   ],
 
   creatividad: [
-    { path: "/servicios/creatividad/branding", label: "Branding", Component: Branding },
+    { path: "/servicios/disenio", label: "Branding", Component: Branding },
   ],
 };
 
