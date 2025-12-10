@@ -26,29 +26,29 @@ export const usePrefetchRoutes = () => {
       
       if (pathname === '/' || pathname === '/home') {
         // Desde home, prefetch páginas principales
-        routes.push('/nosotros', '/contactanos', '/estrategia', '/creatividad');
+        routes.push('/nosotros', '/contactanos', '/paid-media', '/diseno');
       }
       
       if (pathname.includes('/nosotros')) {
         // Desde nosotros, prefetch servicios
-        routes.push('/estrategia', '/creatividad', '/desarrollo', '/contactanos');
+        routes.push('/paid-media', '/diseno', '/desarrollo', '/contactanos');
       }
       
-      if (pathname.includes('/estrategia') || pathname.includes('/creatividad') || 
-          pathname.includes('/desarrollo') || pathname.includes('/interaccion') || 
-          pathname.includes('/soporte')) {
+      if (pathname.includes('/paid-media') || pathname.includes('/diseno') || 
+          pathname.includes('/desarrollo') || pathname.includes('/social-media') || 
+          pathname.includes('/multimedia')) {
         // Desde servicios, prefetch otros servicios y contacto
         routes.push('/nosotros', '/contactanos');
-        if (!pathname.includes('/estrategia')) routes.push('/estrategia');
-        if (!pathname.includes('/creatividad')) routes.push('/creatividad');
+        if (!pathname.includes('/paid-media')) routes.push('/paid-media');
+        if (!pathname.includes('/diseno')) routes.push('/diseno');
         if (!pathname.includes('/desarrollo')) routes.push('/desarrollo');
-        if (!pathname.includes('/interaccion')) routes.push('/interaccion');
-        if (!pathname.includes('/soporte')) routes.push('/soporte');
+        if (!pathname.includes('/social-media')) routes.push('/social-media');
+        if (!pathname.includes('/multimedia')) routes.push('/multimedia');
       }
       
       if (pathname.includes('/contactanos')) {
         // Desde contacto, prefetch servicios principales
-        routes.push('/estrategia', '/creatividad', '/desarrollo', '/nosotros');
+        routes.push('/paid-media', '/diseno', '/desarrollo', '/nosotros');
       }
       
       return routes;

@@ -11,11 +11,11 @@ const Gracias = lazy(() => import("../pages/Gracias"));
 
 //Servicios
 const Servicios = lazy(() => import("../pages/Servicios"));
-const Creatividad = lazy(() => import("../pages/servicios/Creatividad.jsx"));
+const Diseno = lazy(() => import("../pages/servicios/Creatividad.jsx"));
 const Desarrollo = lazy(() => import("../pages/servicios/Desarrollo.jsx"));
-const Estrategia = lazy(() => import("../pages/servicios/Estrategia"));
-const Interaccion = lazy(() => import("../pages/servicios/Interaccion"));
-const Soporte = lazy(() => import("../pages/servicios/Soporte"));
+const PaidMedia = lazy(() => import("../pages/servicios/Estrategia"));
+const SocialMedia = lazy(() => import("../pages/servicios/Interaccion"));
+const Multimedia = lazy(() => import("../pages/servicios/Multimedia"));
 const Google = lazy(() => import("../pages/estrategias/Google.jsx"));
 const Meta = lazy(() => import("../pages/estrategias/Meta.jsx"));
 const Analitica = lazy(() => import("../pages/estrategias/Analitica.jsx"));
@@ -42,11 +42,11 @@ const routesConfig = {
   menuMobile: [
     { path: "/", label: "inicio", Component: Home },
     { path: "/nosotros", label: "nosotros", Component: Nosotros },
-    { path: "/estrategia", label: "estrategia", Component: Estrategia },
-    { path: "/creatividad", label: "Creatividad", Component: Creatividad },
-    { path: "/interaccion", label: "interacción", Component: Interaccion },
+    { path: "/paid-media", label: "Paid Media", Component: PaidMedia },
+    { path: "/diseno", label: "Diseño", Component: Diseno },
+    { path: "/multimedia", label: "Multimedia", Component: Multimedia },
+    { path: "/social-media", label: "Social Media", Component: SocialMedia },
     { path: "/desarrollo", label: "desarrollo", Component: Desarrollo },
-    { path: "/soporte", label: "soporte", Component: Soporte },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],
 
@@ -57,11 +57,11 @@ const routesConfig = {
   footerMobile: [
     { path: "/", label: "inicio", Component: Home },
     { path: "/nosotros", label: "nosotros", Component: Nosotros },
-    { path: "/estrategia", label: "estrategia", Component: Estrategia },
-    { path: "/creatividad", label: "Creatividad", Component: Creatividad },
-    { path: "/interaccion", label: "interacción", Component: Interaccion },
+    { path: "/paid-media", label: "Paid Media", Component: PaidMedia },
+    { path: "/diseno", label: "Diseño", Component: Diseno },
+    { path: "/multimedia", label: "Multimedia", Component: Multimedia },
+    { path: "/social-media", label: "Social Media", Component: SocialMedia },
     { path: "/desarrollo", label: "desarrollo", Component: Desarrollo },
-    { path: "/soporte", label: "soporte", Component: Soporte },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],
 
@@ -73,11 +73,11 @@ const routesConfig = {
 
 
   servicios: [
-    { path: "/estrategia", label: "estrategia", Component: Estrategia },
-    { path: "/creatividad", label: "Creatividad", Component: Creatividad },
-    { path: "/interaccion", label: "interacción", Component: Interaccion },
+    { path: "/paid-media", label: "Paid Media", Component: PaidMedia },
+    { path: "/diseno", label: "Diseño", Component: Diseno },
+    { path: "/multimedia", label: "Multimedia", Component: Multimedia },
+    { path: "/social-media", label: "Social Media", Component: SocialMedia },
     { path: "/desarrollo", label: "desarrollo", Component: Desarrollo },
-    { path: "/soporte", label: "soporte", Component: Soporte },
   ],
 
   us: [

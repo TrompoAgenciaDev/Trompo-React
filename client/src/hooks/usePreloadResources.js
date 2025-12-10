@@ -64,7 +64,7 @@ export const usePreloadResources = () => {
         };
       }
       
-      if (pathname.includes('/creatividad')) {
+      if (pathname.includes('/diseno')) {
         return {
           desktop: `${base}assets/hero/creatividad-hero.mp4`,
           mobile: `${base}assets/hero/mobile/creatividad-hero-mobile.mp4`
@@ -78,24 +78,24 @@ export const usePreloadResources = () => {
         };
       }
       
-      if (pathname.includes('/estrategia')) {
+      if (pathname.includes('/paid-media')) {
         return {
           desktop: `${base}assets/hero/estrategia-hero.mp4`,
           mobile: `${base}assets/hero/mobile/estrategia-hero-mobile.mp4`
         };
       }
       
-      if (pathname.includes('/interaccion')) {
+      if (pathname.includes('/social-media')) {
         return {
           desktop: `${base}assets/hero/interaccion-hero.mp4`,
           mobile: `${base}assets/hero/mobile/interaccion-hero-mobile.mp4`
         };
       }
       
-      if (pathname.includes('/soporte')) {
+      if (pathname.includes('/multimedia')) {
         return {
-          desktop: `${base}assets/hero/soporte-hero.mp4`,
-          mobile: `${base}assets/hero/mobile/soporte-hero-mobile.mp4`
+          desktop: `${base}assets/hero/multimedia-hero.mp4`,
+          mobile: `${base}assets/hero/mobile/multimedia-hero-mobile.mp4`
         };
       }
 
