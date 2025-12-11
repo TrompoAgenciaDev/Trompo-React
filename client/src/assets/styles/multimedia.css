@@ -1,0 +1,245 @@
+.title-page.multimedia-title{
+    color: #000000;
+}
+
+.diagonal-multimedia{
+    -webkit-clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0 100%);
+    clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0 100%);
+}
+
+.multimedia-footer-grid{
+    height: 350px;
+    clip-path: polygon(0 0, 100% 0%, 100% 50%, 0 100%);
+}
+
+/* Tabs con fondo blanco y texto negro - mismos estilos que Diseño */
+/* Selector más específico para evitar conflictos con ads.css */
+.diagonal-multimedia .tabs-container .tab-button,
+.diagonal-multimedia .tabs .tab-button {
+    background-color: #ffffff;
+    padding: 15px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    color: #000000;
+    font-family: var(--font-portfolio);
+    width: auto;
+    max-width: none;
+}
+
+.diagonal-multimedia .tabs-container .tab-button.active,
+.diagonal-multimedia .tabs .tab-button.active {
+    background-color: #ffffff;
+}
+
+.diagonal-multimedia .tab-select{
+    width: 100%;
+    max-width: 800px;
+    background-color: #ffffff;
+    padding: 15px 50px 15px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%23000000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    font-family: var(--font-portfolio);
+    color: #000000;
+}
+
+.diagonal-multimedia .tab-select:focus{
+    outline: none;
+    background-color: #ffffff;
+}
+
+.diagonal-multimedia .tab-select option{
+    background-color: #ffffff;
+    padding: 15px 20px;
+    color: #000000;
+}
+
+/* Contenedores de tabs - mismos estilos que Diseño (sin background-color y clip-path) */
+.diagonal-multimedia .title-tabs{
+    padding: 70px 0;
+}
+
+.diagonal-multimedia .tabs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.diagonal-multimedia .tabs-container{
+    width: 100%;
+    max-width: 800px;
+    display: none;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-highlight{
+    color: #9A7A00;
+    font-family: var(--font-portfolio);
+    font-size: 36px;
+}
+
+.grid-item-content{
+    background-color: #ffffff;
+}
+
+.container.highlight-content{
+    padding-top: 0;
+}
+
+/* Grid de Motion Graphics - solo desktop desde 1024px */
+.grid-motion-graphics {
+    display: none; /* Oculto por defecto */
+}
+
+.motion-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.item-content {
+    background-color: #ffffff;
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.motion-item-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #8e8e8e;
+    line-height: 1.2;
+    font-family: var(--font-portfolio);
+}
+
+.item-video {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.motion-video-element {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.highlight-content .grid-item-content p{
+    font-size: 13px;
+    padding: 20px;
+}
+
+.tab-content-container{
+    padding: 0;
+}
+
+@media (min-width: 768px) {
+    .highlight-content{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+    }
+}
+
+
+@media (min-width: 1024px) {
+    .diagonal-multimedia{
+        -webkit-clip-path: polygon(0 3%, 100% 0%, 100% 100%, 0 100%);
+        clip-path: polygon(0 3%, 100% 0%, 100% 100%, 0 100%);
+    }
+    
+    .diagonal-multimedia .title-tabs{
+        padding: 100px 0;
+    }
+    
+    .diagonal-multimedia .tabs-container .tab-button,
+    .diagonal-multimedia .tabs .tab-button {
+        font-size: 24px;
+        padding: 30px 20px;
+        width: auto;
+        max-width: none;
+    }
+    
+    .diagonal-multimedia .tabs-container{
+        max-width: 1024px;
+        gap: 40px;
+        display: flex;
+    }
+    
+    .diagonal-multimedia .tab-select{
+        display: none;
+    }
+    
+    .diagonal-multimedia .tab-content-container p{
+        width: 100%;
+        max-width: 640px;
+        font-size: 13px;
+        font-weight: normal;
+    }
+
+    .diagonal-multimedia .tab-content-container p span{
+        font-weight: 700;
+    }
+
+    .title-highlight{
+        font-size: 75px;
+    }
+
+    /* Grid Motion Graphics - Desktop desde 1024px */
+    .grid-motion-graphics {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: 1fr;
+        gap: 0;
+    }
+
+    .motion-item {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .item-content {
+        padding: 20px 35px;
+    }
+
+    .motion-item-title {
+        font-size: 26px;
+    }
+
+    .item-content p {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1280px) {
+
+    .title-highlight{
+        font-size: 90px;
+    }
+
+    .highlight-content .grid-item-content p{
+        font-size: 16px;
+        padding: 50px;
+    }
+
+    .diagonal-multimedia{
+        -webkit-clip-path: polygon(0 7%, 100% 0%, 100% 100%, 0 100%);
+        clip-path: polygon(0 7%, 100% 0%, 100% 100%, 0 100%);
+    }
+}

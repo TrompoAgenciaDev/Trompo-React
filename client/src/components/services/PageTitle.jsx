@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import "../../assets/styles/page-title.css";
 
-function PageTitle({ title, subtitle = "", highlight = "", bgc = "#ffffff" }) {
+function PageTitle({ title, subtitle = "", highlight = "", bgc = "#ffffff", location }) {
   const container = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.05 } },
@@ -90,7 +90,11 @@ function PageTitle({ title, subtitle = "", highlight = "", bgc = "#ffffff" }) {
     >
       <div className="full-container diagonal-title">
         <div className="title-container">
-          <h1 className="title-page condensed">
+          <h1
+            className={
+              `title-page condensed${location === "multimedia" ? " multimedia-title" : ""}`
+            }
+          >
             {renderTitle(title)}{" "}
             {subtitle ? <span className="subtitle-page">{subtitle}</span> : ""}
           </h1>

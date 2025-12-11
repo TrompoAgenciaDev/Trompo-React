@@ -16,10 +16,9 @@ const Desarrollo = lazy(() => import("../pages/servicios/Desarrollo.jsx"));
 const PaidMedia = lazy(() => import("../pages/servicios/PaidMedia.jsx"));
 const SocialMedia = lazy(() => import("../pages/servicios/SocialMedia.jsx"));
 const Multimedia = lazy(() => import("../pages/servicios/Multimedia"));
-const Google = lazy(() => import("../pages/estrategias/Google.jsx"));
-const Meta = lazy(() => import("../pages/estrategias/Meta.jsx"));
-const Analitica = lazy(() => import("../pages/estrategias/Analitica.jsx"));
-const Branding = lazy(() => import("../pages/creatividad/Branding.jsx"));
+const Google = lazy(() => import("../pages/paidMedia/Google.jsx"));
+const Meta = lazy(() => import("../pages/paidMedia/Meta.jsx"));
+const Analitica = lazy(() => import("../pages/paidMedia/Analitica.jsx"));
 
 //Landings
 const Primavera = lazy(() => import("../pages/landings/Primavera.jsx"));
@@ -98,7 +97,7 @@ const routesConfig = {
   ],
   posts: [{ path: "/post/:slug", Component: SinglePost }],
 
-  AlternativePAges: [
+  AlternativePages: [
     { path: "/not-found", label: "No encontrado", Component: NotFound },
     { path: "/maintenance", label: "Mantenimiento", Component: Maintenance },
     { path: "/gracias", label: "gracias", Component: Gracias },
@@ -106,14 +105,10 @@ const routesConfig = {
     { path: "/clear-cache", label: "Limpiar Caché", Component: ClearCache },
   ],
 
-  estrategias: [
+  paidMedia: [
     { path: "/servicios/paid-media/google-ads", label: "Google Ads", Component: Google },
     { path: "/servicios/paid-media/meta-ads", label: "Meta Ads", Component: Meta },
     { path: "/servicios/paid-media/analitica-web", label: "Analítica", Component: Analitica },
-  ],
-
-  creatividad: [
-    { path: "/servicios/disenio", label: "Branding", Component: Branding },
   ],
 };
 

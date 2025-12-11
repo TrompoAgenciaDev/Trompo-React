@@ -61,14 +61,43 @@
   ],
   "web": [
     {
-      "id": "vox",
-      "name": "Vox",
-      "description": "Desarrollamos la identidad de VOX, una agencia de prensa y comunicación.</br></br>Creamos un concepto visual basado en un búho que transmite criterio y cercanía, junto con un sistema gráfico cálido y profesional.</br></br>Completamos el proyecto con un sitio web dinámico que ordena sus servicios y potencia su presencia en medios.",
-      "gallery": [
-        "vox1.webp",
-        "vox2.webp",
-        "vox3.webp"
-      ],
+      "id": "galpones-modulares",
+      "name": "Galpones Modulares",
+      "description": "Desarrollamos la identidad visual para Galpones Modulares, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.",
+      "video": "branding-web/galpones-modulares.mp4",
+      "gallery": [],
+      "logo": null
+    },
+    {
+      "id": "ravana",
+      "name": "Ravana",
+      "description": "Desarrollamos la identidad visual para Ravana, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.",
+      "video": "branding-web/ravana.mp4",
+      "gallery": [],
+      "logo": null
+    },
+    {
+      "id": "super-walter",
+      "name": "Super Walter",
+      "description": "Desarrollamos la identidad visual para Super Walter, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.",
+      "video": "branding-web/super-walter.mp4",
+      "gallery": [],
+      "logo": null
+    },
+    {
+      "id": "volvo-usados",
+      "name": "Volvo Usados",
+      "description": "Desarrollamos la identidad visual y comunicación digital para Volvo Usados, destacando su proceso de reacondicionamiento, la garantía oficial y la experiencia de compra confiable.",
+      "video": "branding-web/volvo-usados.mp4",
+      "gallery": [],
+      "logo": null
+    },
+    {
+      "id": "volvo-vm",
+      "name": "Volvo VM",
+      "description": "Desarrollamos la identidad visual para Volvo VM, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.",
+      "video": "branding-web/volvo-vm.mp4",
+      "gallery": [],
       "logo": null
     }
   ],

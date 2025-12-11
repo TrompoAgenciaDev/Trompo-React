@@ -94,7 +94,7 @@ h3.display-title,
 .tabs-container{
     width: 100%;
     max-width: 800px;
-    display: flex;
+    display: none; /* Oculto en responsive, visible desde 1024px */
     gap: 10px;
     justify-content: center;
     align-items: center;
@@ -107,10 +107,40 @@ h3.display-title,
     font-size: 14px;
     font-weight: 700;
     cursor: pointer;
+    border: none;
 }
 
 .tab-button.active{
     background-color: #E1C025;
+}
+
+/* Select para responsive (hasta tablet) */
+.tab-select{
+    width: 100%;
+    max-width: 800px;
+    background-color: #FFDF69;
+    padding: 15px 50px 15px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%231D1D1B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    font-family: var(--font-portfolio);
+}
+
+.tab-select:focus{
+    outline: none;
+    background-color: #E1C025;
+}
+
+.tab-select option{
+    background-color: #FFDF69;
+    padding: 15px 20px;
 }
 
 .grid-item-beneficios svg{
@@ -227,6 +257,11 @@ h3.display-title,
     .tabs-container{
         max-width: 1024px;
         gap: 50px;
+        display: flex; /* Visible en desktop */
+    }
+
+    .tab-select{
+        display: none; /* Oculto en desktop */
     }
 
     .tab-button{

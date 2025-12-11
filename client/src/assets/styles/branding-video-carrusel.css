@@ -1,0 +1,90 @@
+/* Contenedor principal */
+.brand-video-item {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* Wrapper con relación de aspecto 21:9 (42.857%) */
+.brand-video-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 42.857%; /* 21:9 */
+    overflow: hidden;
+}
+
+/* VIDEO CORREGIDO */
+.brand-video-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Panel de contenido */
+.brand-video-item .container {
+    height: 600px;
+}
+
+.brand-video-panel {
+    position: relative;
+    z-index: 1;
+    max-width: 400px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(6px);
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+}
+
+.brand-video-panel-hidden {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+.brand-video-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #8e8e8e;
+    line-height: 1.2;
+    font-family: var(--font-portfolio);
+}
+
+.brand-video-panel p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #1D1D1B;
+    padding: 0;
+}
+
+/* Version desktop */
+@media (min-width: 1024px) {
+
+    .brand-video-item .container {
+        position: relative;
+    }
+
+    .brand-video-panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 35px 50px;
+    }
+
+    .brand-video-title {
+        font-size: 48px;
+    }
+
+    .brand-video-panel p {
+        font-size: 15px;
+    }
+}
