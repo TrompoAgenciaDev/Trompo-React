@@ -188,6 +188,12 @@ h3.display-title,
     font-size: 20px;
 }
 
+.brand-video-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(5, 300px);
+}
+
 @media (min-width: 1024px) {
     .title-container-creative{
         padding: 50px 0 150px;
@@ -313,6 +319,10 @@ h3.display-title,
         max-width: 600px;
         font-weight: normal;
     }
+
+    .brand-video-grid{
+        grid-template-rows: repeat(5, 500px);
+    }
     
 }
 
@@ -328,3 +338,4 @@ h3.display-title,
     }
 }
 
+cd client

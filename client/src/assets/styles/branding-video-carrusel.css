@@ -1,34 +1,3 @@
-/* Contenedor principal */
-.brand-video-item {
-    position: relative;
-    width: 100%;
-    cursor: pointer;
-    overflow: hidden;
-}
-
-/* Wrapper con relación de aspecto 21:9 (42.857%) */
-.brand-video-wrapper {
-    position: relative;
-    width: 100%;
-    padding-bottom: 42.857%; /* 21:9 */
-    overflow: hidden;
-}
-
-/* VIDEO CORREGIDO */
-.brand-video-element {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-/* Panel de contenido */
-.brand-video-item .container {
-    height: 600px;
-}
-
 .brand-video-panel {
     position: relative;
     z-index: 1;
@@ -86,5 +55,23 @@
 
     .brand-video-panel p {
         font-size: 15px;
+    }
+}
+
+
+@media (min-width: 1280px) {
+    
+
+    .brand-video-grid{
+        grid-template-rows: repeat(5, 600px);
+    }
+    .brand-video-item, .brand-video-wrapper {
+        height: 600px;
+    }
+    .brand-video-element{
+        width: auto;
+        height: 600px;
+        object-fit: cover;
+        object-position: center;
     }
 }

@@ -169,6 +169,10 @@ p {
   background-color: #FEE070;
 }
 
+.bg-white{
+  background-color: #ffffff;
+}
+
 footer {
   z-index: 1;
 }
