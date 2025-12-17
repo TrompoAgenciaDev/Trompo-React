@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import Hero from "../../layout/Hero";
 import PageTitle from "../../components/services/PageTitle";
 import Faqs from "../../layout/Faqs";
@@ -35,22 +36,36 @@ const Multimedia = () => {
 
       
 
-      <div className="full-container bg-white">
-        <div className="container">
-          <div className="gird-motion">
+      <div className="full-container bg-white diagonal-multimedia">
+        <div className="full-container gird-motion">
+          <div className="full-container">
+            <h2>
+              Video Institucional
+            </h2>
             <div className="container">
-              <h2>
-                Video Institucional
-              </h2>
-              <div className="container">
-                <p>
-                  Tomamos tu material y lo convertimos en historias que funcionan. Curamos guion y ritmo, musicalización, color, subtítulos y placas gráficas; sumamos llamadas a la acción y adaptamos duraciones para lanzamientos, sliders de sitio, YouTube, LinkedIn y short-form. Optimización por objetivo (retención, CTR, conversión) y mastering listo para publicar.
-                </p>
-              </div>
+              <p>
+                Tomamos tu material y lo convertimos en historias que funcionan. Curamos guion y ritmo, musicalización, color, subtítulos y placas gráficas; sumamos llamadas a la acción y adaptamos duraciones para lanzamientos, sliders de sitio, YouTube, LinkedIn y short-form. Optimización por objetivo (retención, CTR, conversión) y mastering listo para publicar.
+              </p>
             </div>
-            <div className="container">
-              <video src={`${base}assets/portfolioImg/videos/institucional.mp4`} autoPlay muted loop playsInline></video>
-            </div>
+          </div>
+          <div className="full-container video-background-container">
+            <motion.video
+              src={`${base}assets/hero/home.mp4`}
+              autoPlay
+              muted
+              loop
+              playsInline
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                zIndex: 0,
+                pointerEvents: 'none'
+              }}
+            />
           </div>
         </div>
       </div>
