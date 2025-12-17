@@ -32,7 +32,6 @@ const Multimedia = () => {
         highlight="Planificamos, producimos y animamos piezas audiovisuales que elevan lanzamientos, explican propuestas y amplifican campañas. Trabajamos con criterio de marca y performance: coherencia visual, ritmo narrativo y formatos optimizados para web, redes y presentaciones. El resultado: contenido vivo, claro y medible."
         location={"multimedia"}   
       />
-
       
 
       <div className="full-container bg-white">

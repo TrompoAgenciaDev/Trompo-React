@@ -1,0 +1,332 @@
+/* Estilos para BrandingAccordion */
+
+.branding-accordion-wrapper {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.branding-accordion-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 100vh;
+    gap: 0;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.branding-accordion-item {
+    display: flex;
+    min-height: 100vh;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    width: 100px;
+}
+
+.branding-accordion-item.expanded {
+    flex: 1;
+    width: auto;
+}
+
+/* Panel cerrado - 100px de ancho en monitores > 1200px */
+.branding-accordion-closed {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #E1C025;
+    border-right: 1px solid #ffffff;
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover en solapas cerradas */
+.branding-accordion-item:not(.expanded):hover .branding-accordion-closed {
+    background-color: #222222;
+}
+
+.branding-accordion-item:not(.expanded):hover .branding-accordion-name span {
+    color: #ffffff;
+}
+
+/* Flecha SVG - solo visible en hover cuando está cerrado */
+.branding-accordion-arrow {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex: 0;
+    padding-top: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    height: 130px;
+}
+
+.branding-accordion-item:not(.expanded):hover .branding-accordion-arrow {
+    opacity: 1;
+}
+
+.branding-accordion-arrow svg {
+    width: 130px !important;
+    height: 130px !important;
+    min-width: 130px;
+    min-height: 130px;
+    color: #222222;
+    transition: color 0.3s ease;
+}
+
+.branding-accordion-arrow svg path {
+    stroke-width: 1px;
+}
+
+.branding-accordion-item:not(.expanded):hover .branding-accordion-arrow svg {
+    color: #E1C025;
+}
+
+/* Flecha cuando está expandido - siempre visible sin fondo */
+.branding-accordion-arrow.expanded-arrow {
+    opacity: 1;
+    background-color: transparent;
+    border-radius: 0;
+    padding: 0;
+    padding-top: 20px;
+    height: 130px;
+    align-items: flex-start;
+}
+
+.branding-accordion-arrow.expanded-arrow svg {
+    height: 130px !important;
+    width: 130px !important;
+    min-width: 130px;
+    min-height: 130px;
+    color: #222222;
+    transform: rotate(180deg); /* Invertir la flecha */
+}
+
+.branding-accordion-arrow.expanded-arrow svg path {
+    stroke-width: 1px;
+}
+
+.branding-accordion-name {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex: 0;
+    padding-bottom: 20px;
+}
+
+.branding-accordion-name span {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 18px;
+    font-weight: 700;
+    color: #222222;
+    font-family: var(--font-portfolio);
+    letter-spacing: 2px;
+    transition: color 0.3s ease;
+}
+
+/* Wrapper para cuando está expandido */
+.branding-accordion-expanded-wrapper {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Panel cerrado cuando está expandido - posicionado encima del slider */
+.branding-accordion-closed.expanded-panel {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    height: 100vh;
+    background-color: #ffffff7e;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(10px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.branding-accordion-closed.expanded-panel * {
+    pointer-events: auto;
+}
+
+.branding-accordion-closed.expanded-panel .branding-accordion-name span {
+    color: #222222;
+}
+
+/* Panel expandido - galería */
+.branding-accordion-expanded {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    background-color: #ffffff;
+}
+
+.branding-accordion-gallery {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.branding-accordion-gallery-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Sticky amarillo animado - solo visible en hover */
+.branding-accordion-sticky {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    width: 24px;
+    height: 80px;
+    background-color: #E1C025;
+    border-radius: 0 6px 6px 0;
+    z-index: 10;
+    transform: translateY(-50%);
+    box-shadow: 0 2px 8px rgba(225, 192, 37, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.branding-accordion-item:not(.expanded):hover .branding-accordion-sticky {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+.branding-accordion-item:not(.expanded) .branding-accordion-sticky {
+    transform: translateY(-50%) translateX(-10px);
+}
+
+/* Quitar cualquier transición de color en click */
+.branding-accordion-item:active,
+.branding-accordion-closed:active {
+    background-color: #E1C025 !important;
+}
+
+/* Responsive - hasta 1200px */
+@media (max-width: 1199px) {
+    .branding-accordion-closed {
+        min-width: 100px;
+        max-width: 100px;
+    }
+
+    .branding-accordion-name span {
+        font-size: 16px;
+    }
+}
+
+/* Responsive - hasta tablet */
+@media (max-width: 1023px) {
+    .branding-accordion-container {
+        flex-direction: column;
+    }
+
+    .branding-accordion-item {
+        min-height: 150px;
+        flex-direction: column;
+    }
+
+    .branding-accordion-closed {
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        height: 150px;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        border-right: none;
+        border-bottom: 1px solid #ffffff;
+    }
+
+    .branding-accordion-arrow {
+        width: 60px;
+        height: 60px;
+    }
+
+    .branding-accordion-arrow svg {
+        width: 60px;
+        height: 60px;
+    }
+
+    .branding-accordion-name {
+        flex: 0;
+        width: auto;
+        padding-bottom: 0;
+    }
+
+    .branding-accordion-name span {
+        writing-mode: horizontal-tb;
+        text-orientation: mixed;
+        transform: none;
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
+
+    .branding-accordion-expanded {
+        width: 100%;
+        height: auto;
+        min-height: 400px;
+    }
+
+    .branding-accordion-gallery {
+        height: 400px;
+    }
+}
+
+/* Desktop - monitores > 1200px */
+@media (min-width: 1200px) {
+    .branding-accordion-container {
+        flex-direction: row;
+    }
+
+    .branding-accordion-item {
+        min-height: 100vh;
+    }
+
+    .branding-accordion-closed {
+        width: 100px;
+        min-width: 100px;
+        max-width: 100px;
+    }
+
+    .branding-accordion-name span {
+        font-size: 70px;
+    }
+
+    .branding-accordion-expanded {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
