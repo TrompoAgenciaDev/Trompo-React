@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
@@ -18,6 +18,38 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
   : `${import.meta.env.BASE_URL}/`;
 
 const Disenio = () => {
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const accordionWrapperRef = useRef(null);
+
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      const header = document.querySelector('header.full-container');
+      if (header) {
+        const height = header.offsetHeight;
+        setHeaderHeight(height);
+        // Aplicar la altura al acordeón usando CSS variable
+        if (accordionWrapperRef.current) {
+          accordionWrapperRef.current.style.setProperty('--header-height', `${height}px`);
+        }
+      }
+    };
+
+    // Actualizar al montar y al cambiar el tamaño de la ventana
+    updateHeaderHeight();
+    window.addEventListener('resize', updateHeaderHeight);
+    
+    // También actualizar cuando el header se vuelve sticky
+    const observer = new MutationObserver(updateHeaderHeight);
+    const header = document.querySelector('header.full-container');
+    if (header) {
+      observer.observe(header, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    return () => {
+      window.removeEventListener('resize', updateHeaderHeight);
+      observer.disconnect();
+    };
+  }, []);
   // const [activeTab, setActiveTab] = useState("institucional");
   // const videoRefs = useRef({});
 
@@ -256,7 +288,7 @@ const Disenio = () => {
         mobilePoster={`${base}assets/hero/mobile/creatividad-hero-mobile-poster.webp`}
       />
 
-      <div className="full-container bg-yellow-2">
+      <div className="full-container">
         <div className="full-container title-container-creative">
           <div className="container title-container">
             <h3 className="display-title">[Branding]</h3>
@@ -325,14 +357,18 @@ const Disenio = () => {
         </div> */}
 
         {/* Nuevo acordeón vertical */}
-        <div className="full-container branding-accordion-wrapper">
+        <div 
+          ref={accordionWrapperRef}
+          className="full-container branding-accordion-wrapper"
+          style={{ '--header-height': `${headerHeight}px` }}
+        >
           <BrandingAccordion category="institucional" />
         </div>
       </div>
       
       <div className="full-container beneficios-container">
         <div className="container title-beneficios">
-          <h1>beneficios <span className="italic">diferenciales</span></h1>
+          <h1>Beneficios <span className="italic">diferenciales</span></h1>
           <h2>Nuestra metodología garantiza:</h2>
         </div>
         <div className="container">          

@@ -41,7 +41,7 @@
     width: 100%;
 }
 
-.title-creative h1:not(.title-creative h1.black, h1.display-title, h3.display-title){
+.title-creative h1:not(.title-creative h1.black, h3.display-title){
     color: #E1C025;
     font-size: 28px;
 }
@@ -57,7 +57,7 @@
 }
 
 .icon-container{
-    width: 100%;
+    width: 120px;
     height: 120px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -65,6 +65,10 @@
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
+}
+
+.title-container-creative .icon-container:hover{
+    background-color: #FEE070 !important;
 }
 
 h3.display-title{
