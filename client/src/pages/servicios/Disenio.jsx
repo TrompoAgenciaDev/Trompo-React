@@ -1,16 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
-// import BrandingCarrusel from "../../components/branding/branding-carrusel.jsx";
-import BrandingAccordion from "../../components/branding/branding-accordion.jsx";
+import PortfolioSlider from "../../components/portfolio-slider/PortfolioSlider.jsx";
 
 //styles
 import "@as/hero.css";
-import "../../assets/styles/creative.css";
+import "../../assets/styles/design.css";
 import "../../assets/styles/branding-video-carrusel.css";
-import "../../assets/styles/branding-accordion.css";
 
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
@@ -20,6 +19,16 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
 const Disenio = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const accordionWrapperRef = useRef(null);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const videoRef = useRef(null);
+
+  // Datos del video (puedes cambiar estos valores)
+  const videoData = {
+    title: "movie trompo",
+    duration: "00.58",
+    thumbnail: `${base}assets/creatividad/volvo.png`,
+    videoSrc: `${base}assets/creatividad/multimedia/volvo.mp4`
+  };
 
   useEffect(() => {
     const updateHeaderHeight = () => {
@@ -50,7 +59,7 @@ const Disenio = () => {
       observer.disconnect();
     };
   }, []);
-  // const [activeTab, setActiveTab] = useState("institucional");
+  
   // const videoRefs = useRef({});
 
   // const tabs = [
@@ -289,82 +298,167 @@ const Disenio = () => {
       />
 
       <div className="full-container">
-        <div className="full-container title-container-creative">
+        <div className="full-container title-container-disegn">
           <div className="container title-container">
-            <h3 className="display-title">[Branding]</h3>
+            <h3 className="display-title">[Diseño]</h3>
           </div>
-          <div className="container grid-container">
-            <div className="container">
-              <div className="title-creative">
-                <h1 className="display-title">Nuestro servicio de Branding está orientado al desarrollo integral de la identidad de marca.</h1>
-                <div className="container">
-                  <p>
-                    Desde la creación de isologotipos hasta el diseño de material editorial y publicitario, este producto busca construir una identidad visual coherente, profesional y alineada a los valores y objetivos estratégicos de la empresa.
-                    <br />
-                    <br />
-                    Es ideal para marcas que inician o necesitan reposicionarse con solidez en un mercado cada vez más competitivo.
-                  </p>
+          <div className="container">
+            <div className="container grid-container">
+              <div className="container">
+                <div className="title-creative">
+                  <h1 className="display-title">Servicios de diseño gráfico</h1>                
+                </div>
+              </div>
+              <div className="container">
+                <div className="icon-container">
+                  <svg xmlns="http://www.w3.org/2000/svg" width={62} height={62} viewBox="0 0 62 62" fill="none">
+                    <path
+                      d="M31 7L31 55M31 55L55 31M31 55L7 31"
+                      stroke="#FED332"
+                      strokeWidth={1}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </div>
               </div>
             </div>
-            <div className="container">
-              <div className="icon-container">
-                <svg xmlns="http://www.w3.org/2000/svg" width={62} height={62} viewBox="0 0 62 62" fill="none">
-                  <path
-                    d="M31 7L31 55M31 55L55 31M31 55L7 31"
-                    stroke="#1D1D1B"
-                    strokeWidth={1}
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-            </div>
           </div>
-        </div>
-        
-        {/* Tabs y portfolios comentados - reemplazados por acordeón */}
-        {/* <div className="full-container tabs-container-creative">
-          <div className="full-container title-tabs">
-            <div className="container tabs">
-              <select
-                className="tab-select"
-                value={activeTab}
-                onChange={(e) => setActiveTab(e.target.value)}
-              >
-                {tabs.map((tab) => (
-                  <option key={tab.id} value={tab.id}>
-                    {tab.label}
-                  </option>
-                ))}
-              </select>
-              <div className="tabs-container">
-                {tabs.map((tab) => (
-                  <button
-                    key={tab.id}
-                    className={`tab-button ${activeTab === tab.id ? "active" : ""}`}
-                    onClick={() => setActiveTab(tab.id)}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="full-container tab-content-container">
-            {renderTabContent()}
-          </div>
-        </div> */}
-
-        {/* Nuevo acordeón vertical */}
-        <div 
-          ref={accordionWrapperRef}
-          className="full-container branding-accordion-wrapper"
-          style={{ '--header-height': `${headerHeight}px` }}
-        >
-          <BrandingAccordion category="institucional" />
         </div>
       </div>
+
+
+      {/* Modal de video a pantalla completa */}
+      <AnimatePresence>
+        {isVideoModalOpen && (
+          <motion.div
+            className="video-modal-fullscreen"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => {
+              setIsVideoModalOpen(false);
+              if (videoRef.current) {
+                videoRef.current.pause();
+              }
+            }}
+          >
+            <motion.div
+              className="video-modal-content"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="video-modal-close"
+                onClick={() => {
+                  setIsVideoModalOpen(false);
+                  if (videoRef.current) {
+                    videoRef.current.pause();
+                  }
+                }}
+                aria-label="Cerrar video"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 6L6 18M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+              <video
+                ref={videoRef}
+                src={videoData.videoSrc}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="video-modal-player"
+                onLoadedData={() => {
+                  if (videoRef.current) {
+                    videoRef.current.play().catch(() => {});
+                  }
+                }}
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <div className="full-container">
+        <div className="container">
+          <div className="container">
+            <span className="play-reel-text">Play</span>
+            <div className="container box">
+              <div 
+                className="img-reel-container"
+                onClick={() => setIsVideoModalOpen(true)}
+                style={{ cursor: 'pointer' }}
+              >
+                <img src={videoData.thumbnail} alt={videoData.title} />
+                <div className="video-overlay-info">
+                  <span className="video-title-overlay">{videoData.title}</span>
+                  <span className="video-duration-overlay">{videoData.duration}</span>
+                </div>
+              </div>
+            </div>
+            <span className="play-reel-text">Me</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="full-container strategy-container">
+        <div className="container">
+          <h1>
+            Diseño Estratégico
+          </h1>
+          <h2> Que Convierte Ideas En Identidad</h2>
+        </div>
+
+        <div className="full-container grid-strategy">
+          <div className="full-container  strategy-item">
+            <div className="container">
+              <div className="grid-item-strategy">
+                <span>Diseño que transciende lo visual</span>
+              </div>
+              <div className="grid-item-strategy">
+                <p>
+                  El diseño consciente no se limita a verse bien. Piensa, comunica y construye sentido. Es estrategia aplicada a la identidad.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="full-container strategy-item">
+            <div className="container">
+              <div className="grid-item-strategy">
+                <span>Identidad con propósito</span>
+              </div>
+              <div className="grid-item-strategy">
+                <p>
+                  No decoramos ideas: les damos alma, carácter y presencia tangible. Diseñamos marcas que se reconocen antes de explicarse.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="full-container strategy-item">
+            <div className="container">
+              <div className="grid-item-strategy">
+                <span>Hacer visible lo esencial</span>
+              </div>
+              <div className="grid-item-strategy">
+                <p>
+                  El verdadero diseño revela lo importante. Ordena, potencia y convierte lo abstracto en algo claro, memorable y real.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="full-container">
+        <PortfolioSlider category="institucional" />
+      </div>
+      
       
       <div className="full-container beneficios-container">
         <div className="container title-beneficios">

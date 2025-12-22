@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import "../../assets/styles/branding-accordion.css";
+import "./portfolio-accordion.css";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
-const BrandingAccordion = ({ category }) => {
+const PortfolioAccordion = ({ category }) => {
   const [clientsData, setClientsData] = useState([]);
   const [expandedIndex, setExpandedIndex] = useState(null);
   const [currentImageIndices, setCurrentImageIndices] = useState({});
@@ -297,5 +297,5 @@ const BrandingAccordion = ({ category }) => {
   );
 };
 
-export default BrandingAccordion;
+export default PortfolioAccordion;
 
