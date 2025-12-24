@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import "./portfolio-slider.css";
+import "../../assets/styles/portfolio-slider.css";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -12,6 +12,7 @@ const PortfolioSlider = ({ category = "institucional" }) => {
   const [prevIndex, setPrevIndex] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [direction, setDirection] = useState('next'); // 'next' o 'prev'
   const autoRotateIntervalRef = useRef(null);
 
   // Cargar datos de la categoría desde el JSON
@@ -54,6 +55,7 @@ const PortfolioSlider = ({ category = "institucional" }) => {
     stopAutoRotate();
 
     autoRotateIntervalRef.current = setInterval(() => {
+      setDirection('next'); // Auto-rotación siempre avanza hacia adelante
       setCurrentIndex((prev) => {
         const oldIndex = prev;
         const nextIndex = (prev + 1) % clientsData.length;
@@ -99,6 +101,7 @@ const PortfolioSlider = ({ category = "institucional" }) => {
     stopAutoRotate();
     
     setIsAnimating(true);
+    setDirection('next'); // Establecer dirección hacia adelante
     const oldIndex = currentIndex;
     setPrevIndex(oldIndex);
     setCurrentIndex((prev) => {
@@ -123,6 +126,7 @@ const PortfolioSlider = ({ category = "institucional" }) => {
     stopAutoRotate();
     
     setIsAnimating(true);
+    setDirection('prev'); // Establecer dirección hacia atrás
     const oldIndex = currentIndex;
     setPrevIndex(oldIndex);
     setCurrentIndex((prev) => {
@@ -147,6 +151,10 @@ const PortfolioSlider = ({ category = "institucional" }) => {
     stopAutoRotate();
     
     setIsAnimating(true);
+    // Determinar dirección basándose en si el índice es mayor o menor
+    const diff = index - currentIndex;
+    const isForward = diff > 0 || (diff < 0 && Math.abs(diff) > clientsData.length / 2);
+    setDirection(isForward ? 'next' : 'prev');
     const oldIndex = currentIndex;
     setPrevIndex(oldIndex);
     setCurrentIndex(index);
@@ -195,7 +203,7 @@ const PortfolioSlider = ({ category = "institucional" }) => {
             onClick={() => goToSlide(index)}
             initial={false}
             animate={{
-              filter: index === currentIndex ? 'blur(0px)' : 'blur(4px)',
+              filter: index === currentIndex ? 'blur(0px)' : 'blur(3px)',
               opacity: index === currentIndex ? 1 : 0.5
             }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
@@ -222,7 +230,6 @@ const PortfolioSlider = ({ category = "institucional" }) => {
               opacity: 0.6
             }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
           >
             {(() => {
               const slideToShow = prevIndex !== currentIndex 
@@ -238,11 +245,14 @@ const PortfolioSlider = ({ category = "institucional" }) => {
             })()}
           </motion.div>
 
-          {/* Slide actual (centro) - viene de la derecha */}
+          {/* Slide actual (centro) - viene de la derecha o izquierda según la dirección */}
           <motion.div
             className="portfolio-slider-main"
             key={`main-${currentIndex}`}
-            initial={{ x: '15%', scale: 0.75, rotateY: 15, filter: 'blur(8px)', opacity: 0.6 }}
+            initial={direction === 'next' 
+              ? { x: '15%', scale: 0.75, rotateY: 15, filter: 'blur(8px)', opacity: 0.6 }
+              : { x: '-15%', scale: 0.75, rotateY: -15, filter: 'blur(8px)', opacity: 0.6 }
+            }
             animate={{ 
               x: 0, 
               scale: 1,
@@ -251,7 +261,6 @@ const PortfolioSlider = ({ category = "institucional" }) => {
               opacity: 1
             }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
           >
             {getSlideData(0) && getSlideData(0).gallery && getSlideData(0).gallery.length > 0 && (
               <img
@@ -277,7 +286,6 @@ const PortfolioSlider = ({ category = "institucional" }) => {
               opacity: 0.6
             }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
           >
             {getSlideData(1) && getSlideData(1).gallery && getSlideData(1).gallery.length > 0 && (
               <img

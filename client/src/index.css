@@ -173,6 +173,10 @@ p {
   background-color: #ffffff;
 }
 
+.black-bg {
+  background-color: #262626;
+}
+
 footer {
   z-index: 1;
 }

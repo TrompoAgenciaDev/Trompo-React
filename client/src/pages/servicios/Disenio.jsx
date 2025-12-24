@@ -5,6 +5,7 @@ import Contact from "../../layout/Contact.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 import PortfolioSlider from "../../components/portfolio-slider/PortfolioSlider.jsx";
+import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 
 //styles
 import "@as/hero.css";
@@ -60,234 +61,7 @@ const Disenio = () => {
     };
   }, []);
   
-  // const videoRefs = useRef({});
-
-  // const tabs = [
-  //   { id: "institucional", label: "Branding Institucional" },
-  //   { id: "web", label: "Branding Web" },
-  //   { id: "social", label: "Social Brand" },
-  // ];
-
-  // Contenido para cada tab - COMENTADO
-  // const renderTabContent = () => {
-  // switch (activeTab) {
-  //     case "institucional":
-  //     return (
-  //         <>
-  //           <div className="full-container">
-  //             <div className="container">
-  //               <h2 className="display-title">Branding Institucional</h2>
-  //               <p>
-  //                 <span>Este servicio está orientado al desarrollo integral de la identidad de marca </span> 
-  //                 <br />
-  //                 Desde la creación de isologotipos hasta el diseño de material editorial y publicitario, este producto busca construir una identidad visual coherente, profesional y alineada a los valores y objetivos estratégicos de la empresa.
-  //               </p>
-  //             </div>
-  //           </div>
-
-  //           <BrandingCarrusel category="institucional" />
-  //         </>
-  //     );
-  //     case "web":
-  //     return (
-  //         <>
-  //           <div className="full-container">
-  //             <div className="container">
-  //               <h2 className="display-title">Branding Web</h2>
-  //               <p>
-  //                 <span>Este servicio está orientado al desarrollo integral de la identidad de marca </span> 
-  //                 <br />
-  //                 Desde la creación de isologotipos hasta el diseño de material editorial y publicitario, este producto busca construir una identidad visual coherente, profesional y alineada a los valores y objetivos estratégicos de la empresa.
-  //               </p>
-  //             </div>
-  //           </div>
-
-  //           {/* Videos manuales de Branding Web */}
-  //           <div className="full-container brand-video-grid">
-  //             <div className="full-container brand-video-item"
-  //               onMouseEnter={() => {
-  //                 if (videoRefs.current['galpones-modulares']) {
-  //                   videoRefs.current['galpones-modulares'].play().catch(() => {});
-  //                 }
-  //               }}
-  //               onMouseLeave={() => {
-  //                 if (videoRefs.current['galpones-modulares']) {
-  //                   videoRefs.current['galpones-modulares'].pause();
-  //                   videoRefs.current['galpones-modulares'].currentTime = 0;
-  //                 }
-  //               }}
-  //             >
-  //               <div className="brand-video-wrapper">
-  //                 <video
-  //                   ref={(el) => { if (el) videoRefs.current['galpones-modulares'] = el; }}
-  //                   className="brand-video-element"
-  //                   src={`${base}assets/creatividad/branding-web/galpones-modulares.mp4`}
-  //                   loop
-  //                   muted
-  //                   playsInline
-  //                   preload="metadata"
-  //                 />
-  //               </div>
-  //               <div className="container">
-  //                 <div className="brand-video-panel brand-video-panel-hidden">
-  //                   <h2 className="brand-video-title">Galpones Modulares</h2>
-  //                   <p>Desarrollamos la identidad visual para Galpones Modulares, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.</p>
-  //                 </div>
-  //               </div>
-  //             </div>
-
-  //             <div className="full-container brand-video-item"
-  //               onMouseEnter={() => {
-  //                 if (videoRefs.current['ravana']) {
-  //                   videoRefs.current['ravana'].play().catch(() => {});
-  //                 }
-  //               }}
-  //               onMouseLeave={() => {
-  //                 if (videoRefs.current['ravana']) {
-  //                   videoRefs.current['ravana'].pause();
-  //                   videoRefs.current['ravana'].currentTime = 0;
-  //                 }
-  //               }}
-  //             >
-  //               <div className="brand-video-wrapper">
-  //                 <video
-  //                   ref={(el) => { if (el) videoRefs.current['ravana'] = el; }}
-  //                   className="brand-video-element"
-  //                   src={`${base}assets/creatividad/branding-web/ravana.mp4`}
-  //                   loop
-  //                   muted
-  //                   playsInline
-  //                   preload="metadata"
-  //                 />
-  //               </div>
-  //               <div className="container">
-  //                 <div className="brand-video-panel brand-video-panel-hidden">
-  //                   <h2 className="brand-video-title">Ravana</h2>
-  //                   <p>Desarrollamos la identidad visual para Ravana, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.</p>
-  //                 </div>
-  //               </div>
-  //             </div>
-
-  //             <div className="full-container brand-video-item"
-  //               onMouseEnter={() => {
-  //                 if (videoRefs.current['super-walter']) {
-  //                   videoRefs.current['super-walter'].play().catch(() => {});
-  //                 }
-  //               }}
-  //               onMouseLeave={() => {
-  //                 if (videoRefs.current['super-walter']) {
-  //                   videoRefs.current['super-walter'].pause();
-  //                   videoRefs.current['super-walter'].currentTime = 0;
-  //                 }
-  //               }}
-  //             >
-  //               <div className="brand-video-wrapper">
-  //                 <video
-  //                   ref={(el) => { if (el) videoRefs.current['super-walter'] = el; }}
-  //                   className="brand-video-element"
-  //                   src={`${base}assets/creatividad/branding-web/super-walter.mp4`}
-  //                   loop
-  //                   muted
-  //                   playsInline
-  //                   preload="metadata"
-  //                 />
-  //               </div>
-  //               <div className="container">
-  //                 <div className="brand-video-panel brand-video-panel-hidden">
-  //                   <h2 className="brand-video-title">Super Walter</h2>
-  //                   <p>Desarrollamos la identidad visual para Super Walter, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.</p>
-  //                 </div>
-  //               </div>
-  //             </div>
-
-  //             <div className="full-container brand-video-item"
-  //               onMouseEnter={() => {
-  //                 if (videoRefs.current['volvo-usados']) {
-  //                   videoRefs.current['volvo-usados'].play().catch(() => {});
-  //                 }
-  //               }}
-  //               onMouseLeave={() => {
-  //                 if (videoRefs.current['volvo-usados']) {
-  //                   videoRefs.current['volvo-usados'].pause();
-  //                   videoRefs.current['volvo-usados'].currentTime = 0;
-  //                 }
-  //               }}
-  //             >
-  //               <div className="brand-video-wrapper">
-  //                 <video
-  //                   ref={(el) => { if (el) videoRefs.current['volvo-usados'] = el; }}
-  //                   className="brand-video-element"
-  //                   src={`${base}assets/creatividad/branding-web/volvo-usados.mp4`}
-  //                   loop
-  //                   muted
-  //                   playsInline
-  //                   preload="metadata"
-  //                 />
-  //               </div>
-  //               <div className="container">
-  //                 <div className="brand-video-panel brand-video-panel-hidden">
-  //                   <h2 className="brand-video-title">Volvo Usados</h2>
-  //                   <p>Desarrollamos la identidad visual y comunicación digital para Volvo Usados, destacando su proceso de reacondicionamiento, la garantía oficial y la experiencia de compra confiable.</p>
-  //                 </div>
-  //               </div>
-  //             </div>
-
-  //             <div className="full-container brand-video-item"
-  //               onMouseEnter={() => {
-  //                 if (videoRefs.current['volvo-vm']) {
-  //                   videoRefs.current['volvo-vm'].play().catch(() => {});
-  //                 }
-  //               }}
-  //               onMouseLeave={() => {
-  //                 if (videoRefs.current['volvo-vm']) {
-  //                   videoRefs.current['volvo-vm'].pause();
-  //                   videoRefs.current['volvo-vm'].currentTime = 0;
-  //                 }
-  //               }}
-  //             >
-  //               <div className="brand-video-wrapper">
-  //                 <video
-  //                   ref={(el) => { if (el) videoRefs.current['volvo-vm'] = el; }}
-  //                   className="brand-video-element"
-  //                   src={`${base}assets/creatividad/branding-web/volvo-vm.mp4`}
-  //                   loop
-  //                   muted
-  //                   playsInline
-  //                   preload="metadata"
-  //                 />
-  //               </div>
-  //               <div className="container">
-  //                 <div className="brand-video-panel brand-video-panel-hidden">
-  //                   <h2 className="brand-video-title">Volvo VM</h2>
-  //                   <p>Desarrollamos la identidad visual para Volvo VM, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.</p>
-  //                 </div>
-  //               </div>
-  //             </div>
-  //           </div>
-  //         </>
-  //     );
-  //     case "social":
-  //     return (
-  //       <>
-  //         <div className="full-container">
-  //           <div className="container">
-  //             <h2 className="display-title">Social Brand</h2>
-  //             <p>
-  //               <span>Este servicio está orientado al desarrollo integral de la identidad de marca </span> 
-  //               <br />
-  //               Desde la creación de isologotipos hasta el diseño de material editorial y publicitario, este producto busca construir una identidad visual coherente, profesional y alineada a los valores y objetivos estratégicos de la empresa.
-  //             </p>
-  //           </div>
-  //         </div>
-
-  //         <BrandingCarrusel category="social" />
-  //       </>
-  //     );
-  //     default:
-  //     return null;
-  // }
-  // };
-
+  
   return (
     <>
       <SimpleHeroVideo
@@ -297,35 +71,7 @@ const Disenio = () => {
         mobilePoster={`${base}assets/hero/mobile/creatividad-hero-mobile-poster.webp`}
       />
 
-      <div className="full-container">
-        <div className="full-container title-container-disegn">
-          <div className="container title-container">
-            <h3 className="display-title">[Diseño]</h3>
-          </div>
-          <div className="container">
-            <div className="container grid-container">
-              <div className="container">
-                <div className="title-creative">
-                  <h1 className="display-title">Servicios de diseño gráfico</h1>                
-                </div>
-              </div>
-              <div className="container">
-                <div className="icon-container">
-                  <svg xmlns="http://www.w3.org/2000/svg" width={62} height={62} viewBox="0 0 62 62" fill="none">
-                    <path
-                      d="M31 7L31 55M31 55L55 31M31 55L7 31"
-                      stroke="#FED332"
-                      strokeWidth={1}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ServiceTitle area="Diseño" titulo="Servicios de diseño gráfico" />
 
 
       {/* Modal de video a pantalla completa */}
@@ -407,7 +153,7 @@ const Disenio = () => {
         </div>
       </div>
 
-      <div className="full-container strategy-container">
+      <div className="full-container strategy-container black-bg">
         <div className="container">
           <h1>
             Diseño Estratégico
@@ -416,7 +162,7 @@ const Disenio = () => {
         </div>
 
         <div className="full-container grid-strategy">
-          <div className="full-container  strategy-item">
+          <div className="full-container strategy-item black-bg">
             <div className="container">
               <div className="grid-item-strategy">
                 <span>Diseño que transciende lo visual</span>
@@ -428,7 +174,7 @@ const Disenio = () => {
               </div>
             </div>
           </div>
-          <div className="full-container strategy-item">
+          <div className="full-container strategy-item black-bg">
             <div className="container">
               <div className="grid-item-strategy">
                 <span>Identidad con propósito</span>
@@ -440,7 +186,7 @@ const Disenio = () => {
               </div>
             </div>
           </div>
-          <div className="full-container strategy-item">
+          <div className="full-container strategy-item black-bg">
             <div className="container">
               <div className="grid-item-strategy">
                 <span>Hacer visible lo esencial</span>

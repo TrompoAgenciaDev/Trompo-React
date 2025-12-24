@@ -19,13 +19,13 @@
 .portfolio-slider-title {
     background: none;
     border: none;
-    color: #ffffff;
+    color: #E1C025;
     font-size: 24px;
     font-weight: 400;
     font-family: var(--font-portfolio);
     cursor: pointer;
     transition: all 0.8s ease;
-    text-transform: lowercase;
+    text-transform: capitalize;
     padding: 10px 0;
 }
 
@@ -35,6 +35,18 @@
 
 .portfolio-slider-title.active {
     font-weight: 700;
+    color: #ffffff;
+}
+
+.portfolio-slider-title.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 1px;
+    background-color: #ffffff;
 }
 
 /* Slider wrapper */
@@ -71,6 +83,7 @@
     border-radius: 8px;
     cursor: pointer;
     transform-style: preserve-3d;
+    perspective: 1000px;
 }
 
 .portfolio-slider-preview-left {
@@ -113,6 +126,7 @@
     border-radius: 8px;
     z-index: 2;
     transform-style: preserve-3d;
+    perspective: 1000px;
 }
 
 .portfolio-slider-main-image {
