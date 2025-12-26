@@ -4,7 +4,7 @@ import "../../assets/styles/service-title.css";
 const ServiceTitle = ({ area, titulo }) => {
   return (
     <div className="full-container">
-      <div className="full-container title-container-disegn black-bg">
+      <div className="full-container title-container-design black-bg">
         <div className="container title-container">
           <h3 className="display-title">[{area}]</h3>
         </div>

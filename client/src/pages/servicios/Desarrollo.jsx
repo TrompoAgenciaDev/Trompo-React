@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion, useReducedMotion } from "framer-motion";
 
 import Hero from "../../layout/Hero.jsx";
 import PageTitle from "../../components/services/PageTitle.jsx";
@@ -11,11 +12,42 @@ import Testimonials from "../../components/Testimonials.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 
 import "../../assets/styles/servicios-page.css";
+import "../../assets/styles/desarrollo.css";
 import "@as/hero.css";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
+
+const InfiniteSlider = ({ text }) => {
+  const shouldReduceMotion = useReducedMotion();
+  // 6 copias para crear un loop infinito más fluido
+  const items = Array(6).fill(text);
+
+  return (
+    <motion.div 
+      className="infinite-slider"
+      animate={{
+        x: shouldReduceMotion ? 0 : ['0%', '-50%']
+      }}
+      transition={{
+        x: {
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: 50,
+          ease: "linear"
+        }
+      }}
+    >
+      {items.map((item, index) => (
+        <h1 key={index} className="infinite-slider-item">{item}</h1>
+      ))}
+      {items.map((item, index) => (
+        <h1 key={`duplicate-${index}`} className="infinite-slider-item">{item}</h1>
+      ))}
+    </motion.div>
+  );
+};
 
 const Desarrollo = () => {
   return (
@@ -26,232 +58,9 @@ const Desarrollo = () => {
         desktopPoster={`${base}assets/hero/desarrollo-hero-poster.webp`}
         mobilePoster={`${base}assets/hero/mobile/desarrollo-hero-mobile-poster.webp`}
       />
-      
-      <PageTitle
-        title="Desarrollo <strong>web</strong>"
-        subtitle=""
-        highlight="<strong>En Trompo</strong> transformamos objetivos de negocio en  <strong>plataformas digitales con propósito.</strong> Unimos estrategia UX</strong>, diseño enfocado en conversión e infraestructura escalable para que tu web no sea solo presencia online, sino un  <strong>activo estratégico que impulsa resultados medibles.</strong>"
-        bgc="#FEE070"
-      />     
 
-      <section className="full-container">
-        <div className="full-container diagonal-invertida">
-          <div className="container grid-content">
-            <div className="grid-item-service">
-              <h2>Web Institucional</h2>
-              <div className="service-container-text">
-                <p>
-                  Diseñamos sitios que trascienden lo informativo:{" "}
-                  <strong>
-                    espacios digitales que transmiten confianza, autoridad y
-                    valor diferencial
-                  </strong>
-                  . Integramos narrativa de marca clara, credenciales tangibles
-                  (casos de éxito, certificaciones) y una estética profesional
-                  que refuerza tu posicionamiento frente a clientes y
-                  competidores
-                </p>
-                <a className="more-info-button" href="#contact">
-                  Más info
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="48"
-                    height="46"
-                    viewBox="0 0 48 46"
-                    fill="none"
-                  >
-                    <path
-                      d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
-                      stroke="#1D1D1B"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div className="grid-item-service">
-              <img
-                src={`${import.meta.env.BASE_URL}assets/desarrollo/institucional.webp`}
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-        <div className="full-container diagonal">
-          <div className="container grid-content">
-            <div className="grid-item-service">
-              <h2>Landing Page</h2>
-              <div className="service-container-text">
-                <p>
-                  Creamos páginas de destino con un único objetivo:{" "}
-                  <strong>convertir visitantes en oportunidades reales</strong>.
-                  Cada elemento está pensado para guiar la acción: arquitectura
-                  conversiva, microcopys persuasivos y un diseño sin fricciones
-                  que multiplica el ROI de cada clic invertido.
-                </p>
-                <a className="more-info-button" href="#contact">
-                  Más info
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="48"
-                    height="46"
-                    viewBox="0 0 48 46"
-                    fill="none"
-                  >
-                    <path
-                      d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
-                      stroke="#1D1D1B"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div className="grid-item-service">
-              <img
-                src={`${import.meta.env.BASE_URL}assets/desarrollo/landing.webp`}
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-        <div className="full-container diagonal-invertida">
-          <div className="container grid-content">
-            <div className="grid-item-service">
-              <h2>E-commerce</h2>
-              <div className="service-container-text">
-                <p>
-                  Desarrollamos tiendas online que combinan{" "}
-                  <strong>
-                    diseño atractivo, performance ágil y procesos de compra
-                    optimizados
-                  </strong>
-                  . Desde la primera impresión hasta el checkout, tu marca
-                  ofrece una experiencia fluida, confiable y diseñada para{" "}
-                  <strong>vender más y fidelizar clientes</strong>.
-                </p>
-                <a className="more-info-button" href="#contact">
-                  Más info
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="48"
-                    height="46"
-                    viewBox="0 0 48 46"
-                    fill="none"
-                  >
-                    <path
-                      d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
-                      stroke="#1D1D1B"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div className="grid-item-service">
-              <img
-                src={`${import.meta.env.BASE_URL}assets/desarrollo/ecommerce.webp`}
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-        <div className="full-container diagonal">
-          <div className="container grid-content">
-            <div className="grid-item-service">
-              <h2>Formación online</h2>
-              <div className="service-container-text">
-                <p>
-                  Creamos plataformas e-learning que unen{" "}
-                  <strong>
-                    pedagogía digital, experiencia de usuario y escalabilidad
-                    tecnológica
-                  </strong>
-                  . Desde cursos autogestionados hasta programas con
-                  integraciones avanzadas, ofrecemos soluciones que facilitan el
-                  aprendizaje y{" "}
-                  <strong>convierten conocimiento en valor de negocio</strong>.
-                </p>
-                <a className="more-info-button" href="#contact">
-                  Más info
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="48"
-                    height="46"
-                    viewBox="0 0 48 46"
-                    fill="none"
-                  >
-                    <path
-                      d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
-                      stroke="#1D1D1B"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div className="grid-item-service">
-              <img
-                src={`${import.meta.env.BASE_URL}assets/desarrollo/formacion.webp`}
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-        <div className="full-container diagonal-invertida">
-          <div className="container grid-content">
-            <div className="grid-item-service">
-              <h2>Catálogo</h2>
-              <div className="service-container-text">
-                <p>
-                  Diseñamos catálogos digitales dinámicos que combinan{" "}
-                  <strong>
-                    diseño visual impactante, navegabilidad intuitiva y
-                    presentación estratégica de productos
-                  </strong>
-                  . Una herramienta que potencia ventas, facilita consultas y
-                  refuerza la credibilidad de tu marca frente a clientes y
-                  distribuidores.
-                </p>
-                <a className="more-info-button" href="#contact">
-                  Más info
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="48"
-                    height="46"
-                    viewBox="0 0 48 46"
-                    fill="none"
-                  >
-                    <path
-                      d="M1.77734 23.0702L46.0268 23.0702M46.0268 23.0702L23.9021 1.36914M46.0268 23.0702L23.902 44.7713"
-                      stroke="#1D1D1B"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </div>
-            <div className="grid-item-service">
-              <img
-                src={`${import.meta.env.BASE_URL}assets/desarrollo/catalogo.webp`}
-                alt=""
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div className="full-container bg-yellow-2">
+      {/*
+      <div className="full-container">
         <div className="full-container title-portfolio-container">
           <div className="container"></div>
           <div className="container">
@@ -266,6 +75,55 @@ const Desarrollo = () => {
           </div>
         </div>
         <Portfolio3d location="desarrollo" categoria="3d" />
+      </div>
+      */}
+
+      <div className="full-container strategy-container">
+        <div className="full-container infinite-slider-container">
+          <InfiniteSlider text="Qué hacemos" />
+        </div>
+
+        <div className="full-container grid-strategy">
+          <div className="full-container strategy-item bg-yellow-2">
+            <div className="container">
+              <div className="grid-item-strategy">
+                <span className="number-title">01</span>
+                <span>Infraestructura Digital</span>
+              </div>
+              <div className="grid-item-strategy">
+                <p>
+                  Desarrollamos sitios web, aplicaciones y plataformas sólidas, seguras y escalables, pensadas para sostener el crecimiento del negocio y adaptarse a futuras necesidades.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="full-container strategy-item bg-yellow-2">
+            <div className="container">
+              <div className="grid-item-strategy">
+                <span className="number-title">02</span>
+                <span>Experiencia de Usuario (UX/UI)</span>
+              </div>
+              <div className="grid-item-strategy">
+                <p>
+                  Diseñamos interfaces intuitivas y funcionales que conectan diseño y usabilidad, optimizando cada interacción para que el recorrido del usuario sea claro, fluido y efectivo.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="full-container strategy-item bg-yellow-2">
+            <div className="container">
+              <div className="grid-item-strategy">
+                <span className="number-title">03</span>
+                <span> Diseño, Tecnología y Conversión</span>
+              </div>
+              <div className="grid-item-strategy">
+                <p>
+                  Integramos estrategia, diseño y desarrollo para crear productos digitales que no solo se ven bien, sino que funcionan con precisión y convierten visitantes en clientes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <Contact form="desarrollo"/>
