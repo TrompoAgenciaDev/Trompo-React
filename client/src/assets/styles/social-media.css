@@ -112,6 +112,11 @@
   font-size: 13px;
 }
 
+.files-carousel-container{
+  display: flex;
+  flex-direction: column;
+}
+
 
 @media (min-width: 768px) {
   .grid-item-interaccion:last-child{
@@ -216,6 +221,10 @@
 
   .title-portfolio-container h3{
     font-size: 28px;
+  }
+
+  .files-carousel-container{
+    height: 90svh;
   }
 }
 

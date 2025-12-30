@@ -40,12 +40,17 @@ const MenuPopup = ({ isOpen, onClose }) => {
   }, [isOpen, onClose]);
 
   useEffect(() => {
-    if (!isOpen) return;
-    const { overflow } = document.body.style;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = overflow;
-    };
+    if (isOpen) {
+      const { overflow } = document.body.style;
+      document.body.style.overflow = "hidden";
+      document.body.classList.add("menu-open");
+      return () => {
+        document.body.style.overflow = overflow;
+        document.body.classList.remove("menu-open");
+      };
+    } else {
+      document.body.classList.remove("menu-open");
+    }
   }, [isOpen]);
 
   const handleOverlayPointerDown = (e) => {

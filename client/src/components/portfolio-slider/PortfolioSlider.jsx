@@ -194,25 +194,6 @@ const PortfolioSlider = ({ category = "institucional" }) => {
 
   return (
     <div className="portfolio-slider-container">
-      {/* Títulos arriba */}
-      <div className="portfolio-slider-titles">
-        {clientsData.map((client, index) => (
-          <motion.button
-            key={client.id}
-            className={`portfolio-slider-title ${index === currentIndex ? 'active' : ''}`}
-            onClick={() => goToSlide(index)}
-            initial={false}
-            animate={{
-              filter: index === currentIndex ? 'blur(0px)' : 'blur(3px)',
-              opacity: index === currentIndex ? 1 : 0.5
-            }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
-          >
-            {client.name}
-          </motion.button>
-        ))}
-      </div>
-
       {/* Slider principal con rueda giratoria */}
       <div className="portfolio-slider-wrapper">
         <div className="portfolio-slider-track">

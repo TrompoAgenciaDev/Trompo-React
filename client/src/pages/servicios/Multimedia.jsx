@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useInView, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import Hero from "../../layout/Hero";
-import PageTitle from "../../components/services/PageTitle";
 import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 import Portfolio3d from "../../layout/Portfolio3d";
@@ -272,66 +271,52 @@ const EntregableItemsList = () => {
 
 const EntregableItem = ({ number, title, children, isLast, itemRef, nextItemRef }) => {
   const isInView = useInView(itemRef, { once: false, amount: 0.1 });
-  const [lineProgress, setLineProgress] = React.useState(0);
 
-  // Efecto para calcular el progreso de la línea basado en scroll
+  // Efecto para calcular la altura y posición de la línea
+  const [lineHeight, setLineHeight] = React.useState(0);
+  const [lineTop, setLineTop] = React.useState(0);
+
   React.useEffect(() => {
     if (isLast || !nextItemRef?.current || !itemRef.current) {
-      setLineProgress(0);
+      setLineHeight(0);
       return;
     }
 
-    const updateLineProgress = () => {
+    const updateLineDimensions = () => {
       const currentRect = itemRef.current.getBoundingClientRect();
       const nextRect = nextItemRef.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
       
-      // Posición del siguiente item relativa al viewport
-      const nextItemTop = nextRect.top;
-      const currentBottom = currentRect.bottom;
-      const currentTop = currentRect.top;
+      // El wrapper tiene padding-top: 15px
+      // El número tiene height: 40px, así que el centro está a 15px (padding-top) + 20px (mitad del número) = 35px desde el top del wrapper
+      const currentNumberCenterY = 35; // 15px padding-top + 20px (mitad de 40px)
       
-      // Si el siguiente item ya está completamente visible (arriba del viewport o dentro)
-      if (nextItemTop <= viewportHeight) {
-        // Calcular progreso basado en qué tan visible está el siguiente item
-        // Cuando nextItemTop está en viewportHeight, progreso = 0
-        // Cuando nextItemTop está en 0 o menos, progreso = 1
-        const progress = 1 - (nextItemTop / viewportHeight);
-        setLineProgress(Math.max(0, Math.min(1, progress)));
-        return;
-      }
+      // Calcular la posición del siguiente wrapper relativa al actual
+      // nextRect.top es la posición absoluta en el viewport
+      // currentRect.top es la posición absoluta del wrapper actual
+      // La diferencia nos da la posición relativa del siguiente wrapper
+      const nextWrapperTopRelative = nextRect.top - currentRect.top;
       
-      // Si el siguiente item está abajo del viewport pero el item actual está visible
-      if (nextItemTop > viewportHeight && currentTop < viewportHeight) {
-        // Calcular progreso basado en el scroll
-        // La línea comienza a crecer cuando el item actual está visible
-        // Y se completa cuando el siguiente item entra en el viewport
-        const distanceToNext = nextItemTop - currentBottom;
-        const scrollDistance = viewportHeight - currentTop;
-        const totalDistance = distanceToNext + (viewportHeight - currentBottom);
-        const progress = scrollDistance / totalDistance;
-        setLineProgress(Math.max(0, Math.min(1, progress)));
-        return;
-      }
+      // Centro del número siguiente: desde el top del wrapper siguiente
+      // Como ambos wrappers tienen la misma estructura, el centro del número siguiente también está a 35px desde el top de su wrapper
+      const nextNumberCenterY = nextWrapperTopRelative + 35;
       
-      // Si el item actual no está visible, la línea no se muestra
-      if (currentTop > viewportHeight) {
-        setLineProgress(0);
-        return;
-      }
+      // Altura de la línea: desde el centro del número actual hasta el centro del número siguiente
+      const calculatedHeight = nextNumberCenterY - currentNumberCenterY;
       
-      setLineProgress(0);
+      // Top de la línea: desde el centro del número actual
+      const calculatedTop = currentNumberCenterY;
+      
+      setLineHeight(Math.max(0, calculatedHeight));
+      setLineTop(calculatedTop);
     };
 
-    updateLineProgress();
-    const rafId = requestAnimationFrame(updateLineProgress);
-    window.addEventListener('scroll', updateLineProgress, { passive: true });
-    window.addEventListener('resize', updateLineProgress);
+    updateLineDimensions();
+    window.addEventListener('scroll', updateLineDimensions, { passive: true });
+    window.addEventListener('resize', updateLineDimensions);
 
     return () => {
-      cancelAnimationFrame(rafId);
-      window.removeEventListener('scroll', updateLineProgress);
-      window.removeEventListener('resize', updateLineProgress);
+      window.removeEventListener('scroll', updateLineDimensions);
+      window.removeEventListener('resize', updateLineDimensions);
     };
   }, [isLast, itemRef, nextItemRef]);
 
@@ -385,8 +370,9 @@ const EntregableItem = ({ number, title, children, isLast, itemRef, nextItemRef 
         <motion.div
           className="entregable-line"
           style={{
-            scaleY: lineProgress,
-            transformOrigin: "top"
+            top: `${lineTop}px`,
+            height: `${lineHeight}px`,
+            opacity: lineHeight > 0 ? 1 : 0
           }}
           transition={{
             type: "spring",
@@ -605,37 +591,24 @@ const Multimedia = () => {
         </div>
       </div>
 
-      <div ref={enfoqueContainerRef} className="full-container multimedia-enfoque">
-        <div className="container">
-          <h2>El mismo enfoque que usamos para crear contenido que se ve, se siente y funciona.</h2>
-          <AnimatedOpacityText 
-            text="Videos para redes, publicidad digital y contenidos corporativos que combinan ritmo, narrativa, animación, audio y tecnología aplicada"
-            containerRef={enfoqueContainerRef}
-          />
-        </div>
-        <AnimatedImageContainer 
-          src={`${base}assets/creatividad/multimedia/featured-image-dev.webp`}
-          alt="Creatividad multimedia"
-          containerRef={enfoqueContainerRef}
-        />
-      </div>
 
-      <div className="full-container black-bg entregables">
+      <div className="full-container black-bg productos">
         <div className="container">
-          <h2 className="title-entregables">Entregables</h2>
-          <p className="description-entregables">Un ecosistema de piezas audiovisuales diseñado para captar atención, comunicar con claridad y rendir en entornos digitales reales.</p>
-          <div className="container">
-            <div className="grid-entregables container">
-              <div className="grid-item-video">
-                <OptimizedVideo src={`${base}assets/creatividad/multimedia/vertical/vanliving.mp4`} />
-              </div>
-              <div className="grid-item-entregables">
-                <EntregableItemsList />
-              </div>
+          <div className="grid-productos container">
+            <div className="grid-item-video">
+              <OptimizedVideo src={`${base}assets/creatividad/multimedia/vertical/vanliving.mp4`} />
+            </div>
+            <div className="grid-item-productos">
+              <EntregableItemsList />
             </div>
           </div>
         </div>
       </div>
+
+      
+      {/*<h2 className="title-productos">Productos</h2>
+      <p className="description-productos">Un ecosistema de piezas audiovisuales diseñado para captar atención, comunicar con claridad y rendir en entornos digitales reales.</p>
+      */} 
 
       <div className="full-container beneficios-container black-bg">
         <div className="container title-beneficios">

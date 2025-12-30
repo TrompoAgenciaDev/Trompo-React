@@ -36,6 +36,7 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
         target="_blank"
         rel="noreferrer"
         data-id={id}
+        data-cursor="view"
         className="portfolio-card"
         style={{ backgroundImage: `url(${backgroundImage})` }}
         onClick={handleClick}

@@ -1,5 +1,4 @@
 import Hero from "../../layout/Hero.jsx";
-import PageTitle from "../../components/services/PageTitle.jsx";
 import Icons from "../../components/Icons.jsx";
 import Portfolio3d from "../../layout/Portfolio3d.jsx";
 import Faqs from "../../layout/Faqs.jsx";
@@ -24,12 +23,6 @@ const Estrategia = () => {
         mobileSrc={`${base}assets/hero/mobile/estrategia-hero-mobile.mp4`}
         desktopPoster={`${base}assets/hero/estrategia-hero-poster.webp`}
         mobilePoster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
-      />
-
-      <PageTitle
-        title="Paid Media"
-        subtitle="inteligente"
-        highlight="De la visión al impacto. <strong>Planificación Estratégica</strong> que alinea negocio, audiencias y objetivos de negocio; <strong>Plataformas Ads</strong> que combinan performance y posicionamiento optimizando presupuesto; <strong>Data & Analítica Digital</strong> que convierte datos en decisiones. Un sistema disciplinado para invertir mejor y vender más, hoy y a escala."
       />
 
       <section className="full-container ads">

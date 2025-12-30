@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 
 import Hero from "../../layout/Hero.jsx";
-import PageTitle from "../../components/services/PageTitle.jsx";
 import Values from "../../layout/Values.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import Portfolio3d from "../../layout/Portfolio3d.jsx";
@@ -59,24 +58,17 @@ const Desarrollo = () => {
         mobilePoster={`${base}assets/hero/mobile/desarrollo-hero-mobile-poster.webp`}
       />
 
-      {/*
-      <div className="full-container">
+      <div className="full-container black-bg">
         <div className="full-container title-portfolio-container">
           <div className="container"></div>
           <div className="container">
             <h3>
               Transformamos ideas en plataformas digitales que impulsan negocios
             </h3>
-            <p>
-              Arquitectura técnica impecable, experiencias de usuario intuitivas
-              y resultados medibles que convierten cada proyecto en un activo de
-              crecimiento.
-            </p>
           </div>
         </div>
         <Portfolio3d location="desarrollo" categoria="3d" />
       </div>
-      */}
 
       <div className="full-container strategy-container">
         <div className="full-container infinite-slider-container">

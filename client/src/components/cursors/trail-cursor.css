@@ -1,0 +1,53 @@
+.trail-circle {
+  height: 24px;
+  width: 24px;
+  border-radius: 24px;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999999; /* so that it stays on top of all other elements */
+  transition: background-color 0.2s ease, mix-blend-mode 0.2s ease;
+}
+
+.cursor-text {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999999;
+  font-family: var(--font-portfolio, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif);
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  text-transform: lowercase;
+  white-space: nowrap;
+  transition: color 0.2s ease, mix-blend-mode 0.2s ease;
+}
+
+/* Ocultar cursor por defecto cuando TrailCursor está activo */
+body.trail-cursor-active {
+  cursor: none !important;
+}
+
+/* Mostrar cursor en elementos interactivos (enlaces, botones, etc.) */
+body.trail-cursor-active a,
+body.trail-cursor-active button,
+body.trail-cursor-active [role="button"],
+body.trail-cursor-active input,
+body.trail-cursor-active textarea,
+body.trail-cursor-active select,
+body.trail-cursor-active [tabindex]:not([tabindex="-1"]),
+body.trail-cursor-active [onclick],
+body.trail-cursor-active [data-cursor="view"],
+body.trail-cursor-active [data-cursor="link"] {
+  cursor: pointer !important;
+}
+
+/* Cursor específico para elementos draggables */
+body.trail-cursor-active [draggable="true"] {
+  cursor: grab !important;
+}
+
+body.trail-cursor-active [draggable="true"]:active {
+  cursor: grabbing !important;
+}
