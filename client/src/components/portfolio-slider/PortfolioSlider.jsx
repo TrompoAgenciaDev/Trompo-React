@@ -169,7 +169,7 @@ const PortfolioSlider = ({ category = "institucional" }) => {
     }, 200);
   };
 
-  const handlePreviewClick = (direction) => {
+  const handleControlClick = (direction) => {
     if (direction === 'prev') {
       prevSlide();
     } else {
@@ -199,8 +199,8 @@ const PortfolioSlider = ({ category = "institucional" }) => {
         <div className="portfolio-slider-track">
           {/* Slide previo (izquierda) - el que estaba activo se mueve aquí */}
           <motion.div
-            className="portfolio-slider-preview portfolio-slider-preview-left"
-            onClick={() => handlePreviewClick('prev')}
+            className="portfolio-slider-control-left slider-control slider-control-prev slider-control-left"
+            onClick={() => handleControlClick('prev')}
             key={`left-${prevIndex}-${currentIndex}`}
             initial={prevIndex !== currentIndex ? { x: 0, scale: 1, rotateY: 0, filter: 'blur(0px)', opacity: 1 } : false}
             animate={{ 
@@ -220,7 +220,7 @@ const PortfolioSlider = ({ category = "institucional" }) => {
                 <img
                   src={getImagePath(slideToShow.gallery[0])}
                   alt={slideToShow.name}
-                  className="portfolio-slider-preview-image"
+                  className="portfolio-slider-control-image"
                 />
               ) : null;
             })()}
@@ -255,8 +255,8 @@ const PortfolioSlider = ({ category = "institucional" }) => {
 
           {/* Slide siguiente (derecha) - el que será el siguiente activo, más grande */}
           <motion.div
-            className="portfolio-slider-preview portfolio-slider-preview-right"
-            onClick={() => handlePreviewClick('next')}
+            className="portfolio-slider-control-right slider-control slider-control-next slider-control-right"
+            onClick={() => handleControlClick('next')}
             key={`right-${currentIndex}`}
             initial={{ x: '15%', scale: 0.75, rotateY: 15, filter: 'blur(8px)', opacity: 0.6 }}
             animate={{ 
@@ -272,7 +272,7 @@ const PortfolioSlider = ({ category = "institucional" }) => {
               <img
                 src={getImagePath(getSlideData(1).gallery[0])}
                 alt={getSlideData(1).name}
-                className="portfolio-slider-preview-image"
+                className="portfolio-slider-control-image"
               />
             )}
           </motion.div>

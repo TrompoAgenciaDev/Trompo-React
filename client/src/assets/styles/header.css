@@ -31,19 +31,24 @@ header.full-container{
   background: linear-gradient(to bottom, #ffffff9f 20%, rgba(255, 255, 255, 0) 75%);
   -webkit-backdrop-filter: blur(0);
   backdrop-filter: blur(0);
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
 /* Header sticky en desktop */
-@media (min-width: 1024px) {
+  @media (min-width: 1024px) {
   header.full-container.sticky {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.7);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
+    -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 }
@@ -68,6 +73,8 @@ header.full-container{
 }
 
 .nav-button{
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
   border-radius: 100%;
   width: 30px;
   height: 30px;

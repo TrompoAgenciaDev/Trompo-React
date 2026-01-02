@@ -271,20 +271,8 @@ p{
     max-width: 1024px;
     padding: 80px 0;
   }
-  .title-portfolio-container{
-    width: 1140px;
-    -ms-grid-columns: 2fr;
-    grid-template-columns: 2fr;
-  }
+
   .creatividad-video-section  h1{
     padding-left: 30px;
-  }
-}
-
-@media (min-width:1366px){
-  .title-portfolio-container{
-    width: 1280px;
-    -ms-grid-columns: 2fr;
-    grid-template-columns: 2fr;
   }
 }

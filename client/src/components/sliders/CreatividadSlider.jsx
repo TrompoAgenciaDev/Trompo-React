@@ -428,6 +428,7 @@ export default function CreatividadSlider({ tipo = "mix" }) {
     <div style={{ position: "relative", width: "100%" }}>
       <button
         aria-label="Prev"
+        className="slider-control slider-control-prev slider-control-left"
         onClick={prev}
         style={{
           position: "absolute",
@@ -459,6 +460,7 @@ export default function CreatividadSlider({ tipo = "mix" }) {
       </button>
       <button
         aria-label="Next"
+        className="slider-control slider-control-next slider-control-right"
         onClick={next}
         style={{
           position: "absolute",

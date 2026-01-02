@@ -1,0 +1,226 @@
+.grid-paid-media-container{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px 0;
+}
+
+
+.grid-item-paid-media{
+  border: 1px solid #E1C025;
+  padding: 30px 20px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-border-radius: 13px;
+  -moz-border-radius: 13px;
+  border-radius: 13px;
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.grid-item-paid-media:hover{
+  background-color: #ffffff;
+}
+
+.grid-item-paid-media:hover span,
+.grid-item-paid-media:hover h2,
+.grid-item-paid-media:hover p{
+  color: #262626;
+}
+
+.grid-item-paid-media:hover .paid-subtitle{
+  border: 1px solid #262626;
+}
+
+/* El background-color del icon-container-paid ahora se maneja con Framer Motion */
+
+.grid-item-paid-media:hover .icon-container-paid svg path{
+  stroke: #262626;
+}
+
+
+.grid-item-paid-media .header-paid-container{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: start;
+  -moz-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.grid-item-paid-media .paid-title{
+  font-size: 22px;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.grid-item-paid-media .paid-subtitle{
+  font-size: 13px;
+  color: #ffffff;
+  font-weight: 400;
+  border: 1px solid #E1C025;
+  padding: 5px 16px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+  letter-spacing: 0.5px;
+}
+
+.footer-paid-container{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer-paid-container p{
+  font-size: 14px;
+  color: #ffffff;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+}
+
+.footer-paid-buttons{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+}
+
+.icon-container-paid svg{
+  width: 100%;
+  height: 100%;
+}
+
+.icon-container-paid svg path{
+  stroke: #E1C025;;
+}
+
+.icon-container-paid{
+  width: 80px;
+  height: 80px;
+  background-color: transparent;
+  -webkit-border-radius: 999px;
+  -moz-border-radius: 999px;
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-background-animated{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #E1C025;
+  -webkit-border-radius: 999px;
+  -moz-border-radius: 999px;
+  border-radius: 999px;
+  -webkit-clip-path: circle(0% at 50% 50%);
+  clip-path: circle(0% at 50% 50%);
+}
+
+@media (min-width: 768px) {
+
+  .grid-item-paid-media .paid-title{
+    font-size: 28px;
+  }
+  
+  .grid-item-paid-media .paid-subtitle{
+    font-size: 15px;
+  }
+
+  .footer-paid-container p{
+    font-size: 15px;
+  }
+
+  .icon-container-paid{
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-paid-media-container{
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 50px 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    padding: 20px 0 100px;
+  }
+
+  .grid-item-paid-media{
+    gap: 70px;
+    -webkit-border-radius: 63px;
+    -moz-border-radius: 63px;
+    border-radius: 63px;
+    padding: 50px;
+  }
+
+  .grid-item-paid-media .paid-title{
+    font-size: 44px;
+  }
+
+  .footer-paid-container p{
+    font-size: 16px;
+  }
+
+  .icon-container-paid{
+    width: 120px;
+    height: 120px;
+  }
+}

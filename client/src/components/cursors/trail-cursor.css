@@ -1,14 +1,38 @@
-.trail-circle {
+.cursor-core {
   height: 24px;
   width: 24px;
+  -webkit-border-radius: 24px;
+  -moz-border-radius: 24px;
   border-radius: 24px;
   background-color: black;
   position: fixed;
   top: 0;
   left: 0;
   pointer-events: none;
-  z-index: 99999999; /* so that it stays on top of all other elements */
-  transition: background-color 0.2s ease, mix-blend-mode 0.2s ease;
+  z-index: 999999999;
+  -webkit-transition: background-color 0.2s ease, mix-blend-mode 0.2s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  -moz-transition: background-color 0.2s ease, mix-blend-mode 0.2s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  -o-transition: background-color 0.2s ease, mix-blend-mode 0.2s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  transition: background-color 0.2s ease, mix-blend-mode 0.2s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+}
+
+.trail-circle {
+  height: 24px;
+  width: 24px;
+  -webkit-border-radius: 24px;
+  -moz-border-radius: 24px;
+  border-radius: 24px;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999998;
+  mix-blend-mode: normal !important;
+  -webkit-transition: background-color 0.2s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  -moz-transition: background-color 0.2s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  -o-transition: background-color 0.2s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  transition: background-color 0.2s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
 }
 
 .cursor-text {
@@ -21,6 +45,9 @@
   color: #000000;
   text-transform: lowercase;
   white-space: nowrap;
+  -webkit-transition: color 0.2s ease, mix-blend-mode 0.2s ease;
+  -moz-transition: color 0.2s ease, mix-blend-mode 0.2s ease;
+  -o-transition: color 0.2s ease, mix-blend-mode 0.2s ease;
   transition: color 0.2s ease, mix-blend-mode 0.2s ease;
 }
 
@@ -29,18 +56,22 @@ body.trail-cursor-active {
   cursor: none !important;
 }
 
-/* Mostrar cursor en elementos interactivos (enlaces, botones, etc.) */
-body.trail-cursor-active a,
-body.trail-cursor-active button,
-body.trail-cursor-active [role="button"],
+/* Mostrar cursor estándar solo en elementos de formulario */
 body.trail-cursor-active input,
 body.trail-cursor-active textarea,
 body.trail-cursor-active select,
-body.trail-cursor-active [tabindex]:not([tabindex="-1"]),
-body.trail-cursor-active [onclick],
-body.trail-cursor-active [data-cursor="view"],
-body.trail-cursor-active [data-cursor="link"] {
+body.trail-cursor-active button:not([data-cursor="view"]),
+body.trail-cursor-active [contenteditable="true"] {
+  cursor: text !important;
+}
+
+body.trail-cursor-active button:not([data-cursor="view"]) {
   cursor: pointer !important;
+}
+
+/* Ocultar cursor en elementos con data-cursor="view" para mostrar el SVG personalizado */
+body.trail-cursor-active [data-cursor="view"] {
+  cursor: none !important;
 }
 
 /* Cursor específico para elementos draggables */

@@ -320,7 +320,7 @@ const BrandingCarrusel = ({ category }) => {
                   {hasMultipleImages && (
                     <>
                       <button 
-                        className="brand-gallery-arrow brand-gallery-arrow-prev"
+                        className="brand-gallery-arrow brand-gallery-arrow-prev slider-control slider-control-prev slider-control-left"
                         onClick={(e) => handlePreviousImage(index, e)}
                         aria-label="Imagen anterior"
                       >
@@ -329,7 +329,7 @@ const BrandingCarrusel = ({ category }) => {
                         </svg>
                       </button>
                       <button 
-                        className="brand-gallery-arrow brand-gallery-arrow-next"
+                        className="brand-gallery-arrow brand-gallery-arrow-next slider-control slider-control-next slider-control-right"
                         onClick={(e) => handleNextImage(index, e)}
                         aria-label="Imagen siguiente"
                       >

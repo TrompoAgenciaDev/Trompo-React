@@ -1,0 +1,94 @@
+.grid-item-beneficios svg{
+    width: 50px;
+    height: 50px;
+}
+
+.grid-beneficios{
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+    gap: 10px;
+}
+
+.grid-item-beneficios{
+    padding: 20px;
+    border: 1px solid #E1C025;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 16px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
+
+.beneficios-container{
+    padding: 30px 0;
+}
+
+.grid-item-beneficios p{
+    font-size: 12px;
+    max-width: 150px;
+    color: #ffffff;
+}
+
+.beneficios-container h1{
+    color: #E1C025;
+    font-size: 28px;
+}
+
+.beneficios-container h2{
+    font-size: 20px;
+}
+
+.title-beneficios h2{
+    color: #ffffff;
+}
+
+@media (min-width: 768px) {
+    .grid-beneficios{
+        -ms-grid-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 50px;
+    }
+
+    .beneficios-container{
+        padding: 70px 0 120px;
+    }
+
+    .title-beneficios{
+        gap: 0;
+        padding-bottom: 50px;
+    }
+
+    .grid-item-beneficios p{
+        font-size: 15px;
+    }
+
+    .beneficios-container h1{
+        font-size: 48px;
+    }
+
+    .beneficios-container h2{
+        font-size: 32px;
+        max-width: 600px;
+        font-weight: normal;
+    }
+}
+
+@media (min-width: 1280px) {
+    .grid-item-beneficios p{
+        font-size: 16px;
+    }
+
+    .grid-item-beneficios svg{
+        width: 60px;
+        height: 60px;
+    }
+}
+

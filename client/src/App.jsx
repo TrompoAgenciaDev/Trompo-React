@@ -1,5 +1,5 @@
 // App.jsx
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useLocation } from "react-router-dom";
 import AppRoutes from "@/routes/AppRoutes";
 import Header from "@/layout/Header";
 import Footer from "@/layout/Footer";
@@ -8,12 +8,14 @@ import useTogglePopup from "@/hooks/useTogglePopup";
 import ScrollTop from "@/components/buttons/ScrollTop";
 import { usePreloadResources } from "@/hooks/usePreloadResources";
 import { usePrefetchRoutes } from "@/hooks/usePrefetchRoutes";
-import TrailCursor from "@/components/cursors/TrailCursor";
+import { HoverProvider } from "@/context/HoverContext";
+import CustomCursor from "@/components/cursors/CustomCursor";
 import React from "react";
 
 // Componente interno que usa el hook dentro del contexto del router
 function AppContent() {
   const { isOpen, togglePopup } = useTogglePopup();
+  const location = useLocation();
   
   // Preload dinámico de recursos críticos
   usePreloadResources();
@@ -21,9 +23,15 @@ function AppContent() {
   // Prefetch inteligente de rutas relacionadas
   usePrefetchRoutes();
 
+  // Rutas donde debe aparecer CustomCursor
+  const showCustomCursor = 
+    location.pathname === "/" || 
+    location.pathname === "/nosotros" || 
+    location.pathname === "/contactanos";
+
   return (
     <>
-      <TrailCursor />
+      {showCustomCursor && <CustomCursor />}
       <Header onTogglePopup={togglePopup} />
       <MenuPopup isOpen={isOpen} onClose={togglePopup} />
       <ScrollTop />
@@ -37,7 +45,9 @@ function AppContent() {
 function App() {
   return (
     <BrowserRouter basename={`${import.meta.env.BASE_URL}`}>
-      <AppContent />
+      <HoverProvider>
+        <AppContent />
+      </HoverProvider>
     </BrowserRouter>
   );
 }

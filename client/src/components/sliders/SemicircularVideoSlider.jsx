@@ -139,11 +139,14 @@ const SemicircularVideoSlider = () => {
 
   // Inicializar posición al montar (solo una vez)
   useEffect(() => {
-    if (!containerRef.current) return;
-    
     const initializePosition = () => {
+      if (!containerRef.current) return;
+      
       const slideWidth = getSlideWidth();
       const containerWidth = containerRef.current.offsetWidth;
+      
+      if (!containerWidth) return;
+      
       const centerOffset = (containerWidth / 2) - (slideWidth / 2);
       const slideWithGap = getSlideWithGap();
       const initialX = centerOffset - (MIDDLE_START * slideWithGap);
@@ -151,10 +154,14 @@ const SemicircularVideoSlider = () => {
       x.set(initialX);
     };
     
-    // Esperar a que el DOM esté listo
-    requestAnimationFrame(() => {
-      initializePosition();
-    });
+    // Esperar a que el DOM esté listo con múltiples intentos
+    const timeoutId = setTimeout(() => {
+      requestAnimationFrame(() => {
+        initializePosition();
+      });
+    }, 100);
+    
+    return () => clearTimeout(timeoutId);
   }, []);
 
   // Calcular límites del carrusel infinito

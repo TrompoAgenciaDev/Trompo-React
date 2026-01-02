@@ -46,7 +46,7 @@
     color: #ffffff;
     font-size: 12px;
     text-transform: lowercase;
-    font-weight: normal;
+    font-weight: 700;
     
 }
 
@@ -81,7 +81,6 @@
 h3.display-title{
     font-size: 18px;
     letter-spacing: 0.5px;
-    font-weight: 700;
 }
 
 h3.display-title,
@@ -141,6 +140,7 @@ h3.display-title,
 @media (min-width: 1200px) {
     .title-container-design .title-creative h1.display-title{
         font-size: 120px;
+        
     }
 }
 

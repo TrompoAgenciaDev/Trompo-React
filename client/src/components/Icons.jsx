@@ -5,8 +5,9 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
-const LogoAmarillo = `${base}assets/logo-amarillo.webp`;
-const LogoBlack = `${base}assets/logo-black.webp`;
+const LogoWhite = `${base}assets/white.webp`;
+const LogoBlack = `${base}assets/black.webp`;
+const LogoYellow = `${base}assets/logo-amarillo.webp`;
 
 const iconComponents = {
   facebook: () => (
@@ -406,8 +407,9 @@ const iconComponents = {
 };
 
 const imageIcons = {
-  logoAmarillo: LogoAmarillo,
+  logoWhite: LogoWhite,
   logoBlack: LogoBlack,
+  logoYellow: LogoYellow,
 };
 
 function Icons({ iconName, link = "#" }) {
@@ -426,7 +428,7 @@ function Icons({ iconName, link = "#" }) {
       <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
         <path
           d="M24 4C20.0444 4 16.1776 5.17298 12.8886 7.37061C9.59962 9.56823 7.03617 12.6918 5.52242 16.3463C4.00867 20.0008 3.6126 24.0222 4.3843 27.9018C5.15601 31.7814 7.06082 35.3451 9.85787 38.1421C12.6549 40.9392 16.2186 42.844 20.0982 43.6157C23.9778 44.3874 27.9992 43.9913 31.6537 42.4776C35.3082 40.9638 38.4318 38.4004 40.6294 35.1114C42.827 31.8224 44 27.9556 44 24C43.9915 18.6983 41.8817 13.6161 38.1328 9.86721C34.3839 6.11832 29.3017 4.00846 24 4ZM31.08 28.24C31.4547 28.6176 31.665 29.128 31.665 29.66C31.665 30.192 31.4547 30.7024 31.08 31.08C30.6976 31.4468 30.1899 31.6542 29.66 31.66C29.1294 31.6579 28.6203 31.45 28.24 31.08L24 26.84L19.76 31.08C19.3797 31.45 18.8706 31.6579 18.34 31.66C17.8101 31.6542 17.3024 31.4468 16.92 31.08C16.5453 30.7024 16.335 30.192 16.335 29.66C16.335 29.128 16.5453 28.6176 16.92 28.24L21.16 24L16.92 19.76C16.5434 19.3834 16.3318 18.8726 16.3318 18.34C16.3318 17.8074 16.5434 17.2966 16.92 16.92C17.2966 16.5434 17.8074 16.3318 18.34 16.3318C18.8726 16.3318 19.3834 16.5434 19.76 16.92L24 21.16L28.24 16.92C28.6166 16.5434 29.1274 16.3318 29.66 16.3318C30.1926 16.3318 30.7034 16.5434 31.08 16.92C31.4566 17.2966 31.6682 17.8074 31.6682 18.34C31.6682 18.8726 31.4566 19.3834 31.08 19.76L26.84 24L31.08 28.24Z"
-          fill="black" />
+          fill="#FFDF69" />
       </svg>
     );
   }

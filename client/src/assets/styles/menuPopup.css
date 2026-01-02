@@ -3,7 +3,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #FEE070;
+  background-color: #262626;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -141,10 +141,13 @@ body.trail-cursor-active .popup-menu .servicios-options a:hover span {
   font-weight: 400;
 }
 
-.menu-popup h3:hover,
-.menu-popup span:hover {
-  color: #fed332;
-}
+  /* Hover solo para mobile - en desktop se maneja con .menu-popup:hover */
+  @media (max-width: 1023px) {
+    .menu-popup h3:hover,
+    .menu-popup span:hover {
+      color: #fed332;
+    }
+  }
 
 .servicios-header {
   display: -webkit-box;
@@ -201,6 +204,7 @@ body.trail-cursor-active .popup-menu .servicios-options a:hover span {
 
   .full-container.popup-menu {
     padding: 0;
+    background-color: #262626;
   }
 
   .mobile-header {
@@ -240,7 +244,7 @@ body.trail-cursor-active .popup-menu .servicios-options a:hover span {
   .menu-popup {
     width: 100%;
     padding: 0;
-    border-right: 1px solid #9A7A00;
+    border-right: 1px solid #000000;
   }
 
   .menu-popup * a:not(.submenu-servicios a),
@@ -284,21 +288,44 @@ body.trail-cursor-active .popup-menu .servicios-options a:hover span {
     border: none;
   }
 
+  /* Textos en blanco por defecto */
   .menu-popup h3,
-  .menu-popup span {
+  .menu-popup span,
+  .servicios-header span {
     font-weight: 700;
     font-size: 22px;
     font-family: var(--font-portfolio);
-  }
-
-  .menu-popup h3:hover,
-  .menu-popup span:hover {
-    color: #000000;
+    color: #ffffff;
   }
 
   .servicios-options a span {
     font-size: 16px;
     font-weight: 500;
+    color: #ffffff;
+  }
+
+  .submenu-servicios li a {
+    color: #ffffff;
+  }
+
+  /* Cuando se hace hover en una sección, fondo blanco y textos negros */
+  .menu-popup:hover h3,
+  .menu-popup:hover h3:hover,
+  .menu-popup:hover span,
+  .menu-popup:hover span:hover,
+  .menu-popup:hover .servicios-header span,
+  .menu-popup:hover .servicios-header span:hover {
+    color: #262626 !important;
+  }
+
+  .menu-popup:hover .servicios-options a span,
+  .menu-popup:hover .servicios-options a:hover span {
+    color: #262626 !important;
+  }
+
+  .menu-popup:hover .submenu-servicios li a,
+  .menu-popup:hover .submenu-servicios li a:hover {
+    color: #262626 !important;
   }
 
   .submenu-servicios {
@@ -321,9 +348,11 @@ body.trail-cursor-active .popup-menu .servicios-options a:hover span {
   }
 
   .menu-popup h3,
-  .menu-popup span {
+  .menu-popup span,
+  .servicios-header span {
     font-weight: 800;
     font-size: 32px;
+    color: #ffffff;
   }
 
   .submenu-servicios {
@@ -346,16 +375,27 @@ body.trail-cursor-active .popup-menu .servicios-options a:hover span {
   }
 
   .servicios-options a span {
-    font-weight: 600;
-    color: #000000;
+    font-weight: 400;
+    color: #ffffff;
     font-family: var(--font-portfolio);
     font-style: normal;
     font-size: 24px;
   }
 
+  .submenu-servicios li a {
+    color: #ffffff;
+  }
+
   .servicios-options a:hover span {
-    font-family: var(--subtitle-font);
-    font-style: italic;
-    font-size: 26px;
+    font-weight: 700;
+  }
+
+  /* Cuando se hace hover en una sección, textos negros */
+  .menu-popup:hover .servicios-options a span {
+    color: #262626;
+  }
+
+  .menu-popup:hover .submenu-servicios li a {
+    color: #262626;
   }
 }

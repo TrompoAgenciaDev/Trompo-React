@@ -701,7 +701,7 @@ h3.display-title,
     border-radius: 16px;
 }
 
-.history-item{
+.design-history-item{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -712,7 +712,7 @@ h3.display-title,
     gap: 16px;
 }
 
-.history-item-header{
+.design-history-item-header{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -722,20 +722,20 @@ h3.display-title,
     gap: 16px;
 }
 
-.history-item h3{
+.design-history-item h3{
     font-size: 20px;
     margin: 0;
     color: #000000;
 }
 
-.history-item p{
+.design-history-item p{
     color: #000000;
     font-size: 12px;
     margin: 0;
     padding-left: 56px;
 }
 
-.entregable-number{
+.design-entregable-number{
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -761,14 +761,14 @@ h3.display-title,
     z-index: 10;
 }
 
-.entregable-item-wrapper{
+.design-entregable-item-wrapper{
     position: relative;
     padding-top: 15px;
     padding-bottom: 15px;
     z-index: 1;
 }
 
-.entregable-line{
+.design-entregable-line{
     position: absolute;
     left: 20px;
     width: 1px;
@@ -783,7 +783,7 @@ h3.display-title,
 }
 
 @media (min-width: 768px) {
-    .history-item p{
+    .design-history-item p{
         font-size: 14px;
     }
 }
@@ -804,7 +804,7 @@ h3.display-title,
         padding-top: 50px;
     }
 
-    .history-item p{
+    .design-history-item p{
         font-size: 15px;
     }
 
@@ -828,6 +828,10 @@ h3.display-title,
 
 .animated-word {
     display: inline-block;
+}
+
+.animated-phrase {
+    display: inline;
 }
 
 .animated-letter-opacity {
