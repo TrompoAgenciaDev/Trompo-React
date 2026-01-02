@@ -1,31 +1,4 @@
-.title-page.multimedia-title{
-    color: #000000;
-}
-
-.diagonal-multimedia{
-    -webkit-clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0 100%);
-    clip-path: polygon(0 5%, 100% 0%, 100% 100%, 0 100%);
-}
-
-.video-background-container {
-    position: relative;
-    overflow: hidden;
-}
-
-.video-background-container .video-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 0;
-}
-
-.video-background-container > *:not(.video-background) {
-    position: relative;
-    z-index: 1;
-}
+/* Clases no usadas removidas: title-page.multimedia-title, diagonal-multimedia, video-background-container */
 
 .animated-text {
     display: block;
@@ -113,30 +86,7 @@
     line-height: 1.5;
 }
 
-.multimedia-enfoque{
-    height: 600px;
-}
-
-.multimedia-enfoque .container{
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.multimedia-enfoque h2{
-    width: 100%;
-    font-size: 48px;
-    font-family: var(--font-portfolio);
-}
-
-.multimedia-enfoque p{
-    font-size: 16px;
-}
+/* Clase no usada removida: multimedia-enfoque */
 
 .image-multimedia-container{
     display: none;
@@ -168,36 +118,7 @@
     line-height: 1.5;
 }
 
-.title-productos{
-    color: #FEE070;
-    font-size: 22px;
-}
-
-.description-productos{
-    font-size: 13px;
-    color: #ffffff;
-}
-
-.grid-productos{
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 1fr;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 30px;
-    padding: 50px 0;
-}
-
-.grid-item-productos{
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    gap: 0;
-    
-}
+/* Clases no usadas removidas: title-productos, description-productos, grid-productos, grid-item-productos */
 
 .multimedia-history-item{
     display: -webkit-box;
@@ -281,15 +202,7 @@
     overflow: hidden;
 }
 
-.entregables > .container{
-    position: relative;
-    z-index: 1;
-}
-
-.grid-item-video{
-    width: 100%;
-    position: relative;
-}
+/* Clases no usadas removidas: entregables > .container, grid-item-video (sin -multimedia) */
 
 .optimized-video-container{
     width: 100%;
@@ -473,40 +386,8 @@
         transform-origin: bottom left;
     }
 
-    .multimedia-enfoque h2{
-        max-width: 750px;
-    }
-    
-    .multimedia-enfoque p{
-        font-size: 18px;
-        max-width: 700px;
-    }
-
     .slider-text span{
         font-size: 48px;
-    }
-
-    .title-productos{
-        font-size: 32px;
-    }
-    
-    .description-productos{
-        font-size: 16px;
-    }
-
-    .grid-productos{
-        -ms-grid-columns: 3fr 2fr;
-        grid-template-columns: 3fr 2fr;
-        gap: 50px;
-        padding: 100px 0 0;
-    }
-    
-    .grid-item-entregables .multimedia-history-item{
-        padding-bottom: 30px
-    }
-
-    .grid-item-video{
-        padding-top: 50px;
     }
 
     .multimedia-history-item p{
@@ -554,6 +435,7 @@
     }
 
     .service-title-container{
+        display: grid;
         grid-template-columns: repeat(4, 1fr); 
         padding: 30px 10px;
         border-right: 1px solid #8E8E8E;
