@@ -85,7 +85,7 @@ const MenuPopup = ({ isOpen, onClose }) => {
           <div className="full-container popup-menu" role="dialog" aria-modal="true" ref={popupRef}>
             <div className="container mobile-header">
               <a className="logo-img" href="/">
-                <Icons iconName="logoYellow" />
+                
               </a>
 
               <button
