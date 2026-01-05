@@ -6,11 +6,18 @@ import '../../assets/styles/custom-cursor.css';
 import { motion } from "framer-motion";
 
 const CustomCursor = ({ icon }) => {
+  // Constantes de tamaño del cursor - deben coincidir con CSS
+  const CURSOR_SIZE = 50; // px - tamaño del SVG del trompo
+  const CURSOR_ANCHOR_OFFSET = CURSOR_SIZE / 2; // 25px - offset para centrar
+  
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [displayPosition, setDisplayPosition] = useState({ x: 0, y: 0 });
   const [mounted, setMounted] = useState(false);
   const [cursorType, setCursorType] = useState(null);
   const [cursorColor, setCursorColor] = useState("#FED332");
+  const [isDragging, setIsDragging] = useState(false);
   const cursorRef = useRef(null);
+  const rafIdRef = useRef(null);
 
   const COLOR_DARK = "#000000";
   const COLOR_LIGHT = "#FED332";
@@ -93,34 +100,49 @@ const CustomCursor = ({ icon }) => {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (cursorType === "next" || cursorType === "prev" || cursorType === "external") {
-      document.body.style.cursor = "none";
-    } else {
-      document.body.style.cursor = "";
-    }
+    // Ocultar cursor por defecto siempre
+    document.body.style.cursor = "none";
     return () => {
       document.body.style.cursor = "";
     };
-  }, [cursorType]);
+  }, []);
 
+  // Ocultar cursor por defecto siempre cuando el componente está montado
   useEffect(() => {
-    const isNavCursor = cursorType === "next" || cursorType === "prev" || cursorType === "external";
-    
-    if (isNavCursor && cursorRef.current) {
-      const updatePosition = () => {
-        if (cursorRef.current) {
-          cursorRef.current.style.left = `${mousePosition.x}px`;
-          cursorRef.current.style.top = `${mousePosition.y}px`;
-        }
-      };
-      updatePosition();
-      const rafId = requestAnimationFrame(updatePosition);
-      return () => cancelAnimationFrame(rafId);
+    document.body.style.cursor = "none";
+    return () => {
+      document.body.style.cursor = "";
+    };
+  }, []);
+
+  // Animación suave del cursor usando requestAnimationFrame
+  useEffect(() => {
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
     }
-  }, [mousePosition, cursorType]);
+
+    const animate = () => {
+      setDisplayPosition(prev => {
+        const dx = mousePosition.x - prev.x;
+        const dy = mousePosition.y - prev.y;
+        // Interpolación suave (lerp)
+        const lerp = 0.15;
+        return {
+          x: prev.x + dx * lerp,
+          y: prev.y + dy * lerp
+        };
+      });
+      rafIdRef.current = requestAnimationFrame(animate);
+    };
+
+    rafIdRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+    };
+  }, [mousePosition]);
 
   useEffect(() => {
     const handleMouseMove = (event) => {
@@ -144,24 +166,31 @@ const CustomCursor = ({ icon }) => {
         const newColor = isLight ? COLOR_DARK : COLOR_LIGHT;
         setCursorColor(newColor);
 
+        // Detectar si está en un carrusel con drag activo
+        const isInCarousel = element.closest('.portfolio-carrusel') || 
+          element.closest('.portfolio-slider') || 
+          element.closest('.portfolio-section') || 
+          element.closest('.slider') || 
+          element.closest('.carrusel') ||
+          element.closest('.infinite-slider-container') ||
+          element.closest('[class*="slider"]') || 
+          element.closest('[class*="carrusel"]') || 
+          element.closest('[class*="portfolio"]');
+
+        // Detectar enlaces
         const linkElement = element.closest('a[href]');
         if (linkElement) {
           const href = linkElement.getAttribute('href');
           const target = linkElement.getAttribute('target');
           const isExternal = target === '_blank' || (href && (href.startsWith('http') || href.startsWith('//')));
-          const isInCarousel = linkElement.closest('.portfolio-carrusel') || 
-            linkElement.closest('.portfolio-slider') || 
-            linkElement.closest('.portfolio-section') || 
-            linkElement.closest('.slider') || 
-            linkElement.closest('.carrusel') ||
-            linkElement.closest('[class*="slider"]') || 
-            linkElement.closest('[class*="carrusel"]') || 
-            linkElement.closest('[class*="portfolio"]');
           
-          if (isExternal && isInCarousel) {
+          if (isExternal) {
             setCursorType("external");
             return;
           }
+          // Enlace interno - mostrar cursor
+          setCursorType("link");
+          return;
         }
 
         const cursorElement = element.closest('[data-cursor]');
@@ -171,15 +200,6 @@ const CustomCursor = ({ icon }) => {
           setCursorType(cursorAttr);
           return;
         }
-
-        const isInCarousel = element.closest('.portfolio-carrusel') || 
-          element.closest('.portfolio-slider') || 
-          element.closest('.portfolio-section') || 
-          element.closest('.slider') || 
-          element.closest('.carrusel') ||
-          element.closest('[class*="slider"]') || 
-          element.closest('[class*="carrusel"]') || 
-          element.closest('[class*="portfolio"]');
 
         const checkElementForNav = (el) => {
           if (!el) return null;
@@ -219,40 +239,84 @@ const CustomCursor = ({ icon }) => {
           return;
         }
 
-        if (isInCarousel) {
+        // Si está en carrusel y está arrastrando, mostrar cursor
+        if (isInCarousel && isDragging) {
+          setCursorType("drag");
+          return;
+        }
+
+        // Si está en carrusel pero no está arrastrando, ocultar cursor
+        if (isInCarousel && !isDragging) {
           setCursorType("hidden");
           return;
         }
 
+        // Por defecto, mostrar el SVG del trompo (cursorType = null)
         setCursorType(null);
       });
     };
 
+    const handleMouseDown = (event) => {
+      const element = document.elementFromPoint(event.clientX, event.clientY);
+      const isInCarousel = element?.closest('.portfolio-carrusel') || 
+        element?.closest('.portfolio-slider') || 
+        element?.closest('.portfolio-section') || 
+        element?.closest('.slider') || 
+        element?.closest('.carrusel') ||
+        element?.closest('.infinite-slider-container') ||
+        element?.closest('[class*="slider"]') || 
+        element?.closest('[class*="carrusel"]') || 
+        element?.closest('[class*="portfolio"]');
+      
+      if (isInCarousel) {
+        setIsDragging(true);
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
     window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("mousedown", handleMouseDown, { passive: true });
+    window.addEventListener("mouseup", handleMouseUp, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, []);
+  }, [isDragging]);
 
   const { hoverComponent } = useHover();
 
   const isNavCursor = cursorType === "next" || cursorType === "prev" || cursorType === "external";
+  const shouldShow = cursorType !== "hidden";
 
-  const cursorContent = isNavCursor ? (
+  // Calcular posición anclada - el punto activo del cursor está en mousePosition
+  // El SVG debe estar centrado en ese punto
+  // Para cursores de navegación, usar el centro del elemento (50% del tamaño)
+  // El contenedor flex ya centra el contenido, así que solo necesitamos el offset del contenedor
+  const anchoredX = displayPosition.x - CURSOR_ANCHOR_OFFSET;
+  const anchoredY = displayPosition.y - CURSOR_ANCHOR_OFFSET;
+
+  const cursorContent = isNavCursor && shouldShow ? (
     <div
       ref={cursorRef}
       style={{
         position: "fixed",
-        left: `${mousePosition.x}px`,
-        top: `${mousePosition.y}px`,
+        left: `${displayPosition.x}px`,
+        top: `${displayPosition.y}px`,
         pointerEvents: "none",
         zIndex: 99999,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         transform: "translate(-50%, -50%)",
       }}
       className='custom-cursor'
     >
-      {cursorType === "hidden" ? null : cursorType === "next" ? (
+      {cursorType === "next" ? (
         <img
           src={`${import.meta.env.BASE_URL}arrow-vector.svg`}
           alt="next"
@@ -308,7 +372,12 @@ const CustomCursor = ({ icon }) => {
             scale: { type: "spring", stiffness: 250, damping: 15 }
           }}
           className="custom-cursor-icon"
-          style={{ transformOrigin: "center", color: cursorColor }}
+          style={{ 
+            transformOrigin: "center center",
+            color: cursorColor,
+            width: `${CURSOR_SIZE}px`,
+            height: `${CURSOR_SIZE}px`,
+          }}
         >
           <motion.g
             animate={{
@@ -369,7 +438,7 @@ const CustomCursor = ({ icon }) => {
         </motion.svg>
       )}
     </div>
-  ) : (
+  ) : shouldShow ? (
     <motion.div
       style={{
         position: "fixed",
@@ -377,45 +446,44 @@ const CustomCursor = ({ icon }) => {
         left: 0,
         pointerEvents: "none",
         zIndex: 99999,
-        transform: "translate(-50%, -50%)",
+        width: `${CURSOR_SIZE}px`,
+        height: `${CURSOR_SIZE}px`,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
       animate={{
-        x: mousePosition.x,
-        y: mousePosition.y,
+        x: anchoredX,
+        y: anchoredY,
         scale: hoverComponent ? 1.3 : 1,
       }}
       transition={{
         type: "spring",
-        stiffness: 500,
-        damping: 30,
-        mass: 0.5,
+        stiffness: 400,
+        damping: 25,
+        mass: 0.4,
       }}
       className='custom-cursor'
     >
-      {cursorType === "hidden" ? null : hoverComponent ? (
-        <motion.span 
-          className="custom-cursor-text"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.2 }}
-        >
-          Ver
-          <Icons iconName='arrowTr'/>
-        </motion.span>
-      ) : (
+      {cursorType === "drag" ? (
         <motion.svg 
           xmlns="http://www.w3.org/2000/svg" 
           viewBox="0 0 1080 1080" 
           fill="none"
           initial={{ scale: 0.9 }}
           animate={{ 
-            scale: 1
+            scale: 1.1
           }}
           transition={{ 
-            scale: { type: "spring", stiffness: 250, damping: 15 }
+            scale: { type: "spring", stiffness: 300, damping: 20 }
           }}
           className="custom-cursor-icon"
-          style={{ transformOrigin: "center", color: cursorColor }}
+          style={{ 
+            transformOrigin: "center center",
+            color: cursorColor,
+            width: `${CURSOR_SIZE}px`,
+            height: `${CURSOR_SIZE}px`,
+          }}
         >
           <motion.g
             animate={{
@@ -474,11 +542,98 @@ const CustomCursor = ({ icon }) => {
             />
           </motion.g>
         </motion.svg>
-      )}
+      ) : hoverComponent ? (
+        <motion.span 
+          className="custom-cursor-text"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.2 }}
+        >
+          Ver
+          <Icons iconName='arrowTr'/>
+        </motion.span>
+      ) : cursorType === "link" || cursorType === null ? (
+        <motion.svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          viewBox="0 0 1080 1080" 
+          fill="none"
+          initial={{ scale: 0.9 }}
+          animate={{ 
+            scale: 1
+          }}
+          transition={{ 
+            scale: { type: "spring", stiffness: 300, damping: 20 }
+          }}
+          className="custom-cursor-icon"
+          style={{ 
+            transformOrigin: "center center",
+            color: cursorColor,
+            width: `${CURSOR_SIZE}px`,
+            height: `${CURSOR_SIZE}px`,
+          }}
+        >
+          <motion.g
+            animate={{
+              rotateZ: [0, 5, -5, 0],
+              scaleX: [1, 1.02, 0.98, 1],
+              scaleY: [1, 0.98, 1.02, 1],
+            }}
+            transition={{
+              duration: 1.6,
+              repeat: Infinity,
+              ease: [0.4, 0, 0.6, 1]
+            }}
+            style={{ transformOrigin: "540px 540px" }}
+          >
+            <path 
+              d="M683.64,708.47c-34.71,10.68-70.34,19.3-107.28,24.69-82.9,11.9-166.85,6.52-251.59-15.01,39.26,89.16,77.65,161.91,71.21,193.38l-.44,1.44-30.25-8.23-.79,2.67,32.43,55.89,2.63.7,55.76-32.17.66-2.63-29.81-8.14v-.09c12.47-43.6,146.5-113.67,257.46-212.51Z"
+              fill={cursorColor}
+            />
+          </motion.g>
+          <motion.g
+            animate={{
+              rotateZ: [0, -4, 4, 0],
+              scaleX: [1, 0.98, 1.02, 1],
+              scaleY: [1, 1.02, 0.98, 1],
+            }}
+            transition={{
+              duration: 1.8,
+              repeat: Infinity,
+              ease: [0.4, 0, 0.6, 1],
+              delay: 0.25
+            }}
+            style={{ transformOrigin: "540px 540px" }}
+          >
+            <path 
+              d="M653.57,133.36l-60.36-16.15c-18.56-5.03-37.69,6.09-42.59,24.64l-5.47,20.66-27.53-7.44c-18.6-4.94-37.6,6-42.55,24.56l-.87,3.06c-67.98,2.32-131.05,35.15-173.29,87.63,67.01,52,143.48,89.6,229.14,112.58,87.45,23.37,173.77,28.98,259.25,16.76,12.61-1.71,24.47-4.51,36.68-7-14.01-58.74-50.77-110.78-102.82-143.26l.66-2.93c5.08-18.78-6.22-37.86-24.51-42.81l-26.52-7.09,5.56-20.44c4.99-18.65-6.04-37.73-24.77-42.76Z"
+              fill={cursorColor}
+            />
+          </motion.g>
+          <motion.g
+            animate={{
+              rotateZ: [0, 6, -6, 0],
+              scaleX: [1, 1.03, 0.97, 1],
+              scaleY: [1, 0.97, 1.03, 1],
+            }}
+            transition={{
+              duration: 1.7,
+              repeat: Infinity,
+              ease: [0.4, 0, 0.6, 1],
+              delay: 0.5
+            }}
+            style={{ transformOrigin: "540px 540px" }}
+          >
+            <path 
+              d="M824.71,507.65c6.39-24.03,8.62-48.32,7.53-72-19.08,4.46-38.56,8.4-58.22,11.03-85.75,12.34-172.11,6.61-259.21-16.72-87.19-23.37-165.1-61.76-232.86-114.99l-6.61-5.56c-7.35,14.53-13.92,29.63-18.3,46.22-26.39,98.09,6.08,211.11,46.27,310.86,6,1.8,11.64,4.03,17.95,5.73,87.28,23.24,173.64,29.06,259.21,16.76,59.57-8.49,115.73-24.64,168.82-47.36,34.62-40.62,62.33-85.18,75.42-133.98Z"
+              fill={cursorColor}
+            />
+          </motion.g>
+        </motion.svg>
+      ) : null}
     </motion.div>
-  );
+  ) : null;
 
-  if (!mounted) return null;
+  if (!mounted || !shouldShow) return null;
 
   return createPortal(cursorContent, document.body);
 };

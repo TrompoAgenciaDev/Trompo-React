@@ -27,32 +27,9 @@ const SimpleHeroVideo = ({
     };
   }, []);
 
-  return (
-    <>
-      {/* Desktop Video */}
-      <video
-        className={`hero-video desktop-only ${className}`}
-        poster={desktopPoster}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        disablePictureInPicture
-        controlsList="nodownload noremoteplayback"
-        onError={(error) => console.log('Error en video desktop:', error)}
-        onLoad={() => console.log('Video desktop cargado')}
-        style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover'
-        }}
-        {...props}
-      >
-        <source src={desktopSrc} type="video/mp4" />
-      </video>
-
-      {/* Mobile Video */}
+  // Renderizar condicionalmente según el tamaño de pantalla
+  if (isMobile) {
+    return (
       <video
         className={`hero-video mobile-only ${className}`}
         poster={mobilePoster}
@@ -74,7 +51,31 @@ const SimpleHeroVideo = ({
       >
         <source src={mobileSrc} type="video/mp4" />
       </video>
-    </>
+    );
+  }
+
+  return (
+    <video
+      className={`hero-video desktop-only ${className}`}
+      poster={desktopPoster}
+      autoPlay
+      loop
+      muted
+      playsInline
+      preload="metadata"
+      disablePictureInPicture
+      controlsList="nodownload noremoteplayback"
+      onError={(error) => console.log('Error en video desktop:', error)}
+      onLoad={() => console.log('Video desktop cargado')}
+      style={{
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover'
+      }}
+      {...props}
+    >
+      <source src={desktopSrc} type="video/mp4" />
+    </video>
   );
 };
 

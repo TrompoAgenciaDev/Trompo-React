@@ -7,7 +7,7 @@ import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 
 //styles
 import "@as/hero.css";
-import "../../assets/styles/ads.css";
+import "../../assets/styles/paid-media.css";
 
 
 const base = import.meta.env.BASE_URL?.endsWith("/")

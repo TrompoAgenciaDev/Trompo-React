@@ -5,7 +5,6 @@ import Portfolio3d from "../../layout/Portfolio3d.jsx";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo";
-import TrailCursor from "../../components/cursors/TrailCursor.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
 
@@ -441,7 +440,6 @@ const ProductoItem = ({ number, title, children, isLast, itemRef, nextItemRef })
 const Desarrollo = () => {
   return (
     <>
-      <TrailCursor />
       <SimpleHeroVideo
         desktopSrc={`${base}assets/hero/desarrollo-hero.mp4`}
         mobileSrc={`${base}assets/hero/mobile/desarrollo-hero-mobile.mp4`}

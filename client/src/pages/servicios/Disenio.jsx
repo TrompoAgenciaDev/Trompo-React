@@ -551,20 +551,16 @@ const EntregableItem = ({ number, title, children, isLast, itemRef, nextItemRef 
   );
 };
 
-const Disenio = () => {
-  const [headerHeight, setHeaderHeight] = useState(0);
-  const accordionWrapperRef = useRef(null);
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
-  const videoRef = useRef(null);
-  
-  // Refs y estado para la sección de texto animado
+// Componente interno para la sección de texto animado
+const AnimatedTextSection = ({ containerRef }) => {
   const textRef = useRef(null);
-  const animatedTextContainerRef = useRef(null);
   const isInView = useInView(textRef, { once: false, amount: 0.3 });
   
+  // useScroll solo se llama cuando containerRef está disponible
   const { scrollYProgress } = useScroll({
-    target: animatedTextContainerRef,
-    offset: ["start end", "start start"]
+    target: containerRef,
+    offset: ["start end", "start start"],
+    layoutEffect: false
   });
 
   // Transformar el scroll progress: cuando está visible (entre 0.1 y 0.9), opacidad 1
@@ -642,6 +638,53 @@ const Disenio = () => {
     }
   }, [baseOpacity, hasAnimated, phrases.length, phraseDelay]);
 
+  return (
+    <motion.span 
+      ref={textRef}
+      className="animated-text"
+    >
+      {phrases.map((phrase, phraseIndex) => (
+        <AnimatedPhrase
+          key={`phrase-${phraseIndex}`}
+          phrase={phrase}
+          index={phraseIndex}
+          phraseDelay={phraseDelay}
+          baseOpacity={baseOpacity}
+          hasAnimated={hasAnimated}
+        />
+      ))}
+    </motion.span>
+  );
+};
+
+const Disenio = () => {
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const accordionWrapperRef = useRef(null);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const videoRef = useRef(null);
+  
+  // Refs para la sección de texto animado
+  const animatedTextContainerRef = useRef(null);
+  const [isTextSectionMounted, setIsTextSectionMounted] = React.useState(false);
+
+  // Esperar a que el componente esté montado antes de inicializar useScroll
+  React.useEffect(() => {
+    // Verificar que el ref esté disponible después de que el DOM se haya renderizado
+    const checkRef = () => {
+      if (animatedTextContainerRef.current) {
+        setIsTextSectionMounted(true);
+      }
+    };
+    
+    // Iniciar verificación después de un pequeño delay para asegurar que el ref está hidratado
+    const timer = setTimeout(checkRef, 100);
+    
+    // También verificar inmediatamente en caso de que el ref ya esté disponible
+    checkRef();
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   // Datos del video (puedes cambiar estos valores)
   const videoData = {
     title: "movie trompo",
@@ -692,24 +735,11 @@ const Disenio = () => {
 
       <ServiceTitle area="Diseño" titulo="Servicios de diseño" />
 
-
       <div ref={animatedTextContainerRef} className="full-container">
         <div className="container animated-text-container">
-          <motion.span 
-            ref={textRef}
-            className="animated-text"
-          >
-            {phrases.map((phrase, phraseIndex) => (
-              <AnimatedPhrase
-                key={`phrase-${phraseIndex}`}
-                phrase={phrase}
-                index={phraseIndex}
-                phraseDelay={phraseDelay}
-                baseOpacity={baseOpacity}
-                hasAnimated={hasAnimated}
-              />
-            ))}
-          </motion.span>
+          {isTextSectionMounted && (
+            <AnimatedTextSection containerRef={animatedTextContainerRef} />
+          )}
         </div>
       </div>
 

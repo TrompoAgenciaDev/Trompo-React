@@ -2,10 +2,19 @@
   width: 50px;  
 }
 
+.custom-cursor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .custom-cursor .custom-cursor-icon {
   width: 50px;
   height: 50px;
   color: #FED332;
+  display: block;
+  margin: 0;
+  /* El SVG ya tiene el tamaño definido, no necesita margin auto */
 }
 
 .custom-cursor .custom-cursor-text {

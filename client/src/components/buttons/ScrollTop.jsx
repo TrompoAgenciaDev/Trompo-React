@@ -23,19 +23,27 @@ function ScrollTop() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const firstSection = document.getElementById("hero");
-      if (!firstSection) return;
-      const sectionHeight = firstSection.offsetHeight;
-      setVisible(window.scrollY > sectionHeight);
+      // Mostrar el botón cuando el usuario haya hecho scroll más de 300px
+      // o más de la mitad de la altura de la ventana
+      const threshold = Math.max(300, window.innerHeight * 0.5);
+      setVisible(window.scrollY > threshold);
     };
-    window.addEventListener("scroll", handleScroll);
+    
+    // Verificar estado inicial
+    handleScroll();
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const scrollToTop = (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   return (
-    <a
+    <button
+      type="button"
       className={`scroll-top-button ${visible ? "visible" : ""}`}
       onClick={scrollToTop}
       aria-label="Scroll to top"
@@ -55,7 +63,7 @@ function ScrollTop() {
           strokeLinejoin="round"
         />
       </svg>
-    </a>
+    </button>
   );
 }
 

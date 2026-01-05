@@ -46,7 +46,7 @@
     color: #ffffff;
     font-size: 12px;
     text-transform: lowercase;
-    font-weight: 700;
+    font-weight: 500;
     
 }
 
@@ -97,7 +97,7 @@ h3.display-title,
         display: -ms-grid;
         display: grid;
         -ms-grid-columns: 5fr 2fr;
-        grid-template-columns: 5fr 2fr;
+        grid-template-columns: 5fr 3fr;
         gap: 50px;
     }
 
@@ -139,8 +139,7 @@ h3.display-title,
 
 @media (min-width: 1200px) {
     .title-container-design .title-creative h1.display-title{
-        font-size: 120px;
-        
+        font-size: 120px;        
     }
 }
 

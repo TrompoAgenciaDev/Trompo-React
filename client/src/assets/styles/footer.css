@@ -1,7 +1,3 @@
-.footer{  
-  background-color: #FEE070;
-}
-
 .footer-container{
   display: -webkit-box;
   display: -webkit-flex;
@@ -47,7 +43,7 @@
   -ms-flex-pack: center;
   justify-content: center;
   padding: 50px;
-  border-bottom: 1px solid #9A7A00;
+  border-bottom: 1px solid #FEE070;
   gap: 20px;
 }
 
@@ -143,7 +139,7 @@
 
 .footer-menu ul li a{
   text-decoration: none;
-  color: #000000;
+  color: #ffffff;
   text-transform: capitalize;
   font-weight: 400;
   transition: all 0.1s ease;
@@ -202,7 +198,7 @@
 
 .footer-menu h3,
 .info-text h4{
-  color: #9A7A00;
+  color: #ffffff;
 }
 
 .mailing-footer{
@@ -211,7 +207,7 @@
   display: -moz-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  background-color: #9A7A00;
+  background-color: #FEE070;
   padding: 8px 20px;
   -webkit-border-radius: 999px;
   -moz-border-radius: 999px;
@@ -249,7 +245,7 @@
 }
 
 .mailing-footer a p{
-  color: #FFFFFF;
+  color: #000000;
   font-size: 14px;
   font-weight: 500;
 }
@@ -285,7 +281,7 @@
 
 .copy span{
   font-weight: 700;
-  color: #9A7A00;
+  color: #ffffff;
   font-size: 15px;
 }
 
@@ -339,7 +335,7 @@
   }
 
   .footer-grid-item:not(:last-child){
-    border-right: 1px solid #9A7A00;
+    border-right: 1px solid #FEE070;
   }
   .footer-menu-mobile{
     display: none;

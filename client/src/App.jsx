@@ -9,7 +9,7 @@ import ScrollTop from "@/components/buttons/ScrollTop";
 import { usePreloadResources } from "@/hooks/usePreloadResources";
 import { usePrefetchRoutes } from "@/hooks/usePrefetchRoutes";
 import { HoverProvider } from "@/context/HoverContext";
-import CustomCursor from "@/components/cursors/CustomCursor";
+import TrailCursor from "@/components/cursors/TrailCursor";
 import React from "react";
 
 // Componente interno que usa el hook dentro del contexto del router
@@ -23,18 +23,11 @@ function AppContent() {
   // Prefetch inteligente de rutas relacionadas
   usePrefetchRoutes();
 
-  // Rutas donde debe aparecer CustomCursor
-  const showCustomCursor = 
-    location.pathname === "/" || 
-    location.pathname === "/nosotros" || 
-    location.pathname === "/contactanos";
-
   return (
     <>
-      {showCustomCursor && <CustomCursor />}
+      <TrailCursor />
       <Header onTogglePopup={togglePopup} />
       <MenuPopup isOpen={isOpen} onClose={togglePopup} />
-      <ScrollTop />
       <AppRoutes />
       <ScrollTop />
       <Footer />

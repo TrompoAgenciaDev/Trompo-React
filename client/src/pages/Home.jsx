@@ -6,7 +6,6 @@ import "@as/hero.css";
 
 //components
 import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
-// import Hero from "../layout/Hero";
 import Services from "../layout/Services";
 import Contact from "../layout/Contact";
 import PostHero from "../components/PostHero";
