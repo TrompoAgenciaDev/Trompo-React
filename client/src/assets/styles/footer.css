@@ -142,14 +142,12 @@
   color: #ffffff;
   text-transform: capitalize;
   font-weight: 400;
+  font-size: 14px;
   transition: all 0.1s ease;
 }
 
 .footer-menu ul li:hover a{
-  font-family: var(--subtitle-font);
-  font-style: italic;
-  font-size: 15px;
-  font-weight: 600;
+  color: #FEE070;
 }
 
 .footer-menu ul{
@@ -194,6 +192,7 @@
 
 .info-footer .info-text p{
   font-size: 14px;
+  color: #ffffff;
 }
 
 .footer-menu h3,
@@ -207,7 +206,7 @@
   display: -moz-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
-  background-color: #FEE070;
+  background-color: #E1C025;
   padding: 8px 20px;
   -webkit-border-radius: 999px;
   -moz-border-radius: 999px;
@@ -277,12 +276,20 @@
   -moz-box-align: flex-start;
   -ms-flex-align: flex-start;
   align-items: flex-start;
+  gap: 5px;
 }
 
 .copy span{
   font-weight: 700;
-  color: #ffffff;
   font-size: 15px;
+}
+
+.copy span:first-child{
+  color: #FEE070;
+}
+
+.copy span:last-child{
+  color: #ffffff;
 }
 
 @media (min-width: 1024px) {
@@ -358,7 +365,6 @@
 }
 
 @media (min-width: 1280px) {
-
   .footer{
     padding: 70px 20px 0;
     gap: 50px;
@@ -398,10 +404,13 @@
   .footer-grid-item:first-child{
     padding: 0;
   }
+
+  .footer-menu ul li a{
+    font-size: 15px;
+  }
 }
 
 @media (min-width: 1366px) {
-    
   .copy{
     max-width: 1300px;
     padding: 30px 0;

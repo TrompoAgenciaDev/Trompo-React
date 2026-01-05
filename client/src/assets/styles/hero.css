@@ -22,6 +22,11 @@
   user-select: none;
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: top;
+  line-height: 0;
 }
 
 /* Mostrar/Ocultar versiones */

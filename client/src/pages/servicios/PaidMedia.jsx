@@ -481,12 +481,14 @@ const Estrategia = () => {
   }, [baseOpacity, hasAnimated, phrases.length, phraseDelay]);
   return (
     <>
-      <SimpleHeroVideo
-        desktopSrc={`${base}assets/hero/estrategia-hero.mp4`}
-        mobileSrc={`${base}assets/hero/mobile/estrategia-hero-mobile.mp4`}
-        desktopPoster={`${base}assets/hero/estrategia-hero-poster.webp`}
-        mobilePoster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
-      />
+      <div style={{ margin: 0, padding: 0, lineHeight: 0, fontSize: 0 }}>
+        <SimpleHeroVideo
+          desktopSrc={`${base}assets/hero/estrategia-hero.mp4`}
+          mobileSrc={`${base}assets/hero/mobile/estrategia-hero-mobile.mp4`}
+          desktopPoster={`${base}assets/hero/estrategia-hero-poster.webp`}
+          mobilePoster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
+        />
+      </div>
       
       <ServiceTitle area="social media" titulo="Servicios de Paid Media" />
 

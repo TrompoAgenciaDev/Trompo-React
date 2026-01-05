@@ -40,6 +40,7 @@
   -moz-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
+  gap: 30px;
 }
 
 .grid-item-paid-media:hover{
@@ -124,6 +125,7 @@
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  flex-direction: column;
   -webkit-box-pack: justify;
   -moz-box-pack: justify;
   -ms-flex-pack: justify;
@@ -135,7 +137,7 @@
   -ms-flex-align: center;
   -webkit-align-items: center;
   -moz-align-items: center;
-  align-items: center;
+  gap: 16px;
 }
 
 .icon-container-paid{
@@ -211,13 +213,13 @@
    TABS - Estilos Base
    ============================================ */
 .tab-content-container {
-  padding: 30px 0;
-  min-height: 200px;
+  padding: 20px 0;
+  min-height: 150px;
 }
 
 .tab-content {
   width: 100%;
-  padding: 20px 0;
+  padding: 15px 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -227,24 +229,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
 }
 
 .tab-content h2 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   color: #1D1D1B;
 }
 
 .tab-content p {
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: 15px;
+  line-height: 1.5;
   color: #1D1D1B;
-}
-
-.tab-content .container {
-  padding: 0;
 }
 
 .tabs{
@@ -303,7 +301,8 @@
 
 
 .text-container {
-  max-width: 650px;
+  width: 100%;
+  max-width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -311,18 +310,20 @@
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  gap: 20px;
-  padding-top: 50px;
+  gap: 15px;
+  padding-top: 30px;
 }
 
 .text-container h3 {
-  font-size: 40px;
+  font-size: 24px;
   font-weight: normal;
   font-family: var(--font-portfolio);
+  line-height: 1.2;
 }
 
 .text-container p {
-  font-size: 20px;
+  font-size: 15px;
+  line-height: 1.5;
 }
 
 .bento-grid {
@@ -330,7 +331,7 @@
   display: grid;
   -ms-grid-columns: 1fr;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: 15px;
 }
 
 .bento-item {
@@ -338,9 +339,13 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
   background-color: #ffffff;
-  padding: 20px 20px 0;
-  gap: 20px;
+  padding: 15px 15px 0;
+  gap: 15px;
   -webkit-box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
 }
@@ -356,10 +361,19 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .content-bento h3 {
   font-family: var(--font-portfolio);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.content-bento p {
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .img-bento {
@@ -440,7 +454,7 @@
 }
 
 .grid-item-body p {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.6;
   color: #1D1D1B;
 }
@@ -493,9 +507,10 @@
 .grafico-slide {
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  width: 290px;
+  width: 280px;
+  min-width: 280px;
   background-color: #fff;
-  padding: 20px;
+  padding: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -506,7 +521,7 @@
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  gap: 20px;
+  gap: 15px;
   border: 1px solid #dddddd;
 }
 
@@ -527,8 +542,8 @@
 }
 
 .grafico-slide .icon-header {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
 }
 
 .grafico-slide .icon-header svg {
@@ -537,16 +552,17 @@
 }
 
 .grafico-slide .title-item h3 {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
   font-family: var(--font-portfolio);
   color: #1D1D1B;
+  line-height: 1.3;
 }
 
 .grafico-slide .item-body p {
   font-size: 12px;
   color: #1D1D1B;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* ============================================
@@ -578,9 +594,10 @@
 .video-slide {
   -ms-flex-negative: 0;
   flex-shrink: 0;
-  width: 100%;
+  width: 280px;
+  min-width: 280px;
   background-color: #fff;
-  padding: 20px;
+  padding: 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -591,7 +608,7 @@
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 15px;
 }
 
 .video-slide .item-header:not(:last-child) {
@@ -624,16 +641,17 @@
 }
 
 .video-slide .title-item h3 {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   font-family: var(--font-portfolio);
   color: #1D1D1B;
+  line-height: 1.3;
 }
 
 .video-slide .item-body p {
-  font-size: 14px;
+  font-size: 13px;
   color: #1D1D1B;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 /* ============================================
@@ -716,7 +734,6 @@
 
 .inversiones-container > .container > .container:last-child {
   text-align: right;
-  padding-right: 100px;
 }
 
 .inversiones-hightlight{
@@ -732,6 +749,11 @@
 
 .inversiones-container > .container > .container:first-child .inversiones-hightlight {
   font-weight: 700;
+}
+
+.grid-tab{
+  width: 100%;
+  padding: 16px;
 }
 
 @media (min-width: 540px) {
@@ -785,7 +807,7 @@
   }
 
   .grid-item-body p {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .ads-grid {
@@ -796,7 +818,66 @@
   }
 
   .text-container {
-    padding-top: 50px;
+    padding-top: 40px;
+    gap: 18px;
+  }
+
+  .text-container h3 {
+    font-size: 28px;
+  }
+
+  .text-container p {
+    font-size: 16px;
+  }
+
+  .bento-grid {
+    gap: 20px;
+  }
+
+  .bento-item {
+    padding: 18px 18px 0;
+    gap: 18px;
+  }
+
+  .content-bento h3 {
+    font-size: 20px;
+  }
+
+  .content-bento p {
+    font-size: 14px;
+  }
+
+  .grafico-slide {
+    width: 300px;
+    min-width: 300px;
+    padding: 18px;
+  }
+
+  .grafico-slide .icon-header {
+    width: 45px;
+    height: 45px;
+  }
+
+  .grafico-slide .title-item h3 {
+    font-size: 17px;
+  }
+
+  .grafico-slide .item-body p {
+    font-size: 14px;
+  }
+
+  .video-slide {
+    width: 300px;
+    min-width: 300px;
+    padding: 18px;
+  }
+
+  .video-slide .title-item h3 {
+    font-size: 18px;
+  }
+
+  .video-slide .item-body p {
+    font-size: 14px;
   }
 
   .grid-paid-media-info-wrapper {
@@ -884,11 +965,27 @@
   }
 
   .grid-item-body p {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   .tab-content {
+    padding: 20px 0;
     gap: 70px;
+  }
+
+  .tab-content h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+
+  .tab-content p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .tab-content-container {
+    padding: 30px 0;
+    min-height: 200px;
   }
 
   .tab-button {
@@ -907,13 +1004,6 @@
 
   .text-container {
     max-width: 650px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
     gap: 20px;
     padding-top: 50px;
   }
@@ -924,7 +1014,7 @@
   }
 
   .text-container p {
-    font-size: 20px;
+    font-size: 21px;
   }
 
   .bento-grid {
@@ -940,6 +1030,8 @@
     display: grid;
     -ms-grid-columns: 2fr 1fr;
     grid-template-columns: 2fr 1fr;
+    padding: 20px 20px 0;
+    gap: 20px;
   }
 
   .bento-item:nth-child(1) {
@@ -961,10 +1053,50 @@
 
   .content-bento {
     padding-bottom: 50px;
+    gap: 0;
   }
 
   .content-bento h3 {
     font-size: 30px;
+  }
+
+  .content-bento p {
+    font-size: 17px;
+  }
+
+  .grafico-slide {
+    width: 290px;
+    min-width: 290px;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .grafico-slide .icon-header {
+    width: 50px;
+    height: 50px;
+  }
+
+  .grafico-slide .title-item h3 {
+    font-size: 17px;
+  }
+
+  .grafico-slide .item-body p {
+    font-size: 13px;
+  }
+
+  .video-slide {
+    width: 290px;
+    min-width: 290px;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .video-slide .title-item h3 {
+    font-size: 20px;
+  }
+
+  .video-slide .item-body p {
+    font-size: 15px;
   }
 
   .inversiones-hightlight {
@@ -998,6 +1130,10 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+
+  .inversiones-container > .container > .container:last-child {
+    text-align: right;
   }
 }
 
