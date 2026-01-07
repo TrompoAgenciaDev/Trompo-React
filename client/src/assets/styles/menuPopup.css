@@ -26,23 +26,6 @@
   padding: 20px 10px 50px;
 }
 
-/* Blend-mode SOLO cuando el cursor custom está sobre textos del menú */
-/* Aplicar blend-mode a los textos del menú cuando tienen hover */
-body.trail-cursor-active header.full-container .menu-item:hover,
-body.trail-cursor-active header.full-container .menu-item:hover span,
-body.trail-cursor-active header.full-container .submenu-item:hover,
-body.trail-cursor-active header.full-container .submenu-item:hover *,
-body.trail-cursor-active .popup-menu h3:hover,
-body.trail-cursor-active .popup-menu span:hover:not(.menu-icon-submenu),
-body.trail-cursor-active .popup-menu .menu-item:hover,
-body.trail-cursor-active .popup-menu .menu-item:hover span,
-body.trail-cursor-active .popup-menu .submenu-item:hover,
-body.trail-cursor-active .popup-menu .submenu-item:hover *,
-body.trail-cursor-active .popup-menu .servicios-header span:hover,
-body.trail-cursor-active .popup-menu .servicios-options a:hover span {
-  mix-blend-mode: difference;
-}
-
 .container.mobile-header {
   width: 95%;
   display: -webkit-box;

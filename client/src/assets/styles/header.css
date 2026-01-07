@@ -1,3 +1,9 @@
+/* Wrapper que mantiene el espacio del header para evitar saltos cuando se hace sticky */
+.header-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 .header{
   height: -moz-fit-content;
   height: -webkit-fit-content;

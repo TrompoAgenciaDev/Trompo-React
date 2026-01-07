@@ -1,3 +1,6 @@
+/* ============================================
+   ESTILOS BASE
+   ============================================ */
 .grid-item-interaccion img{
   width: 100%;
 }
@@ -94,7 +97,6 @@
   line-height: 1.5;
 }
 
-/* portfolio 3d*/
 .title-portfolio-container{
   display: -ms-grid;
   display: grid;
@@ -117,7 +119,98 @@
   flex-direction: column;
 }
 
+.espacios{
+  height: 50svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.2;
+  transition: mix-blend-mode 0.2s ease;
+}
 
+.highlight-text{
+  color: #d9d9d988;
+  font-size: 20px;
+}
+
+.how-container{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 50px;
+}
+
+.how-container h1{
+  font-size: 30px;
+  font-weight: 700;
+  color: #d9d9d988;
+}
+
+.how-container p{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+.grid-social-media-info-wrapper {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 30px;
+}
+
+.grid-item-social-media-info span,
+.grid-item-social-media-info h3,
+.grid-item-social-media-info p {
+  color: #ffffff;
+}
+
+.grid-item-social-media-info h3,
+.grid-item-social-media-info p {
+  padding-left: 8px;
+}
+
+.grid-item-social-media-info {
+  padding: 20px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.grid-item-social-media-info h3 {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-family: var(--font-portfolio);
+}
+
+.grid-item-social-media-info:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #8E8E8E;
+}
+
+.grid-item-social-media-info p {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ============================================
+   MEDIA QUERIES - Tablet (768px+)
+   ============================================ */
 @media (min-width: 768px) {
   .grid-item-interaccion:last-child{
     width: 100%;
@@ -150,8 +243,20 @@
   .title-portfolio-container p{
     font-size: 14px;
   }
+
+  .grid-social-media-info-wrapper {
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .grid-item-social-media-info p {
+    font-size: 14px;
+  }
 }
 
+/* ============================================
+   MEDIA QUERIES - Desktop (1024px+)
+   ============================================ */
 @media (min-width: 1024px) {
   .interaccion-grid{
     display: -ms-grid;
@@ -226,8 +331,34 @@
   .files-carousel-container{
     height: 90svh;
   }
+
+  .grid-social-media-info-wrapper {
+    column-gap: 168px;
+    row-gap: 70px;
+  }
+
+  .grid-item-social-media-info p {
+    font-size: 16px;
+  }
+
+  .how-container{
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    padding-top: 70px;
+  }
+
+  .how-container h1{
+    font-size: 48px;
+  }
+  
+  .how-container p{
+    font-size: 15px;
+  }
 }
 
+/* ============================================
+   MEDIA QUERIES - Large Desktop (1280px+)
+   ============================================ */
 @media (min-width: 1280px) {
   .interaccion-diagonal:first-child{
     height: 200px;
@@ -285,5 +416,13 @@
 
   .title-portfolio-container h3{
     font-size: 32px;
+  }
+
+  .how-container{
+    grid-template-columns: 4fr 3fr;
+  }
+
+  .how-container h1{
+    font-size: 68px;
   }
 }
