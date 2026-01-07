@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import React, { useRef, useState, useMemo } from "react";
+import { motion, useScroll, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import Hero from "../../layout/Hero.jsx";
 import Values from "../../layout/Values.jsx";
 import PostCard from "../../components/posts/PostCard.jsx";
@@ -16,9 +16,44 @@ import Inversiones from "../../components/Inversiones.jsx";
 import "../../assets/styles/social-media.css";
 import "@as/hero.css";
 
+// Componente Slider Infinito para Social Media
+const SocialMediaSlider = ({ text }) => {
+  const shouldReduceMotion = useReducedMotion();
+  const items = Array(16).fill(text);
+
+  return (
+    <motion.div 
+      className="sm-infinite-slider"
+      animate={{
+        x: shouldReduceMotion ? 0 : ['0%', '-10%']
+      }}
+      transition={{
+        x: {
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: 50,
+          ease: "linear"
+        }
+      }}
+      style={{
+        pointerEvents: 'auto',
+        willChange: 'transform'
+      }}
+    >
+      {items.map((item, index) => (
+        <h1 key={index} className="sm-infinite-slider-item">{item}</h1>
+      ))}
+      {items.map((item, index) => (
+        <h1 key={`duplicate-${index}`} className="sm-infinite-slider-item">{item}</h1>
+      ))}
+    </motion.div>
+  );
+};
+
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
+
 
 // Componente para animar palabra por palabra basado en scroll
 const AnimatedWord = ({ word, index, totalWords, scrollProgress }) => {
@@ -112,12 +147,13 @@ const SocialMedia = () => {
                 word={word}
                 index={index + yellowWordsCount}
                 totalWords={words.length}
-                scrollProgress={Math.min(scrollProgress * 2, 1)}
+                scrollProgress={Math.min(scrollProgress * 1, 1)}
               />
             ))}
           </h1>
         </div>
       </div>
+
 
       <div className="full-container black-bg">
         <div className="container how-container">
@@ -158,6 +194,27 @@ const SocialMedia = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="full-container black-bg">
+        <div className="container">
+          <div className="grid-impulsos">
+            <div className="grid-item-impulsos">
+              <div className="container title-container-impulsos">
+                <h1 className="title-impulsos">Impulsados por la conversación</h1>
+                <p className="subtitle-impulsos">Las redes no se transmiten: se viven. Creamos diálogos auténticos que convierten marcas en comunidades.</p>
+              </div>
+              <div className="container">
+                <p>Las redes sociales son la plaza pública donde las marcas conversan, escuchan y construyen vínculos reales. En un entorno saturado de mensajes, la autenticidad es el valor que genera resonancia. No buscamos ruido ni presencia vacía: diseñamos conversaciones con sentido, capaces de conectar con personas reales. <br/>Nuestro propósito es transformar la identidad de cada marca en una presencia social magnética y coherente. Traducimos valores, tono y narrativa al lenguaje nativo de cada plataforma, construyendo comunidades comprometidas y relaciones que trascienden la pantalla.</p>
+              </div>
+            </div>
+            <div className="grid-item-impulsos"></div>
+          </div>
+        </div>
+      </div>
+
+      <div className="full-container sm-slider-container infinite-slider-container">
+        <SocialMediaSlider text="Social Media" />
       </div>
 
       <Inversiones />

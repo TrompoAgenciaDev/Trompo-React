@@ -52,6 +52,70 @@ const InfiniteSlider = ({ text }) => {
   );
 };
 
+const WebDesignSection = () => {
+  const sectionRef = useRef(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  // Detectar cuando la sección entra al viewport
+  const isInView = useInView(sectionRef, { 
+    once: false, 
+    amount: 0.1,
+    margin: "-10% 0px -10% 0px"
+  });
+
+  // useScroll para controlar el cambio de color durante el scroll
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "center center"]
+  });
+
+  // Transformar el scroll progress a un color intermedio para el fondo
+  const backgroundColor = useTransform(
+    scrollYProgress,
+    [0.5, 0.8],
+    shouldReduceMotion 
+      ? ["#262626", "#262626"] 
+      : ["#262626", "#ffffff"]
+  );
+
+  // Transformar el scroll progress para el color del texto (blanco a negro)
+  const textColor = useTransform(
+    scrollYProgress,
+    [0.5, 0.8],
+    shouldReduceMotion 
+      ? ["#ffffff", "#ffffff"] 
+      : ["#ffffff", "#000000"]
+  );
+
+  return (
+    <motion.div 
+      ref={sectionRef}
+      className="full-container web-design-container"
+      style={{
+        backgroundColor: backgroundColor,
+      }}
+    >
+      <div className="container">
+        <motion.h1 
+          className="text-highlight"
+          style={{ color: textColor }}
+        >
+          Diseñamos y desarrollamos plataformas digitales escalables
+        </motion.h1>
+      </div>
+      <div className="container web-design-container-text">
+        <div className="container-text">
+          <motion.p 
+            style={{ color: textColor }}
+          >
+            <strong>Diseñamos y desarrollamos plataformas digitales escalables</strong> para transformar diseño en sistemas digitales reales. Planificamos la experiencia de usuario desde el primer prototipo, desarrollamos front-end y back-end a medida con código limpio y escalable, e integramos APIs, CRM y herramientas de marketing y analytics para que cada plataforma funcione como un núcleo sólido del negocio.
+          </motion.p>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 const ZoomInSection = () => {
   const containerRef = useRef(null);
   const sectionRef = useRef(null);
@@ -537,16 +601,7 @@ const Desarrollo = () => {
         <Portfolio3d location="desarrollo" categoria="3d" />
       </div>      
 
-      <div className="full-container web-design-container">
-        <div className="container">
-          <h1 className="text-highlight">Diseñamos y desarrollamos plataformas digitales escalables</h1>
-        </div>
-        <div className="container web-design-container-text">
-          <div className="container-text">
-            <p><strong>Diseñamos y desarrollamos plataformas digitales escalables</strong> para transformar diseño en sistemas digitales reales. Planificamos la experiencia de usuario desde el primer prototipo, desarrollamos front-end y back-end a medida con código limpio y escalable, e integramos APIs, CRM y herramientas de marketing y analytics para que cada plataforma funcione como un núcleo sólido del negocio.</p>
-          </div>
-        </div>
-      </div>
+      <WebDesignSection />
 
       <Beneficios />
 

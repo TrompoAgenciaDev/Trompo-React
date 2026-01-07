@@ -757,7 +757,7 @@ const Disenio = () => {
       </div>
 
       <div className="full-container">
-        <PortfolioSlider category="institucional" />
+        <PortfolioSlider/>
       </div>
 
       <div className="full-container strategy-container black-bg">

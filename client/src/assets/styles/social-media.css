@@ -131,7 +131,7 @@
 }
 
 .highlight-text{
-  color: #d9d9d988;
+  color: #ebebeb88;
   font-size: 20px;
 }
 
@@ -209,6 +209,92 @@
 }
 
 /* ============================================
+   SLIDER INFINITO - SOCIAL MEDIA
+   ============================================ */
+.sm-slider-container{
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  contain: layout style paint;
+  isolation: isolate;
+  position: relative;
+}
+
+.sm-infinite-slider{
+  display: flex;
+  width: fit-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 30px 0;
+}
+
+.sm-infinite-slider-item{
+  white-space: nowrap;
+  margin: 0;
+  padding-right: 60px;
+  flex-shrink: 0;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #000000 !important;
+  font-size: 48px;
+  font-weight: 500;
+  font-family: var(--font-portfolio);
+  line-height: 1.2;
+  transition: mix-blend-mode 0.2s ease;
+}
+
+/* Efecto blend mode cuando el cursor está sobre el slider */
+body.trail-cursor-in-slider .sm-infinite-slider-item {
+  mix-blend-mode: difference;
+}
+
+.grid-impulsos{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.title-container-impulsos{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title-container-impulsos .subtitle-impulsos{
+  font-size: 12px;
+}
+
+.grid-item-impulsos h1,
+.grid-item-impulsos p{
+  color: #ffffff;
+}
+
+.grid-item-impulsos h1{
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.grid-item-impulsos p{
+  font-size: 13px;
+}
+
+/* ============================================
+   SCROLL CONTROLLED CAROUSEL - SOCIAL MEDIA
+   ============================================ */
+
+/* Contenedor padre: define duración del scroll */
+
+/* ============================================
    MEDIA QUERIES - Tablet (768px+)
    ============================================ */
 @media (min-width: 768px) {
@@ -252,6 +338,18 @@
   .grid-item-social-media-info p {
     font-size: 14px;
   }
+
+  .highlight-text{
+    font-size: 26px;
+  }
+
+  .grid-item-impulsos h1{
+    font-size: 22px;
+  }
+  
+  .grid-item-impulsos p{
+    font-size: 14px;
+  }
 }
 
 /* ============================================
@@ -263,12 +361,6 @@
     display: grid;
     -ms-grid-columns: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
-  }
-
-  .interaccion-diagonal:not(.interaccion-diagonal:first-child):not(.interaccion-diagonal:last-child){
-    height: 150px;
-    margin-top: -100px;
-    z-index: 999999;
   }
 
   .interaccion-diagonal:first-child{
@@ -354,6 +446,33 @@
   .how-container p{
     font-size: 15px;
   }
+
+  .highlight-text{
+    font-size: 30px;
+  }
+
+  .sm-infinite-slider{
+    padding: 50px 0;
+  }
+
+  .sm-infinite-slider-item{
+    padding-right: 80px;
+    font-size: 70px;
+  }
+
+  .grid-impulsos{
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+  }
+
+  .grid-item-impulsos h1{
+    font-size: 26px;
+  }
+  
+  .grid-item-impulsos p{
+    font-size: 15px;
+  }
+
 }
 
 /* ============================================
@@ -424,5 +543,13 @@
 
   .how-container h1{
     font-size: 68px;
+  }
+  
+  .highlight-text{
+    font-size: 54px;
+  }
+
+  .sm-infinite-slider-item{
+    font-size: 90px;
   }
 }
