@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { motion, useInView, useScroll, useTransform, useMotionValueEvent, AnimatePresence, useMotionValue, useAnimation } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useMotionValueEvent, AnimatePresence, useMotionValue, useAnimation, useSpring } from "framer-motion";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
@@ -409,18 +409,31 @@ const Estrategia = () => {
   });
 
   // Transformar el scroll progress: cuando está visible (entre 0.1 y 0.9), opacidad 1
+  // Usando easing suave para transiciones más fluidas
   const opacityValue = useTransform(
     scrollYProgress,
     [0, 0.1, 0.9, 1],
-    [0.1, 1, 1, 0.1]
+    [0.1, 1, 1, 0.1],
+    {
+      clamp: false, // Permitir valores fuera del rango para suavidad
+    }
   );
+  
+  // Suavizar el valor de opacidad con un spring para transiciones más fluidas
+  // Parámetros ajustados para scroll más suave con frenado progresivo
+  const smoothedOpacity = useSpring(opacityValue, {
+    stiffness: 80,   // Más bajo = más suave pero más lento
+    damping: 30,     // Más alto = menos rebote, más controlado
+    mass: 0.6,       // Más bajo = más responsivo, más fluido
+  });
 
   // Convertir el motion value a un estado para usar en las animaciones
   const [baseOpacity, setBaseOpacity] = React.useState(0.1);
   const [hasAnimated, setHasAnimated] = React.useState(false);
 
   // Escuchar cambios en el scroll progress y actualizar opacidad
-  useMotionValueEvent(opacityValue, "change", (latest) => {
+  // Usar el valor suavizado para transiciones más fluidas
+  useMotionValueEvent(smoothedOpacity, "change", (latest) => {
     setBaseOpacity(latest);
   });
 

@@ -1,3 +1,5 @@
+import React, { useRef } from "react";
+import { motion, useInView, useScroll, useTransform, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import PostHero from "../components/PostHero";
 import Hero from "../layout/Hero";
 import Members from "../components/Members";
@@ -5,6 +7,7 @@ import StoricalClients from "../layout/StoricalClients";
 import Contact from "../layout/Contact.jsx";
 import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import SimpleHeroVideo from "../components/SimpleHeroVideo";
+import useMembers from "../hooks/useMembers";
 
 // styles
 import "../assets/styles/about.css";
@@ -14,7 +17,187 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
+const AnimatedLetter = ({ letter, index, letterDelay, baseOpacity, hasAnimated }) => {
+  const delay = hasAnimated ? 0 : index * letterDelay;
+  const targetOpacity = baseOpacity >= 0.9 ? 1 : Math.max(0.1, baseOpacity);
+
+  return (
+    <motion.span
+      className="about-animated-letter"
+      initial={{ opacity: 0.1 }}
+      animate={{ opacity: targetOpacity }}
+      transition={{
+        delay: delay,
+        duration: 0.3,
+        ease: "easeOut"
+      }}
+    >
+      {letter === " " ? "\u00A0" : letter}
+    </motion.span>
+  );
+};
+
+const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }) => {
+  const delay = hasAnimated ? 0 : index * phraseDelay;
+  const targetOpacity = baseOpacity >= 0.9 ? 1 : Math.max(0.1, baseOpacity);
+
+  return (
+    <motion.span
+      className="about-animated-phrase"
+      initial={{ opacity: 0.1 }}
+      animate={{ opacity: targetOpacity }}
+      transition={{
+        delay: delay,
+        duration: 0.4,
+        ease: "easeOut"
+      }}
+    >
+      {phrase}
+    </motion.span>
+  );
+};
+
+// Componente Slider Infinito para Nosotros
+const SocialMediaSlider = ({ text }) => {
+  const shouldReduceMotion = useReducedMotion();
+  const items = Array(16).fill(text);
+
+  return (
+    <motion.div 
+      className="about-infinite-slider"
+      animate={{
+        x: shouldReduceMotion ? 0 : ['0%', '-10%']
+      }}
+      transition={{
+        x: {
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: 50,
+          ease: "linear"
+        }
+      }}
+      style={{
+        pointerEvents: 'auto',
+        willChange: 'transform'
+      }}
+    >
+      {items.map((item, index) => (
+        <h1 key={index} className="about-infinite-slider-item">{item}</h1>
+      ))}
+      {items.map((item, index) => (
+        <h1 key={`duplicate-${index}`} className="about-infinite-slider-item">{item}</h1>
+      ))}
+    </motion.div>
+  );
+};
+
+const EquipoGrid = () => {
+  const { members, loading, error } = useMembers();
+  const base = import.meta.env.BASE_URL?.endsWith("/")
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+
+  if (loading) return null;
+  if (error) return null;
+  if (!members.length) return null;
+
+  return (
+    <div className="full-container bg-yellow-2 equipo">
+      <div className="equipo-slider-background">
+        <SocialMediaSlider text="Nosotros" />
+      </div>
+      <div className="container">
+        <div className="grid-equipo-wrapper">
+          {members.map((member, index) => (
+            <div key={member.id} className="grid-item-equipo">
+              <div className="header-equipo">
+                <h3 className="equipo-name">{member.name}</h3>
+                <span className="equipo-position">{member.position}</span>
+              </div>
+              <div className="footer-equipo">
+                <p className="equipo-description">{member.portfolio}</p>
+              </div>
+              <div className="equipo-image-wrapper">
+                <img 
+                  src={`${base}${member.featured_image.replace(/^\//, '')}`}
+                  alt={member.name}
+                  className="equipo-image"
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Nosotros = () => {
+  const textRef = useRef(null);
+  const containerRef = useRef(null);
+  const isInView = useInView(textRef, { once: false, amount: 0.3 });
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "start start"]
+  });
+
+  const opacityValue = useTransform(
+    scrollYProgress,
+    [0, 0.1, 0.9, 1],
+    [0.1, 1, 1, 0.1]
+  );
+
+  const [baseOpacity, setBaseOpacity] = React.useState(0.1);
+  const [hasAnimated, setHasAnimated] = React.useState(false);
+
+  useMotionValueEvent(opacityValue, "change", (latest) => {
+    setBaseOpacity(latest);
+  });
+
+  const text = "En Trompo no creemos en soluciones mágicas. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Desde Córdoba Capital, ayudamos a empresas a convertir desafíos digitales en ventajas competitivas.";
+  
+  const phraseDelay = 0.3;
+  
+  const phrases = React.useMemo(() => {
+    const splitRegex = /([,.])\s+/g;
+    const result = [];
+    let lastIndex = 0;
+    let match;
+    
+    while ((match = splitRegex.exec(text)) !== null) {
+      const phrase = text.substring(lastIndex, match.index + 1) + ' ';
+      if (phrase.trim().length > 0) {
+        result.push(phrase);
+      }
+      lastIndex = match.index + match[0].length;
+    }
+    
+    if (lastIndex < text.length) {
+      const lastPhrase = text.substring(lastIndex);
+      if (lastPhrase.trim().length > 0) {
+        result.push(lastPhrase);
+      }
+    }
+    
+    return result;
+  }, [text]);
+
+  React.useEffect(() => {
+    if (baseOpacity >= 0.9) {
+      if (!hasAnimated) {
+        const totalPhrases = phrases.length;
+        const totalAnimationTime = (totalPhrases * phraseDelay + 0.4) * 1000;
+        const timeout = setTimeout(() => {
+          setHasAnimated(true);
+        }, totalAnimationTime);
+        
+        return () => clearTimeout(timeout);
+      }
+    } else if (baseOpacity < 0.3) {
+      setHasAnimated(false);
+    }
+  }, [baseOpacity, hasAnimated, phrases.length, phraseDelay]);
   return (
     <>
       <SimpleHeroVideo
@@ -24,50 +207,59 @@ const Nosotros = () => {
         mobilePoster={`${base}assets/hero/mobile/home.webp`}
       />
 
-      <section className="post-hero-section full-container">
-        <div className="container">
-          <p>
-            Hace más de una década, Trompo nació con una idea clara: una agencia
-            no es un proveedor, es un <strong>aliado estratégico.</strong>
-            <br />
-            <br />
-            Desde el inicio, nos propusimos involucrarnos de verdad. Entender el
-            ADN de cada marca, sus valores, su visión, su forma de trabajar.
-            Porque solo así se construyen estrategias que importan y relaciones
-            que trascienden.
-            <br />
-            <br />
-            Fuimos testigos —y protagonistas— de la transformación digital:
-            cuando la pauta online era solo un 5% del mix, cuando el "mobile
-            first" todavía no existía. Hoy, con un ecosistema donde{" "}
-            <strong>tecnología, datos, IA, contenido y audiencias</strong> conviven
-            en tiempo real, seguimos acompañando a nuestros clientes con la
-            misma convicción de siempre: <strong>estar cerca.</strong>
-            <br />
-            <br />
-            En Trompo, combinamos{" "}
-            <strong>
-              Estrategia, Creatividad, Interacción, Desarrollo y Soporte
-            </strong>
-            , para brindar soluciones integrales que generen impacto real.
-          </p>
-        </div>
-      </section>
+      <div className="full-container about-slider-container infinite-slider-container">
+        <SocialMediaSlider text="Nosotros" />
+      </div>
 
-      <section className="full-container about-section bg-yellow-2">
-        <div className="container about-content-text">
-          <h2>Un equipo que se mueve con vos</h2>
-          <p>
-            En Trompo creemos que las marcas que crecen nunca se quedan quietas.
-            Por eso, nuestro equipo tampoco.
-          </p>
-        </div>
+      <div className="full-container black-bg">
         <div className="container">
-          <Members />
+          <div className="about-grid-wrapper">
+            <div className="about-grid-item">
+              <span>01</span>
+              <h3 className="about-question">qué hacemos</h3>
+              <p>Creamos contenido audiovisual estratégico que pone en movimiento la identidad de tu marca. Desde piezas breves y potentes para redes sociales hasta producciones corporativas ágiles, narramos, mostramos y hacemos sentir lo que la marca representa, con intención y coherencia en cada formato.</p>
+            </div>
+            <div className="about-grid-item">
+              <span>02</span>
+              <h3 className="about-question">Cómo lo hacemos</h3>
+              <p>Nuestro proceso combina estrategia narrativa, producción ágil y tecnología aplicada con criterio. Partimos de ideas claras, guiones optimizados y storyboards pensados para captar atención en segundos y cumplir un objetivo concreto en cada plataforma.</p>
+            </div>
+            <div className="about-grid-item">
+              <span>03</span>
+              <h3 className="about-question">Producción y post con propósito</h3>
+              <p>Grabamos en contextos reales o sets ligeros, priorizando autenticidad, ritmo visual y mensaje. En postproducción sumamos edición dinámica, motion graphics, animación 2D, transiciones y sonido para transformar la idea en una pieza lista para competir en entornos digitales.</p>
+            </div>
+            <div className="about-grid-item">
+              <span>04</span>
+              <h3 className="about-question">Tecnología e IA aplicada</h3>
+              <p>Integramos inteligencia artificial de forma estratégica para potenciar resultados: asistencia creativa en guiones y copy, generación de assets visuales, locuciones sintéticas de alta calidad, limpieza de audio y subtitulado creativo diseñado como parte activa de la narrativa.</p>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
 
-      <StoricalClients />
+      <div ref={containerRef} className="full-container" style={{ backgroundColor: '#ffffff' }}>
+        <div className="container about-animated-text-container">
+          <motion.span 
+            ref={textRef}
+            className="about-animated-text"
+            style={{ color: '#000000' }}
+          >
+            {phrases.map((phrase, phraseIndex) => (
+              <AnimatedPhrase
+                key={`phrase-${phraseIndex}`}
+                phrase={phrase}
+                index={phraseIndex}
+                phraseDelay={phraseDelay}
+                baseOpacity={baseOpacity}
+                hasAnimated={hasAnimated}
+              />
+            ))}
+          </motion.span>
+        </div>
+      </div>
+
+      <EquipoGrid />
 
       {/* formulario */}
       <Contact />

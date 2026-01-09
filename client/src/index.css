@@ -52,6 +52,13 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  /* Mejorar el scroll con aceleración de hardware */
+  scroll-padding-top: 0;
+}
+
 html,
 *,
 *::before,
@@ -61,7 +68,6 @@ html,
   margin: 0;
   border: 0;
   outline: 0;
-  scroll-behavior: smooth;
 }
 
 * {
@@ -71,9 +77,38 @@ html,
 body {
   width: 100%;
   height: auto;
-  scroll-behavior: smooth;
   position: relative;
   overflow-x: hidden;
+  /* Mejorar el rendimiento del scroll */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Scroll más fluido */
+  overscroll-behavior-y: contain;
+}
+
+/* Clase para scroll suave mejorado */
+body.smooth-scroll-enabled {
+  /* Aceleración de hardware para mejor rendimiento */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+/* Mejorar transiciones de elementos durante el scroll */
+body.smooth-scroll-enabled * {
+  /* Reducir repaint durante scroll */
+  will-change: auto;
+}
+
+/* Elementos con animaciones de scroll deben tener mejor rendimiento */
+body.smooth-scroll-enabled [data-scroll],
+body.smooth-scroll-enabled .animate-on-scroll {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 #root {

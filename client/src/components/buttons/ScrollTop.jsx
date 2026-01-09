@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { animate } from "framer-motion";
 import "../../assets/styles/scrollTop.css";
 
 function ScrollTop() {
@@ -9,7 +10,7 @@ function ScrollTop() {
   // reset de scroll en cada cambio de ruta
   useEffect(() => {
     if (hash) return; // si vas a /ruta#ancla, respetá el ancla
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [pathname, hash]);
 
   // opcional: desactivar restauración del navegador
@@ -38,7 +39,20 @@ function ScrollTop() {
 
   const scrollToTop = (e) => {
     e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    
+    // Usar Framer Motion para animación suave con easing progresivo
+    const startPosition = window.scrollY;
+    animate(startPosition, 0, {
+      duration: 1.0,
+      ease: [0.25, 0.1, 0.25, 1], // Cubic bezier para transición suave con frenado progresivo
+      onUpdate: (latest) => {
+        window.scrollTo({
+          top: latest,
+          left: 0,
+          behavior: "auto"
+        });
+      }
+    });
   };
 
   return (

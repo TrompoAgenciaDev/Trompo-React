@@ -154,7 +154,6 @@ const SocialMedia = () => {
         </div>
       </div>
 
-
       <div className="full-container black-bg">
         <div className="container how-container">
           <h1><span className="yellow">Cómo</span> lo hacemos</h1>

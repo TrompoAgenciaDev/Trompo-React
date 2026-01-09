@@ -214,8 +214,111 @@ const TrailCursor = () => {
   };
 
   const detectCursorState = (x, y) => {
-    const element = document.elementFromPoint(x, y);
-    if (!element) return { color: COLOR_DARK, showSvg: false, useBlendMode: false, hideTrail: false, isFormElement: false, isInSlider: false };
+    // Usar elementsFromPoint para obtener todos los elementos en ese punto
+    // y filtrar el cursor mismo para obtener el elemento real debajo
+    let elements = [];
+    try {
+      elements = document.elementsFromPoint(x, y);
+    } catch (e) {
+      // Fallback a elementFromPoint si elementsFromPoint no está disponible
+      try {
+        const element = document.elementFromPoint(x, y);
+        elements = element ? [element] : [];
+      } catch (e2) {
+        console.warn("Error detecting elements at point:", e2);
+        return { color: COLOR_DARK, showSvg: false, useBlendMode: false, hideTrail: false, isFormElement: false, isInSlider: false };
+      }
+    }
+    
+    // Filtrar el cursor mismo y obtener el primer elemento real
+    // Priorizar elementos que no sean el cursor, body o html
+    // También verificar que el elemento esté realmente visible en el viewport
+    let element = null;
+    const viewportHeight = window.innerHeight;
+    const viewportWidth = window.innerWidth;
+    
+    for (let i = 0; i < elements.length; i++) {
+      const el = elements[i];
+      
+      // Excluir el cursor y sus componentes
+      if (el.classList?.contains('trail-circle') || 
+          el.classList?.contains('cursor-core') || 
+          el.classList?.contains('cursor-text')) {
+        continue;
+      }
+      
+      // Excluir elementos que son parte del cursor
+      if (el.closest('.trail-circle, .cursor-core, .cursor-text')) {
+        continue;
+      }
+      
+      // Excluir body y html
+      if (el === document.body || el === document.documentElement) {
+        continue;
+      }
+      
+      // Verificar que el elemento esté realmente visible en el viewport
+      // Esto previene detectar elementos del hero que están fuera del viewport después del scroll
+      try {
+        const rect = el.getBoundingClientRect();
+        const isVisibleInViewport = (
+          rect.top < viewportHeight &&
+          rect.bottom > 0 &&
+          rect.left < viewportWidth &&
+          rect.right > 0
+        );
+        
+        // Si el elemento está fuera del viewport, continuar buscando
+        if (!isVisibleInViewport) {
+          continue;
+        }
+        
+        // Verificación adicional: si el elemento es parte del hero video y el hero está fuera del viewport,
+        // ignorarlo para detectar elementos más abajo
+        const heroVideo = el.closest('video.hero-video, .hero-video, [data-vjs-player]');
+        if (heroVideo) {
+          const heroRect = heroVideo.getBoundingClientRect();
+          // Si el hero está completamente fuera del viewport (arriba), ignorarlo
+          if (heroRect.bottom < 0) {
+            continue;
+          }
+        }
+      } catch (e) {
+        // Si hay error al obtener el rect, continuar con el siguiente elemento
+        continue;
+      }
+      
+      // Si encontramos un elemento válido y visible, usarlo
+      element = el;
+      break;
+    }
+    
+    // Si no encontramos ningún elemento válido, usar el primero que no sea cursor
+    if (!element) {
+      element = elements.find(el => {
+        if (el === document.body || el === document.documentElement) return false;
+        if (el.classList?.contains('trail-circle')) return false;
+        if (el.classList?.contains('cursor-core')) return false;
+        if (el.classList?.contains('cursor-text')) return false;
+        
+        // Verificar visibilidad
+        try {
+          const rect = el.getBoundingClientRect();
+          return (
+            rect.top < viewportHeight &&
+            rect.bottom > 0 &&
+            rect.left < viewportWidth &&
+            rect.right > 0
+          );
+        } catch (e) {
+          return false;
+        }
+      }) || null;
+    }
+    
+    if (!element || element === document.body || element === document.documentElement) {
+      return { color: COLOR_DARK, showSvg: false, useBlendMode: false, hideTrail: false, isFormElement: false, isInSlider: false };
+    }
 
     const isForm = isFormElement(element);
 
@@ -266,6 +369,13 @@ const TrailCursor = () => {
     
     document.body.classList.add("trail-cursor-active");
     
+    // Inicializar coordenadas del cursor en el centro de la pantalla
+    // Esto previene que el cursor se quede en una posición inválida
+    const initialX = window.innerWidth / 2;
+    const initialY = window.innerHeight / 2;
+    coordsRef.current.x = initialX;
+    coordsRef.current.y = initialY;
+    
     if (cursorCoreRef.current) {
       cursorCoreRef.current.style.backgroundColor = currentColorRef.current;
       cursorCoreRef.current.style.mixBlendMode = "normal";
@@ -276,12 +386,15 @@ const TrailCursor = () => {
 
     circles.forEach((circle, index) => {
       if (circle) {
-        circle.x = 0;
-        circle.y = 0;
+        circle.x = initialX;
+        circle.y = initialY;
         circle.style.backgroundColor = currentColorRef.current;
         circle.style.mixBlendMode = "normal";
         circle.style.display = "block";
         circle.style.visibility = "visible";
+        // Asegurar posición inicial
+        circle.style.left = (initialX - 12) + "px";
+        circle.style.top = (initialY - 12) + "px";
       }
     });
 
@@ -312,13 +425,28 @@ const TrailCursor = () => {
       }
     };
 
+    let lastMouseMoveTime = 0;
+    const MOUSE_MOVE_THROTTLE = 16; // ~60fps
+
     const handleMouseMove = (e) => {
-      const x = e.clientX;
-      const y = e.clientY;
+      // Throttle para evitar demasiadas actualizaciones
+      const now = performance.now();
+      if (now - lastMouseMoveTime < MOUSE_MOVE_THROTTLE && e.type === 'scroll') {
+        return;
+      }
+      lastMouseMoveTime = now;
+
+      // Usar clientX/clientY para posición relativa al viewport
+      // Esto asegura que funcione correctamente incluso después del scroll
+      const x = e.clientX !== undefined ? e.clientX : coordsRef.current.x;
+      const y = e.clientY !== undefined ? e.clientY : coordsRef.current.y;
       
+      // Actualizar coordenadas inmediatamente
       coordsRef.current.x = x;
       coordsRef.current.y = y;
 
+      // Forzar detección del elemento en el punto actual
+      // Usar getBoundingClientRect para asegurar que detectamos el elemento correcto
       const state = detectCursorState(x, y);
       const wasShowingSvg = showSvgRef.current;
       
@@ -393,7 +521,52 @@ const TrailCursor = () => {
       const x = coordsRef.current.x;
       const y = coordsRef.current.y;
 
-      const element = document.elementFromPoint(x, y);
+      // Detectar elemento de forma segura usando elementsFromPoint
+      let element = null;
+      try {
+        const elements = document.elementsFromPoint(x, y);
+        // Filtrar el cursor mismo usando la misma lógica que detectCursorState
+        for (let i = 0; i < elements.length; i++) {
+          const el = elements[i];
+          if (el.classList?.contains('trail-circle') || 
+              el.classList?.contains('cursor-core') || 
+              el.classList?.contains('cursor-text')) {
+            continue;
+          }
+          if (el.closest('.trail-circle, .cursor-core, .cursor-text')) {
+            continue;
+          }
+          if (el === document.body || el === document.documentElement) {
+            continue;
+          }
+          element = el;
+          break;
+        }
+        
+        if (!element) {
+          element = elements.find(el => 
+            el !== document.body && 
+            el !== document.documentElement &&
+            !el.classList?.contains('trail-circle') &&
+            !el.classList?.contains('cursor-core') &&
+            !el.classList?.contains('cursor-text')
+          ) || null;
+        }
+      } catch (e) {
+        // Fallback si elementsFromPoint no está disponible
+        try {
+          element = document.elementFromPoint(x, y);
+          // Verificar que no sea el cursor
+          if (element && (element.classList?.contains('trail-circle') || 
+              element.classList?.contains('cursor-core') || 
+              element.classList?.contains('cursor-text'))) {
+            element = null;
+          }
+        } catch (e2) {
+          console.warn("Error in animateCircles:", e2);
+        }
+      }
+      
       const isInSlider = element && element.closest(".infinite-slider-container");
       const baseSize = 24;
       const coreSize = isInSlider ? baseSize + 20 : baseSize;
@@ -470,10 +643,55 @@ const TrailCursor = () => {
     };
 
     animateCircles();
-    window.addEventListener("mousemove", handleMouseMove);
+    
+    // Agregar listeners tanto a window como a document para asegurar captura completa
+    // También capturar eventos en diferentes fases para mayor compatibilidad
+    window.addEventListener("mousemove", handleMouseMove, { passive: true, capture: false });
+    document.addEventListener("mousemove", handleMouseMove, { passive: true, capture: false });
+    
+    // Capturar el movimiento del mouse después del scroll para asegurar actualización
+    let scrollTimeout = null;
+    let lastKnownMousePosition = { x: 0, y: 0 };
+    
+    const handleScroll = () => {
+      // Usar un timeout para evitar demasiadas actualizaciones durante el scroll
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+      
+      scrollTimeout = setTimeout(() => {
+        // Cuando hay scroll, forzar una actualización de la detección del elemento
+        // usando las coordenadas actuales del mouse (si están disponibles)
+        const x = coordsRef.current.x || lastKnownMousePosition.x;
+        const y = coordsRef.current.y || lastKnownMousePosition.y;
+        if (x > 0 && y > 0) {
+          // Simular un evento de mousemove para actualizar el estado
+          handleMouseMove({ clientX: x, clientY: y, type: 'scroll' });
+        }
+      }, 100); // Esperar 100ms después del scroll para actualizar
+    };
+    
+    // Guardar la última posición conocida del mouse
+    const handleMouseMoveForTracking = (e) => {
+      lastKnownMousePosition.x = e.clientX;
+      lastKnownMousePosition.y = e.clientY;
+    };
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    document.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("mousemove", handleMouseMoveForTracking, { passive: true });
+    document.addEventListener("mousemove", handleMouseMoveForTracking, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousemove", handleMouseMoveForTracking);
+      document.removeEventListener("mousemove", handleMouseMoveForTracking);
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("scroll", handleScroll);
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
