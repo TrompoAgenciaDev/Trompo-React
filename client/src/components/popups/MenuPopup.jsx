@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Menu from "@/components/Menu";
 import routesConfig from "@/config/routesConfig";
@@ -7,8 +8,23 @@ import "@as/menuPopup.css";
 
 const MenuPopup = ({ isOpen, onClose }) => {
   const popupRef = useRef(null);
+  const portalContainerRef = useRef(null);
   const [isServiciosOpen, setIsServiciosOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+
+  // Crear portal container
+  useEffect(() => {
+    const container = document.createElement('div');
+    container.id = 'menu-popup-portal';
+    document.body.appendChild(container);
+    portalContainerRef.current = container;
+    
+    return () => {
+      if (container.parentNode) {
+        container.parentNode.removeChild(container);
+      }
+    };
+  }, []);
 
   // Detectar si está en modo desktop
   useEffect(() => {
@@ -72,7 +88,11 @@ const MenuPopup = ({ isOpen, onClose }) => {
     if (isDesktop) setIsServiciosOpen(false);
   };
 
-  return (
+  if (!portalContainerRef.current) {
+    return null;
+  }
+
+  const popupContent = (
     <>
       {isOpen && (
         <>
@@ -191,6 +211,8 @@ const MenuPopup = ({ isOpen, onClose }) => {
       )}
     </>
   );
+
+  return createPortal(popupContent, portalContainerRef.current);
 };
 
 export default MenuPopup;

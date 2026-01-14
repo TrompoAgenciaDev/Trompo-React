@@ -530,3 +530,33 @@ body.trail-cursor-in-slider .infinite-slider-item {
     }
 }
 
+/* Estilos para texto animado */
+.desarrollo-animated-text {
+    display: block;
+    line-height: 1.6;
+    text-align: center;
+    font-weight: 500;
+    padding: 50px 10px;
+}
+
+.desarrollo-animated-phrase {
+    display: inline;
+}
+
+.desarrollo-animated-text-container{
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .desarrollo-animated-text-container{
+        font-size: 28px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .desarrollo-animated-text-container{
+        font-size: 32px;
+        padding: 70px 10px;
+    }
+}
+

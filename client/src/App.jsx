@@ -9,7 +9,7 @@ import ScrollTop from "@/components/buttons/ScrollTop";
 import { usePreloadResources } from "@/hooks/usePreloadResources";
 import { usePrefetchRoutes } from "@/hooks/usePrefetchRoutes";
 import { HoverProvider } from "@/context/HoverContext";
-import TrailCursor from "@/components/cursors/TrailCursor";
+// import TrailCursor from "@/components/cursors/TrailCursor";
 import SmoothScroll from "@/components/SmoothScroll";
 import React from "react";
 
@@ -26,7 +26,7 @@ function AppContent() {
 
   return (
     <SmoothScroll>
-      <TrailCursor />
+      {/* <TrailCursor /> */}
       <Header onTogglePopup={togglePopup} />
       <MenuPopup isOpen={isOpen} onClose={togglePopup} />
       <AppRoutes />

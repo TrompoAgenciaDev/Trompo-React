@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useMemo } from "react";
-import { motion, useReducedMotion, useScroll, useTransform, useMotionValueEvent, useInView } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform, useMotionValueEvent, useInView, useSpring } from "framer-motion";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import Portfolio3d from "../../layout/Portfolio3d.jsx";
 import Faqs from "../../layout/Faqs.jsx";
@@ -116,133 +116,148 @@ const WebDesignSection = () => {
   );
 };
 
-const ZoomInSection = () => {
-  const containerRef = useRef(null);
-  const sectionRef = useRef(null);
-  const shouldReduceMotion = useReducedMotion();
-
-  // Obtener el scrollY global para calcular el translateY preciso
-  const { scrollY } = useScroll();
+// Componente para animar frase por frase
+const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }) => {
+  // Calcular el delay: si NO ha animado, aplicar delay progresivo para animar frase por frase
+  // Si ya animó, no aplicar delay (todas las frases aparecen juntas)
+  const delay = hasAnimated ? 0 : index * phraseDelay;
   
-  // Scroll progress para detectar el rango de pin
-  // El pin comienza cuando el top de la sección alcanza 10svh desde el top del viewport
-  // El zoom debe completarse antes de que la sección llegue al 50% del viewport
-  // La animación debe comenzar cuando el 120% de la imagen esté en el viewport
-  // Si la sección tiene 90svh, el 120% = 108svh, entonces el top debe estar a -8vh (fuera por arriba)
-  // Offset: ["start 10svh", ["start", -0.08]] para que progress vaya de 0 a 1 correctamente
-  // - "start 10svh": cuando el top del contenedor está a 10svh del top del viewport (progress = 0, imagen pequeña)
-  // - ["start", -0.08]: cuando el top del contenedor está a -8% del viewport (progress = 1, imagen grande, 120% visible)
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 10svh", ["start", -0.08]]
-  });
-
-  // Scroll progress para el rango completo del pin (más allá del zoom)
-  // Necesitamos esto para calcular el translateY durante todo el pin
-  const { scrollYProgress: pinProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 10svh", "end start"]
-  });
-
-  // Calcular el translateY para mantener la sección fija durante el pin
-  // Durante el pin (pinProgress de 0 a 1), compensamos el scroll con translateY negativo
-  // El offset ["start 10svh", "end start"] define el rango completo de scroll durante el pin
-  // Cuando pinProgress = 0, el top está a 10svh
-  // Cuando pinProgress = 1, el bottom sale del viewport
-  const translateY = useTransform(
-    [scrollY, pinProgress],
-    ([scroll, progress]) => {
-      if (progress <= 0) {
-        // Antes del pin, no hay translateY
-        return 0;
-      }
-      if (progress >= 1) {
-        // Después del pin, la sección continúa normalmente
-        // El translateY final debe compensar todo el scroll durante el pin
-        if (!containerRef.current) return 0;
-        const containerHeight = containerRef.current.offsetHeight;
-        const viewportHeight = window.innerHeight;
-        const tenSvh = viewportHeight * 0.1;
-        // El scroll durante el pin completo es la altura del contenedor
-        // menos la parte visible cuando comienza el pin (viewport - 10svh)
-        const pinScrollRange = containerHeight - (viewportHeight - tenSvh);
-        return -pinScrollRange;
-      }
-      // Durante el pin (0 < progress < 1), compensamos el scroll proporcionalmente
-      if (!containerRef.current) return 0;
-      const containerHeight = containerRef.current.offsetHeight;
-      const viewportHeight = window.innerHeight;
-      const tenSvh = viewportHeight * 0.1;
-      // El rango de scroll durante el pin es la altura del contenedor
-      // menos la parte visible cuando comienza el pin
-      const pinScrollRange = containerHeight - (viewportHeight - tenSvh);
-      // El scroll acumulado durante el pin es progress * pinScrollRange
-      return -progress * pinScrollRange;
-    }
-  );
-
-  // Zoom de la imagen durante el pin
-  // Con el offset invertido, progress = 0 cuando el top está a -8% del viewport (120% de la imagen visible, imagen pequeña)
-  // y progress = 1 cuando el top está a 10svh (imagen grande al 100%)
-  const scale = useTransform(
-    scrollYProgress,
-    [0, 1], // Rango del zoom: desde -8% del viewport (progress = 0, 120% visible) hasta 10svh (progress = 1)
-    shouldReduceMotion ? [1, 1] : [0.5, 1]
-  );
+  // Asegurar que cuando está visible, la opacidad sea 1
+  // Si baseOpacity es >= 0.9, forzar a 1 para máxima visibilidad
+  const targetOpacity = baseOpacity >= 0.9 ? 1 : Math.max(0.1, baseOpacity);
 
   return (
-    <section
-      ref={containerRef}
-      className="full-container black-bg zoomin-container"
-      style={{ pointerEvents: 'auto' }}
+    <motion.span
+      className="desarrollo-animated-phrase"
+      initial={{ opacity: 0.1 }}
+      animate={{ opacity: targetOpacity }}
+      transition={{
+        delay: delay,
+        duration: 0.4,
+        ease: "easeOut"
+      }}
     >
-      {/* Sección con pinning controlado por Motion usando translateY */}
-      <motion.div
-        ref={sectionRef}
-        className="full-container black-bg zoomin-section"
-        style={{
-          height: "100svh",
-          overflow: "hidden",
-          // Usar translateY para mantener la sección fija durante el pin
-          y: translateY,
-          // Z-index para estar sobre el contenido siguiente, pero no tan alto que interfiera con el cursor
-          // El cursor tiene z-index: 999999999, así que 5 está bien
-          zIndex: 5,
-          // Asegurar que el mouse funcione correctamente
-          pointerEvents: 'auto',
-          // Asegurar que no haya problemas de rendering
-          willChange: 'transform'
-        }}
-      >
-        <div className="full-container zoomin-img" style={{ pointerEvents: 'auto' }}>
-          {/* Texto fijo detrás */}
-          <div className="container zoomin-text" style={{ pointerEvents: 'none' }}>
-            <h1 className="text-interaccion-desarrollo">
-              Cada interacción, tiene un propósito cada línea de código también.
-            </h1>
-          </div>
+      {phrase}
+    </motion.span>
+  );
+};
 
-          {/* Imagen escalada con transform continuo durante el pin */}
-          <motion.div
-            className="zoomin-image-wrapper"
-            style={{
-              scale,
-              x: "-50%",
-              y: "-50%",
-              pointerEvents: 'none',
-              willChange: 'transform'
-            }}
-          >
-            <img
-              src={`${base}assets/desarrollo/landing.webp`}
-              alt="Desarrollo"
-              className="zoomin-image"
-              style={{ pointerEvents: 'none' }}
-            />
-          </motion.div>
-        </div>
-      </motion.div>
-    </section>
+// Componente interno para la sección de texto animado
+const AnimatedTextSection = ({ containerRef }) => {
+  const textRef = useRef(null);
+  const isInView = useInView(textRef, { once: false, amount: 0.3 });
+  
+  // useScroll solo se llama cuando containerRef está disponible
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "start start"],
+    layoutEffect: false
+  });
+
+  // Transformar el scroll progress: cuando está visible (entre 0.1 y 0.9), opacidad 1
+  // Usando easing suave para transiciones más fluidas
+  const opacityValue = useTransform(
+    scrollYProgress,
+    [0, 0.1, 0.9, 1],
+    [0.1, 1, 1, 0.1],
+    {
+      clamp: false, // Permitir valores fuera del rango para suavidad
+    }
+  );
+  
+  // Suavizar el valor de opacidad con un spring para transiciones más fluidas
+  // Parámetros ajustados para scroll más suave con frenado progresivo
+  const smoothedOpacity = useSpring(opacityValue, {
+    stiffness: 80,   // Más bajo = más suave pero más lento
+    damping: 30,     // Más alto = menos rebote, más controlado
+    mass: 0.6,       // Más bajo = más responsivo, más fluido
+  });
+
+  // Convertir el motion value a un estado para usar en las animaciones
+  const [baseOpacity, setBaseOpacity] = React.useState(0.1);
+  const [hasAnimated, setHasAnimated] = React.useState(false);
+
+  // Escuchar cambios en el scroll progress y actualizar opacidad
+  // Usar el valor suavizado para transiciones más fluidas
+  useMotionValueEvent(smoothedOpacity, "change", (latest) => {
+    setBaseOpacity(latest);
+  });
+
+  const animatedText = "Una plataforma digital no es un folleto en línea; es la arquitectura donde ocurre la experiencia de marca. Es la función, la forma y la sensación trabajando en armonía. Construimos con código lo que el diseño imagina y la estrategia planea: espacios digitales intuitivos, robustos y con propósito, donde cada interacción tiene una razón de ser y cada línea de código está al servicio del negocio.";
+  
+  // Delay entre frases: 0.3s por frase para una animación fluida
+  const phraseDelay = 0.3;
+  
+  // Dividir el texto en frases separadas por comas o puntos (incluyendo el espacio después)
+  const phrases = React.useMemo(() => {
+    // Dividir por comas o puntos seguidos de espacio, pero mantener el delimitador
+    // Usamos lookahead para incluir el espacio en el split pero mantenerlo con la frase anterior
+    const splitRegex = /([,.])\s+/g;
+    const result = [];
+    let lastIndex = 0;
+    let match;
+    
+    // Encontrar todas las coincidencias de coma o punto seguido de espacio
+    while ((match = splitRegex.exec(animatedText)) !== null) {
+      // Agregar la frase desde el último índice hasta la coma/punto (incluyéndolo)
+      const phrase = animatedText.substring(lastIndex, match.index + 1) + ' ';
+      if (phrase.trim().length > 0) {
+        result.push(phrase);
+      }
+      lastIndex = match.index + match[0].length; // Avanzar después del delimitador completo
+    }
+    
+    // Agregar la última frase (desde el último índice hasta el final)
+    if (lastIndex < animatedText.length) {
+      const lastPhrase = animatedText.substring(lastIndex);
+      if (lastPhrase.trim().length > 0) {
+        result.push(lastPhrase);
+      }
+    }
+    
+    return result;
+  }, [animatedText]);
+
+  // Controlar la animación frase por frase
+  // Cuando baseOpacity es alta, iniciar animación progresiva
+  // Cuando baja, resetear para que vuelva a animar cuando vuelva a subir
+  React.useEffect(() => {
+    if (baseOpacity >= 0.9) {
+      // Cuando la opacidad es alta, mantener hasAnimated en false
+      // para que se anime frase por frase
+      // Después de un tiempo, marcar como animado para que todas las frases
+      // se mantengan visibles sin delay en futuros cambios
+      if (!hasAnimated) {
+        const totalPhrases = phrases.length;
+        const totalAnimationTime = (totalPhrases * phraseDelay + 0.4) * 1000;
+        const timeout = setTimeout(() => {
+          setHasAnimated(true);
+        }, totalAnimationTime);
+        
+        return () => clearTimeout(timeout);
+      }
+    } else if (baseOpacity < 0.3) {
+      // Cuando la opacidad baja mucho, resetear para que vuelva a animar
+      setHasAnimated(false);
+    }
+  }, [baseOpacity, hasAnimated, phrases.length, phraseDelay]);
+
+  return (
+    <motion.span 
+      ref={textRef}
+      className="desarrollo-animated-text"
+    >
+      {phrases.map((phrase, phraseIndex) => (
+        <AnimatedPhrase
+          key={`phrase-${phraseIndex}`}
+          phrase={phrase}
+          index={phraseIndex}
+          phraseDelay={phraseDelay}
+          baseOpacity={baseOpacity}
+          hasAnimated={hasAnimated}
+        />
+      ))}
+    </motion.span>
   );
 };
 
@@ -502,6 +517,28 @@ const ProductoItem = ({ number, title, children, isLast, itemRef, nextItemRef })
 
 
 const Desarrollo = () => {
+  // Refs para la sección de texto animado
+  const animatedTextContainerRef = useRef(null);
+  const [isTextSectionMounted, setIsTextSectionMounted] = React.useState(false);
+
+  // Esperar a que el componente esté montado antes de inicializar useScroll
+  React.useEffect(() => {
+    // Verificar que el ref esté disponible después de que el DOM se haya renderizado
+    const checkRef = () => {
+      if (animatedTextContainerRef.current) {
+        setIsTextSectionMounted(true);
+      }
+    };
+    
+    // Iniciar verificación después de un pequeño delay para asegurar que el ref está hidratado
+    const timer = setTimeout(checkRef, 100);
+    
+    // También verificar inmediatamente en caso de que el ref ya esté disponible
+    checkRef();
+    
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <SimpleHeroVideo
@@ -513,12 +550,13 @@ const Desarrollo = () => {
 
       <ServiceTitle area="Desarrollo" titulo="Servicios de desarrollo" />
 
-      <div className="full-container black-bg">
-        <h1 className="highlight-text">código, diseño y estrategia en armonía</h1>
+      <div ref={animatedTextContainerRef} className="full-container">
+        <div className="container desarrollo-animated-text-container">
+          {isTextSectionMounted && (
+            <AnimatedTextSection containerRef={animatedTextContainerRef} />
+          )}
+        </div>
       </div>
-
-      <ZoomInSection />
-
 
       <div className="full-container bg-yellow-2 productos-desarrollo">
         <div className="container">

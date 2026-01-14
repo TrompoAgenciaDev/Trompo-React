@@ -1,10 +1,7 @@
 import React, { useRef } from "react";
-import { motion, useInView, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
-import Hero from "../../layout/Hero";
+import { motion, useInView, useScroll, useTransform, useMotionValueEvent, useSpring } from "framer-motion";
 import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
-import Portfolio3d from "../../layout/Portfolio3d";
-import Testimonials from "../../components/Testimonials.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
@@ -683,8 +680,6 @@ const Multimedia = () => {
       </div>
 
       <Beneficios />
-
-      <Faqs location="branding" />
 
       <Contact form="multimedia" />
 

@@ -720,3 +720,91 @@
         padding: 70px 10px;
     }
 }
+
+/* ============================================
+   PORTFOLIO GRID 4x3 - DISEÑO
+   ============================================ */
+.grid-portfolio-container {
+  width: 100%;
+  padding: 50px 0;
+}
+
+.grid-portfolio-wrapper {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+}
+
+.grid-portfolio-item {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Carrusel mobile */
+.portfolio-carousel-mobile {
+  padding: 20px 0;
+}
+
+.portfolio-carousel-track {
+  display: flex;
+  width: 100%;
+  cursor: grab;
+}
+
+.portfolio-carousel-track:active {
+  cursor: grabbing;
+}
+
+.portfolio-section-container{
+    padding: 30px 10px;
+}
+
+@media (min-width: 768px) {
+  .grid-portfolio-wrapper {
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-portfolio-container {
+    padding: 40px 0;
+  }
+
+  .grid-portfolio-wrapper {
+    -ms-grid-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .grid-portfolio-item {
+    transition: transform 0.3s ease;
+  }
+
+  .grid-portfolio-item:hover {
+    transform: scale(1.02);
+  }
+
+  .portfolio-section-container{
+    padding: 50px 10px 100px;
+}
+}
+
+/* Título del portfolio - mismo estilo que Diseño Estratégico pero en negro */
+.portfolio-title {
+  color: #000000;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-family: var(--font-portfolio);
+}
+
+@media (min-width: 1024px) {
+  .portfolio-title {
+    font-size: 64px;
+  }
+}

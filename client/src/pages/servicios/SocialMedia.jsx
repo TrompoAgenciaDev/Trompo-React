@@ -11,6 +11,7 @@ import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Inversiones from "../../components/Inversiones.jsx";
+import SocialMediaShowcaseSlider from "../../components/sliders/SocialMediaShowcaseSlider.jsx";
 
 //styles
 import "../../assets/styles/social-media.css";
@@ -154,7 +155,16 @@ const SocialMedia = () => {
         </div>
       </div>
 
-      <div className="full-container black-bg">
+      <div className="full-container bg-yellow-2 portfolio-social-media-container">
+        <div className="container">
+          <div className="container">
+            <h1 className="portfolio-title">Portfolio de Social Media</h1>
+          </div>
+          <SocialMediaShowcaseSlider />
+        </div>
+      </div>
+
+      <div className="full-container black-bg how-container-social-media">
         <div className="container how-container">
           <h1><span className="yellow">Cómo</span> lo hacemos</h1>
           <p>Operamos en el cruce entre la estrategia de marca y la cultura digital, diseñando sistemas de contenido que generan conversación, coherencia y comunidad.</p>
@@ -195,22 +205,6 @@ const SocialMedia = () => {
         </div>
       </div>
 
-      <div className="full-container black-bg">
-        <div className="container">
-          <div className="grid-impulsos">
-            <div className="grid-item-impulsos">
-              <div className="container title-container-impulsos">
-                <h1 className="title-impulsos">Impulsados por la conversación</h1>
-                <p className="subtitle-impulsos">Las redes no se transmiten: se viven. Creamos diálogos auténticos que convierten marcas en comunidades.</p>
-              </div>
-              <div className="container">
-                <p>Las redes sociales son la plaza pública donde las marcas conversan, escuchan y construyen vínculos reales. En un entorno saturado de mensajes, la autenticidad es el valor que genera resonancia. No buscamos ruido ni presencia vacía: diseñamos conversaciones con sentido, capaces de conectar con personas reales. <br/>Nuestro propósito es transformar la identidad de cada marca en una presencia social magnética y coherente. Traducimos valores, tono y narrativa al lenguaje nativo de cada plataforma, construyendo comunidades comprometidas y relaciones que trascienden la pantalla.</p>
-              </div>
-            </div>
-            <div className="grid-item-impulsos"></div>
-          </div>
-        </div>
-      </div>
 
       <div className="full-container sm-slider-container infinite-slider-container">
         <SocialMediaSlider text="Social Media" />

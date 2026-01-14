@@ -204,21 +204,21 @@
       "slug": "terratua"
     }
   ],
-  "creatividad": [
+  "disenio": [
     {
       "id": 0,
       "title": "airon",
       "short_description": "",
       "long_description": "",
-      "featured_image": "assets/creatividad/branding/airon1.webp",
+      "featured_image": "assets/creatividad/portfolioImg/airon1.webp",
       "vertical_image": "",
       "featured_video": "",
       "gallery": [
-        "assets/creatividad/branding/airon2.webp",
-        "assets/creatividad/branding/airon3.webp",
-        "assets/creatividad/branding/airon4.webp"
+        "assets/creatividad/portfolioImg/airon2.webp",
+        "assets/creatividad/portfolioImg/airon3.webp",
+        "assets/creatividad/portfolioImg/airon4.webp"
       ],
-      "category": ["creatividad", "branding", "slider"],
+      "category": ["disenio", "branding", "slider"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -231,14 +231,14 @@
       "title": "ayni",
       "short_description": "",
       "long_description": "",
-      "featured_image": "assets/creatividad/branding/ayni1.webp",
+      "featured_image": "assets/creatividad/portfolioImg/ayni1.webp",
       "vertical_image": "",
       "featured_video": "",
       "gallery": [
-        "assets/creatividad/branding/ayni2.webp",
-        "assets/creatividad/branding/ayni3.webp"
+        "assets/creatividad/portfolioImg/ayni2.webp",
+        "assets/creatividad/portfolioImg/ayni3.webp"
       ],
-      "category": ["creatividad", "branding"],
+      "category": ["disenio", "branding"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -251,15 +251,15 @@
       "title": "eleva",
       "short_description": "",
       "long_description": "",
-      "featured_image": "assets/creatividad/branding/eleva1.webp",
+      "featured_image": "assets/creatividad/portfolioImg/eleva1.webp",
       "vertical_image": "",
       "featured_video": "",
       "gallery": [
-        "assets/creatividad/branding/eleva2.webp",
-        "assets/creatividad/branding/eleva3.webp",
-        "assets/creatividad/branding/eleva4.webp"
+        "assets/creatividad/portfolioImg/eleva2.webp",
+        "assets/creatividad/portfolioImg/eleva3.webp",
+        "assets/creatividad/portfolioImg/eleva4.webp"
       ],
-      "category": ["creatividad", "branding"],
+      "category": ["disenio", "branding"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -272,15 +272,15 @@
       "title": "ishvara",
       "short_description": "",
       "long_description": "",
-      "featured_image": "assets/creatividad/branding/ishvara1.webp",
+      "featured_image": "assets/creatividad/portfolioImg/ishvara1.webp",
       "vertical_image": "",
       "featured_video": "",
       "gallery": [
-        "assets/creatividad/branding/ishvara2.webp",
-        "assets/creatividad/branding/ishvara3.webp",
-        "assets/creatividad/branding/ishvara4.webp"
+        "assets/creatividad/portfolioImg/ishvara2.webp",
+        "assets/creatividad/portfolioImg/ishvara3.webp",
+        "assets/creatividad/portfolioImg/ishvara4.webp"
       ],
-      "category": ["creatividad", "branding"],
+      "category": ["disenio", "branding"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -293,14 +293,14 @@
       "title": "kindom",
       "short_description": "",
       "long_description": "",
-      "featured_image": "assets/creatividad/branding/kindom1.webp",
+      "featured_image": "assets/creatividad/portfolioImg/kindom1.webp",
       "vertical_image": "",
       "featured_video": "",
       "gallery": [
-        "assets/creatividad/branding/kindom2.webp",
-        "assets/creatividad/branding/kindom3.webp"
+        "assets/creatividad/portfolioImg/kindom2.webp",
+        "assets/creatividad/portfolioImg/kindom3.webp"
       ],
-      "category": ["creatividad", "branding", "slider"],
+      "category": ["disenio", "branding", "slider"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -313,14 +313,14 @@
       "title": "kotur",
       "short_description": "",
       "long_description": "",
-      "featured_image": "assets/creatividad/branding/kotur1.webp",
+      "featured_image": "assets/creatividad/portfolioImg/kotur1.webp",
       "vertical_image": "",
       "featured_video": "",
       "gallery": [
-        "assets/creatividad/branding/kotur2.webp",
-        "assets/creatividad/branding/kotur3.webp"
+        "assets/creatividad/portfolioImg/kotur2.webp",
+        "assets/creatividad/portfolioImg/kotur3.webp"
       ],
-      "category": ["creatividad", "branding"],
+      "category": ["disenio", "branding"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -333,14 +333,14 @@
       "title": "lema",
       "short_description": "",
       "long_description": "",
-      "featured_image": "assets/creatividad/branding/lema1.webp",
+      "featured_image": "assets/creatividad/portfolioImg/lema1.webp",
       "vertical_image": "",
       "featured_video": "",
       "gallery": [
-        "assets/creatividad/branding/lema2.webp",
-        "assets/creatividad/branding/lema3.webp"
+        "assets/creatividad/portfolioImg/lema2.webp",
+        "assets/creatividad/portfolioImg/lema3.webp"
       ],
-      "category": ["creatividad", "branding", "slider"],
+      "category": ["disenio", "branding", "slider"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -350,35 +350,16 @@
     },
     {
       "id": 7,
-      "title": "qsltec",
-      "short_description": "",
-      "long_description": "",
-      "featured_image": "assets/creatividad/branding/qsltec1.webp",
-      "vertical_image": "",
-      "featured_video": "",
-      "gallery": [
-        "assets/creatividad/branding/qsltec2.webp"
-      ],
-      "category": ["creatividad", "branding"],
-      "tags": [],
-      "meta_title": "",
-      "meta_description": "",
-      "meta_keywords": [],
-      "url_client": "",
-      "slug": "qsltec"
-    },
-    {
-      "id": 8,
       "title": "smartshop",
       "short_description": "",
       "long_description": "",
-      "featured_image": "assets/creatividad/branding/smartshop1.webp",
+      "featured_image": "assets/creatividad/portfolioImg/smartshop1.webp",
       "vertical_image": "",
       "featured_video": "",
       "gallery": [
-        "assets/creatividad/branding/smartshop2.webp"
+        "assets/creatividad/portfolioImg/smartshop2.webp"
       ],
-      "category": ["creatividad", "branding"],
+      "category": ["disenio", "branding"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -387,17 +368,17 @@
       "slug": "smartshop"
     },
     {
-      "id": 9,
+      "id": 8,
       "title": "terratua",
       "short_description": "",
       "long_description": "",
-      "featured_image": "assets/creatividad/branding/terratua1.webp",
+      "featured_image": "assets/creatividad/portfolioImg/terratua1.webp",
       "vertical_image": "",
       "featured_video": "",
       "gallery": [
-        "assets/creatividad/branding/terratua2.webp"
+        "assets/creatividad/portfolioImg/terratua2.webp"
       ],
-      "category": ["creatividad", "branding"],
+      "category": ["disenio", "branding"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -406,18 +387,60 @@
       "slug": "terratua"
     },
     {
-      "id": 10,
-      "title": "vox",
+      "id": 9,
+      "title": "volvo trucks",
       "short_description": "",
       "long_description": "",
-      "featured_image": "assets/creatividad/branding/vox1.webp",
+      "featured_image": "assets/creatividad/portfolioImg/volvobanner1.webp",
       "vertical_image": "",
       "featured_video": "",
       "gallery": [
-        "assets/creatividad/branding/vox2.webp",
-        "assets/creatividad/branding/vox3.webp"
+        "assets/creatividad/portfolioImg/volvobotella2.webp",
+        "assets/creatividad/portfolioImg/volvomaterialpop3.webp",
+        "assets/creatividad/portfolioImg/volvotabletent4.webp"
       ],
-      "category": ["creatividad", "branding", "slider"],
+      "category": ["disenio", "branding"],
+      "tags": [],
+      "meta_title": "",
+      "meta_description": "",
+      "meta_keywords": [],
+      "url_client": "",
+      "slug": "volvo-trucks"
+    },
+    {
+      "id": 10,
+      "title": "volvo usados",
+      "short_description": "",
+      "long_description": "",
+      "featured_image": "assets/creatividad/portfolioImg/volvousados1.webp",
+      "vertical_image": "",
+      "featured_video": "",
+      "gallery": [
+        "assets/creatividad/portfolioImg/volvousados2.webp",
+        "assets/creatividad/portfolioImg/volvousados3.webp"
+      ],
+      "category": ["disenio", "branding"],
+      "tags": [],
+      "meta_title": "",
+      "meta_description": "",
+      "meta_keywords": [],
+      "url_client": "",
+      "slug": "volvo-usados"
+    },
+    {
+      "id": 11,
+      "title": "vox",
+      "short_description": "",
+      "long_description": "",
+      "featured_image": "assets/creatividad/portfolioImg/vox1.webp",
+      "vertical_image": "",
+      "featured_video": "",
+      "gallery": [
+        "assets/creatividad/portfolioImg/vox2.webp",
+        "assets/creatividad/portfolioImg/vox3.webp",
+        "assets/creatividad/portfolioImg/vox4.webp"
+      ],
+      "category": ["disenio", "branding", "slider"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -426,7 +449,7 @@
       "slug": "vox"
     },
     {
-      "id": 11,
+      "id": 12,
       "title": "denso",
       "short_description": "",
       "long_description": "",
@@ -434,7 +457,7 @@
       "vertical_image": "",
       "featured_video": "assets/creatividad/multimedia/denso.mp4",
       "gallery": [],
-      "category": ["creatividad", "multimedia", "slider"],
+      "category": ["disenio", "multimedia", "slider"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -443,7 +466,7 @@
       "slug": "denso-video"
     },
     {
-      "id": 12,
+      "id": 13,
       "title": "raulito",
       "short_description": "",
       "long_description": "",
@@ -451,7 +474,7 @@
       "vertical_image": "",
       "featured_video": "",
       "gallery": [],
-      "category": ["creatividad", "multimedia", "slider"],
+      "category": ["disenio", "multimedia", "slider"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -460,7 +483,7 @@
       "slug": "raulito-video"
     },
     {
-      "id": 13,
+      "id": 14,
       "title": "viditec",
       "short_description": "",
       "long_description": "",
@@ -468,7 +491,7 @@
       "vertical_image": "",
       "featured_video": "assets/creatividad/multimedia/viditec.mp4",
       "gallery": [],
-      "category": ["creatividad", "multimedia", "slider"],
+      "category": ["disenio", "multimedia", "slider"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -477,7 +500,7 @@
       "slug": "viditec-video"
     },
     {
-      "id": 14,
+      "id": 15,
       "title": "western union",
       "short_description": "",
       "long_description": "",
@@ -485,7 +508,7 @@
       "vertical_image": "",
       "featured_video": "assets/creatividad/multimedia/wu.mp4",
       "gallery": [],
-      "category": ["creatividad", "multimedia", "slider"],
+      "category": ["disenio", "multimedia", "slider"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -494,7 +517,7 @@
       "slug": "wu-video"
     },
     {
-      "id": 15,
+      "id": 16,
       "title": "super walter",
       "short_description": "",
       "long_description": "",
@@ -502,7 +525,7 @@
       "vertical_image": "",
       "featured_video": "",
       "gallery": [],
-      "category": ["creatividad", "branding-web", "slider"],
+      "category": ["disenio", "branding-web", "slider"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -511,7 +534,7 @@
       "slug": "super-walter-branding-web"
     },
     {
-      "id": 16,
+      "id": 17,
       "title": "galpones modulares",
       "short_description": "",
       "long_description": "",
@@ -519,7 +542,7 @@
       "vertical_image": "",
       "featured_video": "",
       "gallery": [],
-      "category": ["creatividad", "branding-web", "slider"],
+      "category": ["disenio", "branding-web", "slider"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -528,7 +551,7 @@
       "slug": "galpones-modulares-branding-web"
     },
     {
-      "id": 17,
+      "id": 18,
       "title": "ravana",
       "short_description": "",
       "long_description": "",
@@ -536,7 +559,7 @@
       "vertical_image": "",
       "featured_video": "",
       "gallery": [],
-      "category": ["creatividad", "branding-web", "slider"],
+      "category": ["disenio", "branding-web", "slider"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -545,7 +568,7 @@
       "slug": "ravana-branding-web"
     },
     {
-      "id": 18,
+      "id": 19,
       "title": "volvo vm",
       "short_description": "",
       "long_description": "",
@@ -553,7 +576,7 @@
       "vertical_image": "",
       "featured_video": "",
       "gallery": [],
-      "category": ["creatividad", "branding-web", "slider"],
+      "category": ["disenio", "branding-web", "slider"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -562,7 +585,7 @@
       "slug": "volvo-vm-branding-web"
     },
     {
-      "id": 19,
+      "id": 20,
       "title": "vox",
       "short_description": "",
       "long_description": "",
@@ -570,7 +593,7 @@
       "vertical_image": "",
       "featured_video": "assets/creatividad/branding-web/vox.mp4",
       "gallery": [],
-      "category": ["creatividad", "branding-web"],
+      "category": ["disenio", "branding-web"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -579,7 +602,7 @@
       "slug": "vox-branding-web"
     },
     {
-      "id": 20,
+      "id": 21,
       "title": "menta",
       "short_description": "",
       "long_description": "",
@@ -587,7 +610,7 @@
       "vertical_image": "",
       "featured_video": "assets/creatividad/branding-web/menta.mp4",
       "gallery": [],
-      "category": ["creatividad", "branding-web"],
+      "category": ["disenio", "branding-web"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",
@@ -596,7 +619,7 @@
       "slug": "menta-branding-web"
     },
     {
-      "id": 21,
+      "id": 22,
       "title": "agreteq",
       "short_description": "",
       "long_description": "",
@@ -604,7 +627,7 @@
       "vertical_image": "",
       "featured_video": "assets/creatividad/branding-web/agreteq.mp4",
       "gallery": [],
-      "category": ["creatividad", "branding-web"],
+      "category": ["disenio", "branding-web"],
       "tags": [],
       "meta_title": "",
       "meta_description": "",

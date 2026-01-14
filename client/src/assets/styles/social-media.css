@@ -1,6 +1,3 @@
-/* ============================================
-   ESTILOS BASE
-   ============================================ */
 .grid-item-interaccion img{
   width: 100%;
 }
@@ -255,6 +252,63 @@
 /* Efecto blend mode cuando el cursor está sobre el slider */
 body.trail-cursor-in-slider .sm-infinite-slider-item {
   mix-blend-mode: difference;
+}
+
+/* ============================================
+   SHOWCASE SLIDER (1 fila) - SOCIAL MEDIA
+   (mismo patrón que Creatividad)
+   ============================================ */
+.sm-showcase-section {
+  overflow: visible !important;
+}
+
+.sm-showcase-section .container {
+  position: relative;
+  max-width: 100%;
+  overflow: visible;
+}
+
+.showcase-track {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.showcase-track > div {
+  flex-shrink: 0;
+}
+
+.portfolio-social-media-container{
+  padding: 30px 10px 50px;
+}
+
+/* Título del portfolio - mismo estilo que en Diseño, en negro */
+.portfolio-title{
+  color: #000000;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-family: var(--font-portfolio);
+}
+
+@media (max-width: 767px) {
+  .sm-showcase-section button {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-title{
+    font-size: 64px;
+  }
+
+  .portfolio-social-media-container{
+    padding: 50px 10px 100px;
+  }
+
+  .how-container-social-media{
+    padding: 50px 10px 100px;
+  }
 }
 
 .grid-impulsos{
@@ -551,5 +605,70 @@ body.trail-cursor-in-slider .sm-infinite-slider-item {
 
   .sm-infinite-slider-item{
     font-size: 90px;
+  }
+}
+
+/* ============================================
+   PORTFOLIO GRID 4x3 - SOCIAL MEDIA
+   ============================================ */
+.grid-portfolio-container {
+  width: 100%;
+  padding: 50px 0;
+}
+
+.grid-portfolio-wrapper {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+}
+
+.grid-portfolio-item {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Carrusel mobile */
+.portfolio-carousel-mobile {
+  padding: 20px 0;
+}
+
+.portfolio-carousel-track {
+  display: flex;
+  width: 100%;
+  cursor: grab;
+}
+
+.portfolio-carousel-track:active {
+  cursor: grabbing;
+}
+
+@media (min-width: 768px) {
+  .grid-portfolio-wrapper {
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-portfolio-container {
+    padding: 80px 0;
+  }
+
+  .grid-portfolio-wrapper {
+    -ms-grid-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .grid-portfolio-item {
+    transition: transform 0.3s ease;
+  }
+
+  .grid-portfolio-item:hover {
+    transform: scale(1.02);
   }
 }

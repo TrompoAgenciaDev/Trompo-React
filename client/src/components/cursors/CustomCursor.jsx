@@ -1,11 +1,17 @@
 import { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useLocation } from "react-router-dom";
 import { useHover } from "../../context/HoverContext";
 import Icons from "../Icons"; 
 import '../../assets/styles/custom-cursor.css';
 import { motion } from "framer-motion";
 
 const CustomCursor = ({ icon }) => {
+  const location = useLocation();
+  
+  // Verificar si estamos en una ruta de servicios
+  const isServiciosRoute = location.pathname.startsWith('/servicios');
+  
   // Constantes de tamaño del cursor - deben coincidir con CSS
   const CURSOR_SIZE = 50; // px - tamaño del SVG del trompo
   const CURSOR_ANCHOR_OFFSET = CURSOR_SIZE / 2; // 25px - offset para centrar
@@ -100,23 +106,27 @@ const CustomCursor = ({ icon }) => {
 
   useEffect(() => {
     setMounted(true);
-    // Ocultar cursor por defecto siempre
-    document.body.style.cursor = "none";
-    return () => {
-      document.body.style.cursor = "";
-    };
   }, []);
 
-  // Ocultar cursor por defecto siempre cuando el componente está montado
+  // Ocultar cursor por defecto solo en rutas de servicios
   useEffect(() => {
-    document.body.style.cursor = "none";
+    if (isServiciosRoute) {
+      document.body.style.cursor = "none";
+    } else {
+      document.body.style.cursor = "";
+    }
     return () => {
       document.body.style.cursor = "";
     };
-  }, []);
+  }, [isServiciosRoute]);
 
   // Animación suave del cursor usando requestAnimationFrame
   useEffect(() => {
+    // Solo animar si estamos en una ruta de servicios
+    if (!isServiciosRoute) {
+      return;
+    }
+
     if (rafIdRef.current) {
       cancelAnimationFrame(rafIdRef.current);
     }
@@ -142,9 +152,14 @@ const CustomCursor = ({ icon }) => {
         cancelAnimationFrame(rafIdRef.current);
       }
     };
-  }, [mousePosition]);
+  }, [mousePosition, isServiciosRoute]);
 
   useEffect(() => {
+    // Solo agregar event listeners si estamos en una ruta de servicios
+    if (!isServiciosRoute) {
+      return;
+    }
+
     const handleMouseMove = (event) => {
       const x = event.clientX;
       const y = event.clientY;
@@ -286,7 +301,7 @@ const CustomCursor = ({ icon }) => {
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isDragging]);
+  }, [isDragging, isServiciosRoute]);
 
   const { hoverComponent } = useHover();
 
@@ -633,7 +648,8 @@ const CustomCursor = ({ icon }) => {
     </motion.div>
   ) : null;
 
-  if (!mounted || !shouldShow) return null;
+  // No mostrar el cursor si no estamos en una ruta de servicios
+  if (!isServiciosRoute || !mounted || !shouldShow) return null;
 
   return createPortal(cursorContent, document.body);
 };

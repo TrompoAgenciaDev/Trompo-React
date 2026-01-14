@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { motion, useInView, useScroll, useTransform, useMotionValueEvent, useReducedMotion } from "framer-motion";
+import React, { useRef, useEffect, useState } from "react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import PostHero from "../components/PostHero";
 import Hero from "../layout/Hero";
 import Members from "../components/Members";
@@ -96,10 +96,64 @@ const EquipoGrid = () => {
   const base = import.meta.env.BASE_URL?.endsWith("/")
     ? import.meta.env.BASE_URL
     : `${import.meta.env.BASE_URL}/`;
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const itemRefs = useRef({});
+  const imageRefs = useRef({});
+
+  useEffect(() => {
+    const updateImagePosition = () => {
+      if (hoveredIndex !== null && itemRefs.current[hoveredIndex] && imageRefs.current[hoveredIndex]) {
+        const itemElement = itemRefs.current[hoveredIndex];
+        const imageElement = imageRefs.current[hoveredIndex];
+        const imagesContainer = imageElement.closest('.equipo-images-container');
+        
+        if (imagesContainer) {
+          const itemRect = itemElement.getBoundingClientRect();
+          const containerRect = imagesContainer.getBoundingClientRect();
+          const isOdd = hoveredIndex % 2 === 0;
+          
+          // Calcular posición vertical (centro de la tarjeta)
+          const top = itemRect.top + itemRect.height / 2 - containerRect.top;
+          imageElement.style.top = `${top}px`;
+          imageElement.style.transform = 'translateY(-50%)';
+          
+          // Calcular posición horizontal (20px dentro de la tarjeta)
+          if (isOdd) {
+            // Imagen a la derecha de la tarjeta, 20px dentro del borde derecho
+            imageElement.style.left = `${itemRect.right - containerRect.left - 20}px`;
+            imageElement.style.right = 'auto';
+          } else {
+            // Imagen a la izquierda de la tarjeta, 20px dentro del borde izquierdo
+            imageElement.style.left = `${itemRect.left - containerRect.left - 20}px`;
+            imageElement.style.right = 'auto';
+          }
+        }
+      }
+    };
+
+    updateImagePosition();
+
+    // Actualizar posición al hacer resize o scroll
+    window.addEventListener('resize', updateImagePosition);
+    window.addEventListener('scroll', updateImagePosition, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', updateImagePosition);
+      window.removeEventListener('scroll', updateImagePosition);
+    };
+  }, [hoveredIndex]);
 
   if (loading) return null;
   if (error) return null;
   if (!members.length) return null;
+
+  const handleMouseEnter = (index) => {
+    setHoveredIndex(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+  };
 
   return (
     <div className="full-container bg-yellow-2 equipo">
@@ -109,7 +163,14 @@ const EquipoGrid = () => {
       <div className="container">
         <div className="grid-equipo-wrapper">
           {members.map((member, index) => (
-            <div key={member.id} className="grid-item-equipo">
+            <div 
+              key={member.id} 
+              className="grid-item-equipo" 
+              data-member-index={index}
+              ref={(el) => (itemRefs.current[index] = el)}
+              onMouseEnter={() => handleMouseEnter(index)}
+              onMouseLeave={handleMouseLeave}
+            >
               <div className="header-equipo">
                 <h3 className="equipo-name">{member.name}</h3>
                 <span className="equipo-position">{member.position}</span>
@@ -117,15 +178,30 @@ const EquipoGrid = () => {
               <div className="footer-equipo">
                 <p className="equipo-description">{member.portfolio}</p>
               </div>
-              <div className="equipo-image-wrapper">
+            </div>
+          ))}
+        </div>
+        {/* Imágenes fuera del grid para evitar problemas de z-index */}
+        <div className="equipo-images-container">
+          {members.map((member, index) => {
+            const isOdd = index % 2 === 0;
+            const isHovered = hoveredIndex === index;
+            
+            return (
+              <div
+                key={`img-${member.id}`}
+                ref={(el) => (imageRefs.current[index] = el)}
+                className={`equipo-image-wrapper ${isHovered ? 'visible' : ''} ${isOdd ? 'odd' : 'even'}`}
+                data-member-index={index}
+              >
                 <img 
                   src={`${base}${member.featured_image.replace(/^\//, '')}`}
                   alt={member.name}
                   className="equipo-image"
                 />
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
@@ -137,23 +213,40 @@ const Nosotros = () => {
   const containerRef = useRef(null);
   const isInView = useInView(textRef, { once: false, amount: 0.3 });
   
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "start start"]
-  });
-
-  const opacityValue = useTransform(
-    scrollYProgress,
-    [0, 0.1, 0.9, 1],
-    [0.1, 1, 1, 0.1]
-  );
-
   const [baseOpacity, setBaseOpacity] = React.useState(0.1);
   const [hasAnimated, setHasAnimated] = React.useState(false);
 
-  useMotionValueEvent(opacityValue, "change", (latest) => {
-    setBaseOpacity(latest);
-  });
+  // Usar IntersectionObserver en lugar de scroll
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const ratio = entry.intersectionRatio;
+          // Mapear intersectionRatio a opacity similar al scroll anterior
+          let opacity = 0.1;
+          if (ratio >= 0.9) {
+            opacity = 1;
+          } else if (ratio >= 0.1) {
+            opacity = 0.1 + (ratio - 0.1) * (1 - 0.1) / (0.9 - 0.1);
+          }
+          setBaseOpacity(opacity);
+        });
+      },
+      {
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+      }
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
 
   const text = "En Trompo no creemos en soluciones mágicas. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Desde Córdoba Capital, ayudamos a empresas a convertir desafíos digitales en ventajas competitivas.";
   

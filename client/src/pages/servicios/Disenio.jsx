@@ -4,7 +4,7 @@ import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
-import PortfolioSlider from "../../components/portfolio-slider/PortfolioSlider.jsx";
+import DisenioPortfolio from "../../components/portfolio/DisenioPortfolio.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
 
@@ -769,8 +769,15 @@ const Disenio = () => {
         </div>
       </div>
 
-      <div className="full-container">
-        <PortfolioSlider/>
+      <div className="full-container bg-white portfolio-section-container">
+        <div className="container">
+          <div className="container">
+            <h1 className="portfolio-title">
+              Portfolio de Diseño
+            </h1>
+          </div>        
+          <DisenioPortfolio />
+        </div>
       </div>
 
       <div className="full-container strategy-container black-bg">
@@ -833,8 +840,7 @@ const Disenio = () => {
               <span></span>
             </div>
           </div>
-      </div>
-      
+      </div>      
       
       <Beneficios />
 

@@ -175,7 +175,7 @@ video {
   -webkit-transition: color .3s ease-in-out;
   -moz-transition: color .3s ease-in-out;
   -o-transition: color .3s ease-in-out;
-  cursor: none;
+  /* cursor: none; */
 }
 
 .bold {

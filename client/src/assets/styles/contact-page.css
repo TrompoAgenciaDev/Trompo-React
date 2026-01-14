@@ -1,0 +1,70 @@
+/* Service title container - mismo estilo que Multimedia */
+.service-title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 10px;
+    margin: 0 auto;
+    border-right: 1px solid #8E8E8E;
+    border-left: 1px solid #8E8E8E;  
+}
+
+.service-title-container h2 {
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+}
+
+.contact-title-container {
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-main-title {
+    font-size: 48px;
+    font-weight: 700;
+    font-family: var(--font-portfolio);
+    line-height: 1.2;
+    transition: color 0.3s ease;
+    color: #ffffff;
+}
+
+.animated-letter {
+    display: inline;
+}
+
+.service-title-container{
+    width: 90%;
+    max-width: 600px;
+}
+
+.hero-contactanos-container{
+    height: 90svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-contactanos-container .container {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .contact-main-title {
+        font-size: 64px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .contact-main-title {
+        font-size: 140px;
+        font-weight: 500;
+    }
+    
+    .contact-title-container {
+        padding: 100px 0;
+    }
+}
+

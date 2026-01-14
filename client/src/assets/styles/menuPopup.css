@@ -22,7 +22,7 @@
   -moz-align-items: center;
   align-items: center;
   gap: 30px;
-  z-index: 9999999;
+  z-index: 100000000;
   padding: 20px 10px 50px;
 }
 
@@ -62,7 +62,7 @@
   background: rgba(0, 0, 0, 0.38);
   -webkit-backdrop-filter: saturate(120%) blur(1px);
   backdrop-filter: saturate(120%) blur(1px);
-  z-index: 99999;
+  z-index: 100000000;
 }
 
 /* --- Ítems principales del menú --- */
@@ -112,10 +112,10 @@
   text-transform: capitalize;
   color: #000;
   cursor: pointer;
-  -webkit-transition: color 0.25s ease-in-out;
-  -moz-transition: color 0.25s ease-in-out;
-  -o-transition: color 0.25s ease-in-out;
-  transition: color 0.25s ease-in-out;
+  -webkit-transition: color 0.1s ease-in-out;
+  -moz-transition: color 0.1s ease-in-out;
+  -o-transition: color 0.1s ease-in-out;
+  transition: color 0.1s ease-in-out;
 }
 
 .servicios-options span {
@@ -168,10 +168,10 @@
   padding: 6px 0;
   text-decoration: none;
   color: #000000;
-  -webkit-transition: color 0.25s ease-in-out;
-  -moz-transition: color 0.25s ease-in-out;
-  -o-transition: color 0.25s ease-in-out;
-  transition: color 0.25s ease-in-out;
+  -webkit-transition: color 0.1s ease-in-out;
+  -moz-transition: color 0.1s ease-in-out;
+  -o-transition: color 0.1s ease-in-out;
+  transition: color 0.1s ease-in-out;
 }
 
 /* --- Hover consistente --- */
@@ -199,7 +199,7 @@
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
-    z-index: 99999;
+    z-index: 100000000;
   }
 
   .menu-options-container {
@@ -228,6 +228,10 @@
     width: 100%;
     padding: 0;
     border-right: 1px solid #000000;
+    -webkit-transition: background-color 0.1s ease-in-out;
+    -moz-transition: background-color 0.1s ease-in-out;
+    -o-transition: background-color 0.1s ease-in-out;
+    transition: background-color 0.1s ease-in-out;
   }
 
   .menu-popup * a:not(.submenu-servicios a),
