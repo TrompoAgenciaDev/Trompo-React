@@ -579,45 +579,45 @@ const Desarrollo = () => {
 
       
 
-      <div className="full-container strategy-container">
+      <div className="full-container dev-container">
         <div className="full-container infinite-slider-container">
           <InfiniteSlider text="Qué hacemos" />
         </div>
 
-        <div className="full-container grid-strategy">
-          <div className="full-container strategy-item bg-yellow-2">
+        <div className="full-container grid-dev">
+          <div className="full-container dev-item bg-yellow-2">
             <div className="container">
-              <div className="grid-item-strategy">
+              <div className="grid-item-dev">
                 <span className="number-title">01</span>
                 <span>Infraestructura Digital</span>
               </div>
-              <div className="grid-item-strategy">
+              <div className="grid-item-dev">
                 <p>
                   Desarrollamos sitios web, aplicaciones y plataformas sólidas, seguras y escalables, pensadas para sostener el crecimiento del negocio y adaptarse a futuras necesidades.
                 </p>
               </div>
             </div>
           </div>
-          <div className="full-container strategy-item bg-yellow-2">
+          <div className="full-container dev-item bg-yellow-2">
             <div className="container">
-              <div className="grid-item-strategy">
+              <div className="grid-item-dev">
                 <span className="number-title">02</span>
                 <span>Experiencia de Usuario (UX/UI)</span>
               </div>
-              <div className="grid-item-strategy">
+              <div className="grid-item-dev">
                 <p>
                   Diseñamos interfaces intuitivas y funcionales que conectan diseño y usabilidad, optimizando cada interacción para que el recorrido del usuario sea claro, fluido y efectivo.
                 </p>
               </div>
             </div>
           </div>
-          <div className="full-container strategy-item bg-yellow-2">
+          <div className="full-container dev-item bg-yellow-2">
             <div className="container">
-              <div className="grid-item-strategy">
+              <div className="grid-item-dev">
                 <span className="number-title">03</span>
                 <span> Diseño, Tecnología y Conversión</span>
               </div>
-              <div className="grid-item-strategy">
+              <div className="grid-item-dev">
                 <p>
                   Integramos estrategia, diseño y desarrollo para crear productos digitales que no solo se ven bien, sino que funcionan con precisión y convierten visitantes en clientes.
                 </p>

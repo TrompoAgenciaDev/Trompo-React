@@ -251,6 +251,7 @@ export default function CreatividadSlider({ tipo = "mix" }) {
   const timer = useRef(null);
   const draggingRef = useRef(false);
   const isResettingRef = useRef(false);
+  const containerRef = useRef(null);
 
   // Carga inicial desde JSON y preparación de slides
   useEffect(() => {
@@ -357,8 +358,12 @@ export default function CreatividadSlider({ tipo = "mix" }) {
   }, []);
 
   // Función helper para verificar y resetear el índice si es necesario
+  // Solo se ejecuta cuando NO hay drag activo para evitar interferencias
   const checkAndResetIndex = useCallback((currentIndex, direction = 1) => {
-    if (baseSlidesLength === 0 || isResettingRef.current) return currentIndex;
+    // No resetear durante drag o si está reseteando
+    if (baseSlidesLength === 0 || isResettingRef.current || draggingRef.current) {
+      return currentIndex;
+    }
     
     const REPEAT = 3;
     const middleStart = baseSlidesLength * Math.floor(REPEAT / 2);
@@ -390,18 +395,35 @@ export default function CreatividadSlider({ tipo = "mix" }) {
     return currentIndex;
   }, [baseSlidesLength]);
 
+  // Autoplay: solo avanza si no hay drag activo
   useEffect(() => {
-    if (paused || slides.length === 0 || draggingRef.current || touchDelay || isResettingRef.current) return;
+    // No ejecutar autoplay durante drag o pausado
+    if (paused || slides.length === 0 || draggingRef.current || touchDelay || isResettingRef.current) {
+      if (timer.current) {
+        clearInterval(timer.current);
+        timer.current = null;
+      }
+      return;
+    }
     
     // Intervalo más rápido en mobile
     const interval = window.innerWidth < 768 ? 2000 : 4000;
     timer.current = setInterval(() => {
-      setIndex((p) => {
-        const newIndex = p + 1;
-        return checkAndResetIndex(newIndex, 1);
-      });
+      // Verificar nuevamente que no haya drag antes de avanzar
+      if (!draggingRef.current && !isResettingRef.current) {
+        setIndex((p) => {
+          const newIndex = p + 1;
+          return checkAndResetIndex(newIndex, 1);
+        });
+      }
     }, interval);
-    return () => clearInterval(timer.current);
+    
+    return () => {
+      if (timer.current) {
+        clearInterval(timer.current);
+        timer.current = null;
+      }
+    };
   }, [paused, slides.length, touchDelay, checkAndResetIndex]);
 
   const slideWidthPct = 100 / visible;
@@ -492,6 +514,7 @@ export default function CreatividadSlider({ tipo = "mix" }) {
       </button>
 
       <div
+        ref={containerRef}
         style={{ 
           position: "relative", 
           overflow: "hidden", 
@@ -500,16 +523,6 @@ export default function CreatividadSlider({ tipo = "mix" }) {
         }}
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
-        onTouchStart={() => {
-          // Solo aplicar retraso en mobile
-          if (window.innerWidth < 768) {
-            setTouchDelay(true);
-            clearInterval(timer.current);
-            setTimeout(() => {
-              setTouchDelay(false);
-            }, 1000);
-          }
-        }}
       >
         <motion.div
           className="showcase-track"
@@ -520,7 +533,79 @@ export default function CreatividadSlider({ tipo = "mix" }) {
             willChange: "transform"
           }}
           animate={{ x: `-${offsetPct}%` }}
-          transition={isResettingRef.current ? { duration: 0 } : { duration: 0.6, ease: "easeOut" }}
+          transition={isResettingRef.current || draggingRef.current ? { duration: 0 } : { duration: 0.6, ease: "easeOut" }}
+          drag="x"
+          dragElastic={0.05}
+          dragMomentum={false}
+          dragConstraints={{
+            left: 0,
+            right: 0
+          }}
+          onDragStart={() => {
+            // Pausar autoplay al iniciar drag
+            draggingRef.current = true;
+            setPaused(true);
+            if (timer.current) {
+              clearInterval(timer.current);
+              timer.current = null;
+            }
+          }}
+          onDragEnd={(_, info) => {
+            // Calcular snap al slide más cercano basado en el desplazamiento del drag
+            draggingRef.current = false;
+            
+            const slideWidthPct = 100 / visible;
+            const containerWidth = containerRef.current?.offsetWidth || window.innerWidth;
+            const dragPercent = (info.offset.x / containerWidth) * 100;
+            const threshold = slideWidthPct * 0.25; // 25% del ancho de un slide para trigger
+            
+            let finalIndex = index;
+            
+            // Snap al slide más cercano si el drag fue significativo
+            if (Math.abs(dragPercent) > threshold) {
+              if (dragPercent < 0) {
+                // Drag hacia la izquierda: siguiente slide
+                finalIndex = index + 1;
+              } else {
+                // Drag hacia la derecha: slide anterior
+                finalIndex = index - 1;
+              }
+            }
+            
+            // Asegurar que el índice esté en rango válido
+            const REPEAT = 3;
+            const minIndex = 0;
+            const maxIndex = baseSlidesLength * REPEAT - 1;
+            finalIndex = Math.max(minIndex, Math.min(maxIndex, finalIndex));
+            
+            // Resetear al bloque medio si es necesario (solo después del drag)
+            // Esto evita que el usuario "salga" de los límites del carrusel infinito
+            if (finalIndex >= baseSlidesLength * (REPEAT - 1)) {
+              const middleStart = baseSlidesLength * Math.floor(REPEAT / 2);
+              isResettingRef.current = true;
+              setIndex(middleStart + (finalIndex % baseSlidesLength));
+              setTimeout(() => {
+                isResettingRef.current = false;
+              }, 100);
+            } else if (finalIndex < baseSlidesLength) {
+              const middleEnd = baseSlidesLength * (Math.floor(REPEAT / 2) + 1);
+              isResettingRef.current = true;
+              setIndex(middleEnd - 1 - ((baseSlidesLength - finalIndex - 1) % baseSlidesLength));
+              setTimeout(() => {
+                isResettingRef.current = false;
+              }, 100);
+            } else {
+              // Índice dentro del rango medio, simplemente actualizar
+              setIndex(finalIndex);
+            }
+            
+            // Reanudar autoplay después de un breve delay para evitar conflicto inmediato
+            setTimeout(() => {
+              if (!draggingRef.current) {
+                setPaused(false);
+              }
+            }, 300);
+          }}
         >
           {slides.map((item, i) => {
             const isVisible = i >= visibleRange.start && i <= visibleRange.end;

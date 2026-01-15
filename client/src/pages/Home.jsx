@@ -8,22 +8,14 @@ import "@as/hero.css";
 import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import Services from "../layout/Services";
 import Contact from "../layout/Contact";
-import PostHero from "../components/PostHero";
 import SimpleHeroVideo from "../components/SimpleHeroVideo";
+import ServiceTitle from "../components/services/ServiceTitle";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
 const Home = () => {
-  const text = (
-    <p>
-      Somos una agencia digital que combina{" "}
-      <span className="bold">creatividad, estrategia y tecnología</span> para
-      diseñar soluciones integrales que generan impacto.
-    </p>
-  );
-
   return (
     <main className="full-container">
       <SimpleHeroVideo
@@ -33,9 +25,7 @@ const Home = () => {
         mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
 
-      <section className="post-hero-section full-container">
-        <PostHero text={text} />
-      </section>
+      <ServiceTitle area="Home" home={true} />
 
       <section className="post-hero-section full-container">
         <div className="bg-yellow separator full-container"></div>

@@ -1,7 +1,11 @@
 import React from "react";
 import "../../assets/styles/service-title.css";
 
-const ServiceTitle = ({ area, titulo }) => {
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const ServiceTitle = ({ area, titulo, home = false }) => {
   return (
     <div className="full-container">
       <div className="full-container title-container-design black-bg">
@@ -10,10 +14,14 @@ const ServiceTitle = ({ area, titulo }) => {
         </div>
         <div className="container">
           <div className="container grid-container">
-            <div className="container">
-              <div className="title-creative">
-                <h1 className="display-title">{titulo}</h1>                
-              </div>
+            <div className="container home-container">
+              {home ? (
+                <img src={`${base}logo2.webp`} alt="Logo" className="display-image-home" />
+              ) : (
+                <div className="title-creative">
+                  <h1 className="display-title">{titulo}</h1>
+                </div>
+              )}
             </div>
             <div className="container">
               <div className="icon-container">

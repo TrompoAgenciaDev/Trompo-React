@@ -1,4 +1,4 @@
-.strategy-container .container h1{
+.dev-container .container h1{
     color: #FED332;
     font-size: 48px;
     font-weight: 700;
@@ -6,31 +6,31 @@
     font-family: var(--font-portfolio);
 }
 
-.strategy-container .container h2{
+.dev-container .container h2{
     color: #ffffff;
     font-size: 24px;
     font-weight: 400;
     font-family: var(--font-portfolio);
 }
 
-/* Mobile First - Grid Strategy */
-.grid-strategy{
+/* Mobile First - Grid Dev */
+.grid-dev{
     display: flex;
     flex-direction: column;
     gap: 0;
 }
 
-.strategy-item{
+.dev-item{
     -webkit-transition: background-color 0.3s ease;
     -o-transition: background-color 0.3s ease;
     transition: background-color 0.3s ease;
 }
 
-.strategy-item:hover{
+.dev-item:hover{
     background-color: #ffffff;
 }
 
-.strategy-item .container{
+.dev-item .container{
     display: -ms-grid;
     display: grid;
     -ms-grid-columns: 1fr;
@@ -39,13 +39,13 @@
     padding: 40px 20px;
 }
 
-.grid-item-strategy{
+.grid-item-dev{
     display: flex;
     gap: 20px;
 }
 
-.grid-item-strategy p,
-.grid-item-strategy span{
+.grid-item-dev p,
+.grid-item-dev span{
     font-size: 18px;
     color: #ffffff;
     -webkit-transition: color 0.3s ease;
@@ -53,44 +53,44 @@
     transition: color 0.3s ease;
 }
 
-.grid-item-strategy span{
+.grid-item-dev span{
     font-family: var(--font-portfolio);
     font-weight: 700;
 }
 
-.grid-item-strategy .number-title{
+.grid-item-dev .number-title{
     font-weight: 200;
 }
 
-.strategy-item:hover .grid-item-strategy p,
-.strategy-item:hover .grid-item-strategy span{
+.dev-item:hover .grid-item-dev p,
+.dev-item:hover .grid-item-dev span{
     color: #000000;
 }
 
-.strategy-item .container{
+.dev-item .container{
     border-top: 1px solid #9A7A00;
 }
 
-/* Estilos específicos para strategy-container con fondo amarillo */
-.strategy-container.bg-yellow-2 .container h1{
+/* Estilos específicos para dev-container con fondo amarillo */
+.dev-container.bg-yellow-2 .container h1{
     color: #000000 !important;
 }
 
-.strategy-container.bg-yellow-2 .container h2{
+.dev-container.bg-yellow-2 .container h2{
     color: #000000 !important;
 }
 
-.bg-yellow-2 .grid-item-strategy p,
-.bg-yellow-2 .grid-item-strategy span{
+.bg-yellow-2 .grid-item-dev p,
+.bg-yellow-2 .grid-item-dev span{
     color: #000000 !important;
 }
 
-.bg-yellow-2 .strategy-item:hover .grid-item-strategy p,
-.bg-yellow-2 .strategy-item:hover .grid-item-strategy span{
+.bg-yellow-2 .dev-item:hover .grid-item-dev p,
+.bg-yellow-2 .dev-item:hover .grid-item-dev span{
     color: #000000 !important;
 }
 
-.bg-yellow-2 .strategy-item:not(:last-child) .container{
+.bg-yellow-2 .dev-item:not(:last-child) .container{
     border-bottom: 1px solid #000000;
 }
 
@@ -262,23 +262,23 @@ body.trail-cursor-in-slider .infinite-slider-item {
 }
 
 @media (min-width: 1024px) {
-    .strategy-container .container h1{
+    .dev-container .container h1{
         font-size: 64px;
     }
 
-    .strategy-container .container h2{
+    .dev-container .container h2{
         font-size: 32px;
     }
 
-    .strategy-item .container{
+    .dev-item .container{
         -ms-grid-columns: 1fr 1fr;
         grid-template-columns: 1fr 1fr;
         gap: 40px;
         padding: 70px 0;
     }
 
-    .grid-item-strategy p,
-    .grid-item-strategy span{
+    .grid-item-dev p,
+    .grid-item-dev span{
         font-size: 24px;
     }
 

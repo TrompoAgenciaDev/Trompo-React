@@ -1,11 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import PostHero from "../components/PostHero";
-import Hero from "../layout/Hero";
-import Members from "../components/Members";
-import StoricalClients from "../layout/StoricalClients";
 import Contact from "../layout/Contact.jsx";
-import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import SimpleHeroVideo from "../components/SimpleHeroVideo";
 import useMembers from "../hooks/useMembers";
 

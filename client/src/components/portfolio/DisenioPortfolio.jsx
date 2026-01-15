@@ -30,7 +30,7 @@ async function fetchPortfolioData(category = "branding") {
 
 /* Inner slider infinito 4:3 con lazy loading - solo imágenes */
 /* REFACTORIZADO: Loop infinito con snap invisible para evitar saltos */
-function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHovered = false }) {
+function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHovered = false, autoStart = false, isInViewport: externalIsInViewport = null }) {
   const len = list.length;
   
   // Si solo hay 1 o menos imágenes, retornar simple
@@ -88,6 +88,11 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
   const isResettingRef = useRef(false);
   // Ref para rastrear el índice anterior y detectar saltos grandes
   const prevGlobalIndexRef = useRef(CENTER_COPY_START);
+  // Estado para rastrear si está en viewport (para autoStart)
+  const [internalIsInViewport, setInternalIsInViewport] = useState(false);
+  
+  // Usar el prop externo si está disponible, sino usar el interno
+  const isInViewport = externalIsInViewport !== null ? externalIsInViewport : internalIsInViewport;
 
   // Lazy loading: solo renderizar cuando está visible
   useEffect(() => {
@@ -110,6 +115,22 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
     return () => observer.disconnect();
   }, [isVisible, shouldRender]);
 
+  // Detectar si está en viewport (para autoStart en mobile) - solo si no hay prop externo
+  useEffect(() => {
+    if (!autoStart || !shouldRender || !containerRef.current || externalIsInViewport !== null) return;
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setInternalIsInViewport(entries[0].isIntersecting);
+      },
+      { threshold: 0.5 } // Al menos 50% visible
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => observer.disconnect();
+  }, [autoStart, shouldRender, externalIsInViewport]);
+
   // Función para limpiar todos los timers
   const clearAllTimers = useCallback(() => {
     if (autoplayIntervalRef.current) {
@@ -124,7 +145,8 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
 
   // Efecto: Monitorear globalIndex para hacer snap cuando hay saltos grandes o salimos del rango
   useEffect(() => {
-    if (len <= 1 || !shouldRender || !isHovered || isResettingRef.current) return;
+    const shouldBeActive = autoStart ? isInViewport : isHovered;
+    if (len <= 1 || !shouldRender || !shouldBeActive || isResettingRef.current) return;
 
     const prevIndex = prevGlobalIndexRef.current;
     const CENTER_COPY_END = CENTER_COPY_START + baseLen - 1;
@@ -171,23 +193,26 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
       // Actualizar el ref del índice anterior en caso normal
       prevGlobalIndexRef.current = globalIndex;
     }
-  }, [globalIndex, len, shouldRender, isHovered, CENTER_COPY_START, baseLen]);
+  }, [globalIndex, len, shouldRender, isHovered, isInViewport, autoStart, CENTER_COPY_START, baseLen]);
 
   // Efecto PRINCIPAL: Controlar hover y autoplay
   useEffect(() => {
     // Si no hay imágenes suficientes o no está renderizado, salir
     if (len <= 1 || !shouldRender) return;
 
-    // Si el hover no cambió, no hacer nada
-    if (wasHoveredRef.current === isHovered) return;
+    // Determinar si debe estar activo: hover (desktop) o inViewport (mobile con autoStart)
+    const shouldBeActive = autoStart ? isInViewport : isHovered;
+
+    // Si el estado no cambió, no hacer nada
+    if (wasHoveredRef.current === shouldBeActive) return;
     
     // Actualizar el ref INMEDIATAMENTE para prevenir ejecuciones múltiples
-    wasHoveredRef.current = isHovered;
+    wasHoveredRef.current = shouldBeActive;
 
     // LIMPIAR cualquier timer activo primero (CRÍTICO)
     clearAllTimers();
 
-    if (isHovered) {
+    if (shouldBeActive) {
       // AL HACER HOVER:
       // 1. Mover inmediatamente al slide índice 1 (segunda imagen) en la copia central con snap
       setShouldAnimate(false);
@@ -260,7 +285,7 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
     return () => {
       clearAllTimers();
     };
-  }, [isHovered, len, shouldRender, interval, clearAllTimers, CENTER_COPY_START]);
+  }, [isHovered, isInViewport, autoStart, len, shouldRender, interval, clearAllTimers, CENTER_COPY_START]);
 
   // Calcular el offset para la animación usando el índice global
   const offsetPct = globalIndex * 100;
@@ -281,8 +306,11 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
     );
   }
 
-  // Si NO hay hover: mostrar solo la primera imagen estática (slide 0)
-  if (!isHovered) {
+  // Determinar si debe estar activo
+  const shouldBeActive = autoStart ? isInViewport : isHovered;
+
+  // Si NO está activo: mostrar solo la primera imagen estática (slide 0)
+  if (!shouldBeActive) {
     return (
       <div
         ref={containerRef}
@@ -345,6 +373,51 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
           </div>
         ))}
       </motion.div>
+    </div>
+  );
+}
+
+// Componente para cada slide en mobile que detecta su propia visibilidad
+function MobileSlideItem({ item, index, visualIndex, slideWidthPct }) {
+  const slideRef = useRef(null);
+  const [isInViewport, setIsInViewport] = useState(false);
+
+  useEffect(() => {
+    if (!slideRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setIsInViewport(entries[0].isIntersecting);
+      },
+      { threshold: 0.5 } // Al menos 50% visible
+    );
+
+    observer.observe(slideRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
+  const isVisible = Math.abs(index - visualIndex) <= 1;
+
+  return (
+    <div
+      ref={slideRef}
+      style={{
+        width: `${slideWidthPct}%`,
+        flex: `0 0 ${slideWidthPct}%`,
+        padding: "4px",
+        boxSizing: "border-box",
+        minWidth: 0,
+      }}
+    >
+      <InnerAutoSlider 
+        list={item.images} 
+        interval={1800} 
+        direction={1}
+        isVisible={isVisible}
+        autoStart={true}
+        isInViewport={isInViewport}
+      />
     </div>
   );
 }
@@ -427,7 +500,7 @@ export default function DisenioPortfolio({ category = "branding" }) {
     return () => { mounted = false; };
   }, []);
 
-  // Carrusel infinito para mobile
+  // Carrusel infinito para mobile - REFACTORIZADO
   const REPEAT = 3;
   const slides = useMemo(() => {
     if (items.length === 0) return [];
@@ -436,34 +509,227 @@ export default function DisenioPortfolio({ category = "branding" }) {
   
   const baseLength = items.length;
   const middleIndex = baseLength > 0 ? baseLength * Math.floor(REPEAT / 2) : 0;
-  const [carouselIndex, setCarouselIndex] = useState(middleIndex);
+  
+  // Índice lógico: 0 → baseLength - 1 (para saber qué slide mostrar)
+  const [logicalIndex, setLogicalIndex] = useState(0);
+  // Índice visual extendido: para el loop infinito
+  const [visualIndex, setVisualIndex] = useState(middleIndex);
+  // Estado para controlar animación durante corrección del loop
+  const [shouldAnimateTransition, setShouldAnimateTransition] = useState(true);
+  
+  // Refs para control de autoplay y drag
+  const autoplayTimerRef = useRef(null);
+  const autoplayResumeTimeoutRef = useRef(null);
+  const isDraggingRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const containerWidthRef = useRef(0);
+  const isCorrectingLoopRef = useRef(false);
 
+  // Inicializar índice lógico cuando cambian los items
   useEffect(() => {
     if (!isMobile || items.length === 0) return;
-    setCarouselIndex(middleIndex);
+    setLogicalIndex(0);
+    setVisualIndex(middleIndex);
   }, [isMobile, items.length, middleIndex]);
 
+  // Función para mover al siguiente slide (lógica centralizada)
+  const moveToNext = useCallback(() => {
+    if (baseLength <= 1 || isDraggingRef.current || isCorrectingLoopRef.current) return;
+    
+    setLogicalIndex((prev) => {
+      const next = (prev + 1) % baseLength;
+      return next;
+    });
+  }, [baseLength]);
+
+  // Función para mover al slide anterior
+  const moveToPrev = useCallback(() => {
+    if (baseLength <= 1 || isDraggingRef.current || isCorrectingLoopRef.current) return;
+    
+    setLogicalIndex((prev) => {
+      const next = (prev - 1 + baseLength) % baseLength;
+      return next;
+    });
+  }, [baseLength]);
+
+  // Sincronizar índice visual con índice lógico (para loop infinito)
   useEffect(() => {
-    if (!isMobile || items.length <= 1) return;
+    if (!isMobile || baseLength === 0) return;
+    
+    // Calcular el índice visual equivalente en la copia central
+    const targetVisualIndex = middleIndex + logicalIndex;
+    
+    // Solo actualizar si es diferente (evitar loops infinitos)
+    if (targetVisualIndex !== visualIndex) {
+      setVisualIndex(targetVisualIndex);
+    }
+  }, [logicalIndex, middleIndex, baseLength, isMobile, visualIndex]);
+
+  // Corrección del loop infinito (UN SOLO LUGAR)
+  useEffect(() => {
+    if (!isMobile || baseLength <= 1 || isCorrectingLoopRef.current) return;
+    
     const min = baseLength * 2;
     const max = baseLength * (REPEAT - 2);
-    if (carouselIndex < min || carouselIndex > max) {
-      const mod = ((carouselIndex % baseLength) + baseLength) % baseLength;
-      setCarouselIndex(middleIndex + mod);
+    
+    // Si estamos fuera del rango de la copia central, hacer snap invisible
+    if (visualIndex < min || visualIndex > max) {
+      isCorrectingLoopRef.current = true;
+      
+      // Desactivar animación para snap instantáneo
+      setShouldAnimateTransition(false);
+      
+      // Calcular el índice relativo dentro de cualquier copia
+      const relativeIndex = ((visualIndex % baseLength) + baseLength) % baseLength;
+      // Mover a la posición equivalente en la copia central
+      const correctedIndex = middleIndex + relativeIndex;
+      
+      // Snap instantáneo sin animación (usando requestAnimationFrame para evitar conflictos)
+      requestAnimationFrame(() => {
+        setVisualIndex(correctedIndex);
+        setLogicalIndex(relativeIndex);
+        isCorrectingLoopRef.current = false;
+        
+        // Re-habilitar animación después del snap
+        setTimeout(() => {
+          setShouldAnimateTransition(true);
+        }, 50);
+      });
     }
-  }, [carouselIndex, baseLength, REPEAT, middleIndex, isMobile, items.length]);
+  }, [visualIndex, baseLength, REPEAT, middleIndex, isMobile]);
 
   const slideWidthPct = isMobile ? 100 : 25; // 100% en mobile, 25% (4 columnas) en desktop
-  const offsetPct = isMobile ? carouselIndex * slideWidthPct : 0;
+  const offsetPct = isMobile ? visualIndex * slideWidthPct : 0;
 
-  // Auto-play para mobile carousel
+  // Autoplay para mobile - REFACTORIZADO
   useEffect(() => {
-    if (!isMobile || items.length <= 1 || draggingRef.current) return;
-    const timer = setInterval(() => {
-      setCarouselIndex(prev => prev + 1);
+    if (!isMobile || baseLength <= 1) {
+      // Limpiar timer y timeout si no es mobile
+      if (autoplayTimerRef.current) {
+        clearInterval(autoplayTimerRef.current);
+        autoplayTimerRef.current = null;
+      }
+      if (autoplayResumeTimeoutRef.current) {
+        clearTimeout(autoplayResumeTimeoutRef.current);
+        autoplayResumeTimeoutRef.current = null;
+      }
+      return;
+    }
+
+    // Limpiar timer anterior si existe
+    if (autoplayTimerRef.current) {
+      clearInterval(autoplayTimerRef.current);
+      autoplayTimerRef.current = null;
+    }
+    
+    // Limpiar timeout de reanudación si existe
+    if (autoplayResumeTimeoutRef.current) {
+      clearTimeout(autoplayResumeTimeoutRef.current);
+      autoplayResumeTimeoutRef.current = null;
+    }
+
+    // Crear UN SOLO intervalo de autoplay
+    autoplayTimerRef.current = setInterval(() => {
+      // Verificar que no estemos arrastrando
+      if (!isDraggingRef.current && !isCorrectingLoopRef.current) {
+        moveToNext();
+      }
     }, 3000);
-    return () => clearInterval(timer);
-  }, [isMobile, items.length]);
+
+    // Cleanup: limpiar al desmontar o cambiar dependencias
+    return () => {
+      if (autoplayTimerRef.current) {
+        clearInterval(autoplayTimerRef.current);
+        autoplayTimerRef.current = null;
+      }
+      if (autoplayResumeTimeoutRef.current) {
+        clearTimeout(autoplayResumeTimeoutRef.current);
+        autoplayResumeTimeoutRef.current = null;
+      }
+    };
+  }, [isMobile, baseLength, moveToNext]);
+
+  // Mobile: Hooks para drag y ancho del contenedor (DEBEN estar antes de cualquier return)
+  // Obtener ancho del contenedor para calcular delta del drag
+  useEffect(() => {
+    if (!isMobile || !containerRef.current) return;
+    const updateWidth = () => {
+      if (containerRef.current) {
+        containerWidthRef.current = containerRef.current.offsetWidth;
+      }
+    };
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, [isMobile]);
+
+  // Handlers para drag - REFACTORIZADO
+  const handleDragStart = useCallback(() => {
+    isDraggingRef.current = true;
+    draggingRef.current = true;
+    
+    // Pausar autoplay durante el drag
+    if (autoplayTimerRef.current) {
+      clearInterval(autoplayTimerRef.current);
+      autoplayTimerRef.current = null;
+    }
+    
+    // Guardar posición inicial del drag
+    if (containerRef.current) {
+      dragStartXRef.current = containerRef.current.getBoundingClientRect().left;
+    }
+  }, []);
+
+  const handleDrag = useCallback((event, info) => {
+    // No hacer nada durante el drag, solo rastrear
+    // El movimiento visual lo maneja Framer Motion automáticamente
+  }, []);
+
+  const handleDragEnd = useCallback((event, info) => {
+    isDraggingRef.current = false;
+    draggingRef.current = false;
+    
+    // Limpiar timeout anterior si existe (evitar múltiples timeouts)
+    if (autoplayResumeTimeoutRef.current) {
+      clearTimeout(autoplayResumeTimeoutRef.current);
+      autoplayResumeTimeoutRef.current = null;
+    }
+    
+    // Calcular delta del drag
+    const deltaX = info.offset.x;
+    const threshold = containerWidthRef.current * 0.3; // 30% del ancho para activar cambio
+    
+    // Determinar dirección y mover solo 1 slide
+    if (Math.abs(deltaX) > threshold) {
+      if (deltaX > 0) {
+        // Drag hacia la derecha = slide anterior
+        moveToPrev();
+      } else {
+        // Drag hacia la izquierda = slide siguiente
+        moveToNext();
+      }
+    }
+    
+    // Reanudar autoplay después de un breve delay
+    autoplayResumeTimeoutRef.current = setTimeout(() => {
+      autoplayResumeTimeoutRef.current = null;
+      
+      if (!isMobile || baseLength <= 1 || isDraggingRef.current) return;
+      
+      // Limpiar timer anterior si existe
+      if (autoplayTimerRef.current) {
+        clearInterval(autoplayTimerRef.current);
+        autoplayTimerRef.current = null;
+      }
+      
+      // Crear nuevo intervalo
+      autoplayTimerRef.current = setInterval(() => {
+        if (!isDraggingRef.current && !isCorrectingLoopRef.current) {
+          moveToNext();
+        }
+      }, 3000);
+    }, 500); // Delay de 500ms antes de reanudar autoplay
+  }, [isMobile, baseLength, moveToNext, moveToPrev]);
 
   if (items.length === 0) {
     return (
@@ -503,7 +769,8 @@ export default function DisenioPortfolio({ category = "branding" }) {
     );
   }
 
-  // Mobile: Carrusel
+  // Mobile: Carrusel - REFACTORIZADO
+
   return (
     <div 
       ref={containerRef}
@@ -514,6 +781,66 @@ export default function DisenioPortfolio({ category = "branding" }) {
         width: "100%",
       }}
     >
+      {/* Flecha izquierda */}
+      <button
+        onClick={() => moveToPrev()}
+        style={{
+          position: "absolute",
+          left: "10px",
+          top: "50%",
+          transform: "translateY(-50%)",
+          zIndex: 10,
+          background: "rgba(255, 255, 255, 0.9)",
+          border: "none",
+          borderRadius: "50%",
+          width: "40px",
+          height: "40px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+          transition: "background 0.2s",
+        }}
+        onMouseEnter={(e) => e.currentTarget.style.background = "rgba(255, 255, 255, 1)"}
+        onMouseLeave={(e) => e.currentTarget.style.background = "rgba(255, 255, 255, 0.9)"}
+        aria-label="Slide anterior"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+
+      {/* Flecha derecha */}
+      <button
+        onClick={() => moveToNext()}
+        style={{
+          position: "absolute",
+          right: "10px",
+          top: "50%",
+          transform: "translateY(-50%)",
+          zIndex: 10,
+          background: "rgba(255, 255, 255, 0.9)",
+          border: "none",
+          borderRadius: "50%",
+          width: "40px",
+          height: "40px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+          transition: "background 0.2s",
+        }}
+        onMouseEnter={(e) => e.currentTarget.style.background = "rgba(255, 255, 255, 1)"}
+        onMouseLeave={(e) => e.currentTarget.style.background = "rgba(255, 255, 255, 0.9)"}
+        aria-label="Slide siguiente"
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+
       <motion.div
         className="portfolio-carousel-track"
         style={{ 
@@ -522,39 +849,27 @@ export default function DisenioPortfolio({ category = "branding" }) {
           willChange: "transform"
         }}
         animate={{ x: `-${offsetPct}%` }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ 
+          duration: shouldAnimateTransition ? 0.6 : 0, 
+          ease: "easeOut" 
+        }}
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.2}
-        onDragStart={() => { draggingRef.current = true; }}
-        onDragEnd={() => { 
-          draggingRef.current = false;
-        }}
+        onDragStart={handleDragStart}
+        onDrag={handleDrag}
+        onDragEnd={handleDragEnd}
         dragControls={dragControls}
       >
-        {slides.map((item, i) => {
-          // Determinar si el slide está visible (el actual y los adyacentes)
-          const isVisible = Math.abs(i - carouselIndex) <= 1;
-          return (
-            <div
-              key={`${item.id}-${i}`}
-              style={{
-                width: `${slideWidthPct}%`,
-                flex: `0 0 ${slideWidthPct}%`,
-                padding: "4px",
-                boxSizing: "border-box",
-                minWidth: 0,
-              }}
-            >
-              <InnerAutoSlider 
-                list={item.images} 
-                interval={1800} 
-                direction={1}
-                isVisible={isVisible}
-              />
-            </div>
-          );
-        })}
+        {slides.map((item, i) => (
+          <MobileSlideItem 
+            key={`${item.id}-${i}`} 
+            item={item} 
+            index={i} 
+            visualIndex={visualIndex}
+            slideWidthPct={slideWidthPct}
+          />
+        ))}
       </motion.div>
     </div>
   );

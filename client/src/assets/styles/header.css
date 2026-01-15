@@ -1,14 +1,18 @@
-/* Wrapper que mantiene el espacio del header para evitar saltos cuando se hace sticky */
-.header-wrapper {
-  position: relative;
-  width: 100%;
-}
-
 .header{
   height: -moz-fit-content;
   height: -webkit-fit-content;
   height: fit-content;
   padding: 0 10px;
+}
+
+/* Sticky header solo en desktop (>=1024px) */
+@media (min-width: 1024px) {
+  .header-sticky {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
 }
 
 .header .container{
@@ -32,11 +36,11 @@
 }
 
 header.full-container{
-  z-index: 99999999;
+  z-index: 100;
   transform: none !important;
   filter: none !important;
-  /* Los estilos de background, backdrop-filter y box-shadow ahora se controlan con Framer Motion */
-  /* El position, top, left y width también se controlan dinámicamente con Motion */
+  /* Los estilos de background, backdrop-filter y box-shadow se controlan con Framer Motion */
+  /* position: sticky se maneja en CSS para evitar stacking contexts innecesarios */
 }
 
 .logo-img{
