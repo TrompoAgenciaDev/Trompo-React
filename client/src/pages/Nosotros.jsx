@@ -3,6 +3,7 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import Contact from "../layout/Contact.jsx";
 import SimpleHeroVideo from "../components/SimpleHeroVideo";
 import useMembers from "../hooks/useMembers";
+import StoricalClients from "../layout/StoricalClients";
 
 // styles
 import "../assets/styles/about.css";
@@ -91,64 +92,26 @@ const EquipoGrid = () => {
   const base = import.meta.env.BASE_URL?.endsWith("/")
     ? import.meta.env.BASE_URL
     : `${import.meta.env.BASE_URL}/`;
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const itemRefs = useRef({});
-  const imageRefs = useRef({});
-
-  useEffect(() => {
-    const updateImagePosition = () => {
-      if (hoveredIndex !== null && itemRefs.current[hoveredIndex] && imageRefs.current[hoveredIndex]) {
-        const itemElement = itemRefs.current[hoveredIndex];
-        const imageElement = imageRefs.current[hoveredIndex];
-        const imagesContainer = imageElement.closest('.equipo-images-container');
-        
-        if (imagesContainer) {
-          const itemRect = itemElement.getBoundingClientRect();
-          const containerRect = imagesContainer.getBoundingClientRect();
-          const isOdd = hoveredIndex % 2 === 0;
-          
-          // Calcular posición vertical (centro de la tarjeta)
-          const top = itemRect.top + itemRect.height / 2 - containerRect.top;
-          imageElement.style.top = `${top}px`;
-          imageElement.style.transform = 'translateY(-50%)';
-          
-          // Calcular posición horizontal (20px dentro de la tarjeta)
-          if (isOdd) {
-            // Imagen a la derecha de la tarjeta, 20px dentro del borde derecho
-            imageElement.style.left = `${itemRect.right - containerRect.left - 20}px`;
-            imageElement.style.right = 'auto';
-          } else {
-            // Imagen a la izquierda de la tarjeta, 20px dentro del borde izquierdo
-            imageElement.style.left = `${itemRect.left - containerRect.left - 20}px`;
-            imageElement.style.right = 'auto';
-          }
-        }
-      }
-    };
-
-    updateImagePosition();
-
-    // Actualizar posición al hacer resize o scroll
-    window.addEventListener('resize', updateImagePosition);
-    window.addEventListener('scroll', updateImagePosition, { passive: true });
-
-    return () => {
-      window.removeEventListener('resize', updateImagePosition);
-      window.removeEventListener('scroll', updateImagePosition);
-    };
-  }, [hoveredIndex]);
 
   if (loading) return null;
   if (error) return null;
   if (!members.length) return null;
 
-  const handleMouseEnter = (index) => {
-    setHoveredIndex(index);
+  // Calcular número de columnas basado en la cantidad de miembros
+  // Ejemplo: 9 miembros = 3x3, 6 miembros = 3x2, 4 miembros = 2x2
+  const calculateColumns = (count) => {
+    if (count === 0) return 1;
+    if (count === 1) return 1;
+    if (count <= 2) return 2;
+    if (count <= 4) return 2;
+    if (count <= 6) return 3;
+    if (count <= 9) return 3;
+    if (count <= 12) return 4;
+    // Para más de 12, calcular raíz cuadrada redondeada hacia arriba
+    return Math.ceil(Math.sqrt(count));
   };
 
-  const handleMouseLeave = () => {
-    setHoveredIndex(null);
-  };
+  const columns = calculateColumns(members.length);
 
   return (
     <div className="full-container bg-yellow-2 equipo">
@@ -156,47 +119,22 @@ const EquipoGrid = () => {
         <SocialMediaSlider text="Nosotros" />
       </div>
       <div className="container">
-        <div className="grid-equipo-wrapper">
+        <div 
+          className="grid-equipo-wrapper"
+        >
           {members.map((member, index) => (
             <div 
               key={member.id} 
               className="grid-item-equipo" 
               data-member-index={index}
-              ref={(el) => (itemRefs.current[index] = el)}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
             >
-              <div className="header-equipo">
-                <h3 className="equipo-name">{member.name}</h3>
-                <span className="equipo-position">{member.position}</span>
-              </div>
-              <div className="footer-equipo">
-                <p className="equipo-description">{member.portfolio}</p>
-              </div>
+              <img 
+                src={`${base}${member.featured_image.replace(/^\//, '')}`}
+                alt={member.name}
+                className="equipo-image"
+              />
             </div>
           ))}
-        </div>
-        {/* Imágenes fuera del grid para evitar problemas de z-index */}
-        <div className="equipo-images-container">
-          {members.map((member, index) => {
-            const isOdd = index % 2 === 0;
-            const isHovered = hoveredIndex === index;
-            
-            return (
-              <div
-                key={`img-${member.id}`}
-                ref={(el) => (imageRefs.current[index] = el)}
-                className={`equipo-image-wrapper ${isHovered ? 'visible' : ''} ${isOdd ? 'odd' : 'even'}`}
-                data-member-index={index}
-              >
-                <img 
-                  src={`${base}${member.featured_image.replace(/^\//, '')}`}
-                  alt={member.name}
-                  className="equipo-image"
-                />
-              </div>
-            );
-          })}
         </div>
       </div>
     </div>
@@ -347,7 +285,22 @@ const Nosotros = () => {
         </div>
       </div>
 
-      <EquipoGrid />
+      <div className="full-container bg-yellow-2 members-container">
+        <div className="container">
+          <h1>Nuestro equipo</h1>
+          <p>
+            En Trompo creemos que las marcas que crecen nunca se quedan quietas. Por eso, nuestro equipo tampoco. Somos profesionales del marketing, la creatividad, la tecnología y la estrategia, con una misma convicción: trabajar codo a codo con cada cliente, como parte de su equipo.
+          </p>
+        </div>
+        <div className="container">
+          <EquipoGrid />
+        </div>
+      </div>
+
+      {/* Histórico de clientes */}
+      <div className="full-container black-bg">
+        <StoricalClients />
+      </div>
 
       {/* formulario */}
       <Contact />

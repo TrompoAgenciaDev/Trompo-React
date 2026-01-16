@@ -53,7 +53,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
   -webkit-overflow-scrolling: touch;
   /* Mejorar el scroll con aceleración de hardware */
   scroll-padding-top: 0;
@@ -86,9 +86,8 @@ body {
   overscroll-behavior-y: contain;
 }
 
-/* Clase para scroll suave mejorado */
-body.smooth-scroll-enabled {
-  /* Aceleración de hardware para mejor rendimiento */
+/* Clase para scroll suave mejorado - DESHABILITADO TEMPORALMENTE */
+/* body.smooth-scroll-enabled {
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   backface-visibility: hidden;
@@ -97,22 +96,19 @@ body.smooth-scroll-enabled {
   -webkit-perspective: 1000px;
 }
 
-/* Mejorar transiciones de elementos durante el scroll */
 body.smooth-scroll-enabled * {
-  /* Reducir repaint durante scroll */
   will-change: auto;
 }
 
-/* Elementos con animaciones de scroll deben tener mejor rendimiento */
 body.smooth-scroll-enabled [data-scroll],
 body.smooth-scroll-enabled .animate-on-scroll {
   will-change: transform, opacity;
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
-}
+} */
 
 #root {
-  overflow: hidden;
+  overflow-x: hidden;
   background-color: #ffffff;
 }
 

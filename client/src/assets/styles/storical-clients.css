@@ -125,6 +125,47 @@
   text-align: center;
 }
 
+/* Invertir colores cuando está dentro de black-bg */
+.black-bg .storical {
+  background: #262626;
+}
+
+.black-bg .storical-panel {
+  background: #262626;
+  border: 1px solid #404040;
+}
+
+.black-bg .storical-item {
+  background: #404040;
+  border: 1px solid #525252;
+}
+
+.black-bg .storical-name {
+  color: #ffffff;
+}
+
+.black-bg .storical-tab {
+  color: #b3b3b3;
+}
+
+.black-bg .storical-tab.is-active {
+  color: #ffffff;
+}
+
+.black-bg .title-historical-container h3,
+.black-bg .title-historical-container p {
+  color: #ffffff;
+}
+
+.black-bg .legal-footer-historical p {
+  color: #b3b3b3;
+}
+
+.black-bg .storical-loading,
+.black-bg .storical-error {
+  color: #ffffff;
+}
+
 .title-historical-container{
   padding: 20px;
   display: -webkit-box;

@@ -169,10 +169,6 @@ p{
   padding: 50px 40px 100px;
 }
 
-.separator{
-  width: 100%;
-  height: 30px;
-}
 
 .creatividad-video-section .container:first-of-type{
   padding: 0;
@@ -182,14 +178,119 @@ p{
   padding-left: 20px;
 }
 
+/* Strategy Container Styles - Mobile First */
+.strategy-container{
+  padding: 40px 0;
+}
 
-.max-text{
-  font-size: 14px;
-  color: #262626;
+.strategy-container .container h1{
+  color: #FED332;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-family: var(--font-portfolio);
+}
+
+.strategy-container .container h2{
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 400;
+  font-family: var(--font-portfolio);
+}
+
+.grid-strategy{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 50px 0;
+  flex-direction: column;
+  gap: 0;
+  padding: 20px 0;
+}
+
+.strategy-item{
+  -webkit-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+.strategy-item:hover{
+  background-color: #ffffff;
+}
+
+.strategy-item .container{
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: 1fr;
+  gap: 15px;
+  padding: 30px 20px;
+}
+
+.grid-item-strategy p,
+.grid-item-strategy span{
+  font-size: 16px;
+  color: #ffffff;
+  -webkit-transition: color 0.3s ease;
+  -o-transition: color 0.3s ease;
+  transition: color 0.3s ease;
+}
+
+.grid-item-strategy span{
+  font-family: var(--font-portfolio);
+  font-weight: 700;
+}
+
+.strategy-item:hover .grid-item-strategy p,
+.strategy-item:hover .grid-item-strategy span{
+  color: #000000;
+}
+
+.strategy-item:not(:last-child) .container{
+  border-bottom: 1px solid #fed332;
+}
+
+/* Animated Text Section Styles - Mobile First */
+.desarrollo-animated-text {
+  display: block;
+  line-height: 1.6;
+  text-align: center;
+  font-weight: 500;
+  padding: 40px 10px;
+}
+
+.desarrollo-animated-phrase {
+  display: inline;
+  font-family: var(--font-portfolio);
+}
+
+.desarrollo-animated-text-container{
+  width: 100%;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+/* Semicircular Video Slider Container - Mobile First */
+.slider-container{
+  position: relative;
+  overflow: hidden;
+}
+
+.slider-text{
+  width: 100%;
+  max-width: 900px;
+  background-color: transparent;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: -500px;
+  padding-bottom: 100px;
+}
+
+.slider-text span{
+  font-size: 18px;
+  color: #000000;
+  font-family: var(--font-portfolio);
+  font-weight: 400;
+  text-align: center;
+  line-height: 1.5;
 }
 
 @media (min-width: 768px) {
@@ -224,6 +325,49 @@ p{
   .title-portfolio-container p,
   .title-portfolio-container h3{
     text-align: right;
+  }
+
+  .desarrollo-animated-text-container{
+    font-size: 28px;
+  }
+
+  .strategy-container{
+    padding: 60px 0;
+  }
+
+  .strategy-container .container h1{
+    font-size: 42px;
+  }
+
+  .strategy-container .container h2{
+    font-size: 22px;
+  }
+
+  .grid-item-strategy p,
+  .grid-item-strategy span{
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .desarrollo-animated-text-container{
+    font-size: 36px;
+  }
+
+  .strategy-container{
+    padding: 80px 0;
+  }
+
+  .strategy-container .container h1{
+    font-size: 48px;
+  }
+
+  .strategy-container .container h2{
+    font-size: 24px;
+  }
+
+  .grid-strategy{
+    padding: 40px 0;
   }
 }
 
@@ -271,18 +415,44 @@ p{
     padding: 50px 20px 100px;
   }  
 
-  .separator{
-    height: 70px;
+  .creatividad-video-section  h1{
+    padding-left: 30px;
   }
 
-  .max-text p{
-    font-size: 20px;
-    width: 100%;
-    max-width: 1024px;
+  .desarrollo-animated-text-container{
+    font-size: 44px;
+    padding: 60px 10px;
+  }
+
+  .strategy-container{
     padding: 80px 0;
   }
 
-  .creatividad-video-section  h1{
-    padding-left: 30px;
+  .strategy-container .container h1{
+    font-size: 64px;
+  }
+
+  .strategy-container .container h2{
+    font-size: 32px;
+  }
+
+  .grid-strategy{
+    padding: 50px 0;
+  }
+
+  .strategy-item .container{
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 70px 0;
+  }
+
+  .grid-item-strategy p,
+  .grid-item-strategy span{
+    font-size: 24px;
+  }
+
+  .slider-text span{
+    font-size: 48px;
   }
 }
