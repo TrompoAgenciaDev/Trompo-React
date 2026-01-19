@@ -8,6 +8,7 @@ import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Icons from "../../components/Icons.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
 import Inversiones from "../../components/Inversiones.jsx";
+import Testimonials from "../../components/Testimonials.jsx";
 
 //styles
 import "../../assets/styles/paid-media.css";
@@ -921,6 +922,10 @@ const Estrategia = () => {
       <Inversiones />
       
       <Beneficios />
+
+      <section className="full-container testimonial-wrapper">
+        <Testimonials />
+      </section>
 
       <Contact form="estrategia" />
 

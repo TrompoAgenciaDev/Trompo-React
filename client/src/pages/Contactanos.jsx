@@ -98,6 +98,10 @@ const Contactanos = () => {
 
       <div id="contacto"></div>
 
+      <section className="full-container testimonial-wrapper">
+        <Testimonials />
+      </section>
+
       <Contact form="contactanos" location="contactanos"/>
 
       

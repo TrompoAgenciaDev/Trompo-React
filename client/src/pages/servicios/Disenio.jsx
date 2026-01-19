@@ -7,6 +7,7 @@ import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 import DisenioPortfolio from "../../components/portfolio/DisenioPortfolio.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
+import Testimonials from "../../components/Testimonials.jsx";
 
 //styles
 import "@as/hero.css";
@@ -843,6 +844,10 @@ const Disenio = () => {
       </div>      
       
       <Beneficios />
+
+      <section className="full-container testimonial-wrapper">
+        <Testimonials />
+      </section>
 
       <Contact form="creative" />
 

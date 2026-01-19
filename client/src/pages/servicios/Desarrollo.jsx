@@ -7,6 +7,7 @@ import Contact from "../../layout/Contact.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
+import Testimonials from "../../components/Testimonials.jsx";
 
 import "../../assets/styles/servicios-page.css";
 import "../../assets/styles/desarrollo.css";
@@ -642,6 +643,10 @@ const Desarrollo = () => {
       <WebDesignSection />
 
       <Beneficios />
+
+      <section className="full-container testimonial-wrapper">
+        <Testimonials />
+      </section>
 
       <Contact form="desarrollo"/>
       

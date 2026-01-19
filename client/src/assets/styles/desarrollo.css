@@ -131,7 +131,7 @@
     -moz-osx-font-smoothing: grayscale;
     color: #000000 !important; /* Texto negro por defecto - forzar con !important */
     font-size: 48px;
-    font-weight: 700;
+    font-weight: 500;
     font-family: var(--font-portfolio);
     line-height: 1.2;
     transition: mix-blend-mode 0.2s ease;

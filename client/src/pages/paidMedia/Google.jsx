@@ -3,6 +3,7 @@ import { motion, useMotionValue, useAnimation, useTransform } from "framer-motio
 import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
+import Testimonials from "../../components/Testimonials.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 
 //styles
@@ -869,6 +870,10 @@ const Google = () => {
       </div>
 
       <Faqs location="estrategia" />
+
+      <section className="full-container testimonial-wrapper">
+        <Testimonials />
+      </section>
 
       <Contact form="estrategia" />
 

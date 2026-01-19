@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
+import Testimonials from "../../components/Testimonials.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 
 //styles
@@ -415,6 +416,10 @@ const Analitica = () => {
       </div>
 
       <Faqs location="estrategia" />
+
+      <section className="full-container testimonial-wrapper">
+        <Testimonials />
+      </section>
 
       <Contact form="estrategia" />
 

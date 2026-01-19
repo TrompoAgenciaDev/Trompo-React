@@ -7,24 +7,27 @@ const INTERVAL = 4000;
 const TRANSITION_S = 1.2;
 const REPEAT = 5;
 
-function isDesktop() {
-  if (typeof window === "undefined") return false;
-  return window.innerWidth >= 1280;
+function getVisibleCount() {
+  if (typeof window === "undefined") return 1;
+  if (window.innerWidth >= 1280) return 4;
+  if (window.innerWidth >= 1024) return 3;
+  if (window.innerWidth >= 768) return 2;
+  return 1;
 }
 const norm = (i, n) => ((i % n) + n) % n;
 
-export default function Testimonials({ size = 1 }) {
+export default function Testimonials({ size = null }) {
   const { testimonials, loading, error } = useFetchTestimonials();
 
   const total = testimonials.length;
-  const [desktop, setDesktop] = useState(isDesktop());
+  const [visibleCount, setVisibleCount] = useState(getVisibleCount());
   useEffect(() => {
-    const onResize = () => setDesktop(isDesktop());
+    const onResize = () => setVisibleCount(getVisibleCount());
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
 
-  const visibleCount = desktop ? Math.max(1, Number(size) || 1) : 1;
+  const displayCount = size !== null ? Number(size) : visibleCount;
 
   // clonar para loop infinito
   const cloned = useMemo(
@@ -66,7 +69,7 @@ export default function Testimonials({ size = 1 }) {
   if (!total) return <div>No hay testimonios disponibles.</div>;
 
   // offset en %: siempre se mueve de a 1, aunque se muestren 2+
-  const offset = (index * 100) / visibleCount;
+  const offset = (index * 100) / displayCount;
 
   // dots: uno por testimonio real
   const activeDot = norm(index, total);
@@ -86,7 +89,7 @@ export default function Testimonials({ size = 1 }) {
   };
   const onDragEnd = (_e, info) => {
     const w = containerRef.current?.offsetWidth || 0;
-    const slideW = w / visibleCount;
+    const slideW = w / displayCount;
     const threshold = Math.max(40, slideW * 0.2);
     const dx = info.offset.x;
     setAnimating(true);
@@ -123,34 +126,40 @@ export default function Testimonials({ size = 1 }) {
             <div
               key={i}
               style={{
-                flex: `0 0 ${100 / visibleCount}%`,
-                maxWidth: `${100 / visibleCount}%`,
+                flex: `0 0 ${100 / displayCount}%`,
+                maxWidth: `${100 / displayCount}%`,
                 boxSizing: "border-box",
-                paddingLeft: "1rem",
-                paddingRight: "1rem",
+                paddingLeft: "0.5rem",
+                paddingRight: "0.5rem",
+                display: "flex",
+                alignItems: "stretch",
               }}
             >
-              <div className="testimoniales-card">
-                <div className="testimoniales-img">
-                  <img src={item.image} />
-                  <div className="testimoniales-author">
-                    {item.author}
+              <div className="testimoniales-card" style={{ width: "100%" }}>
+                <div className="testimoniales-text">
+                  {item.text.replace(/^✨\s*/, '')}
+                </div>
+                <div className="testimoniales-author-info">
+                  <img src={item.image} alt={item.name || item.author} className="testimoniales-avatar" />
+                  <div className="testimoniales-author-details">
+                    <div className="testimoniales-author-name">
+                      {item.name || (() => {
+                        const parts = (item.author || '').split(/[-,]/);
+                        return parts[0] ? parts[0].trim() : item.author;
+                      })()}
+                    </div>
+                    <div className="testimoniales-author-role" title={item.role || (() => {
+                      const parts = (item.author || '').split(/[-,]/);
+                      return parts.length > 1 ? parts.slice(1).join(',').trim() : '';
+                    })()}>
+                      {item.role || (() => {
+                        const parts = (item.author || '').split(/[-,]/);
+                        return parts.length > 1 ? parts.slice(1).join(',').trim() : '';
+                      })()}
+                    </div>
                   </div>
                 </div>
-                <div className="testimonial-content">
-                  <div className="testimonial-header-card">
-                    {/* <div className="testimoniales-rating">
-                      {"★".repeat(item.rating)}
-                      <span className="testimoniales-rating-empty">
-                        {"★".repeat(5 - item.rating)}
-                      </span>
-                    </div> */}
-                  </div>
-                  <div className="testimoniales-text">
-                    {/* <span className="testimoniales-rating">{"★ "}</span> */}
-                    {item.text}
-                  </div>
-                </div>
+                <div className="testimoniales-quote-icon">"</div>
               </div>
             </div>
           ))}
