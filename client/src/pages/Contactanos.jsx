@@ -7,7 +7,7 @@ import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import Faqs from "../layout/Faqs";
 import Hero from "../layout/Hero";
 import Contact from "../layout/Contact";
-import Testimonials from "../components/Testimonials.jsx";
+import Testimonials3D from "../components/Testimonials3D.jsx";
 
 import "../assets/styles/contact-page.css";
 
@@ -99,7 +99,7 @@ const Contactanos = () => {
       <div id="contacto"></div>
 
       <section className="full-container testimonial-wrapper">
-        <Testimonials />
+        <Testimonials3D />
       </section>
 
       <Contact form="contactanos" location="contactanos"/>
@@ -117,7 +117,7 @@ const Contactanos = () => {
           <p>Historias que muestran el valor de trabajar en equipo.</p>
         </div>
         <div className="full-container">
-          <Testimonials size={3} />
+          <Testimonials3D />
         </div>
       </section> */}
 

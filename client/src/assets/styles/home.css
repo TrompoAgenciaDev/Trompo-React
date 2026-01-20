@@ -576,6 +576,54 @@ body.trail-cursor-in-slider .infinite-slider-item {
   text-transform: uppercase;
 }
 
+.grid-full-container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 70px 0;
+}
+
+.grid-item-full-container span{
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 100px;
+  line-height: 1;
+}
+
+.item-1,
+.item-2,
+.item-3,
+.item-4{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.item-1,
+.item-3{
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.item-2,
+.item-4{
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.item-1, .item-2{
+  margin-bottom: 0px;
+}
+
+
+.grid-full-container .container{
+  padding-left: 0;
+  padding-right: 0;
+}
+
 @media (min-width: 768px) {
   .text-show-effect *{
     font-size: 19px;

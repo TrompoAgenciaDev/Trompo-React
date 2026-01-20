@@ -7,7 +7,7 @@ import Contact from "../../layout/Contact.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
-import Testimonials from "../../components/Testimonials.jsx";
+import Testimonials3D from "../../components/Testimonials3D.jsx";
 
 import "../../assets/styles/servicios-page.css";
 import "../../assets/styles/desarrollo.css";
@@ -543,10 +543,10 @@ const Desarrollo = () => {
   return (
     <>
       <SimpleHeroVideo
-        desktopSrc={`${base}assets/hero/desarrollo-hero.mp4`}
-        mobileSrc={`${base}assets/hero/mobile/desarrollo-hero-mobile.mp4`}
-        desktopPoster={`${base}assets/hero/desarrollo-hero-poster.webp`}
-        mobilePoster={`${base}assets/hero/mobile/desarrollo-hero-mobile-poster.webp`}
+        desktopSrc={`${base}assets/hero/home.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/home-hero-mobile.mp4`}
+        desktopPoster={`${base}assets/hero/home.webp`}
+        mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
 
       <ServiceTitle area="Desarrollo" titulo="Servicios de desarrollo" />
@@ -645,7 +645,7 @@ const Desarrollo = () => {
       <Beneficios />
 
       <section className="full-container testimonial-wrapper">
-        <Testimonials />
+        <Testimonials3D />
       </section>
 
       <Contact form="desarrollo"/>

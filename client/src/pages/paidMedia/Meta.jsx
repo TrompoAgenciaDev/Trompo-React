@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import Testimonials from "../../components/Testimonials.jsx";
+import Testimonials3D from "../../components/Testimonials3D.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 
 //styles
@@ -28,10 +28,10 @@ const Meta = () => {
   return (
     <>
       <SimpleHeroVideo
-        desktopSrc={`${base}assets/hero/estrategia-hero.mp4`}
-        mobileSrc={`${base}assets/hero/mobile/estrategia-hero-mobile.mp4`}
-        desktopPoster={`${base}assets/hero/estrategia-hero-poster.webp`}
-        mobilePoster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
+        desktopSrc={`${base}assets/hero/home.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/home-hero-mobile.mp4`}
+        desktopPoster={`${base}assets/hero/home.webp`}
+        mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
 
       <div className="full-container title-container-ads">
@@ -503,7 +503,7 @@ const Meta = () => {
       <Faqs location="estrategia" />
 
       <section className="full-container testimonial-wrapper">
-        <Testimonials />
+        <Testimonials3D />
       </section>
 
       <Contact form="estrategia" />

@@ -8,7 +8,7 @@ import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Icons from "../../components/Icons.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
 import Inversiones from "../../components/Inversiones.jsx";
-import Testimonials from "../../components/Testimonials.jsx";
+import Testimonials3D from "../../components/Testimonials3D.jsx";
 
 //styles
 import "../../assets/styles/paid-media.css";
@@ -500,10 +500,10 @@ const Estrategia = () => {
     <>
       <div style={{ margin: 0, padding: 0, lineHeight: 0, fontSize: 0 }}>
         <SimpleHeroVideo
-          desktopSrc={`${base}assets/hero/estrategia-hero.mp4`}
-          mobileSrc={`${base}assets/hero/mobile/estrategia-hero-mobile.mp4`}
-          desktopPoster={`${base}assets/hero/estrategia-hero-poster.webp`}
-          mobilePoster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
+          desktopSrc={`${base}assets/hero/home.mp4`}
+          mobileSrc={`${base}assets/hero/mobile/home-hero-mobile.mp4`}
+          desktopPoster={`${base}assets/hero/home.webp`}
+          mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
         />
       </div>
       
@@ -924,7 +924,7 @@ const Estrategia = () => {
       <Beneficios />
 
       <section className="full-container testimonial-wrapper">
-        <Testimonials />
+        <Testimonials3D />
       </section>
 
       <Contact form="estrategia" />

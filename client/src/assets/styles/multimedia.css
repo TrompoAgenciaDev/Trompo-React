@@ -291,6 +291,10 @@
     gap: 30px;
 }
 
+.grid-item-video-multimedia img{
+    width: 100%;
+}
+
 .service-title-container{
     display: flex;
     flex-direction: row;

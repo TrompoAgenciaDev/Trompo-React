@@ -3,7 +3,7 @@ import { motion, useMotionValue, useAnimation, useTransform } from "framer-motio
 import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import Testimonials from "../../components/Testimonials.jsx";
+import Testimonials3D from "../../components/Testimonials3D.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 
 //styles
@@ -628,10 +628,10 @@ const Google = () => {
   return (
     <>
       <SimpleHeroVideo
-        desktopSrc={`${base}assets/hero/estrategia-hero.mp4`}
-        mobileSrc={`${base}assets/hero/mobile/estrategia-hero-mobile.mp4`}
-        desktopPoster={`${base}assets/hero/estrategia-hero-poster.webp`}
-        mobilePoster={`${base}assets/hero/mobile/estrategia-hero-mobile-poster.webp`}
+        desktopSrc={`${base}assets/hero/home.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/home-hero-mobile.mp4`}
+        desktopPoster={`${base}assets/hero/home.webp`}
+        mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
 
       <div className="full-container title-container-ads">
@@ -872,7 +872,7 @@ const Google = () => {
       <Faqs location="estrategia" />
 
       <section className="full-container testimonial-wrapper">
-        <Testimonials />
+        <Testimonials3D />
       </section>
 
       <Contact form="estrategia" />

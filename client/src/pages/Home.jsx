@@ -14,7 +14,6 @@ import Beneficios from "../components/Beneficios";
 import SemicircularVideoSlider from "../components/sliders/SemicircularVideoSlider";
 import Menu from "../components/Menu";
 import routesConfig from "../config/routesConfig";
-import Testimonials from "../components/Testimonials";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -111,7 +110,7 @@ const AnimatedTextSection = ({ containerRef }) => {
     setBaseOpacity(latest);
   });
 
-  const animatedText = "En trompo combinamos creatividad e innovación tecnologia para construir marcas que evolucionan";
+  const animatedText = "En trompo combinamos creatividad e innovación tecnológica para construir marcas que evolucionan";
   const phraseDelay = 0.3;
   
   const phrases = React.useMemo(() => {
@@ -304,7 +303,45 @@ const Home = () => {
         mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
 
-      <ServiceTitle area="Home" home={true} />
+      {/* <ServiceTitle area="Home" home={true} /> */}
+      
+      <div className="full-container grid-full-container">
+        <div className="full-container grid-item-full-container item-1">
+            <span style={{ color: '#fed332' }}>trompo</span>
+        </div>
+        <div className="full-container grid-item-full-container item-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="102" height="102" viewBox="0 0 102 102" fill="none">
+            <g clipPath="url(#clip0_3525_2018)">
+              <path d="M102 94L-1.52588e-05 94" stroke="black" strokeWidth="20"/>
+              <path d="M8 0L8 102" stroke="black" strokeWidth="20"/>
+              <path d="M95.9375 5.93756L5.87504 96" stroke="black" strokeWidth="20"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_3525_2018">
+                <rect width="102" height="102" fill="white"/>
+              </clipPath>
+            </defs>
+          </svg>
+        </div>
+
+        <div className="full-container grid-item-full-container item-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="102" height="102" viewBox="0 0 102 102" fill="none">
+            <g clipPath="url(#clip0_3524_2006)">
+              <path d="M0 8L102 8" stroke="#fed332" strokeWidth="20"/>
+              <path d="M94 102L94 -3.09944e-06" stroke="#fed332" strokeWidth="20"/>
+              <path d="M6.0625 96.0625L96.1249 6.00003" stroke="#fed332" strokeWidth="20"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_3524_2006">
+                <rect x="102" y="102" width="102" height="102" transform="rotate(180 102 102)" fill="white"/>
+              </clipPath>
+            </defs>
+          </svg>
+        </div>
+        <div className="full-container grid-item-full-container item-4">
+          <span>agencia</span>
+        </div>
+      </div>
 
       <div ref={animatedTextContainerRef} className="full-container">
         <div className="container desarrollo-animated-text-container">
@@ -480,7 +517,7 @@ const Home = () => {
       <Beneficios />
 
       <section className="full-container black-bg testimonial-wrapper">
-        <Testimonials />
+        
       </section>
 
       <Contact form="home" />

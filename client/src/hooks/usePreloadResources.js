@@ -49,57 +49,13 @@ export const usePreloadResources = () => {
       : `${import.meta.env.BASE_URL}/`;
 
     // Preload del video hero de la página actual
+    // Todos usan el mismo video del home
     const getHeroVideo = (pathname) => {
-      if (pathname === '/' || pathname === '/home') {
-        return {
-          desktop: `${base}assets/hero/home.mp4`,
-          mobile: `${base}assets/hero/mobile/home-mobile.mp4`
-        };
-      }
-      
-      if (pathname.includes('/nosotros')) {
-        return {
-          desktop: `${base}assets/hero/home.mp4`, // Usa el mismo que home
-          mobile: `${base}assets/hero/mobile/home-mobile.mp4`
-        };
-      }
-      
-      if (pathname.includes('/diseno')) {
-        return {
-          desktop: `${base}assets/hero/creatividad-hero.mp4`,
-          mobile: `${base}assets/hero/mobile/creatividad-hero-mobile.mp4`
-        };
-      }
-      
-      if (pathname.includes('/desarrollo')) {
-        return {
-          desktop: `${base}assets/hero/desarrollo-hero.mp4`,
-          mobile: `${base}assets/hero/mobile/desarrollo-hero-mobile.mp4`
-        };
-      }
-      
-      if (pathname.includes('/paid-media')) {
-        return {
-          desktop: `${base}assets/hero/estrategia-hero.mp4`,
-          mobile: `${base}assets/hero/mobile/estrategia-hero-mobile.mp4`
-        };
-      }
-      
-      if (pathname.includes('/social-media')) {
-        return {
-          desktop: `${base}assets/hero/interaccion-hero.mp4`,
-          mobile: `${base}assets/hero/mobile/interaccion-hero-mobile.mp4`
-        };
-      }
-      
-      if (pathname.includes('/multimedia')) {
-        return {
-          desktop: `${base}assets/hero/multimedia-hero.mp4`,
-          mobile: `${base}assets/hero/mobile/multimedia-hero-mobile.mp4`
-        };
-      }
-
-      return null;
+      // Todas las páginas usan los mismos videos del home
+      return {
+        desktop: `${base}assets/hero/home.mp4`,
+        mobile: `${base}assets/hero/mobile/home-mobile.mp4`
+      };
     };
 
     // Detectar si es móvil

@@ -12,7 +12,7 @@ import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Inversiones from "../../components/Inversiones.jsx";
 import SocialMediaShowcaseSlider from "../../components/sliders/SocialMediaShowcaseSlider.jsx";
-import Testimonials from "../../components/Testimonials.jsx";
+import Testimonials3D from "../../components/Testimonials3D.jsx";
 
 //styles
 import "../../assets/styles/social-media.css";
@@ -118,9 +118,9 @@ const SocialMedia = () => {
   return (
     <>
       <SimpleHeroVideo
-        desktopSrc={`${base}assets/hero/interaccion-hero.mp4`}
-        mobileSrc={`${base}assets/hero/mobile/interaccion-hero-mobile.mp4`}
-        desktopPoster={`${base}assets/hero/home-poster.webp`}
+        desktopSrc={`${base}assets/hero/home.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/home-hero-mobile.mp4`}
+        desktopPoster={`${base}assets/hero/home.webp`}
         mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
       
@@ -214,7 +214,7 @@ const SocialMedia = () => {
       <Inversiones />
 
       <section className="full-container testimonial-wrapper">
-        <Testimonials />
+        <Testimonials3D />
       </section>
 
       <Contact form="interaccion" />

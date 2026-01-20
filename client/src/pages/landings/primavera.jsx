@@ -5,7 +5,7 @@ import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import Portfolio3d from "../../layout/Portfolio3d.jsx";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
-import Testimonials from "../../components/Testimonials.jsx";
+import Testimonials3D from "../../components/Testimonials3D.jsx";
 
 import "../../assets/styles/landing-primavera.css";
 
@@ -55,7 +55,7 @@ const Primavera = () => {
           <p>Historias que muestran el valor de trabajar en equipo.</p>
         </div>
         <div className="full-container">
-          <Testimonials size={4} />
+          <Testimonials3D />
         </div>
       </section>
 

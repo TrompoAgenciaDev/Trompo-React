@@ -7,7 +7,7 @@ import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import SemicircularVideoSlider from "../../components/sliders/SemicircularVideoSlider.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
-import Testimonials from "../../components/Testimonials.jsx";
+import Testimonials3D from "../../components/Testimonials3D.jsx";
 
 //styles
 import "../../assets/styles/multimedia.css";
@@ -571,10 +571,10 @@ const Multimedia = () => {
   return (
     <>
       <SimpleHeroVideo
-        desktopSrc={`${base}assets/hero/creatividad-hero.mp4`}
-        mobileSrc={`${base}assets/hero/mobile/creatividad-hero-mobile.mp4`}
-        desktopPoster={`${base}assets/hero/creatividad-hero-poster.webp`}
-        mobilePoster={`${base}assets/hero/mobile/creatividad-hero-mobile-poster.webp`}
+        desktopSrc={`${base}assets/hero/home.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/home-hero-mobile.mp4`}
+        desktopPoster={`${base}assets/hero/home.webp`}
+        mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
 
       <ServiceTitle area="Multimedia" titulo="Servicios de multimedia" />
@@ -646,7 +646,7 @@ const Multimedia = () => {
                 <h2>Servicios</h2>
                 <h2>Servicios</h2>
               </div>
-              <OptimizedVideo src={`${base}assets/creatividad/multimedia/vertical/vanliving.mp4`} />
+              <img src={`${base}assets/creatividad/meli.png`} />
             </div>
             <div className="grid-item-productos-multimedia">
               <ProductosItemsList />
@@ -683,7 +683,7 @@ const Multimedia = () => {
       <Beneficios />
 
       <section className="full-container testimonial-wrapper">
-        <Testimonials />
+        <Testimonials3D />
       </section>
 
       <Contact form="multimedia" />

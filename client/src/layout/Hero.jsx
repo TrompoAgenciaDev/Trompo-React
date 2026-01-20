@@ -14,17 +14,18 @@ const videosByLocation = {
     desktop: `${base}assets/hero/home.mp4`,
     mobile: `${base}assets/hero/mobile/home-mobile.mp4`,
   },
+  // Todos los demás servicios usan los mismos videos que home
   desarrollo: {
-    desktop: `${base}assets/hero/desarrollo-hero.mp4`,
-    mobile: `${base}assets/hero/mobile/desarrollo-hero-mobile.mp4`,
+    desktop: `${base}assets/hero/home.mp4`,
+    mobile: `${base}assets/hero/mobile/home-mobile.mp4`,
   },
   creatividad: {
-    desktop: `${base}assets/hero/creatividad-hero.mp4`,
-    mobile: `${base}assets/hero/mobile/creatividad-hero-mobile.mp4`,
+    desktop: `${base}assets/hero/home.mp4`,
+    mobile: `${base}assets/hero/mobile/home-mobile.mp4`,
   },
   estrategia: {
-    desktop: `${base}assets/hero/estrategia-hero.mp4`,
-    mobile: `${base}assets/hero/mobile/estrategia-hero-mobile.mp4`,
+    desktop: `${base}assets/hero/home.mp4`,
+    mobile: `${base}assets/hero/mobile/home-mobile.mp4`,
   },
 };
 

@@ -7,7 +7,7 @@ import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 import DisenioPortfolio from "../../components/portfolio/DisenioPortfolio.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
-import Testimonials from "../../components/Testimonials.jsx";
+import Testimonials3D from "../../components/Testimonials3D.jsx";
 
 //styles
 import "@as/hero.css";
@@ -741,10 +741,10 @@ const Disenio = () => {
   return (
     <>
       <SimpleHeroVideo
-        desktopSrc={`${base}assets/hero/creatividad-hero.mp4`}
-        mobileSrc={`${base}assets/hero/mobile/creatividad-hero-mobile.mp4`}
-        desktopPoster={`${base}assets/hero/creatividad-hero-poster.webp`}
-        mobilePoster={`${base}assets/hero/mobile/creatividad-hero-mobile-poster.webp`}
+        desktopSrc={`${base}assets/hero/home.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/home-hero-mobile.mp4`}
+        desktopPoster={`${base}assets/hero/home.webp`}
+        mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
 
       <ServiceTitle area="Diseño" titulo="Servicios de diseño" />
@@ -846,7 +846,7 @@ const Disenio = () => {
       <Beneficios />
 
       <section className="full-container testimonial-wrapper">
-        <Testimonials />
+        <Testimonials3D />
       </section>
 
       <Contact form="creative" />
