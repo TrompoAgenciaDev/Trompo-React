@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useLayoutEffect } from "react";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import "../../assets/styles/semicircular-video-slider.css";
 
@@ -33,6 +33,9 @@ const CurvedSlide = ({ video, index, x, containerRef, wrapperRef, videoRefs, isD
     const containerRect = containerRef.current.getBoundingClientRect();
     const slideRect = slideRef.current.getBoundingClientRect();
     
+    // Verificar que las mediciones sean válidas
+    if (!containerRect.width || !slideRect.width) return 0;
+    
     const viewportCenterX = containerRect.left + (containerRect.width / 2);
     const slideCenterX = slideRect.left + (slideRect.width / 2);
     const distanceFromCenter = slideCenterX - viewportCenterX;
@@ -49,6 +52,9 @@ const CurvedSlide = ({ video, index, x, containerRef, wrapperRef, videoRefs, isD
     const containerRect = containerRef.current.getBoundingClientRect();
     const slideRect = slideRef.current.getBoundingClientRect();
     
+    // Verificar que las mediciones sean válidas
+    if (!containerRect.width || !slideRect.width) return 0;
+    
     const viewportCenterX = containerRect.left + (containerRect.width / 2);
     const slideCenterX = slideRect.left + (slideRect.width / 2);
     const distanceFromCenter = slideCenterX - viewportCenterX;
@@ -64,6 +70,9 @@ const CurvedSlide = ({ video, index, x, containerRef, wrapperRef, videoRefs, isD
     
     const containerRect = containerRef.current.getBoundingClientRect();
     const slideRect = slideRef.current.getBoundingClientRect();
+    
+    // Verificar que las mediciones sean válidas
+    if (!containerRect.width || !slideRect.width) return 50;
     
     const viewportCenterX = containerRect.left + (containerRect.width / 2);
     const slideCenterX = slideRect.left + (slideRect.width / 2);
@@ -119,8 +128,20 @@ const SemicircularVideoSlider = () => {
   const containerRef = useRef(null);
   const wrapperRef = useRef(null);
   
-  // ÚNICA fuente de verdad: motionValue x
-  const x = useMotionValue(0);
+  // Calcular valor inicial de x basado en window.innerWidth (disponible inmediatamente)
+  const getInitialX = () => {
+    if (typeof window === "undefined") return 0;
+    const slideWidth = window.innerWidth >= 1024 ? 400 : 160;
+    const gap = window.innerWidth >= 1024 ? 70 : 20;
+    const slideWithGap = slideWidth + gap;
+    // Usar window.innerWidth como aproximación del containerWidth
+    const containerWidth = window.innerWidth;
+    const centerOffset = (containerWidth / 2) - (slideWidth / 2);
+    return centerOffset - (MIDDLE_START * slideWithGap);
+  };
+  
+  // ÚNICA fuente de verdad: motionValue x - inicializado con valor calculado
+  const x = useMotionValue(getInitialX());
   
   // Calcular dimensiones
   const getSlideWidth = () => {
@@ -137,31 +158,64 @@ const SemicircularVideoSlider = () => {
     return getSlideWidth() + getGap();
   };
 
-  // Inicializar posición al montar (solo una vez)
-  useEffect(() => {
-    const initializePosition = () => {
-      if (!containerRef.current) return;
+  // Refinar posición inicial con dimensiones reales del DOM
+  // Usar useLayoutEffect para ejecutar antes del paint y evitar layout incorrecto inicial
+  useLayoutEffect(() => {
+    const refinePosition = () => {
+      if (!containerRef.current) return false;
       
       const slideWidth = getSlideWidth();
       const containerWidth = containerRef.current.offsetWidth;
       
-      if (!containerWidth) return;
+      if (!containerWidth) return false;
       
       const centerOffset = (containerWidth / 2) - (slideWidth / 2);
       const slideWithGap = getSlideWithGap();
-      const initialX = centerOffset - (MIDDLE_START * slideWithGap);
+      const correctX = centerOffset - (MIDDLE_START * slideWithGap);
       
-      x.set(initialX);
+      // Solo actualizar si hay diferencia significativa (más de 1px)
+      const currentX = x.get();
+      if (Math.abs(currentX - correctX) > 1) {
+        x.set(correctX);
+      }
+      
+      return true;
     };
     
-    // Esperar a que el DOM esté listo con múltiples intentos
-    const timeoutId = setTimeout(() => {
+    // Refinar posición inmediatamente si el DOM está listo
+    if (refinePosition()) {
+      // Forzar recálculo de transforms después de que el layout se estabilice
       requestAnimationFrame(() => {
-        initializePosition();
+        requestAnimationFrame(() => {
+          const currentX = x.get();
+          // Trigger mínimo para forzar recálculo de todos los transforms
+          x.set(currentX + 0.0001);
+          requestAnimationFrame(() => {
+            x.set(currentX);
+          });
+        });
       });
-    }, 100);
-    
-    return () => clearTimeout(timeoutId);
+    } else {
+      // Si el DOM no está listo, intentar en frames siguientes
+      let attempts = 0;
+      const tryRefine = () => {
+        attempts++;
+        if (refinePosition()) {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              const currentX = x.get();
+              x.set(currentX + 0.0001);
+              requestAnimationFrame(() => {
+                x.set(currentX);
+              });
+            });
+          });
+        } else if (attempts < 3) {
+          requestAnimationFrame(tryRefine);
+        }
+      };
+      requestAnimationFrame(tryRefine);
+    }
   }, []);
 
   // Calcular límites del carrusel infinito

@@ -3,7 +3,7 @@ import { motion, useMotionValue, useAnimation, useTransform } from "framer-motio
 import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import Testimonials3D from "../../components/Testimonials3D.jsx";
+import Testimonials3D from "../../components/Testimonials.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 
 //styles

@@ -12,7 +12,7 @@ import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Inversiones from "../../components/Inversiones.jsx";
 import SocialMediaShowcaseSlider from "../../components/sliders/SocialMediaShowcaseSlider.jsx";
-import Testimonials3D from "../../components/Testimonials3D.jsx";
+import Testimonials3D from "../../components/Testimonials.jsx";
 
 //styles
 import "../../assets/styles/social-media.css";

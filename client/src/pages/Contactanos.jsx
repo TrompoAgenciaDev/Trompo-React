@@ -7,7 +7,7 @@ import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import Faqs from "../layout/Faqs";
 import Hero from "../layout/Hero";
 import Contact from "../layout/Contact";
-import Testimonials3D from "../components/Testimonials3D.jsx";
+import Testimonials3D from "../components/Testimonials.jsx";
 
 import "../assets/styles/contact-page.css";
 

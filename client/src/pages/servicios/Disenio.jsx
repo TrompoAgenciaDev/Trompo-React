@@ -7,7 +7,7 @@ import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 import DisenioPortfolio from "../../components/portfolio/DisenioPortfolio.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
-import Testimonials3D from "../../components/Testimonials3D.jsx";
+import Testimonials3D from "../../components/Testimonials.jsx";
 
 //styles
 import "@as/hero.css";
