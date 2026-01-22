@@ -211,6 +211,10 @@ p {
   background-color: #262626;
 }
 
+.black-bg-2 {
+  background-color: #080808;
+}
+
 footer {
   z-index: 1;
 }

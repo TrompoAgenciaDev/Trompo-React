@@ -747,7 +747,7 @@ const Disenio = () => {
         mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
 
-      <ServiceTitle area="Diseño" titulo="Servicios de diseño" />
+      <ServiceTitle titulo="Diseño Digital" subtitulo="Dimensiones del patrón y momentos que conectan y dejan una imagen audaz." />
 
       <div ref={animatedTextContainerRef} className="full-container">
         <div className="container animated-text-container">
