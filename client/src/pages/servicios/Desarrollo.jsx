@@ -453,7 +453,7 @@ const ProductoItem = ({ number, title, children, isLast, itemRef, nextItemRef })
 
   return (
     <div ref={itemRef} className="desarrollo-producto-item-wrapper">
-      <div className="desarrollo-producto-item">
+      <div className="desarrollo-producto-item black-bg">
         <div className="desarrollo-producto-item-header">
           <motion.span
             className="desarrollo-producto-number"
@@ -549,7 +549,7 @@ const Desarrollo = () => {
         mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
 
-      <ServiceTitle area="Desarrollo" titulo="Servicios de desarrollo" />
+      <ServiceTitle titulo="Desarrollo" subtitulo="Dimensiones del patrón y momentos que conectan y dejan una imagen audaz." />
 
       <div ref={animatedTextContainerRef} className="full-container">
         <div className="container desarrollo-animated-text-container">
@@ -559,17 +559,11 @@ const Desarrollo = () => {
         </div>
       </div>
 
-      <div className="full-container bg-yellow-2 productos-desarrollo">
+      <div className="full-container black-bg productos-desarrollo">
         <div className="container">
           <div className="grid-productos-desarrollo container">
             <div className="grid-item-video-desarrollo">
-              <div className="desarrollo-service-title-container">
-                <h2>Servicios</h2>
-                <h2>Servicios</h2>
-                <h2>Servicios</h2>
-                <h2>Servicios</h2>
-              </div>
-              <OptimizedVideo src={`${base}assets/creatividad/multimedia/vertical/vanliving.mp4`} />
+              <img src={`${base}assets/sillon.webp`} />
             </div>
             <div className="grid-item-productos-desarrollo">
               <ProductosItemsList />
@@ -645,8 +639,10 @@ const Desarrollo = () => {
       <Beneficios />
 
       <section className="full-container testimonial-wrapper">
-        <Testimonials3D />
-      </section>
+        <div className="container testimonial-cards-slider">
+          <Testimonials3D />
+        </div>
+      </section>d
 
       <Contact form="desarrollo"/>
       

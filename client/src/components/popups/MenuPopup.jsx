@@ -102,7 +102,7 @@ const MenuPopup = ({ isOpen, onClose }) => {
             aria-hidden="true"
           />
 
-          <div className="full-container popup-menu" role="dialog" aria-modal="true" ref={popupRef}>
+          <div className="full-container popup-menu black-bg" role="dialog" aria-modal="true" ref={popupRef}>
             <div className="container mobile-header">
               <a className="logo-img" href="/">
                 

@@ -492,7 +492,7 @@ const EntregableItem = ({ number, title, children, isLast, itemRef, nextItemRef 
       <div className="design-history-item">
         <div className="design-history-item-header">
           <motion.span
-            className="design-entregable-number bg-yellow-2"
+            className="design-entregable-number"
             initial={{ scale: 0, opacity: 0 }}
             animate={{
               scale: isInView ? 1 : 0,
@@ -757,14 +757,14 @@ const Disenio = () => {
         </div>
       </div>
 
-      <div className="full-container bg-yellow-2 productos">
+      <div className="full-container black-bg productos">
         <div className="container">
           <div className="grid-productos container">
             <div className="grid-item-productos">
               <EntregableItemsList />
             </div>
             <div className="grid-item-video">
-              <OptimizedVideo src={`${base}assets/creatividad/multimedia/vertical/vanliving.mp4`} />
+              <img src={`${base}assets/sillon.webp`} />
             </div>
           </div>
         </div>

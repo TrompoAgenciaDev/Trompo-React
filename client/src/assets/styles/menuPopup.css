@@ -3,7 +3,6 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #262626;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -67,12 +66,12 @@
 
 /* --- Ítems principales del menú --- */
 .menu-popup {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #262626;
 }
 
 /* --- Estilos específicos para menú mobile --- */
 .mobile-menu li {
-  border-bottom: 1px solid #3f3e3e;
+  border-bottom: 1px solid #262626;
   list-style: none;
 }
 
@@ -153,7 +152,7 @@
   font-weight: 600;
   font-size: 1.1rem;
   line-height: 1.2;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #262626;
   color: #000;
   cursor: pointer;
 }
@@ -187,7 +186,6 @@
 
   .full-container.popup-menu {
     padding: 0;
-    background-color: #262626;
   }
 
   .mobile-header {
@@ -227,7 +225,7 @@
   .menu-popup {
     width: 100%;
     padding: 0;
-    border-right: 1px solid #000000;
+    border-right: 1px solid #262626;
     -webkit-transition: background-color 0.1s ease-in-out;
     -moz-transition: background-color 0.1s ease-in-out;
     -o-transition: background-color 0.1s ease-in-out;

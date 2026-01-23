@@ -1,4 +1,9 @@
-.title-container-section{
+.services-title-page-container{
+    padding: 50px 0;
+    color: #ffffff;
+}
+
+.title-page-container-section{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,42 +15,237 @@
     width: 100%;
     display: flex;
     align-items: flex-start;
+    cursor: pointer;
+}
+
+.service-title-wrapper{
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 54px;
 }
 
 .title-page{
     font-size: 36px;
+    font-weight: 500;
     color: white;
+    line-height: 1.5 !important;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    min-height: 54px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.service-title-hidden{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    min-height: 54px;
+    display: flex;
+    align-items: flex-start;
+    line-height: 1.5 !important;
+}
+
+.subtitle-page{
+    font-size: 14px;
+    color: #ffffff;
 }
 
 .service-subtitle-container{
     width: 100%;
-}
-
-
-.icon-container{
-    width: 100%;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 20px;
 }
 
-.icon-container svg{
-    width: 30px;
-    height: 30px;
+.service-subtitle-container .title-creative{
+    width: 100%;
+    max-width: 400px;
 }
 
+.service-subtitle-container .icon-container{
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    -moz-transition: background-color 0.3s ease-in-out;
+    -o-transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+    border-radius: 4px;
+}
 
+.icon-container .svg-wrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 
+.icon-container .svg-icon{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
+.icon-container .svg-icon.svg-yellow{
+    top: 10px;
+}
 
 .service-areas-container{
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    gap: 10px;
+    overflow: hidden;
+}
+
+.service-areas-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.service-areas-bg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.service-areas-bg-white{
+    background-color: #ffffff;
+}
+
+.service-areas-bg-yellow{
+    background-color: #FEE070;
+}
+
+.service-areas-content{
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
 }
 
 .service-areas-container span{
     font-size: 13px;
-    /* color: white; */
+    color: #262626;
+}
+
+
+@media (min-width: 540px) {
+    .title-page{
+        font-size: 58px;
+    }
+    
+    .service-title-wrapper{
+        height: 87px;
+    }
+    
+    .title-page,
+    .service-title-hidden{
+        height: auto;
+        min-height: 87px;
+    }
+
+    .subtitle-page{
+        font-size: 24px;
+    }
+
+    .service-subtitle-container .icon-container{
+        width: 100px;
+        height: 100px;
+    }
+
+    .service-areas-container span{
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 768px) {
+    .title-page-container-section{
+        gap: 50px;
+    }
+
+    .title-page{
+        font-size: 90px;
+    }
+    
+    .service-title-wrapper{
+        height: 135px;
+    }
+    
+    .title-page,
+    .service-title-hidden{
+        height: auto;
+        min-height: 135px;
+    }
+
+    .service-areas-container span{
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .services-title-page-container{
+        padding: 70px 0;
+    }
+
+    .title-page{
+        font-size: 130px;
+    }
+    
+    .service-title-wrapper{
+        height: 195px;
+    }
+    
+    .title-page,
+    .service-title-hidden{
+        height: auto;
+        min-height: 195px;
+    }
+
+    .service-areas-container span{
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .title-page{
+        font-size: 160px;
+    }
+    
+    .service-title-wrapper{
+        height: 240px;
+    }
+    
+    .title-page,
+    .service-title-hidden{
+        height: auto;
+        min-height: 240px;
+    }
 }

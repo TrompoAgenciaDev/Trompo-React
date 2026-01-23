@@ -124,7 +124,7 @@ const SocialMedia = () => {
         mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
       
-      <ServiceTitle area="Social Media" titulo="Servicios de social media"/>
+      <ServiceTitle titulo="Social Media" subtitulo="Dimensiones del patrón y momentos que conectan y dejan una imagen audaz." />
 
       <div ref={textContainerRef} className="full-container black-bg espacios">
         <div className="container">

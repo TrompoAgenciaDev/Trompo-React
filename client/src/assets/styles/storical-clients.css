@@ -127,11 +127,9 @@
 
 /* Invertir colores cuando está dentro de black-bg */
 .black-bg .storical {
-  background: #262626;
 }
 
 .black-bg .storical-panel {
-  background: #262626;
   border: 1px solid #404040;
 }
 

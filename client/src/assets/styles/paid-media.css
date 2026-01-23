@@ -287,7 +287,6 @@
 }
 
 .tab-button:hover:not(.active) {
-  background-color: #262626;
   color: #ffffff;
 }
 

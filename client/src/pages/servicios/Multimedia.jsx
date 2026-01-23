@@ -347,10 +347,10 @@ const EntregableItem = ({ number, title, children, isLast, itemRef, nextItemRef 
 
   return (
     <div ref={itemRef} className="multimedia-entregable-item-wrapper">
-      <div className="multimedia-history-item">
+      <div className="multimedia-history-item black-bg">
         <div className="multimedia-history-item-header">
           <motion.span
-            className="multimedia-entregable-number"
+            className="multimedia-entregable-number black-bg"
             initial={{ scale: 0, opacity: 0 }}
             animate={{
               scale: isInView ? 1 : 0,
@@ -577,7 +577,7 @@ const Multimedia = () => {
         mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
 
-      <ServiceTitle area="Multimedia" titulo="Servicios de multimedia" />
+      <ServiceTitle titulo="Multimedia" subtitulo="Dimensiones del patrón y momentos que conectan y dejan una imagen audaz." />
 
       <div ref={containerRef} className="full-container bg-yellow-2">
         <div className="container animated-text-container">
@@ -640,13 +640,7 @@ const Multimedia = () => {
         <div className="container">
           <div className="grid-productos-multimedia container">
             <div className="grid-item-video-multimedia">
-              <div className="service-title-container">
-                <h2>Servicios</h2>
-                <h2>Servicios</h2>
-                <h2>Servicios</h2>
-                <h2>Servicios</h2>
-              </div>
-              <img src={`${base}assets/creatividad/meli.png`} />
+              <img src={`${base}assets/sillon.webp`} />
             </div>
             <div className="grid-item-productos-multimedia">
               <ProductosItemsList />

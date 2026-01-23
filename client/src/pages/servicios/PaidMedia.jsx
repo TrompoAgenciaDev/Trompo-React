@@ -507,7 +507,7 @@ const Estrategia = () => {
         />
       </div>
       
-      <ServiceTitle area="social media" titulo="Servicios de Paid Media" />
+      <ServiceTitle titulo="social media" subtitulo="Dimensiones del patrón y momentos que conectan y dejan una imagen audaz."  />
 
 
       <div className="full-container black-bg">

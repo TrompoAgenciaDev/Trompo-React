@@ -579,15 +579,20 @@ body.trail-cursor-in-slider .infinite-slider-item {
 .grid-full-container{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 0px;
   padding: 70px 0;
 }
 
 .grid-item-full-container span{
   text-transform: uppercase;
-  font-weight: 600;
-  font-size: 100px;
+  font-weight: 500;
+  font-size: 40px;
   line-height: 1;
+}
+
+.item-2 svg, .item-3 svg{
+  width: 40px;
+  height: 40px;
 }
 
 .item-1,
@@ -598,6 +603,7 @@ body.trail-cursor-in-slider .infinite-slider-item {
   display: flex;
   justify-content: flex-end;
 }
+
 
 
 .item-1,
@@ -681,6 +687,15 @@ body.trail-cursor-in-slider .infinite-slider-item {
   .grid-item-strategy p,
   .grid-item-strategy span{
     font-size: 18px;
+  }
+
+  .grid-item-full-container span{
+    font-size: 70px;
+  }
+  
+  .item-2 svg, .item-3 svg{
+    width: 70px;
+    height: 70px;
   }
 }
 
@@ -768,6 +783,15 @@ body.trail-cursor-in-slider .infinite-slider-item {
   .infinite-slider-item{
     padding-right: 80px;
     font-size: 64px;
+  }
+  
+  .grid-item-full-container span{
+    font-size: 100px;
+  }
+  
+  .item-2 svg, .item-3 svg{
+    width: 90px;
+    height: 90px;
   }
 }
 
@@ -898,5 +922,28 @@ body.trail-cursor-in-slider .infinite-slider-item {
 
   .infinite-slider-item{
     font-size: 80px;
+  }
+    
+  .grid-item-full-container span{
+    font-size: 130px;
+    line-height: 0.8;
+  }
+  
+  .item-2 svg, .item-3 svg{
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (min-width: 1600px){
+      
+  .grid-item-full-container span{
+    font-size: 160px;
+    line-height: 0.7;
+  }
+  
+  .item-2 svg, .item-3 svg{
+    width: 150px;
+    height: 150px;
   }
 }

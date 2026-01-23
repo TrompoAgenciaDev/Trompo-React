@@ -18,14 +18,14 @@ export default function StoricalClients() {
 
   if (loading) {
     return (
-      <section className="full-container storical">
+      <section className="full-container storical black-bg">
         <div className="storical-loading">Cargando…</div>
       </section>
     );
   }
   if (error) {
     return (
-      <section className="full-container storical">
+      <section className="full-container storical black-bg">
         <div className="storical-error">
           Error al cargar: {String(error.message || error)}
         </div>
@@ -36,7 +36,7 @@ export default function StoricalClients() {
   const categories = listCategories();
 
   return (
-    <section className="full-container storical">
+    <section className="full-container storical black-bg">
       <div className="title-historical-container">
         <h3>
           Trayectoria y Confianza:{" "}
@@ -86,7 +86,7 @@ export default function StoricalClients() {
       </div>
 
       {/* Listado de clientes */}
-      <div className="storical-panel" role="tabpanel">
+      <div className="storical-panel black-bg" role="tabpanel">
         <AnimatePresence mode="popLayout">
           <motion.ul
             key={selectedCategory}

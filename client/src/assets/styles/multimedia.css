@@ -130,7 +130,6 @@
     flex-direction: column;
     gap: 16px;
     color: #ffffff;
-    background-color: #262626;
 }
 
 .multimedia-history-item-header{
@@ -171,7 +170,6 @@
     min-height: 40px;
     -webkit-border-radius: 100%;
     border-radius: 100%;
-    background-color: #262626;
     border: 1px solid #FEE070;
     color: #FEE070;
     font-size: 18px;
@@ -295,18 +293,6 @@
     width: 100%;
 }
 
-.service-title-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 20px 10px;
-}
-
-.service-title-container h2{
-    width: 100%;
-    text-align: center;
-    color: #ffffff;
-}
 
 .title-entregables{
     font-size: 20px;
@@ -438,13 +424,6 @@
         padding: 70px 0;
     }
 
-    .service-title-container{
-        display: grid;
-        grid-template-columns: repeat(4, 1fr); 
-        padding: 30px 10px;
-        border-right: 1px solid #8E8E8E;
-        border-left: 1px solid #8E8E8E;        
-    }
 
     .title-entregables{
         font-size: 36px;

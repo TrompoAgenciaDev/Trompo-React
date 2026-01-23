@@ -9,7 +9,6 @@ import "@as/hero.css";
 import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import Contact from "../layout/Contact";
 import SimpleHeroVideo from "../components/SimpleHeroVideo";
-import ServiceTitle from "../components/services/ServiceTitle";
 import Beneficios from "../components/Beneficios";
 import SemicircularVideoSlider from "../components/sliders/SemicircularVideoSlider";
 import Menu from "../components/Menu";
@@ -110,7 +109,7 @@ const AnimatedTextSection = ({ containerRef }) => {
     setBaseOpacity(latest);
   });
 
-  const animatedText = "En trompo combinamos creatividad e innovación tecnológica para construir marcas que evolucionan";
+  const animatedText = "En trompo combinamos creatividad e innovación tecnológica, para construir marcas que evolucionan";
   const phraseDelay = 0.3;
   
   const phrases = React.useMemo(() => {
@@ -303,7 +302,6 @@ const Home = () => {
         mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
 
-      {/* <ServiceTitle area="Home" home={true} /> */}
       
       <div className="full-container grid-full-container">
         <div className="full-container grid-item-full-container item-1">
@@ -323,7 +321,6 @@ const Home = () => {
             </defs>
           </svg>
         </div>
-
         <div className="full-container grid-item-full-container item-3">
           <svg xmlns="http://www.w3.org/2000/svg" width="102" height="102" viewBox="0 0 102 102" fill="none">
             <g clipPath="url(#clip0_3524_2006)">

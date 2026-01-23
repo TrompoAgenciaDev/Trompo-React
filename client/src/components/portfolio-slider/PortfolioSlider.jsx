@@ -193,7 +193,7 @@ const PortfolioSlider = ({ category = "institucional" }) => {
   };
 
   return (
-    <div className="portfolio-slider-container">
+    <div className="portfolio-slider-container black-bg">
       {/* Slider principal con rueda giratoria */}
       <div className="portfolio-slider-wrapper">
         <div className="portfolio-slider-track">
