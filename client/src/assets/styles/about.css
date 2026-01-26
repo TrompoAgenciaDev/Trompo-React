@@ -1,3 +1,7 @@
+/* ============================================
+   ESTILOS BASE
+   ============================================ */
+
 /* Estilos para slider infinito */
 .about-slider-container{
   overflow: hidden;
@@ -122,55 +126,44 @@ body.trail-cursor-in-slider .about-infinite-slider-item {
   width: 100%;
 }
 
+/* Estilos para members-container */
 .members-container{
-  display: flex;
+  width: 100%;
+  height: 800px;
   gap: 30px;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr;
   padding: 50px 10px;
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
 }
 
-/* Media Queries */
-@media (min-width: 768px) {
-  .about-grid-wrapper{
-    -ms-grid-columns: 1fr 1fr;
-    grid-template-columns: repeat(2, 1fr);
-    padding: 80px 0;
-  }
-
-  .about-grid-item p{
-    font-size: 13px;
-  }
-
-  .about-animated-text-container{
-    font-size: 28px;
-  }
+.members-container h1{
+  font-size: 24px;
+  color: #ffffff;
+  font-family: var(--font-portfolio);
+  font-weight: 500;  
 }
 
-@media (min-width: 1024px) {
-  .about-infinite-slider{
-    padding: 50px 0;
-  }
+.text-members-container{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #000000bd;
+  backdrop-filter: blur(6px);
+  padding: 20px 20px 20px 0;
+}
 
-  .about-infinite-slider-item{
-    padding-right: 80px;
-    font-size: 70px;
-  }
+.members-container p{
+  font-size: 14px;
+  color: #ffffff;
+  font-family: var(--font-portfolio);
+  font-weight: 400;
+}
 
-  .about-animated-text-container{
-    font-size: 32px;
-    padding: 70px 10px;
-  }
-
-  .about-grid-wrapper{
-    column-gap: 168px;
-    row-gap: 70px;
-    padding: 120px 0;
-  }
-
-  .about-grid-item p{
-    font-size: 14px;
-  }
+.members-container p strong{
+  color: #FED332;
 }
 
 /* Estilos para slider de fondo en sección equipo */
@@ -237,25 +230,93 @@ body.trail-cursor-in-slider .about-infinite-slider-item {
   max-height: 500px;
 } */
 
+/* ============================================
+   MEDIA QUERIES
+   ============================================ */
+
+/* Media Query: 768px */
 @media (min-width: 768px) {
+  .about-grid-wrapper{
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 80px 0;
+  }
+
+  .about-grid-item p{
+    font-size: 13px;
+  }
+
+  .about-animated-text-container{
+    font-size: 28px;
+  }
+
   .grid-equipo-wrapper{
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
 }
 
+/* Media Query: 1024px */
 @media (min-width: 1024px) {
+  .about-infinite-slider{
+    padding: 50px 0;
+  }
+
+  .about-infinite-slider-item{
+    padding-right: 80px;
+    font-size: 70px;
+  }
+
+  .about-animated-text-container{
+    font-size: 32px;
+    padding: 70px 10px;
+  }
+
+  .about-grid-wrapper{
+    column-gap: 168px;
+    row-gap: 70px;
+    padding: 120px 0;
+  }
+
+  .about-grid-item p{
+    font-size: 14px;
+  }
+
+  .members-container{
+    height: 90svh;
+    grid-template-columns: 3fr 5fr;
+  }
+
+  .members-container .container{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .members-container h1{
+    font-size: 32px;
+  }
+  
+  .members-container p{
+    font-size: 18px;
+  }
+
   .equipo-slider-background .about-infinite-slider-item{
     font-size: 450px;
   }
 
-  .members-container{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }  
-
   .grid-equipo-wrapper{
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .members-container h1{
+    font-size: 44px;
+  }
+  
+  .members-container p{
+    font-size: 24px;
   }
 }

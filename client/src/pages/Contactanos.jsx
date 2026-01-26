@@ -7,7 +7,7 @@ import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import Faqs from "../layout/Faqs";
 import Hero from "../layout/Hero";
 import Contact from "../layout/Contact";
-import Testimonials3D from "../components/Testimonials.jsx";
+import Testimonials3D from "../components/Testimonials3d.jsx";
 
 import "../assets/styles/contact-page.css";
 
@@ -74,14 +74,6 @@ const Contactanos = () => {
   return (
     <>
       <div className="full-container black-bg hero-contactanos-container">
-        <div className="container">
-          <div className="service-title-container">
-            <h2>Contacto</h2>
-            <h2>Contacto</h2>
-            <h2>Contacto</h2>
-            <h2>Contacto</h2>
-          </div>
-        </div>
         <div className="container contact-title-container">
           <h1 className="contact-main-title">
             {letters.map((letter, index) => (

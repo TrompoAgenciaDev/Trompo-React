@@ -7,7 +7,7 @@ import Contact from "../../layout/Contact.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
-import Testimonials3D from "../../components/Testimonials.jsx";
+import Testimonials3D from "../../components/Testimonials3d.jsx";
 
 import "../../assets/styles/servicios-page.css";
 import "../../assets/styles/desarrollo.css";

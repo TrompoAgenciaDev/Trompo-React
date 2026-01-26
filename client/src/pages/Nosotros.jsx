@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import Contact from "../layout/Contact.jsx";
 import SimpleHeroVideo from "../components/SimpleHeroVideo";
-import useMembers from "../hooks/useMembers";
 import StoricalClients from "../layout/StoricalClients";
 
 // styles
@@ -84,60 +83,6 @@ const SocialMediaSlider = ({ text }) => {
         <h1 key={`duplicate-${index}`} className="about-infinite-slider-item">{item}</h1>
       ))}
     </motion.div>
-  );
-};
-
-const EquipoGrid = () => {
-  const { members, loading, error } = useMembers();
-  const base = import.meta.env.BASE_URL?.endsWith("/")
-    ? import.meta.env.BASE_URL
-    : `${import.meta.env.BASE_URL}/`;
-
-  if (loading) return null;
-  if (error) return null;
-  if (!members.length) return null;
-
-  // Calcular número de columnas basado en la cantidad de miembros
-  // Ejemplo: 9 miembros = 3x3, 6 miembros = 3x2, 4 miembros = 2x2
-  const calculateColumns = (count) => {
-    if (count === 0) return 1;
-    if (count === 1) return 1;
-    if (count <= 2) return 2;
-    if (count <= 4) return 2;
-    if (count <= 6) return 3;
-    if (count <= 9) return 3;
-    if (count <= 12) return 4;
-    // Para más de 12, calcular raíz cuadrada redondeada hacia arriba
-    return Math.ceil(Math.sqrt(count));
-  };
-
-  const columns = calculateColumns(members.length);
-
-  return (
-    <div className="full-container bg-yellow-2 equipo">
-      <div className="equipo-slider-background">
-        <SocialMediaSlider text="Nosotros" />
-      </div>
-      <div className="container">
-        <div 
-          className="grid-equipo-wrapper"
-        >
-          {members.map((member, index) => (
-            <div 
-              key={member.id} 
-              className="grid-item-equipo" 
-              data-member-index={index}
-            >
-              <img 
-                src={`${base}${member.featured_image.replace(/^\//, '')}`}
-                alt={member.name}
-                className="equipo-image"
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
   );
 };
 
@@ -285,15 +230,21 @@ const Nosotros = () => {
         </div>
       </div>
 
-      <div className="full-container bg-yellow-2 members-container">
+      <div className="full-container members-container"
+      style={{ background: `url(${base}assets/members/team.webp) no-repeat center center`}}>
         <div className="container">
-          <h1>Nuestro equipo</h1>
-          <p>
-            En Trompo creemos que las marcas que crecen nunca se quedan quietas. Por eso, nuestro equipo tampoco. Somos profesionales del marketing, la creatividad, la tecnología y la estrategia, con una misma convicción: trabajar codo a codo con cada cliente, como parte de su equipo.
-          </p>
-        </div>
-        <div className="container">
-          <EquipoGrid />
+          <h1>Lo que nos define.</h1>
+          <div className="text-members-container">
+            <p>
+              Hace más de una década, <strong>Trompo nació con una idea clara</strong>: una agencia no es un proveedor, es un aliado estratégico.
+            </p>
+            <p>
+              Desde el inicio, nos propusimos involucrarnos de verdad. Entender el ADN de cada marca, sus valores, su visión, su forma de trabajar. Porque solo así se construyen estrategias que importan y relaciones que trascienden.
+            </p>
+            <p>
+              <strong>Fuimos testigos y protagonistas de la transformación digital</strong>: cuando la pauta online era solo un 5% del mix, cuando el "mobile first" todavía no existía.
+            </p>
+          </div>
         </div>
       </div>
 

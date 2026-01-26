@@ -672,6 +672,36 @@
     overflow: hidden;
 }
 
+.testimonial-cards-slider{
+    width: 100%;
+    max-width: 600px;
+    padding: 0;
+    margin: 0 auto;
+}
+
+/* Grid de 2 columnas para testimonial-wrapper en desktop */
+@media (min-width: 1024px) {
+    .testimonial-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: stretch;
+        position: relative;
+    }
+
+    .testimonial-cards-slider {
+        max-width: 600px;
+        width: 100%;
+        grid-column: 1 / -1;
+        justify-self: center;
+        margin: 0;
+    }
+
+    .testimonial-wrapper > div:empty {
+        display: none;
+    }
+}
+
 @media (min-width: 768px) {
     .design-history-item p{
         font-size: 14px;

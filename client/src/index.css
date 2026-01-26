@@ -86,27 +86,6 @@ body {
   overscroll-behavior-y: contain;
 }
 
-/* Clase para scroll suave mejorado - DESHABILITADO TEMPORALMENTE */
-/* body.smooth-scroll-enabled {
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  perspective: 1000px;
-  -webkit-perspective: 1000px;
-}
-
-body.smooth-scroll-enabled * {
-  will-change: auto;
-}
-
-body.smooth-scroll-enabled [data-scroll],
-body.smooth-scroll-enabled .animate-on-scroll {
-  will-change: transform, opacity;
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-} */
-
 #root {
   overflow-x: hidden;
   background-color: #ffffff;
