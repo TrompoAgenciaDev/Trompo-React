@@ -141,7 +141,6 @@
 }
 
 .title-portfolio-container h3{
-  font-size: 26px;
   font-weight: 700;
   color: #ffffff;
 }
@@ -267,9 +266,6 @@
     margin: 100px 0 -60px;
   }
 
-  .title-portfolio-container h3{
-    font-size: 28px;
-  }
 
   .title-portfolio-container p{
     font-size: 14px;
@@ -369,9 +365,6 @@
     margin: 100px 0 -70px;
   }
 
-  .title-portfolio-container h3{
-    font-size: 28px;
-  }
 }
 
 @media (min-width: 1280px) {
@@ -464,9 +457,6 @@
     gap: 8px;
   }
 
-  .title-portfolio-container h3{
-    font-size: 32px;
-  }
 
   .service-container-text{
     gap: 12px;

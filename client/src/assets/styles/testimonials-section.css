@@ -63,8 +63,9 @@
     padding: 2rem 1rem;
 }
 
-.testimonial-text-content h1 {
+.testimonial-text-content h3 {
     margin-bottom: 1rem;
+    color: #ffffff;
 }
 
 .testimonial-text-content p {

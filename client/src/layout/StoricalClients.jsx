@@ -38,10 +38,10 @@ export default function StoricalClients() {
   return (
     <section className="full-container storical black-bg">
       <div className="title-historical-container">
-        <h3>
+        <h5>
           Trayectoria y Confianza:{" "}
           <strong>Las verticales que Escribieron Nuestra Historia</strong>
-        </h3>
+        </h5>
         <p>
           Un vistazo a los diversos sectores que han depositado su confianza en
           nuestra agencia para lograr sus objetivos

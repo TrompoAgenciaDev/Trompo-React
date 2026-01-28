@@ -5,8 +5,8 @@ const Beneficios = () => {
   return (
     <div className="full-container beneficios-container black-bg">
       <div className="container title-beneficios">
-        <h1>Beneficios <span className="italic">diferenciales</span></h1>
-        <h2>Nuestra metodología garantiza:</h2>
+        <h3>Beneficios <span className="italic">diferenciales</span></h3>
+        <h5>Nuestra metodología garantiza:</h5>
       </div>
       <div className="container">          
         <div className="grid-beneficios">

@@ -86,7 +86,6 @@
 }
 
 .title-section-container h2{
-  font-size: 18px;
 }
 
 .parr-section-container p{
@@ -103,7 +102,6 @@
 }
 
 .title-portfolio-container h3{
-  font-size: 26px;
   font-weight: 700;
 }
 
@@ -140,7 +138,6 @@
 }
 
 .how-container h1{
-  font-size: 30px;
   font-weight: 700;
   color: #d9d9d988;
 }
@@ -329,7 +326,6 @@
 }
 
 .grid-item-impulsos h1{
-  font-size: 18px;
   font-weight: 600;
   letter-spacing: 0.2px;
 }
@@ -358,9 +354,6 @@
     max-width: 400px;
   }
   
-  .title-section-container h2{
-    font-size: 20px;
-  }
 
   .parr-section-container p{
     font-size: 13px;
@@ -393,9 +386,6 @@
     font-size: 26px;
   }
 
-  .grid-item-impulsos h1{
-    font-size: 22px;
-  }
   
   .grid-item-impulsos p{
     font-size: 14px;
@@ -452,9 +442,6 @@
     padding-top: 50px;
   }
   
-  .title-section-container h2{
-    font-size: 22px;
-  }
 
   .parr-section-container p{
     font-size: 14px;
@@ -464,10 +451,6 @@
     -ms-grid-columns: 2fr 3fr;
     grid-template-columns: 2fr 3fr;
     margin: 100px 0 -70px;
-  }
-
-  .title-portfolio-container h3{
-    font-size: 28px;
   }
 
   .files-carousel-container{
@@ -489,9 +472,6 @@
     padding-top: 70px;
   }
 
-  .how-container h1{
-    font-size: 48px;
-  }
   
   .how-container p{
     font-size: 15px;
@@ -515,9 +495,6 @@
     gap: 50px;
   }
 
-  .grid-item-impulsos h1{
-    font-size: 26px;
-  }
   
   .grid-item-impulsos p{
     font-size: 15px;
@@ -556,9 +533,6 @@
     padding-top: 50px;
   }
   
-  .title-section-container h2{
-    font-size: 24px;
-  }
 
   .parr-section-container p{
     font-size: 15px;
@@ -583,17 +557,11 @@
     gap: 8px;
   }
 
-  .title-portfolio-container h3{
-    font-size: 32px;
-  }
 
   .how-container{
     grid-template-columns: 4fr 3fr;
   }
 
-  .how-container h1{
-    font-size: 68px;
-  }
   
   .highlight-text{
     font-size: 54px;

@@ -33,7 +33,7 @@ const Footer = () => {
         </div>
         <div className="footer-grid-item footer-menu-desktop">
           <div className="footer-menu footer-menu-desktop">
-            <h3>Institucional</h3>
+            <h6>Institucional</h6>
             <Menu
               menuType="footerInstitucional"
               routes={routesConfig}
@@ -44,7 +44,7 @@ const Footer = () => {
         </div>
         <div className="footer-grid-item">
           <div className="footer-menu footer-menu-mobile">
-            <h3>Institucional</h3>
+            <h6>Institucional</h6>
             <Menu
               menuType="footerMobile"
               routes={routesConfig}
@@ -53,7 +53,7 @@ const Footer = () => {
             />
           </div>
           <div className="footer-menu footer-menu-desktop">
-            <h3>Servicios</h3>
+            <h6>Servicios</h6>
             <Menu
               menuType="servicios"
               routes={routesConfig}
@@ -70,7 +70,7 @@ const Footer = () => {
               </svg>
             </div>
             <div className="info-text">
-              <h4>Horarios</h4>
+              <h6>Horarios</h6>
               <p>Lunes a Viernes de 09:00 a 18:00 hs.</p>
             </div>
           </div> 
@@ -79,7 +79,7 @@ const Footer = () => {
               <path d="M27.4312 10.2094C25.9874 5.3625 21.553 2.0625 16.4999 2.0625C11.4468 2.0625 7.0124 5.3625 5.56865 10.2094C5.05303 12.0656 5.05303 14.025 5.46553 15.9844C6.1874 18.3562 8.2499 22.4813 13.6124 28.875C13.8187 29.1844 14.128 29.4937 14.3343 29.7C14.6437 30.1125 15.0562 30.4219 15.4687 30.7312C16.0874 31.0406 16.8093 31.0406 17.428 30.7312C17.8405 30.4219 18.253 30.1125 18.5624 29.7C18.7687 29.3906 19.078 29.0813 19.2843 28.875C24.6468 22.5844 26.7093 18.3562 27.328 15.9844C27.9468 14.025 27.9468 12.0656 27.4312 10.2094ZM21.6562 13.4062C21.6562 16.2937 19.3874 18.5625 16.4999 18.5625C13.6124 18.5625 11.3437 16.2937 11.3437 13.4062C11.3437 10.5188 13.6124 8.25 16.4999 8.25C19.3874 8.25 21.6562 10.5188 21.6562 13.4062Z" fill="#ffffff"/>
             </svg>
             <div className="info-text">
-              <h4>Córdoba, Argentina</h4>
+              <p>Córdoba, Argentina</p>
             </div>
           </div> 
           <div className="mailing-footer">              
@@ -95,8 +95,8 @@ const Footer = () => {
         </div>
       </div>
       <div className="copy">
-        <span>© 2025 Trompo.</span>
-        <span>Todos los derechos reservados</span>
+        <p>© 2025 Trompo.</p>
+        <p>Todos los derechos reservados</p>
       </div>
     </footer>
   );

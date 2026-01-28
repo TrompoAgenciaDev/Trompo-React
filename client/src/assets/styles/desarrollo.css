@@ -1,6 +1,5 @@
 .dev-container .container h1{
     color: #FED332;
-    font-size: 48px;
     font-weight: 700;
     margin-bottom: 10px;
     font-family: var(--font-portfolio);
@@ -8,7 +7,6 @@
 
 .dev-container .container h2{
     color: #ffffff;
-    font-size: 24px;
     font-weight: 400;
     font-family: var(--font-portfolio);
 }
@@ -257,13 +255,6 @@
 
 
 @media (min-width: 1024px) {
-    .dev-container .container h1{
-        font-size: 64px;
-    }
-
-    .dev-container .container h2{
-        font-size: 32px;
-    }
 
     .dev-item .container{
         -ms-grid-columns: 1fr 1fr;

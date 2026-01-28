@@ -45,9 +45,9 @@ function Contact({ location = "home", form }) {
               </svg>
             </div>
             <div className="grid-item-title">
-              <h1>
+              <h5>
                 Hablemos de lo que tu marca necesita. 
-              </h1>
+              </h5>
               <p>
                 Cada proyecto es único. Completá el formulario y diseñemos la estrategia que tu marca necesita para evolucionar
               </p>

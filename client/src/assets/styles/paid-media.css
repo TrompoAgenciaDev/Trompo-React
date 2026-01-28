@@ -321,7 +321,6 @@
 }
 
 .text-container h3 {
-  font-size: 24px;
   font-weight: normal;
   font-family: var(--font-portfolio);
   line-height: 1.2;
@@ -372,7 +371,6 @@
 
 .content-bento h3 {
   font-family: var(--font-portfolio);
-  font-size: 18px;
   font-weight: 600;
   line-height: 1.3;
 }
@@ -558,7 +556,6 @@
 }
 
 .grafico-slide .title-item h3 {
-  font-size: 15px;
   font-weight: 600;
   font-family: var(--font-portfolio);
   color: #1D1D1B;
@@ -647,7 +644,6 @@
 }
 
 .video-slide .title-item h3 {
-  font-size: 16px;
   font-weight: 400;
   font-family: var(--font-portfolio);
   color: #1D1D1B;
@@ -805,9 +801,6 @@
     gap: 18px;
   }
 
-  .content-bento h3 {
-    font-size: 20px;
-  }
 
   .content-bento p {
     font-size: 14px;
@@ -824,9 +817,6 @@
     height: 45px;
   }
 
-  .grafico-slide .title-item h3 {
-    font-size: 17px;
-  }
 
   .grafico-slide .item-body p {
     font-size: 14px;
@@ -838,9 +828,6 @@
     padding: 18px;
   }
 
-  .video-slide .title-item h3 {
-    font-size: 18px;
-  }
 
   .video-slide .item-body p {
     font-size: 14px;
@@ -868,9 +855,6 @@
     box-sizing: border-box;
   }
 
-  .grafico-slide .item-header h3 {
-    font-size: 20px;
-  }
 
   .grafico-slide .item-body p {
     font-size: 15px;
@@ -1018,9 +1002,6 @@
     gap: 0;
   }
 
-  .content-bento h3 {
-    font-size: 30px;
-  }
 
   .content-bento p {
     font-size: 17px;
@@ -1038,9 +1019,6 @@
     height: 50px;
   }
 
-  .grafico-slide .title-item h3 {
-    font-size: 17px;
-  }
 
   .grafico-slide .item-body p {
     font-size: 13px;
@@ -1053,9 +1031,6 @@
     gap: 20px;
   }
 
-  .video-slide .title-item h3 {
-    font-size: 20px;
-  }
 
   .video-slide .item-body p {
     font-size: 15px;

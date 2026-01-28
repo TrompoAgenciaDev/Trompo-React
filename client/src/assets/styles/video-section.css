@@ -33,7 +33,6 @@
 }
 
 .video-content h1 {
-  font-size: 3rem;
   font-weight: 700;
   margin-bottom: 20px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -46,9 +45,6 @@
 }
 
 @media (max-width: 767px) {
-  .video-content h1 {
-    font-size: 2rem;
-  }
   
   .video-content p {
     font-size: 1rem;

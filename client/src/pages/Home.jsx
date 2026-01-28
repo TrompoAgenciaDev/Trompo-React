@@ -255,7 +255,7 @@ const Home = () => {
               className={`full-container menu-item-home-section ${activeMenuItem === index ? 'is-active' : ''}`}
               onMouseEnter={() => setActiveMenuItem(index)}
             >
-              <h1>{item.label}</h1>
+              <h4>{item.label}</h4>
               <MenuIcon />
             </Link>
           ))}
@@ -354,17 +354,17 @@ const Home = () => {
 
       <div className="full-container strategy-container black-bg">
         <div className="container">
-          <h1>
+          <h3>
             Diseño Estratégico
-          </h1>
-          <h2> Que Convierte Ideas En Identidad</h2>
+          </h3>
+          <h5> Que Convierte Ideas En Identidad</h5>
         </div>
 
         <div className="full-container grid-strategy">
           <div className="full-container strategy-item black-bg">
             <div className="container">
               <div className="grid-item-strategy">
-                <span>Diseño que transciende lo visual</span>
+                <h6>Diseño que transciende lo visual</h6>
               </div>
               <div className="grid-item-strategy">
                 <p>
@@ -376,7 +376,7 @@ const Home = () => {
           <div className="full-container strategy-item black-bg">
             <div className="container">
               <div className="grid-item-strategy">
-                <span>Identidad con propósito</span>
+                <h6>Identidad con propósito</h6>
               </div>
               <div className="grid-item-strategy">
                 <p>
@@ -388,7 +388,7 @@ const Home = () => {
           <div className="full-container strategy-item black-bg">
             <div className="container">
               <div className="grid-item-strategy">
-                <span>Hacer visible lo esencial</span>
+                <h6>Hacer visible lo esencial</h6>
               </div>
               <div className="grid-item-strategy">
                 <p>
@@ -403,7 +403,7 @@ const Home = () => {
       <div className="full-container black-bg">
         <div className="container identidades">
             <div className="card-identidades">
-              <h2>Las marcas son identidades vivas.</h2>
+              <h4>Las marcas son identidades vivas.</h4>
               <p>Nuestro propósito es concebirlas y cultivarlas desde su núcleo más auténtico. A través de un sistema de marca sólido, construimos el fundamento estratégico y visual que permite a las empresas posicionarse con claridad, diferenciarse con fuerza y potenciar su activo más valioso: su identidad en el mundo.</p>
             </div>
             <div className="span-identidades">

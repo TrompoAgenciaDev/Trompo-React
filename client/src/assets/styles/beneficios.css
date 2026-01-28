@@ -37,16 +37,21 @@
     color: #ffffff;
 }
 
-.beneficios-container h1{
+.beneficios-container h3{
     color: #E1C025;
-    font-size: 28px;
-}
-
-.beneficios-container h2{
     font-size: 20px;
+    font-weight: 700;
+    font-family: var(--font-portfolio);
+    margin-bottom: 10px;
 }
 
-.title-beneficios h2{
+.beneficios-container h5{
+    font-size: 18px;
+    font-weight: 400;
+    font-family: var(--font-portfolio);
+}
+
+.title-beneficios h5{
     color: #ffffff;
 }
 
@@ -70,16 +75,11 @@
         font-size: 15px;
     }
 
-    .beneficios-container h1{
-        font-size: 48px;
-    }
-
-    .beneficios-container h2{
-        font-size: 32px;
+    .beneficios-container h5{
         max-width: 600px;
-        font-weight: normal;
     }
 }
+
 
 @media (min-width: 1280px) {
     .grid-item-beneficios p{
@@ -90,5 +90,6 @@
         width: 60px;
         height: 60px;
     }
+
 }
 

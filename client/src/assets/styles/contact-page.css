@@ -5,12 +5,16 @@
 }
 
 .contact-main-title {
-    font-size: 48px;
     font-weight: 700;
     font-family: var(--font-portfolio);
     line-height: 1.2;
     transition: color 0.3s ease;
     color: #ffffff;
+}
+
+.contact-main-title span,
+.contact-main-title .animated-letter {
+    font-size: 48px;
 }
 
 .animated-letter {
@@ -30,14 +34,21 @@
 }
 
 @media (min-width: 768px) {
-    .contact-main-title {
+    .contact-main-title span,
+    .contact-main-title .animated-letter {
         font-size: 64px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .contact-main-title span,
+    .contact-main-title .animated-letter {
+        font-size: 80px;
     }
 }
 
 @media (min-width: 1024px) {
     .contact-main-title {
-        font-size: 140px;
         font-weight: 500;
     }
     
@@ -64,14 +75,10 @@
 }
 
 @media (min-width: 768px) {
-    .about-animated-text-container {
-        font-size: 28px;
-    }
 }
 
 @media (min-width: 1024px) {
     .about-animated-text-container {
-        font-size: 32px;
         padding: 70px 10px;
     }
 }

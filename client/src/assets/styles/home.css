@@ -183,17 +183,15 @@ p{
   padding: 40px 0;
 }
 
-.strategy-container .container h1{
+.strategy-container .container h3{
   color: #FED332;
-  font-size: 32px;
   font-weight: 700;
   margin-bottom: 10px;
   font-family: var(--font-portfolio);
 }
 
-.strategy-container .container h2{
+.strategy-container .container h5{
   color: #ffffff;
-  font-size: 18px;
   font-weight: 400;
   font-family: var(--font-portfolio);
 }
@@ -225,22 +223,28 @@ p{
 }
 
 .grid-item-strategy p,
-.grid-item-strategy span{
-  font-size: 16px;
+.grid-item-strategy h6{
   color: #ffffff;
+  font-family: var(--font-portfolio);
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
   -webkit-transition: color 0.3s ease;
   -o-transition: color 0.3s ease;
   transition: color 0.3s ease;
 }
 
-.grid-item-strategy span{
-  font-family: var(--font-portfolio);
-  font-weight: 700;
+.strategy-item:hover .grid-item-strategy p,
+.strategy-item:hover .grid-item-strategy h6{
+  color: #000000;
 }
 
-.strategy-item:hover .grid-item-strategy p,
-.strategy-item:hover .grid-item-strategy span{
-  color: #000000;
+/* Estándar para h6 */
+h6{
+  font-family: var(--font-portfolio);
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
 }
 
 .strategy-item:not(:last-child) .container{
@@ -294,9 +298,8 @@ p{
   text-decoration: none;
 }
 
-.menu-item-home-section h1{
+.menu-item-home-section h4{
   color: #000000;
-  font-size: 24px;
   font-weight: 400;
   font-family: var(--font-portfolio);
   text-transform: lowercase;
@@ -318,8 +321,8 @@ p{
   background-color: #262626;
 }
 
-.menu-item-home-section.is-active h1,
-.menu-item-home-section:hover h1{
+.menu-item-home-section.is-active h4,
+.menu-item-home-section:hover h4{
   color: #ffffff;
 }
 
@@ -451,7 +454,6 @@ p{
 
 .service-item-home-content h3{
   color: #ffffff;
-  font-size: 20px;
   font-weight: 400;
   font-family: var(--font-portfolio);
   margin: 0;
@@ -634,8 +636,8 @@ p{
   flex-direction: row;
 }
 
-.menu-item-home-section h1{
-  font-size: 20px;
+.menu-item-home-section h4{
+  font-size: 14px;
   text-transform: uppercase;
 }
 
@@ -681,16 +683,7 @@ p{
     padding: 60px 0;
   }
 
-  .strategy-container .container h1{
-    font-size: 42px;
-  }
-
-  .strategy-container .container h2{
-    font-size: 22px;
-  }
-
-  .grid-item-strategy p,
-  .grid-item-strategy span{
+  .grid-item-strategy p{
     font-size: 18px;
   }
 
@@ -701,21 +694,11 @@ p{
     padding: 80px 0;
   }
 
-  .strategy-container .container h1{
-    font-size: 48px;
-  }
-
-  .strategy-container .container h2{
-    font-size: 24px;
-  }
 
   .grid-strategy{
     padding: 40px 0;
   }
 
-  .menu-item-home-section h1{
-    font-size: 32px;
-  }
 
   .menu-content-container{
     min-height: 300px;
@@ -751,7 +734,6 @@ p{
   }
 
   .service-item-home-content h3{
-    font-size: 42px;
     height: 60px;
     min-height: 60px;
     max-height: 60px;
@@ -841,13 +823,6 @@ p{
     padding: 80px 0;
   }
 
-  .strategy-container .container h1{
-    font-size: 64px;
-  }
-
-  .strategy-container .container h2{
-    font-size: 32px;
-  }
 
   .grid-strategy{
     padding: 50px 0;
@@ -860,8 +835,7 @@ p{
     padding: 70px 0;
   }
 
-  .grid-item-strategy p,
-  .grid-item-strategy span{
+  .grid-item-strategy p{
     font-size: 24px;
   }
 
@@ -891,7 +865,6 @@ p{
   }
 
   .service-item-home-content h3{
-    font-size: 60px;
     height: 60px;
     min-height: 60px;
     max-height: 60px;
@@ -975,8 +948,10 @@ p{
     border-radius: 100%;
 }
 
-.card-identidades h2{
-    font-size: 22px;
+.card-identidades h4{
+    font-family: var(--font-portfolio);
+    margin: 0;
+    padding: 0;
 }
 
 .card-identidades p{
@@ -996,9 +971,6 @@ p{
         padding: 30px;
     }
     
-    .card-identidades h2{
-        font-size: 32px;
-    }
     
     .card-identidades p{
         font-size: 16px;
@@ -1011,8 +983,7 @@ p{
         padding: 40px;
     }
     
-    .card-identidades h2{
-        font-size: 44px;
+    .card-identidades h4{
         line-height: 1;
     }
 }

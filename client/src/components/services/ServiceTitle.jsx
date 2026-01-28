@@ -107,7 +107,7 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
           onMouseLeave={() => setIsHovered(false)}
         >
           <div className="service-title-wrapper">
-            <motion.h3
+            <motion.h1
               className="title-page"
               initial={{ y: '0%' }}
               animate={{ 
@@ -116,8 +116,8 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
               {titulo}
-            </motion.h3>
-            <motion.h3
+            </motion.h1>
+            <motion.h1
               className="title-page service-title-hidden"
               style={{ top: '50px' }}
               initial={{ y: '100%' }}
@@ -127,7 +127,7 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
               {titulo}
-            </motion.h3>
+            </motion.h1>
           </div>
         </div>
         <div className={`full-container service-subtitle-container ${isHovered ? 'is-hovered' : ''}`}>

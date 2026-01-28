@@ -9,7 +9,7 @@ const TestimonialsSection = () => {
         <Testimonials3D />
       </div>
       <div className="container testimonial-text-content">
-        <h1>Dejamos que hablen por nosotros</h1>
+        <h3>Dejamos que hablen por nosotros</h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, natus maiores corporis earum quidem, quo alias dolore consequatur doloribus obcaecati deserunt eum suscipit dignissimos! Natus vero eveniet libero dignissimos ratione!</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam minus minima placeat reprehenderit quaerat repellendus!</p>
       </div>

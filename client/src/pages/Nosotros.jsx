@@ -39,7 +39,7 @@ const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }
   const targetOpacity = baseOpacity >= 0.9 ? 1 : Math.max(0.1, baseOpacity);
 
   return (
-    <motion.span
+    <motion.h5
       className="about-animated-phrase"
       initial={{ opacity: 0.1 }}
       animate={{ opacity: targetOpacity }}
@@ -50,7 +50,7 @@ const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }
       }}
     >
       {phrase}
-    </motion.span>
+    </motion.h5>
   );
 };
 
@@ -79,10 +79,10 @@ const SocialMediaSlider = ({ text }) => {
       }}
     >
       {items.map((item, index) => (
-        <h1 key={index} className="about-infinite-slider-item">{item}</h1>
+        <h2 key={index} className="about-infinite-slider-item">{item}</h2>
       ))}
       {items.map((item, index) => (
-        <h1 key={`duplicate-${index}`} className="about-infinite-slider-item">{item}</h1>
+        <h2 key={`duplicate-${index}`} className="about-infinite-slider-item">{item}</h2>
       ))}
     </motion.div>
   );
@@ -189,22 +189,22 @@ const Nosotros = () => {
           <div className="about-grid-wrapper">
             <div className="about-grid-item">
               <span>01</span>
-              <h3 className="about-question">qué hacemos</h3>
+              <h6 className="about-question">qué hacemos</h6>
               <p>Creamos contenido audiovisual estratégico que pone en movimiento la identidad de tu marca. Desde piezas breves y potentes para redes sociales hasta producciones corporativas ágiles, narramos, mostramos y hacemos sentir lo que la marca representa, con intención y coherencia en cada formato.</p>
             </div>
             <div className="about-grid-item">
               <span>02</span>
-              <h3 className="about-question">Cómo lo hacemos</h3>
+              <h6 className="about-question">Cómo lo hacemos</h6>
               <p>Nuestro proceso combina estrategia narrativa, producción ágil y tecnología aplicada con criterio. Partimos de ideas claras, guiones optimizados y storyboards pensados para captar atención en segundos y cumplir un objetivo concreto en cada plataforma.</p>
             </div>
             <div className="about-grid-item">
               <span>03</span>
-              <h3 className="about-question">Producción y post con propósito</h3>
+              <h6 className="about-question">Producción y post con propósito</h6>
               <p>Grabamos en contextos reales o sets ligeros, priorizando autenticidad, ritmo visual y mensaje. En postproducción sumamos edición dinámica, motion graphics, animación 2D, transiciones y sonido para transformar la idea en una pieza lista para competir en entornos digitales.</p>
             </div>
             <div className="about-grid-item">
               <span>04</span>
-              <h3 className="about-question">Tecnología e IA aplicada</h3>
+              <h6 className="about-question">Tecnología e IA aplicada</h6>
               <p>Integramos inteligencia artificial de forma estratégica para potenciar resultados: asistencia creativa en guiones y copy, generación de assets visuales, locuciones sintéticas de alta calidad, limpieza de audio y subtitulado creativo diseñado como parte activa de la narrativa.</p>
             </div>
           </div>
@@ -240,7 +240,7 @@ const Nosotros = () => {
         }}
       >
         <div className="container">
-          <h1>Lo que nos define.</h1>
+          <h4>Lo que nos define.</h4>
           <div className="text-members-container">
             <p>
               Hace más de una década, <strong>Trompo nació con una idea clara</strong>: una agencia no es un proveedor, es un aliado estratégico.

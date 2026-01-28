@@ -7,7 +7,6 @@ import Contact from "../layout/Contact";
 import TestimonialsSection from "../components/TestimonialsSection.jsx";
 
 import "../assets/styles/contact-page.css";
-import "../assets/styles/home.css";
 
 const Contactanos = () => {
 
@@ -53,7 +52,7 @@ const Contactanos = () => {
     const targetOpacity = baseOpacity >= 0.9 ? 1 : Math.max(0.1, baseOpacity);
 
     return (
-      <motion.span
+      <motion.h5
         className="about-animated-phrase"
         initial={{ opacity: 0.1 }}
         animate={{ opacity: targetOpacity }}
@@ -64,7 +63,7 @@ const Contactanos = () => {
         }}
       >
         {phrase}
-      </motion.span>
+      </motion.h5>
     );
   };
 
