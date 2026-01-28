@@ -3,9 +3,11 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import Contact from "../layout/Contact.jsx";
 import SimpleHeroVideo from "../components/SimpleHeroVideo";
 import StoricalClients from "../layout/StoricalClients";
+import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 
 // styles
 import "../assets/styles/about.css";
+import "../assets/styles/home.css";
 import "@as/hero.css";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
@@ -230,8 +232,13 @@ const Nosotros = () => {
         </div>
       </div>
 
-      <div className="full-container members-container"
-      style={{ background: `url(${base}assets/members/team.webp) no-repeat center center`}}>
+      <div 
+        className="full-container members-container"
+        style={{ 
+          '--team-image': `url(${base}assets/members/team.webp)`,
+          '--team-mobile-image': `url(${base}assets/members/team-mobile.webp)`
+        }}
+      >
         <div className="container">
           <h1>Lo que nos define.</h1>
           <div className="text-members-container">
@@ -252,9 +259,31 @@ const Nosotros = () => {
       <div className="full-container black-bg">
         <StoricalClients />
       </div>
+      {/*
+      <div className="full-container black-bg">
+        <div className="container identidades">
+            <div className="card-identidades">
+              <h2>Las marcas son identidades vivas.</h2>
+              <p>Nuestro propósito es concebirlas y cultivarlas desde su núcleo más auténtico. A través de un sistema de marca sólido, construimos el fundamento estratégico y visual que permite a las empresas posicionarse con claridad, diferenciarse con fuerza y potenciar su activo más valioso: su identidad en el mundo.</p>
+            </div>
+            <div className="span-identidades">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+      </div>
+
+      */}
 
       {/* formulario */}
       <Contact />
+
+      <section className="full-container">
+        <div className="slider-container container">
+          <CustomerSlider />
+        </div>
+      </section>
     </>
   );
 };

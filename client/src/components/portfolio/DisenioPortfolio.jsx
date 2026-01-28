@@ -2,11 +2,80 @@ import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { motion, useDragControls } from "framer-motion";
 import LazyImage from "../LazyImage";
 
-// Cargar datos del portfolio
+// Hook para precargar imágenes en segundo plano
+const useImagePreloader = (imageUrls, bufferSize = 3) => {
+  const preloadedRef = useRef(new Set());
+  const preloadingRef = useRef(new Set());
+
+  const preloadImage = useCallback((url) => {
+    if (!url || preloadedRef.current.has(url) || preloadingRef.current.has(url)) return;
+    
+    preloadingRef.current.add(url);
+    const img = new Image();
+    img.onload = () => {
+      preloadedRef.current.add(url);
+      preloadingRef.current.delete(url);
+    };
+    img.onerror = () => {
+      preloadingRef.current.delete(url);
+    };
+    img.src = url;
+  }, []);
+
+  // Precargar imágenes críticas (primeras de cada slide)
+  useEffect(() => {
+    if (!imageUrls || imageUrls.length === 0) return;
+    
+    // Precargar primeras imágenes de cada slide inmediatamente
+    imageUrls.forEach((item) => {
+      if (item.images && item.images.length > 0) {
+        // Precargar primera imagen de cada slide
+        preloadImage(item.images[0]);
+        // Precargar segunda imagen si existe
+        if (item.images.length > 1) {
+          preloadImage(item.images[1]);
+        }
+      }
+    });
+  }, [imageUrls, preloadImage]);
+
+  // Precargar buffer de imágenes alrededor del índice activo
+  const preloadBuffer = useCallback((activeIndex) => {
+    if (!imageUrls || imageUrls.length === 0) return;
+    
+    const item = imageUrls[activeIndex];
+    if (!item || !item.images) return;
+
+    // Precargar imágenes del slide activo y adyacentes
+    const start = Math.max(0, activeIndex - 1);
+    const end = Math.min(imageUrls.length - 1, activeIndex + 1);
+    
+    for (let i = start; i <= end; i++) {
+      const slideItem = imageUrls[i];
+      if (slideItem && slideItem.images) {
+        // Precargar hasta bufferSize imágenes de cada slide adyacente
+        slideItem.images.slice(0, bufferSize).forEach(preloadImage);
+      }
+    }
+  }, [imageUrls, bufferSize, preloadImage]);
+
+  return { preloadBuffer, preloadImage };
+};
+
+// Caché simple para evitar recargas múltiples
+const portfolioCache = new Map();
+
+// Cargar datos del portfolio con caché
 async function fetchPortfolioData(category = "branding") {
-  const ts = Date.now();
-  const res = await fetch(`${import.meta.env.BASE_URL}portfolio.json?v=${ts}`, {
-    cache: "no-store",
+  const cacheKey = `portfolio-${category}`;
+  
+  // Verificar caché
+  if (portfolioCache.has(cacheKey)) {
+    return portfolioCache.get(cacheKey);
+  }
+  
+  const res = await fetch(`${import.meta.env.BASE_URL}portfolio.json`, {
+    cache: "force-cache", // Usar caché del navegador
   });
   if (!res.ok) throw new Error("No se pudo cargar portfolio.json");
   const data = await res.json();
@@ -14,62 +83,44 @@ async function fetchPortfolioData(category = "branding") {
   // Si es "branding", buscar en disenio
   if (category === "branding") {
     const items = Array.isArray(data?.disenio) ? data.disenio : [];
-    return items.filter(item => {
+    const filtered = items.filter(item => {
       const categories = Array.isArray(item.category) ? item.category : [];
       return categories.some(cat => cat && cat.toLowerCase() === "branding" && !categories.some(c => c && c.toLowerCase() === "branding-web"));
     });
+    
+    // Guardar en caché
+    portfolioCache.set(cacheKey, filtered);
+    return filtered;
   }
   
   // Si es "social media", buscar en interaccion
   const items = Array.isArray(data?.interaccion) ? data.interaccion : [];
-  return items.filter(item => {
+  const filtered = items.filter(item => {
     const categories = Array.isArray(item.category) ? item.category : [];
     return categories.some(cat => cat && cat.toLowerCase() === "social media");
   });
+  
+  // Guardar en caché
+  portfolioCache.set(cacheKey, filtered);
+  return filtered;
 }
 
 /* Inner slider infinito 4:3 con lazy loading - solo imágenes */
 /* REFACTORIZADO: Loop infinito con snap invisible para evitar saltos */
-function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHovered = false, autoStart = false, isInViewport: externalIsInViewport = null }) {
+function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHovered = false, autoStart = false, isInViewport: externalIsInViewport = null, preloadImage: externalPreloadImage = null }) {
   const len = list.length;
   
-  // Si solo hay 1 o menos imágenes, retornar simple
-  if (len <= 1) {
-    return (
-      <div
-        style={{
-          position: "relative",
-          width: "100%",
-          paddingTop: "75%",
-          overflow: "hidden",
-        }}
-      >
-        <img
-          src={list[0] || ""}
-          alt=""
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: "block",
-          }}
-        />
-      </div>
-    );
-  }
-
+  // TODOS LOS HOOKS DEBEN ESTAR ANTES DE CUALQUIER RETURN CONDICIONAL
   // Preparar array extendido: 5 copias para loop infinito real
   // [copia1][copia2][copia3][copia4][copia5]
   // La copia central (copia3) es la que se muestra normalmente
   const REPEAT = 5;
-  const extended = useMemo(() => Array.from({ length: REPEAT }, () => list).flat(), [list]);
+  const extended = useMemo(() => len > 1 ? Array.from({ length: REPEAT }, () => list).flat() : [], [list, len]);
   const baseLen = len;
   
   // Índice GLOBAL en el array extendido (0 a extended.length-1)
   // Estado inicial: baseLen * 2 (inicio de copia central, imagen 0)
-  const CENTER_COPY_START = baseLen * 2;
+  const CENTER_COPY_START = baseLen > 1 ? baseLen * 2 : 0;
   const [globalIndex, setGlobalIndex] = useState(CENTER_COPY_START);
   
   // Control de animación: true = animación normal, false = snap instantáneo
@@ -287,8 +338,63 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
     };
   }, [isHovered, isInViewport, autoStart, len, shouldRender, interval, clearAllTimers, CENTER_COPY_START]);
 
+  // Precargar imágenes próximas cuando está activo - MOVIDO ANTES DE RETURNS
+  const shouldBeActive = autoStart ? isInViewport : isHovered;
+  
+  useEffect(() => {
+    if (!shouldBeActive || !shouldRender || len <= 1) return;
+    
+    // Función de precarga local si no se pasa externamente
+    const preload = externalPreloadImage || ((url) => {
+      if (!url) return;
+      const img = new Image();
+      img.src = url;
+    });
+    
+    // Precargar imágenes próximas (actual + siguientes 2)
+    const currentImageIndex = globalIndex % baseLen;
+    const nextIndices = [
+      (currentImageIndex + 1) % baseLen,
+      (currentImageIndex + 2) % baseLen,
+    ];
+    
+    nextIndices.forEach(idx => {
+      if (list[idx]) {
+        preload(list[idx]);
+      }
+    });
+  }, [globalIndex, shouldBeActive, shouldRender, len, baseLen, list, externalPreloadImage]);
+
   // Calcular el offset para la animación usando el índice global
   const offsetPct = globalIndex * 100;
+
+  // Si solo hay 1 o menos imágenes, retornar simple
+  if (len <= 1) {
+    return (
+      <div
+        ref={containerRef}
+        style={{
+          position: "relative",
+          width: "100%",
+          paddingTop: "75%",
+          overflow: "hidden",
+        }}
+      >
+        <img
+          src={list[0] || ""}
+          alt=""
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block",
+          }}
+        />
+      </div>
+    );
+  }
 
   // Si aún no se debe renderizar (lazy loading)
   if (!shouldRender) {
@@ -305,9 +411,6 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
       />
     );
   }
-
-  // Determinar si debe estar activo
-  const shouldBeActive = autoStart ? isInViewport : isHovered;
 
   // Si NO está activo: mostrar solo la primera imagen estática (slide 0)
   if (!shouldBeActive) {
@@ -357,28 +460,33 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
             : { duration: 0 } // Snap instantáneo sin animación
         }
       >
-        {extended.map((src, i) => (
-          <div key={i} style={{ width: "100%", flex: "0 0 100%" }}>
-            <LazyImage
-              src={src}
-              alt=""
-              placeholder="#f0f0f0"
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                display: "block",
-              }}
-            />
-          </div>
-        ))}
+        {extended.map((src, i) => {
+          // Marcar como críticas las imágenes visibles y próximas
+          const isVisible = Math.abs(i - globalIndex) <= 2;
+          return (
+            <div key={i} style={{ width: "100%", flex: "0 0 100%" }}>
+              <LazyImage
+                src={src}
+                alt=""
+                placeholder="#f0f0f0"
+                critical={isVisible}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  display: "block",
+                }}
+              />
+            </div>
+          );
+        })}
       </motion.div>
     </div>
   );
 }
 
 // Componente para cada slide en mobile que detecta su propia visibilidad
-function MobileSlideItem({ item, index, visualIndex, slideWidthPct }) {
+function MobileSlideItem({ item, index, visualIndex, slideWidthPct, preloadImage }) {
   const slideRef = useRef(null);
   const [isInViewport, setIsInViewport] = useState(false);
 
@@ -417,6 +525,7 @@ function MobileSlideItem({ item, index, visualIndex, slideWidthPct }) {
         isVisible={isVisible}
         autoStart={true}
         isInViewport={isInViewport}
+        preloadImage={preloadImage}
       />
     </div>
   );
@@ -430,6 +539,9 @@ export default function DisenioPortfolio({ category = "branding" }) {
   const draggingRef = useRef(false);
   const dragControls = useDragControls();
   const containerRef = useRef(null);
+  
+  // Hook de precarga de imágenes
+  const { preloadBuffer, preloadImage } = useImagePreloader(items, 3);
 
   // Detectar si es mobile
   useEffect(() => {
@@ -441,12 +553,16 @@ export default function DisenioPortfolio({ category = "branding" }) {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Cargar datos
+  // Cargar datos con caché mejorado
   useEffect(() => {
     let mounted = true;
+    let abortController = new AbortController();
+    
     (async () => {
       try {
         const data = await fetchPortfolioData(category);
+        if (!mounted || abortController.signal.aborted) return;
+        
         // Preparar items con imágenes
         const preparedItems = data.map(item => {
           const base = import.meta.env.BASE_URL?.endsWith("/")
@@ -490,15 +606,21 @@ export default function DisenioPortfolio({ category = "branding" }) {
         // Limitar a 12 items para el grid 4x3
         const limitedItems = preparedItems.slice(0, 12);
         
-        if (mounted) {
+        if (mounted && !abortController.signal.aborted) {
           setItems(limitedItems);
         }
       } catch (error) {
-        console.error("Error cargando portfolio:", error);
+        if (!abortController.signal.aborted) {
+          console.error("Error cargando portfolio:", error);
+        }
       }
     })();
-    return () => { mounted = false; };
-  }, []);
+    
+    return () => { 
+      mounted = false;
+      abortController.abort();
+    };
+  }, [category]);
 
   // Carrusel infinito para mobile - REFACTORIZADO
   const REPEAT = 3;
@@ -514,6 +636,16 @@ export default function DisenioPortfolio({ category = "branding" }) {
   const [logicalIndex, setLogicalIndex] = useState(0);
   // Índice visual extendido: para el loop infinito
   const [visualIndex, setVisualIndex] = useState(middleIndex);
+  
+  // Precargar buffer cuando cambia el hover (desktop) o índice (mobile)
+  useEffect(() => {
+    if (items.length === 0) return;
+    
+    const activeIndex = isMobile ? logicalIndex : hoveredIndex;
+    if (activeIndex !== null && activeIndex >= 0 && activeIndex < items.length) {
+      preloadBuffer(activeIndex);
+    }
+  }, [hoveredIndex, logicalIndex, isMobile, items, preloadBuffer]);
   // Estado para controlar animación durante corrección del loop
   const [shouldAnimateTransition, setShouldAnimateTransition] = useState(true);
   
@@ -751,7 +883,13 @@ export default function DisenioPortfolio({ category = "branding" }) {
               <div 
                 key={item.id || i} 
                 className="grid-portfolio-item"
-                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseEnter={() => {
+                  setHoveredIndex(i);
+                  // Precargar imágenes cuando se hace hover
+                  if (item.images && item.images.length > 0) {
+                    item.images.slice(0, 5).forEach(preloadImage);
+                  }
+                }}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 <InnerAutoSlider 
@@ -760,6 +898,7 @@ export default function DisenioPortfolio({ category = "branding" }) {
                   direction={1} 
                   isVisible={isVisible}
                   isHovered={isHovered}
+                  preloadImage={preloadImage}
                 />
               </div>
             );
@@ -868,6 +1007,7 @@ export default function DisenioPortfolio({ category = "branding" }) {
             index={i} 
             visualIndex={visualIndex}
             slideWidthPct={slideWidthPct}
+            preloadImage={preloadImage}
           />
         ))}
       </motion.div>

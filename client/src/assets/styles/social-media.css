@@ -249,10 +249,6 @@
   transition: mix-blend-mode 0.2s ease;
 }
 
-/* Efecto blend mode cuando el cursor está sobre el slider */
-body.trail-cursor-in-slider .sm-infinite-slider-item {
-  mix-blend-mode: difference;
-}
 
 /* ============================================
    SHOWCASE SLIDER (1 fila) - SOCIAL MEDIA

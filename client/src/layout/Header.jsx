@@ -1,33 +1,12 @@
-import { useState, useEffect } from "react";
 import Icons from "../components/Icons";
 
 import "../assets/styles/header.css";
 import { motion } from "framer-motion";
 
 const Header = ({ onTogglePopup }) => {
-  const [isSticky, setIsSticky] = useState(false);
-
-  useEffect(() => {
-    // Detectar cuando el scroll alcanza 85svh (promedio entre 80-90svh)
-    const handleScroll = () => {
-      const scrollThreshold = window.innerHeight * 0.85; // 85svh
-      setIsSticky(window.scrollY >= scrollThreshold);
-    };
-
-    // Verificar estado inicial
-    handleScroll();
-
-    // Escuchar scroll con passive para mejor rendimiento
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll, { passive: true });
-    };
-  }, []);
-
   return (
     <motion.header 
-      className={`full-container header header-sticky ${isSticky ? 'header-is-sticky' : ''}`}
+      className="full-container header"
     >
       <div className="container">
         <motion.a

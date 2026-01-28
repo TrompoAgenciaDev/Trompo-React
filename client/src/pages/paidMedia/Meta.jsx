@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import Testimonials3D from "../../components/Testimonials.jsx";
+import Testimonials3D from "../../components/Testimonials3d.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 
 //styles

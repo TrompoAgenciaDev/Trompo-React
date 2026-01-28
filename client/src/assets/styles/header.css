@@ -5,17 +5,6 @@
   padding: 0 10px;
 }
 
-/* Header sticky activo - mayor especificidad para sobrescribir el selector universal */
-/* Solo se activa cuando se alcanza el scroll threshold de 85svh */
-@media (min-width: 1024px) {
-  .header-sticky.header-is-sticky {
-    position: sticky !important;
-    top: 0 !important;
-    left: 0;
-    width: 100%;
-    z-index: 100;
-  }
-}
 
 .header .container{
   width: 100%;
@@ -39,10 +28,9 @@
 
 header.full-container{
   z-index: 100;
-  transform: none !important;
-  filter: none !important;
+  position: static;
+  /* Removido transform: none !important para permitir que Framer Motion funcione correctamente */
   /* Los estilos de background, backdrop-filter y box-shadow se controlan con Framer Motion */
-  /* position: sticky se maneja en CSS para evitar stacking contexts innecesarios */
 }
 
 .logo-img{

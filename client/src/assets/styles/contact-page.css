@@ -46,3 +46,49 @@
     }
 }
 
+/* Estilos para la sección de texto animado (de Nosotros) */
+.about-animated-text {
+    display: block;
+    line-height: 1.6;
+    text-align: center;
+    font-weight: 500;
+    padding: 50px 10px;
+}
+
+.about-animated-phrase {
+    display: inline;
+}
+
+.about-animated-text-container {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .about-animated-text-container {
+        font-size: 28px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .about-animated-text-container {
+        font-size: 32px;
+        padding: 70px 10px;
+    }
+}
+
+/* Estilos específicos para testimonios en Contactanos */
+.contactanos-testimonials-wrapper .testimonial-cards-slider::before {
+    background: linear-gradient(to bottom, rgba(38, 38, 38, 1) 0%, rgba(38, 38, 38, 0) 100%);
+}
+
+.contactanos-testimonials-wrapper .testimonial-cards-slider::after {
+    background: linear-gradient(to top, rgba(38, 38, 38, 1) 0%, rgba(38, 38, 38, 0) 100%);
+}
+
+.contactanos-testimonials-wrapper .testimonial-text-content h1 {
+    color: #ffffff;
+}
+
+.contactanos-testimonials-wrapper .testimonial-text-content p {
+    color: #ffffff;
+}

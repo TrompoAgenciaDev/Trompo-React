@@ -66,12 +66,12 @@
 
 /* --- Ítems principales del menú --- */
 .menu-popup {
-  border-bottom: 1px solid #262626;
+  border-bottom: 1px solid #dddddd;
 }
 
 /* --- Estilos específicos para menú mobile --- */
 .mobile-menu li {
-  border-bottom: 1px solid #262626;
+  border-bottom: 1px solid #000000;
   list-style: none;
 }
 
@@ -225,7 +225,7 @@
   .menu-popup {
     width: 100%;
     padding: 0;
-    border-right: 1px solid #262626;
+    border-right: 1px solid #404040;
     -webkit-transition: background-color 0.1s ease-in-out;
     -moz-transition: background-color 0.1s ease-in-out;
     -o-transition: background-color 0.1s ease-in-out;

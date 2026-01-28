@@ -234,6 +234,7 @@
     flex-direction: column;
     gap: 50px;
     padding: 30px 0;
+    background-color: #ffffff;
 }
 
 .web-design-container p{
@@ -254,11 +255,6 @@
     justify-content: flex-end;
 }
 
-/* Aplicar mix-blend-mode solo al texto cuando el cursor está sobre el slider */
-body.trail-cursor-in-slider .infinite-slider-item {
-    mix-blend-mode: difference;
-    /* El color sigue siendo negro, pero el blend mode lo invierte visualmente */
-}
 
 @media (min-width: 1024px) {
     .dev-container .container h1{

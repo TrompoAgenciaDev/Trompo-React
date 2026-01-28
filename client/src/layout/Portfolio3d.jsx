@@ -23,7 +23,25 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
     const NormalSpeed = () => setVelocityReduction(260);
 
     const handleClick = (e) => {
-      if (draggingRef.current) { e.preventDefault(); e.stopPropagation(); }
+      // Si está arrastrando, prevenir la navegación
+      if (draggingRef.current) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+
+      // Solo para desarrollo, abrir en nueva pestaña de forma segura
+      if (location === "desarrollo" && enlacePortfolio) {
+        e.preventDefault();
+        // Usar window.open solo en respuesta directa a un click del usuario
+        // Esto evita que los adblockers lo detecten como popup automático
+        const newWindow = window.open(enlacePortfolio, '_blank', 'noopener,noreferrer');
+        // Si el popup fue bloqueado, newWindow será null
+        // En ese caso, abrir en la misma ventana como fallback
+        if (!newWindow) {
+          window.location.href = enlacePortfolio;
+        }
+      }
     };
 
     return (
@@ -32,11 +50,9 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
         onMouseLeave={NormalSpeed}
         animate={{ x: ["-0%", "-300%"] }}
         transition={{ ease: "linear", duration: velocityReduction, repeat: Infinity }}
-        href={location === "desarrollo" ? enlacePortfolio : undefined}
-        target="_blank"
-        rel="noreferrer"
+        href={location === "desarrollo" ? enlacePortfolio : "#"}
+        rel="noopener noreferrer"
         data-id={id}
-        data-cursor="view"
         className="portfolio-card"
         style={{ backgroundImage: `url(${backgroundImage})` }}
         onClick={handleClick}

@@ -44,10 +44,6 @@
   transition: mix-blend-mode 0.2s ease;
 }
 
-/* Efecto blend mode cuando el cursor está sobre el slider */
-body.trail-cursor-in-slider .about-infinite-slider-item {
-  mix-blend-mode: difference;
-}
 
 /* Estilos para grid de items */
 .about-grid-wrapper{
@@ -137,6 +133,18 @@ body.trail-cursor-in-slider .about-infinite-slider-item {
   background-size: cover;
   background-position: center right;
   background-repeat: no-repeat;
+  background-image: var(--team-image, url(''));
+}
+
+/* Mobile: cambiar imagen y ocultar texto */
+@media (max-width: 767px) {
+  .members-container {
+    background-image: var(--team-mobile-image, var(--team-image, url('')));
+  }
+  
+  .members-container .container {
+    display: none;
+  }
 }
 
 .members-container h1{

@@ -1,15 +1,13 @@
-import { motion } from "framer-motion";
-import Icons from "../components/Icons";
-import { useEffect, useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { useEffect, useState, useRef, useMemo } from "react";
 
 
 import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
-import Faqs from "../layout/Faqs";
-import Hero from "../layout/Hero";
 import Contact from "../layout/Contact";
-import Testimonials3D from "../components/Testimonials3d.jsx";
+import TestimonialsSection from "../components/TestimonialsSection.jsx";
 
 import "../assets/styles/contact-page.css";
+import "../assets/styles/home.css";
 
 const Contactanos = () => {
 
@@ -49,6 +47,27 @@ const Contactanos = () => {
     );
   };
 
+  // Componente para animar frase por frase (de Nosotros)
+  const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }) => {
+    const delay = hasAnimated ? 0 : index * phraseDelay;
+    const targetOpacity = baseOpacity >= 0.9 ? 1 : Math.max(0.1, baseOpacity);
+
+    return (
+      <motion.span
+        className="about-animated-phrase"
+        initial={{ opacity: 0.1 }}
+        animate={{ opacity: targetOpacity }}
+        transition={{
+          delay: delay,
+          duration: 0.4,
+          ease: "easeOut"
+        }}
+      >
+        {phrase}
+      </motion.span>
+    );
+  };
+
   // --- CONTACTANOS ---
   const [revealed, setRevealed] = useState(false);
   const titleText = "Hagamos que funcione.";
@@ -71,6 +90,89 @@ const Contactanos = () => {
     };
   }, []);
 
+  // --- SECCIÓN DE TEXTO ANIMADO (de Nosotros) ---
+  const textRef = useRef(null);
+  const containerRef = useRef(null);
+  const isInView = useInView(textRef, { once: false, amount: 0.3 });
+  
+  const [baseOpacity, setBaseOpacity] = useState(0.1);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  // Usar IntersectionObserver para controlar la opacidad
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const ratio = entry.intersectionRatio;
+          let opacity = 0.1;
+          if (ratio >= 0.9) {
+            opacity = 1;
+          } else if (ratio >= 0.1) {
+            opacity = 0.1 + (ratio - 0.1) * (1 - 0.1) / (0.9 - 0.1);
+          }
+          setBaseOpacity(opacity);
+        });
+      },
+      {
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+      }
+    );
+
+    observer.observe(containerRef.current);
+
+    return () => {
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
+  const text = "En Trompo no creemos en soluciones mágicas. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Desde Córdoba Capital, ayudamos a empresas a convertir desafíos digitales en ventajas competitivas.";
+  
+  const phraseDelay = 0.3;
+  
+  const phrases = useMemo(() => {
+    const splitRegex = /([,.])\s+/g;
+    const result = [];
+    let lastIndex = 0;
+    let match;
+    
+    while ((match = splitRegex.exec(text)) !== null) {
+      const phrase = text.substring(lastIndex, match.index + 1) + ' ';
+      if (phrase.trim().length > 0) {
+        result.push(phrase);
+      }
+      lastIndex = match.index + match[0].length;
+    }
+    
+    if (lastIndex < text.length) {
+      const lastPhrase = text.substring(lastIndex);
+      if (lastPhrase.trim().length > 0) {
+        result.push(lastPhrase);
+      }
+    }
+    
+    return result;
+  }, [text]);
+
+  useEffect(() => {
+    if (baseOpacity >= 0.9) {
+      if (!hasAnimated) {
+        const totalPhrases = phrases.length;
+        const totalAnimationTime = (totalPhrases * phraseDelay + 0.4) * 1000;
+        const timeout = setTimeout(() => {
+          setHasAnimated(true);
+        }, totalAnimationTime);
+        
+        return () => clearTimeout(timeout);
+      }
+    } else if (baseOpacity < 0.3) {
+      setHasAnimated(false);
+    }
+  }, [baseOpacity, hasAnimated, phrases.length, phraseDelay]);
+
   return (
     <>
       <div className="full-container black-bg hero-contactanos-container">
@@ -90,9 +192,44 @@ const Contactanos = () => {
 
       <div id="contacto"></div>
 
-      <section className="full-container testimonial-wrapper">
-        <Testimonials3D />
-      </section>
+      <div ref={containerRef} className="full-container" style={{ backgroundColor: '#ffffff' }}>
+        <div className="container about-animated-text-container">
+          <motion.span 
+            ref={textRef}
+            className="about-animated-text"
+            style={{ color: '#000000' }}
+          >
+            {phrases.map((phrase, phraseIndex) => (
+              <AnimatedPhrase
+                key={`phrase-${phraseIndex}`}
+                phrase={phrase}
+                index={phraseIndex}
+                phraseDelay={phraseDelay}
+                baseOpacity={baseOpacity}
+                hasAnimated={hasAnimated}
+              />
+            ))}
+          </motion.span>
+        </div>
+      </div>
+
+      <div className="full-container black-bg contactanos-testimonials-wrapper">
+        <TestimonialsSection />
+      </div>
+
+      <div className="full-container black-bg">
+        <div className="container identidades">
+            <div className="card-identidades">
+              <h2>Las marcas son identidades vivas.</h2>
+              <p>Nuestro propósito es concebirlas y cultivarlas desde su núcleo más auténtico. A través de un sistema de marca sólido, construimos el fundamento estratégico y visual que permite a las empresas posicionarse con claridad, diferenciarse con fuerza y potenciar su activo más valioso: su identidad en el mundo.</p>
+            </div>
+            <div className="span-identidades">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+      </div>
 
       <Contact form="contactanos" location="contactanos"/>
 

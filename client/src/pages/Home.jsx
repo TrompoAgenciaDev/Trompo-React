@@ -10,13 +10,31 @@ import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import Contact from "../layout/Contact";
 import SimpleHeroVideo from "../components/SimpleHeroVideo";
 import Beneficios from "../components/Beneficios";
-import SemicircularVideoSlider from "../components/sliders/SemicircularVideoSlider";
 import Menu from "../components/Menu";
 import routesConfig from "../config/routesConfig";
+import ServiceTitle from "../components/services/ServiceTitle.jsx";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
+
+// Componente SVG para el ícono del menú
+const MenuIcon = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="99" height="99" viewBox="0 0 99 99" fill="none">
+      <g clipPath="url(#clip0_3595_1967)">
+        <path d="M46.0977 10.3275L88.5241 52.7539" stroke="#000000" strokeWidth="10"/>
+        <path d="M46.0977 88.5251L88.5241 46.0987" stroke="#000000" strokeWidth="10"/>
+        <path d="M11.9902 49.4784L86.9123 49.4784" stroke="#000000" strokeWidth="10"/>
+      </g>
+      <defs>
+        <clipPath id="clip0_3595_1967">
+          <rect x="49.498" y="98.995" width="70" height="70" transform="rotate(-135 49.498 98.995)" fill="white"/>
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};
 
 // Componente InfiniteSlider
 const InfiniteSlider = ({ text }) => {
@@ -55,119 +73,49 @@ const InfiniteSlider = ({ text }) => {
   );
 };
 
-// Componente para animar frase por frase
-const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }) => {
-  const delay = hasAnimated ? 0 : index * phraseDelay;
-  const targetOpacity = baseOpacity >= 0.9 ? 1 : Math.max(0.1, baseOpacity);
-
+// Componente para grid de videos del portfolio
+const PortfolioVideosGrid = () => {
+  const videoRefs = useRef([]);
+  
+  const videoNames = ['agreteq', 'denso', 'raulito', 'sw', 'viditec', 'volvo'];
+  
+  const handleMouseEnter = (index) => {
+    if (videoRefs.current[index]) {
+      videoRefs.current[index].play();
+    }
+  };
+  
+  const handleMouseLeave = (index) => {
+    if (videoRefs.current[index]) {
+      videoRefs.current[index].pause();
+      videoRefs.current[index].currentTime = 0;
+    }
+  };
+  
   return (
-    <motion.span
-      className="desarrollo-animated-phrase"
-      initial={{ opacity: 0.1 }}
-      animate={{ opacity: targetOpacity }}
-      transition={{
-        delay: delay,
-        duration: 0.4,
-        ease: "easeOut"
-      }}
-    >
-      {phrase}
-    </motion.span>
-  );
-};
-
-// Componente interno para la sección de texto animado
-const AnimatedTextSection = ({ containerRef }) => {
-  const textRef = useRef(null);
-  const isInView = useInView(textRef, { once: false, amount: 0.3 });
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "start start"],
-    layoutEffect: false
-  });
-
-  const opacityValue = useTransform(
-    scrollYProgress,
-    [0, 0.1, 0.9, 1],
-    [0.1, 1, 1, 0.1],
-    {
-      clamp: false,
-    }
-  );
-  
-  const smoothedOpacity = useSpring(opacityValue, {
-    stiffness: 80,
-    damping: 30,
-    mass: 0.6,
-  });
-
-  const [baseOpacity, setBaseOpacity] = React.useState(0.1);
-  const [hasAnimated, setHasAnimated] = React.useState(false);
-
-  useMotionValueEvent(smoothedOpacity, "change", (latest) => {
-    setBaseOpacity(latest);
-  });
-
-  const animatedText = "En trompo combinamos creatividad e innovación tecnológica, para construir marcas que evolucionan";
-  const phraseDelay = 0.3;
-  
-  const phrases = React.useMemo(() => {
-    const splitRegex = /([,.])\s+/g;
-    const result = [];
-    let lastIndex = 0;
-    let match;
-    
-    while ((match = splitRegex.exec(animatedText)) !== null) {
-      const phrase = animatedText.substring(lastIndex, match.index + 1) + ' ';
-      if (phrase.trim().length > 0) {
-        result.push(phrase);
-      }
-      lastIndex = match.index + match[0].length;
-    }
-    
-    if (lastIndex < animatedText.length) {
-      const lastPhrase = animatedText.substring(lastIndex);
-      if (lastPhrase.trim().length > 0) {
-        result.push(lastPhrase);
-      }
-    }
-    
-    return result;
-  }, [animatedText]);
-
-  React.useEffect(() => {
-    if (baseOpacity >= 0.9) {
-      if (!hasAnimated) {
-        const totalPhrases = phrases.length;
-        const totalAnimationTime = (totalPhrases * phraseDelay + 0.4) * 1000;
-        const timeout = setTimeout(() => {
-          setHasAnimated(true);
-        }, totalAnimationTime);
-        
-        return () => clearTimeout(timeout);
-      }
-    } else if (baseOpacity < 0.3) {
-      setHasAnimated(false);
-    }
-  }, [baseOpacity, hasAnimated, phrases.length, phraseDelay]);
-
-  return (
-    <motion.span 
-      ref={textRef}
-      className="desarrollo-animated-text"
-    >
-      {phrases.map((phrase, phraseIndex) => (
-        <AnimatedPhrase
-          key={`phrase-${phraseIndex}`}
-          phrase={phrase}
-          index={phraseIndex}
-          phraseDelay={phraseDelay}
-          baseOpacity={baseOpacity}
-          hasAnimated={hasAnimated}
-        />
-      ))}
-    </motion.span>
+    <div className="full-container portfolio-videos-container">
+      <div className="portfolio-videos-grid">
+        {videoNames.map((videoName, index) => (
+          <div 
+            key={index} 
+            className="portfolio-video-item"
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={() => handleMouseLeave(index)}
+          >
+            <video
+              ref={(el) => (videoRefs.current[index] = el)}
+              className="portfolio-video"
+              muted
+              loop
+              playsInline
+              preload="metadata"
+            >
+              <source src={`${base}assets/portfolioImg/videos/${videoName}.mp4`} type="video/mp4" />
+            </video>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
@@ -260,20 +208,14 @@ const ServiceItem = ({ title, subtitle, subtitles, link, links }) => {
         className="service-progress-bar"
         initial={{ width: "0%" }}
         animate={{ width: isHovered ? "100%" : "0%" }}
-        transition={{ duration: 1, ease: "easeInOut" }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
       />
     </div>
   );
 };
 
 const Home = () => {
-  const animatedTextContainerRef = useRef(null);
-  const [isTextSectionMounted, setIsTextSectionMounted] = useState(false);
   const [activeMenuItem, setActiveMenuItem] = useState(0); // 0: sobre nosotros, 1: servicios, 2: contacto
-
-  useEffect(() => {
-    setIsTextSectionMounted(true);
-  }, []);
 
   const menuItems = [
     { 
@@ -302,51 +244,7 @@ const Home = () => {
         mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
       />
 
-      
-      <div className="full-container grid-full-container">
-        <div className="full-container grid-item-full-container item-1">
-            <span style={{ color: '#fed332' }}>trompo</span>
-        </div>
-        <div className="full-container grid-item-full-container item-2">
-          <svg xmlns="http://www.w3.org/2000/svg" width="102" height="102" viewBox="0 0 102 102" fill="none">
-            <g clipPath="url(#clip0_3525_2018)">
-              <path d="M102 94L-1.52588e-05 94" stroke="black" strokeWidth="20"/>
-              <path d="M8 0L8 102" stroke="black" strokeWidth="20"/>
-              <path d="M95.9375 5.93756L5.87504 96" stroke="black" strokeWidth="20"/>
-            </g>
-            <defs>
-              <clipPath id="clip0_3525_2018">
-                <rect width="102" height="102" fill="white"/>
-              </clipPath>
-            </defs>
-          </svg>
-        </div>
-        <div className="full-container grid-item-full-container item-3">
-          <svg xmlns="http://www.w3.org/2000/svg" width="102" height="102" viewBox="0 0 102 102" fill="none">
-            <g clipPath="url(#clip0_3524_2006)">
-              <path d="M0 8L102 8" stroke="#fed332" strokeWidth="20"/>
-              <path d="M94 102L94 -3.09944e-06" stroke="#fed332" strokeWidth="20"/>
-              <path d="M6.0625 96.0625L96.1249 6.00003" stroke="#fed332" strokeWidth="20"/>
-            </g>
-            <defs>
-              <clipPath id="clip0_3524_2006">
-                <rect x="102" y="102" width="102" height="102" transform="rotate(180 102 102)" fill="white"/>
-              </clipPath>
-            </defs>
-          </svg>
-        </div>
-        <div className="full-container grid-item-full-container item-4">
-          <span>agencia</span>
-        </div>
-      </div>
-
-      <div ref={animatedTextContainerRef} className="full-container">
-        <div className="container desarrollo-animated-text-container">
-          {isTextSectionMounted && (
-            <AnimatedTextSection containerRef={animatedTextContainerRef} />
-          )}
-        </div>
-      </div>
+      <ServiceTitle titulo="Agencia Digital" subtitulo="En trompo combinamos creatividad e innovación tecnológica, para construir marcas que evolucionan" page="home" />
 
       <div className="full-container black-bg menu-container-home-section">
         <div className="full-container">
@@ -358,9 +256,7 @@ const Home = () => {
               onMouseEnter={() => setActiveMenuItem(index)}
             >
               <h1>{item.label}</h1>
-              <svg xmlns="http://www.w3.org/2000/svg" width="70" height="56" viewBox="0 0 70 56" fill="none">
-                <path d="M0.999994 27.8085L68.2447 27.8085M68.2447 27.8085L34.6223 1M68.2447 27.8085L34.6223 54.617" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="menu-arrow"/>
-              </svg>
+              <MenuIcon />
             </Link>
           ))}
         </div>
@@ -421,7 +317,7 @@ const Home = () => {
       </div>      
 
       <div className="full-container infinite-slider-container">
-        <InfiniteSlider text="servicios" />
+        <InfiniteSlider text="20 Años Produciendo Ideas" />
       </div>
 
       <div className="full-container services-section-home black-bg">
@@ -454,14 +350,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="full-container slider-container">
-        <div className="full-container">
-          <SemicircularVideoSlider />
-        </div>
-        <div className="container slider-text">
-          <span className="">Nuestra Agencia es el espacio donde nacen y se ponen a prueba las ideas. Un entorno de exploración constante donde integramos herramientas emergentes, flujos de trabajo impulsados por inteligencia artificial y métodos modernos de producción creativa.</span>
-        </div>
-      </div>
+      <PortfolioVideosGrid />
 
       <div className="full-container strategy-container black-bg">
         <div className="container">
@@ -511,11 +400,21 @@ const Home = () => {
         </div>
       </div>
 
-      <Beneficios />
+      <div className="full-container black-bg">
+        <div className="container identidades">
+            <div className="card-identidades">
+              <h2>Las marcas son identidades vivas.</h2>
+              <p>Nuestro propósito es concebirlas y cultivarlas desde su núcleo más auténtico. A través de un sistema de marca sólido, construimos el fundamento estratégico y visual que permite a las empresas posicionarse con claridad, diferenciarse con fuerza y potenciar su activo más valioso: su identidad en el mundo.</p>
+            </div>
+            <div className="span-identidades">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+      </div>
 
-      <section className="full-container black-bg testimonial-wrapper">
-        
-      </section>
+      <Beneficios />
 
       <Contact form="home" />
 

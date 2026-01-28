@@ -63,7 +63,6 @@
   height: -moz-max-content;
   height: max-content;
   background: #f8fafc;
-  border: 1px solid #e5e7eb;
   border-radius: 14px;
   padding: 16px;
 }
@@ -113,6 +112,10 @@
   flex: 0 0 auto;
 }
 
+.black-bg .storical-bullet {
+  display: none;
+}
+
 .storical-name {
   font-size: 12px;
   color: #0f172a;
@@ -130,12 +133,13 @@
 }
 
 .black-bg .storical-panel {
-  border: 1px solid #404040;
+  background: #000000;
+  border-radius: 0;
 }
 
 .black-bg .storical-item {
-  background: #404040;
-  border: 1px solid #525252;
+  background: #000000;
+  border: 1px solid #303030;
 }
 
 .black-bg .storical-name {

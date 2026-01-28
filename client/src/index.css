@@ -1,7 +1,7 @@
 @import url('/assets/fonts/fonts.css');
 
 :root {
-  font-family: 'Montserrat', 'Neue Haas Grotesk Display Pro', 'Poppins', system-ui, sans-serif;
+  font-family: 'Neue Haas Grotesk Display Pro', 'Montserrat', 'Poppins', system-ui, sans-serif;
   --font-portfolio: 'Neue Haas Grotesk Display Pro', 'Montserrat', 'Poppins', system-ui, sans-serif;
   line-height: 1.3;
   font-weight: 300;
@@ -72,6 +72,12 @@ html,
 
 * {
   position: relative;
+}
+
+/* Excluir header y sus elementos del position: relative global para permitir sticky/fixed */
+header,
+header * {
+  position: static;
 }
 
 body {
@@ -150,7 +156,6 @@ video {
   -webkit-transition: color .3s ease-in-out;
   -moz-transition: color .3s ease-in-out;
   -o-transition: color .3s ease-in-out;
-  /* cursor: none; */
 }
 
 .bold {
@@ -187,11 +192,11 @@ p {
 }
 
 .black-bg {
-  background-color: #080808;
+  background-color: #262626;
 }
 
 .black-bg-2 {
-  background-color: #080808;
+  background-color: #262626;
 }
 
 footer {

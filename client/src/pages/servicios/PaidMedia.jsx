@@ -8,7 +8,7 @@ import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Icons from "../../components/Icons.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
 import Inversiones from "../../components/Inversiones.jsx";
-import Testimonials3D from "../../components/Testimonials.jsx";
+import TestimonialsSection from "../../components/TestimonialsSection.jsx";
 
 //styles
 import "../../assets/styles/paid-media.css";
@@ -923,9 +923,7 @@ const Estrategia = () => {
       
       <Beneficios />
 
-      <section className="full-container testimonial-wrapper">
-        <Testimonials3D />
-      </section>
+      <TestimonialsSection />
 
       <Contact form="estrategia" />
 

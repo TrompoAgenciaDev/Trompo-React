@@ -13,6 +13,7 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
   const getPageType = () => {
     if (page) {
       const pageLower = page.toLowerCase();
+      if (pageLower.includes('home') || pageLower.includes('inicio')) return 'home';
       if (pageLower.includes('diseño') || pageLower.includes('disenio') || pageLower.includes('diseño')) return 'disenio';
       if (pageLower.includes('multimedia')) return 'multimedia';
       if (pageLower.includes('social')) return 'socialMedia';
@@ -22,6 +23,7 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
     
     // Si no hay prop, detectar desde la URL
     const pathname = window.location.pathname.toLowerCase();
+    if (pathname === '/' || pathname.includes('home') || pathname.includes('inicio')) return 'home';
     if (pathname.includes('disenio') || pathname.includes('diseño')) return 'disenio';
     if (pathname.includes('multimedia')) return 'multimedia';
     if (pathname.includes('social')) return 'socialMedia';
@@ -35,6 +37,17 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
 
   const renderServiceTexts = () => {
     switch (pageType) {
+      case 'home':
+        return (
+          <>
+            <span>Diseño Digital</span>
+            <span>Multimedia</span>
+            <span>Social Media</span>
+            <span>Desarrollo Web</span>
+            <span>Paid Media</span>
+          </>
+        );
+      
       case 'disenio':
         return (
           <>

@@ -9,7 +9,6 @@ import ScrollTop from "@/components/buttons/ScrollTop";
 import { usePreloadResources } from "@/hooks/usePreloadResources";
 import { usePrefetchRoutes } from "@/hooks/usePrefetchRoutes";
 import { HoverProvider } from "@/context/HoverContext";
-// import TrailCursor from "@/components/cursors/TrailCursor";
 import React from "react";
 
 // Componente interno que usa el hook dentro del contexto del router
@@ -25,7 +24,6 @@ function AppContent() {
 
   return (
     <>
-      {/* <TrailCursor /> */}
       <Header onTogglePopup={togglePopup} />
       <MenuPopup isOpen={isOpen} onClose={togglePopup} />
       <AppRoutes />

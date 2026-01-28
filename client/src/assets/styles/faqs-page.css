@@ -91,10 +91,6 @@
   transition: mix-blend-mode 0.2s ease;
 }
 
-/* Efecto blend mode cuando el cursor está sobre el slider */
-body.trail-cursor-in-slider .faqs-infinite-slider-item {
-  mix-blend-mode: difference;
-}
 
 /* Sección de FAQs */
 .faqs-section-container {

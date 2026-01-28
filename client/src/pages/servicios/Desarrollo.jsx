@@ -7,7 +7,7 @@ import Contact from "../../layout/Contact.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
-import Testimonials3D from "../../components/Testimonials3d.jsx";
+import TestimonialsSection from "../../components/TestimonialsSection.jsx";
 
 import "../../assets/styles/servicios-page.css";
 import "../../assets/styles/desarrollo.css";
@@ -54,66 +54,21 @@ const InfiniteSlider = ({ text }) => {
 };
 
 const WebDesignSection = () => {
-  const sectionRef = useRef(null);
-  const shouldReduceMotion = useReducedMotion();
-
-  // Detectar cuando la sección entra al viewport
-  const isInView = useInView(sectionRef, { 
-    once: false, 
-    amount: 0.1,
-    margin: "-10% 0px -10% 0px"
-  });
-
-  // useScroll para controlar el cambio de color durante el scroll
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "center center"]
-  });
-
-  // Transformar el scroll progress a un color intermedio para el fondo
-  const backgroundColor = useTransform(
-    scrollYProgress,
-    [0.5, 0.8],
-    shouldReduceMotion 
-      ? ["#262626", "#262626"] 
-      : ["#262626", "#ffffff"]
-  );
-
-  // Transformar el scroll progress para el color del texto (blanco a negro)
-  const textColor = useTransform(
-    scrollYProgress,
-    [0.5, 0.8],
-    shouldReduceMotion 
-      ? ["#ffffff", "#ffffff"] 
-      : ["#ffffff", "#000000"]
-  );
-
   return (
-    <motion.div 
-      ref={sectionRef}
-      className="full-container web-design-container"
-      style={{
-        backgroundColor: backgroundColor,
-      }}
-    >
+    <div className="full-container web-design-container">
       <div className="container">
-        <motion.h1 
-          className="text-highlight"
-          style={{ color: textColor }}
-        >
+        <h1 className="text-highlight">
           Diseñamos y desarrollamos plataformas digitales escalables
-        </motion.h1>
+        </h1>
       </div>
       <div className="container web-design-container-text">
         <div className="container-text">
-          <motion.p 
-            style={{ color: textColor }}
-          >
+          <p>
             <strong>Diseñamos y desarrollamos plataformas digitales escalables</strong> para transformar diseño en sistemas digitales reales. Planificamos la experiencia de usuario desde el primer prototipo, desarrollamos front-end y back-end a medida con código limpio y escalable, e integramos APIs, CRM y herramientas de marketing y analytics para que cada plataforma funcione como un núcleo sólido del negocio.
-          </motion.p>
+          </p>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -638,11 +593,7 @@ const Desarrollo = () => {
 
       <Beneficios />
 
-      <section className="full-container testimonial-wrapper">
-        <div className="container testimonial-cards-slider">
-          <Testimonials3D />
-        </div>
-      </section>d
+      <TestimonialsSection />
 
       <Contact form="desarrollo"/>
       

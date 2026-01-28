@@ -7,7 +7,7 @@ import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import SemicircularVideoSlider from "../../components/sliders/SemicircularVideoSlider.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
-import Testimonials3D from "../../components/Testimonials.jsx";
+import TestimonialsSection from "../../components/TestimonialsSection.jsx";
 
 //styles
 import "../../assets/styles/multimedia.css";
@@ -676,9 +676,7 @@ const Multimedia = () => {
 
       <Beneficios />
 
-      <section className="full-container testimonial-wrapper">
-        <Testimonials3D />
-      </section>
+      <TestimonialsSection />
 
       <Contact form="multimedia" />
 

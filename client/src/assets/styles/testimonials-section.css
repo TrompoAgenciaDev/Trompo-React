@@ -1,0 +1,80 @@
+/* Estilos para la sección de testimonios reutilizable */
+.testimonial-cards-slider{
+    width: 100%;
+    max-width: 600px;
+    padding: 0;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Gradientes de desvanecimiento en los bordes superior e inferior */
+.testimonial-cards-slider::before,
+.testimonial-cards-slider::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.testimonial-cards-slider::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.testimonial-cards-slider::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+/* Grid de 2 columnas para testimonial-wrapper en desktop */
+@media (min-width: 1024px) {
+    .testimonial-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: stretch;
+        position: relative;
+    }
+
+    .testimonial-cards-slider {
+        max-width: 600px;
+        width: 100%;
+        grid-column: 1;
+        justify-self: end;
+        margin: 0;
+    }
+
+    .testimonial-wrapper > div:empty,
+    .testimonial-text-content {
+        grid-column: 2;
+    }
+}
+
+/* Estilos para el contenido de texto de testimonios */
+.testimonial-text-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.testimonial-text-content h1 {
+    margin-bottom: 1rem;
+}
+
+.testimonial-text-content p {
+    max-width: 800px;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+@media (min-width: 1280px) {
+    .testimonial-text-content p {
+        font-size: 18px;
+    }
+}

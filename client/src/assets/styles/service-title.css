@@ -18,7 +18,7 @@
     cursor: pointer;
 }
 
-.service-title-wrapper{
+.services-title-page-container .service-title-wrapper{
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -42,7 +42,7 @@
     align-items: flex-start;
 }
 
-.service-title-hidden{
+.services-title-page-container .service-title-hidden{
     position: absolute;
     top: 0;
     left: 0;
@@ -162,12 +162,12 @@
         font-size: 58px;
     }
     
-    .service-title-wrapper{
+    .services-title-page-container .service-title-wrapper{
         height: 87px;
     }
     
     .title-page,
-    .service-title-hidden{
+    .services-title-page-container .service-title-hidden{
         height: auto;
         min-height: 87px;
     }
@@ -195,10 +195,6 @@
         font-size: 90px;
     }
     
-    .service-title-wrapper{
-        height: 135px;
-    }
-    
     .title-page,
     .service-title-hidden{
         height: auto;
@@ -219,12 +215,12 @@
         font-size: 130px;
     }
     
-    .service-title-wrapper{
+    .services-title-page-container .service-title-wrapper{
         height: 195px;
     }
     
     .title-page,
-    .service-title-hidden{
+    .services-title-page-container .service-title-hidden{
         height: auto;
         min-height: 195px;
     }
@@ -239,12 +235,12 @@
         font-size: 160px;
     }
     
-    .service-title-wrapper{
+    .services-title-page-container .service-title-wrapper{
         height: 240px;
     }
     
     .title-page,
-    .service-title-hidden{
+    .services-title-page-container .service-title-hidden{
         height: auto;
         min-height: 240px;
     }

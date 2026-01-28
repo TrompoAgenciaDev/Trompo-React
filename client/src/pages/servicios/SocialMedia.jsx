@@ -12,7 +12,7 @@ import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Inversiones from "../../components/Inversiones.jsx";
 import SocialMediaShowcaseSlider from "../../components/sliders/SocialMediaShowcaseSlider.jsx";
-import Testimonials3D from "../../components/Testimonials.jsx";
+import TestimonialsSection from "../../components/TestimonialsSection.jsx";
 
 //styles
 import "../../assets/styles/social-media.css";
@@ -213,9 +213,7 @@ const SocialMedia = () => {
 
       <Inversiones />
 
-      <section className="full-container testimonial-wrapper">
-        <Testimonials3D />
-      </section>
+      <TestimonialsSection />
 
       <Contact form="interaccion" />
       
