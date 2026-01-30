@@ -560,9 +560,13 @@ h6{
 
 
 .productos{
-    padding: 70px 0;
+    padding: 70px 20px;
     position: relative;
     overflow: hidden;
+}
+
+.productos .container{   
+    width: 100%; 
 }
 
 .testimonial-cards-slider{
@@ -621,12 +625,14 @@ h6{
 
 /* Estilos para el contenido de texto de testimonios */
 .testimonial-text-content {
+    width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 2rem 1rem;
+    display: none;
 }
 
 .testimonial-text-content h1 {
@@ -639,15 +645,6 @@ h6{
     text-align: left;
 }
 
-@media (min-width: 1280px) {
-    .testimonial-text-content p {
-    }
-}
-
-@media (min-width: 768px) {
-    .design-history-item p{
-    }
-}
 
 @media (min-width: 1024px) {
     .optimized-video-container{
@@ -670,6 +667,10 @@ h6{
 
     .productos{
         padding: 70px 0;
+    }
+
+    .testimonial-text-content {
+        display: flex;
     }
 }
 

@@ -15,6 +15,13 @@
     gap: 20px;
 }
 
+.identidades-slider-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    min-height: 200px;
+}
+
 .card-identidades{
     display: -webkit-box;
     display: -ms-flexbox;
@@ -40,12 +47,56 @@
     padding: 0 30px;
 }
 
+.span-identidades-dot {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
 .identidades .span-identidades span{
     width: 20px;
     height: 20px;
-    background-color: #E1C025;
     -webkit-border-radius: 100%;
     border-radius: 100%;
+    display: block;
+    -webkit-transition: opacity 0.3s ease, transform 0.3s ease;
+    -moz-transition: opacity 0.3s ease, transform 0.3s ease;
+    -o-transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.span-identidades-dot:not(.active) span {
+    opacity: 0.4;
+}
+
+.span-identidades-dot.active span {
+    opacity: 1;
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+/* Puntos cuando el fondo es blanco o amarillo - puntos negros */
+.white-bg .identidades .span-identidades-dot span,
+.bg-yellow-2 .identidades .span-identidades-dot span {
+    background-color: #262626;
+}
+
+/* Puntos cuando el fondo es negro - puntos amarillos */
+.black-bg .identidades .span-identidades-dot span {
+    background-color: #FEE070;
 }
 
 .card-identidades h2,
@@ -54,16 +105,23 @@
     padding: 0;
 }
 
-.card-identidades p{
-}
-
 @media (min-width: 1024px) {
     .identidades .span-identidades span{
         width: 20px;
         height: 20px;
-        background-color: #E1C025;
         -webkit-border-radius: 100%;
         border-radius: 100%;
+    }
+
+    /* Puntos cuando el fondo es blanco o amarillo - puntos negros */
+    .white-bg .identidades .span-identidades-dot span,
+    .bg-yellow-2 .identidades .span-identidades-dot span {
+        background-color: #262626;
+    }
+
+    /* Puntos cuando el fondo es negro - puntos amarillos */
+    .black-bg .identidades .span-identidades-dot span {
+        background-color: #FEE070;
     }
 
     .card-identidades{

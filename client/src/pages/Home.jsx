@@ -22,18 +22,20 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
 // Componente SVG para el ícono del menú
 const MenuIcon = () => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="99" height="99" viewBox="0 0 99 99" fill="none">
-      <g clipPath="url(#clip0_3595_1967)">
-        <path d="M46.0977 10.3275L88.5241 52.7539" stroke="#000000" strokeWidth="10"/>
-        <path d="M46.0977 88.5251L88.5241 46.0987" stroke="#000000" strokeWidth="10"/>
-        <path d="M11.9902 49.4784L86.9123 49.4784" stroke="#000000" strokeWidth="10"/>
-      </g>
-      <defs>
-        <clipPath id="clip0_3595_1967">
-          <rect x="49.498" y="98.995" width="70" height="70" transform="rotate(-135 49.498 98.995)" fill="white"/>
-        </clipPath>
-      </defs>
-    </svg>
+    <div className="icon-servicios-container">
+      <svg xmlns="http://www.w3.org/2000/svg" width="99" height="99" viewBox="0 0 99 99" fill="none">
+        <g clipPath="url(#clip0_3595_1967)">
+          <path d="M46.0977 10.3275L88.5241 52.7539" stroke="#000000" strokeWidth="10"/>
+          <path d="M46.0977 88.5251L88.5241 46.0987" stroke="#000000" strokeWidth="10"/>
+          <path d="M11.9902 49.4784L86.9123 49.4784" stroke="#000000" strokeWidth="10"/>
+        </g>
+        <defs>
+          <clipPath id="clip0_3595_1967">
+            <rect x="49.498" y="98.995" width="70" height="70" transform="rotate(-135 49.498 98.995)" fill="white"/>
+          </clipPath>
+        </defs>
+      </svg>
+    </div>
   );
 };
 
@@ -239,10 +241,10 @@ const Home = () => {
   return (
     <main className="full-container">
       <SimpleHeroVideo
-        desktopSrc={`${base}assets/hero/home.mp4`}
-        mobileSrc={`${base}assets/hero/mobile/home-hero-mobile.mp4`}
+        desktopSrc={`${base}assets/hero/hero.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/hero-mobile.mp4`}
         desktopPoster={`${base}assets/hero/home.webp`}
-        mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
+        mobilePoster={`${base}assets/hero/mobile/home.webp`}
       />
 
       <ServiceTitle titulo="Agencia Digital" subtitulo="En trompo combinamos creatividad e innovación tecnológica, para construir marcas que evolucionan" page="home" />

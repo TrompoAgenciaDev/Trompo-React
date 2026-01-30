@@ -196,14 +196,22 @@
         font-size: 90px;
     }
     
+    .services-title-page-container .service-title-wrapper{
+        height: 150px;
+    }
+    
     .title-page,
     .service-title-hidden{
         height: auto;
-        min-height: 135px;
+        min-height: 150px;
     }
 
     .service-areas-container span{
         font-size: 15px;
+    }
+
+    .container.service-areas-wrapper{
+        max-width: 100%;
     }
 }
 

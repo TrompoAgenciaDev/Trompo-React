@@ -262,11 +262,11 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
+  -webkit-flex-direction: row;
   -moz-box-orient: vertical;
   -moz-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  -ms-flex-direction: row;
+  flex-direction: row;
   -webkit-box-align: flex-start;
   -webkit-align-items: flex-start;
   -moz-box-align: flex-start;

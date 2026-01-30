@@ -210,10 +210,11 @@
       "title": "airon",
       "short_description": "",
       "long_description": "",
-      "featured_image": "assets/creatividad/portfolioImg/airon1.webp",
+      "featured_image": "assets/creatividad/portfolioImg/airon.webp",
       "vertical_image": "",
       "featured_video": "",
       "gallery": [
+        "assets/creatividad/portfolioImg/airon1.webp",
         "assets/creatividad/portfolioImg/airon2.webp",
         "assets/creatividad/portfolioImg/airon3.webp",
         "assets/creatividad/portfolioImg/airon4.webp"
@@ -275,10 +276,11 @@
       "title": "ishvara",
       "short_description": "",
       "long_description": "",
-      "featured_image": "assets/creatividad/portfolioImg/ishvara1.webp",
+      "featured_image": "assets/creatividad/portfolioImg/ishvara.webp",
       "vertical_image": "",
       "featured_video": "",
       "gallery": [
+        "assets/creatividad/portfolioImg/ishvara1.webp",
         "assets/creatividad/portfolioImg/ishvara2.webp",
         "assets/creatividad/portfolioImg/ishvara3.webp",
         "assets/creatividad/portfolioImg/ishvara4.webp"
@@ -375,10 +377,11 @@
       "title": "terratua",
       "short_description": "",
       "long_description": "",
-      "featured_image": "assets/creatividad/portfolioImg/terratua1.webp",
+      "featured_image": "assets/creatividad/portfolioImg/terratua.webp",
       "vertical_image": "",
       "featured_video": "",
       "gallery": [
+        "assets/creatividad/portfolioImg/terratua1.webp",
         "assets/creatividad/portfolioImg/terratua2.webp"
       ],
       "category": ["disenio", "branding"],
@@ -394,13 +397,14 @@
       "title": "volvo trucks",
       "short_description": "",
       "long_description": "",
-      "featured_image": "assets/creatividad/portfolioImg/volvobanner1.webp",
+      "featured_image": "assets/creatividad/portfolioImg/volvo.webp",
       "vertical_image": "",
       "featured_video": "",
       "gallery": [
-        "assets/creatividad/portfolioImg/volvobotella2.webp",
-        "assets/creatividad/portfolioImg/volvomaterialpop3.webp",
-        "assets/creatividad/portfolioImg/volvotabletent4.webp"
+        "assets/creatividad/portfolioImg/volvo2.webp",
+        "assets/creatividad/portfolioImg/volvo3.webp",
+        "assets/creatividad/portfolioImg/volvo4.webp",
+        "assets/creatividad/portfolioImg/volvo5.webp"
       ],
       "category": ["disenio", "branding"],
       "tags": [],

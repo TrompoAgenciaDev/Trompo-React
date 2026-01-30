@@ -173,8 +173,8 @@ const Nosotros = () => {
   return (
     <>
       <SimpleHeroVideo
-        desktopSrc={`${base}assets/hero/home.mp4`}
-        mobileSrc={`${base}assets/hero/mobile/home-hero-mobile.mp4`}
+        desktopSrc={`${base}assets/hero/hero.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/hero-mobile.mp4`}
         desktopPoster={`${base}assets/hero/home.webp`}
         mobilePoster={`${base}assets/hero/mobile/home.webp`}
       />
@@ -255,25 +255,9 @@ const Nosotros = () => {
       </div>
 
       {/* Histórico de clientes */}
-      <div className="full-container black-bg">
+      <div className="full-container black-bg hide-storical-mobile">
         <StoricalClients />
       </div>
-      {/*
-      <div className="full-container black-bg">
-        <div className="container identidades">
-            <div className="card-identidades">
-              <h2>Las marcas son identidades vivas.</h2>
-              <p>Nuestro propósito es concebirlas y cultivarlas desde su núcleo más auténtico. A través de un sistema de marca sólido, construimos el fundamento estratégico y visual que permite a las empresas posicionarse con claridad, diferenciarse con fuerza y potenciar su activo más valioso: su identidad en el mundo.</p>
-            </div>
-            <div className="span-identidades">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-      </div>
-
-      */}
 
       {/* formulario */}
       <Contact />

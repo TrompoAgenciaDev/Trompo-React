@@ -294,5 +294,16 @@
   }
 }
 
+/* Ocultar sección de histórico de clientes en mobile */
+.hide-storical-mobile {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hide-storical-mobile {
+    display: flex;
+  }
+}
+
 @media (min-width: 1280px) {
 }

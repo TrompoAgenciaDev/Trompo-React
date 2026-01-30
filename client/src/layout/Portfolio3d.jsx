@@ -27,39 +27,45 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
       if (draggingRef.current) {
         e.preventDefault();
         e.stopPropagation();
-        return;
+        return false;
       }
 
       // Solo para desarrollo, abrir en nueva pestaña de forma segura
       if (location === "desarrollo" && enlacePortfolio) {
         e.preventDefault();
+        e.stopPropagation();
+        e.nativeEvent?.stopImmediatePropagation();
         // Usar window.open solo en respuesta directa a un click del usuario
         // Esto evita que los adblockers lo detecten como popup automático
-        const newWindow = window.open(enlacePortfolio, '_blank', 'noopener,noreferrer');
-        // Si el popup fue bloqueado, newWindow será null
-        // En ese caso, abrir en la misma ventana como fallback
-        if (!newWindow) {
-          window.location.href = enlacePortfolio;
-        }
+        window.open(enlacePortfolio, '_blank', 'noopener,noreferrer');
+        return false;
       }
     };
 
+    // Para desarrollo, usar div en lugar de <a> para evitar navegación
+    const Component = location === "desarrollo" ? motion.div : motion.a;
+    const linkProps = location === "desarrollo" 
+      ? {} 
+      : { 
+          href: enlacePortfolio || "#",
+          rel: "noopener noreferrer"
+        };
+
     return (
-      <motion.a
+      <Component
         onMouseOver={SlowSpeed}
         onMouseLeave={NormalSpeed}
         animate={{ x: ["-0%", "-300%"] }}
         transition={{ ease: "linear", duration: velocityReduction, repeat: Infinity }}
-        href={location === "desarrollo" ? enlacePortfolio : "#"}
-        rel="noopener noreferrer"
+        {...linkProps}
         data-id={id}
         className="portfolio-card"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
+        style={{ backgroundImage: `url(${backgroundImage})`, cursor: location === "desarrollo" ? "pointer" : undefined }}
         onClick={handleClick}
         draggable={false}
       >
         <h2 className="portfolio-title">{title}</h2>
-      </motion.a>
+      </Component>
     );
   };
 

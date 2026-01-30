@@ -71,12 +71,36 @@
 
 /* --- Estilos específicos para menú mobile --- */
 .mobile-menu li {
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid #3f3f3f;
   list-style: none;
 }
 
 .mobile-menu li:last-child {
   border-bottom: none;
+}
+
+/* Estilos para los links y textos del menú mobile */
+.mobile-menu .menu-item {
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  text-transform: capitalize;
+  -webkit-transition: color 0.1s ease-in-out;
+  -moz-transition: color 0.1s ease-in-out;
+  -o-transition: color 0.1s ease-in-out;
+  transition: color 0.1s ease-in-out;
+}
+
+.mobile-menu .menu-item .menu-item-content {
+  color: inherit;
+}
+
+.mobile-menu .menu-item:hover,
+.mobile-menu .menu-item:hover .menu-item-content {
+  color: #fed332;
 }
 
 /* Quitar borde inferior del contenedor cuando se usa menú mobile */

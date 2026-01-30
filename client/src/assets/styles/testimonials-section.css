@@ -5,6 +5,7 @@
     padding: 0;
     margin: 0 auto;
     position: relative;
+    height: 400px;
 }
 
 /* Gradientes de desvanecimiento en los bordes superior e inferior */
@@ -30,31 +31,10 @@
 }
 
 .testimonial-wrapper{
+    height: 400px;
     overflow: hidden;
-}
-
-/* Grid de 2 columnas para testimonial-wrapper en desktop */
-@media (min-width: 1024px) {
-    .testimonial-wrapper {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        align-items: stretch;
-        position: relative;
-    }
-
-    .testimonial-cards-slider {
-        max-width: 600px;
-        width: 100%;
-        grid-column: 1;
-        justify-self: end;
-        margin: 0;
-    }
-
-    .testimonial-wrapper > div:empty,
-    .testimonial-text-content {
-        grid-column: 2;
-    }
+    position: relative;
+    padding: 50px 0;
 }
 
 /* Estilos para el contenido de texto de testimonios */
@@ -138,7 +118,29 @@
     background: linear-gradient(to top, rgba(38, 38, 38, 1) 0%, rgba(38, 38, 38, 0) 100%);
 }
 
-@media (min-width: 1280px) {
-    .testimonial-text-content p {
+/* Grid de 2 columnas para testimonial-wrapper en desktop */
+@media (min-width: 1024px) {
+    .testimonial-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: stretch;
+        position: relative;
+        padding: 0;
+        height: 600px;
+    }
+    
+    .testimonial-cards-slider {
+        max-width: 600px;
+        width: 100%;
+        height: 600px;
+        grid-column: 1;
+        justify-self: end;
+        margin: 0;
+    }
+
+    .testimonial-wrapper > div:empty,
+    .testimonial-text-content {
+        grid-column: 2;
     }
 }

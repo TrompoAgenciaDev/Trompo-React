@@ -63,19 +63,27 @@ const useImagePreloader = (imageUrls, bufferSize = 3) => {
 };
 
 // Caché simple para evitar recargas múltiples
+// COMENTADO: Deshabilitado para forzar recarga siempre y ver cambios en tiempo real
 const portfolioCache = new Map();
 
-// Cargar datos del portfolio con caché
+// Cargar datos del portfolio sin caché para ver cambios en tiempo real
 async function fetchPortfolioData(category = "branding") {
   const cacheKey = `portfolio-${category}`;
   
-  // Verificar caché
-  if (portfolioCache.has(cacheKey)) {
-    return portfolioCache.get(cacheKey);
-  }
+  // COMENTADO: Deshabilitar caché en memoria para forzar recarga
+  // if (portfolioCache.has(cacheKey)) {
+  //   return portfolioCache.get(cacheKey);
+  // }
   
-  const res = await fetch(`${import.meta.env.BASE_URL}portfolio.json`, {
-    cache: "force-cache", // Usar caché del navegador
+  // Agregar timestamp para evitar caché del navegador
+  const timestamp = new Date().getTime();
+  const res = await fetch(`${import.meta.env.BASE_URL}portfolio.json?t=${timestamp}`, {
+    cache: "no-cache", // No usar caché del navegador
+    headers: {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    }
   });
   if (!res.ok) throw new Error("No se pudo cargar portfolio.json");
   const data = await res.json();
@@ -88,8 +96,8 @@ async function fetchPortfolioData(category = "branding") {
       return categories.some(cat => cat && cat.toLowerCase() === "branding" && !categories.some(c => c && c.toLowerCase() === "branding-web"));
     });
     
-    // Guardar en caché
-    portfolioCache.set(cacheKey, filtered);
+    // COMENTADO: No guardar en caché para forzar recarga
+    // portfolioCache.set(cacheKey, filtered);
     return filtered;
   }
   
@@ -100,8 +108,8 @@ async function fetchPortfolioData(category = "branding") {
     return categories.some(cat => cat && cat.toLowerCase() === "social media");
   });
   
-  // Guardar en caché
-  portfolioCache.set(cacheKey, filtered);
+  // COMENTADO: No guardar en caché para forzar recarga
+  // portfolioCache.set(cacheKey, filtered);
   return filtered;
 }
 

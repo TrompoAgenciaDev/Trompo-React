@@ -118,10 +118,10 @@ const SocialMedia = () => {
   return (
     <>
       <SimpleHeroVideo
-        desktopSrc={`${base}assets/hero/home.mp4`}
-        mobileSrc={`${base}assets/hero/mobile/home-hero-mobile.mp4`}
+        desktopSrc={`${base}assets/hero/hero.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/hero-mobile.mp4`}
         desktopPoster={`${base}assets/hero/home.webp`}
-        mobilePoster={`${base}assets/hero/mobile/home-mobile-poster.webp`}
+        mobilePoster={`${base}assets/hero/mobile/home.webp`}
       />
       
       <ServiceTitle titulo="Social Media" subtitulo="Dimensiones del patrón y momentos que conectan y dejan una imagen audaz." />

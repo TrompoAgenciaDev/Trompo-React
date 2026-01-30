@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import { motion, useMotionValue, animate } from "motion/react";
+import { motion, useMotionValue } from "motion/react";
 import useFetchTestimonials from "../hooks/useFetchTestimonials";
 import "../assets/styles/testimonials.css";
 
