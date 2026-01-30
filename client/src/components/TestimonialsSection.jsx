@@ -2,9 +2,9 @@ import React from "react";
 import Testimonials3D from "./Testimonials3d";
 import "../assets/styles/testimonials-section.css";
 
-const TestimonialsSection = () => {
+const TestimonialsSection = ({ backgroundClass = "" }) => {
   return (
-    <section className="full-container testimonial-wrapper">
+    <section className={`full-container testimonial-wrapper ${backgroundClass}`}>
       <div className="testimonial-cards-slider">
         <Testimonials3D />
       </div>

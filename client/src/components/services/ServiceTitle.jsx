@@ -191,7 +191,7 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
           </div>
         </div>
         <div className="full-container service-areas-container">
-          <div className="service-areas-wrapper">
+          <div className="container service-areas-wrapper">
             <motion.div
               className="service-areas-bg service-areas-bg-white"
               initial={{ y: '0%' }}

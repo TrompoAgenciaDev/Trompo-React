@@ -363,7 +363,7 @@ const EntregableItem = ({ number, title, children, isLast, itemRef, nextItemRef 
           >
             {number}
           </motion.span>
-          <motion.h3
+          <motion.h6
             initial={{ scale: 0, opacity: 0 }}
             animate={{
               scale: isInView ? 1 : 0,
@@ -375,7 +375,7 @@ const EntregableItem = ({ number, title, children, isLast, itemRef, nextItemRef 
             }}
           >
             {title}
-          </motion.h3>
+          </motion.h6>
         </div>
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
@@ -604,22 +604,22 @@ const Multimedia = () => {
           <div className="grid-multimedia-wrapper">
             <div className="grid-item-multimedia">
               <span>01</span>
-              <h3 className="question-multimedia">qué hacemos</h3>
+              <h6 className="question-multimedia">qué hacemos</h6>
               <p>Creamos contenido audiovisual estratégico que pone en movimiento la identidad de tu marca. Desde piezas breves y potentes para redes sociales hasta producciones corporativas ágiles, narramos, mostramos y hacemos sentir lo que la marca representa, con intención y coherencia en cada formato.</p>
             </div>
             <div className="grid-item-multimedia">
               <span>02</span>
-              <h3 className="question-multimedia">Cómo lo hacemos</h3>
+              <h6 className="question-multimedia">Cómo lo hacemos</h6>
               <p>Nuestro proceso combina estrategia narrativa, producción ágil y tecnología aplicada con criterio. Partimos de ideas claras, guiones optimizados y storyboards pensados para captar atención en segundos y cumplir un objetivo concreto en cada plataforma.</p>
             </div>
             <div className="grid-item-multimedia">
               <span>03</span>
-              <h3 className="question-multimedia">Producción y post con propósito</h3>
+              <h6 className="question-multimedia">Producción y post con propósito</h6>
               <p>Grabamos en contextos reales o sets ligeros, priorizando autenticidad, ritmo visual y mensaje. En postproducción sumamos edición dinámica, motion graphics, animación 2D, transiciones y sonido para transformar la idea en una pieza lista para competir en entornos digitales.</p>
             </div>
             <div className="grid-item-multimedia">
               <span>04</span>
-              <h3 className="question-multimedia">Tecnología e IA aplicada</h3>
+              <h6 className="question-multimedia">Tecnología e IA aplicada</h6>
               <p>Integramos inteligencia artificial de forma estratégica para potenciar resultados: asistencia creativa en guiones y copy, generación de assets visuales, locuciones sintéticas de alta calidad, limpieza de audio y subtitulado creativo diseñado como parte activa de la narrativa.</p>
             </div>
           </div>
@@ -640,7 +640,7 @@ const Multimedia = () => {
         <div className="container">
           <div className="grid-productos-multimedia container">
             <div className="grid-item-video-multimedia">
-              <img src={`${base}assets/sillon.webp`} />
+              <img src={`${base}assets/ofi.webp`} />
             </div>
             <div className="grid-item-productos-multimedia">
               <ProductosItemsList />
@@ -648,7 +648,6 @@ const Multimedia = () => {
           </div>
         </div>
       </div>
-
       
       <div className="full-container black-bg">
         <div className="container">
@@ -656,19 +655,19 @@ const Multimedia = () => {
         </div>
         <div className="container grid-entregables">
           <div className="item-entregables">
-            <h3>Identidad Corporativa</h3>
+            <h5>Identidad Corporativa</h5>
             <p>Sistema completo de marca que define la identidad, coherencia y proyección visual en todos los puntos de contacto.</p>
           </div>
           <div className="item-entregables">
-            <h3>Papelería, Señalética y Espacios</h3>
+            <h5>Papelería, Señalética y Espacios</h5>
             <p>Diseño institucional premium aplicado a piezas gráficas, señalética y proyectos espaciales.</p>
           </div>
           <div className="item-entregables">
-            <h3>Manual de Marca</h3>
+            <h5>Manual de Marca</h5>
             <p>Guía estratégica y visual que ordena el uso de la identidad en entornos digitales y físicos.</p>
           </div>
           <div className="item-entregables">
-            <h3>Material POP, Mercadería y Templates</h3>
+            <h5>Material POP, Mercadería y Templates</h5>
             <p>Desarrollo de piezas promocionales y templates corporativos alineados al sistema de marca.</p>
           </div>
         </div>
@@ -676,7 +675,7 @@ const Multimedia = () => {
 
       <Beneficios />
 
-      <TestimonialsSection />
+      <TestimonialsSection backgroundClass="white-bg" />
 
       <Contact form="multimedia" />
 

@@ -44,10 +44,10 @@ const InfiniteSlider = ({ text }) => {
       }}
     >
       {items.map((item, index) => (
-        <h1 key={index} className="infinite-slider-item">{item}</h1>
+        <h2 key={index} className="infinite-slider-item">{item}</h2>
       ))}
       {items.map((item, index) => (
-        <h1 key={`duplicate-${index}`} className="infinite-slider-item">{item}</h1>
+        <h2 key={`duplicate-${index}`} className="infinite-slider-item">{item}</h2>
       ))}
     </motion.div>
   );
@@ -57,9 +57,9 @@ const WebDesignSection = () => {
   return (
     <div className="full-container web-design-container">
       <div className="container">
-        <h1 className="text-highlight">
+        <h2 className="text-highlight">
           Diseñamos y desarrollamos plataformas digitales escalables
-        </h1>
+        </h2>
       </div>
       <div className="container web-design-container-text">
         <div className="container-text">
@@ -424,7 +424,7 @@ const ProductoItem = ({ number, title, children, isLast, itemRef, nextItemRef })
           >
             {number}
           </motion.span>
-          <motion.h3
+          <motion.h6
             initial={{ scale: 0, opacity: 0 }}
             animate={{
               scale: isInView ? 1 : 0,
@@ -436,7 +436,7 @@ const ProductoItem = ({ number, title, children, isLast, itemRef, nextItemRef })
             }}
           >
             {title}
-          </motion.h3>
+          </motion.h6>
         </div>
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
@@ -527,8 +527,6 @@ const Desarrollo = () => {
         </div>
       </div>
 
-      
-
       <div className="full-container dev-container">
         <div className="full-container infinite-slider-container">
           <InfiniteSlider text="Qué hacemos" />
@@ -539,7 +537,7 @@ const Desarrollo = () => {
             <div className="container">
               <div className="grid-item-dev">
                 <span className="number-title">01</span>
-                <span>Infraestructura Digital</span>
+                <h5>Infraestructura Digital</h5>
               </div>
               <div className="grid-item-dev">
                 <p>
@@ -552,7 +550,7 @@ const Desarrollo = () => {
             <div className="container">
               <div className="grid-item-dev">
                 <span className="number-title">02</span>
-                <span>Experiencia de Usuario (UX/UI)</span>
+                <h5>Experiencia de Usuario (UX/UI)</h5>
               </div>
               <div className="grid-item-dev">
                 <p>
@@ -565,7 +563,7 @@ const Desarrollo = () => {
             <div className="container">
               <div className="grid-item-dev">
                 <span className="number-title">03</span>
-                <span> Diseño, Tecnología y Conversión</span>
+                <h5> Diseño, Tecnología y Conversión</h5>
               </div>
               <div className="grid-item-dev">
                 <p>
@@ -593,7 +591,7 @@ const Desarrollo = () => {
 
       <Beneficios />
 
-      <TestimonialsSection />
+      <TestimonialsSection backgroundClass="white-bg" />
 
       <Contact form="desarrollo"/>
       

@@ -32,7 +32,6 @@
 }
 
 .grid-item:first-child p {
-  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -135,11 +134,9 @@
   }
 
   .grid-item:first-child h2 {
-    font-size: 24px;
   }
 
   .grid-item:first-child p {
-    font-size: 15px;
   }
 
   .grid-value-content .content-grid {
@@ -180,11 +177,9 @@
   }
 
   .grid-item:first-child h2 {
-    font-size: 24px;
   }
 
   .grid-item:first-child p {
-    font-size: 15px;
   }
 
   .grid-value-content .content-grid {

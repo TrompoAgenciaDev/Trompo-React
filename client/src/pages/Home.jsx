@@ -13,6 +13,7 @@ import Beneficios from "../components/Beneficios";
 import Menu from "../components/Menu";
 import routesConfig from "../config/routesConfig";
 import ServiceTitle from "../components/services/ServiceTitle.jsx";
+import IdentidadesSection from "../components/IdentidadesSection.jsx";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -64,10 +65,10 @@ const InfiniteSlider = ({ text }) => {
       }}
     >
       {items.map((item, index) => (
-        <h1 key={index} className="infinite-slider-item">{item}</h1>
+        <h2 key={index} className="infinite-slider-item">{item}</h2>
       ))}
       {items.map((item, index) => (
-        <h1 key={`duplicate-${index}`} className="infinite-slider-item">{item}</h1>
+        <h2 key={`duplicate-${index}`} className="infinite-slider-item">{item}</h2>
       ))}
     </motion.div>
   );
@@ -400,19 +401,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="full-container black-bg">
-        <div className="container identidades">
-            <div className="card-identidades">
-              <h4>Las marcas son identidades vivas.</h4>
-              <p>Nuestro propósito es concebirlas y cultivarlas desde su núcleo más auténtico. A través de un sistema de marca sólido, construimos el fundamento estratégico y visual que permite a las empresas posicionarse con claridad, diferenciarse con fuerza y potenciar su activo más valioso: su identidad en el mundo.</p>
-            </div>
-            <div className="span-identidades">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-      </div>
+      <IdentidadesSection backgroundClass="bg-yellow-2" />
 
       <Beneficios />
 

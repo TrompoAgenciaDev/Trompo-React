@@ -5,6 +5,7 @@ import { useEffect, useState, useRef, useMemo } from "react";
 import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import Contact from "../layout/Contact";
 import TestimonialsSection from "../components/TestimonialsSection.jsx";
+import IdentidadesSection from "../components/IdentidadesSection.jsx";
 
 import "../assets/styles/contact-page.css";
 
@@ -216,19 +217,7 @@ const Contactanos = () => {
         <TestimonialsSection />
       </div>
 
-      <div className="full-container black-bg">
-        <div className="container identidades">
-            <div className="card-identidades">
-              <h2>Las marcas son identidades vivas.</h2>
-              <p>Nuestro propósito es concebirlas y cultivarlas desde su núcleo más auténtico. A través de un sistema de marca sólido, construimos el fundamento estratégico y visual que permite a las empresas posicionarse con claridad, diferenciarse con fuerza y potenciar su activo más valioso: su identidad en el mundo.</p>
-            </div>
-            <div className="span-identidades">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-      </div>
+      <IdentidadesSection backgroundClass="bg-yellow-2" />
 
       <Contact form="contactanos" location="contactanos"/>
 

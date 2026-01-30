@@ -279,7 +279,6 @@
   .servicios-header span {
     font-weight: 700;
     font-size: 22px;
-    font-family: var(--font-portfolio);
     color: #ffffff;
   }
 
@@ -362,7 +361,6 @@
   .servicios-options a span {
     font-weight: 400;
     color: #ffffff;
-    font-family: var(--font-portfolio);
     font-style: normal;
     font-size: 24px;
   }

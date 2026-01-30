@@ -15,6 +15,10 @@ const sliderImages = [
   `${import.meta.env.BASE_URL}assets/customerImg/sw.webp`,
   `${import.meta.env.BASE_URL}assets/customerImg/viditec.webp`,
   `${import.meta.env.BASE_URL}assets/customerImg/volvo.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/femesa.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/guanaco.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/lhaka.webp`,
+  `${import.meta.env.BASE_URL}assets/customerImg/sanatorio-santa-fe.webp`,
 ];
 
 function colsForWidth(w) {

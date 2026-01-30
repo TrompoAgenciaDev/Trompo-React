@@ -5,7 +5,6 @@ const Home = lazy(() => import("../pages/Home"));
 const Nosotros = lazy(() => import("../pages/Nosotros.jsx"));
 const Contactanos = lazy(() => import("../pages/Contactanos"));
 const Casos = lazy(() => import("../pages/Casos"));
-const Trends = lazy(() => import("../pages/Trends"));
 const Terms = lazy(() => import("../pages/terms"));
 const Gracias = lazy(() => import("../pages/Gracias"));
 

@@ -174,32 +174,32 @@ const SocialMedia = () => {
           <div className="grid-social-media-info-wrapper">
             <div className="grid-item-social-media-info">
               <span>01</span>
-              <h3 className="question-social-media">ESTRATEGIA DE CONTENIDO & COMMUNITY</h3>
+              <h6 className="question-social-media">ESTRATEGIA DE CONTENIDO & COMMUNITY</h6>
               <p>Definimos un social brand sólido: tono, personalidad y pilares claros. A partir de ahí construimos una matriz de contenido inteligente, adaptable y relevante, pensada para sostener la marca en el tiempo.</p>
             </div>
             <div className="grid-item-social-media-info">
               <span>02</span>
-              <h3 className="question-social-media">CREACIÓN & DISEÑO NATIVO</h3>
+              <h6 className="question-social-media">CREACIÓN & DISEÑO NATIVO</h6>
               <p>Cada idea se traduce al lenguaje propio de cada plataforma. Instagram, LinkedIn, TikTok y más: el diseño no acompaña el mensaje, es parte esencial de cómo se comunica.</p>
             </div>
             <div className="grid-item-social-media-info">
               <span>03</span>
-              <h3 className="question-social-media">GESTIÓN DE COMUNIDAD PROACTIVA</h3>
+              <h6 className="question-social-media">GESTIÓN DE COMUNIDAD PROACTIVA</h6>
               <p>No publicamos y desaparecemos. Escuchamos, respondemos, incentivamos y moderamos, cuidando cada interacción y fortaleciendo el vínculo entre la marca y su comunidad.</p>
             </div>
             <div className="grid-item-social-media-info">
               <span>04</span>
-              <h3 className="question-social-media">PLANIFICACIÓN & EJECUCIÓN</h3>
+              <h6 className="question-social-media">PLANIFICACIÓN & EJECUCIÓN</h6>
               <p>Organizamos el contenido a través de calendarios claros y flexibles, alineados a objetivos, momentos culturales y necesidades reales de la marca.</p>
             </div>
             <div className="grid-item-social-media-info">
               <span>05</span>
-              <h3 className="question-social-media">ANÁLISIS & ADAPTACIÓN</h3>
+              <h6 className="question-social-media">ANÁLISIS & ADAPTACIÓN</h6>
               <p>Medimos desempeño, conversación y percepción. Aplicamos social listening y ajustamos la estrategia para evolucionar junto a la comunidad y el contexto digital.</p>
             </div>
             <div className="grid-item-social-media-info">
               <span>06</span>
-              <h3 className="question-social-media">ENTREGABLES</h3>
+              <h6 className="question-social-media">ENTREGABLES</h6>
               <p>Estrategia integral de Social Media, planificación de contenido (matriz y calendario), creación y diseño de piezas nativas (feed, stories, reels), gestión diaria de comunidades, reportes de desempeño y conversación, social listening y adaptación estratégica.</p>
             </div>
           </div>
@@ -213,7 +213,7 @@ const SocialMedia = () => {
 
       <Inversiones />
 
-      <TestimonialsSection />
+      <TestimonialsSection backgroundClass="bg-white" />
 
       <Contact form="interaccion" />
       

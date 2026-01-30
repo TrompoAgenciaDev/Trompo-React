@@ -20,16 +20,13 @@
 }
 
 .brand-video-title {
-    font-size: 24px;
     font-weight: 700;
     margin-bottom: 20px;
     color: #8e8e8e;
     line-height: 1.2;
-    font-family: var(--font-portfolio);
 }
 
 .brand-video-panel p {
-    font-size: 14px;
     line-height: 1.6;
     color: #1D1D1B;
     padding: 0;
@@ -50,11 +47,9 @@
     }
 
     .brand-video-title {
-        font-size: 48px;
     }
 
     .brand-video-panel p {
-        font-size: 15px;
     }
 }
 

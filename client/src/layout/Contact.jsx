@@ -2,17 +2,9 @@
 import "../assets/styles/contact.css";
 import FormIndex from "../components/forms/FormIndex";
 
-const BGS = {
-  home: "form.webp",
-  contactanos: "contact-bg.webp", // Nueva imagen específica para contacto
-  default: "form.webp", // Fallback
-};
-
 function Contact({ location = "home", form }) {
   const base = import.meta.env.BASE_URL;
-  const key = String(location).toLowerCase();
-  const file = BGS[key] || BGS.default;
-  const bg = `url(${base}assets/contact/${file})`;
+  const bg = `url(${base}assets/contact/form-bg.webp)`;
 
   return (
     <section

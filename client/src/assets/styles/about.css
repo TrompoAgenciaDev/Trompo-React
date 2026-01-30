@@ -38,7 +38,6 @@
   -moz-osx-font-smoothing: grayscale;
   color: #000000 !important;
   font-weight: 500;
-  font-family: var(--font-portfolio);
   line-height: 1.2;
   transition: mix-blend-mode 0.2s ease;
 }
@@ -82,7 +81,6 @@
 .about-question{
   text-transform: uppercase;
   font-weight: 400;
-  font-family: var(--font-portfolio);
 }
 
 .about-grid-item:before{
@@ -150,7 +148,6 @@
 
 .members-container h4{
   color: #ffffff;
-  font-family: var(--font-portfolio);
   font-weight: 500;  
 }
 
@@ -165,7 +162,6 @@
 
 .members-container p{
   color: #ffffff;
-  font-family: var(--font-portfolio);
   font-weight: 400;
 }
 

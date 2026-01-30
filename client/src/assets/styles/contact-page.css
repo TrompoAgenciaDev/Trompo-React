@@ -6,7 +6,6 @@
 
 .contact-main-title {
     font-weight: 700;
-    font-family: var(--font-portfolio);
     line-height: 1.2;
     transition: color 0.3s ease;
     color: #ffffff;

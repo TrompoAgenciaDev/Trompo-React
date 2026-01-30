@@ -89,7 +89,6 @@
 }
 
 .parr-section-container p{
-  font-size: 12px;
   line-height: 1.5;
 }
 
@@ -106,7 +105,6 @@
 }
 
 .title-portfolio-container p{
-  font-size: 13px;
 }
 
 .files-carousel-container{
@@ -143,7 +141,6 @@
 }
 
 .how-container p{
-  font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
   color: #ffffff;
@@ -158,12 +155,12 @@
 }
 
 .grid-item-social-media-info span,
-.grid-item-social-media-info h3,
+.grid-item-social-media-info h6,
 .grid-item-social-media-info p {
   color: #ffffff;
 }
 
-.grid-item-social-media-info h3,
+.grid-item-social-media-info h6,
 .grid-item-social-media-info p {
   padding-left: 8px;
 }
@@ -181,10 +178,9 @@
   position: relative;
 }
 
-.grid-item-social-media-info h3 {
+.grid-item-social-media-info h6 {
   text-transform: uppercase;
   font-weight: 400;
-  font-family: var(--font-portfolio);
 }
 
 .grid-item-social-media-info:before {
@@ -198,7 +194,6 @@
 }
 
 .grid-item-social-media-info p {
-  font-size: 13px;
   line-height: 1.5;
 }
 
@@ -241,7 +236,6 @@
   color: #000000 !important;
   font-size: 48px;
   font-weight: 500;
-  font-family: var(--font-portfolio);
   line-height: 1.2;
   transition: mix-blend-mode 0.2s ease;
 }
@@ -281,7 +275,6 @@
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 10px;
-  font-family: var(--font-portfolio);
 }
 
 @media (max-width: 767px) {
@@ -331,7 +324,6 @@
 }
 
 .grid-item-impulsos p{
-  font-size: 13px;
 }
 
 /* ============================================
@@ -356,7 +348,6 @@
   
 
   .parr-section-container p{
-    font-size: 13px;
   }
 
   .title-portfolio-container{
@@ -366,11 +357,9 @@
   }
 
   .title-portfolio-container h3{
-    font-size: 28px;
   }
 
   .title-portfolio-container p{
-    font-size: 14px;
   }
 
   .grid-social-media-info-wrapper {
@@ -379,7 +368,6 @@
   }
 
   .grid-item-social-media-info p {
-    font-size: 14px;
   }
 
   .highlight-text{
@@ -388,7 +376,6 @@
 
   
   .grid-item-impulsos p{
-    font-size: 14px;
   }
 }
 
@@ -444,7 +431,6 @@
   
 
   .parr-section-container p{
-    font-size: 14px;
   }
 
   .title-portfolio-container{
@@ -463,7 +449,6 @@
   }
 
   .grid-item-social-media-info p {
-    font-size: 16px;
   }
 
   .how-container{
@@ -474,7 +459,6 @@
 
   
   .how-container p{
-    font-size: 15px;
   }
 
   .highlight-text{
@@ -497,7 +481,6 @@
 
   
   .grid-item-impulsos p{
-    font-size: 15px;
   }
 
 }
@@ -535,7 +518,6 @@
   
 
   .parr-section-container p{
-    font-size: 15px;
   }
 
   .title-portfolio-container{

@@ -7,6 +7,15 @@ const ClearCache = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Prevenir indexación en motores de búsqueda
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (!robotsMeta) {
+      robotsMeta = document.createElement("meta");
+      robotsMeta.setAttribute("name", "robots");
+      document.head.appendChild(robotsMeta);
+    }
+    robotsMeta.setAttribute("content", "noindex, nofollow");
+
     // Forzar no-cache en esta página
     const metaTags = [
       { httpEquiv: "Cache-Control", content: "no-cache, no-store, must-revalidate" },

@@ -29,6 +29,10 @@
     background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
 }
 
+.testimonial-wrapper{
+    overflow: hidden;
+}
+
 /* Grid de 2 columnas para testimonial-wrapper en desktop */
 @media (min-width: 1024px) {
     .testimonial-wrapper {
@@ -72,10 +76,69 @@
     max-width: 800px;
     margin-bottom: 1rem;
     text-align: left;
+    color: #ffffff;
+}
+
+/* Estilos cuando el fondo es claro (blanco o amarillo) */
+.bg-yellow .testimonial-text-content h3,
+.bg-yellow-2 .testimonial-text-content h3,
+.bg-white .testimonial-text-content h3,
+.white-bg .testimonial-text-content h3 {
+    color: #262626;
+}
+
+.bg-yellow .testimonial-text-content p,
+.bg-yellow-2 .testimonial-text-content p,
+.bg-white .testimonial-text-content p,
+.white-bg .testimonial-text-content p {
+    color: #262626;
+}
+
+/* Estilos cuando el fondo es oscuro (black-bg) - mantener texto blanco por defecto */
+.black-bg .testimonial-text-content h3,
+.black-bg-2 .testimonial-text-content h3 {
+    color: #ffffff;
+}
+
+.black-bg .testimonial-text-content p,
+.black-bg-2 .testimonial-text-content p {
+    color: #ffffff;
+}
+
+/* Gradientes adaptados para fondo amarillo */
+.bg-yellow .testimonial-cards-slider::before,
+.bg-yellow-2 .testimonial-cards-slider::before {
+    background: linear-gradient(to bottom, rgba(254, 224, 112, 1) 0%, rgba(254, 224, 112, 0) 100%);
+}
+
+.bg-yellow .testimonial-cards-slider::after,
+.bg-yellow-2 .testimonial-cards-slider::after {
+    background: linear-gradient(to top, rgba(254, 224, 112, 1) 0%, rgba(254, 224, 112, 0) 100%);
+}
+
+/* Gradientes adaptados para fondo blanco */
+.bg-white .testimonial-cards-slider::before,
+.white-bg .testimonial-cards-slider::before {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.bg-white .testimonial-cards-slider::after,
+.white-bg .testimonial-cards-slider::after {
+    background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+/* Gradientes adaptados para fondo oscuro (black-bg) */
+.black-bg .testimonial-cards-slider::before,
+.black-bg-2 .testimonial-cards-slider::before {
+    background: linear-gradient(to bottom, rgba(38, 38, 38, 1) 0%, rgba(38, 38, 38, 0) 100%);
+}
+
+.black-bg .testimonial-cards-slider::after,
+.black-bg-2 .testimonial-cards-slider::after {
+    background: linear-gradient(to top, rgba(38, 38, 38, 1) 0%, rgba(38, 38, 38, 0) 100%);
 }
 
 @media (min-width: 1280px) {
     .testimonial-text-content p {
-        font-size: 18px;
     }
 }

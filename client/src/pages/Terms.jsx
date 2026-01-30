@@ -4,14 +4,6 @@ function Terms() {
   return (
     <>
       <div className="full-container black-bg hero-terms-container">
-        <div className="container">
-          <div className="terms-service-title-container">
-            <h2>Términos</h2>
-            <h2>Términos</h2>
-            <h2>Términos</h2>
-            <h2>Términos</h2>
-          </div>
-        </div>
         <div className="container terms-title-container">
           <h1 className="terms-main-title">Términos y Condiciones</h1>
         </div>
@@ -20,11 +12,11 @@ function Terms() {
       <div className="full-container white-bg terms-content-container">
         <div className="container terms-content">
           <section className="terms-section">
-            <h1 className="terms-title">Términos y Condiciones Generales</h1>
+            <h3 className="terms-title">Términos y Condiciones Generales</h3>
 
             <ul className="terms-list">
               <li className="terms-item">
-                <h2 className="terms-subtitle">1. Ámbito de aplicación</h2>
+                <h6 className="terms-subtitle">1. Ámbito de aplicación</h6>
                 <p className="terms-paragraph">
                   Estos Términos y Condiciones regulan la prestación de servicios de
                   marketing digital, branding y desarrollo web por parte de Trompo
@@ -34,7 +26,7 @@ function Terms() {
               </li>
 
               <li className="terms-item">
-                <h2 className="terms-subtitle">2. Propiedad Intelectual</h2>
+                <h6 className="terms-subtitle">2. Propiedad Intelectual</h6>
                 <p className="terms-paragraph">
                   Todas las ideas, conceptos, bocetos, presentaciones, demos y
                   presupuestos generados por Trompo Agencia son de nuestra exclusiva
@@ -44,7 +36,7 @@ function Terms() {
               </li>
 
               <li className="terms-item">
-                <h2 className="terms-subtitle">3. Alcance de los servicios</h2>
+                <h6 className="terms-subtitle">3. Alcance de los servicios</h6>
                 <p className="terms-paragraph">
                   Cada servicio se describe en el acuerdo o presupuesto aprobado.
                   Cualquier trabajo adicional se cotiza y aprueba por separado.
@@ -52,7 +44,7 @@ function Terms() {
               </li>
 
               <li className="terms-item">
-                <h2 className="terms-subtitle">4. Revisión y cambios</h2>
+                <h6 className="terms-subtitle">4. Revisión y cambios</h6>
                 <p className="terms-paragraph">
                   Incluimos "X" rondas de ajustes según lo pactado; los extras se
                   facturan aparte. El cliente revisa y aprueba el material antes de
@@ -61,7 +53,7 @@ function Terms() {
               </li>
 
               <li className="terms-item">
-                <h2 className="terms-subtitle">5. Formas y plazos de pago</h2>
+                <h6 className="terms-subtitle">5. Formas y plazos de pago</h6>
                 <ul className="terms-sublist">
                   <li>
                     Servicios puntuales: pago a 30 días corridos contra factura.
@@ -74,7 +66,7 @@ function Terms() {
               </li>
 
               <li className="terms-item">
-                <h2 className="terms-subtitle">6. Responsabilidad limitada</h2>
+                <h6 className="terms-subtitle">6. Responsabilidad limitada</h6>
                 <p className="terms-paragraph">
                   No respondemos por resultados comerciales, daños indirectos ni
                   decisiones estratégicas del cliente.
@@ -82,7 +74,7 @@ function Terms() {
               </li>
 
               <li className="terms-item">
-                <h2 className="terms-subtitle">7. Propiedad y liberación de cuentas Ads</h2>
+                <h6 className="terms-subtitle">7. Propiedad y liberación de cuentas Ads</h6>
                 <p className="terms-paragraph">
                   Las cuentas Ads creadas y configuradas por Trompo Agencia son de
                   nuestra titularidad hasta su liberación, cuyo costo se define en
@@ -95,7 +87,7 @@ function Terms() {
               </li>
 
               <li className="terms-item">
-                <h2 className="terms-subtitle">8. Cancelación</h2>
+                <h6 className="terms-subtitle">8. Cancelación</h6>
                 <p className="terms-paragraph">
                   Se requiere aviso con 30 días de anticipación para dar por
                   finalizado cualquier servicio recurrente; de lo contrario, se
@@ -104,7 +96,7 @@ function Terms() {
               </li>
 
               <li className="terms-item">
-                <h2 className="terms-subtitle">9. Jurisdicción</h2>
+                <h6 className="terms-subtitle">9. Jurisdicción</h6>
                 <p className="terms-paragraph">
                   Toda disputa se dirime en los tribunales de la Ciudad Autónoma de
                   Buenos Aires.
@@ -114,7 +106,7 @@ function Terms() {
           </section>
 
           <section className="terms-section">
-            <h1 className="terms-title">Aviso Legal y Política de Privacidad</h1>
+            <h5 className="terms-title">Aviso Legal y Política de Privacidad</h5>
             <p className="terms-paragraph">
               Trompo Agencia cumple con la normativa argentina de protección de
               datos y, de ser aplicable, con el RGPD europeo.
@@ -134,7 +126,7 @@ function Terms() {
           </section>
 
           <section className="terms-section">
-            <h1 className="terms-title">Cláusula de No Exclusividad</h1>
+            <h5 className="terms-title">Cláusula de No Exclusividad</h5>
             <p className="terms-paragraph">
               El cliente reconoce y acepta que Trompo Agencia puede prestar
               servicios similares a empresas del mismo sector, salvo pacto expreso y
@@ -143,7 +135,7 @@ function Terms() {
           </section>
 
           <section className="terms-section">
-            <h1 className="terms-title">Cláusula de Suspensión</h1>
+            <h5 className="terms-title">Cláusula de Suspensión</h5>
             <p className="terms-paragraph">
               En caso de falta de pago en los plazos acordados, Trompo Agencia podrá
               suspender de inmediato la prestación de servicios hasta la

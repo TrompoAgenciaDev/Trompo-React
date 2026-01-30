@@ -175,7 +175,13 @@ video {
 
 p {
   color: #222222;
-  font-size: 12px;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  p {
+    font-size: 18px;
+  }
 }
 
 .bg-yellow {
@@ -305,11 +311,11 @@ h2 {
 }
 
 h3 {
-  font-size: 20px;
+  font-size: 24px;
 }
 
 h4 {
-  font-size: 14px;
+  font-size: 20px;
 }
 
 h5 {
@@ -317,7 +323,7 @@ h5 {
 }
 
 h6 {
-  font-size: 18px;
+  font-size: 17px;
 }
 
 @media (min-width: 768px) {
@@ -326,15 +332,15 @@ h6 {
   }
 
   h2 {
-    font-size: 40px;
+    font-size: 44px;
   }
 
   h3 {
-    font-size: 42px;
+    font-size: 32px;
   }
 
   h4 {
-    font-size: 36px;
+    font-size: 26px;
   }
 
   h5 {
@@ -342,13 +348,25 @@ h6 {
   }
 
   h6 {
-    font-size: 18px;
+    font-size: 20px;
   }
 }
 
 @media (min-width: 1024px) {
+  h1 {
+    font-size: 72px;
+  }
+
+  h2 {
+    font-size: 52px;
+  }
+
   h3 {
-    font-size: 42px;
+    font-size: 38px;
+  }
+
+  h4 {
+    font-size: 30px;
   }
 
   h5 {
@@ -356,7 +374,7 @@ h6 {
   }
 
   h6 {
-    font-size: 24px;
+    font-size: 22px;
   }
 }
 
@@ -366,19 +384,23 @@ h6 {
   }
 
   h2 {
-    font-size: 50px;
-  }
-
-  h3 {
     font-size: 60px;
   }
 
+  h3 {
+    font-size: 46px;
+  }
+
   h4 {
-    font-size: 54px;
+    font-size: 36px;
   }
 
   h5 {
-    font-size: 32px;
+    font-size: 28px;
+  }
+
+  h6 {
+    font-size: 24px;
   }
 }
 

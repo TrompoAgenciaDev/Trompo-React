@@ -78,12 +78,9 @@
 }
 
 .grid-item-service h2{
-  font-size: 17px;
-  font-family: var(--font-portfolio);
 }
 
 .grid-item-service p{
-  font-size: 12px;
 }
 
 .grid-item-service img{
@@ -121,7 +118,6 @@
 .desarrollo-post .container:first-child h2{
   color: #8E8E8E;
   font-weight: 500;
-  font-size: 20px;
   text-align: center;
 }
 
@@ -146,7 +142,6 @@
 }
 
 .title-portfolio-container p{
-  font-size: 13px;
 }
 
 .more-info-button{
@@ -222,11 +217,9 @@
   }
 
   .grid-item-service h2{
-    font-size: 20px;
   }
 
   .grid-item-service p{
-    font-size: 14px;
   }
 
   .diagonal-invertida:nth-child(2){
@@ -257,7 +250,6 @@
   }
 
   .desarrollo-post .container:first-child h2{
-    font-size: 22px;
   }
 
   .title-portfolio-container{
@@ -268,7 +260,6 @@
 
 
   .title-portfolio-container p{
-    font-size: 14px;
   }
 }
 
@@ -333,11 +324,9 @@
   }
 
   .grid-item-service h2{
-    font-size: 22px;
   }
 
   .grid-item-service p{
-    font-size: 14px;
   }
 
   .values-section .grid-container{
@@ -349,7 +338,6 @@
   }
 
   .desarrollo-post .container:first-child h2{
-    font-size: 24px;
   }
 
   .desarrollo-post .post-card .container{
@@ -414,7 +402,6 @@
   }
 
   .desarrollo-post .container:first-child h2{
-    font-size: 28px;
   }
   
   .grid-item-service p{    
@@ -423,7 +410,6 @@
   }
   
   .grid-item-service h2{
-    font-size: 26px;
     width: 100%;
     max-width: 800px;
   }
@@ -508,7 +494,6 @@
   }
 
   .grid-item-service h2{
-    font-size: 26px;
     width: 100%;
     max-width: 700px;
   }
@@ -516,13 +501,11 @@
   .diagonal-invertida .grid-item-service:first-child p{
     width: 100%;
     max-width: 700px;
-    font-size: 14px;
   }
 
   .diagonal .grid-item-service:first-child p{
     width: 100%;
     max-width: 700px;
-    font-size: 14px;
   }
 
   .service-container-text{

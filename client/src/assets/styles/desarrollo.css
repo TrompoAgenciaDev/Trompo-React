@@ -2,13 +2,11 @@
     color: #FED332;
     font-weight: 700;
     margin-bottom: 10px;
-    font-family: var(--font-portfolio);
 }
 
 .dev-container .container h2{
     color: #ffffff;
     font-weight: 400;
-    font-family: var(--font-portfolio);
 }
 
 /* Mobile First - Grid Dev */
@@ -44,7 +42,6 @@
 
 .grid-item-dev p,
 .grid-item-dev span{
-    font-size: 18px;
     color: #ffffff;
     -webkit-transition: color 0.3s ease;
     -o-transition: color 0.3s ease;
@@ -52,7 +49,6 @@
 }
 
 .grid-item-dev span{
-    font-family: var(--font-portfolio);
     font-weight: 700;
 }
 
@@ -128,9 +124,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #000000 !important; /* Texto negro por defecto - forzar con !important */
-    font-size: 48px;
     font-weight: 500;
-    font-family: var(--font-portfolio);
     line-height: 1.2;
     transition: mix-blend-mode 0.2s ease;
     /* NO cambiar el color por hover - solo por blend mode */
@@ -199,7 +193,6 @@
     color: #ffffff;
     font-size: 24px;
     font-weight: 700;
-    font-family: var(--font-portfolio);
 }
 
 .zoomin-image-wrapper{
@@ -222,7 +215,6 @@
 }
 
 .text-highlight{
-    font-size: 30px;
     color: #000000;
     text-align: center;
 }
@@ -236,7 +228,6 @@
 }
 
 .web-design-container p{
-    font-size: 14px;
     color: #000000;
     font-weight: 400;
 } 
@@ -265,7 +256,6 @@
 
     .grid-item-dev p,
     .grid-item-dev span{
-        font-size: 24px;
     }
 
     .infinite-slider{
@@ -274,7 +264,6 @@
 
     .infinite-slider-item{
         padding-right: 80px;
-        font-size: 64px;
     }
 
     .highlight-text{
@@ -285,12 +274,7 @@
         font-size: 48px;
     }
 
-    .text-highlight{
-        font-size: 80px;
-    }
-
     .web-design-container p{
-        font-size: 17px;
         font-weight: 400;
     }
     
@@ -392,13 +376,11 @@
 }
 
 .desarrollo-producto-item h3{
-    font-size: 20px;
     margin: 0;
 }
 
 .desarrollo-producto-item p{
     color: #ffffff;
-    font-size: 12px;
     margin: 0;
     padding-left: 56px;
 }
@@ -471,7 +453,6 @@
 
 @media (min-width: 768px) {
     .desarrollo-producto-item p{
-        font-size: 14px;
     }
 
     .grid-productos-desarrollo{
@@ -493,7 +474,6 @@
 
 
     .desarrollo-producto-item p{
-        font-size: 15px;
     }
 
     .optimized-video-container{

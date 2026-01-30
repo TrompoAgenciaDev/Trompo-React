@@ -654,7 +654,7 @@ const Estrategia = () => {
                               <path d="M20.9998 1.15088C10.0588 1.15088 1.15479 10.0549 1.15479 20.9959C1.15479 31.9369 10.0588 40.8367 20.9998 40.8367C31.9408 40.8367 40.8448 31.9369 40.8448 20.9959C40.8448 10.0549 31.9408 1.15088 20.9998 1.15088ZM25.771 22.9447L28.5258 31.4287L21.3064 26.1871C21.2178 26.1199 21.1086 26.0863 20.9998 26.0863C20.891 26.0863 20.7814 26.1199 20.6928 26.1871L13.4734 31.4287L16.2282 22.9447C16.2996 22.7305 16.224 22.4911 16.0396 22.3567L8.81979 17.1151H17.7448C17.9716 17.1151 18.1728 16.9681 18.2446 16.7497L20.9998 8.26568L23.755 16.7497C23.8268 16.9681 24.028 17.1151 24.2548 17.1151H33.1798L25.96 22.3567C25.7756 22.4911 25.6996 22.7305 25.771 22.9447Z" fill="#E1C025"/>
                             </svg>
                           </div>
-                          <div className="title-item"><h3>Temas</h3></div>
+                          <div className="title-item"><h6>Temas</h6></div>
                         </div>
                         <div className="item-body">
                           <p>Seleccionar páginas web clasificadas por temáticas</p>
@@ -668,7 +668,7 @@ const Estrategia = () => {
                               <path d="M45.3783 41.1206C45.3783 44.8093 37.5946 48.7499 26.0002 48.7499C14.4058 48.7499 6.62207 44.8093 6.62207 41.1206C6.62207 37.6999 12.9514 34.5637 21.4258 33.7268C21.4258 33.7268 25.6996 41.2749 26.0002 41.2749C26.3008 41.2749 30.5746 33.7268 30.5746 33.7268C39.0489 34.5637 45.3783 37.6999 45.3783 41.1206Z" fill="#E1C025"/>
                             </svg>
                           </div>
-                          <div className="title-item"><h3>Ubicación/Emplazamientos</h3></div>
+                          <div className="title-item"><h6>Ubicación/Emplazamientos</h6></div>
                         </div>
                         <div className="item-body">
                           <p>Seleccionar páginas web clasificadas por ubicación</p>
@@ -686,7 +686,7 @@ const Estrategia = () => {
                               <path d="M31.5934 13.7129C26.8327 13.7129 22.9604 17.8042 22.9604 22.8344C22.9604 26.4692 24.9833 29.6142 27.9032 31.0785C29.023 31.6408 30.2744 31.9546 31.5934 31.9546C32.9125 31.9546 34.1639 31.6408 35.2836 31.0785C38.2035 29.6142 40.2264 26.4692 40.2264 22.8344C40.2264 17.8042 36.3541 13.7129 31.5934 13.7129Z" fill="#E1C025"/>
                             </svg>
                           </div>
-                          <div className="title-item"><h3>Demografía</h3></div>
+                          <div className="title-item"><h6>Demografía</h6></div>
                         </div>
                         <div className="item-body">
                           <p>Se orientan los anuncios a públicos determinados según datos tales como edad, sexo o estado civil.</p>
@@ -709,7 +709,7 @@ const Estrategia = () => {
                               </defs>
                             </svg>
                           </div>
-                          <div className="title-item"><h3>Interés</h3></div>
+                          <div className="title-item"><h6>Interés</h6></div>
                         </div>
                         <div className="item-body">
                           <p>Se orientan los anuncios a públicos determinados según sus intereses, cookies y comportamientos</p>
@@ -722,7 +722,7 @@ const Estrategia = () => {
                               <path fillRule="evenodd" clipRule="evenodd" d="M19.545 41.7089L24.7464 48.4689C25.2185 49.0825 25.1357 49.9511 24.5623 50.4713L22.7736 52.0946C22.4541 52.3845 22.0696 52.5134 21.64 52.4746C21.2105 52.4358 20.8567 52.239 20.593 51.8977L14.8264 44.4331L19.545 41.7089ZM48.0776 24.3601H53.3749C54.2223 24.3601 54.9079 23.6681 54.9062 22.8218C54.9044 21.9745 54.2135 21.2898 53.3673 21.2898H48.0699C47.2226 21.2898 46.5369 21.9818 46.5387 22.828C46.5403 23.6755 47.2312 24.3601 48.0776 24.3601ZM41.7897 10.4124L44.4385 5.82475C44.8616 5.09182 44.6142 4.1512 43.8812 3.72595C43.1493 3.30135 42.2071 3.54909 41.7835 4.28289L39.1347 8.87051C38.7116 9.60343 38.959 10.5441 39.692 10.9693C40.424 11.3939 41.366 11.1462 41.7897 10.4124ZM47.9187 15.9076L52.2677 13.3967C53.006 12.9704 53.2589 12.0266 52.8327 11.2882C52.4064 10.55 51.4626 10.2971 50.7242 10.7233L46.3753 13.2344C45.637 13.6606 45.3841 14.6044 45.8103 15.3428C46.2366 16.0809 47.1804 16.3338 47.9187 15.9076ZM41.0786 22.8166L46.2083 31.7016C47.1714 33.3696 46.5945 35.5225 44.9264 36.4856C43.3698 37.3844 41.3912 36.9419 40.351 35.5232H40.3508C34.6727 34.6595 27.2763 35.5873 19.9216 38.4544L12.851 26.2078C19.0136 21.2772 23.5292 15.3671 25.6204 10.0179L25.6205 10.0176C24.8859 8.4002 25.4893 6.44239 27.0581 5.53665C28.7263 4.57349 30.879 5.15045 31.8422 6.81853L36.9719 15.7035C37.1179 15.5906 37.2731 15.4862 37.4374 15.3913C39.4195 14.2469 41.9541 14.9261 43.0985 16.9083C44.2429 18.8905 43.5638 21.4251 41.5816 22.5695C41.4174 22.6643 41.2493 22.7466 41.0786 22.8166ZM18.1437 39.7499L10.7348 26.9174L4.84482 30.318C1.26585 32.3843 0.0283782 37.0031 2.09458 40.5819L2.09469 40.582C4.161 44.1609 8.77969 45.3985 12.3587 43.3323L18.2486 39.9317L18.1437 39.7499Z" fill="#E1C025"/>
                             </svg>
                           </div>
-                          <div className="title-item"><h3>Remarketing</h3></div>
+                          <div className="title-item"><h6>Remarketing</h6></div>
                         </div>
                         <div className="item-body">
                           <p>Muestra anuncios a públicos que han visitado anteriormente la página web, generando audiencias con distintos intereses con creatividades personalizadas.</p>
@@ -743,7 +743,7 @@ const Estrategia = () => {
                               <path fillRule="evenodd" clipRule="evenodd" d="M30.5733 26.8291H9.16155C8.7872 26.8291 8.48319 26.5258 8.48319 26.1512L8.48327 12.0084C8.48327 11.6338 8.78701 11.3302 9.16147 11.3302L39.4039 11.3301C39.7785 11.3301 40.0821 11.6339 40.0821 12.0085L40.0822 20.1303L49.2684 10.6585C49.4168 10.5056 49.6276 10.4314 49.8383 10.4577C50.0492 10.4836 50.2363 10.6075 50.3423 10.7917L52.6072 14.7142L52.9661 14.5069C53.3747 14.2711 53.8515 14.209 54.3084 14.3316C54.7665 14.4542 55.148 14.7468 55.3836 15.1552L57.4245 18.6898C57.6611 19.0983 57.7234 19.5753 57.5997 20.0329C57.4775 20.4904 57.1852 20.8724 56.7766 21.1082L56.4185 21.3149L58.6833 25.2373C58.7893 25.4214 58.8032 25.6451 58.7207 25.8409C58.6371 26.0367 58.4676 26.1824 58.2615 26.2344L45.2316 29.5126L42.0131 31.3707L47.0229 36.3794C48.0263 37.3838 48.0261 39.0182 47.0228 40.0227C46.5378 40.5077 45.8899 40.7748 45.2011 40.7747C44.5112 40.7747 43.8645 40.5077 43.3794 40.0227L37.3521 33.9948C36.7221 34.2435 36.0642 34.3635 35.4121 34.3634C33.5739 34.3634 31.7826 33.4099 30.7982 31.706C29.9051 30.158 29.8808 28.3427 30.5733 26.8291ZM4.7373 9.74858L4.73738 43.4285C4.73738 45.1449 6.13277 46.5411 7.84964 46.5411L29.8816 46.541C29.8883 46.5409 29.895 46.5409 29.9018 46.541H36.1004H36.1162L58.151 46.5409C59.8665 46.5409 61.2631 45.1449 61.2631 43.4287V9.74835C61.2631 8.03225 59.8665 6.63614 58.1508 6.63614L7.84986 6.63599C6.13296 6.63599 4.7373 8.03236 4.7373 9.74858ZM8.57858 32.5022L27.9699 32.5021C28.3442 32.5021 28.648 32.8058 28.648 33.1805C28.6481 33.555 28.3441 33.8586 27.9699 33.8586H8.57869C8.20431 33.8586 7.9003 33.5551 7.9003 33.1805C7.90041 32.8057 8.20408 32.5022 8.57858 32.5022ZM9.16147 39.5315L37.3007 39.5313C37.6764 39.5313 37.979 39.8351 37.979 40.2097C37.979 40.5842 37.6764 40.888 37.3007 40.8878H9.16155C8.7872 40.8878 8.48319 40.5844 8.48319 40.2097C8.48327 39.8349 8.78701 39.5315 9.16147 39.5315Z" fill="#E1C025" />
                             </svg>
                           </div>
-                          <div className="title-item"><h3>Dispositivos</h3></div>
+                          <div className="title-item"><h6>Dispositivos</h6></div>
                         </div>
                         <div className="item-body">
                           <p>Muestra los anuncios a personas interesadas en productos /servicios relacionados a su historial de navegación.</p>
@@ -770,7 +770,7 @@ const Estrategia = () => {
                               </defs>
                             </svg>
                           </div>
-                          <div className="title-item"><h3>Keywords</h3></div>
+                          <div className="title-item"><h6>Keywords</h6></div>
                         </div>
                         <div className="item-body">
                           <p>Activar anuncios contextualmente en base al contenido del sitio web que coincida con las palabras claves que se asignan a la campaña.</p>
@@ -812,7 +812,7 @@ const Estrategia = () => {
                     >
                       <div key="instream" className="video-slide">
                         <div className="item-header">
-                          <div className="title-item"><h3>Anuncios <strong>In-stream</strong></h3></div>
+                          <div className="title-item"><h6>Anuncios <strong>In-stream</strong></h6></div>
                           <div className="img-header">
                             <img src={`${base}assets/estrategia/google-ads/instream.webp`} alt="InStream" />
                           </div>
@@ -825,7 +825,7 @@ const Estrategia = () => {
                       </div>
                       <div key="instream-no-omitir" className="video-slide">
                         <div className="item-header">
-                          <div className="title-item"><h3>Anuncios <strong>In-stream no se omiten</strong></h3></div>
+                          <div className="title-item"><h6>Anuncios <strong>In-stream no se omiten</strong></h6></div>
                           <div className="img-header">
                             <img src={`${base}assets/estrategia/google-ads/instream-2.webp`} alt="InStream" />
                           </div>
@@ -838,7 +838,7 @@ const Estrategia = () => {
                       </div>
                       <div key="video-discovery" className="video-slide">
                         <div className="item-header">
-                          <div className="title-item"><h3>Anuncios <strong>Video discovery</strong></h3></div>
+                          <div className="title-item"><h6>Anuncios <strong>Video discovery</strong></h6></div>
                           <div className="img-header">
                             <img src={`${base}assets/estrategia/google-ads/discovery.webp`} alt="InStream" />
                           </div>
@@ -851,7 +851,7 @@ const Estrategia = () => {
                       </div>
                       <div key="outstream" className="video-slide">
                         <div className="item-header">
-                          <div className="title-item"><h3>Anuncios <strong>Out-stream</strong></h3></div>
+                          <div className="title-item"><h6>Anuncios <strong>Out-stream</strong></h6></div>
                           <div className="img-header">
                             <img src={`${base}assets/estrategia/google-ads/outstream.webp`} alt="InStream" />
                           </div>
@@ -864,7 +864,7 @@ const Estrategia = () => {
                       </div>
                       <div key="bumpers" className="video-slide">
                         <div className="item-header">
-                          <div className="title-item"><h3>Bumpers <strong>Publicitarios</strong></h3></div>
+                          <div className="title-item"><h6>Bumpers <strong>Publicitarios</strong></h6></div>
                           <div className="img-header">
                             <img src={`${base}assets/estrategia/google-ads/ads.webp`} alt="InStream" />
                           </div>
@@ -892,27 +892,27 @@ const Estrategia = () => {
           <div className="grid-paid-media-info-wrapper">
             <div className="grid-item-paid-media-info">
               <span>01</span>
-              <h3 className="question-paid-media">PAID MEDIA & PERFORMANCE</h3>
+              <h6 className="question-paid-media">PAID MEDIA & PERFORMANCE</h6>
               <p>Diseñamos y ejecutamos campañas de performance y branding en plataformas digitales como Meta Ads, Google Ads y LinkedIn. Cada acción responde a un objetivo claro: vender hoy y construir inteligencia para vender mejor mañana.</p>
             </div>
             <div className="grid-item-paid-media-info">
               <span>02</span>
-              <h3 className="question-paid-media">PLANIFICACIÓN ESTRATÉGICA</h3>
+              <h6 className="question-paid-media">PLANIFICACIÓN ESTRATÉGICA</h6>
               <p>Alineamos negocio, audiencias y KPIs desde el inicio. Definimos con precisión dónde estar, a quién impactar y con qué mensaje, evitando dispersiones y maximizando eficiencia publicitaria.</p>
             </div>
             <div className="grid-item-paid-media-info">
               <span>03</span>
-              <h3 className="question-paid-media">ARQUITECTURA & EJECUCIÓN EN PLATAFORMAS</h3>
+              <h6 className="question-paid-media">ARQUITECTURA & EJECUCIÓN EN PLATAFORMAS</h6>
               <p>Construimos estructuras de cuentas sólidas, audiences hipersegmentadas y creativos diseñados para escalar resultados. Performance y posicionamiento trabajan juntos, no por separado.</p>
             </div>
             <div className="grid-item-paid-media-info">
               <span>04</span>
-              <h3 className="question-paid-media">OPTIMIZACIÓN CONTINUA</h3>
+              <h6 className="question-paid-media">OPTIMIZACIÓN CONTINUA</h6>
               <p>Analizamos datos en tiempo real, testeamos variantes (A/B), ajustamos mensajes y redistribuimos inversión según rendimiento. Cada decisión se basa en evidencia, no en suposiciones.</p>
             </div>
             <div className="grid-item-paid-media-info">
               <span>05</span>
-              <h3 className="question-paid-media">ANÁLISIS & APRENDIZAJE</h3>
+              <h6 className="question-paid-media">ANÁLISIS & APRENDIZAJE</h6>
               <p>Convertimos métricas en conocimiento accionable. Leemos patrones, entendemos comportamientos y adaptamos la estrategia para evolucionar junto al mercado, la audiencia y los objetivos del negocio.</p>
             </div>
           </div>
@@ -923,7 +923,7 @@ const Estrategia = () => {
       
       <Beneficios />
 
-      <TestimonialsSection />
+      <TestimonialsSection backgroundClass="white-bg" />
 
       <Contact form="estrategia" />
 

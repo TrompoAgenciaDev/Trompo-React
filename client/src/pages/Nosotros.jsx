@@ -7,7 +7,6 @@ import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 
 // styles
 import "../assets/styles/about.css";
-import "../assets/styles/home.css";
 import "@as/hero.css";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")

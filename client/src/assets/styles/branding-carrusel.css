@@ -65,16 +65,13 @@
 
 .brand-item .brand-item-panel h2,
 .brand-item-title {
-    font-size: 24px;
     font-weight: 700;
     margin-bottom: 20px;
     color: #8e8e8e;
     line-height: 1.2;
-    font-family: var(--font-portfolio);
 }
 
 .brand-item .brand-item-panel p {
-    font-size: 14px;
     line-height: 1.6;
     color: #1D1D1B;
     padding: 0;
@@ -131,16 +128,13 @@
 }
 
 .brand-item-responsive-text .brand-item-title {
-    font-size: 24px;
     font-weight: 700;
     margin-bottom: 20px;
     color: #8e8e8e;
     line-height: 1.2;
-    font-family: var(--font-portfolio);
 }
 
 .brand-item-responsive-text p {
-    font-size: 14px;
     line-height: 1.6;
     color: #1D1D1B;
     padding: 0;
@@ -285,10 +279,8 @@
 
     .brand-item .brand-item-panel h2,
     .brand-item-title {
-        font-size: 48px;
     }
 
     .brand-item .brand-item-panel p {
-        font-size: 15px;
     }
 }

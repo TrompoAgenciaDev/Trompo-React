@@ -43,12 +43,12 @@
 
 
 .grid-item-multimedia span,
-.grid-item-multimedia h3,
+.grid-item-multimedia h6,
 .grid-item-multimedia p{
     color: #ffffff;
 }
 
-.grid-item-multimedia h3,
+.grid-item-multimedia h6,
 .grid-item-multimedia p{
     padding-left: 8px;
 }
@@ -65,10 +65,9 @@
     gap: 10px;
 }
 
-.grid-item-multimedia h3{
+.grid-item-multimedia h6{
     text-transform: uppercase;
     font-weight: 400;
-    font-family: var(--font-portfolio);
 }
 
 .grid-item-multimedia:before{
@@ -82,7 +81,6 @@
 }
 
 .grid-item-multimedia p{
-    font-size: 12px;
     line-height: 1.5;
 }
 
@@ -112,7 +110,6 @@
 .slider-text span{
     font-size: 18px;
     color: #000000;
-    font-family: var(--font-portfolio);
     font-weight: 400;
     text-align: center;
     line-height: 1.5;
@@ -143,13 +140,11 @@
 }
 
 .multimedia-history-item h3{
-    font-size: 20px;
     margin: 0;
 }
 
 .multimedia-history-item p{
     color: #ffffff;
-    font-size: 12px;
     margin: 0;
     padding-left: 56px;
 }
@@ -259,7 +254,6 @@
 }
 
 .grid-item-beneficios p{
-    font-size: 12px;
     max-width: 150px;
     color: #ffffff;
 }
@@ -267,13 +261,11 @@
 .beneficios-container h3{
     color: #E1C025;
     font-weight: 700;
-    font-family: var(--font-portfolio);
     margin-bottom: 10px;
 }
 
 .beneficios-container h5{
     font-weight: 400;
-    font-family: var(--font-portfolio);
 }
 
 .title-beneficios h5{
@@ -317,13 +309,12 @@
     gap: 8px;
 }
 
-.item-entregables h3{
+.item-entregables h5{
     color: #ffffff;
 }
 
 .item-entregables p{
     color: #ffffff;
-    font-size: 13px;
 }
 
 @media (min-width: 768px) {
@@ -336,11 +327,9 @@
         padding: 80px 0;
     }
     .grid-item-multimedia p{
-        font-size: 13px;
     }
 
     .multimedia-history-item p{
-        font-size: 14px;
     }
 }
 
@@ -359,7 +348,6 @@
         padding: 120px 0;
     }
     .grid-item-multimedia p{
-        font-size: 14px;
     }
     .image-multimedia-container{
         display: -webkit-box;
@@ -384,7 +372,6 @@
     }
 
     .multimedia-history-item p{
-        font-size: 15px;
     }
 
     .grid-beneficios{
@@ -403,7 +390,6 @@
     }
 
     .grid-item-beneficios p{
-        font-size: 15px;
     }
 
     .beneficios-container h5{
@@ -435,12 +421,10 @@
         gap: 16px;
     }
     
-    .item-entregables h3{
-        font-size: 26px;
+    .item-entregables h5{
     }
     
     .item-entregables p{
-        font-size: 16px;
         width: 100%;
         max-width: 450px;
     }
@@ -448,7 +432,6 @@
 
 @media (min-width: 1280px) {
     .grid-item-beneficios p{
-        font-size: 16px;
     }
 
     .grid-item-beneficios svg{

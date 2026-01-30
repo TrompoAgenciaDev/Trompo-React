@@ -101,14 +101,6 @@ const FaqsPage = () => {
   return (
     <>
       <div className="full-container black-bg hero-faqs-container">
-        <div className="container">
-          <div className="service-title-container">
-            <h2>FAQs</h2>
-            <h2>FAQs</h2>
-            <h2>FAQs</h2>
-            <h2>FAQs</h2>
-          </div>
-        </div>
         <div className="container faqs-title-container">
           <h1 className="faqs-main-title">
             {letters.map((letter, index) => (

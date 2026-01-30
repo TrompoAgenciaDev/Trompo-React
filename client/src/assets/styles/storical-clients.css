@@ -193,7 +193,6 @@
 }
 
 .legal-footer-historical p{
-  font-size: 12px;
 }
 
 @media (min-width: 768px) {
@@ -228,6 +227,5 @@
     margin-top: 30px;
   }
   .legal-footer-historical p{
-    font-size: 12px;
   }
 }

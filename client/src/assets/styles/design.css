@@ -33,7 +33,6 @@
 }
 
 .grid-item-beneficios p{
-    font-size: 12px;
     max-width: 150px;
     color: #ffffff;
 }
@@ -41,13 +40,11 @@
 .beneficios-container h3{
     color: #E1C025;
     font-weight: 700;
-    font-family: var(--font-portfolio);
     margin-bottom: 10px;
 }
 
 .beneficios-container h5{
     font-weight: 400;
-    font-family: var(--font-portfolio);
 }
 
 /* Estilos para el video reel */
@@ -138,13 +135,11 @@
     color: #FED332;
     font-weight: 700;
     margin-bottom: 10px;
-    font-family: var(--font-portfolio);
 }
 
 .strategy-container .container h5{
     color: #ffffff;
     font-weight: 400;
-    font-family: var(--font-portfolio);
 }
 
 /* Mobile First - Grid Strategy */
@@ -180,7 +175,6 @@
     -webkit-transition: color 0.3s ease;
     -o-transition: color 0.3s ease;
     transition: color 0.3s ease;
-    font-family: var(--font-portfolio);
     font-weight: 700;
     margin: 0;
     padding: 0;
@@ -193,8 +187,6 @@
 
 /* Estándar para h6 */
 h6{
-    font-size: 18px;
-    font-family: var(--font-portfolio);
     font-weight: 700;
     margin: 0;
     padding: 0;
@@ -207,67 +199,6 @@ h6{
 .title-beneficios h5{
     color: #ffffff;
 }
-
-.identidades{
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-align: end;
-    -ms-flex-align: end;
-    align-items: flex-end;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    gap: 20px;
-}
-
-.card-identidades{
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    gap: 20px;
-    background-color: #ffffff;
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
-}
-
-.identidades .span-identidades{
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    gap: 10px;
-    padding: 0 30px;
-}
-
-.identidades .span-identidades span{
-    width: 20px;
-    height: 20px;
-    background-color: #E1C025;
-    -webkit-border-radius: 100%;
-    border-radius: 100%;
-}
-
-.card-identidades h4{
-    font-family: var(--font-portfolio);
-    margin: 0;
-    padding: 0;
-}
-
-.card-identidades p{
-    font-size: 12px;
-}
-
 
 .branding-tab-content{
     display: flex;
@@ -288,15 +219,6 @@ h6{
     }
 
     .grid-item-strategy p{
-        font-size: 24px;
-    }
-
-    .identidades .span-identidades span{
-        width: 20px;
-        height: 20px;
-        background-color: #E1C025;
-        -webkit-border-radius: 100%;
-        border-radius: 100%;
     }
 
     /* Estilos de ServiceTitle removidos - solo deben estar en service-title.css */
@@ -317,22 +239,10 @@ h6{
     }
 
     .grid-item-beneficios p{
-        font-size: 15px;
     }
 
     .beneficios-container h5{
         max-width: 600px;
-    }
-
-
-    .card-identidades{
-        padding: 30px;
-    }
-    
-    
-    .card-identidades p{
-        font-size: 16px;
-        padding-left: 20%;
     }
 
     .branding-tab-content{
@@ -344,7 +254,6 @@ h6{
 
 @media (min-width: 1280px) {
     .grid-item-beneficios p{
-        font-size: 16px;
     }
 
     .grid-item-beneficios svg{
@@ -353,19 +262,9 @@ h6{
     }
 
     .beneficios-container h3{
-        font-size: 60px;
     }
 
     .beneficios-container h5{
-        font-size: 32px;
-    }
-
-    .card-identidades{
-        padding: 40px;
-    }
-    
-    .card-identidades h4{
-        line-height: 1;
     }
 }
 
@@ -434,7 +333,6 @@ h6{
 .title-client {
     font-size: 32px;
     font-weight: 700;
-    font-family: var(--font-portfolio);
     color: #ffffff;
     text-transform: uppercase;
     display: block;
@@ -443,7 +341,6 @@ h6{
 .category-client {
     font-size: 18px;
     font-weight: 400;
-    font-family: var(--font-portfolio);
     color: #B3B3B3;
     text-transform: lowercase;
     display: block;
@@ -466,7 +363,6 @@ h6{
 .slide-counter {
     display: flex;
     gap: 10px;
-    font-family: var(--font-portfolio);
     font-size: 16px;
     color: #B3B3B3;
 }
@@ -588,14 +484,12 @@ h6{
 }
 
 .design-history-item h3{
-    font-size: 20px;
     margin: 0;
     color: #000000;
 }
 
 .design-history-item p{
     color: #000000;
-    font-size: 12px;
     margin: 0;
     padding-left: 56px;
 }
@@ -747,13 +641,11 @@ h6{
 
 @media (min-width: 1280px) {
     .testimonial-text-content p {
-        font-size: 18px;
     }
 }
 
 @media (min-width: 768px) {
     .design-history-item p{
-        font-size: 14px;
     }
 }
 
@@ -774,7 +666,6 @@ h6{
     }
 
     .design-history-item p{
-        font-size: 15px;
     }
 
     .productos{
@@ -907,7 +798,6 @@ h6{
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 10px;
-  font-family: var(--font-portfolio);
 }
 
 @media (min-width: 1024px) {

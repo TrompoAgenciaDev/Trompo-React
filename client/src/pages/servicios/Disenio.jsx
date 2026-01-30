@@ -8,6 +8,7 @@ import DisenioPortfolio from "../../components/portfolio/DisenioPortfolio.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
 import TestimonialsSection from "../../components/TestimonialsSection.jsx";
+import IdentidadesSection from "../../components/IdentidadesSection.jsx";
 
 //styles
 import "@as/hero.css";
@@ -505,7 +506,7 @@ const EntregableItem = ({ number, title, children, isLast, itemRef, nextItemRef 
           >
             {number}
           </motion.span>
-          <motion.h3
+          <motion.h6
             initial={{ scale: 0, opacity: 0 }}
             animate={{
               scale: isInView ? 1 : 0,
@@ -517,7 +518,7 @@ const EntregableItem = ({ number, title, children, isLast, itemRef, nextItemRef 
             }}
           >
             {title}
-          </motion.h3>
+          </motion.h6>
         </div>
         <motion.div
           initial={{ scale: 0, opacity: 0 }}
@@ -764,7 +765,7 @@ const Disenio = () => {
               <EntregableItemsList />
             </div>
             <div className="grid-item-video">
-              <img src={`${base}assets/sillon.webp`} />
+              <img src={`${base}assets/metegol.webp`} />
             </div>
           </div>
         </div>
@@ -783,17 +784,17 @@ const Disenio = () => {
 
       <div className="full-container strategy-container black-bg">
         <div className="container">
-          <h1>
+          <h3>
             Diseño Estratégico
-          </h1>
-          <h2> Que Convierte Ideas En Identidad</h2>
+          </h3>
+          <h5> Que Convierte Ideas En Identidad</h5>
         </div>
 
         <div className="full-container grid-strategy">
           <div className="full-container strategy-item black-bg">
             <div className="container">
               <div className="grid-item-strategy">
-                <span>Diseño que transciende lo visual</span>
+                <h6>Diseño que transciende lo visual</h6>
               </div>
               <div className="grid-item-strategy">
                 <p>
@@ -805,7 +806,7 @@ const Disenio = () => {
           <div className="full-container strategy-item black-bg">
             <div className="container">
               <div className="grid-item-strategy">
-                <span>Identidad con propósito</span>
+                <h6>Identidad con propósito</h6>
               </div>
               <div className="grid-item-strategy">
                 <p>
@@ -817,7 +818,7 @@ const Disenio = () => {
           <div className="full-container strategy-item black-bg">
             <div className="container">
               <div className="grid-item-strategy">
-                <span>Hacer visible lo esencial</span>
+                <h6>Hacer visible lo esencial</h6>
               </div>
               <div className="grid-item-strategy">
                 <p>
@@ -829,23 +830,11 @@ const Disenio = () => {
         </div>
       </div>
 
-      <div className="full-container black-bg">
-        <div className="container identidades">
-            <div className="card-identidades">
-              <h2>Las marcas son identidades vivas.</h2>
-              <p>Nuestro propósito es concebirlas y cultivarlas desde su núcleo más auténtico. A través de un sistema de marca sólido, construimos el fundamento estratégico y visual que permite a las empresas posicionarse con claridad, diferenciarse con fuerza y potenciar su activo más valioso: su identidad en el mundo.</p>
-            </div>
-            <div className="span-identidades">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-      </div>      
+      <IdentidadesSection backgroundClass="bg-yellow-2" />      
       
       <Beneficios />
 
-      <TestimonialsSection />
+      <TestimonialsSection backgroundClass="bg-white" />
 
       <Contact form="creative" />
 

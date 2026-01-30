@@ -32,23 +32,18 @@
 }
 
 .grid-item-beneficios p{
-    font-size: 12px;
     max-width: 150px;
     color: #ffffff;
 }
 
 .beneficios-container h3{
     color: #E1C025;
-    font-size: 20px;
     font-weight: 700;
-    font-family: var(--font-portfolio);
     margin-bottom: 10px;
 }
 
 .beneficios-container h5{
-    font-size: 18px;
     font-weight: 400;
-    font-family: var(--font-portfolio);
 }
 
 .title-beneficios h5{
@@ -72,7 +67,6 @@
     }
 
     .grid-item-beneficios p{
-        font-size: 15px;
     }
 
     .beneficios-container h5{
@@ -83,7 +77,6 @@
 
 @media (min-width: 1280px) {
     .grid-item-beneficios p{
-        font-size: 16px;
     }
 
     .grid-item-beneficios svg{
