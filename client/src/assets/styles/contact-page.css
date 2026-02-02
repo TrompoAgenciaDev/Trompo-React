@@ -98,3 +98,53 @@
 .contactanos-testimonials-wrapper .testimonial-text-content p {
     color: #ffffff;
 }
+
+/* Estilos para slider infinito de Contactanos */
+.contact-slider-container{
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  contain: layout style paint;
+  isolation: isolate;
+  position: relative;
+}
+
+.contact-infinite-slider{
+  display: flex;
+  width: fit-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 30px 0;
+}
+
+.contact-infinite-slider-item{
+  white-space: nowrap;
+  margin: 0;
+  padding-right: 60px;
+  flex-shrink: 0;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #000000 !important;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: mix-blend-mode 0.2s ease;
+}
+
+@media (min-width: 1024px) {
+  .contact-infinite-slider{
+    padding: 50px 0;
+  }
+
+  .contact-infinite-slider-item{
+    padding-right: 80px;
+  }
+}

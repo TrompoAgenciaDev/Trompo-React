@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { motion, useInView, useScroll, useTransform, useMotionValueEvent, useSpring } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useMotionValueEvent, useSpring, useMotionValue } from "framer-motion";
 import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
@@ -7,7 +7,6 @@ import SimpleHeroVideo from "../../components/SimpleHeroVideo";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import SemicircularVideoSlider from "../../components/sliders/SemicircularVideoSlider.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
-import TestimonialsSection from "../../components/TestimonialsSection.jsx";
 
 //styles
 import "../../assets/styles/multimedia.css";
@@ -65,6 +64,107 @@ const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }
     >
       {phrase}
     </motion.span>
+  );
+};
+
+// Componente para imagen con tracking del mouse
+const MouseTrackingImage = ({ src, alt = "" }) => {
+  const containerRef = useRef(null);
+  const [isInViewport, setIsInViewport] = React.useState(false);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  // Valores suavizados con spring para movimiento fluido
+  const smoothX = useSpring(mouseX, { stiffness: 150, damping: 15 });
+  const smoothY = useSpring(mouseY, { stiffness: 150, damping: 15 });
+
+  // IntersectionObserver para detectar cuando la imagen está en viewport (al menos 10px visibles)
+  React.useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Verificar si al menos 10px están visibles
+          const isVisible = entry.isIntersecting && entry.intersectionRatio > 0;
+          // También verificar si hay al menos 10px de altura visible
+          const rect = entry.boundingClientRect;
+          const viewportHeight = window.innerHeight;
+          const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+          const hasMinVisible = visibleHeight >= 10;
+          
+          setIsInViewport(isVisible && hasMinVisible);
+          
+          // Si sale del viewport, volver al centro
+          if (!isVisible || !hasMinVisible) {
+            mouseX.set(0);
+            mouseY.set(0);
+          }
+        });
+      },
+      {
+        threshold: [0, 0.01, 0.1, 0.5, 1],
+        rootMargin: "0px"
+      }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      if (container) {
+        observer.unobserve(container);
+      }
+    };
+  }, [mouseX, mouseY]);
+
+  // Tracking del mouse en toda la ventana cuando está en viewport
+  React.useEffect(() => {
+    if (!isInViewport) return;
+
+    const handleMouseMove = (e) => {
+      if (!containerRef.current) return;
+      
+      const rect = containerRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      // Calcular la distancia del mouse desde el centro de la imagen
+      const deltaX = (e.clientX - centerX) / rect.width;
+      const deltaY = (e.clientY - centerY) / rect.height;
+      
+      // Movimiento reducido para no pisar el texto (15px máximo)
+      mouseX.set(deltaX * 15);
+      mouseY.set(deltaY * 15);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [isInViewport, mouseX, mouseY]);
+
+  return (
+    <motion.div
+      ref={containerRef}
+      style={{
+        width: "100%",
+        height: "100%"
+      }}
+    >
+      <motion.img
+        src={src}
+        alt={alt}
+        style={{
+          x: smoothX,
+          y: smoothY,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover"
+        }}
+      />
+    </motion.div>
   );
 };
 
@@ -640,7 +740,7 @@ const Multimedia = () => {
         <div className="container">
           <div className="grid-productos-multimedia container">
             <div className="grid-item-video-multimedia">
-              <img src={`${base}assets/ofi.webp`} />
+              <MouseTrackingImage src={`${base}assets/ofi.webp`} alt="Multimedia" />
             </div>
             <div className="grid-item-productos-multimedia">
               <ProductosItemsList />
@@ -674,8 +774,6 @@ const Multimedia = () => {
       </div>
 
       <Beneficios />
-
-      <TestimonialsSection backgroundClass="white-bg" />
 
       <Contact form="multimedia" />
 

@@ -1,11 +1,10 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useState, useRef, useMemo } from "react";
 
 
 import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import Contact from "../layout/Contact";
 import TestimonialsSection from "../components/TestimonialsSection.jsx";
-import IdentidadesSection from "../components/IdentidadesSection.jsx";
 
 import "../assets/styles/contact-page.css";
 
@@ -68,9 +67,43 @@ const Contactanos = () => {
     );
   };
 
+  // Componente Slider Infinito
+  const SocialMediaSlider = ({ text }) => {
+    const shouldReduceMotion = useReducedMotion();
+    const items = Array(16).fill(text);
+
+    return (
+      <motion.div 
+        className="contact-infinite-slider"
+        animate={{
+          x: shouldReduceMotion ? 0 : ['0%', '-10%']
+        }}
+        transition={{
+          x: {
+            repeat: Infinity,
+            repeatType: "loop",
+            duration: 50,
+            ease: "linear"
+          }
+        }}
+        style={{
+          pointerEvents: 'auto',
+          willChange: 'transform'
+        }}
+      >
+        {items.map((item, index) => (
+          <h2 key={index} className="contact-infinite-slider-item">{item}</h2>
+        ))}
+        {items.map((item, index) => (
+          <h2 key={`duplicate-${index}`} className="contact-infinite-slider-item">{item}</h2>
+        ))}
+      </motion.div>
+    );
+  };
+
   // --- CONTACTANOS ---
   const [revealed, setRevealed] = useState(false);
-  const titleText = "Hagamos que funcione.";
+  const titleText = "Hablemos de tu proyecto.";
   
   // Delay entre letras: 0.05s por letra para una animación fluida
   const letterDelay = 0.05;
@@ -129,7 +162,7 @@ const Contactanos = () => {
     };
   }, []);
 
-  const text = "En Trompo no creemos en soluciones mágicas. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Desde Córdoba Capital, ayudamos a empresas a convertir desafíos digitales en ventajas competitivas.";
+  const text = "En Trompo no creemos en soluciones mágicas. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Ayudamos a empresas a convertir desafíos digitales en ventajas competitivas.";
   
   const phraseDelay = 0.3;
   
@@ -190,6 +223,10 @@ const Contactanos = () => {
         </div>
       </div>
 
+      <div className="full-container contact-slider-container infinite-slider-container bg-yellow-2">
+        <SocialMediaSlider text="Hablemos. Ordenemos. Escalemos" />
+      </div>
+
       <div id="contacto"></div>
 
       <div ref={containerRef} className="full-container" style={{ backgroundColor: '#ffffff' }}>
@@ -217,8 +254,6 @@ const Contactanos = () => {
         <TestimonialsSection />
       </div>
 
-      <IdentidadesSection backgroundClass="bg-yellow-2" />
-
       <Contact form="contactanos" location="contactanos"/>
 
       
@@ -227,16 +262,6 @@ const Contactanos = () => {
           <CustomerSlider />
         </div>
       </section>
-
-      {/* <section className="full-container bg-yellow testimonial-wrapper">
-        <div className="container testimonial-header">
-          <h4>Más que clientes, aliados estratégicos.</h4>
-          <p>Historias que muestran el valor de trabajar en equipo.</p>
-        </div>
-        <div className="full-container">
-          <Testimonials3D />
-        </div>
-      </section> */}
 
 
     </>

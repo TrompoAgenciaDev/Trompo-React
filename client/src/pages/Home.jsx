@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React, { useRef, useState, useEffect, useMemo } from "react";
+import React, { useState } from "react";
 //styles
 import "../assets/styles/home.css";
 import { motion, useScroll, useTransform, useMotionValueEvent, useInView, useSpring, AnimatePresence, useReducedMotion } from "motion/react";
@@ -13,7 +13,6 @@ import Beneficios from "../components/Beneficios";
 import Menu from "../components/Menu";
 import routesConfig from "../config/routesConfig";
 import ServiceTitle from "../components/services/ServiceTitle.jsx";
-import IdentidadesSection from "../components/IdentidadesSection.jsx";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -76,51 +75,6 @@ const InfiniteSlider = ({ text }) => {
   );
 };
 
-// Componente para grid de videos del portfolio
-const PortfolioVideosGrid = () => {
-  const videoRefs = useRef([]);
-  
-  const videoNames = ['agreteq', 'denso', 'raulito', 'sw', 'viditec', 'volvo'];
-  
-  const handleMouseEnter = (index) => {
-    if (videoRefs.current[index]) {
-      videoRefs.current[index].play();
-    }
-  };
-  
-  const handleMouseLeave = (index) => {
-    if (videoRefs.current[index]) {
-      videoRefs.current[index].pause();
-      videoRefs.current[index].currentTime = 0;
-    }
-  };
-  
-  return (
-    <div className="full-container portfolio-videos-container">
-      <div className="portfolio-videos-grid">
-        {videoNames.map((videoName, index) => (
-          <div 
-            key={index} 
-            className="portfolio-video-item"
-            onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={() => handleMouseLeave(index)}
-          >
-            <video
-              ref={(el) => (videoRefs.current[index] = el)}
-              className="portfolio-video"
-              muted
-              loop
-              playsInline
-              preload="metadata"
-            >
-              <source src={`${base}assets/portfolioImg/videos/${videoName}.mp4`} type="video/mp4" />
-            </video>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 // Componente para items de servicios con efecto slide
 const ServiceItem = ({ title, subtitle, subtitles, link, links }) => {
@@ -247,7 +201,7 @@ const Home = () => {
         mobilePoster={`${base}assets/hero/mobile/home.webp`}
       />
 
-      <ServiceTitle titulo="Agencia Digital" subtitulo="En trompo combinamos creatividad e innovación tecnológica, para construir marcas que evolucionan" page="home" />
+      <ServiceTitle titulo="Agencia Digital" subtitulo="En Trompo hacemos tres cosas bien: <strong>claridad estratégica, creatividad aplicada y ejecución con criterio</strong>." page="home" />
 
       <div className="full-container black-bg menu-container-home-section">
         <div className="full-container">
@@ -278,7 +232,7 @@ const Home = () => {
                 transition={{ duration: 0.3 }}
                 onMouseEnter={() => setActiveMenuItem(0)}
               >
-                <p><span className="yellow">En Trompo no creemos en soluciones mágicas</span>. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Desde Córdoba Capital, ayudamos a empresas a convertir desafíos digitales en ventajas competitivas.</p>
+                <p><span className="yellow">En Trompo no creemos en soluciones mágicas</span>. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Ayudamos a empresas a convertir desafíos digitales en ventajas competitivas.</p>
               </motion.div>
             )}
             {activeMenuItem === 1 && (
@@ -320,7 +274,7 @@ const Home = () => {
       </div>      
 
       <div className="full-container infinite-slider-container">
-        <InfiniteSlider text="20 Años Produciendo Ideas" />
+        <InfiniteSlider text="Marketing orientado a resultados y mejora continua" />
       </div>
 
       <div className="full-container services-section-home black-bg">
@@ -352,58 +306,6 @@ const Home = () => {
           />
         </div>
       </div>
-
-      <PortfolioVideosGrid />
-
-      <div className="full-container strategy-container black-bg">
-        <div className="container">
-          <h3>
-            Diseño Estratégico
-          </h3>
-          <h5> Que Convierte Ideas En Identidad</h5>
-        </div>
-
-        <div className="full-container grid-strategy">
-          <div className="full-container strategy-item black-bg">
-            <div className="container">
-              <div className="grid-item-strategy">
-                <h6>Diseño que transciende lo visual</h6>
-              </div>
-              <div className="grid-item-strategy">
-                <p>
-                  El diseño consciente no se limita a verse bien. Piensa, comunica y construye sentido. Es estrategia aplicada a la identidad.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="full-container strategy-item black-bg">
-            <div className="container">
-              <div className="grid-item-strategy">
-                <h6>Identidad con propósito</h6>
-              </div>
-              <div className="grid-item-strategy">
-                <p>
-                  No decoramos ideas: les damos alma, carácter y presencia tangible. Diseñamos marcas que se reconocen antes de explicarse.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="full-container strategy-item black-bg">
-            <div className="container">
-              <div className="grid-item-strategy">
-                <h6>Hacer visible lo esencial</h6>
-              </div>
-              <div className="grid-item-strategy">
-                <p>
-                  El verdadero diseño revela lo importante. Ordena, potencia y convierte lo abstracto en algo claro, memorable y real.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <IdentidadesSection backgroundClass="bg-yellow-2" />
 
       <Beneficios />
 

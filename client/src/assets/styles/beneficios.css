@@ -1,6 +1,8 @@
-.grid-item-beneficios svg{
+.grid-item-beneficios svg,
+.beneficios-icon{
     width: 50px;
     height: 50px;
+    color: #ffffff;
 }
 
 .grid-beneficios{
@@ -36,10 +38,25 @@
     color: #ffffff;
 }
 
+/* Variante amarilla - textos e íconos negros */
+.beneficios-yellow .grid-item-beneficios p,
+.beneficios-yellow .title-beneficios h5{
+    color: #000000;
+}
+
+.beneficios-yellow .beneficios-icon{
+    color: #000000;
+}
+
 .beneficios-container h3{
     color: #E1C025;
     font-weight: 700;
     margin-bottom: 10px;
+}
+
+/* El título siempre es amarillo, incluso en variante amarilla */
+.beneficios-yellow .beneficios-container h3{
+    color: #E1C025 !important;
 }
 
 .beneficios-container h5{
@@ -79,7 +96,8 @@
     .grid-item-beneficios p{
     }
 
-    .grid-item-beneficios svg{
+    .grid-item-beneficios svg,
+    .beneficios-icon{
         width: 60px;
         height: 60px;
     }

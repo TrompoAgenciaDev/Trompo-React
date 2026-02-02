@@ -152,6 +152,8 @@
 }
 
 .text-members-container{
+  width: 100%;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -273,10 +275,10 @@
     padding: 120px 0;
   }
 
-
   .members-container{
     height: 90svh;
     grid-template-columns: 3fr 5fr;
+    padding-left: 50px;
   }
 
   .members-container .container{
@@ -285,13 +287,12 @@
     gap: 30px;
   }
 
-  .equipo-slider-background .about-infinite-slider-item{
-  }
-
   .grid-equipo-wrapper{
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
   }
+
+
 }
 
 /* Ocultar sección de histórico de clientes en mobile */
@@ -303,7 +304,4 @@
   .hide-storical-mobile {
     display: flex;
   }
-}
-
-@media (min-width: 1280px) {
 }

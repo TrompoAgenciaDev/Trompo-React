@@ -5,7 +5,6 @@ import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import Portfolio3d from "../../layout/Portfolio3d.jsx";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
-import Testimonials3D from "../../components/Testimonials3d.jsx";
 
 import "../../assets/styles/landing-primavera.css";
 
@@ -48,16 +47,6 @@ const Primavera = () => {
       </div>
 
       <Contact location="home" />
-
-      <section className="full-container bg-yellow testimonial-wrapper">
-        <div className="container testimonial-header">
-          <h4>Más que clientes, aliados estratégicos.</h4>
-          <p>Historias que muestran el valor de trabajar en equipo.</p>
-        </div>
-        <div className="full-container">
-          <Testimonials3D />
-        </div>
-      </section>
 
       <Faqs location="landing" />
       <div className="full-container">

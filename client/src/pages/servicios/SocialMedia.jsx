@@ -12,7 +12,6 @@ import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Inversiones from "../../components/Inversiones.jsx";
 import SocialMediaShowcaseSlider from "../../components/sliders/SocialMediaShowcaseSlider.jsx";
-import TestimonialsSection from "../../components/TestimonialsSection.jsx";
 
 //styles
 import "../../assets/styles/social-media.css";
@@ -212,8 +211,6 @@ const SocialMedia = () => {
       </div>
 
       <Inversiones />
-
-      <TestimonialsSection backgroundClass="bg-white" />
 
       <Contact form="interaccion" />
       

@@ -127,7 +127,7 @@ const Nosotros = () => {
     };
   }, []);
 
-  const text = "En Trompo no creemos en soluciones mágicas. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Desde Córdoba Capital, ayudamos a empresas a convertir desafíos digitales en ventajas competitivas.";
+  const text = "En Trompo no creemos en soluciones mágicas. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Ayudamos a empresas a convertir desafíos digitales en ventajas competitivas.";
   
   const phraseDelay = 0.3;
   
@@ -180,7 +180,7 @@ const Nosotros = () => {
       />
 
       <div className="full-container about-slider-container infinite-slider-container">
-        <SocialMediaSlider text="Nosotros" />
+        <SocialMediaSlider text="Método, criterio y crecimiento real" />
       </div>
 
       <div className="full-container black-bg">
@@ -189,22 +189,23 @@ const Nosotros = () => {
             <div className="about-grid-item">
               <span>01</span>
               <h6 className="about-question">qué hacemos</h6>
-              <p>Creamos contenido audiovisual estratégico que pone en movimiento la identidad de tu marca. Desde piezas breves y potentes para redes sociales hasta producciones corporativas ágiles, narramos, mostramos y hacemos sentir lo que la marca representa, con intención y coherencia en cada formato.</p>
+              <p>Ayudamos a marcas y empresas a transformar desafíos digitales en ventajas competitivas. Lo hacemos diseñando sistemas completos: identidad, contenido, performance y plataformas, para que la marca crezca con coherencia, comunique mejor y convierta con evidencia.</p>
             </div>
             <div className="about-grid-item">
               <span>02</span>
               <h6 className="about-question">Cómo lo hacemos</h6>
-              <p>Nuestro proceso combina estrategia narrativa, producción ágil y tecnología aplicada con criterio. Partimos de ideas claras, guiones optimizados y storyboards pensados para captar atención en segundos y cumplir un objetivo concreto en cada plataforma.</p>
+              <p>Trabajamos con un método simple y exigente: Claridad estratégica: definimos objetivos, prioridades y enfoque   realista. Creatividad aplicada: ideas que no se quedan en lo lindo; cumplen un rol. Ejecución con criterio: implementación ordenada, medición y mejoras continuas. No improvisamos. Probamos, aprendemos y ajustamos.</p>
             </div>
             <div className="about-grid-item">
               <span>03</span>
               <h6 className="about-question">Producción y post con propósito</h6>
-              <p>Grabamos en contextos reales o sets ligeros, priorizando autenticidad, ritmo visual y mensaje. En postproducción sumamos edición dinámica, motion graphics, animación 2D, transiciones y sonido para transformar la idea en una pieza lista para competir en entornos digitales.</p>
+              <p>Hace más de una década Trompo nació con una idea clara: una agencia no es un proveedor, es un aliado estratégico.
+                Nos involucramos de verdad: entendemos el ADN de cada marca, su cultura, su mercado y su forma de trabajar. Porque la estrategia no se “baja”: se construye con contexto.</p>
             </div>
             <div className="about-grid-item">
               <span>04</span>
               <h6 className="about-question">Tecnología e IA aplicada</h6>
-              <p>Integramos inteligencia artificial de forma estratégica para potenciar resultados: asistencia creativa en guiones y copy, generación de assets visuales, locuciones sintéticas de alta calidad, limpieza de audio y subtitulado creativo diseñado como parte activa de la narrativa.</p>
+              <p>Fuimos testigos y protagonistas de la transformación digital: cuando la pauta era marginal, cuando el “mobile first” todavía era teoría, y cuando medir de punta a punta parecía ciencia ficción. Hoy trabajamos con la misma filosofía: hacer que lo digital rinda, y que la marca se sostenga en el tiempo.</p>
             </div>
           </div>
         </div>
@@ -246,9 +247,6 @@ const Nosotros = () => {
             </p>
             <p>
               Desde el inicio, nos propusimos involucrarnos de verdad. Entender el ADN de cada marca, sus valores, su visión, su forma de trabajar. Porque solo así se construyen estrategias que importan y relaciones que trascienden.
-            </p>
-            <p>
-              <strong>Fuimos testigos y protagonistas de la transformación digital</strong>: cuando la pauta online era solo un 5% del mix, cuando el "mobile first" todavía no existía.
             </p>
           </div>
         </div>

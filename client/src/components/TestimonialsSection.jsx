@@ -9,9 +9,8 @@ const TestimonialsSection = ({ backgroundClass = "" }) => {
         <Testimonials3D />
       </div>
       <div className="container testimonial-text-content">
-        <h3>Dejamos que hablen por nosotros</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, natus maiores corporis earum quidem, quo alias dolore consequatur doloribus obcaecati deserunt eum suscipit dignissimos! Natus vero eveniet libero dignissimos ratione!</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam minus minima placeat reprehenderit quaerat repellendus!</p>
+        <h3>Más que clientes, aliados estratégicos</h3>
+        <p>Historias reales que reflejan el valor de construir en conjunto: marcas que confiaron en Trompo para evolucionar, ordenar su presencia digital y convertir desafíos en resultados concretos, con estrategia, creatividad y compromiso en cada paso.</p>
       </div>
     </section>
   );

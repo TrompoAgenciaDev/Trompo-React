@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import Testimonials3D from "../../components/Testimonials3d.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 
 //styles
@@ -501,10 +500,6 @@ const Meta = () => {
       </div>
 
       <Faqs location="estrategia" />
-
-      <section className="full-container testimonial-wrapper">
-        <Testimonials3D />
-      </section>
 
       <Contact form="estrategia" />
 
