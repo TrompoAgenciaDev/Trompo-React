@@ -41,7 +41,19 @@ const AutoSlider = ({
   
   // Clonar children solo si infinite es true
   const childrenArray = React.Children.toArray(children);
-  const clonedChildren = infinite ? [...childrenArray, ...childrenArray, ...childrenArray] : childrenArray;
+  const clonedChildren = infinite 
+    ? [...childrenArray, ...childrenArray, ...childrenArray].map((child, index) => {
+        // Asegurar que cada elemento clonado tenga una key única
+        if (React.isValidElement(child)) {
+          const cloneIndex = Math.floor(index / childrenArray.length);
+          const originalIndex = index % childrenArray.length;
+          return React.cloneElement(child, { 
+            key: `${child.key || `slide-${originalIndex}`}-clone-${cloneIndex}` 
+          });
+        }
+        return child;
+      })
+    : childrenArray;
 
   // Calcular dimensiones
   useEffect(() => {
@@ -581,7 +593,7 @@ const Estrategia = () => {
                   className="tab-content"
                 >
                   <div className="container grid-tab bg-white">
-                    <img src={`${base}assets/estrategia/google-ads/busqueda.webp`} alt="Busqueda Google Ads" />
+                    <img src={`${base}assets/paid-media/google-ads/busqueda.webp`} alt="Busqueda Google Ads" />
                     <div className="text-container">
                       <h3>
                         <strong>Anuncios de búsqueda </strong> en Google y Buscadores asociados.
@@ -598,7 +610,7 @@ const Estrategia = () => {
                         <p>Google Ads permite publicar los anuncios en los resultados de búsqueda de Google y en los buscadores asociados (Aol, Terra, Maps, YouTube,etc) mediante palabras claves de interés.</p>
                       </div>
                       <div className="img-bento">
-                        <img src={`${base}assets/estrategia/google-ads/search.webp`} alt="Search" />
+                        <img src={`${base}assets/paid-media/google-ads/search.webp`} alt="Search" />
                       </div>
                     </div>
                     <div className="bento-item bg-yellow-2">
@@ -607,7 +619,7 @@ const Estrategia = () => {
                         <p>Las campañas de Google Shopping están especialmente pensadas para promocionar productos de tiendas online.</p>
                       </div>
                       <div className="img-bento">
-                        <img src={`${base}assets/estrategia/google-ads/shopping.webp`} alt="Search" />
+                        <img src={`${base}assets/paid-media/google-ads/shopping.webp`} alt="Search" />
                       </div>
                     </div>
                     <div className="bento-item bg-yellow-2">
@@ -616,7 +628,7 @@ const Estrategia = () => {
                         <p>Muestran anuncios tanto por búsqueda como en sitios web y App Moviles.</p>
                       </div>
                       <div className="img-bento">
-                        <img src={`${base}assets/estrategia/google-ads/apps.webp`} alt="Search" />
+                        <img src={`${base}assets/paid-media/google-ads/apps.webp`} alt="Search" />
                       </div>
                     </div>
                   </div>
@@ -633,7 +645,7 @@ const Estrategia = () => {
                   className="tab-content"
                 >
                   <div className="container grid-tab bg-white">
-                    <img src={`${base}assets/estrategia/google-ads/display-google-ads.webp`} alt="Anuncios Gráficos Google Ads" />
+                    <img src={`${base}assets/paid-media/google-ads/display-google-ads.webp`} alt="Anuncios Gráficos Google Ads" />
                     <div className="text-container">
                       <h3>
                         <strong>Anuncios gráficos </strong> 
@@ -790,7 +802,7 @@ const Estrategia = () => {
                   className="tab-content"
                 >
                   <div className="container grid-tab bg-white">
-                    <img src={`${base}assets/estrategia/google-ads/videos.webp`} alt="Anuncios Gráficos Google Ads" />
+                    <img src={`${base}assets/paid-media/google-ads/videos.webp`} alt="Anuncios Gráficos Google Ads" />
                     <div className="text-container">
                       <h3>
                         <strong>Anuncios de video </strong> 
@@ -813,7 +825,7 @@ const Estrategia = () => {
                         <div className="item-header">
                           <div className="title-item"><h6>Anuncios <strong>In-stream</strong></h6></div>
                           <div className="img-header">
-                            <img src={`${base}assets/estrategia/google-ads/instream.webp`} alt="InStream" />
+                            <img src={`${base}assets/paid-media/google-ads/instream.webp`} alt="InStream" />
                           </div>
                         </div>
                         <div className="item-body">
@@ -826,7 +838,7 @@ const Estrategia = () => {
                         <div className="item-header">
                           <div className="title-item"><h6>Anuncios <strong>In-stream no se omiten</strong></h6></div>
                           <div className="img-header">
-                            <img src={`${base}assets/estrategia/google-ads/instream-2.webp`} alt="InStream" />
+                            <img src={`${base}assets/paid-media/google-ads/instream-2.webp`} alt="InStream" />
                           </div>
                         </div>
                         <div className="item-body">
@@ -839,7 +851,7 @@ const Estrategia = () => {
                         <div className="item-header">
                           <div className="title-item"><h6>Anuncios <strong>Video discovery</strong></h6></div>
                           <div className="img-header">
-                            <img src={`${base}assets/estrategia/google-ads/discovery.webp`} alt="InStream" />
+                            <img src={`${base}assets/paid-media/google-ads/discovery.webp`} alt="InStream" />
                           </div>
                         </div>
                         <div className="item-body">
@@ -852,7 +864,7 @@ const Estrategia = () => {
                         <div className="item-header">
                           <div className="title-item"><h6>Anuncios <strong>Out-stream</strong></h6></div>
                           <div className="img-header">
-                            <img src={`${base}assets/estrategia/google-ads/outstream.webp`} alt="InStream" />
+                            <img src={`${base}assets/paid-media/google-ads/outstream.webp`} alt="InStream" />
                           </div>
                         </div>
                         <div className="item-body">
@@ -865,7 +877,7 @@ const Estrategia = () => {
                         <div className="item-header">
                           <div className="title-item"><h6>Bumpers <strong>Publicitarios</strong></h6></div>
                           <div className="img-header">
-                            <img src={`${base}assets/estrategia/google-ads/ads.webp`} alt="InStream" />
+                            <img src={`${base}assets/paid-media/google-ads/ads.webp`} alt="InStream" />
                           </div>
                         </div>
                         <div className="item-body">

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import LazyImage from "../LazyImage";
 
-async function fetchSocialMediaShowcaseData() {
+async function fetchSocialMediaShowcaseData(sourceArray = "social-media") {
   const ts = Date.now();
   const res = await fetch(`${import.meta.env.BASE_URL}portfolio.json?v=${ts}`, {
     cache: "no-store",
@@ -10,16 +10,10 @@ async function fetchSocialMediaShowcaseData() {
   if (!res.ok) throw new Error("No se pudo cargar portfolio.json");
   const data = await res.json();
 
-  const estrategia = Array.isArray(data?.estrategia) ? data.estrategia : [];
-  const interaccion = Array.isArray(data?.interaccion) ? data.interaccion : [];
-
-  const socialMedia = interaccion.filter((it) => {
-    const cats = Array.isArray(it.category) ? it.category : [];
-    return cats.some((c) => String(c).toLowerCase() === "social media");
-  });
-
-  // Usar ambos: Estrategia + Social Media
-  return [...estrategia, ...socialMedia];
+  // Usar el array especificado (social-media o paid-media)
+  const items = Array.isArray(data?.[sourceArray]) ? data[sourceArray] : [];
+  
+  return items;
 }
 
 function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef, isVisible }) {
@@ -123,7 +117,7 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef, is
   );
 }
 
-export default function SocialMediaShowcaseSlider() {
+export default function SocialMediaShowcaseSlider({ sourceArray = "social-media" }) {
   const [slides, setSlides] = useState([]);
   const [baseSlidesLength, setBaseSlidesLength] = useState(0);
   const [index, setIndex] = useState(0);
@@ -140,7 +134,7 @@ export default function SocialMediaShowcaseSlider() {
     let mounted = true;
     (async () => {
       try {
-        const items = await fetchSocialMediaShowcaseData();
+        const items = await fetchSocialMediaShowcaseData(sourceArray);
 
         const base = import.meta.env.BASE_URL?.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
         const baseSlides = items
@@ -163,13 +157,13 @@ export default function SocialMediaShowcaseSlider() {
           setIndex(middleIndex);
         }
       } catch (e) {
-        console.error("Error cargando slider social media:", e);
+        console.error(`Error cargando slider ${sourceArray}:`, e);
       }
     })();
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [sourceArray]);
 
   useEffect(() => {
     const onResize = () => {

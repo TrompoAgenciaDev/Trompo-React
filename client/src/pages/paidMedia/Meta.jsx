@@ -94,13 +94,13 @@ const Meta = () => {
         <div className="container">
           <div className="grid-social-container">
             <div className="grid-social-item">
-              <img src={`${base}assets/estrategia/meta-ads/face.webp`} alt="" />
+              <img src={`${base}assets/paid-media/meta-ads/face.webp`} alt="" />
               <p>
                 <strong>Permite alcanzar audiencias hipersegmentadas</strong> a través de múltiples ubicaciones (feed, marketplace, reels, stories, etc.) y con objetivos como conversiones, tráfico, alcance, interacciones o ventas por catálogo.
               </p>
             </div>
             <div className="grid-social-item">
-              <img src={`${base}assets/estrategia/meta-ads/instagram.webp`} alt="" />
+              <img src={`${base}assets/paid-media/meta-ads/instagram.webp`} alt="" />
               <p>
                 Ideal para formatos visuales de alto impacto (reels, historias, feed, colecciones), con un fuerte componente emocional, aspiracional y estético. <strong>Fundamental para audiencias más jóvenes y engagement orgánico + pago.</strong></p>
             </div>
@@ -311,7 +311,7 @@ const Meta = () => {
                 style={{ width: "100%", height: "100%" }}
               >
                 <img 
-                  src={`${base}assets/estrategia/meta-ads/${formatos[activeImage]}`}
+                  src={`${base}assets/paid-media/meta-ads/${formatos[activeImage]}`}
                   alt={`Anuncios de ${activeImage}`}
                   style={{ width: "100%", height: "100%", objectFit: "contain" }}
                 />

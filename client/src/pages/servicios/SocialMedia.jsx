@@ -1,12 +1,6 @@
-import React, { useRef, useState, useMemo } from "react";
+import React, { useRef } from "react";
 import { motion, useScroll, useMotionValueEvent, useReducedMotion } from "framer-motion";
-import Hero from "../../layout/Hero.jsx";
-import Values from "../../layout/Values.jsx";
-import PostCard from "../../components/posts/PostCard.jsx";
-import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
-import Portfolio3d from "../../layout/Portfolio3d.jsx";
-import Icons from "../../components/Icons.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
@@ -160,7 +154,7 @@ const SocialMedia = () => {
           <div className="container">
             <h1 className="portfolio-title">Portfolio de Social Media</h1>
           </div>
-          <SocialMediaShowcaseSlider />
+          <SocialMediaShowcaseSlider sourceArray="social-media" />
         </div>
       </div>
 
