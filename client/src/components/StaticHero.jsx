@@ -20,9 +20,9 @@ const StaticHero = ({
 }) => {
   const videoRef = useRef(null);
   
-  // useEffect SOLO para iniciar el video después del primer paint
-  // NO afecta layout ni LCP
-  // PROHIBIDO: requestIdleCallback en above-the-fold
+  // useEffect SOLO para iniciar la reproducción del video después del primer paint
+  // El video ya es discoverable desde HTML inicial (sources renderizados)
+  // NO afecta layout ni LCP discovery
   useEffect(() => {
     // Esperar al primer paint usando requestAnimationFrame
     // Esto asegura que el poster ya se pintó antes de iniciar el video
@@ -30,18 +30,7 @@ const StaticHero = ({
       const video = videoRef.current;
       if (!video) return;
       
-      // Determinar qué video cargar basado en viewport
-      const isMobile = window.matchMedia('(max-width: 767px)').matches;
-      const videoSrc = isMobile ? mobileSrc : desktopSrc;
-      
-      // Establecer la fuente del video
-      const source = video.querySelector('source');
-      if (source) {
-        source.src = videoSrc;
-      }
-      
-      // Cargar el video
-      video.preload = 'metadata';
+      // Cargar el video (los sources ya están en el HTML)
       video.load();
       
       // Cuando el video pueda reproducirse, hacerlo visible
@@ -110,8 +99,8 @@ const StaticHero = ({
         />
       </picture>
       
-      {/* VIDEO: Se monta después del primer paint, solo se superpone */}
-      {/* Un solo video, la fuente se establece dinámicamente en useEffect */}
+      {/* VIDEO: Discoverable desde HTML inicial para LCP optimization */}
+      {/* Sources renderizados desde el inicio para que sean discoverable */}
       <video
         ref={videoRef}
         className="hero-video"
@@ -121,7 +110,8 @@ const StaticHero = ({
         loop
         muted
         playsInline
-        preload="none"
+        preload="metadata"
+        fetchPriority="high"
         disablePictureInPicture
         controlsList="nodownload noremoteplayback"
         style={{
@@ -138,8 +128,18 @@ const StaticHero = ({
           // El poster permanece visible debajo (aunque cubierto visualmente)
         }}
       >
-        {/* La fuente se establece dinámicamente en useEffect después del primer paint */}
-        <source type="video/mp4" />
+        {/* Desktop video - discoverable desde HTML inicial */}
+        <source 
+          src={desktopSrc}
+          type={desktopSrc.endsWith('.webm') ? 'video/webm' : 'video/mp4'}
+          media="(min-width: 768px)"
+        />
+        {/* Mobile video - discoverable desde HTML inicial */}
+        <source 
+          src={mobileSrc}
+          type={mobileSrc.endsWith('.webm') ? 'video/webm' : 'video/mp4'}
+          media="(max-width: 767px)"
+        />
       </video>
     </div>
   );

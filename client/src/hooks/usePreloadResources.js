@@ -8,93 +8,101 @@ export const usePreloadResources = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const preloadResource = (href, as, type = null) => {
-      // Verificar si ya existe el preload
-      const existingLink = document.querySelector(`link[rel="preload"][href="${href}"]`);
-      if (existingLink) return;
+    // Diferir ejecución para no bloquear main thread - usar requestIdleCallback
+    const executePreload = () => {
+      const preloadResource = (href, as, type = null) => {
+        // Verificar si ya existe el preload
+        const existingLink = document.querySelector(`link[rel="preload"][href="${href}"]`);
+        if (existingLink) return;
 
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.href = href;
-      
-      // Agregar 'as' si está presente y es válido
-      if (as) {
-        link.as = as;
-      }
-      
-      if (type) {
-        link.type = type;
-      }
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.href = href;
+        
+        // Agregar 'as' si está presente y es válido
+        if (as) {
+          link.as = as;
+        }
+        
+        if (type) {
+          link.type = type;
+        }
 
-      document.head.appendChild(link);
-    };
-
-    const removePreload = (href) => {
-      const link = document.querySelector(`link[rel="preload"][href="${href}"]`);
-      if (link) {
-        document.head.removeChild(link);
-      }
-    };
-
-    // Limpiar preloads anteriores
-    const existingPreloads = document.querySelectorAll('link[rel="preload"][as="video"]');
-    existingPreloads.forEach(link => {
-      if (link.href.includes('assets/hero/')) {
-        document.head.removeChild(link);
-      }
-    });
-
-    const base = import.meta.env.BASE_URL?.endsWith("/")
-      ? import.meta.env.BASE_URL
-      : `${import.meta.env.BASE_URL}/`;
-
-    // Preload del video hero de la página actual
-    // Todos usan el mismo video del home
-    const getHeroVideo = (pathname) => {
-      // Todas las páginas usan los mismos videos del home
-      return {
-        desktop: `${base}assets/hero/home.mp4`,
-        mobile: `${base}assets/hero/mobile/home-mobile.mp4`
+        document.head.appendChild(link);
       };
+
+      const removePreload = (href) => {
+        const link = document.querySelector(`link[rel="preload"][href="${href}"]`);
+        if (link) {
+          document.head.removeChild(link);
+        }
+      };
+
+      // Limpiar preloads anteriores
+      const existingPreloads = document.querySelectorAll('link[rel="preload"][as="video"]');
+      existingPreloads.forEach(link => {
+        if (link.href.includes('assets/hero/')) {
+          document.head.removeChild(link);
+        }
+      });
+
+      const base = import.meta.env.BASE_URL?.endsWith("/")
+        ? import.meta.env.BASE_URL
+        : `${import.meta.env.BASE_URL}/`;
+
+      // Preload del video hero de la página actual
+      // Todos usan el mismo video del home
+      const getHeroVideo = (pathname) => {
+        // Todas las páginas usan los mismos videos del home
+        return {
+          desktop: `${base}assets/hero/home.mp4`,
+          mobile: `${base}assets/hero/mobile/home-mobile.mp4`
+        };
+      };
+
+      // Detectar si es móvil
+      const isMobile = window.matchMedia('(max-width: 767px)').matches;
+      
+      const heroVideo = getHeroVideo(location.pathname);
+      
+      if (heroVideo) {
+        const videoToPreload = isMobile ? heroVideo.mobile : heroVideo.desktop;
+        preloadResource(videoToPreload, 'video', 'video/mp4');
+      }
+
+      // Preload de imágenes críticas de la página actual
+      const getCriticalImages = (pathname) => {
+        const images = [];
+        
+        if (pathname === '/' || pathname === '/home') {
+          images.push(`${base}assets/hero/home.webp`);
+        }
+        
+        if (pathname.includes('/nosotros')) {
+          images.push(`${base}assets/hero/home.webp`);
+        }
+        
+        // Agregar más imágenes críticas según la página
+        return images;
+      };
+
+      const criticalImages = getCriticalImages(location.pathname);
+      criticalImages.forEach(imageSrc => {
+        preloadResource(imageSrc, 'image');
+      });
     };
 
-    // Detectar si es móvil
-    const isMobile = window.matchMedia('(max-width: 767px)').matches;
-    
-    const heroVideo = getHeroVideo(location.pathname);
-    
-    if (heroVideo) {
-      const videoToPreload = isMobile ? heroVideo.mobile : heroVideo.desktop;
-      preloadResource(videoToPreload, 'video', 'video/mp4');
+    // Diferir con requestIdleCallback o setTimeout como fallback
+    let cleanup;
+    if ('requestIdleCallback' in window) {
+      const idleId = requestIdleCallback(executePreload, { timeout: 2000 });
+      cleanup = () => cancelIdleCallback(idleId);
+    } else {
+      const timeoutId = setTimeout(executePreload, 100);
+      cleanup = () => clearTimeout(timeoutId);
     }
 
-    // Preload de imágenes críticas de la página actual
-    const getCriticalImages = (pathname) => {
-      const images = [];
-      
-      if (pathname === '/' || pathname === '/home') {
-        images.push(`${base}assets/hero/home.webp`);
-        images.push(`${base}assets/logo-amarillo.webp`);
-      }
-      
-      if (pathname.includes('/nosotros')) {
-        images.push(`${base}assets/hero/home.webp`);
-        images.push(`${base}assets/logo-amarillo.webp`);
-      }
-      
-      // Agregar más imágenes críticas según la página
-      return images;
-    };
-
-    const criticalImages = getCriticalImages(location.pathname);
-    criticalImages.forEach(imageSrc => {
-      preloadResource(imageSrc, 'image');
-    });
-
-    // Cleanup function
-    return () => {
-      // No limpiar aquí para mantener el preload hasta la siguiente navegación
-    };
+    return cleanup;
   }, [location.pathname]);
 };
 

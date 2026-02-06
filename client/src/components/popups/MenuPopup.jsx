@@ -12,18 +12,33 @@ const MenuPopup = ({ isOpen, onClose }) => {
   const [isServiciosOpen, setIsServiciosOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
 
-  // Crear portal container
+  // Crear portal container - diferido para no afectar render inicial
   useEffect(() => {
-    const container = document.createElement('div');
-    container.id = 'menu-popup-portal';
-    document.body.appendChild(container);
-    portalContainerRef.current = container;
-    
-    return () => {
-      if (container.parentNode) {
-        container.parentNode.removeChild(container);
-      }
+    const createPortal = () => {
+      const container = document.createElement('div');
+      container.id = 'menu-popup-portal';
+      document.body.appendChild(container);
+      portalContainerRef.current = container;
     };
+
+    // Diferir creación del portal para no afectar render inicial
+    if ('requestIdleCallback' in window) {
+      const idleId = requestIdleCallback(createPortal, { timeout: 500 });
+      return () => {
+        cancelIdleCallback(idleId);
+        if (portalContainerRef.current?.parentNode) {
+          portalContainerRef.current.parentNode.removeChild(portalContainerRef.current);
+        }
+      };
+    } else {
+      const timeoutId = setTimeout(createPortal, 0);
+      return () => {
+        clearTimeout(timeoutId);
+        if (portalContainerRef.current?.parentNode) {
+          portalContainerRef.current.parentNode.removeChild(portalContainerRef.current);
+        }
+      };
+    }
   }, []);
 
   // Detectar si está en modo desktop

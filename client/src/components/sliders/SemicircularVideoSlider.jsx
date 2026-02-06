@@ -26,20 +26,43 @@ const CurvedSlide = ({ video, index, x, containerRef, wrapperRef, videoRefs, isD
   const maxCurveHeight = 250;
   const maxRotation = 25;
   
-  // Calcular Y basado en posición real del slide
-  const y = useTransform(x, () => {
-    if (!containerRef.current || !slideRef.current) return 0;
+  // Cachear rects para evitar múltiples lecturas en cada frame
+  const rectsCacheRef = useRef({ container: null, slide: null, timestamp: 0 });
+  const CACHE_DURATION = 16; // ~1 frame a 60fps
+  
+  // Función helper para obtener rects cacheados
+  const getCachedRects = () => {
+    const now = performance.now();
+    if (rectsCacheRef.current.timestamp && (now - rectsCacheRef.current.timestamp) < CACHE_DURATION) {
+      return rectsCacheRef.current;
+    }
     
+    if (!containerRef.current || !slideRef.current) {
+      return { container: null, slide: null };
+    }
+    
+    // Batch las lecturas en un solo frame
     const containerRect = containerRef.current.getBoundingClientRect();
     const slideRect = slideRef.current.getBoundingClientRect();
     
-    // Verificar que las mediciones sean válidas
-    if (!containerRect.width || !slideRect.width) return 0;
+    rectsCacheRef.current = {
+      container: containerRect,
+      slide: slideRect,
+      timestamp: now
+    };
     
-    const viewportCenterX = containerRect.left + (containerRect.width / 2);
-    const slideCenterX = slideRect.left + (slideRect.width / 2);
+    return rectsCacheRef.current;
+  };
+  
+  // Calcular Y basado en posición real del slide
+  const y = useTransform(x, () => {
+    const rects = getCachedRects();
+    if (!rects.container || !rects.slide || !rects.container.width || !rects.slide.width) return 0;
+    
+    const viewportCenterX = rects.container.left + (rects.container.width / 2);
+    const slideCenterX = rects.slide.left + (rects.slide.width / 2);
     const distanceFromCenter = slideCenterX - viewportCenterX;
-    const normalizedDistance = distanceFromCenter / (containerRect.width / 2);
+    const normalizedDistance = distanceFromCenter / (rects.container.width / 2);
     const clampedDistance = Math.max(-1, Math.min(1, normalizedDistance));
     
     return -maxCurveHeight * (1 - Math.pow(clampedDistance, 2));
@@ -47,18 +70,13 @@ const CurvedSlide = ({ video, index, x, containerRef, wrapperRef, videoRefs, isD
   
   // Calcular rotación Z basada en posición real
   const rotateZ = useTransform(x, () => {
-    if (!containerRef.current || !slideRef.current) return 0;
+    const rects = getCachedRects();
+    if (!rects.container || !rects.slide || !rects.container.width || !rects.slide.width) return 0;
     
-    const containerRect = containerRef.current.getBoundingClientRect();
-    const slideRect = slideRef.current.getBoundingClientRect();
-    
-    // Verificar que las mediciones sean válidas
-    if (!containerRect.width || !slideRect.width) return 0;
-    
-    const viewportCenterX = containerRect.left + (containerRect.width / 2);
-    const slideCenterX = slideRect.left + (slideRect.width / 2);
+    const viewportCenterX = rects.container.left + (rects.container.width / 2);
+    const slideCenterX = rects.slide.left + (rects.slide.width / 2);
     const distanceFromCenter = slideCenterX - viewportCenterX;
-    const normalizedDistance = distanceFromCenter / (containerRect.width / 2);
+    const normalizedDistance = distanceFromCenter / (rects.container.width / 2);
     const clampedDistance = Math.max(-1, Math.min(1, normalizedDistance));
     
     return clampedDistance * maxRotation;
@@ -66,21 +84,31 @@ const CurvedSlide = ({ video, index, x, containerRef, wrapperRef, videoRefs, isD
   
   // Calcular zIndex basado en distancia del centro
   const zIndex = useTransform(x, () => {
-    if (!containerRef.current || !slideRef.current) return 50;
+    const rects = getCachedRects();
+    if (!rects.container || !rects.slide || !rects.container.width || !rects.slide.width) return 50;
     
-    const containerRect = containerRef.current.getBoundingClientRect();
-    const slideRect = slideRef.current.getBoundingClientRect();
-    
-    // Verificar que las mediciones sean válidas
-    if (!containerRect.width || !slideRect.width) return 50;
-    
-    const viewportCenterX = containerRect.left + (containerRect.width / 2);
-    const slideCenterX = slideRect.left + (slideRect.width / 2);
+    const viewportCenterX = rects.container.left + (rects.container.width / 2);
+    const slideCenterX = rects.slide.left + (rects.slide.width / 2);
     const distanceFromCenter = Math.abs(slideCenterX - viewportCenterX);
-    const normalizedDistance = distanceFromCenter / (containerRect.width / 2);
+    const normalizedDistance = distanceFromCenter / (rects.container.width / 2);
     
     return Math.round(100 - Math.min(1, normalizedDistance) * 50);
   });
+  
+  // Invalidar cache en resize/scroll
+  useEffect(() => {
+    const invalidateCache = () => {
+      rectsCacheRef.current.timestamp = 0;
+    };
+    
+    window.addEventListener('resize', invalidateCache, { passive: true });
+    window.addEventListener('scroll', invalidateCache, { passive: true });
+    
+    return () => {
+      window.removeEventListener('resize', invalidateCache);
+      window.removeEventListener('scroll', invalidateCache);
+    };
+  }, []);
   
   return (
     <motion.div
@@ -127,6 +155,8 @@ const SemicircularVideoSlider = () => {
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef(null);
   const wrapperRef = useRef(null);
+  // Cachear containerWidth para evitar lecturas repetidas de offsetWidth
+  const containerWidthRef = useRef(0);
   
   // Calcular valor inicial de x basado en window.innerWidth (disponible inmediatamente)
   const getInitialX = () => {
@@ -158,14 +188,33 @@ const SemicircularVideoSlider = () => {
     return getSlideWidth() + getGap();
   };
 
+  // Función para actualizar containerWidth cacheado
+  const updateContainerWidth = () => {
+    if (containerRef.current) {
+      // Usar requestAnimationFrame para batch la lectura
+      requestAnimationFrame(() => {
+        if (containerRef.current) {
+          containerWidthRef.current = containerRef.current.offsetWidth;
+        }
+      });
+    }
+  };
+  
   // Refinar posición inicial con dimensiones reales del DOM
   // Usar useLayoutEffect para ejecutar antes del paint y evitar layout incorrecto inicial
   useLayoutEffect(() => {
+    // Actualizar cache inicial
+    updateContainerWidth();
+    
     const refinePosition = () => {
       if (!containerRef.current) return false;
       
       const slideWidth = getSlideWidth();
-      const containerWidth = containerRef.current.offsetWidth;
+      // Usar valor cacheado, actualizar si es 0
+      if (containerWidthRef.current === 0) {
+        containerWidthRef.current = containerRef.current.offsetWidth;
+      }
+      const containerWidth = containerWidthRef.current;
       
       if (!containerWidth) return false;
       
@@ -218,12 +267,25 @@ const SemicircularVideoSlider = () => {
     }
   }, []);
 
+  // Actualizar cache en resize
+  useEffect(() => {
+    const handleResize = () => {
+      updateContainerWidth();
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
   // Calcular límites del carrusel infinito
   const getDragConstraints = () => {
     if (!containerRef.current) return { left: 0, right: 0 };
     
     const slideWidth = getSlideWidth();
-    const containerWidth = containerRef.current.offsetWidth;
+    // Usar valor cacheado
+    if (containerWidthRef.current === 0 && containerRef.current) {
+      containerWidthRef.current = containerRef.current.offsetWidth;
+    }
+    const containerWidth = containerWidthRef.current;
     const centerOffset = (containerWidth / 2) - (slideWidth / 2);
     const slideWithGap = getSlideWithGap();
     
@@ -252,7 +314,11 @@ const SemicircularVideoSlider = () => {
     
     const currentX = x.get();
     const slideWidth = getSlideWidth();
-    const containerWidth = containerRef.current.offsetWidth;
+    // Usar valor cacheado
+    if (containerWidthRef.current === 0 && containerRef.current) {
+      containerWidthRef.current = containerRef.current.offsetWidth;
+    }
+    const containerWidth = containerWidthRef.current;
     const centerOffset = (containerWidth / 2) - (slideWidth / 2);
     const slideWithGap = getSlideWithGap();
     

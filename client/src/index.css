@@ -1,4 +1,5 @@
-@import url('/assets/fonts/fonts.css');
+/* Fuentes cargadas directamente en index.html para evitar bloqueo de @import */
+/* @import url('/assets/fonts/fonts.css'); */
 
 :root {
   font-family: 'Neue Haas Grotesk Display Pro', 'Montserrat', 'Poppins', system-ui, sans-serif;

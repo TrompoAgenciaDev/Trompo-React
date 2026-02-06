@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, lazy, Suspense } from "react";
 //styles
 import "../assets/styles/home.css";
-import { motion, useScroll, useTransform, useMotionValueEvent, useInView, useSpring, AnimatePresence, useReducedMotion } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import "@as/hero.css";
 
 //components críticos (above-the-fold)
@@ -197,9 +197,9 @@ const Home = () => {
   ];
 
   return (
-    <main className="full-container">
+    <div className="full-container">
       <StaticHero
-        desktopSrc={`${base}assets/hero/hero.mp4`}
+        desktopSrc={`${base}assets/hero/hero.webm`}
         mobileSrc={`${base}assets/hero/mobile/hero-mobile.mp4`}
         desktopPoster={`${base}assets/hero/home.webp`}
         mobilePoster={`${base}assets/hero/mobile/home.webp`}
@@ -230,9 +230,9 @@ const Home = () => {
               <motion.div
                 key="about"
                 className="container menu-content-item about"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
                 onMouseEnter={() => setActiveMenuItem(0)}
               >
@@ -243,9 +243,9 @@ const Home = () => {
               <motion.div
                 key="services"
                 className="container menu-content-item services"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
                 onMouseEnter={() => setActiveMenuItem(1)}
               >
@@ -261,9 +261,9 @@ const Home = () => {
               <motion.div
                 key="contact"
                 className="container menu-content-item contact"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
                 onMouseEnter={() => setActiveMenuItem(2)}
               >
@@ -311,22 +311,22 @@ const Home = () => {
         </div>
       </div>
 
-      <Suspense fallback={<div style={{ minHeight: '400px' }} />}>
+      <Suspense fallback={null}>
         <Beneficios />
       </Suspense>
 
-      <Suspense fallback={<div style={{ minHeight: '400px' }} />}>
+      <Suspense fallback={null}>
         <Contact form="home" />
       </Suspense>
 
       <section className="full-container">
         <div className="slider-container container">
-          <Suspense fallback={<div style={{ minHeight: '100px' }} />}>
+          <Suspense fallback={null}>
             <CustomerSlider />
           </Suspense>
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

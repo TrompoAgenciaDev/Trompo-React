@@ -65,38 +65,45 @@ const AutoSlider = ({
       const slider = sliderRef.current;
       if (!container || !slider) return;
 
-      const containerRect = container.getBoundingClientRect();
-      const sliderRect = slider.getBoundingClientRect();
-      
-      const slideElements = slider.querySelectorAll(slideSelector);
-      if (slideElements.length > 0) {
-        const firstSlide = slideElements[0];
-        const slideRect = firstSlide.getBoundingClientRect();
-        const computedStyle = window.getComputedStyle(slider);
-        const gap = parseFloat(computedStyle.gap) || 16;
-        const width = slideRect.width + gap;
+      // Usar requestAnimationFrame para batch todas las lecturas geométricas
+      // Esto evita múltiples forced reflows
+      requestAnimationFrame(() => {
+        if (!container || !slider) return;
         
-        // Calcular el ancho de un loop (un set de slides originales) solo si es infinito
-        if (infinite) {
-          const originalSlidesCount = childrenArray.length;
-          const loopWidth = width * originalSlidesCount;
-          loopWidthRef.current = loopWidth;
+        // Batch todas las lecturas geométricas en un solo frame
+        const containerRect = container.getBoundingClientRect();
+        const sliderRect = slider.getBoundingClientRect();
+        
+        const slideElements = slider.querySelectorAll(slideSelector);
+        if (slideElements.length > 0) {
+          const firstSlide = slideElements[0];
+          const slideRect = firstSlide.getBoundingClientRect();
+          const computedStyle = window.getComputedStyle(slider);
+          const gap = parseFloat(computedStyle.gap) || 16;
+          const width = slideRect.width + gap;
           
-          // Inicializar desde el segundo loop (el del medio) para tener margen en ambos lados
-          if (x.get() === 0 && loopWidth > 0) {
-            const initialX = -loopWidth;
-            x.set(initialX);
-            setCurrentSlideIndex(originalSlidesCount);
+          // Calcular el ancho de un loop (un set de slides originales) solo si es infinito
+          if (infinite) {
+            const originalSlidesCount = childrenArray.length;
+            const loopWidth = width * originalSlidesCount;
+            loopWidthRef.current = loopWidth;
+            
+            // Inicializar desde el segundo loop (el del medio) para tener margen en ambos lados
+            if (x.get() === 0 && loopWidth > 0) {
+              const initialX = -loopWidth;
+              x.set(initialX);
+              setCurrentSlideIndex(originalSlidesCount);
+            }
+          } else {
+            loopWidthRef.current = 0; // No usar loop si no es infinito
           }
-        } else {
-          loopWidthRef.current = 0; // No usar loop si no es infinito
+          
+          setSlideWidth(width);
+          setContainerWidth(containerRect.width);
+          setTotalWidth(sliderRect.width);
+          setTotalSlides(slideElements.length);
         }
-        
-        setSlideWidth(width);
-        setContainerWidth(containerRect.width);
-        setTotalWidth(sliderRect.width);
-        setTotalSlides(slideElements.length);
-      }
+      });
     };
 
     // Usar setTimeout para asegurar que el DOM esté renderizado

@@ -4,6 +4,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayXXThin.ttf") format("truetype");
   font-weight: 100;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -11,6 +12,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayXXThinItalic.ttf") format("truetype");
   font-weight: 100;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -18,6 +20,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayXThin.ttf") format("truetype");
   font-weight: 200;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -25,6 +28,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayXThinItalic.ttf") format("truetype");
   font-weight: 200;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -32,6 +36,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayThin.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -39,6 +44,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayThinItalic.ttf") format("truetype");
   font-weight: 300;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -46,6 +52,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayLight.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -53,6 +60,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayLightItalic.ttf") format("truetype");
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -60,6 +68,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayRoman.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -67,6 +76,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayRomanItalic.ttf") format("truetype");
   font-weight: 500;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -74,6 +84,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayMediu.ttf") format("truetype");
   font-weight: 600;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -81,6 +92,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayMediumItalic.ttf") format("truetype");
   font-weight: 600;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -88,6 +100,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayBold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -95,6 +108,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayBoldItalic.ttf") format("truetype");
   font-weight: 700;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -102,6 +116,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayBlack.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -109,6 +124,7 @@
   src: url("/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayBlackItalic.ttf") format("truetype");
   font-weight: 900;
   font-style: italic;
+  font-display: swap;
 }
 
 /* ===========================
@@ -119,6 +135,7 @@
   src: url("/assets/SuperiorTitle-Bold/assetsttf") format("truetype");
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -126,4 +143,5 @@
   src: url("/assets/SuperiorTitle-BoldItalic/assetsttf") format("truetype");
   font-weight: 700;
   font-style: italic;
+  font-display: swap;
 }

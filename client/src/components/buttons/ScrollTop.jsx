@@ -22,18 +22,33 @@ function ScrollTop() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Mostrar el botón cuando el usuario haya hecho scroll más de 300px
-      // o más de la mitad de la altura de la ventana
-      const threshold = Math.max(300, window.innerHeight * 0.5);
-      setVisible(window.scrollY > threshold);
+    // Diferir listener de scroll para no bloquear render inicial
+    const setupScrollListener = () => {
+      const handleScroll = () => {
+        // Mostrar el botón cuando el usuario haya hecho scroll más de 300px
+        // o más de la mitad de la altura de la ventana
+        const threshold = Math.max(300, window.innerHeight * 0.5);
+        setVisible(window.scrollY > threshold);
+      };
+      
+      // Verificar estado inicial
+      handleScroll();
+      
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      return () => window.removeEventListener("scroll", handleScroll);
     };
-    
-    // Verificar estado inicial
-    handleScroll();
-    
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    // Diferir con requestIdleCallback o setTimeout
+    let cleanup;
+    if ('requestIdleCallback' in window) {
+      const idleId = requestIdleCallback(setupScrollListener, { timeout: 1000 });
+      cleanup = () => cancelIdleCallback(idleId);
+    } else {
+      const timeoutId = setTimeout(setupScrollListener, 100);
+      cleanup = () => clearTimeout(timeoutId);
+    }
+
+    return cleanup;
   }, []);
 
   const scrollToTop = (e) => {

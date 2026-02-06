@@ -84,14 +84,27 @@ export default function Testimonials3D({ size = null }) {
   const middle = total * Math.floor(REPEAT / 2);
   
   // Función helper para obtener altura del slide
+  // Cachear altura para evitar lecturas repetidas
+  const slideHeightRef = useRef(500);
   const getSlideHeight = useMemo(() => {
     return () => {
+      // Retornar valor cacheado si está disponible
+      if (slideHeightRef.current !== 500) {
+        return slideHeightRef.current;
+      }
+      
+      // Leer propiedades geométricas solo cuando sea necesario
+      // Usar requestAnimationFrame para evitar forced reflow
       if (trackRef.current?.firstElementChild) {
-        return trackRef.current.firstElementChild.offsetHeight || 500;
+        const height = trackRef.current.firstElementChild.offsetHeight || 500;
+        slideHeightRef.current = height;
+        return height;
       }
       if (containerRef.current) {
         const viewportHeight = containerRef.current.offsetHeight;
-        return Math.round(viewportHeight * 0.555) || 500;
+        const calculated = Math.round(viewportHeight * 0.555) || 500;
+        slideHeightRef.current = calculated;
+        return calculated;
       }
       return 500;
     };

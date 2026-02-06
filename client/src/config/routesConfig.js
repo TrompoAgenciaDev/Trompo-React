@@ -1,7 +1,9 @@
 import { lazy } from "react";
 
-// Code splitting - Lazy loading de todas las páginas
-const Home = lazy(() => import("../pages/Home"));
+// Home importado estáticamente - CRÍTICO para LCP
+import Home from "../pages/Home";
+
+// Code splitting - Lazy loading de páginas secundarias
 const Nosotros = lazy(() => import("../pages/Nosotros.jsx"));
 const Contactanos = lazy(() => import("../pages/Contactanos"));
 const Casos = lazy(() => import("../pages/Casos"));

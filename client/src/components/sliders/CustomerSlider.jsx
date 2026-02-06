@@ -68,12 +68,18 @@ export default function ImageSlider() {
   }, []);
 
   // calcular ancho de un loop (un set de imágenes) según columnas
+  // Usar requestAnimationFrame para evitar forced reflow
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
-    const w = el.offsetWidth || 0;
-    const slideW = w / Math.max(1, cols);
-    loopWRef.current = slideW * sliderImages.length;
+    
+    // Diferir lectura de offsetWidth hasta el próximo frame para evitar forced reflow
+    requestAnimationFrame(() => {
+      if (!el) return; // Verificar que aún existe
+      const w = el.offsetWidth || 0;
+      const slideW = w / Math.max(1, cols);
+      loopWRef.current = slideW * sliderImages.length;
+    });
   }, [cols]);
 
   // animación continua

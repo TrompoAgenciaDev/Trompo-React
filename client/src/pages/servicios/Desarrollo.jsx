@@ -482,35 +482,49 @@ const ProductoItem = ({ number, title, children, isLast, itemRef, nextItemRef })
       return;
     }
 
+    let rafId = null;
     const updateLineDimensions = () => {
-      const currentRect = itemRef.current.getBoundingClientRect();
-      const nextRect = nextItemRef.current.getBoundingClientRect();
+      // Cancelar frame anterior si existe
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
       
-      // El wrapper tiene padding-top: 15px
-      // El número tiene height: 40px, así que el centro está a 15px (padding-top) + 20px (mitad del número) = 35px desde el top del wrapper
-      const currentNumberCenterY = 35; // 15px padding-top + 20px (mitad de 40px)
-      
-      // Calcular la posición del siguiente wrapper relativa al actual
-      // nextRect.top es la posición absoluta en el viewport
-      // currentRect.top es la posición absoluta del wrapper actual
-      // La diferencia nos da la posición relativa del siguiente wrapper
-      const nextWrapperTopRelative = nextRect.top - currentRect.top;
-      
-      // Centro del número siguiente: desde el top del wrapper siguiente
-      // Como ambos wrappers tienen la misma estructura, el centro del número siguiente también está a 35px desde el top de su wrapper
-      const nextNumberCenterY = nextWrapperTopRelative + 35;
-      
-      // Altura de la línea: desde el centro del número actual hasta el centro del número siguiente
-      const calculatedHeight = nextNumberCenterY - currentNumberCenterY;
-      
-      // Top de la línea: desde el centro del número actual
-      const calculatedTop = currentNumberCenterY;
-      
-      setLineHeight(Math.max(0, calculatedHeight));
-      setLineTop(calculatedTop);
+      // Usar requestAnimationFrame para batch las lecturas geométricas
+      rafId = requestAnimationFrame(() => {
+        if (!itemRef.current || !nextItemRef.current) return;
+        
+        // Batch todas las lecturas en un solo frame para evitar múltiples reflows
+        const currentRect = itemRef.current.getBoundingClientRect();
+        const nextRect = nextItemRef.current.getBoundingClientRect();
+        
+        // El wrapper tiene padding-top: 15px
+        // El número tiene height: 40px, así que el centro está a 15px (padding-top) + 20px (mitad del número) = 35px desde el top del wrapper
+        const currentNumberCenterY = 35; // 15px padding-top + 20px (mitad de 40px)
+        
+        // Calcular la posición del siguiente wrapper relativa al actual
+        // nextRect.top es la posición absoluta en el viewport
+        // currentRect.top es la posición absoluta del wrapper actual
+        // La diferencia nos da la posición relativa del siguiente wrapper
+        const nextWrapperTopRelative = nextRect.top - currentRect.top;
+        
+        // Centro del número siguiente: desde el top del wrapper siguiente
+        // Como ambos wrappers tienen la misma estructura, el centro del número siguiente también está a 35px desde el top de su wrapper
+        const nextNumberCenterY = nextWrapperTopRelative + 35;
+        
+        // Altura de la línea: desde el centro del número actual hasta el centro del número siguiente
+        const calculatedHeight = nextNumberCenterY - currentNumberCenterY;
+        
+        // Top de la línea: desde el centro del número actual
+        const calculatedTop = currentNumberCenterY;
+        
+        setLineHeight(Math.max(0, calculatedHeight));
+        setLineTop(calculatedTop);
+        rafId = null;
+      });
     };
 
-    updateLineDimensions();
+    // Diferir medición inicial
+    requestAnimationFrame(() => updateLineDimensions());
     window.addEventListener('scroll', updateLineDimensions, { passive: true });
     window.addEventListener('resize', updateLineDimensions);
 

@@ -7,7 +7,6 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
 
 const LogoWhite = `${base}assets/white.webp`;
 const LogoBlack = `${base}assets/black.webp`;
-const LogoYellow = `${base}assets/logo-amarillo.webp`;
 
 const iconComponents = {
   facebook: () => (
@@ -409,7 +408,6 @@ const iconComponents = {
 const imageIcons = {
   logoWhite: LogoWhite,
   logoBlack: LogoBlack,
-  logoYellow: LogoYellow,
 };
 
 function Icons({ iconName, link = "#" }) {
@@ -446,16 +444,41 @@ function Icons({ iconName, link = "#" }) {
     const logoDimensions = {
       logoWhite: { width: 150, height: 50 },
       logoBlack: { width: 150, height: 50 },
-      logoYellow: { width: 150, height: 50 },
     };
     const dimensions = logoDimensions[iconName] || { width: 150, height: 50 };
+    
+    // Logo del header (logoBlack) debe ser eager y high priority para LCP
+    const isHeaderLogo = iconName === "logoBlack";
+    
+    // Imágenes responsivas: usar srcset con descriptores de ancho (w)
+    // El navegador elegirá la imagen más apropiada según el tamaño del viewport y la densidad de píxeles
+    const baseSrc = imageIcons[iconName];
+    const basePath = baseSrc.replace('.webp', '');
+    
+    // srcset con descriptores de ancho (w) para imágenes responsivas
+    // El navegador calculará automáticamente qué imagen necesita según:
+    // - El tamaño del viewport (definido en sizes)
+    // - La densidad de píxeles del dispositivo (DPR)
+    // Ejemplo: En un dispositivo 2x con viewport de 180px, necesitará 360px
+    const srcSet = iconName === "logoBlack"
+      ? `${basePath}-150.webp 150w, ${basePath}-300.webp 300w, ${basePath}-360.webp 360w, ${baseSrc} 180w`
+      : `${basePath}-150.webp 150w, ${basePath}-300.webp 300w, ${basePath}-360.webp 360w, ${baseSrc} 180w`;
+    
+    // sizes indica al navegador qué tamaño de imagen necesita según el viewport
+    // Mobile: 150px, Tablet: 160px, Desktop: 180px
+    // El navegador multiplicará estos valores por el DPR para elegir la imagen correcta
+    const sizes = "(max-width: 767px) 150px, (max-width: 1023px) 160px, 180px";
+    
     return (
       <img 
-        src={imageIcons[iconName]} 
-        alt={iconName} 
+        src={baseSrc}
+        srcSet={srcSet}
+        sizes={sizes}
+        alt={iconName === "logoBlack" ? "Trompo" : iconName} 
         width={dimensions.width}
         height={dimensions.height}
-        loading="lazy" 
+        loading={isHeaderLogo ? "eager" : "lazy"}
+        fetchPriority={isHeaderLogo ? "high" : undefined}
         decoding="async"
         style={{ aspectRatio: `${dimensions.width} / ${dimensions.height}`, maxWidth: '100%', height: 'auto' }}
       />
