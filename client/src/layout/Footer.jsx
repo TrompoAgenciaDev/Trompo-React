@@ -95,7 +95,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="copy">
-        <p>© 2025 Trompo.</p>
+        <p>© 2026 Trompo.</p>
         <p>Todos los derechos reservados</p>
       </div>
     </footer>

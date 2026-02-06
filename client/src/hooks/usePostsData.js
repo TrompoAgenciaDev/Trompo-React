@@ -20,7 +20,8 @@ export default function usePostsData({ tag, category, limit }) {
         setLoading(true);
         setError(null);
 
-        const res = await fetch("posts.json", { cache: "no-store" }); // sin BASE
+        const buildTime = import.meta.env.BUILD_TIME || Date.now();
+        const res = await fetch(`posts.json?v=${buildTime}`, { cache: "default" }); // sin BASE
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         let data = await res.json();
 

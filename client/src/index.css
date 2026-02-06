@@ -237,10 +237,10 @@ footer {
   -ms-transform: translateX(-10px);
   transform: translateX(-10px);
 
-  transition: all .2s ease-in-out;
-  -webkit-transition: all .2s ease-in-out;
-  -moz-transition: all .2s ease-in-out;
-  -o-transition: all .2s ease-in-out;
+  transition: transform .2s ease-in-out, opacity .2s ease-in-out;
+  -webkit-transition: transform .2s ease-in-out, opacity .2s ease-in-out;
+  -moz-transition: transform .2s ease-in-out, opacity .2s ease-in-out;
+  -o-transition: transform .2s ease-in-out, opacity .2s ease-in-out;
 }
 
 .read-more-link svg {
@@ -248,10 +248,10 @@ footer {
   height: 18px;
   fill: #444444;
 
-  transition: all .2s ease-in-out;
-  -webkit-transition: all .2s ease-in-out;
-  -moz-transition: all .2s ease-in-out;
-  -o-transition: all .2s ease-in-out;
+  transition: transform .2s ease-in-out, opacity .2s ease-in-out;
+  -webkit-transition: transform .2s ease-in-out, opacity .2s ease-in-out;
+  -moz-transition: transform .2s ease-in-out, opacity .2s ease-in-out;
+  -o-transition: transform .2s ease-in-out, opacity .2s ease-in-out;
 }
 
 .button-prev,

@@ -9,6 +9,56 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
 const ServiceTitle = ({ titulo, subtitulo, page }) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  // Función para renderizar HTML con soporte para strong, b, em, etc.
+  const renderHTML = (html) => {
+    if (!html) return null;
+    
+    const htmlString = String(html);
+    
+    // Si no hay etiquetas HTML, devolver el texto tal cual
+    if (!/<(strong|b|em|i)>/i.test(htmlString)) {
+      return htmlString;
+    }
+    
+    // Parsear el HTML manteniendo las etiquetas strong, b, em, i
+    const tokens = htmlString.split(/(<\/?(?:strong|b|em|i)>)/gi);
+    const result = [];
+    let currentTag = null;
+    let keyIndex = 0;
+    
+    tokens.forEach((token) => {
+      if (!token) return;
+      
+      if (/^<(strong|b)>$/i.test(token)) {
+        currentTag = 'strong';
+        return;
+      }
+      if (/^<(em|i)>$/i.test(token)) {
+        currentTag = 'em';
+        return;
+      }
+      if (/^<\/(strong|b)>$/i.test(token)) {
+        currentTag = null;
+        return;
+      }
+      if (/^<\/(em|i)>$/i.test(token)) {
+        currentTag = null;
+        return;
+      }
+      
+      // Agregar el token con la etiqueta correspondiente
+      if (currentTag === 'strong') {
+        result.push(<strong key={`strong-${keyIndex++}`}>{token}</strong>);
+      } else if (currentTag === 'em') {
+        result.push(<em key={`em-${keyIndex++}`}>{token}</em>);
+      } else {
+        result.push(token);
+      }
+    });
+    
+    return result.length > 0 ? result : htmlString;
+  };
+
   // Detectar la página desde la prop o desde la URL
   const getPageType = () => {
     if (page) {
@@ -132,7 +182,9 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
         </div>
         <div className={`full-container service-subtitle-container ${isHovered ? 'is-hovered' : ''}`}>
           <div className="title-creative">
-            <span className="subtitle-page">{subtitulo}</span>
+            <div className="subtitle-page">
+              {renderHTML(subtitulo)}
+            </div>
           </div>
           <div className="icon-container">
             <div className="svg-wrapper">

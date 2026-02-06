@@ -70,7 +70,7 @@ const Contactanos = () => {
   // Componente Slider Infinito
   const SocialMediaSlider = ({ text }) => {
     const shouldReduceMotion = useReducedMotion();
-    const items = Array(16).fill(text);
+    const items = Array(8).fill(text);
 
     return (
       <motion.div 
@@ -82,7 +82,7 @@ const Contactanos = () => {
           x: {
             repeat: Infinity,
             repeatType: "loop",
-            duration: 50,
+            duration: 25,
             ease: "linear"
           }
         }}

@@ -314,6 +314,16 @@ const BrandingCarrusel = ({ category }) => {
                         animate={{ x: 0, opacity: 1 }}
                         exit={{ x: -100, opacity: 0 }}
                         transition={{ duration: 0.3, ease: "easeInOut" }}
+                        decoding="async"
+                        width={1200}
+                        height={900}
+                        style={{ 
+                          width: '100%', 
+                          height: 'auto', 
+                          aspectRatio: '4/3',
+                          maxWidth: '100%',
+                          display: 'block'
+                        }}
                       />
                     </AnimatePresence>
                   </div>

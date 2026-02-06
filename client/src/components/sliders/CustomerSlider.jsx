@@ -44,14 +44,26 @@ export default function ImageSlider() {
 
   const [cols, setCols] = useState(4);
 
-  // medir y ajustar columnas
+  // medir y ajustar columnas con throttling
   useEffect(() => {
+    let ticking = false;
     const update = () => {
-      const w = containerRef.current?.offsetWidth || window.innerWidth || 1280;
-      setCols(colsForWidth(w));
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const w = containerRef.current?.offsetWidth || window.innerWidth || 1280;
+          setCols(colsForWidth(w));
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    update();
-    window.addEventListener("resize", update);
+    // Diferir medición inicial hasta después del primer paint
+    if (typeof window !== 'undefined' && window.requestIdleCallback) {
+      requestIdleCallback(() => update(), { timeout: 100 });
+    } else {
+      setTimeout(update, 100);
+    }
+    window.addEventListener("resize", update, { passive: true });
     return () => window.removeEventListener("resize", update);
   }, []);
 
@@ -137,6 +149,9 @@ export default function ImageSlider() {
               alt={`slide-${i}`}
               className="image-element"
               placeholder="#ffffff"
+              width={200}
+              height={100}
+              style={{ objectFit: 'contain' }}
             />
           </div>
         ))}

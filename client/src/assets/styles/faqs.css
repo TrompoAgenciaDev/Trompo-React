@@ -1,5 +1,6 @@
 .faqs{
     padding: 30px 20px;
+    min-height: 400px; /* Reservar espacio para evitar CLS mientras carga */
 }
 
 .faqs .container{
@@ -38,6 +39,7 @@
   -moz-align-items: flex-start;
   align-items: flex-start;
   gap: 0px;
+  min-height: 300px; /* Reservar espacio mínimo para evitar CLS */
 }
 
 .accordion-title-section{

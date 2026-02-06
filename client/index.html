@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google Tag Manager -->
+    <!-- Google Tag Manager - Inicialización asíncrona del dataLayer -->
     <script>
-      // Excluir página de limpieza de caché de las analíticas
-      if (window.location.pathname !== '/clear-cache' && !window.location.pathname.includes('/clear-cache')) {
-        (function (w, d, s, l, i) {
-          w[l] = w[l] || [];
-          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-          var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s),
-            dl = l != "dataLayer" ? "&l=" + l : "";
-          j.async = true;
-          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-          f.parentNode.insertBefore(j, f);
-        })(window, document, "script", "dataLayer", "GTM-WTCNM4L");
+      // Inicializar dataLayer de forma no bloqueante
+      window.dataLayer = window.dataLayer || [];
+    </script>
+    <!-- Google Tag Manager - Script diferido después de window.load -->
+    <script>
+      // Cargar GTM después de window.load para no bloquear render inicial
+      function loadGTM() {
+        // Excluir página de limpieza de caché de las analíticas
+        if (window.location.pathname !== '/clear-cache' && !window.location.pathname.includes('/clear-cache')) {
+          (function (w, d, s, l, i) {
+            w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+            var j = d.createElement(s),
+              dl = l != "dataLayer" ? "&l=" + l : "";
+            j.async = true;
+            j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+            d.head.appendChild(j);
+          })(window, document, "script", "dataLayer", "GTM-WTCNM4L");
+        }
+      }
+      
+      // Cargar después de window.load o después de 3 segundos como máximo
+      if (document.readyState === 'complete') {
+        loadGTM();
+      } else {
+        window.addEventListener('load', loadGTM);
+        // Fallback: cargar después de 3 segundos máximo
+        setTimeout(loadGTM, 3000);
       }
     </script>
     <!-- End Google Tag Manager -->
@@ -23,14 +38,179 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- DNS Prefetch para recursos externos -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://sibforms.com" />
+
+    <!-- Preconnect para recursos críticos -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://sibforms.com" />
+    
+    <!-- Preload recursos críticos del hero -->
+    <!-- Solo preload del poster (LCP), no del video -->
+    <!-- Poster hero desktop - solo para pantallas grandes -->
+    <link 
+      rel="preload" 
+      href="/assets/hero/home.webp" 
+      as="image" 
+      type="image/webp" 
+      media="(min-width: 768px)"
+      fetchpriority="high"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
+    <!-- Poster hero mobile - solo para pantallas pequeñas -->
+    <link 
+      rel="preload" 
+      href="/assets/hero/mobile/home.webp" 
+      as="image" 
+      type="image/webp" 
+      media="(max-width: 767px)"
+      fetchpriority="high"
+    />
+    
+    <!-- Prefetch para rutas probables - mejora navegación entre páginas -->
+    <link rel="prefetch" href="/nosotros" />
+    <link rel="prefetch" href="/servicios" />
+    <link rel="prefetch" href="/contactanos" />
+    <link rel="prefetch" href="/faqs" />
+    
+    <!-- Preload fuentes críticas (above-the-fold) -->
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXpsog.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw9aXpsog.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    
+    <!-- Google Fonts - Solo pesos usados: 400, 500, 600, 700, 800, 900 -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <link rel="stylesheet" href="https://use.typekit.net/crf2yba.css" />
+
+    <!-- CSS crítico inline para header y hero - evita CLS y mejora LCP -->
+    <style>
+      /* Header crítico */
+      header.full-container {
+        z-index: 100;
+        position: static;
+        height: fit-content;
+        padding: 0 10px;
+      }
+      
+      .header .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .logo-img {
+        width: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      @media (min-width: 768px) {
+        .header .container {
+          padding: 20px 0;
+        }
+        .logo-img {
+          width: 160px;
+        }
+      }
+      
+      @media (min-width: 1024px) {
+        .logo-img {
+          width: 180px;
+        }
+      }
+      
+      /* Hero container crítico */
+      .hero-video,
+      .hero-poster-img {
+        width: 100vw;
+        height: 100vh;
+        min-height: 100vh;
+        display: block;
+        object-fit: cover;
+      }
+      
+      /* Mobile hero */
+      @media (max-width: 767px) {
+        .hero-video,
+        .hero-poster-img {
+          aspect-ratio: 768 / 1024;
+          height: auto;
+          min-height: 100vh;
+        }
+      }
+      
+      /* Desktop hero */
+      @media (min-width: 768px) {
+        .hero-video,
+        .hero-poster-img {
+          aspect-ratio: 1920 / 1080;
+          height: auto;
+          min-height: 100vh;
+        }
+      }
+      
+      /* Contenedor hero */
+      [data-hero-container] {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+      
+      @media (max-width: 767px) {
+        [data-hero-container] {
+          aspect-ratio: 768 / 1024;
+          height: auto;
+        }
+      }
+      
+      @media (min-width: 768px) {
+        [data-hero-container] {
+          aspect-ratio: 1920 / 1080;
+          height: auto;
+        }
+      }
+    </style>
 
     <title>Trompo Agencia</title>
   </head>
@@ -47,9 +227,36 @@
     <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script
-      defer
-      src="https://sibforms.com/forms/end-form/build/main.js"
-    ></script>
+    <!-- Brevo (Sibforms) - Cargar después de window.load -->
+    <script>
+      function loadBrevo() {
+        // Verificar que el body existe antes de agregar el script
+        if (!document.body) {
+          setTimeout(loadBrevo, 100);
+          return;
+        }
+        
+        // Verificar que no existe ya el script
+        if (document.querySelector('script[src*="sibforms.com"]')) {
+          return;
+        }
+        
+        var script = document.createElement('script');
+        script.defer = true;
+        script.src = 'https://sibforms.com/forms/end-form/build/main.js';
+        script.onerror = function() {
+          console.warn('Error al cargar script de Brevo');
+        };
+        document.body.appendChild(script);
+      }
+      
+      if (document.readyState === 'complete') {
+        loadBrevo();
+      } else {
+        window.addEventListener('load', loadBrevo);
+        // Fallback: cargar después de 3 segundos máximo
+        setTimeout(loadBrevo, 3000);
+      }
+    </script>
   </body>
 </html>

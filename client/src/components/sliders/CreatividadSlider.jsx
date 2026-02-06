@@ -4,9 +4,9 @@ import LazyImage from "../LazyImage";
 
 // Carga dinámica desde portfolio.json
 async function fetchCreatividadData() {
-  const ts = Date.now();
-  const res = await fetch(`${import.meta.env.BASE_URL}portfolio.json?v=${ts}`, {
-    cache: "no-store",
+  const buildTime = import.meta.env.BUILD_TIME || Date.now();
+  const res = await fetch(`${import.meta.env.BASE_URL}portfolio.json?v=${buildTime}`, {
+    cache: "default",
   });
   if (!res.ok) throw new Error("No se pudo cargar portfolio.json");
   const data = await res.json();
@@ -44,6 +44,9 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef, is
         <img
           src={list[0] || ""}
           alt=""
+          decoding="async"
+          width={1200}
+          height={900}
           style={{
             position: "absolute",
             inset: 0,
@@ -141,11 +144,14 @@ function InnerAutoSlider({ list, interval = 2200, direction = 1, draggingRef, is
               src={src}
               alt=""
               placeholder="#f0f0f0"
+              width={1200}
+              height={1200}
               style={{
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
                 display: "block",
+                aspectRatio: '1/1'
               }}
             />
           </div>

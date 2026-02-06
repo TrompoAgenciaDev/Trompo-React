@@ -75,15 +75,10 @@ async function fetchPortfolioData(category = "branding") {
   //   return portfolioCache.get(cacheKey);
   // }
   
-  // Agregar timestamp para evitar caché del navegador
-  const timestamp = new Date().getTime();
-  const res = await fetch(`${import.meta.env.BASE_URL}portfolio.json?t=${timestamp}`, {
-    cache: "no-cache", // No usar caché del navegador
-    headers: {
-      'Cache-Control': 'no-cache, no-store, must-revalidate',
-      'Pragma': 'no-cache',
-      'Expires': '0'
-    }
+  // Usar buildTime para versionado del cache
+  const buildTime = import.meta.env.BUILD_TIME || Date.now();
+  const res = await fetch(`${import.meta.env.BASE_URL}portfolio.json?v=${buildTime}`, {
+    cache: "default",
   });
   if (!res.ok) throw new Error("No se pudo cargar portfolio.json");
   const data = await res.json();
@@ -391,6 +386,9 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
         <img
           src={list[0] || ""}
           alt=""
+          decoding="async"
+          width={1200}
+          height={900}
           style={{
             position: "absolute",
             inset: 0,
@@ -435,6 +433,9 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
         <img
           src={list[0]}
           alt=""
+          decoding="async"
+          width={1200}
+          height={900}
           style={{
             position: "absolute",
             inset: 0,
@@ -478,11 +479,14 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
                 alt=""
                 placeholder="#f0f0f0"
                 critical={isVisible}
+                width={1200}
+                height={1200}
                 style={{
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
                   display: "block",
+                  aspectRatio: '1/1'
                 }}
               />
             </div>

@@ -17,8 +17,8 @@ export const usePreloadResources = () => {
       link.rel = 'preload';
       link.href = href;
       
-      // Solo agregar 'as' si es un tipo válido y no es null
-      if (as && as !== 'video' && as !== null) {
+      // Agregar 'as' si está presente y es válido
+      if (as) {
         link.as = as;
       }
       
@@ -65,7 +65,7 @@ export const usePreloadResources = () => {
     
     if (heroVideo) {
       const videoToPreload = isMobile ? heroVideo.mobile : heroVideo.desktop;
-      preloadResource(videoToPreload, null, 'video/mp4');
+      preloadResource(videoToPreload, 'video', 'video/mp4');
     }
 
     // Preload de imágenes críticas de la página actual

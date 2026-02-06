@@ -1,3 +1,47 @@
+/* Hero container - dimensiones fijas desde el inicio */
+[data-hero-container] {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  [data-hero-container] {
+    aspect-ratio: 768 / 1024;
+    height: auto;
+    min-height: 100vh;
+  }
+}
+
+@media (min-width: 768px) {
+  [data-hero-container] {
+    aspect-ratio: 1920 / 1080;
+    height: auto;
+    min-height: 100vh;
+  }
+}
+
+/* Hero poster - visible desde el HTML inicial */
+.hero-poster-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+/* Hero video - se monta después del primer paint */
 .hero-video {
   width: 100%;
   height: 100%;
@@ -14,8 +58,10 @@
   -moz-backface-visibility: visible !important;
   -ms-backface-visibility: visible !important;
   backface-visibility: visible !important;
-  position: relative;
-  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

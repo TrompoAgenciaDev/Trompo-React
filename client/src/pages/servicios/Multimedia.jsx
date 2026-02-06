@@ -3,7 +3,7 @@ import { motion, useInView, useScroll, useTransform, useMotionValueEvent, useSpr
 import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import SimpleHeroVideo from "../../components/SimpleHeroVideo";
+import StaticHero from "../../components/StaticHero";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import SemicircularVideoSlider from "../../components/sliders/SemicircularVideoSlider.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
@@ -68,7 +68,7 @@ const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }
 };
 
 // Componente para imagen con tracking del mouse
-const MouseTrackingImage = ({ src, alt = "" }) => {
+const MouseTrackingImage = ({ src, srcSet, sizes, alt = "" }) => {
   const containerRef = useRef(null);
   const [isInViewport, setIsInViewport] = React.useState(false);
   const mouseX = useMotionValue(0);
@@ -77,6 +77,10 @@ const MouseTrackingImage = ({ src, alt = "" }) => {
   // Valores suavizados con spring para movimiento fluido
   const smoothX = useSpring(mouseX, { stiffness: 150, damping: 15 });
   const smoothY = useSpring(mouseY, { stiffness: 150, damping: 15 });
+  
+  // Validar srcSet: eliminar si solo tiene una imagen (srcSet falso)
+  const hasValidSrcSet = srcSet && srcSet.split(',').length > 1;
+  const finalSrcSet = hasValidSrcSet ? srcSet : undefined;
 
   // IntersectionObserver para detectar cuando la imagen está en viewport (al menos 10px visibles)
   React.useEffect(() => {
@@ -150,18 +154,26 @@ const MouseTrackingImage = ({ src, alt = "" }) => {
       ref={containerRef}
       style={{
         width: "100%",
-        height: "100%"
+        height: "100%",
+        position: "relative"
       }}
     >
       <motion.img
         src={src}
+        srcSet={finalSrcSet}
+        sizes={sizes}
         alt={alt}
+        width={1200}
+        height={1200}
+        loading="lazy"
+        decoding="async"
         style={{
           x: smoothX,
           y: smoothY,
           width: "100%",
           height: "100%",
-          objectFit: "cover"
+          objectFit: "contain",
+          display: "block"
         }}
       />
     </motion.div>
@@ -229,6 +241,17 @@ const AnimatedImageContainer = ({ src, alt, containerRef: parentContainerRef }) 
       <motion.img 
         src={src} 
         alt={alt}
+        loading="lazy"
+        decoding="async"
+        width={1200}
+        height={900}
+        style={{
+          width: '100%',
+          height: 'auto',
+          aspectRatio: '4/3',
+          maxWidth: '100%',
+          display: 'block'
+        }}
         initial={{ scale: 1 }}
         whileHover={{
           scale: 1.05,
@@ -670,7 +693,7 @@ const Multimedia = () => {
 
   return (
     <>
-      <SimpleHeroVideo
+      <StaticHero
         desktopSrc={`${base}assets/hero/hero.mp4`}
         mobileSrc={`${base}assets/hero/mobile/hero-mobile.mp4`}
         desktopPoster={`${base}assets/hero/home.webp`}
@@ -740,7 +763,11 @@ const Multimedia = () => {
         <div className="container">
           <div className="grid-productos-multimedia container">
             <div className="grid-item-video-multimedia">
-              <MouseTrackingImage src={`${base}assets/ofi.webp`} alt="Multimedia" />
+              <MouseTrackingImage 
+                src={`${base}assets/ofi.webp`} 
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                alt="Multimedia" 
+              />
             </div>
             <div className="grid-item-productos-multimedia">
               <ProductosItemsList />

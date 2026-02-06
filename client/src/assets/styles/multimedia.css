@@ -282,6 +282,9 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+    position: relative;
+    min-height: 500px;
+    aspect-ratio: 4/3;
 }
 
 .grid-item-video-multimedia img{

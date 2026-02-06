@@ -146,10 +146,13 @@ const ClearCache = () => {
           >
             <div
               style={{
-                width: `${progress}%`,
+                width: "100%",
                 height: "100%",
                 backgroundColor: "#4CAF50",
-                transition: "width 0.3s ease",
+                transform: `scaleX(${progress / 100})`,
+                transformOrigin: "left center",
+                transition: "transform 0.3s ease",
+                willChange: "transform",
               }}
             />
           </div>

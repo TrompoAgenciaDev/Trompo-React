@@ -56,7 +56,7 @@
     cursor: pointer;
     position: relative;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: flex 0.3s ease, width 0.3s ease;
     flex-shrink: 0;
     width: 100px;
 }

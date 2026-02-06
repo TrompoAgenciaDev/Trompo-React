@@ -36,7 +36,7 @@ const SinglePost = () => {
       </div>
       <div className="container featured-image-container">
         {post.featured_image && (
-          <img className="featured-image" src={post.featured_image} alt="" />
+          <img className="featured-image" src={post.featured_image} alt="" width={1200} height={675} style={{ aspectRatio: '16/9', maxWidth: '100%', height: 'auto' }} loading="lazy" decoding="async" />
         )}
         <div className="post-content-container">
           <div

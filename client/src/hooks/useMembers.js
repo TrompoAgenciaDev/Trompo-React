@@ -8,9 +8,10 @@ export default function useMembers() {
   useEffect(() => {
     let alive = true;
 
-    const url = `${import.meta.env.BASE_URL}members.json`;
+    const buildTime = import.meta.env.BUILD_TIME || Date.now();
+    const url = `${import.meta.env.BASE_URL}members.json?v=${buildTime}`;
 
-    fetch(url, { cache: "no-store" })
+    fetch(url, { cache: "default" })
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();

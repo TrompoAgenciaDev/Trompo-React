@@ -3,11 +3,12 @@ import { motion, useInView, useScroll, useTransform, useMotionValueEvent, Animat
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
+import StaticHero from "../../components/StaticHero.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Icons from "../../components/Icons.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
 import Inversiones from "../../components/Inversiones.jsx";
+import SocialMediaShowcaseSlider from "../../components/sliders/SocialMediaShowcaseSlider.jsx";
 
 //styles
 import "../../assets/styles/paid-media.css";
@@ -510,7 +511,7 @@ const Estrategia = () => {
   return (
     <>
       <div style={{ margin: 0, padding: 0, lineHeight: 0, fontSize: 0 }}>
-        <SimpleHeroVideo
+        <StaticHero
           desktopSrc={`${base}assets/hero/hero.mp4`}
           mobileSrc={`${base}assets/hero/mobile/hero-mobile.mp4`}
           desktopPoster={`${base}assets/hero/home.webp`}
@@ -518,7 +519,7 @@ const Estrategia = () => {
         />
       </div>
       
-      <ServiceTitle titulo="social media" subtitulo="Dimensiones del patrón y momentos que conectan y dejan una imagen audaz."  />
+      <ServiceTitle titulo="Paid Media" subtitulo="Dimensiones del patrón y momentos que conectan y dejan una imagen audaz."  />
 
 
       <div className="full-container black-bg">
@@ -582,7 +583,7 @@ const Estrategia = () => {
         </div>
         <div className="full-container tab-content-container">
           <div className="container">
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
               {activeTab === "busqueda" && (
                 <motion.div
                   key="busqueda"
@@ -593,7 +594,15 @@ const Estrategia = () => {
                   className="tab-content"
                 >
                   <div className="container grid-tab bg-white">
-                    <img src={`${base}assets/paid-media/google-ads/busqueda.webp`} alt="Busqueda Google Ads" />
+                    <img 
+                      src={`${base}assets/paid-media/google-ads/busqueda.webp`} 
+                      alt="Busqueda Google Ads" 
+                      loading="lazy" 
+                      decoding="async" 
+                      width={800} 
+                      height={480} 
+                      style={{ maxWidth: '100%', height: 'auto' }} 
+                    />
                     <div className="text-container">
                       <h3>
                         <strong>Anuncios de búsqueda </strong> en Google y Buscadores asociados.
@@ -610,7 +619,15 @@ const Estrategia = () => {
                         <p>Google Ads permite publicar los anuncios en los resultados de búsqueda de Google y en los buscadores asociados (Aol, Terra, Maps, YouTube,etc) mediante palabras claves de interés.</p>
                       </div>
                       <div className="img-bento">
-                        <img src={`${base}assets/paid-media/google-ads/search.webp`} alt="Search" />
+                        <img 
+                          src={`${base}assets/paid-media/google-ads/search.webp`} 
+                          alt="Search" 
+                          loading="lazy" 
+                          decoding="async" 
+                          width={400} 
+                          height={240} 
+                          style={{ maxWidth: '100%', height: 'auto' }} 
+                        />
                       </div>
                     </div>
                     <div className="bento-item bg-yellow-2">
@@ -619,7 +636,15 @@ const Estrategia = () => {
                         <p>Las campañas de Google Shopping están especialmente pensadas para promocionar productos de tiendas online.</p>
                       </div>
                       <div className="img-bento">
-                        <img src={`${base}assets/paid-media/google-ads/shopping.webp`} alt="Search" />
+                        <img 
+                          src={`${base}assets/paid-media/google-ads/shopping.webp`} 
+                          alt="Search" 
+                          loading="lazy" 
+                          decoding="async" 
+                          width={400} 
+                          height={240} 
+                          style={{ maxWidth: '100%', height: 'auto' }} 
+                        />
                       </div>
                     </div>
                     <div className="bento-item bg-yellow-2">
@@ -628,7 +653,15 @@ const Estrategia = () => {
                         <p>Muestran anuncios tanto por búsqueda como en sitios web y App Moviles.</p>
                       </div>
                       <div className="img-bento">
-                        <img src={`${base}assets/paid-media/google-ads/apps.webp`} alt="Search" />
+                        <img 
+                          src={`${base}assets/paid-media/google-ads/apps.webp`} 
+                          alt="Search" 
+                          loading="lazy" 
+                          decoding="async" 
+                          width={400} 
+                          height={240} 
+                          style={{ maxWidth: '100%', height: 'auto' }} 
+                        />
                       </div>
                     </div>
                   </div>
@@ -638,14 +671,22 @@ const Estrategia = () => {
               {activeTab === "graficos" && (
                 <motion.div
                   key="graficos"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={false}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.3 }}
                   className="tab-content"
                 >
                   <div className="container grid-tab bg-white">
-                    <img src={`${base}assets/paid-media/google-ads/display-google-ads.webp`} alt="Anuncios Gráficos Google Ads" />
+                    <img 
+                      src={`${base}assets/paid-media/google-ads/display-google-ads.webp`} 
+                      alt="Anuncios Gráficos Google Ads" 
+                      loading="lazy" 
+                      decoding="async" 
+                      width={800} 
+                      height={480} 
+                      style={{ maxWidth: '100%', height: 'auto' }} 
+                    />
                     <div className="text-container">
                       <h3>
                         <strong>Anuncios gráficos </strong> 
@@ -802,7 +843,15 @@ const Estrategia = () => {
                   className="tab-content"
                 >
                   <div className="container grid-tab bg-white">
-                    <img src={`${base}assets/paid-media/google-ads/videos.webp`} alt="Anuncios Gráficos Google Ads" />
+                    <img 
+                      src={`${base}assets/paid-media/google-ads/videos.webp`} 
+                      alt="Anuncios Gráficos Google Ads" 
+                      loading="lazy" 
+                      decoding="async" 
+                      width={800} 
+                      height={480} 
+                      style={{ maxWidth: '100%', height: 'auto' }} 
+                    />
                     <div className="text-container">
                       <h3>
                         <strong>Anuncios de video </strong> 
@@ -825,7 +874,15 @@ const Estrategia = () => {
                         <div className="item-header">
                           <div className="title-item"><h6>Anuncios <strong>In-stream</strong></h6></div>
                           <div className="img-header">
-                            <img src={`${base}assets/paid-media/google-ads/instream.webp`} alt="InStream" />
+                            <img 
+                              src={`${base}assets/paid-media/google-ads/instream.webp`} 
+                              alt="InStream" 
+                              loading="lazy" 
+                              decoding="async" 
+                              width={600} 
+                              height={360} 
+                              style={{ maxWidth: '100%', height: 'auto' }} 
+                            />
                           </div>
                         </div>
                         <div className="item-body">
@@ -838,7 +895,15 @@ const Estrategia = () => {
                         <div className="item-header">
                           <div className="title-item"><h6>Anuncios <strong>In-stream no se omiten</strong></h6></div>
                           <div className="img-header">
-                            <img src={`${base}assets/paid-media/google-ads/instream-2.webp`} alt="InStream" />
+                            <img 
+                              src={`${base}assets/paid-media/google-ads/instream-2.webp`} 
+                              alt="InStream" 
+                              loading="lazy" 
+                              decoding="async" 
+                              width={600} 
+                              height={360} 
+                              style={{ maxWidth: '100%', height: 'auto' }} 
+                            />
                           </div>
                         </div>
                         <div className="item-body">
@@ -851,7 +916,15 @@ const Estrategia = () => {
                         <div className="item-header">
                           <div className="title-item"><h6>Anuncios <strong>Video discovery</strong></h6></div>
                           <div className="img-header">
-                            <img src={`${base}assets/paid-media/google-ads/discovery.webp`} alt="InStream" />
+                            <img 
+                              src={`${base}assets/paid-media/google-ads/discovery.webp`} 
+                              alt="InStream" 
+                              loading="lazy" 
+                              decoding="async" 
+                              width={600} 
+                              height={360} 
+                              style={{ maxWidth: '100%', height: 'auto' }} 
+                            />
                           </div>
                         </div>
                         <div className="item-body">
@@ -864,7 +937,15 @@ const Estrategia = () => {
                         <div className="item-header">
                           <div className="title-item"><h6>Anuncios <strong>Out-stream</strong></h6></div>
                           <div className="img-header">
-                            <img src={`${base}assets/paid-media/google-ads/outstream.webp`} alt="InStream" />
+                            <img 
+                              src={`${base}assets/paid-media/google-ads/outstream.webp`} 
+                              alt="InStream" 
+                              loading="lazy" 
+                              decoding="async" 
+                              width={600} 
+                              height={360} 
+                              style={{ maxWidth: '100%', height: 'auto' }} 
+                            />
                           </div>
                         </div>
                         <div className="item-body">
@@ -877,7 +958,15 @@ const Estrategia = () => {
                         <div className="item-header">
                           <div className="title-item"><h6>Bumpers <strong>Publicitarios</strong></h6></div>
                           <div className="img-header">
-                            <img src={`${base}assets/paid-media/google-ads/ads.webp`} alt="InStream" />
+                            <img 
+                              src={`${base}assets/paid-media/google-ads/ads.webp`} 
+                              alt="InStream" 
+                              loading="lazy" 
+                              decoding="async" 
+                              width={600} 
+                              height={360} 
+                              style={{ maxWidth: '100%', height: 'auto' }} 
+                            />
                           </div>
                         </div>
                         <div className="item-body">
@@ -895,6 +984,15 @@ const Estrategia = () => {
               )}
             </AnimatePresence>
           </div>
+        </div>
+      </div>
+
+      <div className="full-container bg-yellow-2 portfolio-social-media-container">
+        <div className="container">
+          <div className="container">
+            <h1 className="portfolio-title">Portfolio</h1>
+          </div>
+          <SocialMediaShowcaseSlider sourceArray="paid-media" />
         </div>
       </div>
 

@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { motion, useScroll, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import Contact from "../../layout/Contact.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
+import StaticHero from "../../components/StaticHero.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Inversiones from "../../components/Inversiones.jsx";
 import SocialMediaShowcaseSlider from "../../components/sliders/SocialMediaShowcaseSlider.jsx";
@@ -14,7 +14,7 @@ import "@as/hero.css";
 // Componente Slider Infinito para Social Media
 const SocialMediaSlider = ({ text }) => {
   const shouldReduceMotion = useReducedMotion();
-  const items = Array(16).fill(text);
+  const items = Array(8).fill(text);
 
   return (
     <motion.div 
@@ -26,7 +26,7 @@ const SocialMediaSlider = ({ text }) => {
         x: {
           repeat: Infinity,
           repeatType: "loop",
-          duration: 50,
+          duration: 25,
           ease: "linear"
         }
       }}
@@ -110,7 +110,7 @@ const SocialMedia = () => {
 
   return (
     <>
-      <SimpleHeroVideo
+      <StaticHero
         desktopSrc={`${base}assets/hero/hero.mp4`}
         mobileSrc={`${base}assets/hero/mobile/hero-mobile.mp4`}
         desktopPoster={`${base}assets/hero/home.webp`}
@@ -152,7 +152,7 @@ const SocialMedia = () => {
       <div className="full-container bg-yellow-2 portfolio-social-media-container">
         <div className="container">
           <div className="container">
-            <h1 className="portfolio-title">Portfolio de Social Media</h1>
+            <h1 className="portfolio-title">Portfolio</h1>
           </div>
           <SocialMediaShowcaseSlider sourceArray="social-media" />
         </div>

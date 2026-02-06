@@ -29,8 +29,9 @@ export default function usePortfolioData({ location, category, limit }) {
         setLoading(true);
         setError(null);
 
-        const url = `${BASE}portfolio.json`;
-        const res = await fetch(url, { cache: "no-store" });
+        const buildTime = import.meta.env.BUILD_TIME || Date.now();
+        const url = `${BASE}portfolio.json?v=${buildTime}`;
+        const res = await fetch(url, { cache: "default" });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
         const data = await res.json();

@@ -33,10 +33,10 @@
   -webkit-border-radius: 13px;
   -moz-border-radius: 13px;
   border-radius: 13px;
-  -webkit-transition: all 0.2s ease;
-  -moz-transition: all 0.2s ease;
-  -o-transition: all 0.2s ease;
-  transition: all 0.2s ease;
+  -webkit-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  -moz-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  -o-transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   gap: 30px;
 }
 
@@ -221,6 +221,8 @@
 .tab-content-container {
   padding: 20px 0;
   min-height: 150px;
+  overflow: visible;
+  position: relative;
 }
 
 .tab-content {
@@ -274,7 +276,7 @@
   padding: 10px 5px;
   cursor: pointer;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .tab-button.active {
@@ -284,7 +286,8 @@
 }
 
 .tab-button:hover:not(.active) {
-  color: #ffffff;
+  background-color: rgba(254, 211, 50, 0.2);
+  color: #262626;
 }
 
 .grid-tab {
@@ -1051,5 +1054,36 @@
     min-width: 300px;
     font-size: 20px;
     padding: 16px 20px;
+  }
+}
+
+/* ============================================
+   PORTFOLIO SLIDER STYLES
+   ============================================ */
+.portfolio-social-media-container{
+  padding: 30px 10px 50px;
+}
+
+/* Título del portfolio - mismo estilo que en Social Media, en negro */
+.portfolio-title{
+  color: #000000;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+  .sm-showcase-section button {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-title{
+    font-size: 64px;
+  }
+
+  .portfolio-social-media-container{
+    padding: 50px 10px 100px;
   }
 }

@@ -220,11 +220,9 @@ const PortfolioAccordion = ({ category }) => {
             className={`branding-accordion-item ${isExpanded ? "expanded" : ""}`}
             onClick={() => handleToggle(index)}
             transition={{
-              layout: {
-                type: "spring",
-                stiffness: 500,
-                damping: 40
-              }
+              type: "spring",
+              stiffness: 500,
+              damping: 40
             }}
           >
             {!isExpanded ? (

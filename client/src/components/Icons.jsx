@@ -442,7 +442,24 @@ function Icons({ iconName, link = "#" }) {
   }
 
   if (imageIcons[iconName]) {
-    return <img src={imageIcons[iconName]} alt={iconName} />;
+    // Dimensiones estándar para logos (ajustar según necesidades reales)
+    const logoDimensions = {
+      logoWhite: { width: 150, height: 50 },
+      logoBlack: { width: 150, height: 50 },
+      logoYellow: { width: 150, height: 50 },
+    };
+    const dimensions = logoDimensions[iconName] || { width: 150, height: 50 };
+    return (
+      <img 
+        src={imageIcons[iconName]} 
+        alt={iconName} 
+        width={dimensions.width}
+        height={dimensions.height}
+        loading="lazy" 
+        decoding="async"
+        style={{ aspectRatio: `${dimensions.width} / ${dimensions.height}`, maxWidth: '100%', height: 'auto' }}
+      />
+    );
   }
 
   const IconComponent = iconComponents[iconName];

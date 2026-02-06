@@ -23,6 +23,9 @@ function Services() {
           disablePictureInPicture
           controlsList="nodownload noremoteplayback"
           poster={`${import.meta.env.BASE_URL}assets/services/loop-poster.webp`}
+          width={1920}
+          height={1080}
+          style={{ aspectRatio: '1920 / 1080' }}
         />
       </div>
 

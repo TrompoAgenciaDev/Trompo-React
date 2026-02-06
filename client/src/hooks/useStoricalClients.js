@@ -17,7 +17,8 @@ export default function useStoricalClients() {
   useEffect(() => {
     let abort = false;
     setLoading(true);
-    fetch("/clientes-storic.json", { cache: "no-store" })
+    const buildTime = import.meta.env.BUILD_TIME || Date.now();
+    fetch(`/clientes-storic.json?v=${buildTime}`, { cache: "default" })
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();

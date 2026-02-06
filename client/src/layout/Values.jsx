@@ -10,12 +10,11 @@ function Collapse({ isOpen, children }) {
 
   return (
     <motion.div
-      layout
       initial={false}
       animate={
         isOpen
-          ? { height: "auto", opacity: 1 }
-          : { height: 0, opacity: 0 }
+          ? { maxHeight: "1000px", opacity: 1 }
+          : { maxHeight: 0, opacity: 0 }
       }
       transition={{ duration: 0.3, ease: "easeOut" }}
       style={{ overflow: "hidden" }}
@@ -60,7 +59,6 @@ function Values() {
 
             return (
               <motion.div
-                layout
                 key={item.id}
                 className={`grid-value-content ${isOpen ? "item-active" : ""}`}
                 onClick={() => toggleItem(index)}
@@ -80,7 +78,6 @@ function Values() {
 
                 <div className="content-grid">
                   <motion.span
-                    layout
                     className="title-item-content"
                     initial={false}
                     animate={{ scale: isOpen ? 0.95 : 1 }}

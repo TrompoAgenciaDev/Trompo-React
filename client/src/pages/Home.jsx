@@ -1,18 +1,20 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 //styles
 import "../assets/styles/home.css";
 import { motion, useScroll, useTransform, useMotionValueEvent, useInView, useSpring, AnimatePresence, useReducedMotion } from "motion/react";
 import "@as/hero.css";
 
-//components
-import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
-import Contact from "../layout/Contact";
-import SimpleHeroVideo from "../components/SimpleHeroVideo";
-import Beneficios from "../components/Beneficios";
+//components críticos (above-the-fold)
+import StaticHero from "../components/StaticHero";
+import ServiceTitle from "../components/services/ServiceTitle.jsx";
 import Menu from "../components/Menu";
 import routesConfig from "../config/routesConfig";
-import ServiceTitle from "../components/services/ServiceTitle.jsx";
+
+//components lazy (below-the-fold)
+const CustomerSlider = lazy(() => import("../components/sliders/CustomerSlider.jsx"));
+const Contact = lazy(() => import("../layout/Contact"));
+const Beneficios = lazy(() => import("../components/Beneficios"));
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -41,8 +43,8 @@ const MenuIcon = () => {
 // Componente InfiniteSlider
 const InfiniteSlider = ({ text }) => {
   const shouldReduceMotion = useReducedMotion();
-  // 6 copias para crear un loop infinito más fluido
-  const items = Array(16).fill(text);
+  // 8 copias para crear un loop infinito más fluido (se duplican para 16 totales)
+  const items = Array(8).fill(text);
 
   return (
     <motion.div 
@@ -54,7 +56,7 @@ const InfiniteSlider = ({ text }) => {
         x: {
           repeat: Infinity,
           repeatType: "loop",
-          duration: 50,
+          duration: 30,
           ease: "linear"
         }
       }}
@@ -123,9 +125,10 @@ const ServiceItem = ({ title, subtitle, subtitles, link, links }) => {
         </div>
         <motion.div
           className="service-progress-bar"
-          initial={{ width: "0%" }}
-          animate={{ width: isHovered ? "100%" : "0%" }}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: isHovered ? 1 : 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
+          style={{ transformOrigin: "left", width: "100%" }}
         />
       </div>
     );
@@ -163,9 +166,10 @@ const ServiceItem = ({ title, subtitle, subtitles, link, links }) => {
       </div>
       <motion.div
         className="service-progress-bar"
-        initial={{ width: "0%" }}
-        animate={{ width: isHovered ? "100%" : "0%" }}
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: isHovered ? 1 : 0 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
+        style={{ transformOrigin: "left", width: "100%" }}
       />
     </div>
   );
@@ -194,7 +198,7 @@ const Home = () => {
 
   return (
     <main className="full-container">
-      <SimpleHeroVideo
+      <StaticHero
         desktopSrc={`${base}assets/hero/hero.mp4`}
         mobileSrc={`${base}assets/hero/mobile/hero-mobile.mp4`}
         desktopPoster={`${base}assets/hero/home.webp`}
@@ -296,8 +300,8 @@ const Home = () => {
           />
           <ServiceItem 
             title="Paid Media"
-            subtitles={["Meta Ads", "Google Ads", "Analítica"]}
-            links={["/servicios/paid-media/meta-ads", "/servicios/paid-media/google-ads", "/servicios/paid-media/analitica-web"]}
+            subtitle="Estrategia de Publicidad Digital"
+            link="/servicios/paid-media"
           />
           <ServiceItem 
             title="Diseño Gráfico"
@@ -307,13 +311,19 @@ const Home = () => {
         </div>
       </div>
 
-      <Beneficios />
+      <Suspense fallback={<div style={{ minHeight: '400px' }} />}>
+        <Beneficios />
+      </Suspense>
 
-      <Contact form="home" />
+      <Suspense fallback={<div style={{ minHeight: '400px' }} />}>
+        <Contact form="home" />
+      </Suspense>
 
       <section className="full-container">
         <div className="slider-container container">
-          <CustomerSlider />
+          <Suspense fallback={<div style={{ minHeight: '100px' }} />}>
+            <CustomerSlider />
+          </Suspense>
         </div>
       </section>
     </main>

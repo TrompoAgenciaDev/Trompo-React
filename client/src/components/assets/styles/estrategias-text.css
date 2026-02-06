@@ -43,11 +43,17 @@
 .description-container {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s ease;
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  will-change: opacity, transform;
 }
 
 .description-container.animated-height {
-  max-height: 500px;
+  max-height: 1000px;
+  opacity: 1;
+  transform: scaleY(1);
 }
 
 .et-description {

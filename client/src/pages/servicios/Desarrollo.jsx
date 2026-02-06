@@ -1,12 +1,14 @@
-import React, { useRef, useState, useEffect, useMemo } from "react";
+import React, { useRef, useState, useEffect, useMemo, Suspense, lazy } from "react";
 import { motion, useReducedMotion, useScroll, useTransform, useMotionValueEvent, useInView, useSpring, useMotionValue } from "framer-motion";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import Portfolio3d from "../../layout/Portfolio3d.jsx";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
-import SimpleHeroVideo from "../../components/SimpleHeroVideo";
+import StaticHero from "../../components/StaticHero";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
+
+// Lazy load Portfolio3d para mejorar performance inicial
+const Portfolio3d = lazy(() => import("../../layout/Portfolio3d.jsx"));
 
 import "../../assets/styles/servicios-page.css";
 import "../../assets/styles/desarrollo.css";
@@ -18,8 +20,8 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
 
 const InfiniteSlider = ({ text }) => {
   const shouldReduceMotion = useReducedMotion();
-  // 6 copias para crear un loop infinito más fluido
-  const items = Array(16).fill(text);
+  // 8 copias para crear un loop infinito más fluido (se duplican para 16 totales)
+  const items = Array(8).fill(text);
 
   return (
     <motion.div 
@@ -31,7 +33,7 @@ const InfiniteSlider = ({ text }) => {
         x: {
           repeat: Infinity,
           repeatType: "loop",
-          duration: 50,
+          duration: 20,
           ease: "linear"
         }
       }}
@@ -217,7 +219,7 @@ const AnimatedTextSection = ({ containerRef }) => {
 };
 
 // Componente para imagen con tracking del mouse
-const MouseTrackingImage = ({ src, alt = "" }) => {
+const MouseTrackingImage = ({ src, srcSet, sizes, alt = "" }) => {
   const containerRef = useRef(null);
   const [isInViewport, setIsInViewport] = React.useState(false);
   const mouseX = useMotionValue(0);
@@ -226,6 +228,10 @@ const MouseTrackingImage = ({ src, alt = "" }) => {
   // Valores suavizados con spring para movimiento fluido
   const smoothX = useSpring(mouseX, { stiffness: 150, damping: 15 });
   const smoothY = useSpring(mouseY, { stiffness: 150, damping: 15 });
+  
+  // Validar srcSet: eliminar si solo tiene una imagen (srcSet falso)
+  const hasValidSrcSet = srcSet && srcSet.split(',').length > 1;
+  const finalSrcSet = hasValidSrcSet ? srcSet : undefined;
 
   // IntersectionObserver para detectar cuando la imagen está en viewport (al menos 10px visibles)
   React.useEffect(() => {
@@ -299,18 +305,26 @@ const MouseTrackingImage = ({ src, alt = "" }) => {
       ref={containerRef}
       style={{
         width: "100%",
-        height: "100%"
+        height: "100%",
+        position: "relative"
       }}
     >
       <motion.img
         src={src}
+        srcSet={finalSrcSet}
+        sizes={sizes}
         alt={alt}
+        width={1200}
+        height={1200}
+        loading="lazy"
+        decoding="async"
         style={{
           x: smoothX,
           y: smoothY,
           width: "100%",
           height: "100%",
-          objectFit: "cover"
+          objectFit: "contain",
+          display: "block"
         }}
       />
     </motion.div>
@@ -597,7 +611,7 @@ const Desarrollo = () => {
 
   return (
     <>
-      <SimpleHeroVideo
+      <StaticHero
         desktopSrc={`${base}assets/hero/hero.mp4`}
         mobileSrc={`${base}assets/hero/mobile/hero-mobile.mp4`}
         desktopPoster={`${base}assets/hero/home.webp`}
@@ -618,7 +632,11 @@ const Desarrollo = () => {
         <div className="container">
           <div className="grid-productos-desarrollo container">
             <div className="grid-item-video-desarrollo">
-              <MouseTrackingImage src={`${base}assets/sillon.webp`} alt="Desarrollo" />
+              <MouseTrackingImage 
+                src={`${base}assets/sillon.webp`} 
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                alt="Desarrollo" 
+              />
             </div>
             <div className="grid-item-productos-desarrollo">
               <ProductosItemsList />
@@ -684,7 +702,9 @@ const Desarrollo = () => {
             </h1>
           </div>
         </div>
-        <Portfolio3d location="desarrollo" categoria="3d" />
+        <Suspense fallback={<div style={{ minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Cargando portfolio...</div>}>
+          <Portfolio3d location="desarrollo" categoria="3d" />
+        </Suspense>
       </div>      
 
       <WebDesignSection />

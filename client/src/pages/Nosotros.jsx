@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import Contact from "../layout/Contact.jsx";
-import SimpleHeroVideo from "../components/SimpleHeroVideo";
+import StaticHero from "../components/StaticHero";
 import StoricalClients from "../layout/StoricalClients";
 import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 
@@ -56,7 +56,7 @@ const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }
 // Componente Slider Infinito para Nosotros
 const SocialMediaSlider = ({ text }) => {
   const shouldReduceMotion = useReducedMotion();
-  const items = Array(16).fill(text);
+  const items = Array(8).fill(text);
 
   return (
     <motion.div 
@@ -68,7 +68,7 @@ const SocialMediaSlider = ({ text }) => {
         x: {
           repeat: Infinity,
           repeatType: "loop",
-          duration: 50,
+          duration: 25,
           ease: "linear"
         }
       }}
@@ -172,7 +172,7 @@ const Nosotros = () => {
   }, [baseOpacity, hasAnimated, phrases.length, phraseDelay]);
   return (
     <>
-      <SimpleHeroVideo
+      <StaticHero
         desktopSrc={`${base}assets/hero/hero.mp4`}
         mobileSrc={`${base}assets/hero/mobile/hero-mobile.mp4`}
         desktopPoster={`${base}assets/hero/home.webp`}

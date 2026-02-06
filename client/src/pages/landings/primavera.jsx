@@ -15,16 +15,32 @@ const Primavera = () => {
     <>
       <section className="hero-landing full-container">
         <picture>
-          {/* Imagen desktop */}
+          {/* Imagen desktop con múltiples tamaños */}
           <source
             media="(min-width: 1024px)"
-            srcSet={`${BASE}assets/landing/primavera.webp`}
+            srcSet={`
+              ${BASE}assets/landing/primavera.webp 1920w,
+              ${BASE}assets/landing/primavera-800w.webp 800w,
+              ${BASE}assets/landing/primavera-1200w.webp 1200w
+            `}
+            sizes="100vw"
           />
-          {/* Imagen mobile (default) */}
+          {/* Imagen mobile con múltiples tamaños (default) */}
           <img
             src={`${BASE}assets/landing/primavera-mobile.webp`}
+            srcSet={`
+              ${BASE}assets/landing/primavera-mobile.webp 1200w,
+              ${BASE}assets/landing/primavera-mobile-400w.webp 400w,
+              ${BASE}assets/landing/primavera-mobile-800w.webp 800w
+            `}
+            sizes="100vw"
             alt="Hero Landing"
             className="hero-image"
+            width={1920}
+            height={1080}
+            style={{ aspectRatio: '16/9', maxWidth: '100%', height: 'auto' }}
+            loading="eager"
+            decoding="async"
           />
         </picture>
       </section>

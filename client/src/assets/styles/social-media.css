@@ -612,6 +612,8 @@
 
   .grid-portfolio-item {
     transition: transform 0.3s ease;
+    will-change: transform;
+    overflow: hidden;
   }
 
   .grid-portfolio-item:hover {

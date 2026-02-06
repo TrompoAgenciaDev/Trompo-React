@@ -6,6 +6,8 @@ import { useLazyVideo } from '../hooks/useLazyLoading';
  * @param {Object} props - Props del componente
  * @param {string} props.src - URL del video
  * @param {string} props.poster - URL del poster
+ * @param {number} props.posterWidth - Ancho del poster en píxeles
+ * @param {number} props.posterHeight - Alto del poster en píxeles
  * @param {string} props.className - Clases CSS
  * @param {boolean} props.autoPlay - Si debe autoplay
  * @param {boolean} props.loop - Si debe loop
@@ -21,6 +23,8 @@ import { useLazyVideo } from '../hooks/useLazyLoading';
 const LazyVideo = ({
   src,
   poster,
+  posterWidth,
+  posterHeight,
   className = '',
   autoPlay = false,
   loop = false,
@@ -76,34 +80,47 @@ const LazyVideo = ({
     }
   }, [shouldLoad, onLoad, onError]);
 
+  // Calcular aspect-ratio del poster si width y height están presentes
+  const posterAspectRatio = posterWidth && posterHeight ? `${posterWidth} / ${posterHeight}` : undefined;
+  
+  // Estilos del contenedor con dimensiones fijas basadas en el poster
+  const containerStyle = {
+    position: 'relative',
+    overflow: 'hidden',
+    backgroundColor: 'transparent',
+    ...(posterWidth && posterHeight && {
+      aspectRatio: posterAspectRatio,
+      width: '100%',
+    }),
+    ...style
+  };
+
   return (
     <div
       ref={ref}
       className={`lazy-video-container ${className}`}
-      style={{
-        position: 'relative',
-        overflow: 'hidden',
-        backgroundColor: 'transparent',
-        ...style
-      }}
+      style={containerStyle}
     >
       {/* Poster placeholder */}
       {showPoster && poster && (
-        <div
+        <img
+          src={poster}
+          alt=""
+          width={posterWidth}
+          height={posterHeight}
           style={{
             position: 'absolute',
             top: 0,
             left: 0,
             width: '100%',
             height: '100%',
-            backgroundImage: `url(${poster})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
+            objectFit: 'cover',
             zIndex: 2,
             opacity: shouldLoad ? 0 : 1,
             transition: 'opacity 0.5s ease'
           }}
+          loading={critical ? "eager" : "lazy"}
+          fetchPriority={critical ? "high" : undefined}
         />
       )}
 

@@ -7,7 +7,7 @@ import "../assets/styles/faqs-page.css";
 // Componente Slider Infinito para FAQs
 const FaqsSlider = ({ text }) => {
   const shouldReduceMotion = useReducedMotion();
-  const items = Array(16).fill(text);
+  const items = Array(8).fill(text);
 
   return (
     <motion.div 
@@ -19,7 +19,7 @@ const FaqsSlider = ({ text }) => {
         x: {
           repeat: Infinity,
           repeatType: "loop",
-          duration: 50,
+          duration: 25,
           ease: "linear"
         }
       }}

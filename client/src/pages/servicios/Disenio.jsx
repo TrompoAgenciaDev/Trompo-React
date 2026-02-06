@@ -3,7 +3,7 @@ import { motion, AnimatePresence, useScroll, useTransform, useInView, useMotionV
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import SimpleHeroVideo from "../../components/SimpleHeroVideo.jsx";
+import StaticHero from "../../components/StaticHero.jsx";
 import DisenioPortfolio from "../../components/portfolio/DisenioPortfolio.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Beneficios from "../../components/Beneficios.jsx";
@@ -279,11 +279,16 @@ const BrandingCarouselContent = ({
                   initial={false}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
+                  width={1200}
+                  height={800}
+                  decoding="async"
                   style={{ 
                     opacity: 1, 
                     display: 'block',
                     width: '100%',
-                    height: 'auto'
+                    height: 'auto',
+                    aspectRatio: '3/2',
+                    maxWidth: '100%'
                   }}
                   onError={(e) => {
                     console.error('Error loading image:', currentImage);
@@ -312,7 +317,7 @@ const BrandingCarouselContent = ({
 };
 
 // Componente para imagen con tracking del mouse
-const MouseTrackingImage = ({ src, alt = "" }) => {
+const MouseTrackingImage = ({ src, srcSet, sizes, alt = "" }) => {
   const containerRef = useRef(null);
   const [isInViewport, setIsInViewport] = React.useState(false);
   const mouseX = useMotionValue(0);
@@ -321,6 +326,10 @@ const MouseTrackingImage = ({ src, alt = "" }) => {
   // Valores suavizados con spring para movimiento fluido
   const smoothX = useSpring(mouseX, { stiffness: 150, damping: 15 });
   const smoothY = useSpring(mouseY, { stiffness: 150, damping: 15 });
+  
+  // Validar srcSet: eliminar si solo tiene una imagen (srcSet falso)
+  const hasValidSrcSet = srcSet && srcSet.split(',').length > 1;
+  const finalSrcSet = hasValidSrcSet ? srcSet : undefined;
 
   // IntersectionObserver para detectar cuando la imagen está en viewport (al menos 10px visibles)
   React.useEffect(() => {
@@ -394,19 +403,27 @@ const MouseTrackingImage = ({ src, alt = "" }) => {
       ref={containerRef}
       style={{
         width: "100%",
-        height: "100%"
+        height: "100%",
+        position: "relative"
       }}
     >
       <motion.img
         src={src}
+        srcSet={finalSrcSet}
+        sizes={sizes}
         alt={alt}
+        width={1200}
+        height={1200}
         style={{
           x: smoothX,
           y: smoothY,
           width: "100%",
           height: "100%",
-          objectFit: "cover"
+          objectFit: "contain",
+          display: "block"
         }}
+        loading="lazy"
+        decoding="async"
       />
     </motion.div>
   );
@@ -840,7 +857,7 @@ const Disenio = () => {
   
   return (
     <>
-      <SimpleHeroVideo
+      <StaticHero
         desktopSrc={`${base}assets/hero/hero.mp4`}
         mobileSrc={`${base}assets/hero/mobile/hero-mobile.mp4`}
         desktopPoster={`${base}assets/hero/home.webp`}
@@ -864,7 +881,11 @@ const Disenio = () => {
               <EntregableItemsList />
             </div>
             <div className="grid-item-video">
-              <MouseTrackingImage src={`${base}assets/metegol.webp`} alt="Diseño" />
+              <MouseTrackingImage 
+                src={`${base}assets/metegol.webp`} 
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                alt="Diseño" 
+              />
             </div>
           </div>
         </div>

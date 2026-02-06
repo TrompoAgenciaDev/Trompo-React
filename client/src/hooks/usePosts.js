@@ -24,9 +24,10 @@ export default function usePosts() {
   useEffect(() => {
     let alive = true;
 
-    const url = `${import.meta.env.BASE_URL}posts.json`;
+    const buildTime = import.meta.env.BUILD_TIME || Date.now();
+    const url = `${import.meta.env.BASE_URL}posts.json?v=${buildTime}`;
 
-    fetch(url, { cache: "no-store" })
+    fetch(url, { cache: "default" })
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();

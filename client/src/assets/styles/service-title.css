@@ -61,6 +61,11 @@
     color: #ffffff;
 }
 
+.subtitle-page strong,
+.subtitle-page b {
+    font-weight: 700;
+}
+
 .service-subtitle-container{
     width: 100%;
     display: flex;

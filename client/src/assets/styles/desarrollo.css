@@ -302,16 +302,9 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
-}
-
-.grid-item-video-desarrollo img{
-    width: 100%;
-}
-
-.grid-item-video-desarrollo{
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+    position: relative;
+    min-height: 500px;
+    aspect-ratio: 4/3;
 }
 
 .grid-item-video-desarrollo img{

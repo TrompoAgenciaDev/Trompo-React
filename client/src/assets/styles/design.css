@@ -433,6 +433,9 @@ h6{
     display: flex;
     flex-direction: column;
     gap: 30px;
+    position: relative;
+    min-height: 500px;
+    aspect-ratio: 4/3;
 }
 
 .grid-item-video img{
@@ -782,6 +785,8 @@ h6{
 
   .grid-portfolio-item {
     transition: transform 0.3s ease;
+    will-change: transform;
+    overflow: hidden;
   }
 
   .grid-portfolio-item:hover {
