@@ -145,6 +145,16 @@
   -o-transition: opacity 0.2s ease-in-out;
   transition: opacity 0.2s ease-in-out;
   z-index: 20;
+  position: relative;
+  text-align: center;
+  padding: 0 20px;
+  word-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 1.2;
+  margin: 0;
 }
 
 .portfolio-card:hover::after{

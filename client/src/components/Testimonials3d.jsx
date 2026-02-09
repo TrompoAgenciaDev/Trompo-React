@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import { motion, useMotionValue } from "motion/react";
+import { motion, useMotionValue, useTransform } from "motion/react";
 import useFetchTestimonials from "../hooks/useFetchTestimonials";
 import "../assets/styles/testimonials.css";
 
@@ -12,19 +12,99 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
 
 const norm = (i, n) => ((i % n) + n) % n;
 
-// Componente para cada slide - sin efectos 3D, solo movimiento vertical
+// Componente para cada slide con cálculo de rotateX normalizado para loop infinito
 const TestimonialSlide = ({ 
   item, 
-  getImagePath 
+  getImagePath,
+  index,
+  autoScrollY,
+  slideHeight,
+  viewportHeight,
+  total
 }) => {
+  // Normalizar el índice por ciclo para manejar slides clonados (REPEAT)
+  // cycleIndex: posición dentro de un ciclo (0 a total-1)
+  const cycleIndex = norm(index, total);
+  
+  // Calcular la posición base del centro del slide dentro de un ciclo
+  // slideCenterBase: posición ideal dentro de un ciclo, independiente de clones
+  const slideCenterBase = (cycleIndex * slideHeight) + (slideHeight / 2);
+  
+  // Calcular el progreso dentro del ciclo considerando el reset del loop
+  // cycleHeight: altura de un ciclo completo
+  const cycleHeight = slideHeight * total;
+  
+  // Calcular el centro del slide relativo al viewport
+  // Considerando el wrap del ciclo infinito y la posición absoluta del track
+  const slideCenterInViewport = useTransform(
+    autoScrollY,
+    (trackY) => {
+      // trackY es negativo cuando el track sube
+      // Calcular la posición absoluta del slide dentro del track
+      // slideTopInTrack: posición del top del slide dentro del track (considerando clones)
+      const slideTopInTrack = index * slideHeight;
+      
+      // El centro del slide en coordenadas del track
+      const slideCenterInTrack = slideTopInTrack + (slideHeight / 2);
+      
+      // El centro del slide relativo al viewport (top del viewport = 0)
+      // trackY es negativo cuando el track sube, así que sumamos para obtener la posición en el viewport
+      const slideCenterAbsolute = slideCenterInTrack + trackY;
+      
+      return slideCenterAbsolute;
+    }
+  );
+  
+  // Centro del viewport
+  const viewportCenter = viewportHeight / 2;
+  
+  // Delta: diferencia entre el centro de la tarjeta y el centro del viewport
+  // delta > 0: tarjeta está por debajo del centro (viene desde abajo)
+  // delta < 0: tarjeta está por encima del centro (se va hacia arriba)
+  // delta = 0: tarjeta está exactamente en el centro
+  const delta = useTransform(
+    slideCenterInViewport,
+    (center) => center - viewportCenter
+  );
+  
+  // Normalización simétrica: maxDistance = mitad de la altura del viewport
+  const maxDistance = viewportHeight / 2;
+  
+  // t = clamp(delta / maxDistance, -1, 1)
+  // t mapea la distancia desde el centro al rango [-1, 1]
+  // t = +1: bien abajo del centro
+  // t = 0: exactamente en el centro
+  // t = -1: bien arriba del centro
+  const t = useTransform(
+    delta,
+    (d) => {
+      if (maxDistance === 0) return 0;
+      return Math.max(-1, Math.min(1, d / maxDistance));
+    }
+  );
+  
+  // Rotación requerida: rotateX = 90 * t
+  // t = +1 (abajo del centro) => rotateX = +90deg (inclinada hacia adelante, reverencia)
+  // t = 0 (centro exacto) => rotateX = 0deg (recta)
+  // t = -1 (arriba del centro) => rotateX = -90deg (inclinada hacia atrás)
+  const rotateX = useTransform(t, (value) => 90 * value);
+  
   return (
-    <div
+    <motion.div
       className="testimoniales-slide-vertical"
       style={{
         flex: "0 0 auto",
         width: "100%",
         boxSizing: "border-box",
         padding: "0.5rem 0",
+        rotateX: rotateX,
+        transformPerspective: 1000,
+        translateZ: 0.01,
+        transformOrigin: 'center center',
+        transformStyle: 'preserve-3d',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
+        willChange: 'transform',
       }}
     >
       <div className="testimoniales-card" style={{ width: "100%" }}>
@@ -61,7 +141,7 @@ const TestimonialSlide = ({
         </div>
         <div className="testimoniales-quote-icon">"</div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -69,11 +149,16 @@ export default function Testimonials3D({ size = null }) {
   const { testimonials, loading, error } = useFetchTestimonials();
   const total = testimonials.length;
   const containerRef = useRef(null);
+  const viewportRef = useRef(null);
   const trackRef = useRef(null);
   const draggingRef = useRef(false);
   const [isPaused, setIsPaused] = useState(false);
   const autoScrollY = useMotionValue(0);
   const animationRef = useRef(null);
+  
+  // Medir alturas solo en mount y resize (no por frame)
+  const [slideHeight, setSlideHeight] = useState(500);
+  const [viewportHeight, setViewportHeight] = useState(0);
 
   // Clonar testimonials para loop infinito
   const cloned = useMemo(
@@ -83,32 +168,44 @@ export default function Testimonials3D({ size = null }) {
 
   const middle = total * Math.floor(REPEAT / 2);
   
-  // Función helper para obtener altura del slide
-  // Cachear altura para evitar lecturas repetidas
-  const slideHeightRef = useRef(500);
-  const getSlideHeight = useMemo(() => {
-    return () => {
-      // Retornar valor cacheado si está disponible
-      if (slideHeightRef.current !== 500) {
-        return slideHeightRef.current;
-      }
-      
-      // Leer propiedades geométricas solo cuando sea necesario
-      // Usar requestAnimationFrame para evitar forced reflow
+  // Medir slideHeight solo cuando el track tiene elementos (mount/resize)
+  useEffect(() => {
+    if (!trackRef.current) return;
+    
+    const measureSlideHeight = () => {
       if (trackRef.current?.firstElementChild) {
         const height = trackRef.current.firstElementChild.offsetHeight || 500;
-        slideHeightRef.current = height;
-        return height;
+        setSlideHeight(height);
       }
-      if (containerRef.current) {
-        const viewportHeight = containerRef.current.offsetHeight;
-        const calculated = Math.round(viewportHeight * 0.555) || 500;
-        slideHeightRef.current = calculated;
-        return calculated;
-      }
-      return 500;
     };
+    
+    // Medir después de que los elementos se rendericen
+    const timeout = setTimeout(measureSlideHeight, 0);
+    
+    window.addEventListener('resize', measureSlideHeight);
+    
+    return () => {
+      clearTimeout(timeout);
+      window.removeEventListener('resize', measureSlideHeight);
+    };
+  }, [cloned.length]);
+  
+  // Medir viewportHeight (testimoniales-viewport) solo en mount y resize
+  useEffect(() => {
+    if (!viewportRef.current) return;
+    
+    const measureViewportHeight = () => {
+      if (viewportRef.current) {
+        setViewportHeight(viewportRef.current.offsetHeight);
+      }
+    };
+    
+    measureViewportHeight();
+    window.addEventListener('resize', measureViewportHeight);
+    
+    return () => window.removeEventListener('resize', measureViewportHeight);
   }, []);
+
 
   // Animación continua vertical de abajo hacia arriba
   useEffect(() => {
@@ -127,7 +224,6 @@ export default function Testimonials3D({ size = null }) {
       if (!container || draggingRef.current || isPaused) return;
       
       const currentY = autoScrollY.get();
-      const slideHeight = getSlideHeight();
       const newY = currentY - SCROLL_SPEED;
       
       // Si llegamos al final de un ciclo, resetear suavemente
@@ -150,7 +246,7 @@ export default function Testimonials3D({ size = null }) {
         animationRef.current = null;
       }
     };
-  }, [total, isPaused, getSlideHeight]);
+  }, [total, isPaused, slideHeight]);
 
   // Drag handlers - simplificados como en Portfolio3d
   const handleDragStart = () => {
@@ -211,7 +307,16 @@ export default function Testimonials3D({ size = null }) {
       ref={containerRef}
       className="testimoniales-container testimoniales-container-vertical"
     >
-      <div className="testimoniales-viewport testimoniales-viewport-vertical" style={{ overflow: "hidden", height: "100%" }}>
+      <div 
+        ref={viewportRef}
+        className="testimoniales-viewport testimoniales-viewport-vertical" 
+        style={{ 
+          overflow: "hidden", 
+          height: "100%",
+          perspective: "1000px",
+          perspectiveOrigin: "center center"
+        }}
+      >
         <motion.div
           ref={trackRef}
           className="testimoniales-track testimoniales-track-vertical"
@@ -236,6 +341,11 @@ export default function Testimonials3D({ size = null }) {
               key={i}
               item={item}
               getImagePath={getImagePath}
+              index={i}
+              autoScrollY={autoScrollY}
+              slideHeight={slideHeight}
+              viewportHeight={viewportHeight}
+              total={total}
             />
           ))}
         </motion.div>

@@ -107,6 +107,13 @@ img {
   min-width: 100%;
 }
 
+/* Excluir logo del header del estilo global para evitar problemas en Mac */
+.logo-img img {
+  min-width: auto;
+  width: auto;
+  height: auto;
+}
+
 video {
   width: 100%;
   -o-object-fit: cover;

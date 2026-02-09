@@ -8,9 +8,6 @@
   margin-bottom: 10px;
 }
 
-.testimonial-header p {
-}
-
 .testimoniales-container {
   width: 100%;
   position: relative;
@@ -153,7 +150,8 @@
 @media (min-width:768px) {
 
   .testimoniales-container-vertical {
-    height: 90svh;
+    height: 900px;
+    max-height: 900px;
   }
 
   .testimoniales-viewport-vertical {
@@ -219,7 +217,8 @@
   }
 
   .testimoniales-container-vertical {
-    height: 90svh;
+    height: 600px;
+    max-height: 600px;
   }
 
   .testimoniales-viewport-vertical {
@@ -266,6 +265,7 @@
   }
 
   .testimonial-wrapper{
-    height: 90svh;
+    height: 600px;
+    max-height: 600px;
   }
 }

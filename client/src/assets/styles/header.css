@@ -50,6 +50,22 @@ header.full-container{
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
+  background: transparent;
+  isolation: isolate;
+}
+
+.logo-img img {
+  width: 100%;
+  height: auto;
+  background: transparent;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  will-change: auto;
 }
 
 .nav-button{

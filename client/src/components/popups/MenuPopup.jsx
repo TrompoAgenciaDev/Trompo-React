@@ -178,13 +178,8 @@ const MenuPopup = ({ isOpen, onClose }) => {
                           </motion.span>
                         </div>
 
-                        <motion.div
-                          initial={{ maxHeight: 0, opacity: 0 }}
-                          animate={{ maxHeight: "1000px", opacity: 1 }}
-                          exit={{ maxHeight: 0, opacity: 0 }}
-                          transition={{ duration: 0.2, ease: "easeInOut" }}
+                        <div
                           className="submenu-servicios"
-                          style={{ overflow: "hidden" }}
                         >
                           <Menu
                             menuType="servicios"
@@ -193,7 +188,7 @@ const MenuPopup = ({ isOpen, onClose }) => {
                             location="gsap"
                             onClose={onClose}
                           />
-                        </motion.div>
+                        </div>
                       </div>
                     </motion.div>
 
