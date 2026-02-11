@@ -1,255 +1,223 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import { gsap } from "gsap";
-import { Draggable } from "gsap/Draggable";
+import { motion, useMotionValue } from "motion/react";
 import useFetchTestimonials from "../hooks/useFetchTestimonials";
 import "../assets/styles/testimonials.css";
 
-gsap.registerPlugin(Draggable);
-
-const AUTOPLAY_DURATION = 20; // Duración en segundos para rotar 180 grados
-const REPEAT = 2; // Duplicar items para loop infinito
+const REPEAT = 3;
+const SCROLL_SPEED = 0.5; // Velocidad de scroll continuo (píxeles por frame)
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 
+const norm = (i, n) => ((i % n) + n) % n;
+
+// Componente para cada slide - sin efectos 3D, solo movimiento vertical
+const TestimonialSlide = ({ 
+  item, 
+  getImagePath 
+}) => {
+  return (
+    <div
+      className="testimoniales-slide-vertical"
+      style={{
+        flex: "0 0 auto",
+        width: "100%",
+        boxSizing: "border-box",
+        padding: "0.5rem 0",
+      }}
+    >
+      <div className="testimoniales-card" style={{ width: "100%" }}>
+        <div className="testimoniales-text">
+          {item.text.replace(/^✨\s*/, '')}
+        </div>
+        <div className="testimoniales-author-info">
+          <img 
+            src={getImagePath(item.image)} 
+            alt={item.name || item.author} 
+            className="testimoniales-avatar"
+            draggable={false}
+            onError={(e) => {
+              // Fallback si la imagen no carga
+              e.target.style.display = 'none';
+            }}
+          />
+          <div className="testimoniales-author-details">
+            <div className="testimoniales-author-name">
+              {item.name || (() => {
+                const parts = (item.author || '').split(/[-,]/);
+                return parts[0] ? parts[0].trim() : item.author;
+              })()}
+            </div>
+            <div className="testimoniales-author-role" title={item.role || (() => {
+              const parts = (item.author || '').split(/[-,]/);
+              return parts.length > 1 ? parts.slice(1).join(',').trim() : '';
+            })()}>
+              {item.role || (() => {
+                const parts = (item.author || '').split(/[-,]/);
+                return parts.length > 1 ? parts.slice(1).join(',').trim() : '';
+              })()}
+            </div>
+          </div>
+          {item.logo && getImagePath(item.logo) && (
+            <img 
+              src={getImagePath(item.logo)} 
+              alt={`Logo ${item.name || item.author}`}
+              className="testimoniales-logo"
+              draggable={false}
+              onError={(e) => {
+                // Fallback si el logo no carga
+                console.error('Error cargando logo:', item.logo, 'Ruta procesada:', getImagePath(item.logo));
+                e.target.style.display = 'none';
+              }}
+              onLoad={() => {
+                console.log('Logo cargado correctamente:', item.logo, 'Ruta:', getImagePath(item.logo));
+              }}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function Testimonials3D({ size = null }) {
   const { testimonials, loading, error } = useFetchTestimonials();
   const total = testimonials.length;
-  
-  // Refs
   const containerRef = useRef(null);
-  const viewportRef = useRef(null);
-  const moverRef = useRef(null);
   const trackRef = useRef(null);
-  const scrollTweenRef = useRef(null);
-  const draggableRef = useRef(null);
-  const dragProxyRef = useRef(null);
-  const slide3dRefs = useRef([]);
-  
-  // Estado
-  const [viewportHeight, setViewportHeight] = useState(0);
-  
-  // Valores de rotación cilíndrica
-  const rotation = useRef(0);
-  const radius = useRef(0);
-  
-  // Duplicar items para loop infinito
+  const draggingRef = useRef(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const autoScrollY = useMotionValue(0);
+  const animationRef = useRef(null);
+
+  // Clonar testimonials para loop infinito
   const cloned = useMemo(
     () => (total ? Array.from({ length: REPEAT }, () => testimonials).flat() : []),
     [testimonials, total]
   );
+
+  const middle = total * Math.floor(REPEAT / 2);
   
-  // Calcular altura del viewport y radio
-  useEffect(() => {
-    if (!viewportRef.current) return;
-    
-    const measureViewportHeight = () => {
-      if (viewportRef.current) {
-        const height = viewportRef.current.offsetHeight;
-        setViewportHeight(height);
-        radius.current = height / 2;
+  // Función helper para obtener altura del slide
+  // Cachear altura para evitar lecturas repetidas
+  const slideHeightRef = useRef(500);
+  const getSlideHeight = useMemo(() => {
+    return () => {
+      // Retornar valor cacheado si está disponible
+      if (slideHeightRef.current !== 500) {
+        return slideHeightRef.current;
       }
+      
+      // Leer propiedades geométricas solo cuando sea necesario
+      // Usar requestAnimationFrame para evitar forced reflow
+      if (trackRef.current?.firstElementChild) {
+        const height = trackRef.current.firstElementChild.offsetHeight || 500;
+        slideHeightRef.current = height;
+        return height;
+      }
+      if (containerRef.current) {
+        const viewportHeight = containerRef.current.offsetHeight;
+        const calculated = Math.round(viewportHeight * 0.555) || 500;
+        slideHeightRef.current = calculated;
+        return calculated;
+      }
+      return 500;
     };
-    
-    measureViewportHeight();
-    window.addEventListener('resize', measureViewportHeight);
-    
-    return () => window.removeEventListener('resize', measureViewportHeight);
   }, []);
-  
-  // Inicializar refs de slides
+
+  // Animación continua vertical de abajo hacia arriba
   useEffect(() => {
-    slide3dRefs.current = slide3dRefs.current.slice(0, cloned.length);
-  }, [cloned.length]);
-  
-  // Función para renderizar slides en 3D (estable, misma referencia)
-  const renderSlides = useRef(() => {
-    if (radius.current === 0 || cloned.length === 0) return;
-    
-    const totalSlides = cloned.length;
-    
-    slide3dRefs.current.forEach((slide3dEl, index) => {
-      if (!slide3dEl) return;
-      
-      // Ángulo base fijo para cada slide
-      const baseAngle = (index / totalSlides) * 180;
-      
-      // Ángulo final = baseAngle + rotación global
-      const finalAngle = baseAngle + rotation.current;
-      
-      // Aplicar transformación 3D
-      gsap.set(slide3dEl, {
-        rotateX: finalAngle,
-        transformOrigin: "center center",
-        z: radius.current,
-        force3D: true
-      });
-    });
-  }).current;
-  
-  // Crear tween infinito para autoplay
-  useEffect(() => {
-    if (!total || radius.current === 0) return;
-    
-    // Matar tween anterior si existe
-    if (scrollTweenRef.current) {
-      scrollTweenRef.current.kill();
-    }
-    
-    // Crear objeto con propiedad current para animar
-    const rotationObj = { current: rotation.current };
-    
-    // Crear tween infinito que rota 180 grados
-    scrollTweenRef.current = gsap.to(rotationObj, {
-      current: `+=180`,
-      duration: AUTOPLAY_DURATION,
-      ease: "none",
-      repeat: -1,
-      onUpdate: () => {
-        rotation.current = rotationObj.current;
-        renderSlides();
+    if (!total || isPaused || draggingRef.current || !containerRef.current) {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
       }
-    });
+      return;
+    }
+
+    const container = containerRef.current;
     
+    // Animación continua hacia arriba
+    const animateContinuous = () => {
+      if (!container || draggingRef.current || isPaused) return;
+      
+      const currentY = autoScrollY.get();
+      const slideHeight = getSlideHeight();
+      const newY = currentY - SCROLL_SPEED;
+      
+      // Si llegamos al final de un ciclo, resetear suavemente
+      const maxY = slideHeight * total;
+      if (Math.abs(newY) >= maxY) {
+        // Resetear al inicio del buffer
+        autoScrollY.set(0);
+      } else {
+        autoScrollY.set(newY);
+      }
+      
+      animationRef.current = requestAnimationFrame(animateContinuous);
+    };
+
+    animationRef.current = requestAnimationFrame(animateContinuous);
+
     return () => {
-      if (scrollTweenRef.current) {
-        scrollTweenRef.current.kill();
-        scrollTweenRef.current = null;
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+        animationRef.current = null;
       }
     };
-  }, [total, radius.current, cloned.length]);
-  
-  // Drag con Draggable de GSAP usando viewport como elemento draggable
-  useEffect(() => {
-    if (!viewportRef.current || !total || !scrollTweenRef.current) return;
+  }, [total, isPaused, getSlideHeight]);
+
+  // Drag handlers - simplificados como en Portfolio3d
+  const handleDragStart = () => {
+    draggingRef.current = true;
+    setIsPaused(true);
     
-    const viewport = viewportRef.current;
-    const scrollTween = scrollTweenRef.current;
-    let startRotation = 0;
-    
-    // Matar draggable anterior si existe
-    if (draggableRef.current) {
-      draggableRef.current.kill();
+    // Cancelar animación automática
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+      animationRef.current = null;
     }
-    
-    // Crear Draggable en viewport que solo modifica rotation (NO mueve elementos)
-    draggableRef.current = Draggable.create(viewport, {
-      type: "y",
-      inertia: false,
-      onDragStart: () => {
-        scrollTween.pause();
-        startRotation = rotation.current;
-      },
-      onDrag: function() {
-        // Calcular rotación basada en el drag
-        // Convertir movimiento Y a rotación en X
-        const dragDelta = this.y - this.startY;
-        // Convertir píxeles a grados
-        // Radio en píxeles representa 90 grados del cilindro
-        const pixelsPerDegree = radius.current / 90;
-        const rotationDelta = dragDelta / pixelsPerDegree;
-        
-        // Actualizar rotación desde el punto inicial
-        rotation.current = startRotation + rotationDelta;
-        
-        // Resetear posición del draggable para evitar movimiento físico
-        this.y = 0;
-        this.startY = 0;
-        gsap.set(viewport, { y: 0, clearProps: "y" });
-        
-        // Renderizar slides
-        renderSlides();
-      },
-      onDragEnd: () => {
-        // Actualizar el tween para continuar desde el ángulo actual
-        if (scrollTweenRef.current) {
-          const rotationObj = { current: rotation.current };
-          scrollTweenRef.current.kill();
-          scrollTweenRef.current = gsap.to(rotationObj, {
-            current: `+=180`,
-            duration: AUTOPLAY_DURATION,
-            ease: "none",
-            repeat: -1,
-            onUpdate: () => {
-              rotation.current = rotationObj.current;
-              renderSlides();
-            }
-          });
+  };
+
+  const handleDragEnd = () => {
+    // Sincronizar la posición final del drag con autoScrollY
+    // Usar un pequeño delay para asegurar que framer-motion haya terminado de aplicar el transform
+    setTimeout(() => {
+      if (trackRef.current) {
+        const transform = window.getComputedStyle(trackRef.current).transform;
+        if (transform && transform !== 'none') {
+          const matrix = transform.match(/matrix\(([^)]+)\)/);
+          if (matrix) {
+            const values = matrix[1].split(', ');
+            const translateY = parseFloat(values[5] || values[13] || 0);
+            // Actualizar autoScrollY con la posición final del drag
+            autoScrollY.set(translateY);
+          }
         }
       }
-    })[0];
-    
-    return () => {
-      if (draggableRef.current) {
-        draggableRef.current.kill();
-        draggableRef.current = null;
-      }
-    };
-  }, [total, radius.current, scrollTweenRef.current, renderSlides]);
-  
-  // Test visual obligatorio: verificar que el 3D funciona
-  useEffect(() => {
-    if (slide3dRefs.current[0] && viewportRef.current && containerRef.current) {
-      const slide3d0 = slide3dRefs.current[0];
-      const viewport = viewportRef.current;
-      const container = containerRef.current;
       
-      // Aplicar transform de prueba
-      gsap.set(slide3d0, { 
-        rotateX: 60, 
-        z: 300,
-        force3D: true,
-        transformOrigin: "center center"
+      // Usar requestAnimationFrame para asegurar que el estado se actualice después del drag
+      requestAnimationFrame(() => {
+        draggingRef.current = false;
+        setIsPaused(false);
       });
-      
-      // Logging para diagnóstico
-      setTimeout(() => {
-        const slide3dStyle = window.getComputedStyle(slide3d0);
-        const viewportStyle = window.getComputedStyle(viewport);
-        const containerStyle = window.getComputedStyle(container);
-        
-        console.log('=== TEST 3D DIAGNÓSTICO ===');
-        console.log('slide3d transform:', slide3dStyle.transform);
-        console.log('viewport perspective:', viewportStyle.perspective);
-        console.log('container transform:', containerStyle.transform);
-        console.log('viewport transform:', viewportStyle.transform);
-        console.log('viewport transformStyle:', viewportStyle.transformStyle);
-        console.log('slide3d transformStyle:', slide3dStyle.transformStyle);
-        
-        // Verificar si hay flattening
-        if (slide3dStyle.transform === 'none' || slide3dStyle.transform === 'matrix(1, 0, 0, 1, 0, 0)') {
-          console.warn('⚠️ FLATTENING DETECTADO: slide3d no tiene transform aplicado');
-        }
-        if (viewportStyle.perspective === 'none' || viewportStyle.perspective === '0px') {
-          console.warn('⚠️ PERSPECTIVE NO APLICADA: viewport no tiene perspective');
-        }
-        if (containerStyle.transform !== 'none') {
-          console.warn('⚠️ CONTAINER CON TRANSFORM: puede causar flattening');
-        }
-      }, 100);
-      
-      // Volver a 0 después de 300ms
-      const timeout = setTimeout(() => {
-        gsap.set(slide3d0, { 
-          rotateX: 0, 
-          z: 0,
-          force3D: true,
-          transformOrigin: "center center"
-        });
-      }, 300);
-      
-      return () => clearTimeout(timeout);
-    }
-  }, [viewportHeight, cloned.length]);
-  
+    }, 0);
+  };
+
   if (loading) return <div>Cargando testimonios...</div>;
   if (error) return <div>{error}</div>;
   if (!total) return <div>No hay testimonios disponibles.</div>;
-  
+
+  // Función para obtener la ruta de la imagen con base
   const getImagePath = (imagePath) => {
     if (!imagePath) return null;
+    // Si ya tiene la ruta completa, usarla; si no, agregar base
     if (imagePath.startsWith('http')) {
+      return imagePath;
+    }
+    // Si empieza con ./, mantenerla tal cual (rutas relativas)
+    if (imagePath.startsWith('./')) {
       return imagePath;
     }
     if (imagePath.startsWith('/')) {
@@ -257,76 +225,40 @@ export default function Testimonials3D({ size = null }) {
     }
     return `${base}${imagePath}`;
   };
-  
+
   return (
-    <div 
-      style={{ 
-        position: 'relative', 
-        transform: 'none !important',
-        isolation: 'isolate'
-      }}
+    <div
+      ref={containerRef}
+      className="testimoniales-container testimoniales-container-vertical"
     >
-      <div
-        ref={containerRef}
-        className="testimoniales-container testimoniales-container-vertical"
-      >
-        <div 
-          ref={viewportRef}
-          className="testimoniales-viewport"
+      <div className="testimoniales-viewport testimoniales-viewport-vertical" style={{ overflow: "hidden", height: "100%" }}>
+        <motion.div
+          ref={trackRef}
+          className="testimoniales-track testimoniales-track-vertical"
+          style={{ 
+            y: autoScrollY,
+            display: "flex",
+            flexDirection: "column",
+            willChange: "transform",
+            cursor: "grab"
+          }}
+          drag="y"
+          dragElastic={0.05}
+          dragMomentum
+          dragTransition={{ power: 0.2, timeConstant: 200 }}
+          dragConstraints={{ top: -Infinity, bottom: Infinity }}
+          whileTap={{ cursor: "grabbing" }}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
         >
-          <div
-            ref={moverRef}
-            className="testimoniales-mover"
-          >
-            <div
-              ref={trackRef}
-              className="testimoniales-track"
-            >
-              {cloned.map((item, i) => (
-                <div key={i} className="testimoniales-slide">
-                  <div
-                    ref={(el) => (slide3dRefs.current[i] = el)}
-                    className="slide-3d"
-                  >
-                    <div className="testimoniales-card">
-                      <div className="testimoniales-text">
-                        {item.text.replace(/^✨\s*/, '')}
-                      </div>
-                      <div className="testimoniales-author-info">
-                        <img 
-                          src={getImagePath(item.image)} 
-                          alt={item.name || item.author} 
-                          className="testimoniales-avatar"
-                          onError={(e) => {
-                            e.target.style.display = 'none';
-                          }}
-                        />
-                        <div className="testimoniales-author-details">
-                          <div className="testimoniales-author-name">
-                            {item.name || (() => {
-                              const parts = (item.author || '').split(/[-,]/);
-                              return parts[0] ? parts[0].trim() : item.author;
-                            })()}
-                          </div>
-                          <div className="testimoniales-author-role" title={item.role || (() => {
-                            const parts = (item.author || '').split(/[-,]/);
-                            return parts.length > 1 ? parts.slice(1).join(',').trim() : '';
-                          })()}>
-                            {item.role || (() => {
-                              const parts = (item.author || '').split(/[-,]/);
-                              return parts.length > 1 ? parts.slice(1).join(',').trim() : '';
-                            })()}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="testimoniales-quote-icon">"</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+          {cloned.map((item, i) => (
+            <TestimonialSlide
+              key={i}
+              item={item}
+              getImagePath={getImagePath}
+            />
+          ))}
+        </motion.div>
       </div>
     </div>
   );

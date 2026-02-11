@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect, useMemo, Suspense, lazy } from "react";
 import { motion, useReducedMotion, useScroll, useTransform, useMotionValueEvent, useInView, useSpring, useMotionValue } from "framer-motion";
-import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import StaticHero from "../../components/StaticHero";
@@ -726,12 +725,6 @@ const Desarrollo = () => {
       <Beneficios />
 
       <Contact form="desarrollo"/>
-      
-      <section className="full-container">
-        <div className="slider-container container">
-          <CustomerSlider />
-        </div>
-      </section>
     </>
   );
 };

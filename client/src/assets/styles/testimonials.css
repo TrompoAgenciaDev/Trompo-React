@@ -8,72 +8,58 @@
   margin-bottom: 10px;
 }
 
+.testimonial-header p {
+}
+
 .testimoniales-container {
   width: 100%;
   position: relative;
   overflow: hidden;
-  transform: none !important;
-  filter: none !important;
 }
 
 .testimoniales-container-vertical {
   height: 900px;
   max-height: 900px;
-  transform: none !important;
-  filter: none !important;
 }
 
 .testimoniales-viewport {
   width: 100%;
-  height: 100%;
   overflow: hidden;
+  padding: 50px;
+}
+
+.testimoniales-viewport-vertical {
+  height: 100%;
   padding: 20px;
-  perspective: 1200px;
-  perspective-origin: center center;
-  transform-style: preserve-3d;
-  position: relative;
-  transform: none !important;
-  filter: none !important;
-}
-
-.testimoniales-mover {
-  width: 100%;
-  will-change: transform;
-  cursor: grab;
-  transform: none !important;
-  filter: none !important;
-}
-
-.testimoniales-mover:active {
-  cursor: grabbing;
+  display: flex;
+  align-items: center;
 }
 
 .testimoniales-track {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  transform: none !important;
-  filter: none !important;
-  /* NO debe tener transforms, animaciones ni motion */
-}
-
-.testimoniales-slide {
-  flex: 0 0 auto;
-  width: 100%;
-  padding: 0.5rem 0;
-  box-sizing: border-box;
-  transform: none !important;
-  filter: none !important;
-}
-
-.slide-3d {
-  width: 100%;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   will-change: transform;
-  /* Recibe únicamente rotateX y z via GSAP */
-  /* Nunca translateY */
+}
+
+.testimoniales-track-vertical {
+  flex-direction: column;
+  height: 100%;
+  cursor: grab;
+}
+
+.testimoniales-track-vertical:active {
+  cursor: grabbing;
+}
+
+.testimoniales-slide-vertical {
+  height: auto;
+  min-height: auto;
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
 }
 
 .testimoniales-card {
@@ -86,6 +72,10 @@
   height: auto;
   min-height: auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
   border-radius: 12px;
   position: relative;
   width: 100%;
@@ -110,6 +100,7 @@
   gap: 12px;
   width: 100%;
   margin-top: auto;
+  position: relative;
 }
 
 .testimoniales-avatar {
@@ -122,6 +113,13 @@
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  pointer-events: auto;
 }
 
 .testimoniales-author-details {
@@ -150,32 +148,38 @@
   max-width: 100%;
 }
 
-.testimoniales-quote-icon {
-  position: absolute;
-  bottom: 24px;
-  right: 24px;
-  font-size: 48px;
-  font-weight: 300;
-  color: #666666;
-  font-family: serif;
-  line-height: 1;
-  opacity: 0.3;
+.testimoniales-logo {
+  width: 100px !important;
+  height: auto !important;
+  max-height: 50px !important;
+  min-width: 70px;
+  object-fit: contain;
+  flex-shrink: 0;
+  margin-left: auto;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  pointer-events: auto;
 }
+
 
 
 
 @media (min-width:768px) {
 
   .testimoniales-container-vertical {
-    height: 900px;
-    max-height: 900px;
+    height: 90svh;
   }
 
-  .testimoniales-viewport {
+  .testimoniales-viewport-vertical {
     padding: 20px;
   }
 
-  .testimoniales-slide {
+  .testimoniales-slide-vertical {
     height: auto;
     min-height: auto;
   }
@@ -208,11 +212,11 @@
     font-size: 12px;
   }
 
-  .testimoniales-quote-icon {
-    font-size: 56px;
-    bottom: 30px;
-    right: 30px;
+  .testimoniales-logo {
+    width: 120px !important;
+    max-height: 60px !important;
   }
+
 }
 
 
@@ -234,15 +238,14 @@
   }
 
   .testimoniales-container-vertical {
-    height: 600px;
-    max-height: 600px;
+    height: 90svh;
   }
 
-  .testimoniales-viewport {
+  .testimoniales-viewport-vertical {
     padding: 20px;
   }
 
-  .testimoniales-slide {
+  .testimoniales-slide-vertical {
     height: auto;
     min-height: auto;
   }
@@ -275,14 +278,13 @@
     font-size: 13px;
   }
 
-  .testimoniales-quote-icon {
-    font-size: 64px;
-    bottom: 36px;
-    right: 36px;
+  .testimoniales-logo {
+    width: 170px !important;
+    max-height: 70px !important;
   }
 
+
   .testimonial-wrapper{
-    height: 600px;
-    max-height: 600px;
+    height: 90svh;
   }
 }

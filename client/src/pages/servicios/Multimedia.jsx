@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { motion, useInView, useScroll, useTransform, useMotionValueEvent, useSpring, useMotionValue } from "framer-motion";
 import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
-import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import StaticHero from "../../components/StaticHero";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import SemicircularVideoSlider from "../../components/sliders/SemicircularVideoSlider.jsx";
@@ -829,12 +828,6 @@ const Multimedia = () => {
       <Beneficios />
 
       <Contact form="multimedia" />
-
-      <section className="full-container">
-        <div className="slider-container container">
-          <CustomerSlider />
-        </div>
-      </section>
     </>
   );
 };

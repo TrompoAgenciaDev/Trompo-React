@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, useInView, useScroll, useTransform, useMotionValueEvent, AnimatePresence, useMotionValue, useAnimation, useSpring } from "framer-motion";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
-import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import StaticHero from "../../components/StaticHero.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Icons from "../../components/Icons.jsx";
@@ -1040,12 +1039,6 @@ const Estrategia = () => {
       <Beneficios />
 
       <Contact form="estrategia" />
-
-      <section className="full-container">
-        <div className="slider-container container">
-          <CustomerSlider />
-        </div>
-      </section>
     </>
   );
 };

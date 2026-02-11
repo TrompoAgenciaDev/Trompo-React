@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Faqs from "../layout/Faqs";
-import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import "../assets/styles/faqs-page.css";
 
 // Componente Slider Infinito para FAQs
@@ -128,12 +127,6 @@ const FaqsPage = () => {
           </div>
         </React.Fragment>
       ))}
-
-      <section className="full-container">
-        <div className="slider-container container">
-          <CustomerSlider />
-        </div>
-      </section>
     </>
   );
 };

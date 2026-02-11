@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 import Hero from "../../layout/Hero.jsx";
-import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import Portfolio3d from "../../layout/Portfolio3d.jsx";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
@@ -65,9 +64,6 @@ const Primavera = () => {
       <Contact location="home" />
 
       <Faqs location="landing" />
-      <div className="full-container">
-        <CustomerSlider />
-      </div>
     </>
   );
 };

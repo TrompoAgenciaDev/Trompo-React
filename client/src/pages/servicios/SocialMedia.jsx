@@ -1,7 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useMotionValueEvent, useReducedMotion } from "framer-motion";
 import Contact from "../../layout/Contact.jsx";
-import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import StaticHero from "../../components/StaticHero.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Inversiones from "../../components/Inversiones.jsx";
@@ -207,12 +206,6 @@ const SocialMedia = () => {
       <Inversiones />
 
       <Contact form="interaccion" />
-      
-      <section className="full-container">
-        <div className="slider-container container">
-          <CustomerSlider />
-        </div>
-      </section>
     </>
   );
 };

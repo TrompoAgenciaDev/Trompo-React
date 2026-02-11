@@ -3,7 +3,6 @@ import { motion, useInView, useReducedMotion } from "framer-motion";
 import Contact from "../layout/Contact.jsx";
 import StaticHero from "../components/StaticHero";
 import StoricalClients from "../layout/StoricalClients";
-import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 
 // styles
 import "../assets/styles/about.css";
@@ -189,23 +188,33 @@ const Nosotros = () => {
             <div className="about-grid-item">
               <span>01</span>
               <h6 className="about-question">qué hacemos</h6>
-              <p>Ayudamos a marcas y empresas a transformar desafíos digitales en ventajas competitivas. Lo hacemos diseñando sistemas completos: identidad, contenido, performance y plataformas, para que la marca crezca con coherencia, comunique mejor y convierta con evidencia.</p>
+              <p>Ayudamos a marcas y empresas a transformar desafíos digitales en ventajas competitivas. Lo hacemos diseñando sistemas completos: identidad, contenido, performance y plataformas, para que la marca crezca con coherencia, comunique mejor y convierta con evidencia.              </p>
             </div>
             <div className="about-grid-item">
               <span>02</span>
               <h6 className="about-question">Cómo lo hacemos</h6>
-              <p>Trabajamos con un método simple y exigente: Claridad estratégica: definimos objetivos, prioridades y enfoque   realista. Creatividad aplicada: ideas que no se quedan en lo lindo; cumplen un rol. Ejecución con criterio: implementación ordenada, medición y mejoras continuas. No improvisamos. Probamos, aprendemos y ajustamos.</p>
+              <p>Trabajamos con un método simple y exigente: Claridad estratégica: definimos objetivos, prioridades y enfoque realista.
+                  <br />
+                  Creatividad aplicada: ideas que no se quedan en lo lindo; cumplen un rol.
+                  <br />
+                  Ejecución con criterio: implementación ordenada, medición y mejoras continuas.
+                  <br />
+                  No improvisamos. Probamos, aprendemos y ajustamos.
+                </p>
             </div>
             <div className="about-grid-item">
               <span>03</span>
-              <h6 className="about-question">Producción y post con propósito</h6>
-              <p>Hace más de una década Trompo nació con una idea clara: una agencia no es un proveedor, es un aliado estratégico.
-                Nos involucramos de verdad: entendemos el ADN de cada marca, su cultura, su mercado y su forma de trabajar. Porque la estrategia no se “baja”: se construye con contexto.</p>
+              <h6 className="about-question">Desde cuándo lo hacemos</h6>
+              <p>Hace más de una década Trompo nació con una idea clara: una agencia no es un proveedor, es un aliado estratégico.<br />
+                Nos involucramos de verdad: entendemos el ADN de cada marca, su cultura, su mercado y su forma de trabajar. Porque la estrategia no se “baja”: se construye con contexto.
+              </p>
             </div>
             <div className="about-grid-item">
               <span>04</span>
-              <h6 className="about-question">Tecnología e IA aplicada</h6>
-              <p>Fuimos testigos y protagonistas de la transformación digital: cuando la pauta era marginal, cuando el “mobile first” todavía era teoría, y cuando medir de punta a punta parecía ciencia ficción. Hoy trabajamos con la misma filosofía: hacer que lo digital rinda, y que la marca se sostenga en el tiempo.</p>
+              <h6 className="about-question">Trayectoria y evolución</h6>
+              <p>Fuimos testigos y protagonistas de la transformación digital: cuando la pauta era marginal, cuando el “mobile first” todavía era teoría, y cuando medir de punta a punta parecía ciencia ficción.<br />
+                Hoy trabajamos con la misma filosofía: hacer que lo digital rinda, y que la marca se sostenga en el tiempo.
+              </p>
             </div>
           </div>
         </div>
@@ -259,12 +268,6 @@ const Nosotros = () => {
 
       {/* formulario */}
       <Contact />
-
-      <section className="full-container">
-        <div className="slider-container container">
-          <CustomerSlider />
-        </div>
-      </section>
     </>
   );
 };

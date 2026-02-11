@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform, useInView, useMotionValueEvent, useSpring, useMotionValue } from "framer-motion";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
-import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import StaticHero from "../../components/StaticHero.jsx";
 import DisenioPortfolio from "../../components/portfolio/DisenioPortfolio.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
@@ -967,12 +966,6 @@ const Disenio = () => {
       <Beneficios />
 
       <Contact form="creative" />
-
-      <section className="full-container">
-        <div className="slider-container container">
-          <CustomerSlider />
-        </div>
-      </section>
     </>
   );
 };

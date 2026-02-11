@@ -201,6 +201,14 @@ p{
   background-color: #FEE070 !important;
 }
 
+/* Mobile: altura automática */
+@media (max-width: 767px) {
+  .menu-container-home-section{
+    height: auto;
+    min-height: 500px;
+  }
+}
+
 .menu-container-home-section.black-bg{
   background-color: #FEE070 !important;
 }
@@ -264,10 +272,14 @@ p{
   position: relative;
   min-height: 200px;
   padding: 40px 0;
+  width: 100%;
+  overflow: visible;
 }
 
 .menu-content-item{
   width: 100%;
+  height: auto;
+  overflow: visible;
 }
 
 .menu-content-item p{
@@ -419,11 +431,16 @@ p{
 }
 
 .service-subtitle-text{
-  color: #FEE070;
+  color: #ffffff;
   font-size: 16px;
   font-weight: 400;
   margin: 15px 0 0 0;
   text-transform: none;
+  transition: color 0.3s ease;
+}
+
+.service-item-home:hover .service-subtitle-text{
+  color: #FEE070;
 }
 
 .service-subtitles-container{
@@ -434,13 +451,18 @@ p{
 }
 
 .service-subtitle-link{
-  color: #262626;
+  color: #ffffff;
   font-size: 16px;
   font-weight: 400;
   text-decoration: none;
   text-transform: none;
-  background-color: #ffffff;
+  background-color: transparent;
   padding: 0 5px;
+  transition: color 0.3s ease;
+}
+
+.service-item-home:hover .service-subtitle-link{
+  color: #FEE070;
 }
 
 /* Infinite Slider - Mobile First */
@@ -542,6 +564,10 @@ p{
     font-size: 16px;
     background-color: transparent;
     color: #ffffff;
+  }
+
+  .service-item-home:hover .service-subtitle-link{
+    color: #FEE070;
   }
 
   .menu-container-home-section{
@@ -726,38 +752,4 @@ p{
   .service-subtitle-link{
     font-size: 20px;
   }
-}
-
-/* Estilos para AnimatedTextSection en Home */
-.home-animated-letter {
-    display: inline;
-}
-
-.home-animated-phrase {
-    display: inline;
-}
-
-.home-animated-text {
-    display: block;
-    line-height: 1.6;
-    text-align: center;
-    font-weight: 500;
-    padding: 50px 10px;
-}
-
-.home-animated-text-container{
-    width: 100%;
-}
-
-@media (min-width: 768px) {
-    .home-animated-text-container{
-        font-size: 28px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .home-animated-text-container{
-        font-size: 32px;
-        padding: 70px 10px;
-    }
 }

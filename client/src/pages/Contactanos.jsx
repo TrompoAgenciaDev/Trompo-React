@@ -1,10 +1,9 @@
-import { motion, useInView, useReducedMotion } from "framer-motion";
-import { useEffect, useState, useRef, useMemo } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
 
-
-import CustomerSlider from "../components/sliders/CustomerSlider.jsx";
 import Contact from "../layout/Contact";
 import TestimonialsSection from "../components/TestimonialsSection.jsx";
+import AnimatedTextSection from "../components/AnimatedTextSection";
 
 import "../assets/styles/contact-page.css";
 
@@ -46,35 +45,25 @@ const Contactanos = () => {
     );
   };
 
-  // Componente para animar frase por frase (de Nosotros)
-  const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }) => {
-    const delay = hasAnimated ? 0 : index * phraseDelay;
-    const targetOpacity = baseOpacity >= 0.9 ? 1 : Math.max(0.1, baseOpacity);
 
-    return (
-      <motion.h5
-        className="about-animated-phrase"
-        initial={{ opacity: 0.1 }}
-        animate={{ opacity: targetOpacity }}
-        transition={{
-          delay: delay,
-          duration: 0.4,
-          ease: "easeOut"
-        }}
-      >
-        {phrase}
-      </motion.h5>
-    );
-  };
-
-  // Componente Slider Infinito
-  const SocialMediaSlider = ({ text }) => {
+  // Componente InfiniteSlider (igual al de Home)
+  const InfiniteSlider = ({ text, items: itemsProp }) => {
     const shouldReduceMotion = useReducedMotion();
-    const items = Array(8).fill(text);
+    
+    // Si se pasa items (array), usar esos; si no, usar text como antes
+    const itemsArray = itemsProp || (text ? [text] : []);
+    
+    // 8 copias para crear un loop infinito más fluido (se duplican para 16 totales)
+    const items = Array(8).fill(itemsArray).flat();
+
+    // Calcular duración basada en la cantidad de items y su longitud total
+    const totalLength = itemsArray.reduce((sum, item) => sum + item.trim().length, 0);
+    const baseDuration = 30;
+    const duration = baseDuration + Math.max(0, (totalLength - 80) / 30);
 
     return (
       <motion.div 
-        className="contact-infinite-slider"
+        className="infinite-slider"
         animate={{
           x: shouldReduceMotion ? 0 : ['0%', '-10%']
         }}
@@ -82,20 +71,22 @@ const Contactanos = () => {
           x: {
             repeat: Infinity,
             repeatType: "loop",
-            duration: 25,
+            duration: duration,
             ease: "linear"
           }
         }}
         style={{
+          // Asegurar que el cursor funcione correctamente
           pointerEvents: 'auto',
+          // Optimizar rendering
           willChange: 'transform'
         }}
       >
         {items.map((item, index) => (
-          <h2 key={index} className="contact-infinite-slider-item">{item}</h2>
+          <h2 key={index} className="infinite-slider-item">{item}</h2>
         ))}
         {items.map((item, index) => (
-          <h2 key={`duplicate-${index}`} className="contact-infinite-slider-item">{item}</h2>
+          <h2 key={`duplicate-${index}`} className="infinite-slider-item">{item}</h2>
         ))}
       </motion.div>
     );
@@ -123,88 +114,6 @@ const Contactanos = () => {
     };
   }, []);
 
-  // --- SECCIÓN DE TEXTO ANIMADO (de Nosotros) ---
-  const textRef = useRef(null);
-  const containerRef = useRef(null);
-  const isInView = useInView(textRef, { once: false, amount: 0.3 });
-  
-  const [baseOpacity, setBaseOpacity] = useState(0.1);
-  const [hasAnimated, setHasAnimated] = useState(false);
-
-  // Usar IntersectionObserver para controlar la opacidad
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const ratio = entry.intersectionRatio;
-          let opacity = 0.1;
-          if (ratio >= 0.9) {
-            opacity = 1;
-          } else if (ratio >= 0.1) {
-            opacity = 0.1 + (ratio - 0.1) * (1 - 0.1) / (0.9 - 0.1);
-          }
-          setBaseOpacity(opacity);
-        });
-      },
-      {
-        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-      }
-    );
-
-    observer.observe(containerRef.current);
-
-    return () => {
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
-      }
-    };
-  }, []);
-
-  const text = "En Trompo no creemos en soluciones mágicas. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Ayudamos a empresas a convertir desafíos digitales en ventajas competitivas.";
-  
-  const phraseDelay = 0.3;
-  
-  const phrases = useMemo(() => {
-    const splitRegex = /([,.])\s+/g;
-    const result = [];
-    let lastIndex = 0;
-    let match;
-    
-    while ((match = splitRegex.exec(text)) !== null) {
-      const phrase = text.substring(lastIndex, match.index + 1) + ' ';
-      if (phrase.trim().length > 0) {
-        result.push(phrase);
-      }
-      lastIndex = match.index + match[0].length;
-    }
-    
-    if (lastIndex < text.length) {
-      const lastPhrase = text.substring(lastIndex);
-      if (lastPhrase.trim().length > 0) {
-        result.push(lastPhrase);
-      }
-    }
-    
-    return result;
-  }, [text]);
-
-  useEffect(() => {
-    if (baseOpacity >= 0.9) {
-      if (!hasAnimated) {
-        const totalPhrases = phrases.length;
-        const totalAnimationTime = (totalPhrases * phraseDelay + 0.4) * 1000;
-        const timeout = setTimeout(() => {
-          setHasAnimated(true);
-        }, totalAnimationTime);
-        
-        return () => clearTimeout(timeout);
-      }
-    } else if (baseOpacity < 0.3) {
-      setHasAnimated(false);
-    }
-  }, [baseOpacity, hasAnimated, phrases.length, phraseDelay]);
 
   return (
     <>
@@ -223,32 +132,12 @@ const Contactanos = () => {
         </div>
       </div>
 
-      <div className="full-container contact-slider-container infinite-slider-container bg-yellow-2">
-        <SocialMediaSlider text="Hablemos. Ordenemos. Escalemos" />
-      </div>
-
       <div id="contacto"></div>
 
-      <div ref={containerRef} className="full-container" style={{ backgroundColor: '#ffffff' }}>
-        <div className="container about-animated-text-container">
-          <motion.span 
-            ref={textRef}
-            className="about-animated-text"
-            style={{ color: '#000000' }}
-          >
-            {phrases.map((phrase, phraseIndex) => (
-              <AnimatedPhrase
-                key={`phrase-${phraseIndex}`}
-                phrase={phrase}
-                index={phraseIndex}
-                phraseDelay={phraseDelay}
-                baseOpacity={baseOpacity}
-                hasAnimated={hasAnimated}
-              />
-            ))}
-          </motion.span>
-        </div>
-      </div>
+      <AnimatedTextSection 
+        text="En Trompo no creemos en soluciones mágicas. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Acompañamos a las empresas a convertir desafíos digitales en ventajas competitivas."
+        backgroundClass=""
+      />
 
       <div className="full-container black-bg contactanos-testimonials-wrapper">
         <TestimonialsSection />
@@ -256,13 +145,9 @@ const Contactanos = () => {
 
       <Contact form="contactanos" location="contactanos"/>
 
-      
-      <section className="full-container">
-        <div className="slider-container container">
-          <CustomerSlider />
-        </div>
-      </section>
-
+      <div className="full-container contact-slider-container infinite-slider-container bg-yellow-2">
+        <InfiniteSlider items={["Hablemos", "Ordenemos", "Escalemos"]} />
+      </div>
 
     </>
   );

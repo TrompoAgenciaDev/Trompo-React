@@ -170,14 +170,14 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
             </motion.h1>
             <motion.h1
               className="title-page service-title-hidden"
-              style={{ top: '50px' }}
+              style={{ top: '50px', color: '#FEE070' }}
               initial={{ y: '100%' }}
               animate={{ 
                 y: isHovered ? '-50px' : '100%'
               }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              {pageType === 'home' ? 'Con estrategia real' : titulo}
+              {pageType === 'home' ? 'con estrategia real' : titulo}
             </motion.h1>
           </div>
         </div>

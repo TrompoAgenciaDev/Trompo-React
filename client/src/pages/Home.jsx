@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { useState, lazy, Suspense, useRef, useEffect, useMemo } from "react";
+import { useState, lazy, Suspense } from "react";
 //styles
 import "../assets/styles/home.css";
-import { motion, AnimatePresence, useReducedMotion, useScroll, useTransform, useInView, useMotionValueEvent, useSpring, useMotionValue } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import "@as/hero.css";
 
 //components críticos (above-the-fold)
@@ -10,9 +10,10 @@ import StaticHero from "../components/StaticHero";
 import ServiceTitle from "../components/services/ServiceTitle.jsx";
 import Menu from "../components/Menu";
 import routesConfig from "../config/routesConfig";
+import AnimatedTextSection from "../components/AnimatedTextSection";
+import TestimonialsSection from "../components/TestimonialsSection.jsx";
 
 //components lazy (below-the-fold)
-const CustomerSlider = lazy(() => import("../components/sliders/CustomerSlider.jsx"));
 const Contact = lazy(() => import("../layout/Contact"));
 const Beneficios = lazy(() => import("../components/Beneficios"));
 
@@ -41,19 +42,19 @@ const MenuIcon = () => {
 };
 
 // Componente InfiniteSlider
-const InfiniteSlider = ({ text }) => {
+const InfiniteSlider = ({ text, items: itemsProp }) => {
   const shouldReduceMotion = useReducedMotion();
+  
+  // Si se pasa items (array), usar esos; si no, usar text como antes
+  const itemsArray = itemsProp || (text ? [text] : []);
+  
   // 8 copias para crear un loop infinito más fluido (se duplican para 16 totales)
-  const items = Array(8).fill(text);
+  const items = Array(8).fill(itemsArray).flat();
 
-  // Calcular duración basada en la longitud del texto
-  // Textos más largos necesitan más tiempo para moverse
-  // Base: 30s para textos cortos, incrementar según longitud
-  const textLength = text.trim().length;
+  // Calcular duración basada en la cantidad de items y su longitud total
+  const totalLength = itemsArray.reduce((sum, item) => sum + item.trim().length, 0);
   const baseDuration = 100;
-  // Aproximadamente 1 segundo adicional por cada 30 caracteres para textos largos
-  // Esto hace que textos largos se muevan más lentamente
-  const duration = baseDuration + Math.max(0, (textLength - 80) / 30);
+  const duration = baseDuration + Math.max(0, (totalLength - 80) / 30);
 
   return (
     <motion.div 
@@ -205,140 +206,9 @@ const AnimatedLetter = ({ letter, index, letterDelay, baseOpacity, hasAnimated }
   );
 };
 
-// Componente para animar frase por frase
-const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }) => {
-  const delay = hasAnimated ? 0 : index * phraseDelay;
-  const targetOpacity = baseOpacity >= 0.9 ? 1 : Math.max(0.1, baseOpacity);
-
-  return (
-    <motion.span
-      className="home-animated-phrase"
-      initial={{ opacity: 0.1 }}
-      animate={{ opacity: targetOpacity }}
-      transition={{
-        delay: delay,
-        duration: 0.4,
-        ease: "easeOut"
-      }}
-    >
-      {phrase}
-    </motion.span>
-  );
-};
-
-// Componente AnimatedTextSection para Home
-const AnimatedTextSection = ({ containerRef }) => {
-  const textRef = useRef(null);
-  const isInView = useInView(textRef, { once: false, amount: 0.3 });
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "start start"],
-    layoutEffect: false
-  });
-
-  const opacityValue = useTransform(
-    scrollYProgress,
-    [0, 0.1, 0.9, 1],
-    [0.1, 1, 1, 0.1],
-    {
-      clamp: false,
-    }
-  );
-  
-  const smoothedOpacity = useSpring(opacityValue, {
-    stiffness: 80,
-    damping: 30,
-    mass: 0.6,
-  });
-
-  const [baseOpacity, setBaseOpacity] = useState(0.1);
-  const [hasAnimated, setHasAnimated] = useState(false);
-
-  useMotionValueEvent(smoothedOpacity, "change", (latest) => {
-    setBaseOpacity(latest);
-  });
-
-  const animatedText = "Acompañamos a equipos de marketing y empresas en la planificación, ejecución y evolución de su ecosistema digital. Nos involucramos de verdad: ordenamos prioridades, activamos iniciativas y optimizamos procesos que impacten en el posicionamiento, la generación de demanda y los resultados del negocio. Integramos estrategia, creatividad y tecnología en un mismo marco de trabajo, y participamos desde la definición estratégica hasta la implementación y mejora continua, alineando marca, canales y datos para construir sistemas digitales coherentes, escalables y orientados a performance.";
-  
-  const phraseDelay = 0.3;
-  
-  const phrases = useMemo(() => {
-    const splitRegex = /([,.])\s+/g;
-    const result = [];
-    let lastIndex = 0;
-    let match;
-    
-    while ((match = splitRegex.exec(animatedText)) !== null) {
-      const phrase = animatedText.substring(lastIndex, match.index + 1) + ' ';
-      if (phrase.trim().length > 0) {
-        result.push(phrase);
-      }
-      lastIndex = match.index + match[0].length;
-    }
-    
-    if (lastIndex < animatedText.length) {
-      const lastPhrase = animatedText.substring(lastIndex);
-      if (lastPhrase.trim().length > 0) {
-        result.push(lastPhrase);
-      }
-    }
-    
-    return result;
-  }, [animatedText]);
-
-  useEffect(() => {
-    if (baseOpacity >= 0.9) {
-      if (!hasAnimated) {
-        const totalPhrases = phrases.length;
-        const totalAnimationTime = (totalPhrases * phraseDelay + 0.4) * 1000;
-        const timeout = setTimeout(() => {
-          setHasAnimated(true);
-        }, totalAnimationTime);
-        
-        return () => clearTimeout(timeout);
-      }
-    } else if (baseOpacity < 0.3) {
-      setHasAnimated(false);
-    }
-  }, [baseOpacity, hasAnimated, phrases.length, phraseDelay]);
-
-  return (
-    <motion.span 
-      ref={textRef}
-      className="home-animated-text"
-    >
-      {phrases.map((phrase, phraseIndex) => (
-        <AnimatedPhrase
-          key={`phrase-${phraseIndex}`}
-          phrase={phrase}
-          index={phraseIndex}
-          phraseDelay={phraseDelay}
-          baseOpacity={baseOpacity}
-          hasAnimated={hasAnimated}
-        />
-      ))}
-    </motion.span>
-  );
-};
 
 const Home = () => {
   const [activeMenuItem, setActiveMenuItem] = useState(0); // 0: sobre nosotros, 1: servicios, 2: contacto
-  const animatedTextContainerRef = useRef(null);
-  const [isTextSectionMounted, setIsTextSectionMounted] = useState(false);
-
-  useEffect(() => {
-    const checkRef = () => {
-      if (animatedTextContainerRef.current) {
-        setIsTextSectionMounted(true);
-      }
-    };
-    
-    const timer = setTimeout(checkRef, 100);
-    checkRef();
-    
-    return () => clearTimeout(timer);
-  }, []);
 
   const menuItems = [
     { 
@@ -369,56 +239,60 @@ const Home = () => {
 
       <ServiceTitle titulo="Agencia Digital" subtitulo="Integramos diseño, multimedia, desarrollo, paid media y social media para construir un ecosistema <strong>digital coherente, medible y escalable.</strong>." page="home" />
 
-      <div ref={animatedTextContainerRef} className="full-container">
-        <div className="container home-animated-text-container">
-          {isTextSectionMounted && (
-            <AnimatedTextSection containerRef={animatedTextContainerRef} />
-          )}
-        </div>
-      </div>
+      <AnimatedTextSection 
+        text="Acompañamos a equipos de marketing y empresas en la planificación, ejecución y evolución de su ecosistema digital. Nos involucramos de verdad: ordenamos prioridades, activamos iniciativas y optimizamos procesos que impacten en el posicionamiento, la generación de demanda y los resultados del negocio."
+        backgroundClass=""
+      />
 
       <div className="full-container services-section-home black-bg">
         <div className="container">
+          <h4 style={{ color: '#ffffff' }}>
+            En Trompo trabajamos con cinco unidades integradas como un sistema coordinado que construye marca y genera resultados.
+          </h4>
+        </div>
+        <div className="container">
           <ServiceItem 
-            title="Social Media"
-            subtitle="Estrategia de Contenido y Comunicacion"
-            link="/servicios/social-media"
+            title="Diseño"
+            subtitles={["Identidad y sistema visual que ordena, diferencia y profesionaliza."]}
           />
           <ServiceItem 
             title="Multimedia"
             subtitles={["Motion, edición y producción audiovisual para comunicar con impacto."]}
-            links={["/servicios/multimedia", "/servicios/multimedia", "/servicios/multimedia", "/servicios/multimedia"]}
           />
           <ServiceItem 
             title="Desarrollo Web"
-            subtitles={["Landing, institucional, e-commerce y plataformas que convierten y escalan."]}
-            links={["/servicios/desarrollo", "/servicios/desarrollo", "/servicios/desarrollo", "/servicios/desarrollo"]}
+            subtitles={["Desarrollo Web que posiciona, convierte y escala."]}
           />
           <ServiceItem 
             title="Paid Media"
-            subtitle="Google, Meta, LinkedIn y TikTok para performance y posicionamiento."
-            link="/servicios/paid-media"
+            subtitle={["Google, Meta, LinkedIn Ads, performance y posicionamiento."]}
           />
           <ServiceItem 
-            title="Diseño"
-            subtitles={["Identidad y sistema visual que ordena, diferencia y profesionaliza."]}
-            links={["/servicios/disenio", "/servicios/disenio", "/servicios/disenio"]}
+            title="Social Media"
+            subtitle={["Contenido, comunidad y narrativa diaria que construye cultura de marca."]}
           />
         </div>
+      </div>
+
+      <Suspense fallback={null}>
+        <Beneficios />
+      </Suspense>
+
+      <div className="full-container bg-white contactanos-testimonials-wrapper">
+        <TestimonialsSection />
       </div>
 
       <div className="full-container menu-container-home-section">
         <div className="full-container">
           {menuItems.map((item, index) => (
-            <Link
+            <div
               key={index}
-              to={item.path}
               className={`full-container menu-item-home-section ${activeMenuItem === index ? 'is-active' : ''}`}
               onMouseEnter={() => setActiveMenuItem(index)}
             >
               <h4>{item.label}</h4>
               <MenuIcon />
-            </Link>
+            </div>
           ))}
         </div>
         <div 
@@ -436,7 +310,7 @@ const Home = () => {
                 transition={{ duration: 0.3 }}
                 onMouseEnter={() => setActiveMenuItem(0)}
               >
-                <p><span className="yellow">En Trompo no creemos en soluciones mágicas</span>. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Ayudamos a empresas a convertir desafíos digitales en ventajas competitivas.</p>
+                <p><span className="yellow">En Trompo no creemos en soluciones mágicas</span>. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. </p>
                 <Link to="/nosotros" className="contact-button-home">conocé más</Link>
               </motion.div>
             )}
@@ -468,7 +342,7 @@ const Home = () => {
                 transition={{ duration: 0.3 }}
                 onMouseEnter={() => setActiveMenuItem(2)}
               >
-                <p>¿Listo para transformar tu estrategia digital? Contactanos y conversemos sobre cómo podemos ayudar a tu marca a alcanzar sus objetivos.</p>
+                <p>Si querés ordenar tu marketing, escalar resultados o profesionalizar tu presencia digital, hablemos.</p>
                 <Link to="/contactanos" className="contact-button-home">
                   Contactanos
                 </Link>
@@ -479,27 +353,30 @@ const Home = () => {
       </div>      
 
       <div className="full-container infinite-slider-container">
-        <InfiniteSlider text="Estrategia - Innovación - Contenido - Resultados - Creatividad - Performance - Leads - Multimedia - Escalabilidad - Posicionamiento - Optimización - Analitica - Branding - Social media - Ads - Automatización - Desarrollo
-        " />
+        <InfiniteSlider items={[
+          "Estrategia",
+          "Innovación",
+          "Contenido",
+          "Resultados",
+          "Creatividad",
+          "Performance",
+          "Leads",
+          "Multimedia",
+          "Escalabilidad",
+          "Posicionamiento",
+          "Optimización",
+          "Analitica",
+          "Branding",
+          "Social media",
+          "Ads",
+          "Automatización",
+          "Desarrollo"
+        ]} />
       </div>
-
-      <Suspense fallback={null}>
-        <Beneficios />
-      </Suspense>
 
       <Suspense fallback={null}>
         <Contact form="home" />
       </Suspense>
-      {/* 
-        <section className="full-container">
-          <div className="slider-container container">
-            <Suspense fallback={null}>
-              <CustomerSlider />
-            </Suspense>
-          </div>
-        </section>
-      
-      */}
     </div>
   );
 };
