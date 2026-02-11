@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
+import { Link } from "react-router-dom";
 import "../../assets/styles/service-title.css";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
@@ -90,11 +91,11 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
       case 'home':
         return (
           <>
-            <span>Diseño Digital</span>
-            <span>Multimedia</span>
-            <span>Social Media</span>
-            <span>Desarrollo Web</span>
-            <span>Paid Media</span>
+            <Link to="/servicios/disenio">Diseño</Link>
+            <Link to="/servicios/multimedia">Multimedia</Link>
+            <Link to="/servicios/social-media">Social Media</Link>
+            <Link to="/servicios/desarrollo">Desarrollo Web</Link>
+            <Link to="/servicios/paid-media">Paid Media</Link>
           </>
         );
       
@@ -176,7 +177,7 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
               }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              {titulo}
+              {pageType === 'home' ? 'Con estrategia real' : titulo}
             </motion.h1>
           </div>
         </div>

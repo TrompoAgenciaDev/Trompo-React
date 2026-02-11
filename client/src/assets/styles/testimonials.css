@@ -12,51 +12,68 @@
   width: 100%;
   position: relative;
   overflow: hidden;
+  transform: none !important;
+  filter: none !important;
 }
 
 .testimoniales-container-vertical {
   height: 900px;
   max-height: 900px;
+  transform: none !important;
+  filter: none !important;
 }
 
 .testimoniales-viewport {
   width: 100%;
+  height: 100%;
   overflow: hidden;
-  padding: 50px;
-}
-
-.testimoniales-viewport-vertical {
-  height: 100%;
   padding: 20px;
-  display: flex;
-  align-items: center;
+  perspective: 1200px;
+  perspective-origin: center center;
+  transform-style: preserve-3d;
+  position: relative;
+  transform: none !important;
+  filter: none !important;
 }
 
-.testimoniales-track {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
+.testimoniales-mover {
+  width: 100%;
   will-change: transform;
-}
-
-.testimoniales-track-vertical {
-  flex-direction: column;
-  height: 100%;
   cursor: grab;
+  transform: none !important;
+  filter: none !important;
 }
 
-.testimoniales-track-vertical:active {
+.testimoniales-mover:active {
   cursor: grabbing;
 }
 
-.testimoniales-slide-vertical {
-  height: auto;
-  min-height: auto;
+.testimoniales-track {
   display: flex;
-  align-items: stretch;
-  flex-shrink: 0;
+  flex-direction: column;
+  width: 100%;
+  transform: none !important;
+  filter: none !important;
+  /* NO debe tener transforms, animaciones ni motion */
+}
+
+.testimoniales-slide {
+  flex: 0 0 auto;
+  width: 100%;
+  padding: 0.5rem 0;
+  box-sizing: border-box;
+  transform: none !important;
+  filter: none !important;
+}
+
+.slide-3d {
+  width: 100%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+  /* Recibe únicamente rotateX y z via GSAP */
+  /* Nunca translateY */
 }
 
 .testimoniales-card {
@@ -154,11 +171,11 @@
     max-height: 900px;
   }
 
-  .testimoniales-viewport-vertical {
+  .testimoniales-viewport {
     padding: 20px;
   }
 
-  .testimoniales-slide-vertical {
+  .testimoniales-slide {
     height: auto;
     min-height: auto;
   }
@@ -221,11 +238,11 @@
     max-height: 600px;
   }
 
-  .testimoniales-viewport-vertical {
+  .testimoniales-viewport {
     padding: 20px;
   }
 
-  .testimoniales-slide-vertical {
+  .testimoniales-slide {
     height: auto;
     min-height: auto;
   }

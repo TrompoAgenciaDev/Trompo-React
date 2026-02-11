@@ -796,20 +796,32 @@ const Multimedia = () => {
         </div>
         <div className="container grid-entregables">
           <div className="item-entregables">
-            <h5>Identidad Corporativa</h5>
-            <p>Sistema completo de marca que define la identidad, coherencia y proyección visual en todos los puntos de contacto.</p>
+            <h5>Videos estratégicos para Redes Sociales</h5>
+            <p>Reels, Shorts (YouTube/Instagram), TikTok y piezas verticales nativas para Stories, diseñados para captar atención en los primeros segundos.</p>
           </div>
           <div className="item-entregables">
-            <h5>Papelería, Señalética y Espacios</h5>
-            <p>Diseño institucional premium aplicado a piezas gráficas, señalética y proyectos espaciales.</p>
+            <h5>Videos Corporativos y Testimoniales de formato ágil</h5>
+            <p>Producciones dinámicas y auténticas, grabadas en contexto real, que comunican valores, servicios o casos de éxito con un ritmo moderno.</p>
           </div>
           <div className="item-entregables">
-            <h5>Manual de Marca</h5>
-            <p>Guía estratégica y visual que ordena el uso de la identidad en entornos digitales y físicos.</p>
+            <h5>Animaciones 2D y Motion Graphics explicativos</h5>
+            <p>Gráficos en movimiento que simplifican ideas complejas, presentan datos o dan vida a elementos de marca de forma clara y atractiva.</p>
           </div>
           <div className="item-entregables">
-            <h5>Material POP, Mercadería y Templates</h5>
-            <p>Desarrollo de piezas promocionales y templates corporativos alineados al sistema de marca.</p>
+            <h5>Contenido para Publicidad Digital (Ads)</h5>
+            <p>Videos optimizados específicamente para campañas en Meta Ads, Google Video o LinkedIn, con foco en conversión y adaptados al formato de cada plataforma.</p>
+          </div>
+          <div className="item-entregables">
+            <h5>Recursos de Audio y Podcasts</h5>
+            <p>Edición y producción sonora para podcasts, así como creación de pistas de audio y sound design para videos. Incluye locuciones generadas por IA de alta calidad para flexibilidad y escalabilidad.</p>
+          </div>
+          <div className="item-entregables">
+            <h5>Piezas con Subtitulado Creativo Integrado</h5>
+            <p>No solo subtitulamos; diseñamos el texto como parte esencial de la narrativa visual, garantizando accesibilidad y máximo engagement en reproducción sin sonido.</p>
+          </div>
+          <div className="item-entregables">
+            <h5>Imágenes y Assets Visuales Potenciados con IA</h5>
+            <p>Generación y edición de imágenes, ilustraciones o elementos gráficos únicos mediante inteligencia artificial, para complementar y enriquecer proyectos audiovisuales o de campaña.</p>
           </div>
         </div>
       </div>

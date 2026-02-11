@@ -727,3 +727,37 @@ p{
     font-size: 20px;
   }
 }
+
+/* Estilos para AnimatedTextSection en Home */
+.home-animated-letter {
+    display: inline;
+}
+
+.home-animated-phrase {
+    display: inline;
+}
+
+.home-animated-text {
+    display: block;
+    line-height: 1.6;
+    text-align: center;
+    font-weight: 500;
+    padding: 50px 10px;
+}
+
+.home-animated-text-container{
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .home-animated-text-container{
+        font-size: 28px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .home-animated-text-container{
+        font-size: 32px;
+        padding: 70px 10px;
+    }
+}

@@ -38,9 +38,14 @@
     color: #ffffff;
 }
 
+.grid-item-beneficios h6{
+    color: #ffffff;
+}
+
 /* Variante amarilla - textos e íconos negros */
 .beneficios-yellow .grid-item-beneficios p,
-.beneficios-yellow .title-beneficios h5{
+.beneficios-yellow .title-beneficios h5,
+.beneficios-yellow .grid-item-beneficios h6{
     color: #000000;
 }
 
