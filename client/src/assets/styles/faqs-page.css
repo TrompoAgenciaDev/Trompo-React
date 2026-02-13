@@ -98,12 +98,12 @@
   display: none;
 }
 
-@media (min-width: 768px) {
-  .faqs-main-title {
-  }
+/* ============================================
+   MEDIA QUERIES
+   ============================================ */
 
-  .faqs-category-title {
-  }
+/* Media Query: 768px */
+@media (min-width: 768px) {
 }
 
 @media (min-width: 1024px) {
@@ -120,8 +120,6 @@
     padding: 100px 0;
   }
 
-  .faqs-category-title {
-  }
 
   .faqs-infinite-slider-item {
     font-size: 64px;

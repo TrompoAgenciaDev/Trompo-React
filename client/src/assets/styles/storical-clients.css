@@ -129,8 +129,6 @@
 }
 
 /* Invertir colores cuando está dentro de black-bg */
-.black-bg .storical {
-}
 
 .black-bg .storical-panel {
   background: #000000;
@@ -192,8 +190,6 @@
   margin-top: 20px;
 }
 
-.legal-footer-historical p{
-}
 
 @media (min-width: 768px) {
   .storical-list {
@@ -208,6 +204,9 @@
   }
   .title-historical-container p{
     text-align: center;
+  }
+  
+  .legal-footer-historical p{
   }
   .storical-name {
     font-size: 20px;

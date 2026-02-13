@@ -139,9 +139,6 @@
 }
 
 @media (min-width: 768px) {
-  .terms-main-title {
-  }
-
   .terms-title {
     margin-bottom: 40px;
   }
@@ -152,9 +149,6 @@
 
   .terms-paragraph {
     line-height: 1.8;
-  }
-
-  .terms-sublist li {
   }
 
   .terms-content {

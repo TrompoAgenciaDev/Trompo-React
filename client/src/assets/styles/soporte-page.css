@@ -52,15 +52,11 @@
   gap: 16px;
 }
 
-.soporte-grid .grid-item-soporte p{
-}
 
 .soporte-grid .grid-item-soporte .title-section-container{
   font-size: 15px;
 }
 
-.title-section-container h2{
-}
 
 /* portfolio 3d*/
 .soporte-title-portfolio-container{
@@ -82,8 +78,6 @@
   font-weight: 400;
 }
 
-.soporte-title-portfolio-container p{
-}
 
 @media (min-width: 768px) {
   .soporte-diagonal-invertida{
@@ -106,8 +100,6 @@
   }
 
 
-  .soporte-title-portfolio-container p{
-  }
 }
 
 @media (min-width: 1024px) {
@@ -132,8 +124,6 @@
     -webkit-box-align: start;
     -ms-flex-align: start;
     align-items: flex-start;
-  }
-  .soporte-grid .grid-item-soporte p{
   }
   .soporte-title-portfolio-container{
     -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
@@ -168,8 +158,6 @@
     -ms-grid-columns: 2fr 3fr !important;
     grid-template-columns: 2fr 3fr !important;
   }
-  .soporte-grid .grid-item-soporte p{
-  }
   .soporte-grid .grid-item-soporte .title-section-container{
     font-size: 18px;
   }
@@ -190,6 +178,4 @@
     gap: 8px;
   }
 
-  .soporte-title-portfolio-container h3{
-  }
 }

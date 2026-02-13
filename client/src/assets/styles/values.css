@@ -133,11 +133,6 @@
     padding-top: 30px;
   }
 
-  .grid-item:first-child h2 {
-  }
-
-  .grid-item:first-child p {
-  }
 
   .grid-value-content .content-grid {
     display: -webkit-box;
@@ -176,11 +171,6 @@
     padding-top: 30px;
   }
 
-  .grid-item:first-child h2 {
-  }
-
-  .grid-item:first-child p {
-  }
 
   .grid-value-content .content-grid {
     display: -webkit-box;

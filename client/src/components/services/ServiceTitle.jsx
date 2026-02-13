@@ -111,7 +111,7 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
       case 'multimedia':
         return (
           <>
-            <span>Redes Sociales</span>
+            <span className="service-area-mobile-hide">Redes Sociales</span>
             <span>Videos corporativos y testimoniales</span>
             <span>Animación & Motion Graphic</span>
           </>

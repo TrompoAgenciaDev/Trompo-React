@@ -774,13 +774,23 @@ const Multimedia = () => {
 
       <div className="full-container black-bg productos-multimedia">
         <div className="container">
-          <div className="grid-productos-multimedia container">
+          <div className="grid-productos-multimedia">
             <div className="grid-item-video-multimedia">
-              <MouseTrackingImage 
-                src={`${base}assets/ofi.webp`} 
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                alt="Multimedia" 
-              />
+              {/* Imagen normal en mobile, MouseTrackingImage desde 1280px */}
+              <div className="image-mobile-only">
+                <img 
+                  src={`${base}assets/ofi.webp`} 
+                  alt="Multimedia"
+                  className="productos-image"
+                />
+              </div>
+              <div className="image-desktop-only">
+                <MouseTrackingImage 
+                  src={`${base}assets/ofi.webp`} 
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                  alt="Multimedia" 
+                />
+              </div>
             </div>
             <div className="grid-item-productos-multimedia">
               <ProductosItemsList />
@@ -789,9 +799,9 @@ const Multimedia = () => {
         </div>
       </div>
       
-      <div className="full-container black-bg">
+      <div className="full-container bg-yellow-2 entregables-container">
         <div className="container">
-          <h2 className="title-entregables">Entregables</h2>
+          <h3 className="title-entregables">Entregables</h3>
         </div>
         <div className="container grid-entregables">
           <div className="item-entregables">

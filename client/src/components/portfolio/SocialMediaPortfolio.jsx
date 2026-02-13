@@ -220,8 +220,87 @@ export default function SocialMediaPortfolio() {
   const slideWidthPct = 100;
   const offsetPct = carouselIndex * slideWidthPct;
 
+  const handlePrev = () => {
+    if (items.length <= 1) return;
+    setCarouselIndex((prev) => prev - 1);
+  };
+
+  const handleNext = () => {
+    if (items.length <= 1) return;
+    setCarouselIndex((prev) => prev + 1);
+  };
+
   return (
     <div className="grid-portfolio-container portfolio-carousel-mobile" style={{ position: "relative", overflow: "hidden", width: "100%" }}>
+      {/* Flechas de navegación para mobile */}
+      {items.length > 1 && (
+        <>
+          <button
+            aria-label="Anterior"
+            className="portfolio-carousel-arrow portfolio-carousel-arrow-prev"
+            onClick={handlePrev}
+            style={{
+              position: "absolute",
+              left: "10px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "rgba(255, 255, 255, 0.9)",
+              border: "none",
+              borderRadius: "50%",
+              width: "40px",
+              height: "40px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              zIndex: 10,
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+            }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 33 33" fill="none">
+              <path
+                d="M31.9687 16.1926L1.08382 16.1926M1.08382 16.1926L16.5263 31.3777M1.08382 16.1926L16.5263 1.00751"
+                stroke="#1D1D1B"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          <button
+            aria-label="Siguiente"
+            className="portfolio-carousel-arrow portfolio-carousel-arrow-next"
+            onClick={handleNext}
+            style={{
+              position: "absolute",
+              right: "10px",
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "rgba(255, 255, 255, 0.9)",
+              border: "none",
+              borderRadius: "50%",
+              width: "40px",
+              height: "40px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              zIndex: 10,
+              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)",
+            }}
+          >
+            <svg width="20" height="20" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
+                stroke="#1E1E1E"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </>
+      )}
       <motion.div
         className="portfolio-carousel-track"
         style={{ display: "flex", width: "100%", willChange: "transform" }}

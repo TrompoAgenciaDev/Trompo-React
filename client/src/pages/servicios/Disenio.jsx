@@ -889,16 +889,26 @@ const Disenio = () => {
 
       <div className="full-container black-bg productos">
         <div className="container">
-          <div className="grid-productos container">
+          <div className="grid-productos">
             <div className="grid-item-productos">
               <EntregableItemsList />
             </div>
             <div className="grid-item-video">
-              <MouseTrackingImage 
-                src={`${base}assets/metegol.webp`} 
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                alt="Diseño" 
-              />
+              {/* Imagen normal en mobile, MouseTrackingImage desde 1280px */}
+              <div className="image-mobile-only">
+                <img 
+                  src={`${base}assets/metegol.webp`} 
+                  alt="Diseño"
+                  className="productos-image"
+                />
+              </div>
+              <div className="image-desktop-only">
+                <MouseTrackingImage 
+                  src={`${base}assets/metegol.webp`} 
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                  alt="Diseño" 
+                />
+              </div>
             </div>
           </div>
         </div>

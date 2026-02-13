@@ -178,10 +178,6 @@ const Nosotros = () => {
         mobilePoster={`${base}assets/hero/mobile/home.webp`}
       />
 
-      <div className="full-container about-slider-container infinite-slider-container">
-        <SocialMediaSlider text="Método, criterio y crecimiento real" />
-      </div>
-
       <div className="full-container black-bg">
         <div className="container">
           <div className="about-grid-wrapper">
@@ -248,16 +244,23 @@ const Nosotros = () => {
           '--team-mobile-image': `url(${base}assets/members/team-mobile.webp)`
         }}
       >
-        <div className="container">
-          <h4>Lo que nos define.</h4>
-          <div className="text-members-container">
-            <p>
-              Hace más de una década, <strong>Trompo nació con una idea clara</strong>: una agencia no es un proveedor, es un aliado estratégico.
-            </p>
-            <p>
-              Desde el inicio, nos propusimos involucrarnos de verdad. Entender el ADN de cada marca, sus valores, su visión, su forma de trabajar. Porque solo así se construyen estrategias que importan y relaciones que trascienden.
-            </p>
+        <div className="members-content-wrapper">
+          <div className="members-text-wrapper">
+            <h4>Lo que nos define.</h4>
+            <div className="text-members-container">
+              <p>
+                Hace más de una década, <strong>Trompo nació con una idea clara</strong>: una agencia no es un proveedor, es un aliado estratégico.
+              </p>
+              <p>
+                Desde el inicio, nos propusimos involucrarnos de verdad. Entender el ADN de cada marca, sus valores, su visión, su forma de trabajar. Porque solo así se construyen estrategias que importan y relaciones que trascienden.
+              </p>
+            </div>
           </div>
+          <img 
+            src={`${base}assets/members/team-mobile.webp`} 
+            alt="Equipo Trompo" 
+            className="members-mobile-image"
+          />
         </div>
       </div>
 

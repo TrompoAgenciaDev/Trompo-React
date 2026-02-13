@@ -129,6 +129,9 @@ export default function SocialMediaShowcaseSlider({ sourceArray = "social-media"
   const [visible, setVisible] = useState(() =>
     typeof window === "undefined" ? 1 : window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1
   );
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window === "undefined" ? false : window.innerWidth < 768
+  );
   const [paused, setPaused] = useState(false);
   const [touchDelay, setTouchDelay] = useState(false);
   const timer = useRef(null);
@@ -174,6 +177,7 @@ export default function SocialMediaShowcaseSlider({ sourceArray = "social-media"
     const onResize = () => {
       const v = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
       setVisible(v);
+      setIsMobile(window.innerWidth < 768);
     };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
@@ -229,17 +233,23 @@ export default function SocialMediaShowcaseSlider({ sourceArray = "social-media"
         onClick={prev}
         style={{
           position: "absolute",
-          left: -50,
+          left: isMobile ? "10px" : -50,
           top: "50%",
           transform: "translateY(-50%)",
-          background: "transparent",
-          borderRadius: 999,
+          background: isMobile ? "rgba(255, 255, 255, 0.9)" : "transparent",
+          borderRadius: "50%",
           width: 40,
           height: 40,
           zIndex: 10,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          border: "none",
+          cursor: "pointer",
+          boxShadow: isMobile ? "0 2px 8px rgba(0, 0, 0, 0.15)" : "none",
         }}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33" fill="none">
+        <svg xmlns="http://www.w3.org/2000/svg" width={isMobile ? "20" : "33"} height={isMobile ? "20" : "33"} viewBox="0 0 33 33" fill="none">
           <path
             d="M31.9687 16.1926L1.08382 16.1926M1.08382 16.1926L16.5263 31.3777M1.08382 16.1926L16.5263 1.00751"
             stroke="#1D1D1B"
@@ -255,17 +265,23 @@ export default function SocialMediaShowcaseSlider({ sourceArray = "social-media"
         onClick={next}
         style={{
           position: "absolute",
-          right: -50,
+          right: isMobile ? "10px" : -50,
           top: "50%",
           transform: "translateY(-50%)",
-          background: "transparent",
-          borderRadius: 999,
+          background: isMobile ? "rgba(255, 255, 255, 0.9)" : "transparent",
+          borderRadius: "50%",
           width: 40,
           height: 40,
           zIndex: 10,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          border: "none",
+          cursor: "pointer",
+          boxShadow: isMobile ? "0 2px 8px rgba(0, 0, 0, 0.15)" : "none",
         }}
       >
-        <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width={isMobile ? "20" : "38"} height={isMobile ? "20" : "38"} viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M1.5 19.0001H36.5M36.5 19.0001L19 1.79175M36.5 19.0001L19 36.2084"
             stroke="#1E1E1E"

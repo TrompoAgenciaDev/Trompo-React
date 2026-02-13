@@ -2,24 +2,27 @@
    ESTILOS BASE
    ============================================ */
 
-/* Estilos para slider infinito */
-.about-slider-container{
-  overflow: hidden;
-  width: 100%;
-  padding: 0;
-  contain: layout style paint;
-  isolation: isolate;
-  position: relative;
-}
-
 .about-infinite-slider{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
   width: fit-content;
   will-change: transform;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
   -webkit-perspective: 1000px;
+  -moz-perspective: 1000px;
   perspective: 1000px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -30,15 +33,24 @@
   white-space: nowrap;
   margin: 0;
   padding-right: 60px;
+  -ms-flex-negative: 0;
   flex-shrink: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #000000 !important;
   font-weight: 500;
   line-height: 1.2;
+  -webkit-transition: mix-blend-mode 0.2s ease;
+  -o-transition: mix-blend-mode 0.2s ease;
   transition: mix-blend-mode 0.2s ease;
 }
 
@@ -124,26 +136,60 @@
 /* Estilos para members-container */
 .members-container{
   width: 100%;
-  height: 800px;
-  gap: 30px;
-  display: grid;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
   grid-template-columns: 1fr;
-  padding: 50px 10px;
+  background-color: #000000;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
   background-size: cover;
   background-position: center right;
   background-repeat: no-repeat;
   background-image: var(--team-image, url(''));
 }
 
-/* Mobile: cambiar imagen y ocultar texto */
-@media (max-width: 767px) {
-  .members-container {
-    background-image: var(--team-mobile-image, var(--team-image, url('')));
-  }
-  
-  .members-container .container {
-    display: none;
-  }
+.members-content-wrapper {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 20px;
+  height: 100%;
+}
+
+.members-text-wrapper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.members-mobile-image {
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+  object-fit: cover;
+  display: block;
 }
 
 .members-container h4{
@@ -153,11 +199,18 @@
 
 .text-members-container{
   width: 100%;
-  max-width: 500px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
   flex-direction: column;
   gap: 16px;
   background-color: #000000bd;
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   padding: 20px 20px 20px 0;
 }
@@ -169,6 +222,36 @@
 
 .members-container p strong{
   color: #FED332;
+}
+
+/* Ocultar sección de histórico de clientes en mobile */
+.hide-storical-mobile {
+  display: none;
+}
+
+/* ============================================
+   MEDIA QUERIES
+   ============================================ */
+
+/* Mobile: grid 2 filas, altura 400px, imagen como elemento */
+@media (max-width: 767px) {
+  .members-container {
+    background-image: none;
+  }
+  
+  .members-content-wrapper {
+    -ms-grid-rows: auto auto;
+    grid-template-rows: auto auto;
+    gap: 20px;
+  }
+  
+  .members-text-wrapper {
+    display: block;
+  }
+  
+  .members-mobile-image {
+    display: block;
+  }
 }
 
 /* Estilos para slider de fondo en sección equipo */
@@ -210,6 +293,9 @@
   padding: 50px 0;
   position: relative;
   overflow: visible;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: start;
   align-items: start;
   z-index: 1;
 }
@@ -223,6 +309,7 @@
   width: 100%;
   height: auto;
   display: block;
+  -o-object-fit: cover;
   object-fit: cover;
 }
 
@@ -234,10 +321,6 @@
   max-height: 500px;
 } */
 
-/* ============================================
-   MEDIA QUERIES
-   ============================================ */
-
 /* Media Query: 768px */
 @media (min-width: 768px) {
   .about-grid-wrapper{
@@ -246,25 +329,40 @@
     padding: 80px 0;
   }
 
-  .about-animated-text-container{
-  }
-
   .grid-equipo-wrapper{
+    -ms-grid-columns: 1fr 1fr;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+  }
+  
+  /* Members container: 2 columnas (texto e imagen al lado) */
+  .members-container {
+    background-image: none;
+  }
+  
+  .members-content-wrapper {
+    -ms-grid-rows: 1fr;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  
+  .members-mobile-image {
+    display: block;
+  }
+  
+  .hide-storical-mobile {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
   }
 }
 
 /* Media Query: 1024px */
 @media (min-width: 1024px) {
-  .about-infinite-slider{
-    padding: 50px 0;
-  }
-
-  .about-infinite-slider-item{
-    padding-right: 80px;
-  }
-
   .about-animated-text-container{
     padding: 70px 10px;
   }
@@ -277,31 +375,65 @@
 
   .members-container{
     height: 90svh;
-    grid-template-columns: 3fr 5fr;
-    padding-left: 50px;
-  }
-
-  .members-container .container{
+    gap: 30px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-box-align: flex-start;
+    -moz-box-align: flex-start;
+    -ms-flex-align: flex-start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+    padding: 50px 10px;
+    padding-left: 50px;
+    background-image: var(--team-image, url(''));
+  }
+  
+  .members-content-wrapper {
+    -ms-grid-columns: 1fr;
+    -ms-grid-rows: 1fr;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    max-width: 500px;
+  }
+  
+  .members-mobile-image {
+    display: none;
+  }
+  
+  .members-text-wrapper {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    height: 100%;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: flex-start;
+    -moz-box-align: flex-start;
+    -ms-flex-align: flex-start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     gap: 30px;
   }
 
   .grid-equipo-wrapper{
+    -ms-grid-columns: 1fr 1fr 1fr;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
   }
 
-
-}
-
-/* Ocultar sección de histórico de clientes en mobile */
-.hide-storical-mobile {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .hide-storical-mobile {
-    display: flex;
+  .text-members-container{
+    max-width: 400px;
   }
 }

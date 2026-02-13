@@ -201,71 +201,15 @@ h6{
 }
 
 .branding-tab-content{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
-}
-
-
-@media (min-width: 1024px) {
-    .grid-strategy{
-        padding: 50px 0;
-    }
-
-    .strategy-item .container{
-        -ms-grid-columns: 1fr 1fr;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        padding: 70px 0;
-    }
-
-    .grid-item-strategy p{
-    }
-
-    /* Estilos de ServiceTitle removidos - solo deben estar en service-title.css */
-
-    .grid-beneficios{
-        -ms-grid-columns: 1fr 1fr 1fr 1fr;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 50px;
-    }
-
-    .beneficios-container{
-        padding: 70px 0 120px;
-    }
-
-    .title-beneficios{
-        gap: 0;
-        padding-bottom: 50px;
-    }
-
-    .grid-item-beneficios p{
-    }
-
-    .beneficios-container h5{
-        max-width: 600px;
-    }
-
-    .branding-tab-content{
-        flex-direction: row;
-    }
-}
-
-/* Estilos de ServiceTitle removidos - solo deben estar en service-title.css */
-
-@media (min-width: 1280px) {
-    .grid-item-beneficios p{
-    }
-
-    .grid-item-beneficios svg{
-        width: 60px;
-        height: 60px;
-    }
-
-    .beneficios-container h3{
-    }
-
-    .beneficios-container h5{
-    }
 }
 
 
@@ -378,33 +322,27 @@ h6{
 }
 
 .branding-title-container{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-box-orient: row;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
     flex-direction: row;
+    -webkit-box-pack: flex-end;
+    -moz-box-pack: flex-end;
+    -ms-flex-pack: flex-end;
+    -webkit-justify-content: flex-end;
     justify-content: flex-end;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
     gap: 20px;
     padding: 20px;
-}
-
-
-@media (min-width: 1024px) {
-    .title-client {
-        font-size: 48px;
-    }
-
-    .category-client {
-        font-size: 24px;
-    }
-
-    .slide-counter {
-        font-size: 18px;
-        gap: 15px;
-    }
-
-
-    .branding-title-container{
-        padding: 50px;
-    }
 }
 
 /* Estilos para productos y entregables */
@@ -415,31 +353,77 @@ h6{
     grid-template-columns: repeat(1, 1fr);
     gap: 30px;
     padding: 20px 0;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
     align-items: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .grid-item-productos{
     display: -webkit-box;
+    display: -moz-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
     gap: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .grid-item-video{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     gap: 30px;
     position: relative;
-    min-height: 500px;
-    aspect-ratio: 4/3;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    height: auto;
 }
 
-.grid-item-video img{
+.grid-item-video img,
+.grid-item-video .productos-image{
     width: 100%;
+    height: auto;
+    max-width: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
+    display: block;
+}
+
+/* Ocultar MouseTrackingImage en mobile, mostrar imagen normal */
+.image-desktop-only {
+    display: none;
+}
+
+.image-mobile-only {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+.image-mobile-only .productos-image {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
 }
 
 .optimized-video-container{
@@ -602,29 +586,6 @@ h6{
     background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
 }
 
-/* Grid de 2 columnas para testimonial-wrapper en desktop */
-@media (min-width: 1024px) {
-    .testimonial-wrapper {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        align-items: stretch;
-        position: relative;
-    }
-
-    .testimonial-cards-slider {
-        max-width: 600px;
-        width: 100%;
-        grid-column: 1;
-        justify-self: end;
-        margin: 0;
-    }
-
-    .testimonial-wrapper > div:empty,
-    .testimonial-text-content {
-        grid-column: 2;
-    }
-}
 
 /* Estilos para el contenido de texto de testimonios */
 .testimonial-text-content {
@@ -649,33 +610,6 @@ h6{
 }
 
 
-@media (min-width: 1024px) {
-    .optimized-video-container{
-        height: 600px;
-    }
-
-    .grid-productos{
-        -ms-grid-columns: 3fr 2fr;
-        grid-template-columns: 3fr 2fr;
-        gap: 50px;
-        padding: 50px 0;
-    }
-    
-    .grid-item-video{
-        padding-top: 50px;
-    }
-
-    .design-history-item p{
-    }
-
-    .productos{
-        padding: 70px 0;
-    }
-
-    .testimonial-text-content {
-        display: flex;
-    }
-}
 
 /* Estilos para texto animado */
 .animated-text {
@@ -710,18 +644,6 @@ h6{
     width: 100%;
 }
 
-@media (min-width: 768px) {
-    .animated-text-container{
-        font-size: 28px;
-    }
-}
-
-@media (min-width: 1024px) {
-    .animated-text-container{
-        font-size: 32px;
-        padding: 70px 10px;
-    }
-}
 
 /* ============================================
    PORTFOLIO GRID 4x3 - DISEÑO
@@ -764,15 +686,140 @@ h6{
     padding: 30px 10px;
 }
 
+/* Título del portfolio - mismo estilo que Diseño Estratégico pero en negro */
+.portfolio-title {
+  color: #000000;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* ============================================
+   MEDIA QUERIES
+   ============================================ */
+
+/* Media Query: 768px */
 @media (min-width: 768px) {
   .grid-portfolio-wrapper {
     -ms-grid-columns: 1fr 1fr;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
   }
+
+  .animated-text-container{
+    font-size: 28px;
+  }
 }
 
+/* Media Query: 1024px */
 @media (min-width: 1024px) {
+  .grid-strategy{
+    padding: 50px 0;
+  }
+
+  .strategy-item .container{
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 70px 0;
+  }
+
+  .grid-beneficios{
+    -ms-grid-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+  }
+
+  .beneficios-container{
+    padding: 70px 0 120px;
+  }
+
+  .title-beneficios{
+    gap: 0;
+    padding-bottom: 50px;
+  }
+
+  .beneficios-container h5{
+    max-width: 600px;
+  }
+
+  .branding-tab-content{
+    -webkit-box-orient: row;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .title-client {
+    font-size: 48px;
+  }
+
+  .category-client {
+    font-size: 24px;
+  }
+
+  .slide-counter {
+    font-size: 18px;
+    gap: 15px;
+  }
+
+  .branding-title-container{
+    padding: 50px;
+  }
+
+  .testimonial-wrapper {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+    position: relative;
+  }
+
+  .testimonial-cards-slider {
+    max-width: 600px;
+    width: 100%;
+    grid-column: 1;
+    -webkit-box-pack: flex-end;
+    -ms-flex-pack: flex-end;
+    -webkit-justify-self: flex-end;
+    justify-self: flex-end;
+    margin: 0;
+  }
+
+  .testimonial-wrapper > div:empty,
+  .testimonial-text-content {
+    grid-column: 2;
+  }
+
+  .optimized-video-container{
+    height: 600px;
+  }
+
+  .grid-productos{
+    -ms-grid-columns: 3fr 2fr;
+    grid-template-columns: 3fr 2fr;
+    gap: 50px;
+    padding: 50px 0;
+  }
+  
+  .grid-item-video{
+    padding-top: 50px;
+  }
+
+  .productos{
+    padding: 70px 0;
+  }
+
+  .animated-text-container{
+    font-size: 32px;
+    padding: 70px 10px;
+  }
+
   .grid-portfolio-container {
     padding: 40px 0;
   }
@@ -784,30 +831,60 @@ h6{
   }
 
   .grid-portfolio-item {
+    -webkit-transition: transform 0.3s ease;
+    -o-transition: transform 0.3s ease;
     transition: transform 0.3s ease;
     will-change: transform;
     overflow: hidden;
   }
 
   .grid-portfolio-item:hover {
+    -webkit-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    -o-transform: scale(1.02);
     transform: scale(1.02);
   }
 
   .portfolio-section-container{
     padding: 50px 10px 100px;
-}
-}
+  }
 
-/* Título del portfolio - mismo estilo que Diseño Estratégico pero en negro */
-.portfolio-title {
-  color: #000000;
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-@media (min-width: 1024px) {
   .portfolio-title {
     font-size: 64px;
+  }
+}
+
+/* Media Query: 1280px */
+@media (min-width: 1280px) {
+  .grid-item-beneficios svg{
+    width: 60px;
+    height: 60px;
+  }
+
+  .image-desktop-only {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .image-mobile-only {
+    display: none;
+  }
+  
+  .grid-item-video {
+    min-height: 500px;
+    aspect-ratio: 4/3;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .testimonial-text-content {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
   }
 }

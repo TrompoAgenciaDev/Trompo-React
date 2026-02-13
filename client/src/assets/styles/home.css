@@ -41,8 +41,6 @@ p{
   font-size: 17px;
 }
 
-.text-home p{
-}
 
 .grid-text{
   display: -ms-grid;
@@ -122,8 +120,6 @@ p{
   gap: 30px;
 }
 
-.social-post-container p{
-}
 
 .container.post-notes{
   text-align: left;
@@ -509,12 +505,6 @@ p{
 
 /* Semicircular Video Slider Container - Mobile First */
 
-@media (min-width: 767px) {
-  .menu-item-home-section .icon-servicios-container{
-    width: 50px;
-    height: 50px;
-  }
-}
 
 
 
@@ -527,7 +517,17 @@ p{
   text-transform: uppercase;
 }
 
+/* ============================================
+   MEDIA QUERIES
+   ============================================ */
+
+/* Media Query: 768px */
 @media (min-width: 768px) {
+  .menu-item-home-section .icon-servicios-container{
+    width: 50px;
+    height: 50px;
+  }
+
   .text-show-effect *{
     font-size: 19px;
   }
@@ -550,6 +550,7 @@ p{
     -ms-grid-columns: 4fr 1fr;
     grid-template-columns: 4fr 1fr;
   }
+  
   .title-portfolio-container p,
   .title-portfolio-container h3{
     text-align: right;
@@ -558,7 +559,6 @@ p{
   .testimonial-wrapper{
     border-top: 1px solid #5a5a5a;
   }
-
 
   .service-subtitle-link{
     font-size: 16px;
@@ -577,7 +577,6 @@ p{
   .menu-item-home-section{
     padding: 30px;
   }
-
 }
 
 @media (min-width: 1024px) {
@@ -588,8 +587,6 @@ p{
     padding: 60px 0;
   }
 
-  .menu-content-item p{
-  }
 
   .menu-content-item.services .servicios-options a{
     padding: 30px 0;
@@ -679,8 +676,6 @@ p{
     grid-template-columns: 2fr 1fr;
   }
 
-  .text-show-effect p{
-  }
 
   .grid-text-home{
     font-size: 18px;

@@ -165,6 +165,11 @@
     display: inline-block;
 }
 
+/* Ocultar el tercer elemento en mobile para multimedia */
+.service-area-mobile-hide {
+    display: none;
+}
+
 
 @media (min-width: 540px) {
     .title-page{
@@ -222,6 +227,11 @@
 
     .container.service-areas-wrapper{
         max-width: 100%;
+    }
+
+    /* Mostrar el tercer elemento desde tablet en adelante */
+    .service-area-mobile-hide {
+        display: inline-block;
     }
 }
 

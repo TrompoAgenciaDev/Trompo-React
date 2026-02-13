@@ -643,13 +643,23 @@ const Desarrollo = () => {
 
       <div className="full-container black-bg productos-desarrollo">
         <div className="container">
-          <div className="grid-productos-desarrollo container">
+          <div className="grid-productos-desarrollo">
             <div className="grid-item-video-desarrollo">
-              <MouseTrackingImage 
-                src={`${base}assets/sillon.webp`} 
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                alt="Desarrollo" 
-              />
+              {/* Imagen normal en mobile, MouseTrackingImage desde 1280px */}
+              <div className="image-mobile-only">
+                <img 
+                  src={`${base}assets/sillon.webp`} 
+                  alt="Desarrollo"
+                  className="productos-image"
+                />
+              </div>
+              <div className="image-desktop-only">
+                <MouseTrackingImage 
+                  src={`${base}assets/sillon.webp`} 
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                  alt="Desarrollo" 
+                />
+              </div>
             </div>
             <div className="grid-item-productos-desarrollo">
               <ProductosItemsList />

@@ -77,11 +77,6 @@
   gap: 10px;
 }
 
-.grid-item-service h2{
-}
-
-.grid-item-service p{
-}
 
 .grid-item-service img{
   width: 100%;
@@ -141,8 +136,6 @@
   color: #ffffff;
 }
 
-.title-portfolio-container p{
-}
 
 .more-info-button{
   width: 100%;
@@ -216,12 +209,6 @@
     padding: 70px 20px 30px;
   }
 
-  .grid-item-service h2{
-  }
-
-  .grid-item-service p{
-  }
-
   .diagonal-invertida:nth-child(2){
     -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 90%);
     clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 90%);
@@ -249,17 +236,10 @@
     max-width: 600px;
   }
 
-  .desarrollo-post .container:first-child h2{
-  }
-
   .title-portfolio-container{
     -ms-grid-columns: 1fr 4fr;
     grid-template-columns: 1fr 4fr;
     margin: 100px 0 -60px;
-  }
-
-
-  .title-portfolio-container p{
   }
 }
 
@@ -323,21 +303,12 @@
     margin-top: -50px;
   }
 
-  .grid-item-service h2{
-  }
-
-  .grid-item-service p{
-  }
-
   .values-section .grid-container{
     max-width: 955px;
   }
 
   .diagonal .values-section{
     min-height: 700px;
-  }
-
-  .desarrollo-post .container:first-child h2{
   }
 
   .desarrollo-post .post-card .container{
@@ -401,9 +372,6 @@
     height: 24px;
   }
 
-  .desarrollo-post .container:first-child h2{
-  }
-  
   .grid-item-service p{    
     width: 100%;
     max-width: 800px;

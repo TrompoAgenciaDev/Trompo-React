@@ -2,7 +2,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 
 import Contact from "../layout/Contact";
-import TestimonialsSection from "../components/TestimonialsSection.jsx";
 import AnimatedTextSection from "../components/AnimatedTextSection";
 
 import "../assets/styles/contact-page.css";
@@ -94,13 +93,15 @@ const Contactanos = () => {
 
   // --- CONTACTANOS ---
   const [revealed, setRevealed] = useState(false);
-  const titleText = "Hablemos de tu proyecto.";
+  const titleTextPart1 = "Hablemos";
+  const titleTextPart2 = "de tu proyecto.";
   
   // Delay entre letras: 0.05s por letra para una animación fluida
   const letterDelay = 0.05;
   
   // Dividir el texto en letras
-  const letters = titleText.split("");
+  const lettersPart1 = titleTextPart1.split("");
+  const lettersPart2 = titleTextPart2.split("");
 
   useEffect(() => {
     const onScroll = () => {
@@ -120,11 +121,20 @@ const Contactanos = () => {
       <div className="full-container black-bg hero-contactanos-container">
         <div className="container contact-title-container">
           <h1 className="contact-main-title">
-            {letters.map((letter, index) => (
+            {lettersPart1.map((letter, index) => (
               <AnimatedLetter
-                key={index}
+                key={`part1-${index}`}
                 letter={letter}
                 index={index}
+                letterDelay={letterDelay}
+              />
+            ))}
+            <br />
+            {lettersPart2.map((letter, index) => (
+              <AnimatedLetter
+                key={`part2-${index}`}
+                letter={letter}
+                index={lettersPart1.length + index}
                 letterDelay={letterDelay}
               />
             ))}
@@ -139,15 +149,7 @@ const Contactanos = () => {
         backgroundClass=""
       />
 
-      <div className="full-container black-bg contactanos-testimonials-wrapper">
-        <TestimonialsSection />
-      </div>
-
       <Contact form="contactanos" location="contactanos"/>
-
-      <div className="full-container contact-slider-container infinite-slider-container bg-yellow-2">
-        <InfiniteSlider items={["Hablemos", "Ordenemos", "Escalemos"]} />
-      </div>
 
     </>
   );

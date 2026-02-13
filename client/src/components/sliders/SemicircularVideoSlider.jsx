@@ -23,8 +23,20 @@ const MIDDLE_START = ORIGINAL_LENGTH; // Empezar en la segunda repetición
 // Componente individual para cada slide con curva
 const CurvedSlide = ({ video, index, x, containerRef, wrapperRef, videoRefs, isDragging }) => {
   const slideRef = useRef(null);
-  const maxCurveHeight = 250;
-  const maxRotation = 25;
+  const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1024);
+  
+  // Actualizar ancho de ventana en resize
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
+  // Curva y rotación ajustadas para mobile (más sutil para evitar elevación excesiva)
+  const maxCurveHeight = windowWidth >= 1024 ? 250 : 60;
+  const maxRotation = windowWidth >= 1024 ? 25 : 20;
   
   // Cachear rects para evitar múltiples lecturas en cada frame
   const rectsCacheRef = useRef({ container: null, slide: null, timestamp: 0 });
@@ -69,6 +81,7 @@ const CurvedSlide = ({ video, index, x, containerRef, wrapperRef, videoRefs, isD
   });
   
   // Calcular rotación Z basada en posición real
+  // En mobile, usar una función más agresiva para rotación más pronunciada
   const rotateZ = useTransform(x, () => {
     const rects = getCachedRects();
     if (!rects.container || !rects.slide || !rects.container.width || !rects.slide.width) return 0;
@@ -78,6 +91,12 @@ const CurvedSlide = ({ video, index, x, containerRef, wrapperRef, videoRefs, isD
     const distanceFromCenter = slideCenterX - viewportCenterX;
     const normalizedDistance = distanceFromCenter / (rects.container.width / 2);
     const clampedDistance = Math.max(-1, Math.min(1, normalizedDistance));
+    
+    // En mobile, usar una función cúbica para rotación más pronunciada en los extremos
+    if (windowWidth < 1024) {
+      const cubicDistance = clampedDistance * Math.abs(clampedDistance);
+      return cubicDistance * maxRotation;
+    }
     
     return clampedDistance * maxRotation;
   });

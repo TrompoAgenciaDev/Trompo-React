@@ -1010,9 +1010,6 @@
     padding: 120px 0;
   }
 
-  .grid-item-paid-media-info p {
-  }
-
   .grafico-slide {
     width: -webkit-calc((100% - 32px) / 3);
     width: calc((100% - 32px) / 3);
@@ -1026,13 +1023,12 @@
   }
 
   .footer-paid-buttons{
-    max-width: 100%;
-  }
-
-  .footer-paid-buttons{
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 5fr 1fr;
     grid-template-columns: 5fr 1fr;
     gap: 10px;
+    max-width: 100%;
   }
 }
 
@@ -1072,12 +1068,20 @@
   margin-bottom: 10px;
 }
 
-@media (max-width: 767px) {
-  .sm-showcase-section button {
-    display: none !important;
-  }
+.sm-showcase-section button {
+  display: block;
 }
 
+/* ============================================
+   MEDIA QUERIES
+   ============================================ */
+
+/* Media Query: max-width 767px (mobile) */
+@media (max-width: 767px) {
+  /* Las flechas ahora son visibles en mobile */
+}
+
+/* Media Query: 1024px */
 @media (min-width: 1024px) {
   .portfolio-title{
     font-size: 64px;

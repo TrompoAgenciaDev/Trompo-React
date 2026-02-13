@@ -18,7 +18,9 @@
     padding: 20px;
     border: 1px solid #E1C025;
     display: -webkit-box;
+    display: -moz-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -26,6 +28,7 @@
     flex-direction: column;
     gap: 16px;
     -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
     border-radius: 8px;
 }
 
@@ -34,7 +37,6 @@
 }
 
 .grid-item-beneficios p{
-    max-width: 150px;
     color: #ffffff;
 }
 
@@ -95,9 +97,6 @@
 
 
 @media (min-width: 1280px) {
-    .grid-item-beneficios p{
-    }
-
     .grid-item-beneficios svg,
     .beneficios-icon{
         width: 60px;

@@ -197,9 +197,6 @@
   .title-grid{
     font-size: 16px;
   }
-
-  .hover-show p{
-  }
 }
 
 @media (min-width: 1024px) {
@@ -267,8 +264,5 @@
     -webkit-align-items: center;
     align-items: center;
     padding: 0 5px;
-  }
-
-  .hover-show p{
   }
 }
