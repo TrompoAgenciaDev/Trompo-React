@@ -15,11 +15,30 @@ export default function useFormBrevo() {
       const url = `${import.meta.env.BASE_URL}form-handler.php`;
       console.log("Enviando a:", url);
 
-      const response = await fetch(url, {
-        method: "POST",
-        body: formData,
-      });
+      // Envío paralelo: Brevo (principal) + Backup (sin bloquear)
+      const [brevoResponse, backupResponse] = await Promise.allSettled([
+        // Envío principal a Brevo (bloquea el flujo)
+        fetch(url, {
+          method: "POST",
+          body: formData,
+        }),
+        // Envío de backup en paralelo (no bloquea)
+        fetch(`${import.meta.env.VITE_BACKUP_ENDPOINT || '/backend/backup-endpoint.php'}`, {
+          method: "POST",
+          body: formData,
+        }).catch((backupErr) => {
+          // Errores del backup se manejan silenciosamente
+          console.warn("Backup falló (no crítico):", backupErr);
+          return { ok: false, status: 0 };
+        }),
+      ]);
 
+      // Procesar respuesta de Brevo (principal)
+      if (brevoResponse.status === "rejected") {
+        throw new Error("Error al conectar con el servidor");
+      }
+
+      const response = brevoResponse.value;
       console.log("HTTP status:", response.status);
 
       const text = await response.text();
@@ -34,6 +53,16 @@ export default function useFormBrevo() {
 
       console.log("Respuesta parseada:", json);
       setResult(json);
+
+      // Log del resultado del backup (sin afectar el flujo)
+      if (backupResponse.status === "fulfilled" && backupResponse.value.ok) {
+        try {
+          const backupData = await backupResponse.value.json();
+          console.log("Backup guardado:", backupData);
+        } catch {
+          // Ignorar errores de parseo del backup
+        }
+      }
 
       if (json.success) {
         setSuccess(true);

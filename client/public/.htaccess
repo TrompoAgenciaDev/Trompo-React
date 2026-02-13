@@ -4,6 +4,10 @@
 RewriteEngine On
 RewriteBase /
 
+# Permitir acceso directo a archivos PHP (endpoints de API)
+RewriteCond %{REQUEST_FILENAME} \.php$
+RewriteRule . - [L]
+
 # Permitir acceso a archivos estáticos (assets, imágenes, videos, etc.)
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule . - [L]

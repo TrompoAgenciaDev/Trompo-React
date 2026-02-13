@@ -799,6 +799,7 @@ const Multimedia = () => {
         </div>
       </div>
       
+      {/*
       <div className="full-container bg-yellow-2 entregables-container">
         <div className="container">
           <h3 className="title-entregables">Entregables</h3>
@@ -834,7 +835,7 @@ const Multimedia = () => {
           </div>
         </div>
       </div>
-
+      */}
       <Beneficios />
 
       <Contact form="multimedia" />

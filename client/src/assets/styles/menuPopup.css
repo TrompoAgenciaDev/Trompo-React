@@ -315,7 +315,7 @@
   .menu-popup h3,
   .menu-popup span,
   .servicios-header span {
-    font-weight: 700;
+    font-weight: 500;
     font-size: 22px;
     color: #ffffff;
   }
@@ -389,7 +389,6 @@
   .menu-popup h3,
   .menu-popup span,
   .servicios-header span {
-    font-weight: 800;
     font-size: 32px;
     color: #ffffff;
   }
