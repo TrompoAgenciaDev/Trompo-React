@@ -1,0 +1,19 @@
+# Dependencias
+/vendor/
+
+# Variables de entorno
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+php_errors.log
+
+# Archivos temporales
+*.tmp
+*.cache
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
