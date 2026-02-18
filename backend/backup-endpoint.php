@@ -33,6 +33,9 @@ ini_set('display_errors', 0);
 error_reporting(E_ALL);
 ini_set('log_errors', 1);
 
+// Logger de errores (cargar primero para registrar cualquier fallo posterior)
+require_once __DIR__ . '/BackupErrorLogger.php';
+
 try {
     // Cargar dependencias
     require_once __DIR__ . '/config.php';
@@ -48,6 +51,7 @@ try {
     
     // Validar que hay datos mínimos
     if (empty($formData)) {
+        BackupErrorLogger::log('validation', 'No se recibieron datos del formulario', ['form_identifier' => $formIdentifier]);
         throw new Exception('No se recibieron datos del formulario');
     }
 
@@ -77,6 +81,7 @@ try {
     } catch (Exception $mailError) {
         // Log del error pero no fallar el proceso
         error_log("Error al enviar notificación para lead #{$leadId}: " . $mailError->getMessage());
+        BackupErrorLogger::log('mail', $mailError->getMessage(), ['lead_id' => $leadId, 'form_identifier' => $formIdentifier]);
         
         // Actualizar estado a 'error' con el mensaje
         $leadRepo->updateLeadStatus($leadId, 'error', $mailError->getMessage());
@@ -95,6 +100,7 @@ try {
 } catch (PDOException $e) {
     // Error de base de datos
     error_log("Error de BD en backup: " . $e->getMessage());
+    BackupErrorLogger::log('database', $e->getMessage(), ['form_identifier' => $formIdentifier ?? 'unknown']);
     http_response_code(500);
     echo json_encode([
         'success' => false,
@@ -102,8 +108,9 @@ try {
     ], JSON_UNESCAPED_UNICODE);
     
 } catch (Exception $e) {
-    // Error general
+    // Error general (config, conexión BD, etc.)
     error_log("Error en backup endpoint: " . $e->getMessage());
+    BackupErrorLogger::log('general', $e->getMessage(), ['form_identifier' => $formIdentifier ?? 'unknown']);
     http_response_code(500);
     echo json_encode([
         'success' => false,
