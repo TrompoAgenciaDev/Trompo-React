@@ -90,6 +90,18 @@ if ($response === false) {
 $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
 
+$trimmedResponse = is_string($response) ? trim($response) : '';
+
+// Brevo puede responder 204 No Content en casos de éxito (sin body).
+if ($httpCode === 204 && $trimmedResponse === '') {
+    echo json_encode([
+        "success" => true,
+        "http"    => 204,
+        "brevo"   => null
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 $decoded = json_decode($response, true);
 
 if ($decoded === null) {

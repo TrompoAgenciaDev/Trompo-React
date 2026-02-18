@@ -1,18 +1,28 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 
 import useFormBrevo from "../../hooks/useFormBrevo";
+import { generateSubmissionId, traceEvent } from "../../utils/formTrace";
 import "../../assets/styles/form-index.css";
 
 export default function FormIndex({ location = "home" }) {
   const { loading, error, submitForm } = useFormBrevo();
+  const submissionIdRef = useRef(null);
 
-  const handleSubmit = async (e) => {
+  const handleClickSubmit = () => {
+    if (!submissionIdRef.current) {
+      submissionIdRef.current = generateSubmissionId();
+      traceEvent("CLICK_SUBMIT", submissionIdRef.current, { formIdentifier: location });
+    }
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
+    const submissionId = submissionIdRef.current || generateSubmissionId();
+    if (!submissionIdRef.current) submissionIdRef.current = submissionId;
+    traceEvent("ONSUBMIT_TRIGGERED", submissionId, { formIdentifier: location });
     const formData = new FormData(e.target);
-    submitForm(formData);
     formData.append("LOCATION", location);
-
-    submitForm(formData);
+    submitForm(formData, { submissionId, formIdentifier: location });
   };
 
   return (
@@ -264,7 +274,7 @@ export default function FormIndex({ location = "home" }) {
           />{" "}
         </div>{" "}
         <div className="submit-container">
-          <button type="submit" disabled={loading}>
+          <button type="submit" disabled={loading} onClick={handleClickSubmit}>
             {loading ? "Enviando..." : "Enviar"}
             <svg
               xmlns="http://www.w3.org/2000/svg"
