@@ -241,7 +241,7 @@
     }
 
     .title-page{
-        font-size: 120px;
+        font-size: 100px;
     }
     
     .services-title-page-container .service-title-wrapper{
@@ -262,7 +262,7 @@
 
 @media (min-width: 1600px) {
     .title-page{
-        font-size: 150px;
+        font-size: 116px;
     }
     
     .services-title-page-container .service-title-wrapper{

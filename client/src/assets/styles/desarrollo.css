@@ -1,169 +1,3 @@
-.dev-container .container h1{
-    color: #FED332;
-    font-weight: 700;
-    margin-bottom: 10px;
-}
-
-.dev-container .container h2{
-    color: #ffffff;
-    font-weight: 400;
-}
-
-/* Mobile First - Grid Dev */
-.grid-dev{
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    gap: 0;
-}
-
-.dev-item{
-    -webkit-transition: background-color 0.3s ease;
-    -o-transition: background-color 0.3s ease;
-    transition: background-color 0.3s ease;
-}
-
-.dev-item:hover{
-    background-color: #ffffff;
-}
-
-.dev-item .container{
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 1fr;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 40px 20px;
-    border-top: 1px solid #9A7A00;
-}
-
-.grid-item-dev{
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    gap: 20px;
-}
-
-.grid-item-dev p,
-.grid-item-dev span{
-    color: #ffffff;
-    -webkit-transition: color 0.3s ease;
-    -o-transition: color 0.3s ease;
-    transition: color 0.3s ease;
-}
-
-.grid-item-dev span{
-    font-weight: 700;
-}
-
-.grid-item-dev .number-title{
-    font-weight: 200;
-}
-
-.dev-item:hover .grid-item-dev p,
-.dev-item:hover .grid-item-dev span{
-    color: #000000;
-}
-
-/* Estilos específicos para dev-container con fondo amarillo */
-.dev-container.bg-yellow-2 .container h1{
-    color: #000000 !important;
-}
-
-.dev-container.bg-yellow-2 .container h2{
-    color: #000000 !important;
-}
-
-.bg-yellow-2 .grid-item-dev p,
-.bg-yellow-2 .grid-item-dev span{
-    color: #000000 !important;
-}
-
-.bg-yellow-2 .dev-item:hover .grid-item-dev p,
-.bg-yellow-2 .dev-item:hover .grid-item-dev span{
-    color: #000000 !important;
-}
-
-.bg-yellow-2 .dev-item:not(:last-child) .container{
-    border-bottom: 1px solid #000000;
-}
-
-/* Estilos para slider infinito optimizado */
-.infinite-slider-container{
-    overflow: hidden;
-    width: 100%;
-    padding: 0;
-    contain: layout style paint;
-    isolation: isolate;
-    position: relative;
-}
-
-.infinite-slider{
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    width: -webkit-fit-content;
-    width: -moz-fit-content;
-    width: fit-content;
-    will-change: transform;
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-perspective: 1000px;
-    -moz-perspective: 1000px;
-    perspective: 1000px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    padding: 30px 0;
-}
-
-.infinite-slider-item{
-    white-space: nowrap;
-    margin: 0;
-    padding-right: 60px;
-    -ms-flex-negative: 0;
-    flex-shrink: 0;
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #000000 !important;
-    font-weight: 500;
-    line-height: 1.2;
-    -webkit-transition: mix-blend-mode 0.2s ease;
-    -o-transition: mix-blend-mode 0.2s ease;
-    transition: mix-blend-mode 0.2s ease;
-}
-
-.highlight-text{
-    font-size: 28px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #ffffff;
-}
 
 .zoomin-container{
     position: relative;
@@ -246,49 +80,6 @@
     object-position: center;
 }
 
-.text-highlight{
-    color: #000000;
-    text-align: center;
-}
-
-.web-design-container{
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    gap: 20px;
-    padding: 30px 0;
-    background-color: #ffffff;
-}
-
-.web-design-container p{
-    color: #000000;
-    font-weight: 400;
-}
-
-.container-text{
-    padding: 20px 10px;
-    width: 100%;
-    max-width: 800px;
-}
-
-.web-design-container-text{
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: flex-end;
-    -moz-box-pack: flex-end;
-    -ms-flex-pack: flex-end;
-    -webkit-justify-content: flex-end;
-    justify-content: flex-end;
-}
 
 /* Estilos para productos y servicios de desarrollo */
 .productos-desarrollo{
@@ -331,7 +122,7 @@
 .grid-item-video-desarrollo .productos-image{
     width: 100%;
     height: auto;
-    max-width: 100%;
+    max-width: calc(100% - 50px);
     -o-object-fit: contain;
     object-fit: contain;
     display: block;
@@ -368,7 +159,7 @@
 .image-mobile-only .productos-image {
     width: 100%;
     height: auto;
-    max-width: 100%;
+    max-width: calc(100% - 50px);
     -o-object-fit: contain;
     object-fit: contain;
 }
@@ -552,31 +343,9 @@
 
 /* Media Query: 1024px */
 @media (min-width: 1024px) {
-    .dev-item .container{
-        -ms-grid-columns: 1fr 1fr;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        padding: 70px 0;
-    }
-
-    .infinite-slider{
-        padding: 50px 0;
-    }
-
-    .infinite-slider-item{
-        padding-right: 80px;
-    }
-
-    .highlight-text{
-        font-size: 70px;
-    }
 
     .text-interaccion-desarrollo{
         font-size: 48px;
-    }
-
-    .web-design-container{
-        padding: 70px 0;
     }
 
     .grid-productos-desarrollo{
@@ -595,11 +364,6 @@
         height: 600px;
     }
 
-    .container-text{
-        border-top: 1px solid #000000;
-        padding: 50px 70px;
-    }
-
     .desarrollo-animated-text-container{
         font-size: 32px;
         padding: 70px 10px;
@@ -612,7 +376,7 @@
     .image-desktop-only {
         display: block;
         width: 100%;
-        max-width: 100%;
+        max-width: calc(100% - 50px);
     }
 
     .image-mobile-only {
@@ -625,5 +389,56 @@
         width: 100%;
         max-width: 100%;
         overflow: visible;
+    }
+}
+
+/* Estilos para entregables-container (copiados de multimedia.css) */
+.entregables-container{
+    padding: 30px 10px;
+}
+
+.title-entregables{
+    color: #262626;
+}
+
+.grid-entregables{
+    border-radius: 50px;
+    padding: 30px 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.item-entregables{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.item-entregables h5{
+    color: #262626;
+}
+
+.item-entregables p{
+    color: #262626;
+}
+
+@media (min-width: 1024px) {
+    .entregables-container{
+        padding: 50px 10px;
+    }
+
+    .grid-entregables{
+        padding: 50px;
+        gap: 30px;
+        border: 1px solid #262626;
+    }
+
+    .item-entregables{
+        gap: 16px;
+    }
+    
+    .item-entregables h5{
+        max-width: 350px;
     }
 }

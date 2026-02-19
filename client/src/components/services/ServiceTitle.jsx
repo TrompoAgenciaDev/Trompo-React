@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
-import { Link } from "react-router-dom";
 import "../../assets/styles/service-title.css";
 
-const base = import.meta.env.BASE_URL?.endsWith("/")
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
-
-const ServiceTitle = ({ titulo, subtitulo, page }) => {
+const ServiceTitle = ({ titulo, tituloReplace, subtitulo}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   // Función para renderizar HTML con soporte para strong, b, em, etc.
@@ -60,94 +55,6 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
     return result.length > 0 ? result : htmlString;
   };
 
-  // Detectar la página desde la prop o desde la URL
-  const getPageType = () => {
-    if (page) {
-      const pageLower = page.toLowerCase();
-      if (pageLower.includes('home') || pageLower.includes('inicio')) return 'home';
-      if (pageLower.includes('diseño') || pageLower.includes('disenio') || pageLower.includes('diseño')) return 'disenio';
-      if (pageLower.includes('multimedia')) return 'multimedia';
-      if (pageLower.includes('social')) return 'socialMedia';
-      if (pageLower.includes('desarrollo')) return 'desarrollo';
-      if (pageLower.includes('paid')) return 'paidMedia';
-    }
-    
-    // Si no hay prop, detectar desde la URL
-    const pathname = window.location.pathname.toLowerCase();
-    if (pathname === '/' || pathname.includes('home') || pathname.includes('inicio')) return 'home';
-    if (pathname.includes('disenio') || pathname.includes('diseño')) return 'disenio';
-    if (pathname.includes('multimedia')) return 'multimedia';
-    if (pathname.includes('social')) return 'socialMedia';
-    if (pathname.includes('desarrollo')) return 'desarrollo';
-    if (pathname.includes('paid')) return 'paidMedia';
-    
-    return null;
-  };
-
-  const pageType = getPageType();
-
-  const renderServiceTexts = () => {
-    switch (pageType) {
-      case 'home':
-        return (
-          <>
-            <Link to="/servicios/disenio">Diseño</Link>
-            <Link to="/servicios/multimedia">Multimedia</Link>
-            <Link to="/servicios/social-media">Social Media</Link>
-            <Link to="/servicios/desarrollo">Desarrollo Web</Link>
-            <Link to="/servicios/paid-media">Paid Media</Link>
-          </>
-        );
-      
-      case 'disenio':
-        return (
-          <>
-            <span>Branding</span>
-            <span>Material POP</span>
-            <span>Gráfica y Publicidad</span>
-          </>
-        );
-      
-      case 'multimedia':
-        return (
-          <>
-            <span className="service-area-mobile-hide">Redes Sociales</span>
-            <span>Videos corporativos y testimoniales</span>
-            <span>Animación & Motion Graphic</span>
-          </>
-        );
-      
-      case 'socialMedia':
-        return (
-          <>
-            <span>Community Management</span>
-            <span>Estrategia de contenido</span>
-            <span>Engagement y crecimiento</span>
-          </>
-        );
-      
-      case 'desarrollo':
-        return (
-          <>
-            <span>Ecommerce</span>
-            <span>Web institucional</span>
-            <span>Landingpage</span>
-          </>
-        );
-      
-      case 'paidMedia':
-        return (
-          <>
-            <span>Google ads</span>
-            <span>Meta ads</span>
-            <span>Analítica</span>
-          </>
-        );
-      
-      default:
-        return null;
-    }
-  };
 
   return (
     <div className="full-container black-bg-2 services-title-page-container">
@@ -177,7 +84,7 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
               }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              {pageType === 'home' ? 'con estrategia real' : titulo}
+              {tituloReplace ? tituloReplace : titulo}
             </motion.h1>
           </div>
         </div>
@@ -263,7 +170,6 @@ const ServiceTitle = ({ titulo, subtitulo, page }) => {
             />
           </div>
           <div className="service-areas-content">
-            {renderServiceTexts()}
           </div>
         </div>
       </div>

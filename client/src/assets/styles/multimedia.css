@@ -254,7 +254,6 @@
 }
 
 .grid-item-beneficios p{
-    max-width: 150px;
     color: #ffffff;
 }
 
@@ -305,7 +304,7 @@
 .grid-item-video-multimedia .productos-image{
     width: 100%;
     height: auto;
-    max-width: 100%;
+    max-width: calc(100% - 50px);
     -o-object-fit: contain;
     object-fit: contain;
     display: block;
@@ -332,7 +331,7 @@
 .image-mobile-only .productos-image {
     width: 100%;
     height: auto;
-    max-width: 100%;
+    max-width: calc(100% - 50px);
     -o-object-fit: contain;
     object-fit: contain;
 }
@@ -491,7 +490,7 @@
     .image-desktop-only {
         display: block;
         width: 100%;
-        max-width: 100%;
+        max-width: calc(100% - 50px);
     }
 
     .image-mobile-only {
