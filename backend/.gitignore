@@ -1,0 +1,11 @@
+/vendor/
+.env
+.env.local
+.env.*.local
+*.log
+php_errors.log
+/logs/
+*.tmp
+*.cache
+.DS_Store
+Thumbs.db
