@@ -5,8 +5,6 @@ import Contact from "../../layout/Contact";
 import StaticHero from "../../components/StaticHero";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import SemicircularVideoSlider from "../../components/sliders/SemicircularVideoSlider.jsx";
-import MenuHomeSectionDuplicate from "../../components/MenuHomeSectionDuplicate";
-
 //styles
 import "../../assets/styles/multimedia.css";
 import "../../assets/styles/beneficios.css";
@@ -891,8 +889,6 @@ const Multimedia = () => {
           </div>
         </div>
       </div>
-
-      <MenuHomeSectionDuplicate />
 
       <Contact form="multimedia" />
     </>

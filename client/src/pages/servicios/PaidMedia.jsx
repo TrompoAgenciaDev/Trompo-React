@@ -7,8 +7,6 @@ import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Icons from "../../components/Icons.jsx";
 import Inversiones from "../../components/Inversiones.jsx";
 import SocialMediaShowcaseSlider from "../../components/sliders/SocialMediaShowcaseSlider.jsx";
-import MenuHomeSectionDuplicate from "../../components/MenuHomeSectionDuplicate";
-
 //styles
 import "../../assets/styles/paid-media.css";
 import "../../assets/styles/beneficios.css";
@@ -993,7 +991,8 @@ const Campaigns = () => {
           </div>
         </div>
       </div>
-
+      
+      {/* 
       <div className="full-container bg-yellow-2 portfolio-social-media-container">
         <div className="container">
           <div className="container">
@@ -1002,8 +1001,9 @@ const Campaigns = () => {
           <SocialMediaShowcaseSlider sourceArray="paid-media" />
         </div>
       </div>
+      */}
 
-      <div className="full-container black-bg">
+      <div className="full-container bg-white">
         <div className="container">
           <div className="grid-paid-media-info-wrapper">
             <div className="grid-item-paid-media-info">
@@ -1092,8 +1092,6 @@ const Campaigns = () => {
           </div>
         </div>
       </div>
-
-      <MenuHomeSectionDuplicate />
 
       <Contact form="estrategia" />
     </>

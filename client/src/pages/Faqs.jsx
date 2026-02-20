@@ -68,7 +68,7 @@ const categoryTitles = {
   socialmedia: "Social Media",
   metaads: "Meta Ads",
   googleads: "Google Ads",
-  paidmedia: "Paid Media",
+  campagnes: "Campañas",
   soporte: "Soporte",
 };
 

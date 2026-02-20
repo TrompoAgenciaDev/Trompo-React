@@ -54,13 +54,15 @@ header.full-container{
   isolation: isolate;
 }
 
-.logo-img img {
+.logo-img img,
+.logo-img video {
   width: 100%;
   height: auto;
-  background: transparent;
+  background: transparent !important;
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
   object-fit: contain;
+  mix-blend-mode: screen;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
   -webkit-font-smoothing: antialiased;

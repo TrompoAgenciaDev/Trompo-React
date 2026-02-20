@@ -1,6 +1,10 @@
 import Icons from "../components/Icons";
 
 import "../assets/styles/header.css";
+
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 import { motion } from "framer-motion";
 
 const Header = ({ onTogglePopup }) => {
@@ -24,7 +28,15 @@ const Header = ({ onTogglePopup }) => {
             stiffness: 350,
           }}
         >
-          <Icons iconName="logoBlack" />
+          {/*<Icons iconName="logoBlack" />*/}
+          <video
+            src={`${base}logo.webm`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="logo-video"
+          />
         </motion.a>
 
         <motion.button

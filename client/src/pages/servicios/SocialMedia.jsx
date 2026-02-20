@@ -5,8 +5,6 @@ import StaticHero from "../../components/StaticHero.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Inversiones from "../../components/Inversiones.jsx";
 import SocialMediaShowcaseSlider from "../../components/sliders/SocialMediaShowcaseSlider.jsx";
-import MenuHomeSectionDuplicate from "../../components/MenuHomeSectionDuplicate";
-
 //styles
 import "../../assets/styles/social-media.css";
 import "@as/hero.css";
@@ -205,8 +203,6 @@ const SocialMedia = () => {
       </div>
 
       <Inversiones />
-
-      <MenuHomeSectionDuplicate />
 
       <Contact form="interaccion" />
     </>

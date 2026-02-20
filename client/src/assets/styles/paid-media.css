@@ -663,6 +663,13 @@
   color: #ffffff;
 }
 
+/* Fondo claro: textos oscuros para legibilidad */
+.bg-white .grid-item-paid-media-info span,
+.bg-white .grid-item-paid-media-info h6,
+.bg-white .grid-item-paid-media-info p {
+  color: #1a1a1a;
+}
+
 .grid-item-paid-media-info h6,
 .grid-item-paid-media-info p {
   padding-left: 8px;

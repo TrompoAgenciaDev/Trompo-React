@@ -5,8 +5,6 @@ import Contact from "../../layout/Contact.jsx";
 import StaticHero from "../../components/StaticHero.jsx";
 import DisenioPortfolio from "../../components/portfolio/DisenioPortfolio.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
-import MenuHomeSectionDuplicate from "../../components/MenuHomeSectionDuplicate";
-
 //styles
 import "@as/hero.css";
 import "../../assets/styles/design.css";
@@ -1026,8 +1024,6 @@ const Disenio = () => {
           </div>
         </div>
       </div>
-
-      <MenuHomeSectionDuplicate />
 
       <Contact form="creative" />
     </>

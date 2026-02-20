@@ -4,7 +4,7 @@ import useFetchTestimonials from "../hooks/useFetchTestimonials";
 import "../assets/styles/testimonials.css";
 
 const REPEAT = 3;
-const SCROLL_SPEED = 0.5; // Velocidad de scroll continuo (píxeles por frame)
+const SCROLL_SPEED = 1; // Velocidad de scroll continuo (píxeles por frame)
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL

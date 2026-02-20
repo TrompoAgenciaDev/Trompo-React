@@ -4,7 +4,7 @@ import FormIndex from "../components/forms/FormIndex";
 
 function Contact({ location = "home", form }) {
   const base = import.meta.env.BASE_URL;
-  const bg = `url(${base}assets/contact/contacto.webp)`;
+  const bg = `url(${base}assets/contact/form-bg.webp)`;
 
   return (
     <section

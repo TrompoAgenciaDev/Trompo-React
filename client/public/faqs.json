@@ -215,10 +215,10 @@
             "content": "Generalmente entre 4 y 6 semanas."
         }
     ],
-    "paidmedia": [
+    "campagnes": [
         {
             "id": 0,
-            "question": "¿Qué incluye el servicio de Interacción?",
+            "question": "¿Qué incluye el servicio de Campañas?",
             "content": "Gestión de redes sociales con contenido estratégico y automatización de marketing para atraer y fidelizar clientes sin esfuerzo extra."
         },
         {

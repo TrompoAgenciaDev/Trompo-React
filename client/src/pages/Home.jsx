@@ -193,7 +193,7 @@ const Home = () => {
     <div className="full-container">
       <StaticHero
         desktopSrc={`${base}assets/hero/hero.webm`}
-        mobileSrc={`${base}assets/hero/mobile/hero-mobile.mp4`}
+        mobileSrc={`${base}assets/hero/mobile/hero-mobile.webm`}
         desktopPoster={`${base}assets/hero/home.webp`}
         mobilePoster={`${base}assets/hero/mobile/home.webp`}
       />
@@ -249,7 +249,7 @@ const Home = () => {
                 <path fillRule="evenodd" clipRule="evenodd" d="M49.3983 22.1304L49.3335 22.1129L49.3097 22.0716L49.2686 22.0954L49.2212 22.0128L49.1801 22.0367L49.1327 21.9541L49.0916 21.9779L49.0204 21.854L48.9793 21.8778L48.6946 21.3821L48.7357 21.3583L48.6646 21.2343L48.7057 21.2105L48.6582 21.1279L48.6993 21.104L48.6756 21.0627L48.7167 21.0389L48.6692 20.9562L48.7103 20.9324L50.0699 11.661C50.0919 11.3177 50.3084 11.0268 50.596 10.8599L55.198 8.18864L53.7406 17.9575L53.7232 18.0227C53.747 18.064 53.7059 18.0878 53.7296 18.1291L53.7533 18.1704L53.7122 18.1943L53.736 18.2356L53.7186 18.3008C53.7249 18.4072 53.7961 18.5312 53.8262 18.6789L53.8974 18.8029C53.9859 18.8616 54.0333 18.9443 54.1219 19.003L54.1693 19.0856L54.2104 19.0618L54.2579 19.1444L54.299 19.1206L54.3227 19.1619L54.3875 19.1793L54.4112 19.2206L54.4523 19.1968L63.5786 22.8775L59.0177 25.5248C58.7301 25.6918 58.3475 25.6935 58.0646 25.5823L49.3983 22.1304ZM57.6634 6.75763L64.2377 2.9416L62.7392 12.7343L62.763 12.7756L62.7219 12.7995C62.7456 12.8408 62.7456 12.8408 62.7282 12.9059L62.752 12.9472L62.7109 12.9711L62.7583 13.0537C62.7647 13.1602 62.7947 13.308 62.8659 13.4319L62.9371 13.5558C62.9845 13.6384 63.032 13.7211 63.1205 13.7798L63.1442 13.8211L63.1853 13.7973L63.2328 13.8799L63.2976 13.8974L63.3213 13.9387C63.3624 13.9148 63.3861 13.9561 63.3861 13.9561L63.4509 13.9736L72.5773 17.6543L66.0029 21.4703L56.0688 17.4323L57.6634 6.75763ZM66.662 1.53444L69.0452 0.151124C69.415 -0.0635281 69.8624 -0.0477808 70.2165 0.187296C70.5707 0.422374 70.7668 0.859322 70.7274 1.26774L69.464 9.65717L77.3462 12.7932C77.7177 12.9631 77.9723 13.311 77.9977 13.7369C78.0231 14.1628 77.8368 14.6014 77.4669 14.8161L75.0427 16.2232L65.0674 12.2091L66.662 1.53444Z" fill="#E1C025"/>
               </svg>
               <h6>Diagnóstico</h6>
-              <p>entendemos la marca, el contexto, las audiencias y objetivos</p>
+              <p>Entendemos antes de ejecutar. Marca, negocio, contexto y audiencias bajo una misma lectura estratégica.</p>
             </div>
             <div className="grid-item-beneficios">
               <svg className="beneficios-icon" xmlns="http://www.w3.org/2000/svg" width="74" height="74" viewBox="0 0 74 74" fill="none">
@@ -262,7 +262,7 @@ const Home = () => {
                 <path fillRule="evenodd" clipRule="evenodd" d="M66.4844 9.68359C66.3398 9.68359 66.1953 9.68359 66.0508 9.53906L59.6914 5.92578C59.2578 5.63672 59.1133 5.05859 59.4023 4.76953L61.8594 0.433594C62.0039 0.289062 62.1484 0.144531 62.4375 0C62.582 0 62.8711 0 63.0156 0.144531L69.375 3.75781C69.8086 4.04688 69.9531 4.625 69.6641 4.91406L67.207 9.25C67.0625 9.53906 66.7734 9.68359 66.4844 9.68359Z" fill="#E1C025"/>
               </svg>
               <h6>Dirección</h6>
-              <p>estrategia y roadmap digital claro</p>
+              <p>Definimos rumbo, no tácticas sueltas. Roadmap digital claro, prioridades bien ordenadas y foco en impacto.</p>
             </div>
             <div className="grid-item-beneficios">
               <svg className="beneficios-icon" xmlns="http://www.w3.org/2000/svg" width="75" height="75" viewBox="0 0 75 75" fill="none">
@@ -277,7 +277,7 @@ const Home = () => {
                 </defs>
               </svg>
               <h6>Producción</h6>
-              <p>piezas y activos listos para activación</p>
+              <p>Creamos activos que activan. Diseño, contenido y desarrollo listos para convertir y escalar.</p>
             </div>
             <div className="grid-item-beneficios">
               <svg className="beneficios-icon" xmlns="http://www.w3.org/2000/svg" width="69" height="69" viewBox="0 0 69 69" fill="none">
@@ -285,7 +285,7 @@ const Home = () => {
                 <path d="M6.85687 55.9475L14.95 28.2181C15.5138 26.3011 16.6818 24.6176 18.2801 23.4183C19.8783 22.219 21.8212 21.568 23.8194 21.5625H60.375V20.125C60.375 18.6 59.7692 17.1375 58.6909 16.0591C57.6125 14.9808 56.15 14.375 54.625 14.375H32.7113C32.2829 14.375 31.8599 14.2795 31.4731 14.0955C31.0863 13.9115 30.7453 13.6436 30.475 13.3113L27.6493 9.83667C26.9762 9.00903 26.127 8.34182 25.1636 7.88356C24.2002 7.42531 23.1468 7.18752 22.08 7.1875H5.75C4.22501 7.1875 2.76247 7.7933 1.68414 8.87164C0.605802 9.94997 0 11.4125 0 12.9375L0 56.0625C0 56.825 0.302901 57.5563 0.842068 58.0954C1.38124 58.6346 2.1125 58.9375 2.875 58.9375C3.77236 58.935 4.6449 58.6426 5.36248 58.1038C6.08006 57.5649 6.60425 56.8086 6.85687 55.9475Z" fill="#E1C025"/>
               </svg>
               <h6>Optimización</h6>
-              <p>medición, aprendizaje y mejora continua</p>
+              <p>Medimos para crecer, no para reportar. Datos, decisiones y mejora continua orientada a resultados reales.</p>
             </div>
           </div>
         </div>

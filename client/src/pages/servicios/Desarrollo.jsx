@@ -4,8 +4,6 @@ import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import StaticHero from "../../components/StaticHero";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
-import MenuHomeSectionDuplicate from "../../components/MenuHomeSectionDuplicate";
-
 // Lazy load Portfolio3d para mejorar performance inicial
 const Portfolio3d = lazy(() => import("../../layout/Portfolio3d.jsx"));
 
@@ -580,7 +578,7 @@ const Desarrollo = () => {
         mobilePoster={`${base}assets/hero/mobile/home.webp`}
       />
 
-      <ServiceTitle titulo="Desarrollo" tituloReplace="que evoluciona" subtitulo="No es “hacer sitios” — es diseñar y construir plataformas digitales que escalan con el negocio" />
+      <ServiceTitle titulo="Desarrollo web" tituloReplace="que evoluciona" subtitulo="No es “hacer sitios” — es diseñar y construir plataformas digitales que escalan con el negocio" />
 
       <div ref={animatedTextContainerRef} className="full-container">
         <div className="container desarrollo-animated-text-container">
@@ -738,8 +736,6 @@ const Desarrollo = () => {
           </div>
         </div>
       </div>
-
-      <MenuHomeSectionDuplicate />
 
       <Contact form="desarrollo"/>
     </>
