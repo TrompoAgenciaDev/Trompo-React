@@ -28,15 +28,19 @@ const Header = ({ onTogglePopup }) => {
             stiffness: 350,
           }}
         >
-          {/*<Icons iconName="logoBlack" />*/}
-          <video
-            src={`${base}logo.webm`}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="logo-video"
-          />
+          <Icons iconName="logoBlack" />
+
+          {/*
+            <video
+              src={`${base}logo.webm`}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="logo-video"
+            />
+          */}
+          
         </motion.a>
 
         <motion.button

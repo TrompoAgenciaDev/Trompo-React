@@ -128,118 +128,22 @@
   font-size: 20px;
 }
 
-.how-container{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-top: 50px;
-}
-
-.how-container h1{
-  font-weight: 700;
-  color: #d9d9d988;
-}
-
-.how-container p{
-  font-weight: 400;
-  line-height: 1.5;
-  color: #ffffff;
-}
-
-.grid-social-media-info-wrapper {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 30px;
-}
-
-.grid-item-social-media-info span,
-.grid-item-social-media-info h6,
-.grid-item-social-media-info p {
-  color: #ffffff;
-}
-
-.grid-item-social-media-info h6,
-.grid-item-social-media-info p {
-  padding-left: 8px;
-}
-
-.grid-item-social-media-info {
-  padding: 20px 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  gap: 10px;
-  position: relative;
-}
-
-.grid-item-social-media-info h6 {
-  text-transform: uppercase;
-  font-weight: 400;
-}
-
-.grid-item-social-media-info:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: #8E8E8E;
-}
-
-.grid-item-social-media-info p {
-  line-height: 1.5;
-}
-
-/* ============================================
-   SLIDER INFINITO - SOCIAL MEDIA
-   ============================================ */
-.sm-slider-container{
-  overflow: hidden;
-  width: 100%;
-  padding: 0;
-  contain: layout style paint;
-  isolation: isolate;
-  position: relative;
-}
-
-.sm-infinite-slider{
-  display: flex;
-  width: fit-content;
-  will-change: transform;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding: 30px 0;
-}
-
-.sm-infinite-slider-item{
-  white-space: nowrap;
-  margin: 0;
-  padding-right: 60px;
-  flex-shrink: 0;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #000000 !important;
-  font-size: 48px;
+/* TEXTO ANIMADO - Sección frase por frase */
+.animated-text {
+  display: block;
+  line-height: 1.6;
+  text-align: center;
   font-weight: 500;
-  line-height: 1.2;
-  transition: mix-blend-mode 0.2s ease;
+  padding: 50px 10px;
 }
 
+.animated-phrase {
+  display: inline;
+}
+
+.animated-text-container {
+  width: 100%;
+}
 
 /* ============================================
    SHOWCASE SLIDER (1 fila) - SOCIAL MEDIA
@@ -289,10 +193,6 @@
   .portfolio-social-media-container{
     padding: 50px 10px 100px;
   }
-
-  .how-container-social-media{
-    padding: 50px 10px 100px;
-  }
 }
 
 .grid-impulsos{
@@ -334,6 +234,10 @@
    MEDIA QUERIES - Tablet (768px+)
    ============================================ */
 @media (min-width: 768px) {
+  .animated-text-container {
+    font-size: 26px;
+  }
+
   .grid-item-interaccion:last-child{
     width: 100%;
     max-width: 600px;
@@ -349,11 +253,6 @@
     margin: 100px 0 -60px;
   }
 
-  .grid-social-media-info-wrapper {
-    -ms-grid-columns: 1fr 1fr;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .highlight-text{
     font-size: 26px;
   }
@@ -363,6 +262,11 @@
    MEDIA QUERIES - Desktop (1024px+)
    ============================================ */
 @media (min-width: 1024px) {
+  .animated-text-container {
+    font-size: 30px;
+    padding: 70px 10px;
+  }
+
   .interaccion-grid{
     display: -ms-grid;
     display: grid;
@@ -419,30 +323,8 @@
     height: 90svh;
   }
 
-  .grid-social-media-info-wrapper {
-    column-gap: 168px;
-    row-gap: 70px;
-  }
-
-  .how-container{
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 3fr 2fr;
-    grid-template-columns: 3fr 2fr;
-    padding-top: 70px;
-  }
-
   .highlight-text{
     font-size: 30px;
-  }
-
-  .sm-infinite-slider{
-    padding: 50px 0;
-  }
-
-  .sm-infinite-slider-item{
-    padding-right: 80px;
-    font-size: 70px;
   }
 
   .grid-impulsos{
@@ -506,18 +388,8 @@
     gap: 8px;
   }
 
-
-  .how-container{
-    -ms-grid-columns: 4fr 3fr;
-    grid-template-columns: 4fr 3fr;
-  }
-
   .highlight-text{
     font-size: 54px;
-  }
-
-  .sm-infinite-slider-item{
-    font-size: 90px;
   }
 }
 

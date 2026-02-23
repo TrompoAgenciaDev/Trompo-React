@@ -18,9 +18,9 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
   const PortfolioCarruselItem = ({
     id, title, backgroundImage, enlacePortfolio, draggingRef,
   }) => {
-    const [velocityReduction, setVelocityReduction] = useState(20);
-    const SlowSpeed = () => setVelocityReduction(3);
-    const NormalSpeed = () => setVelocityReduction(200);
+    const [velocityReduction, setVelocityReduction] = useState(12);
+    const SlowSpeed = () => setVelocityReduction(2);
+    const NormalSpeed = () => setVelocityReduction(40);
 
     const handleClick = (e) => {
       // Si está arrastrando, prevenir la navegación

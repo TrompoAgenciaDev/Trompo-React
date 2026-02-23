@@ -225,6 +225,13 @@
   position: relative;
 }
 
+.tab-content-wrapper {
+  width: 100%;
+  position: relative;
+  min-height: 200px;
+  overflow: visible;
+}
+
 .tab-content {
   width: 100%;
   padding: 15px 0;
@@ -476,6 +483,262 @@
 }
 
 /* ============================================
+   PRODUCTOS - Sección grid-productos (de design.css)
+   ============================================ */
+.productos {
+  padding: 70px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.productos .container {
+  width: 100%;
+}
+
+.grid-productos {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 30px;
+  padding: 20px 0;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.grid-item-productos {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.grid-item-video {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  height: auto;
+}
+
+.grid-item-video img,
+.grid-item-video .productos-image {
+  width: 100%;
+  height: auto;
+  max-width: calc(100% - 50px);
+  -o-object-fit: contain;
+  object-fit: contain;
+  display: block;
+}
+
+.image-desktop-only {
+  display: none;
+}
+
+.image-mobile-only {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.image-mobile-only .productos-image {
+  width: 100%;
+  height: auto;
+  max-width: calc(100% - 50px);
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+/* Entregable items (design-history-item, design-entregable-*) */
+.design-history-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.design-history-item-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.design-history-item h3 {
+  margin: 0;
+  color: #000000;
+}
+
+.design-history-item p {
+  color: #000000;
+  margin: 0;
+  padding-left: 56px;
+}
+
+.design-entregable-number {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+  border: 1px solid #000000;
+  color: #000000;
+  font-size: 18px;
+  font-weight: 500;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.design-entregable-item-wrapper {
+  position: relative;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  z-index: 1;
+}
+
+.design-entregable-line {
+  position: absolute;
+  left: 20px;
+  width: 1px;
+  background-color: #000000;
+  z-index: 0;
+}
+
+.black-bg .design-history-item {
+  color: #ffffff;
+}
+
+.black-bg .design-history-item h3 {
+  color: #ffffff;
+}
+
+.black-bg .design-history-item p {
+  color: #ffffff;
+}
+
+.black-bg .design-entregable-number {
+  border: 1px solid #FEE070;
+  color: #FEE070;
+  background-color: #262626;
+}
+
+.black-bg .design-entregable-line {
+  background-color: #FEE070;
+}
+
+/* ============================================
+   ENTREGABLES - Sección (de design.css)
+   ============================================ */
+.entregables-container {
+  padding: 30px 10px;
+}
+
+.title-entregables {
+  color: #262626;
+}
+
+.grid-entregables {
+  border-radius: 50px;
+  padding: 30px 0;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 30px;
+}
+
+.item-entregables {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item-entregables h5 {
+  color: #262626;
+}
+
+.item-entregables p {
+  color: #262626;
+}
+
+@media (min-width: 540px) {
+  .grid-entregables {
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .entregables-container {
+    padding: 50px 10px;
+  }
+
+  .grid-entregables {
+    padding: 50px;
+    gap: 30px;
+    border: 1px solid #262626;
+  }
+
+  .item-entregables {
+    gap: 16px;
+  }
+
+  .item-entregables h5 {
+    max-width: 350px;
+  }
+}
+
+/* ============================================
    SLIDER DE GRÁFICOS - Estilos Base
    ============================================ */
 .graficos-slider-container {
@@ -645,69 +908,7 @@
   line-height: 1.5;
 }
 
-/* ============================================
-   GRID INFO PAID MEDIA - Estilos Base
-   ============================================ */
-.grid-paid-media-info-wrapper {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 30px;
-  padding: 50px 0;
-}
-
-.grid-item-paid-media-info span,
-.grid-item-paid-media-info h6,
-.grid-item-paid-media-info p {
-  color: #ffffff;
-}
-
-/* Fondo claro: textos oscuros para legibilidad */
-.bg-white .grid-item-paid-media-info span,
-.bg-white .grid-item-paid-media-info h6,
-.bg-white .grid-item-paid-media-info p {
-  color: #1a1a1a;
-}
-
-.grid-item-paid-media-info h6,
-.grid-item-paid-media-info p {
-  padding-left: 8px;
-}
-
-.grid-item-paid-media-info {
-  padding: 20px 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  gap: 10px;
-  position: relative;
-}
-
-.grid-item-paid-media-info h6 {
-  text-transform: uppercase;
-  font-weight: 400;
-}
-
-.grid-item-paid-media-info:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background-color: #8E8E8E;
-}
-
-  .grid-item-paid-media-info p {
-    line-height: 1.5;
-  }
-
-  .grid-tab{
+.grid-tab {
   width: 100%;
   padding: 16px;
 }
@@ -819,15 +1020,6 @@
   .video-slide .item-body p {
   }
 
-  .grid-paid-media-info-wrapper {
-    -ms-grid-columns: 1fr 1fr;
-    grid-template-columns: repeat(2, 1fr);
-    padding: 80px 0;
-  }
-
-  .grid-item-paid-media-info p {
-  }
-
   .graficos-slider-container {
     max-width: 100%;
     box-sizing: border-box;
@@ -923,6 +1115,17 @@
     padding: 16px 20px;
   }
 
+  .grid-productos {
+    -ms-grid-columns: 3fr 2fr;
+    grid-template-columns: 3fr 2fr;
+    gap: 50px;
+    padding: 50px 0;
+  }
+
+  .productos {
+    padding: 70px 0;
+  }
+
   .grid-tab {
     display: -ms-grid;
     display: grid;
@@ -1011,12 +1214,6 @@
   .video-slide .item-body p {
   }
 
-  .grid-paid-media-info-wrapper {
-    column-gap: 168px;
-    row-gap: 70px;
-    padding: 120px 0;
-  }
-
   .grafico-slide {
     width: -webkit-calc((100% - 32px) / 3);
     width: calc((100% - 32px) / 3);
@@ -1043,6 +1240,24 @@
    MEDIA QUERIES - Large Desktop (1280px+)
    ============================================ */
 @media (min-width: 1280px) {
+  .image-desktop-only {
+    display: block;
+    width: 100%;
+    max-width: calc(100% - 50px);
+  }
+
+  .image-mobile-only {
+    display: none;
+  }
+
+  .grid-item-video {
+    min-height: 500px;
+    aspect-ratio: 4/3;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
   .grafico-slide {
     width: -webkit-calc((100% - 48px) / 4);
     width: calc((100% - 48px) / 4);

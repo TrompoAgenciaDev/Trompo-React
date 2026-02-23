@@ -683,7 +683,7 @@ const Desarrollo = () => {
 
       <div className="full-container beneficios-container black-bg">
         <div className="container title-beneficios">
-          <h3>Ventajas</h3>
+          <h3>Beneficios diferenciales</h3>
           <h5>que aporta nuestra metodología</h5>
         </div>
         <div className="container">          

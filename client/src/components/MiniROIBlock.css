@@ -1,0 +1,136 @@
+/* MiniROIBlock - Calculadora de ROI mensual */
+
+.roi-calculator-section {
+  padding: 50px 0;
+}
+
+.roi-calculator-block {
+  border: 1px solid #262626;
+  max-width: 700px;
+  margin: 0 auto;
+  border-radius: 16px;
+  padding: 30px 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.roi-calculator-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.roi-calculator-title {
+  color: #262626;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+}
+
+.roi-calculator-subtitle {
+  color: #262626;
+  font-size: 14px;
+  margin: 0;
+}
+
+.roi-calculator-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.roi-calculator-inputs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.roi-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.roi-input-group label {
+  color: #262626;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.roi-input-group input {
+  border: 1px solid #404040;
+  color: #262626;
+  padding: 12px 14px;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+}
+
+.roi-input-group input:focus {
+  outline: none;
+  border-color: #E1C025;
+}
+
+.roi-input-group input::placeholder {
+  color: #6E6E6E;
+}
+
+.roi-calculator-separator {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #E1C025, transparent);
+  opacity: 0.5;
+}
+
+.roi-calculator-results {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.roi-result-item {
+  border: 1px solid #404040;
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.roi-result-label {
+  color: #262626;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.roi-result-value {
+  color: #262626;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.roi-result-ingresos {
+  color: #277a20;
+}
+
+.roi-result-roi.roi-positive .roi-result-value {
+  color: #22c55e;
+}
+
+.roi-result-roi.roi-negative .roi-result-value {
+  color: #ef4444;
+}
+
+@media (min-width: 768px) {
+  .roi-calculator-block {
+    padding: 40px 36px;
+  }
+
+  .roi-calculator-title {
+    font-size: 28px;
+  }
+
+  .roi-calculator-inputs,
+  .roi-calculator-results {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

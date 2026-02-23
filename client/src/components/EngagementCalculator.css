@@ -1,0 +1,186 @@
+/* EngagementCalculator - Calculadora de engagement para redes sociales */
+
+.engagement-calculator-section {
+  padding: 50px 0;
+}
+
+.engagement-calculator-block {
+  max-width: 700px;
+  margin: 0 auto;
+  background: linear-gradient(145deg, #f8f9fa 0%, #fff 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 30px 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.engagement-calculator-header {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.engagement-calculator-title {
+  color: #1a1a2e;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+}
+
+.engagement-calculator-subtitle {
+  color: #64748b;
+  font-size: 14px;
+  margin: 0;
+}
+
+.engagement-calculator-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Toggle Seguidores / Alcance */
+.engagement-toggle-wrapper {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.engagement-toggle-btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.engagement-toggle-btn:hover {
+  border-color: #E1C025;
+  color: #1a1a2e;
+}
+
+.engagement-toggle-btn.active {
+  background: #E1C025;
+  border-color: #E1C025;
+  color: #1a1a2e;
+}
+
+/* Inputs */
+.engagement-calculator-inputs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.engagement-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.engagement-input-group label {
+  color: #475569;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.engagement-input-group input {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  color: #1a1a2e;
+  padding: 12px 14px;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: border-color 0.2s ease;
+}
+
+.engagement-input-group input:focus {
+  outline: none;
+  border-color: #E1C025;
+}
+
+.engagement-input-group input::placeholder {
+  color: #94a3b8;
+}
+
+/* Separador */
+.engagement-calculator-separator {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+}
+
+/* Resultados */
+.engagement-calculator-results {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.engagement-result-item {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.engagement-result-label {
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.engagement-result-value {
+  color: #1a1a2e;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.engagement-result-main {
+  font-size: 28px;
+}
+
+.engagement-result-interpretation {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Colores por rango de engagement */
+.engagement-rate.engagement-low .engagement-result-main,
+.engagement-rate.engagement-low .engagement-result-interpretation {
+  color: #ef4444;
+}
+
+.engagement-rate.engagement-mid .engagement-result-main,
+.engagement-rate.engagement-mid .engagement-result-interpretation {
+  color: #eab308;
+}
+
+.engagement-rate.engagement-high .engagement-result-main,
+.engagement-rate.engagement-high .engagement-result-interpretation {
+  color: #22c55e;
+}
+
+@media (min-width: 768px) {
+  .engagement-calculator-block {
+    padding: 40px 36px;
+  }
+
+  .engagement-calculator-title {
+    font-size: 28px;
+  }
+
+  .engagement-calculator-inputs,
+  .engagement-calculator-results {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
