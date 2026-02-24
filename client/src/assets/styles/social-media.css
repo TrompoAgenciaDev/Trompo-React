@@ -173,7 +173,44 @@
   padding: 30px 10px 50px;
 }
 
-/* Título del portfolio - mismo estilo que en Diseño, en negro */
+.portfolio-social-media-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.portfolio-social-media-col-video {
+  min-width: 0;
+  width: 100%;
+}
+
+.portfolio-social-media-col-video .social-media-video {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.portfolio-social-media-col-text {
+  min-width: 0;
+}
+
+/* Fondo oscuro: textos claros en esta sección */
+.portfolio-social-media-container .portfolio-title {
+  color: #ffffff;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.portfolio-social-media-container .portfolio-social-media-col-text p {
+  color: #e5e5e5;
+  line-height: 1.5;
+}
+
+/* Título del portfolio (resto de páginas) - en negro */
 .portfolio-title{
   color: #000000;
   font-size: 48px;
@@ -185,8 +222,21 @@
   /* Las flechas ahora son visibles en mobile */
 }
 
+@media (min-width: 768px) {
+  .portfolio-social-media-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+}
+
 @media (min-width: 1024px) {
   .portfolio-title{
+    font-size: 64px;
+  }
+
+  .portfolio-social-media-container .portfolio-title {
     font-size: 64px;
   }
 
@@ -484,4 +534,17 @@
   .grid-portfolio-item:hover {
     transform: scale(1.02);
   }
+}
+
+/* Lista dentro del ítem de productos/entregable (alineada con el texto, no con el número) */
+.productos-multimedia .multimedia-entregable-list {
+  margin: 8px 0 0 0;
+  padding-left: 56px;
+  color: #ffffff;
+  list-style-type: disc;
+}
+
+.productos-multimedia .multimedia-entregable-list li {
+  margin-bottom: 4px;
+  color: #ffffff;
 }

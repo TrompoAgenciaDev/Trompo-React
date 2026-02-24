@@ -4,10 +4,12 @@ import Contact from "../../layout/Contact.jsx";
 import StaticHero from "../../components/StaticHero.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import SocialMediaShowcaseSlider from "../../components/sliders/SocialMediaShowcaseSlider.jsx";
+import AutoSlider from "../../components/sliders/AutoSlider.jsx";
 import EngagementCalculator from "../../components/EngagementCalculator.jsx";
 //styles
 import "../../assets/styles/social-media.css";
 import "../../assets/styles/multimedia.css";
+import "../../assets/styles/paid-media.css";
 import "../../assets/styles/beneficios.css";
 import "@as/hero.css";
 
@@ -167,11 +169,22 @@ const ProductosItemsListSocialMedia = () => {
   const item5Ref = useRef(null);
 
   const items = [
-    { number: 1, title: "Estrategia y Dirección", ref: item1Ref, nextRef: item2Ref, isLast: false, children: <p>Desarrollamos una arquitectura editorial sólida que define el rol de cada red, los pilares de contenido, el tono de comunicación y los objetivos medibles. Este entregable ordena el sistema conversacional y establece la base estratégica para el crecimiento sostenido.</p> },
-    { number: 2, title: "Planificación y Producción de Contenidos", ref: item2Ref, nextRef: item3Ref, isLast: false, children: <p>Construimos un calendario editorial alineado a negocio, acompañado de piezas visuales y copies estratégicos adaptados a cada formato y plataforma. El contenido no es improvisado: responde a una lógica narrativa y a un objetivo claro dentro del ecosistema digital.</p> },
-    { number: 3, title: "Gestión e Interacción Profesional", ref: item3Ref, nextRef: item4Ref, isLast: false, children: <p>Administramos la conversación de marca con criterio, coherencia y protocolos definidos. La gestión incluye moderación, respuestas estratégicas y derivación inteligente hacia instancias comerciales cuando corresponde.</p> },
-    { number: 4, title: "Integración con Ecosistema Digital", ref: item4Ref, nextRef: item5Ref, isLast: false, children: <p>Conectamos Social Media con landing pages, WhatsApp, CRM y funnels activos. La presencia social deja de ser aislada para convertirse en parte del sistema de adquisición y conversión.</p> },
-    { number: 5, title: "Analítica y Evolución Continua", ref: item5Ref, nextRef: null, isLast: true, children: <p>Entregamos reportes ejecutivos con interpretación estratégica, no solo métricas. Analizamos comportamiento, identificamos oportunidades y definimos ajustes que permitan mejorar alcance útil, interacción relevante y conversión asistida.</p> },
+    { number: 1, title: "Estrategia de Contenidos", ref: item1Ref, nextRef: item2Ref, isLast: false, children: <p>Arquitectura de mensajes diseñada para tu público, tus productos y tus objetivos. Foco: relevancia, claridad y conexión estratégica.</p> },
+    { number: 2, title: "Gestión de Comunidades", ref: item2Ref, nextRef: item3Ref, isLast: false, children: <p>No solo moderamos. Creamos conversaciones que consolidan tu marca. Foco: fidelización, confianza y sentido de pertenencia en tu audiencia.</p> },
+    { number: 3, title: "Contenido Creativo y Dinámico", ref: item3Ref, nextRef: item4Ref, isLast: false, children: <p>Imágenes, copies, reels, motion graphics y formatos optimizados por plataforma. Foco: engagement que impulsa resultados, no likes vacíos.</p> },
+    { number: 4, title: "Automatización e Integración", ref: item4Ref, nextRef: item5Ref, isLast: false, children: <p>Bots, respuestas automáticas y conexión con embudos (e.g., WhatsApp, email, lead magnets). Foco: conversión y eficiencia operativa.</p> },
+    { number: 5, title: "Social Analytics & Reporting", ref: item5Ref, nextRef: null, isLast: true, children: (
+      <>
+        <p>Métricas que importan:</p>
+        <ul className="multimedia-entregable-list">
+          <li>Engagement estratégico</li>
+          <li>Conversiones asistidas desde social</li>
+          <li>Tráfico y calidad de clics</li>
+          <li>Sentimiento de marca</li>
+        </ul>
+        <p>Foco: datos que deciden acciones y ajustan estrategia.</p>
+      </>
+    ) },
   ];
 
   return (
@@ -332,12 +345,66 @@ const SocialMedia = () => {
         </div>
       </div>
 
-      <div className="full-container bg-yellow-2 portfolio-social-media-container">
+      <div className="full-container bg-yellow-2 entregables-container">
         <div className="container">
-          <div className="container">
-            <h1 className="portfolio-title">Portfolio</h1>
+          <h3 className="title-entregables">Entregables</h3>
+          <h5>Lo que construimos para tu estrategia social</h5>
+        </div>
+        <div className="container grid-entregables">
+          <div className="item-entregables">
+            <h5>Estrategia y Dirección</h5>
+            <p>Desarrollamos una arquitectura editorial sólida que define el rol de cada red, los pilares de contenido, el tono de comunicación y los objetivos medibles. Este entregable ordena el sistema conversacional y establece la base estratégica para el crecimiento sostenido.</p>
           </div>
-          <SocialMediaShowcaseSlider sourceArray="social-media" />
+          <div className="item-entregables">
+            <h5>Planificación y Producción de Contenidos</h5>
+            <p>Construimos un calendario editorial alineado a negocio, acompañado de piezas visuales y copies estratégicos adaptados a cada formato y plataforma. El contenido no es improvisado: responde a una lógica narrativa y a un objetivo claro dentro del ecosistema digital.</p>
+          </div>
+          <div className="item-entregables">
+            <h5>Gestión e Interacción Profesional</h5>
+            <p>Administramos la conversación de marca con criterio, coherencia y protocolos definidos. La gestión incluye moderación, respuestas estratégicas y derivación inteligente hacia instancias comerciales cuando corresponde.</p>
+          </div>
+          <div className="item-entregables">
+            <h5>Integración con Ecosistema Digital</h5>
+            <p>Conectamos Social Media con landing pages, WhatsApp, CRM y funnels activos. La presencia social deja de ser aislada para convertirse en parte del sistema de adquisición y conversión.</p>
+          </div>
+          <div className="item-entregables">
+            <h5>Analítica y Evolución Continua</h5>
+            <p>Entregamos reportes ejecutivos con interpretación estratégica, no solo métricas. Analizamos comportamiento, identificamos oportunidades y definimos ajustes que permitan mejorar alcance útil, interacción relevante y conversión asistida.</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="full-container black-bg portfolio-social-media-container">
+        <div className="container portfolio-social-media-grid">
+          <div className="portfolio-social-media-col-video">
+            <video
+              className="social-media-video"
+              autoPlay
+              playsInline
+              muted
+              loop
+              preload="auto"
+              aria-label="Social Media"
+            >
+              <source src={`${base}assets/social-media/social.webm`} type="video/webm" />
+              <source src={`${base}assets/social-media/social.mp4`} type="video/mp4" />
+              Tu navegador no soporta la reproducción de video.
+            </video>
+          </div>
+          <div className="portfolio-social-media-col-text">
+            <h1 className="portfolio-title">Portfolio</h1>
+            <p style={{ lineHeight: "1.5" }}>
+              Las redes sociales se han convertido en uno de los   principales entornos de construcción de valor de marca.
+              <br/>
+              Allí se define percepción, se valida autoridad y se influye en decisiones de compra, incluso antes del primer contacto comercial.
+              <br/>
+              Cuando el ecosistema social está alineado a estrategia, contenido y performance, deja de ser comunicación dispersa y se transforma en un activo competitivo.
+              <br/>
+              Social Media no es exposición constante; es influencia sostenida con intención clara.
+              <br/>
+              Los resultados se ven en la coherencia, en la evolución de la marca y en cada caso que demuestra cómo la estrategia bien ejecutada genera impacto real.
+            </p>
+          </div>
         </div>
       </div>
 

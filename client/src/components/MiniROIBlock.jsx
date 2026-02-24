@@ -56,14 +56,27 @@ const MiniROIBlock = () => {
     setter(cleaned);
   };
 
+  const roiMessage = calculated.roi > 0
+    ? "El modelo es escalable. El siguiente paso es optimizar y amplificar."
+    : "La estructura puede mejorarse. Ajustemos variables antes de invertir más.";
+
   return (
-    <div className="roi-calculator-block bg-yellow-2">
-      <div className="roi-calculator-header">
-        <h3 className="roi-calculator-title">MINI ROI BLOCK</h3>
-        <p className="roi-calculator-subtitle">Calculá el potencial de tu inversión</p>
+    <div className="roi-calculator-wrap">
+      <p className="roi-calculator-intro">Antes de avanzar, proyectemos el escenario.</p>
+      <div className="roi-calculator-layout">
+      <div className="roi-calculator-texts">
+        <h3 className="roi-calculator-title">Simulador de Rentabilidad Publicitaria</h3>
+        <h5 className="roi-calculator-subtitle">Proyectá el impacto real de tu inversión en medios.</h5>
+        <div className="roi-calculator-description">
+          <p>Antes de escalar una campaña, entendemos la ecuación completa.</p>
+          <p>Este simulador te permite visualizar cómo influyen variables clave como inversión, CPL, tasa de cierre y ticket promedio en tu rentabilidad proyectada.</p>
+          <p>No es una promesa: es una aproximación estratégica basada en datos.</p>
+          <p>La diferencia entre gastar y crecer está en la matemática.</p>
+        </div>
       </div>
 
-      <div className="roi-calculator-body">
+      <div className="roi-calculator-block bg-yellow-2">
+        <div className="roi-calculator-body">
         {/* Sección Inputs */}
         <div className="roi-calculator-inputs">
           <div className="roi-input-group">
@@ -111,6 +124,9 @@ const MiniROIBlock = () => {
             />
           </div>
         </div>
+        <p className="roi-calculator-microcopy">
+          Ajustá los valores según tu escenario actual o proyectado. El resultado es una estimación orientativa para analizar viabilidad y escalabilidad.
+        </p>
 
         {/* Separador visual */}
         <div className="roi-calculator-separator" />
@@ -158,6 +174,16 @@ const MiniROIBlock = () => {
             <span className="roi-result-value">{calculated.roi >= 0 ? "+" : ""}{calculated.roi}%</span>
           </motion.div>
         </div>
+
+        <p className="roi-result-message">{roiMessage}</p>
+
+        <div className="roi-calculator-cta-wrap">
+          <p className="roi-calculator-cta-text">¿Querés validar este escenario con datos reales?</p>
+          <a href="#contact" className="roi-calculator-cta">Coordinar análisis estratégico</a>
+        </div>
+        <p className="roi-calculator-closing">El crecimiento sostenible comienza con claridad.</p>
+        </div>
+      </div>
       </div>
     </div>
   );

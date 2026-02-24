@@ -38,10 +38,10 @@ function Contact({ location = "home", form }) {
             </div>
             <div className="grid-item-title">
               <h5>
-                Hablemos de lo que tu marca necesita. 
+                Completá el siguiente formulario.
               </h5>
               <p>
-                Cada proyecto es único. Completá el formulario y diseñemos la estrategia que tu marca necesita para evolucionar
+              Definamos tu próximo paso estratégico.
               </p>
             </div>
           </div>

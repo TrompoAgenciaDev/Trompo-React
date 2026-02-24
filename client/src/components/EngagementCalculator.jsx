@@ -54,6 +54,10 @@ const EngagementCalculator = () => {
 
   const performance = getPerformance();
 
+  const impactMessage = performance.className === "engagement-high"
+    ? "Tu comunidad tiene potencial de conversión estructural."
+    : "El contenido necesita dirección estratégica para generar impacto real.";
+
   // Formatear números con separador de miles
   const formatNumber = (n) => {
     return new Intl.NumberFormat("es-AR").format(Math.round(n));
@@ -66,13 +70,21 @@ const EngagementCalculator = () => {
   };
 
   return (
-    <div className="engagement-calculator-block">
-      <div className="engagement-calculator-header">
-        <h3 className="engagement-calculator-title">Calculá tu Engagement</h3>
-        <p className="engagement-calculator-subtitle">Medí el rendimiento real de tu contenido</p>
-      </div>
+    <div className="engagement-calculator-wrap">
+      <h3>Antes de avanzar, proyectemos el escenario.</h3>
+      <div className="engagement-calculator-layout">
+        <div className="engagement-calculator-texts">
+          <h3>Simulador de Impacto Social</h3>
+          <h6 className="engagement-calculator-subtitle">Medí cómo tu comunidad puede transformarse en oportunidad.</h6>
+          <div className="engagement-calculator-description">
+            <p>Las redes no son solo alcance, son percepción, influencia y conversión asistida.</p>
+            <p>Este simulador estima cómo el engagement y la tasa de interacción pueden impactar en generación de leads u oportunidades comerciales cuando el ecosistema está bien estructurado.</p>
+            <p>Porque la conversación correcta también tiene retorno.</p>
+          </div>
+        </div>
 
-      <div className="engagement-calculator-body">
+        <div className="engagement-calculator-block bg-yellow-2">
+          <div className="engagement-calculator-body">
         {/* Toggle Seguidores / Alcance */}
         <div className="engagement-toggle-wrapper">
           <button
@@ -163,6 +175,9 @@ const EngagementCalculator = () => {
             />
           </div>
         </div>
+        <p className="engagement-calculator-microcopy">
+          Ingresá tu alcance mensual estimado y tasa de interacción promedio. Visualizá cómo podría traducirse en oportunidades reales.
+        </p>
 
         {/* Separador visual */}
         <div className="engagement-calculator-separator" />
@@ -192,6 +207,17 @@ const EngagementCalculator = () => {
             </span>
             <span className="engagement-result-interpretation">{performance.label}</span>
           </motion.div>
+        </div>
+
+        <p className="engagement-result-message">{impactMessage}</p>
+
+        <div className="engagement-calculator-cta-wrap">
+          <p className="engagement-calculator-cta-text">¿Querés profesionalizar tu ecosistema social?</p>
+          <a href="#contact" className="engagement-calculator-cta">Diseñar estrategia social</a>
+        </div>
+
+        <p className="engagement-calculator-closing">El crecimiento sostenible comienza con claridad.</p>
+          </div>
         </div>
       </div>
     </div>
