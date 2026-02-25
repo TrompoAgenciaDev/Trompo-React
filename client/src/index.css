@@ -71,21 +71,24 @@ html,
   outline: 0;
 }
 
-* {
+/* * {
   position: relative;
-}
+} */
 
 /* Excluir header y sus elementos del position: relative global para permitir sticky/fixed */
+/* Se comenta porque el position: relative global fue removido */
+/*
 header,
 header * {
   position: static;
 }
+*/
 
 body {
   width: 100%;
   height: auto;
-  position: relative;
-  overflow-x: hidden;
+  /* position: relative; // Removido para evitar romper sticky */
+  /* overflow-x: hidden; // Movido o removido para no romper position: sticky */
   /* Mejorar el rendimiento del scroll */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -94,8 +97,9 @@ body {
 }
 
 #root {
-  overflow-x: hidden;
+  /* overflow-x: hidden; // Removido para no romper position: sticky */
   background-color: #ffffff;
+  overflow: hidden;
 }
 
 main {

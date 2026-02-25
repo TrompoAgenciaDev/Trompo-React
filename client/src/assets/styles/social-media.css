@@ -133,7 +133,7 @@
   align-items: center;
 }
 
-.showcase-track > div {
+.showcase-track>div {
   flex-shrink: 0;
 }
 
@@ -572,7 +572,7 @@
     font-size: 155px;
   }
 
-  h1.portfolio-title{
+  h1.portfolio-title {
     font-size: 150px;
   }
 }
