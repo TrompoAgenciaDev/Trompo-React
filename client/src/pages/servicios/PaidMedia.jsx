@@ -498,10 +498,6 @@ const Campaigns = () => {
             <p>Construimos un calendario editorial alineado a negocio, acompañado de piezas visuales y copies estratégicos adaptados a cada formato y plataforma. El contenido no es improvisado: responde a una lógica narrativa y a un objetivo claro dentro del ecosistema digital.</p>
           </div>
           <div className="item-entregables">
-            <h5>Gestión e Interacción Profesional</h5>
-            <p>Administramos la conversación de marca con criterio, coherencia y protocolos definidos. La gestión incluye moderación, respuestas estratégicas y derivación inteligente hacia instancias comerciales cuando corresponde.</p>
-          </div>
-          <div className="item-entregables">
             <h5>Integración con Ecosistema Digital</h5>
             <p>Conectamos Social Media con landing pages, WhatsApp, CRM y funnels activos. La presencia social deja de ser aislada para convertirse en parte del sistema de adquisición y conversión.</p>
           </div>

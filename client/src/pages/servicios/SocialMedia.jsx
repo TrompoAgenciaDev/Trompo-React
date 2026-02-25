@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useLayoutEffect } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent, useSpring, useMotionValue, useInView } from "framer-motion";
 import Contact from "../../layout/Contact.jsx";
 import StaticHero from "../../components/StaticHero.jsx";
@@ -157,6 +157,73 @@ const EntregableItem = ({ number, title, children, isLast, itemRef, nextItemRef 
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         />
       )}
+    </div>
+  );
+};
+
+/* Sección Portfolio: misma animación que los 5 productos (scale + opacity) */
+const PortfolioIntroItem = ({ itemRef, children }) => {
+  const isInView = useInView(itemRef, { once: false, amount: 0.15 });
+
+  return (
+    <motion.p
+      ref={itemRef}
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: isInView ? 1 : 0, opacity: isInView ? 1 : 0 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+    >
+      {children}
+    </motion.p>
+  );
+};
+
+const PortfolioIntroList = () => {
+  const cornerTlRef = useRef(null);
+  const cornerBrRef = useRef(null);
+  const p1Ref = useRef(null);
+  const p2Ref = useRef(null);
+  const p3Ref = useRef(null);
+  const p4Ref = useRef(null);
+  const p5Ref = useRef(null);
+
+  const isTlInView = useInView(cornerTlRef, { once: false, amount: 0.15 });
+  const isBrInView = useInView(cornerBrRef, { once: false, amount: 0.15 });
+
+  const items = [
+    { key: 1, ref: p1Ref, text: "Las redes sociales se han convertido en uno de los principales entornos de construcción de valor de marca." },
+    { key: 2, ref: p2Ref, text: "Allí se define percepción, se valida autoridad y se influye en decisiones de compra, incluso antes del primer contacto comercial." },
+    { key: 3, ref: p3Ref, text: "Cuando el ecosistema social está alineado a estrategia, contenido y performance, deja de ser comunicación dispersa y se transforma en un activo competitivo." },
+    { key: 4, ref: p4Ref, text: "Social Media no es exposición constante; es influencia sostenida con intención clara." },
+    { key: 5, ref: p5Ref, text: "Los resultados se ven en la coherencia, en la evolución de la marca y en cada caso que demuestra cómo la estrategia bien ejecutada genera impacto real." },
+  ];
+
+  return (
+    <div className="portfolio-intro-block">
+      <motion.div
+        ref={cornerTlRef}
+        className="portfolio-corner-wrapper portfolio-corner-wrapper-tl"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: isTlInView ? 1 : 0, opacity: isTlInView ? 1 : 0 }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+      >
+        <span className="portfolio-corner portfolio-corner-tl" aria-hidden />
+      </motion.div>
+      <div className="portfolio-intro-list">
+        {items.map((item) => (
+          <PortfolioIntroItem key={item.key} itemRef={item.ref}>
+            {item.text}
+          </PortfolioIntroItem>
+        ))}
+      </div>
+      <motion.div
+        ref={cornerBrRef}
+        className="portfolio-corner-wrapper portfolio-corner-wrapper-br"
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: isBrInView ? 1 : 0, opacity: isBrInView ? 1 : 0 }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+      >
+        <span className="portfolio-corner portfolio-corner-br" aria-hidden />
+      </motion.div>
     </div>
   );
 };
@@ -360,10 +427,6 @@ const SocialMedia = () => {
             <p>Construimos un calendario editorial alineado a negocio, acompañado de piezas visuales y copies estratégicos adaptados a cada formato y plataforma. El contenido no es improvisado: responde a una lógica narrativa y a un objetivo claro dentro del ecosistema digital.</p>
           </div>
           <div className="item-entregables">
-            <h5>Gestión e Interacción Profesional</h5>
-            <p>Administramos la conversación de marca con criterio, coherencia y protocolos definidos. La gestión incluye moderación, respuestas estratégicas y derivación inteligente hacia instancias comerciales cuando corresponde.</p>
-          </div>
-          <div className="item-entregables">
             <h5>Integración con Ecosistema Digital</h5>
             <p>Conectamos Social Media con landing pages, WhatsApp, CRM y funnels activos. La presencia social deja de ser aislada para convertirse en parte del sistema de adquisición y conversión.</p>
           </div>
@@ -393,17 +456,7 @@ const SocialMedia = () => {
           </div>
           <div className="portfolio-social-media-col-text">
             <h1 className="portfolio-title">Portfolio</h1>
-            <p style={{ lineHeight: "1.5" }}>
-              Las redes sociales se han convertido en uno de los   principales entornos de construcción de valor de marca.
-              <br/>
-              Allí se define percepción, se valida autoridad y se influye en decisiones de compra, incluso antes del primer contacto comercial.
-              <br/>
-              Cuando el ecosistema social está alineado a estrategia, contenido y performance, deja de ser comunicación dispersa y se transforma en un activo competitivo.
-              <br/>
-              Social Media no es exposición constante; es influencia sostenida con intención clara.
-              <br/>
-              Los resultados se ven en la coherencia, en la evolución de la marca y en cada caso que demuestra cómo la estrategia bien ejecutada genera impacto real.
-            </p>
+            <PortfolioIntroList />
           </div>
         </div>
       </div>

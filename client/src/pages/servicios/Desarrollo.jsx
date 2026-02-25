@@ -621,10 +621,6 @@ const Desarrollo = () => {
         </div>
         <div className="container grid-entregables">
           <div className="item-entregables">
-            <h5>Propiedad Total del Sitio</h5>
-            <p>La web es del cliente. Se entregan accesos completos a hosting, dominio, CMS y bases de datos. Sin dependencia obligatoria ni licencias ocultas.</p>
-          </div>
-          <div className="item-entregables">
             <h5>Accesos Administrativos Configurados</h5>
             <p>Creación de usuarios con distintos niveles de permiso (administrador, editor, marketing, etc.) para gestión interna segura y ordenada.</p>
           </div>
@@ -633,20 +629,8 @@ const Desarrollo = () => {
             <p>Instancia de formación para el equipo del cliente (virtual o grabada) para que puedan gestionar contenidos, productos o secciones básicas de forma autónoma.</p>
           </div>
           <div className="item-entregables">
-            <h5>Configuración y Parametrización de Servidor</h5>
-            <p>Optimización de hosting, configuración de entorno (PHP, bases de datos, permisos), compresión, caché y estructura técnica preparada para rendimiento y estabilidad.</p>
-          </div>
-          <div className="item-entregables">
-            <h5>Implementación de Seguridad</h5>
-            <p>Configuración de SSL, backups automáticos, control de accesos, protección básica contra vulnerabilidades y buenas prácticas de seguridad.</p>
-          </div>
-          <div className="item-entregables">
             <h5>Migración (si aplica)</h5>
             <p>Migración completa desde servidor anterior o entorno de prueba hacia producción, con verificación de integridad y funcionamiento.</p>
-          </div>
-          <div className="item-entregables">
-            <h5>Backups Iniciales y Plan de Respaldo</h5>
-            <p>Copia de seguridad previa y posterior al lanzamiento, junto con lineamientos para continuidad operativa.</p>
           </div>
           <div className="item-entregables">
             <h5>Integración de Herramientas de Medición</h5>
@@ -655,10 +639,6 @@ const Desarrollo = () => {
           <div className="item-entregables">
             <h5>Optimización Inicial de Performance</h5>
             <p>Carga optimizada de imágenes, estructura técnica liviana y pruebas básicas de velocidad para asegurar tiempos adecuados.</p>
-          </div>
-          <div className="item-entregables">
-            <h5>Entrega de Documentación Técnica Básica</h5>
-            <p>Resumen de accesos, configuraciones clave e indicaciones para mantenimiento o continuidad.</p>
           </div>
           <div className="item-entregables">
             <h5>Sitio 100% Operativo y Publicado</h5>

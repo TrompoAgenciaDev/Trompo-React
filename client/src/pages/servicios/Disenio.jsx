@@ -940,21 +940,9 @@ const Disenio = () => {
             <p>Diseño de presentaciones, brochures, catálogos, papelería, avisos, material POP y recursos gráficos aplicados a comunicación corporativa y comercial.</p>
           </div>
           <div className="item-entregables">
-            <h5>Sistema Visual para Social Media (Social Brand)</h5>
-            <p>Plantillas estructuradas para feed, historias, carruseles y piezas promocionales, alineadas al ADN de marca y optimizadas para producción continua de contenidos.</p>
-          </div>
-          <div className="item-entregables">
-            <h5>Diseño Gráfico para Campañas Digitales</h5>
-            <p>Creatividades estáticas y dinámicas orientadas a performance en Paid Media (Meta, Google, LinkedIn), diseñadas para mejorar CTR, conversión y coherencia visual en pauta.</p>
-          </div>
-          <div className="item-entregables">
-            <h5>Branding Web y UI Visual</h5>
-            <p>Diseño de layouts, banners, sliders, componentes gráficos y elementos visuales aplicados a sitios web y plataformas digitales, asegurando experiencia estética consistente y profesional.</p>
-          </div>
-          <div className="item-entregables">
-            <h5>Sistemas de Grillas y Librerías Visuales</h5>
-            <p>Creación de frameworks gráficos reutilizables que permiten escalar producción de piezas manteniendo coherencia, velocidad y calidad.</p>
-          </div>
+            <h5>Sistema Visual para Social Media y Ads</h5>
+            <p>Plantillas estructuradas para feed, historias, carruseles, anuncios ads y piezas promocionales, alineadas al ADN de marca y optimizadas para producción continua de contenidos.</p>
+          </div>          
         </div>
       </div>
 

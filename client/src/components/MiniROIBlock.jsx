@@ -62,10 +62,10 @@ const MiniROIBlock = () => {
 
   return (
     <div className="roi-calculator-wrap">
-      <p className="roi-calculator-intro">Antes de avanzar, proyectemos el escenario.</p>
+      <h2>Antes de avanzar, proyectemos el escenario.</h2>
       <div className="roi-calculator-layout">
       <div className="roi-calculator-texts">
-        <h3 className="roi-calculator-title">Simulador de Rentabilidad Publicitaria</h3>
+        <h3>Simulador de Rentabilidad Publicitaria</h3>
         <h5 className="roi-calculator-subtitle">Proyectá el impacto real de tu inversión en medios.</h5>
         <div className="roi-calculator-description">
           <p>Antes de escalar una campaña, entendemos la ecuación completa.</p>
