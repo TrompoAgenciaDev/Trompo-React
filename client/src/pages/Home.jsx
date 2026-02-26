@@ -198,7 +198,7 @@ const Home = () => {
         mobilePoster={`${base}assets/hero/mobile/home.webp`}
       />
 
-      <ServiceTitle titulo="Agencia Digital" tituloReplace="con estrategia real" subtitulo="Integramos diseño, multimedia, desarrollo, paid media y social media para construir un ecosistema <strong>digital coherente, medible y escalable.</strong>." />
+      <ServiceTitle titulo="Agencia Digital" tituloReplace="con estrategia real" subtitulo="Integramos diseño, multimedia, desarrollo, paid media y social media para construir un ecosistema <strong>digital coherente, medible y escalable.</strong>" />
 
       <AnimatedTextSection
         text="Acompañamos a equipos de marketing y empresas en la planificación, ejecución y evolución de su ecosistema digital. Nos involucramos de verdad: ordenamos prioridades, activamos iniciativas y optimizamos procesos que impacten en el posicionamiento, la generación de demanda y los resultados del negocio."
