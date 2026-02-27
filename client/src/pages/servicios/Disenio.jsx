@@ -950,7 +950,7 @@ const Disenio = () => {
         <div className="container">
           <div className="container">
             <h3 className="portfolio-title">
-              Portfolio de Diseño
+              Portfolio
             </h3>
           </div>        
           <DisenioPortfolio />

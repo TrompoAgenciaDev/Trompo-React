@@ -15,7 +15,7 @@
 }
 
 .grid-item-beneficios{
-    padding: 20px;
+    padding: 20px 10px;
     border: 1px solid #E1C025;
     display: -webkit-box;
     display: -moz-box;
@@ -79,6 +79,10 @@
         -ms-grid-columns: 1fr 1fr 1fr 1fr;
         grid-template-columns: repeat(4, 1fr);
         gap: 50px;
+    }
+
+    .grid-item-beneficios{
+        padding: 20px;
     }
 
     .beneficios-container{

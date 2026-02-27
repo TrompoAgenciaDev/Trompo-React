@@ -8,10 +8,10 @@
 }
 
 @media (max-width: 767px) {
-  [data-hero-container] {
-    aspect-ratio: 768 / 1024;
-    height: auto;
-    min-height: 100vh;
+  [data-hero-container],
+  [data-vjs-player] {
+    height: 400px;
+    min-height: 400px;
   }
 }
 

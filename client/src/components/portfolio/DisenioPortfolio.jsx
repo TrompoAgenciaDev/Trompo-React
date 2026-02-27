@@ -497,47 +497,32 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
   );
 }
 
-// Componente para cada slide en mobile que detecta su propia visibilidad
-function MobileSlideItem({ item, index, visualIndex, slideWidthPct, preloadImage }) {
-  const slideRef = useRef(null);
-  const [isInViewport, setIsInViewport] = useState(false);
-
-  useEffect(() => {
-    if (!slideRef.current) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        setIsInViewport(entries[0].isIntersecting);
-      },
-      { threshold: 0.5 } // Al menos 50% visible
-    );
-
-    observer.observe(slideRef.current);
-
-    return () => observer.disconnect();
-  }, []);
-
-  const isVisible = Math.abs(index - visualIndex) <= 1;
-
+// Componente para cada slide en mobile: solo la primera imagen (destacada) del portfolio
+function MobileSimpleSlide({ imageSrc }) {
   return (
     <div
-      ref={slideRef}
       style={{
-        width: `${slideWidthPct}%`,
-        flex: `0 0 ${slideWidthPct}%`,
-        padding: "4px",
-        boxSizing: "border-box",
+        position: "relative",
+        width: "100%",
+        paddingTop: "75%",
+        overflow: "hidden",
         minWidth: 0,
       }}
     >
-      <InnerAutoSlider 
-        list={item.images} 
-        interval={1800} 
-        direction={1}
-        isVisible={isVisible}
-        autoStart={true}
-        isInViewport={isInViewport}
-        preloadImage={preloadImage}
+      <img
+        src={imageSrc}
+        alt=""
+        decoding="async"
+        width={1200}
+        height={900}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          display: "block",
+        }}
       />
     </div>
   );
@@ -555,10 +540,10 @@ export default function DisenioPortfolio({ category = "branding" }) {
   // Hook de precarga de imágenes
   const { preloadBuffer, preloadImage } = useImagePreloader(items, 3);
 
-  // Detectar si es mobile
+  // Detectar si es mobile (<1024px) - desktop desde 1024px
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1024);
     };
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -634,14 +619,18 @@ export default function DisenioPortfolio({ category = "branding" }) {
     };
   }, [category]);
 
-  // Carrusel infinito para mobile - REFACTORIZADO
+  // Carrusel infinito para mobile - una sola imagen por cliente (primera/destacada)
   const REPEAT = 3;
-  const slides = useMemo(() => {
+  const firstImages = useMemo(() => {
     if (items.length === 0) return [];
-    return Array.from({ length: REPEAT }, () => items).flat();
+    return items.map(item => item.images?.[0]).filter(Boolean);
   }, [items]);
+  const slides = useMemo(() => {
+    if (firstImages.length === 0) return [];
+    return Array.from({ length: REPEAT }, () => firstImages).flat();
+  }, [firstImages]);
   
-  const baseLength = items.length;
+  const baseLength = firstImages.length;
   const middleIndex = baseLength > 0 ? baseLength * Math.floor(REPEAT / 2) : 0;
   
   // Índice lógico: 0 → baseLength - 1 (para saber qué slide mostrar)
@@ -1012,15 +1001,19 @@ export default function DisenioPortfolio({ category = "branding" }) {
         onDragEnd={handleDragEnd}
         dragControls={dragControls}
       >
-        {slides.map((item, i) => (
-          <MobileSlideItem 
-            key={`${item.id}-${i}`} 
-            item={item} 
-            index={i} 
-            visualIndex={visualIndex}
-            slideWidthPct={slideWidthPct}
-            preloadImage={preloadImage}
-          />
+        {slides.map((imageSrc, i) => (
+          <div
+            key={`slide-${i}`}
+            style={{
+              width: `${slideWidthPct}%`,
+              flex: `0 0 ${slideWidthPct}%`,
+              padding: "4px",
+              boxSizing: "border-box",
+              minWidth: 0,
+            }}
+          >
+            <MobileSimpleSlide imageSrc={imageSrc} />
+          </div>
         ))}
       </motion.div>
     </div>
