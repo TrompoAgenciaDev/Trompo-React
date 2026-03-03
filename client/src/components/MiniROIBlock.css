@@ -1,5 +1,8 @@
-/* MiniROIBlock - Calculadora de ROI mensual */
+/* ============================================
+   MiniROIBlock - Mobile First
+   ============================================ */
 
+/* ---------- Base (mobile) ---------- */
 .roi-calculator-section {
   padding: 50px 0;
 }
@@ -7,15 +10,9 @@
 .roi-calculator-wrap {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 24px;
-}
-
-.roi-calculator-intro {
-  text-align: center;
-  color: #262626;
-  font-size: 14px;
-  font-weight: 500;
-  margin: 0;
 }
 
 .roi-calculator-layout {
@@ -24,16 +21,19 @@
   gap: 32px;
 }
 
-.roi-calculator-closing {
-  text-align: center;
-  color: #262626;
-  font-size: 13px;
-  font-weight: 500;
-  margin: 24px 0 0 0;
+.roi-calculator-texts {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
 
-.roi-calculator-texts {
-  /* Sin fondo, sin borde */
+.container.text-calculator {
+  width: 100%;
+  border: 1px solid #262626;
+  padding: 20px;
+  border-radius: 30px;
 }
 
 .roi-calculator-texts .roi-calculator-title {
@@ -54,7 +54,6 @@
   text-align: left;
   color: #262626;
   font-size: 14px;
-  line-height: 1.5;
 }
 
 .roi-calculator-texts .roi-calculator-description p {
@@ -76,6 +75,7 @@
   gap: 24px;
 }
 
+/* Inputs */
 .roi-calculator-inputs {
   display: grid;
   grid-template-columns: 1fr;
@@ -112,19 +112,14 @@
   color: #6E6E6E;
 }
 
-.roi-calculator-microcopy {
-  color: #262626;
-  font-size: 13px;
-  line-height: 1.5;
-  margin: 0;
-}
-
+/* Separador */
 .roi-calculator-separator {
   height: 1px;
   background: linear-gradient(to right, transparent, #E1C025, transparent);
   opacity: 0.5;
 }
 
+/* Resultados */
 .roi-calculator-results {
   display: grid;
   grid-template-columns: 1fr;
@@ -166,6 +161,14 @@
   color: #ef4444;
 }
 
+/* Textos y CTA */
+.roi-calculator-microcopy {
+  color: #262626;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+}
+
 .roi-result-message {
   color: #262626;
   font-size: 14px;
@@ -204,21 +207,32 @@
   border-color: #E1C025;
 }
 
+.roi-calculator-closing {
+  text-align: center;
+  color: #262626;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 24px 0 0 0;
+}
+
+/* ============================================
+   Tablet: min-width 768px
+   ============================================ */
 @media (min-width: 768px) {
   .roi-calculator-layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 3fr;
     gap: 40px;
     align-items: stretch;
   }
 
   .roi-calculator-texts {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-self: stretch;
+    min-height: 100%;
   }
 
   .roi-calculator-block {
+    align-self: stretch;
     padding: 40px 36px;
   }
 
@@ -232,9 +246,24 @@
   }
 }
 
+/* ============================================
+   Desktop: min-width 1024px
+   ============================================ */
 @media (min-width: 1024px) {
   .roi-calculator-texts .roi-calculator-subtitle {
     font-size: 16px;
+  }
+
+  .roi-calculator-microcopy {
+    font-size: 16px;
+  }
+
+  .roi-calculator-cta-text {
+    font-size: 16px;
+  }
+
+  .roi-calculator-closing {
+    font-size: 15px;
   }
 
   .roi-input-group label {
@@ -245,9 +274,7 @@
     font-size: 14px;
   }
 
-  .roi-result-message,
-  .roi-calculator-cta-text,
-  .roi-calculator-cta {
+  .roi-result-message {
     font-size: 16px;
   }
 }

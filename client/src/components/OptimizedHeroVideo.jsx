@@ -47,7 +47,7 @@ const OptimizedHeroVideo = ({
         src={desktopSrc}
         poster={desktopPoster}
         posterWidth={1920}
-        posterHeight={1080}
+        posterHeight={720}
         className={`hero-video desktop-only ${className}`}
         autoPlay
         loop

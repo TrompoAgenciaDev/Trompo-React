@@ -237,14 +237,8 @@ const Nosotros = () => {
         </div>
       </div>
 
-      <div 
-        className="full-container members-container"
-        style={{ 
-          '--team-image': `url(${base}assets/members/team.webp)`,
-          '--team-mobile-image': `url(${base}assets/members/team-mobile.webp)`
-        }}
-      >
-        <div className="members-content-wrapper">
+      <div className="members-container black-bg">
+        <div className="container members-content-wrapper">
           <div className="members-text-wrapper">
             <h4>Lo que nos define.</h4>
             <div className="text-members-container">
@@ -256,11 +250,12 @@ const Nosotros = () => {
               </p>
             </div>
           </div>
-          <img 
-            src={`${base}assets/members/team-mobile.webp`} 
-            alt="Equipo Trompo" 
-            className="members-mobile-image"
-          />
+          <div className="member-image">
+            <picture>
+              <source media="(max-width: 767px)" srcSet={`${base}assets/img/nosotros-mobile.webp`} />
+              <img src={`${base}assets/img/nosotros.webp`} alt="Nosotros" />
+            </picture>
+          </div>
         </div>
       </div>
 

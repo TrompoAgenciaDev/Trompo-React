@@ -381,15 +381,112 @@
   transform: translateY(-50%) scale(0.95);
 }
 
-/* ---------- Productos multimedia ---------- */
-.productos-multimedia .multimedia-entregable-list {
+/* ---------- Grid productos (igual que Multimedia) ---------- */
+.productos-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 20px 30px;
+}
+
+.grid-productos{
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 30px;
+  padding: 30px 0;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.grid-item-img{
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  height: auto;
+}
+
+.grid-item-img img,
+.grid-item-img picture img{
+  width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.grid-item-productos-multimedia{
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.multimedia-history-item{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #ffffff;
+}
+
+.multimedia-history-item-header{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.multimedia-history-item h3{
+  margin: 0;
+}
+
+.multimedia-history-item p{
+  color: #ffffff;
+  margin: 0;
+  padding-left: 56px;
+}
+
+.multimedia-entregable-number{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: 100%;
+  border: 1px solid #FEE070;
+  color: #FEE070;
+  font-size: 18px;
+  font-weight: 500;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.multimedia-entregable-item-wrapper{
+  position: relative;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.multimedia-entregable-line{
+  position: absolute;
+  left: 20px;
+  width: 1px;
+  background-color: #FEE070;
+  z-index: 1;
+}
+
+.multimedia-entregable-list{
   margin: 8px 0 0 0;
   padding-left: 56px;
   color: #ffffff;
   list-style-type: disc;
 }
 
-.productos-multimedia .multimedia-entregable-list li {
+.multimedia-entregable-list li{
   margin-bottom: 4px;
   color: #ffffff;
 }
@@ -506,6 +603,16 @@
     padding: 80px 0;
   }
 
+  .grid-productos{
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0;
+  }
+
+  .multimedia-history-item p{
+    font-size: 16px;
+  }
+
   .grid-portfolio-wrapper {
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
@@ -526,6 +633,20 @@
    LARGE DESKTOP: min-width 1280px
    ============================================ */
 @media (min-width: 1280px) {
+  .grid-productos{
+    grid-template-columns: 2fr 3fr;
+    -ms-grid-columns: 2fr 3fr;
+    gap: 50px;
+    padding: 50px 0;
+  }
+
+  .grid-item-img{
+    aspect-ratio: 4/3;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
   .interaccion-diagonal:first-child {
     height: 200px;
     -webkit-clip-path: polygon(0 30%, 100% 0, 100% 70%, 0 100%);
@@ -572,6 +693,12 @@
     font-size: 155px;
   }
 
+  h1.portfolio-title {
+    font-size: 134px;
+  }
+}
+
+@media (min-width: 1440px) {
   h1.portfolio-title {
     font-size: 150px;
   }

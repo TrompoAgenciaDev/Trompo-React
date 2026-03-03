@@ -149,7 +149,7 @@ const Contactanos = () => {
         backgroundClass=""
       />
 
-      <Contact form="contactanos" location="contactanos"/>
+      <Contact form="contactanos" location="contacto"/>
 
     </>
   );

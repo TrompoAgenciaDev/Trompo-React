@@ -206,12 +206,18 @@
 
     <!-- CSS crítico inline para header y hero - evita CLS y mejora LCP -->
     <style>
-      /* Header crítico */
+      /* Header crítico - sticky en desktop */
       header.full-container {
         z-index: 100;
-        position: static;
         height: fit-content;
         padding: 0 10px;
+      }
+      
+      @media (min-width: 768px) {
+        header.full-container {
+          position: sticky;
+          top: 0;
+        }
       }
       
       .header .container {
@@ -244,57 +250,18 @@
         }
       }
       
-      /* Hero container crítico */
+      /* Hero - contenedor sin alto, video 100% ancho */
       .hero-video,
       .hero-poster-img {
-        width: 100vw;
-        height: 100vh;
-        min-height: 100vh;
+        width: 100%;
+        max-width: 100%;
         display: block;
-        object-fit: cover;
       }
       
-      /* Mobile hero */
-      @media (max-width: 767px) {
-        .hero-video,
-        .hero-poster-img {
-          height: 400px;
-          min-height: 400px;
-          object-fit: cover;
-        }
-      }
-      
-      /* Desktop hero */
-      @media (min-width: 768px) {
-        .hero-video,
-        .hero-poster-img {
-          aspect-ratio: 1920 / 1080;
-          height: auto;
-          min-height: 100vh;
-        }
-      }
-      
-      /* Contenedor hero */
       [data-hero-container] {
         position: relative;
-        width: 100vw;
-        height: 100vh;
-        min-height: 100vh;
-        overflow: hidden;
-      }
-      
-      @media (max-width: 767px) {
-        [data-hero-container] {
-          height: 400px;
-          min-height: 400px;
-        }
-      }
-      
-      @media (min-width: 768px) {
-        [data-hero-container] {
-          aspect-ratio: 1920 / 1080;
-          height: auto;
-        }
+        width: 100%;
+        overflow: visible;
       }
     </style>
 

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { motion, useInView, useScroll, useTransform, useMotionValueEvent, useSpring, useMotionValue } from "framer-motion";
+import { motion, useInView, useScroll, useTransform, useMotionValueEvent, useSpring } from "framer-motion";
 import Faqs from "../../layout/Faqs";
 import Contact from "../../layout/Contact";
 import StaticHero from "../../components/StaticHero";
@@ -7,6 +7,7 @@ import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import SemicircularVideoSlider from "../../components/sliders/SemicircularVideoSlider.jsx";
 //styles
 import "../../assets/styles/multimedia.css";
+import "../../assets/styles/entregables.css";
 import "../../assets/styles/beneficios.css";
 import "@as/hero.css";
 
@@ -62,119 +63,6 @@ const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }
     >
       {phrase}
     </motion.span>
-  );
-};
-
-// Componente para imagen con tracking del mouse
-const MouseTrackingImage = ({ src, srcSet, sizes, alt = "" }) => {
-  const containerRef = useRef(null);
-  const [isInViewport, setIsInViewport] = React.useState(false);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  // Valores suavizados con spring para movimiento fluido
-  const smoothX = useSpring(mouseX, { stiffness: 150, damping: 15 });
-  const smoothY = useSpring(mouseY, { stiffness: 150, damping: 15 });
-  
-  // Validar srcSet: eliminar si solo tiene una imagen (srcSet falso)
-  const hasValidSrcSet = srcSet && srcSet.split(',').length > 1;
-  const finalSrcSet = hasValidSrcSet ? srcSet : undefined;
-
-  // IntersectionObserver para detectar cuando la imagen está en viewport (al menos 10px visibles)
-  React.useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          // Verificar si al menos 10px están visibles
-          const isVisible = entry.isIntersecting && entry.intersectionRatio > 0;
-          // También verificar si hay al menos 10px de altura visible
-          const rect = entry.boundingClientRect;
-          const viewportHeight = window.innerHeight;
-          const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
-          const hasMinVisible = visibleHeight >= 10;
-          
-          setIsInViewport(isVisible && hasMinVisible);
-          
-          // Si sale del viewport, volver al centro
-          if (!isVisible || !hasMinVisible) {
-            mouseX.set(0);
-            mouseY.set(0);
-          }
-        });
-      },
-      {
-        threshold: [0, 0.01, 0.1, 0.5, 1],
-        rootMargin: "0px"
-      }
-    );
-
-    observer.observe(container);
-
-    return () => {
-      if (container) {
-        observer.unobserve(container);
-      }
-    };
-  }, [mouseX, mouseY]);
-
-  // Tracking del mouse en toda la ventana cuando está en viewport
-  React.useEffect(() => {
-    if (!isInViewport) return;
-
-    const handleMouseMove = (e) => {
-      if (!containerRef.current) return;
-      
-      const rect = containerRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      
-      // Calcular la distancia del mouse desde el centro de la imagen
-      const deltaX = (e.clientX - centerX) / rect.width;
-      const deltaY = (e.clientY - centerY) / rect.height;
-      
-      // Movimiento reducido para no pisar el texto (15px máximo)
-      mouseX.set(deltaX * 15);
-      mouseY.set(deltaY * 15);
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, [isInViewport, mouseX, mouseY]);
-
-  return (
-    <motion.div
-      ref={containerRef}
-      style={{
-        width: "100%",
-        height: "100%",
-        position: "relative"
-      }}
-    >
-      <motion.img
-        src={src}
-        srcSet={finalSrcSet}
-        sizes={sizes}
-        alt={alt}
-        width={1200}
-        height={1200}
-        loading="lazy"
-        decoding="async"
-        style={{
-          x: smoothX,
-          y: smoothY,
-          width: "100%",
-          height: "100%",
-          objectFit: "contain",
-          display: "block"
-        }}
-      />
-    </motion.div>
   );
 };
 
@@ -770,25 +658,18 @@ const Multimedia = () => {
         </div>
       </div>
 
-      <div className="full-container black-bg productos-multimedia">
+      <div className="productos-container black-bg">
         <div className="container">
-          <div className="grid-productos-multimedia">
-            <div className="grid-item-video-multimedia">
-              {/* Imagen normal en mobile, MouseTrackingImage desde 1280px */}
-              <div className="image-mobile-only">
-                <img 
-                  src={`${base}assets/ofi.webp`} 
-                  alt="Multimedia"
-                  className="productos-image"
+          <div className="grid-productos">
+            <div className="grid-item-img">
+              <picture>
+                <source
+                  srcSet={`${base}assets/img/multimedia.webp`}
+                  type="image/webp"
+                  media="(min-width: 951px)"
                 />
-              </div>
-              <div className="image-desktop-only">
-                <MouseTrackingImage 
-                  src={`${base}assets/ofi.webp`} 
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                  alt="Multimedia" 
-                />
-              </div>
+                <img src={`${base}assets/img/multimedia-mobile.webp`} alt="Multimedia" />
+              </picture>
             </div>
             <div className="grid-item-productos-multimedia">
               <ProductosItemsList />
@@ -796,7 +677,7 @@ const Multimedia = () => {
           </div>
         </div>
       </div>
-
+      
       <div className="full-container bg-yellow-2 entregables-container">
         <div className="container">
           <h3 className="title-entregables">Entregables</h3>

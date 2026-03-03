@@ -27,10 +27,15 @@
 }
 
 header.full-container{
-  z-index: 100;
-  position: static;
-  /* Removido transform: none !important para permitir que Framer Motion funcione correctamente */
-  /* Los estilos de background, backdrop-filter y box-shadow se controlan con Framer Motion */
+  z-index: 99999;
+  /* position: static por defecto (mobile), sticky en desktop */
+}
+
+@media (min-width: 768px) {
+  header.full-container{
+    position: sticky;
+    top: 0;
+  }
 }
 
 .logo-img{

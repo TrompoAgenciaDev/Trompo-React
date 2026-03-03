@@ -97,9 +97,8 @@ body {
 }
 
 #root {
-  /* overflow-x: hidden; // Removido para no romper position: sticky */
   background-color: #ffffff;
-  overflow: hidden;
+  overflow-x: clip; /* clip permite sticky; hidden lo rompe */
 }
 
 main {
@@ -122,6 +121,12 @@ video {
   width: 100%;
   -o-object-fit: cover;
   object-fit: cover;
+}
+
+.hero-video {
+  width: 100% !important;
+  -o-object-fit: none;
+  object-fit: none;
 }
 
 .full-container {

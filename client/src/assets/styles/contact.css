@@ -1,16 +1,28 @@
+/* ===== MOBILE FIRST - Base = mobile ===== */
+
+.contact-section--contacto,
+.contact-section--form {
+  background-image: var(--contact-bg-mobile);
+}
+
 .contact-section {
-  background-size: cover;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background-size: 97%;
+  -webkit-background-size: 97%;
+  -moz-background-size: 97%;
+  -o-background-size: 97%;
   background-position: center center;
+  -webkit-background-position: center center;
   background-repeat: no-repeat;
+  -webkit-background-repeat: no-repeat;
   padding: 50px 0;
+  width: 100vw;
   width: 100svw;
   position: relative;
   margin-left: calc((100svw - 100%) / -2);
   margin-right: calc((100svw - 100%) / -2);
   box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   overflow: hidden;
 }
 
@@ -34,6 +46,7 @@
   flex-direction: column;
   gap: 30px;
   background: #FEE070;
+  -webkit-box-shadow: 0 4px 20px 5px rgba(0, 0, 0, 0.25);
   box-shadow: 0 4px 20px 5px rgba(0, 0, 0, 0.25);
   padding: 20px;
 }
@@ -74,15 +87,34 @@
   font-style: italic;
 }
 
+/* ===== min-width: 768px ===== */
 
-@media (min-width:768px) {
+@media (min-width: 768px) {
   .grid-item-icon {
     width: 60px;
     height: 60px;
   }
 }
 
-@media (min-width:1280px) {
+/* ===== min-width: 1024px ===== */
+
+@media (min-width: 1024px) {
+  .contact-section--contacto,
+  .contact-section--form {
+    background-image: var(--contact-bg-desktop);
+  }
+
+  .contact-section {
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+  }
+}
+
+/* ===== min-width: 1280px ===== */
+
+@media (min-width: 1280px) {
   .grid-contact {
     padding: 50px;
   }
@@ -94,5 +126,13 @@
   .grid-item-icon {
     width: 120px;
     height: 120px;
+  }
+}
+
+
+@media (min-width: 1440px) {
+  .contact-section{
+    background-size: 98%;
+    min-height: 1050px;
   }
 }

@@ -226,6 +226,14 @@ p {
   box-sizing: border-box;
 }
 
+.service-item-home .service-title-link {
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
 .service-item-home-content h3 {
   color: #ffffff;
   font-weight: 400;
@@ -346,7 +354,9 @@ p {
 /* Semicircular Video Slider Container - Mobile First */
 
 
-
+.home-new-image{
+  padding: 7px 5px;
+}
 
 
 /* ============================================
@@ -397,6 +407,9 @@ p {
     color: #FEE070;
   }
 
+  .home-new-image{
+    padding: 12px 10px;
+  }
 }
 
 @media (min-width: 1024px) {

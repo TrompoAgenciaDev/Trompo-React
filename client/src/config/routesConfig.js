@@ -35,7 +35,6 @@ const routesConfig = {
     { path: "/nosotros", label: "nosotros", Component: Nosotros },
     { path: "", label: "servicios", Component: Servicios },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
-    { path: "/faqs", label: "faqs", Component: Faqs },
   ],
 
   menuMobile: [
@@ -68,8 +67,6 @@ const routesConfig = {
     { path: "/", label: "inicio", Component: Home },
     { path: "/nosotros", label: "nosotros", Component: Nosotros },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
-    { path: "/faqs", label: "FAQs", Component: Faqs },
-    { path: "/terms", label: "Términos y condiciones", Component: Terms },
   ],
 
 
@@ -93,7 +90,6 @@ const routesConfig = {
     { path: "/", label: "inicio", Component: Home },
     { path: "/nosotros", label: "nosotros", Component: Nosotros },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
-    { path: "/faqs", label: "Preguntas Frecuentes", Component: Faqs },
   ],
   legal: [
     { path: "/terms", label: "términos y condiciones", Component: Terms },
@@ -106,8 +102,6 @@ const routesConfig = {
     { path: "/gracias", label: "gracias", Component: Gracias },
     { path: "/primavera", label: "Landing Primavera", Component: Primavera },
     { path: "/clear-cache", label: "Limpiar Caché", Component: ClearCache },
-    { path: "/faqs", label: "faqs", Component: Faqs },
-    { path: "/terms", label: "Términos y condiciones", Component: Terms },
   ],
 
 };

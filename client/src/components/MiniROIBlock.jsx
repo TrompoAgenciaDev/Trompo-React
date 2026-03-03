@@ -62,18 +62,20 @@ const MiniROIBlock = () => {
 
   return (
     <div className="roi-calculator-wrap">
-      <h2>Antes de avanzar, proyectemos el escenario.</h2>
       <div className="roi-calculator-layout">
-      <div className="roi-calculator-texts">
-        <h3>Simulador de Rentabilidad Publicitaria</h3>
-        <h5 className="roi-calculator-subtitle">Proyectá el impacto real de tu inversión en medios.</h5>
-        <div className="roi-calculator-description">
-          <p>Antes de escalar una campaña, entendemos la ecuación completa.</p>
-          <p>Este simulador te permite visualizar cómo influyen variables clave como inversión, CPL, tasa de cierre y ticket promedio en tu rentabilidad proyectada.</p>
-          <p>No es una promesa: es una aproximación estratégica basada en datos.</p>
-          <p>La diferencia entre gastar y crecer está en la matemática.</p>
+        <div className="roi-calculator-texts">
+          <h3>Antes de avanzar, proyectemos el escenario.</h3>
+          <div className="container text-calculator">
+            <h4 className="roi-calculator-title">Simulador de Rentabilidad Publicitaria</h4>
+            <h6 className="roi-calculator-subtitle">Proyectá el impacto real de tu inversión en medios.</h6>
+            <div className="roi-calculator-description">
+              <p>Antes de escalar una campaña, entendemos la ecuación completa.</p>
+              <p>Este simulador te permite visualizar cómo influyen variables clave como inversión, CPL, tasa de cierre y ticket promedio en tu rentabilidad proyectada.</p>
+              <p>No es una promesa: es una aproximación estratégica basada en datos.</p>
+              <p>La diferencia entre gastar y crecer está en la matemática.</p>
+            </div>
+          </div>
         </div>
-      </div>
 
       <div className="roi-calculator-block bg-yellow-2">
         <div className="roi-calculator-body">
@@ -180,10 +182,10 @@ const MiniROIBlock = () => {
         <div className="roi-calculator-cta-wrap">
           <p className="roi-calculator-cta-text">¿Querés validar este escenario con datos reales?</p>
           <a href="#contact" className="roi-calculator-cta">Coordinar análisis estratégico</a>
+          </div>
+            <p className="roi-calculator-closing">El crecimiento sostenible comienza con claridad.</p>
+          </div>
         </div>
-        <p className="roi-calculator-closing">El crecimiento sostenible comienza con claridad.</p>
-        </div>
-      </div>
       </div>
     </div>
   );

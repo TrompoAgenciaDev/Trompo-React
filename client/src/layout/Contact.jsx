@@ -4,13 +4,30 @@ import FormIndex from "../components/forms/FormIndex";
 
 function Contact({ location = "home", form }) {
   const base = import.meta.env.BASE_URL;
-  const bg = `url(${base}assets/contact/form-bg.webp)`;
+
+  const getBgStyle = () => {
+    if (location === "contacto") {
+      return {
+        "--contact-bg-desktop": `url(${base}assets/img/contacto.webp)`,
+        "--contact-bg-mobile": `url(${base}assets/img/contacto-mobile.webp)`,
+      };
+    }else{
+      return { 
+        "--contact-bg-desktop": `url(${base}assets/img/form.webp)`,
+        "--contact-bg-mobile": `url(${base}assets/img/form-mobile.webp)`,
+      };
+    }
+  };
+
+  const sectionClass = location === "contacto"
+    ? "full-container contact-section contact-section--contacto black-bg"
+    : "full-container contact-section contact-section--form black-bg";
 
   return (
     <section
       id="contact"
-      className="full-container contact-section"
-      style={{ backgroundImage: bg }}
+      className={sectionClass}
+      style={getBgStyle()}
     >
       <div className="container">
         <div className="grid-contact">

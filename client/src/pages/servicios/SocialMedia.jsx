@@ -1,5 +1,5 @@
 import React, { useRef, useState, useLayoutEffect } from "react";
-import { motion, useScroll, useTransform, useMotionValueEvent, useSpring, useMotionValue, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValueEvent, useInView, useSpring } from "framer-motion";
 import Contact from "../../layout/Contact.jsx";
 import StaticHero from "../../components/StaticHero.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
@@ -8,85 +8,13 @@ import AutoSlider from "../../components/sliders/AutoSlider.jsx";
 import EngagementCalculator from "../../components/EngagementCalculator.jsx";
 //styles
 import "../../assets/styles/social-media.css";
-import "../../assets/styles/multimedia.css";
-import "../../assets/styles/paid-media.css";
+import "../../assets/styles/entregables.css";
 import "../../assets/styles/beneficios.css";
 import "@as/hero.css";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
-
-// Componente para imagen con tracking del mouse
-const MouseTrackingImage = ({ src, srcSet, sizes, alt = "" }) => {
-  const containerRef = useRef(null);
-  const [isInViewport, setIsInViewport] = React.useState(false);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const smoothX = useSpring(mouseX, { stiffness: 150, damping: 15 });
-  const smoothY = useSpring(mouseY, { stiffness: 150, damping: 15 });
-  const hasValidSrcSet = srcSet && srcSet.split(",").length > 1;
-  const finalSrcSet = hasValidSrcSet ? srcSet : undefined;
-
-  React.useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const isVisible = entry.isIntersecting && entry.intersectionRatio > 0;
-          const rect = entry.boundingClientRect;
-          const viewportHeight = window.innerHeight;
-          const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
-          setIsInViewport(isVisible && visibleHeight >= 10);
-        });
-      },
-      { threshold: 0, rootMargin: "0px" }
-    );
-    observer.observe(container);
-    return () => observer.disconnect();
-  }, []);
-
-  React.useEffect(() => {
-    if (!isInViewport) return;
-    const handleMouseMove = (e) => {
-      const container = containerRef.current;
-      if (!container) return;
-      const rect = container.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const deltaX = (e.clientX - centerX) / rect.width;
-      const deltaY = (e.clientY - centerY) / rect.height;
-      mouseX.set(deltaX * 15);
-      mouseY.set(deltaY * 15);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [isInViewport, mouseX, mouseY]);
-
-  return (
-    <motion.div ref={containerRef} style={{ width: "100%", height: "100%", position: "relative" }}>
-      <motion.img
-        src={src}
-        srcSet={finalSrcSet}
-        sizes={sizes}
-        alt={alt}
-        width={1200}
-        height={1200}
-        loading="lazy"
-        decoding="async"
-        style={{
-          x: smoothX,
-          y: smoothY,
-          width: "100%",
-          height: "100%",
-          objectFit: "contain",
-          display: "block",
-        }}
-      />
-    </motion.div>
-  );
-};
 
 const EntregableItem = ({ number, title, children, isLast, itemRef, nextItemRef }) => {
   const isInView = useInView(itemRef, { once: false, amount: 0.1 });
@@ -369,7 +297,7 @@ const SocialMedia = () => {
         mobilePoster={`${base}assets/hero/mobile/home.webp`}
       />
 
-      <ServiceTitle titulo="Social Media" tituloReplace="cultura de marca" subtitulo="Dimensiones del patrón y momentos que conectan y dejan una imagen audaz." />
+      <ServiceTitle titulo="Social Media" tituloReplace="cultura de marca" subtitulo="Diseñamos, gestionamos y  optimizamos experiencias sociales que se integran con toda tu estrategia digital para transformar presencia en impacto real." />
 
       <div ref={animatedTextContainerRef} className="full-container white-bg">
         <div className="container animated-text-container">
@@ -388,24 +316,18 @@ const SocialMedia = () => {
         </div>
       </div>
 
-      <div className="full-container black-bg productos-multimedia">
+      <div className="productos-container black-bg">
         <div className="container">
-          <div className="grid-productos-multimedia">
-            <div className="grid-item-video-multimedia">
-              <div className="image-mobile-only">
-                <img
-                  src={`${base}assets/ofi.webp`}
-                  alt="Social Media"
-                  className="productos-image"
+          <div className="grid-productos">
+            <div className="grid-item-img">
+              <picture>
+                <source
+                  srcSet={`${base}assets/img/social.webp`}
+                  type="image/webp"
+                  media="(min-width: 951px)"
                 />
-              </div>
-              <div className="image-desktop-only">
-                <MouseTrackingImage
-                  src={`${base}assets/ofi.webp`}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                  alt="Social Media"
-                />
-              </div>
+                <img src={`${base}assets/img/social-mobile.webp`} alt="Social Media" />
+              </picture>
             </div>
             <div className="grid-item-productos-multimedia">
               <ProductosItemsListSocialMedia />

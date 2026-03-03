@@ -69,78 +69,38 @@ const StaticHero = ({
   // NUNCA desaparece, permanece en el DOM durante toda la vida de la página
   return (
     <div data-hero-container className={className}>
-      {/* POSTER: Un solo elemento LCP, nunca desaparece */}
-      <picture>
-        <source 
-          media="(min-width: 768px)" 
-          srcSet={desktopPoster}
-        />
-        <img
-          src={mobilePoster}
-          alt=""
-          width={1920}
-          height={1080}
+      <div className="hero-video-wrapper">
+        <video
+          ref={videoRef}
+          className="hero-video"
+          poster={desktopPoster}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
           fetchPriority="high"
-          loading="eager"
-          decoding="async"
-          className="hero-poster-img"
+          disablePictureInPicture
+          controlsList="nodownload noremoteplayback"
           style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            zIndex: 1,
-            // NUNCA display: none, NUNCA opacity: 0
-            // El poster permanece visible siempre
-            // width y height definidos para evitar CLS
+            opacity: 0,
+            transition: 'opacity 0.5s ease',
           }}
-        />
-      </picture>
-      
-      {/* VIDEO: Discoverable desde HTML inicial para LCP optimization */}
-      {/* Sources renderizados desde el inicio para que sean discoverable */}
-      <video
-        ref={videoRef}
-        className="hero-video"
-        width={1920}
-        height={1080}
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        fetchPriority="high"
-        disablePictureInPicture
-        controlsList="nodownload noremoteplayback"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          zIndex: 2,
-          opacity: 0,
-          transition: 'opacity 0.5s ease',
-          // El video va encima del poster pero no lo oculta
-          // El poster permanece visible debajo (aunque cubierto visualmente)
-        }}
-      >
-        {/* Desktop video - discoverable desde HTML inicial */}
-        <source 
-          src={desktopSrc}
-          type={desktopSrc.endsWith('.webm') ? 'video/webm' : 'video/mp4'}
-          media="(min-width: 768px)"
-        />
-        {/* Mobile video - discoverable desde HTML inicial */}
+        >
+        {/* Mobile video primero - en mobile el navegador toma el primer source que matchee */}
         <source 
           src={mobileSrc}
           type={mobileSrc.endsWith('.webm') ? 'video/webm' : 'video/mp4'}
           media="(max-width: 767px)"
         />
-      </video>
+        {/* Desktop video */}
+        <source 
+          src={desktopSrc}
+          type={desktopSrc.endsWith('.webm') ? 'video/webm' : 'video/mp4'}
+          media="(min-width: 768px)"
+        />
+        </video>
+      </div>
     </div>
   );
 };

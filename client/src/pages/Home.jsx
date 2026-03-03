@@ -1,4 +1,5 @@
 import { lazy, Suspense, useState } from "react";
+import { Link } from "react-router-dom";
 //styles
 import "../assets/styles/home.css";
 import "../assets/styles/beneficios.css";
@@ -81,25 +82,51 @@ const ServiceItem = ({ title, subtitle, subtitles, link, links }) => {
       >
         <div className="service-item-home-content">
           <div className="service-title-wrapper">
-            <motion.h3
-              initial={{ y: '0%' }}
-              animate={{
-                y: isHovered ? '-100%' : '0%'
-              }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              {title}
-            </motion.h3>
-            <motion.h3
-              className="service-title-hidden"
-              initial={{ y: '100%' }}
-              animate={{
-                y: isHovered ? '0%' : '100%'
-              }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              {title}
-            </motion.h3>
+            {link ? (
+              <Link to={link} className="service-title-link">
+                <motion.h3
+                  initial={{ y: '0%' }}
+                  animate={{
+                    y: isHovered ? '-100%' : '0%'
+                  }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                  {title}
+                </motion.h3>
+                <motion.h3
+                  className="service-title-hidden"
+                  initial={{ y: '100%' }}
+                  animate={{
+                    y: isHovered ? '0%' : '100%'
+                  }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                  {title}
+                </motion.h3>
+              </Link>
+            ) : (
+              <>
+                <motion.h3
+                  initial={{ y: '0%' }}
+                  animate={{
+                    y: isHovered ? '-100%' : '0%'
+                  }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                  {title}
+                </motion.h3>
+                <motion.h3
+                  className="service-title-hidden"
+                  initial={{ y: '100%' }}
+                  animate={{
+                    y: isHovered ? '0%' : '100%'
+                  }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                  {title}
+                </motion.h3>
+              </>
+            )}
           </div>
           <div className="service-subtitles-container">
             {subtitles.map((sub, index) => (
@@ -129,27 +156,53 @@ const ServiceItem = ({ title, subtitle, subtitles, link, links }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="service-item-home-content">
+        <div className="service-item-home-content">
         <div className="service-title-wrapper">
-          <motion.h3
-            initial={{ y: '0%' }}
-            animate={{
-              y: isHovered ? '-100%' : '0%'
-            }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            {title}
-          </motion.h3>
-          <motion.h3
-            className="service-title-hidden"
-            initial={{ y: '100%' }}
-            animate={{
-              y: isHovered ? '0%' : '100%'
-            }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            {title}
-          </motion.h3>
+          {link ? (
+            <Link to={link} className="service-title-link">
+              <motion.h3
+                initial={{ y: '0%' }}
+                animate={{
+                  y: isHovered ? '-100%' : '0%'
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                {title}
+              </motion.h3>
+              <motion.h3
+                className="service-title-hidden"
+                initial={{ y: '100%' }}
+                animate={{
+                  y: isHovered ? '0%' : '100%'
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                {title}
+              </motion.h3>
+            </Link>
+          ) : (
+            <>
+              <motion.h3
+                initial={{ y: '0%' }}
+                animate={{
+                  y: isHovered ? '-100%' : '0%'
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                {title}
+              </motion.h3>
+              <motion.h3
+                className="service-title-hidden"
+                initial={{ y: '100%' }}
+                animate={{
+                  y: isHovered ? '0%' : '100%'
+                }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                {title}
+              </motion.h3>
+            </>
+          )}
         </div>
         <p className="service-subtitle-text">{subtitle}</p>
       </div>
@@ -205,6 +258,22 @@ const Home = () => {
         backgroundClass=""
       />
 
+      <div className="full-container black-bg home-new-image">
+        <picture>
+          <source
+            srcSet={`${base}assets/img/home-mobile.webp`}
+            type="image/webp"
+            media="(max-width: 767px)"
+          />
+          <source
+            srcSet={`${base}assets/img/home.webp`}
+            type="image/webp"
+            media="(min-width: 768px)"
+          />
+          <img src={`${base}assets/home/desktop.webp`} alt="" />
+        </picture>
+      </div>
+
       <div className="full-container services-section-home black-bg">
         <div className="container">
           <h4 style={{ color: '#ffffff' }}>
@@ -214,22 +283,27 @@ const Home = () => {
         <div className="container">
           <ServiceItem
             title="Diseño"
+            link="/servicios/disenio"
             subtitles={["Identidad y sistema visual que ordena, diferencia y profesionaliza."]}
           />
           <ServiceItem
             title="Multimedia"
+            link="/servicios/multimedia"
             subtitles={["Motion, edición y producción audiovisual para comunicar con impacto."]}
           />
           <ServiceItem
             title="Desarrollo Web"
+            link="/servicios/desarrollo"
             subtitles={["Desarrollo Web que posiciona, convierte y escala."]}
           />
           <ServiceItem
-            title="Campañas"
+            title="Paid Media"
+            link="/servicios/paid-media"
             subtitle={["Google, Meta, LinkedIn Ads, performance y posicionamiento."]}
           />
           <ServiceItem
             title="Redes Sociales"
+            link="/servicios/social-media"
             subtitle={["Contenido, comunidad y narrativa diaria que construye cultura de marca."]}
           />
         </div>
@@ -296,6 +370,7 @@ const Home = () => {
       </div>
 
 
+      {/*
       <MenuHomeSectionDuplicate />
 
       <div className="full-container infinite-slider-container">
@@ -319,6 +394,7 @@ const Home = () => {
           "Desarrollo"
         ]} />
       </div>
+      */}
 
       <Suspense fallback={null}>
         <Contact form="home" />

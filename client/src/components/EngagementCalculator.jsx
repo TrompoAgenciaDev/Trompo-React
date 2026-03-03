@@ -71,16 +71,20 @@ const EngagementCalculator = () => {
 
   return (
     <div className="engagement-calculator-wrap">
-      <h3>Antes de avanzar, proyectemos el escenario.</h3>
       <div className="engagement-calculator-layout">
-        <div className="engagement-calculator-texts">
-          <h3>Simulador de Impacto Social</h3>
-          <h6 className="engagement-calculator-subtitle">Medí cómo tu comunidad puede transformarse en oportunidad.</h6>
-          <div className="engagement-calculator-description">
-            <p>Las redes no son solo alcance, son percepción, influencia y conversión asistida.</p>
-            <p>Este simulador estima cómo el engagement y la tasa de interacción pueden impactar en generación de leads u oportunidades comerciales cuando el ecosistema está bien estructurado.</p>
-            <p>Porque la conversación correcta también tiene retorno.</p>
+        <div className="engagement-calculator-texts">          
+          <div></div>
+
+          <div className="container text-calculator">
+            <h4>Simulador de Impacto Social</h4>
+            <h6 className="engagement-calculator-subtitle">Medí cómo tu comunidad puede transformarse en oportunidad.</h6>
+            <div className="engagement-calculator-description">
+              <p>Las redes no son solo alcance, son percepción, influencia y conversión asistida.</p>
+              <p>Este simulador estima cómo el engagement y la tasa de interacción pueden impactar en generación de leads u oportunidades comerciales cuando el ecosistema está bien estructurado.</p>
+              <p>Porque la conversación correcta también tiene retorno.</p>
+            </div>
           </div>
+          
         </div>
 
         <div className="engagement-calculator-block bg-yellow-2">

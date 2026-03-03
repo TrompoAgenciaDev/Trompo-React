@@ -10,6 +10,7 @@ import AutoSlider from "../../components/sliders/AutoSlider.jsx";
 import MiniROIBlock from "../../components/MiniROIBlock.jsx";
 //styles
 import "../../assets/styles/paid-media.css";
+import "../../assets/styles/entregables.css";
 import "../../assets/styles/beneficios.css";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
@@ -60,74 +61,6 @@ const PaidMediaItem = ({ title, subtitle, description, footerText, svgStroke = "
         </div>
       </div>
     </div>
-  );
-};
-
-// Componente para imagen con tracking del mouse (copiado de Disenio.jsx)
-const MouseTrackingImage = ({ src, srcSet, sizes, alt = "" }) => {
-  const containerRef = useRef(null);
-  const [isInViewport, setIsInViewport] = React.useState(false);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const smoothX = useSpring(mouseX, { stiffness: 150, damping: 15 });
-  const smoothY = useSpring(mouseY, { stiffness: 150, damping: 15 });
-  const hasValidSrcSet = srcSet && srcSet.split(',').length > 1;
-  const finalSrcSet = hasValidSrcSet ? srcSet : undefined;
-
-  React.useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const isVisible = entry.isIntersecting && entry.intersectionRatio > 0;
-          const rect = entry.boundingClientRect;
-          const viewportHeight = window.innerHeight;
-          const visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
-          const hasMinVisible = visibleHeight >= 10;
-          setIsInViewport(isVisible && hasMinVisible);
-          if (!isVisible || !hasMinVisible) {
-            mouseX.set(0);
-            mouseY.set(0);
-          }
-        });
-      },
-      { threshold: [0, 0.01, 0.1, 0.5, 1], rootMargin: "0px" }
-    );
-    observer.observe(container);
-    return () => { if (container) observer.unobserve(container); };
-  }, [mouseX, mouseY]);
-
-  React.useEffect(() => {
-    if (!isInViewport) return;
-    const handleMouseMove = (e) => {
-      if (!containerRef.current) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const deltaX = (e.clientX - centerX) / rect.width;
-      const deltaY = (e.clientY - centerY) / rect.height;
-      mouseX.set(deltaX * 15);
-      mouseY.set(deltaY * 15);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [isInViewport, mouseX, mouseY]);
-
-  return (
-    <motion.div ref={containerRef} style={{ width: "100%", height: "100%", position: "relative" }}>
-      <motion.img
-        src={src}
-        srcSet={finalSrcSet}
-        sizes={sizes}
-        alt={alt}
-        width={1200}
-        height={1200}
-        style={{ x: smoothX, y: smoothY, width: "100%", height: "100%", objectFit: "contain", display: "block" }}
-        loading="lazy"
-        decoding="async"
-      />
-    </motion.div>
   );
 };
 
@@ -392,7 +325,7 @@ const Campaigns = () => {
         />
       </div>
       
-      <ServiceTitle titulo="Paid Media" tituloReplace="inteligencia estratégica" subtitulo="Dimensiones del patrón y momentos que conectan y dejan una imagen audaz." />
+      <ServiceTitle titulo="Paid Media" tituloReplace="inteligencia estratégica" subtitulo='En Trompo, Paid Media no es "hacer campañas". Es diseñar sistemas de adquisición, optimización y escalamiento sostenido.'/>
 
       <div ref={animatedTextContainerRef} className="full-container white-bg">
         <div className="container animated-text-container">
@@ -412,30 +345,23 @@ const Campaigns = () => {
             ))}
           </motion.span>
         </div>
-      </div>      
+      </div>
 
-      <div className="full-container black-bg productos">
+      <div className="productos-container black-bg">
         <div className="container">
           <div className="grid-productos">
             <div className="grid-item-productos">
               <EntregableItemsList />
             </div>
-            <div className="grid-item-video">
-              {/* Imagen normal en mobile, MouseTrackingImage desde 1280px */}
-              <div className="image-mobile-only">
-                <img 
-                  src={`${base}assets/metegol.webp`} 
-                  alt="Diseño"
-                  className="productos-image"
+            <div className="grid-item-img">
+              <picture>
+                <source
+                  srcSet={`${base}assets/img/paid-media.webp`}
+                  type="image/webp"
+                  media="(min-width: 951px)"
                 />
-              </div>
-              <div className="image-desktop-only">
-                <MouseTrackingImage 
-                  src={`${base}assets/metegol.webp`} 
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                  alt="Diseño" 
-                />
-              </div>
+                <img src={`${base}assets/img/paid-media-mobile.webp`} alt="Paid Media" />
+              </picture>
             </div>
           </div>
         </div>
@@ -904,6 +830,6 @@ export default Campaigns;
               footerText="→ Ideal para crecer, testear y acelerar resultados."
               svgStroke="#FED332"
             />
-          </div>
-        </div>
+            </div>
+            </div>
       </div> */}

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { motion, useScroll, useTransform, useInView, useMotionValueEvent, useSpring, useMotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, useInView, useMotionValueEvent, useSpring } from "framer-motion";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
 import StaticHero from "../../components/StaticHero.jsx";
@@ -8,6 +8,7 @@ import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 //styles
 import "@as/hero.css";
 import "../../assets/styles/design.css";
+import "../../assets/styles/entregables.css";
 import "../../assets/styles/branding-video-carrusel.css";
 import "../../assets/styles/beneficios.css";
 
@@ -894,28 +895,21 @@ const Disenio = () => {
         </div>
       </div>
 
-      <div className="full-container black-bg productos">
+      <div className="productos-container black-bg">
         <div className="container">
           <div className="grid-productos">
             <div className="grid-item-productos">
               <EntregableItemsList />
             </div>
-            <div className="grid-item-video">
-              {/* Imagen normal en mobile, MouseTrackingImage desde 1280px */}
-              <div className="image-mobile-only">
-                <img 
-                  src={`${base}assets/metegol.webp`} 
-                  alt="Diseño"
-                  className="productos-image"
+            <div className="grid-item-img">
+              <picture>
+                <source
+                  srcSet={`${base}assets/img/disenio.webp`}
+                  type="image/webp"
+                  media="(min-width: 951px)"
                 />
-              </div>
-              <div className="image-desktop-only">
-                <MouseTrackingImage 
-                  src={`${base}assets/metegol.webp`} 
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                  alt="Diseño" 
-                />
-              </div>
+                <img src={`${base}assets/img/disenio-mobile.webp`} alt="Diseño" />
+              </picture>
             </div>
           </div>
         </div>

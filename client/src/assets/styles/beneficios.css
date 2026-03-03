@@ -78,7 +78,7 @@
     .grid-beneficios{
         -ms-grid-columns: 1fr 1fr 1fr 1fr;
         grid-template-columns: repeat(4, 1fr);
-        gap: 50px;
+        gap: 20px;
     }
 
     .grid-item-beneficios{
