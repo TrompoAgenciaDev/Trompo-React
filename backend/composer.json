@@ -1,14 +1,8 @@
 {
-  "name": "trompo/backup-system",
-  "description": "Sistema de backup paralelo para formularios",
-  "type": "project",
+  "name": "trompo/form-backup",
+  "description": "Backup de envíos de formulario y notificación por email",
   "require": {
     "php": ">=7.4",
     "phpmailer/phpmailer": "^6.8"
-  },
-  "autoload": {
-    "psr-4": {
-      "Trompo\\Backup\\": "src/"
-    }
   }
 }

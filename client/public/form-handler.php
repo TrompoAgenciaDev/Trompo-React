@@ -1,14 +1,20 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+/**
+ * Form handler: envía los datos del formulario a Brevo.
+ * Carga .env desde rutas compatibles con open_basedir en hosting compartido.
+ */
+ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
 header('Content-Type: application/json; charset=utf-8');
 
-// === CARGAR .ENV MANUALMENTE ===
+// Cargar .env: solo rutas permitidas por open_basedir (un nivel arriba o mismo directorio)
 $envPath = __DIR__ . '/../.env';
-if (file_exists($envPath)) {
-    $vars = parse_ini_file($envPath, false, INI_SCANNER_RAW);
+if (!@file_exists($envPath)) {
+    $envPath = __DIR__ . '/.env';
+}
+if (@file_exists($envPath)) {
+    $vars = @parse_ini_file($envPath, false, INI_SCANNER_RAW);
     if ($vars !== false) {
         foreach ($vars as $key => $value) {
             putenv("$key=$value");
@@ -18,7 +24,6 @@ if (file_exists($envPath)) {
 
 $brevoApiKey = getenv('BREVO_API_KEY') ?: '';
 
-// === MAPEO DE LISTAS SEGÚN LOCATION ===
 $listMap = [
     "home"        => getenv('BREVO_LIST_HOME'),
     "desarrollo"  => getenv('BREVO_LIST_DESARROLLO'),
@@ -28,7 +33,6 @@ $listMap = [
     "creatividad" => getenv('BREVO_LIST_CREATIVIDAD'),
 ];
 
-// === CAPTURAR DATOS DEL POST ===
 $nombre    = $_POST['NOMBRE'] ?? '';
 $apellidos = $_POST['APELLIDOS'] ?? '';
 $email     = $_POST['EMAIL'] ?? '';
@@ -38,7 +42,6 @@ $smsNum    = $_POST['SMS'] ?? '';
 $consulta  = $_POST['CONSULTA'] ?? '';
 $location  = $_POST['LOCATION'] ?? 'home';
 
-// === Validar email requerido por Brevo ===
 if (empty($email)) {
     echo json_encode([
         "success" => false,
@@ -47,10 +50,8 @@ if (empty($email)) {
     exit;
 }
 
-// === Determinar listId por location ===
 $listId = $listMap[$location] ?? $listMap['home'];
 
-// === Preparar payload para Brevo ===
 $payload = [
     "updateEnabled" => true,
     "email" => $email,
@@ -61,12 +62,11 @@ $payload = [
         "SMS"       => $smsCode . $smsNum,
         "WHATSAPP"  => $smsCode . $smsNum,
         "CONSULTA"  => $consulta,
-        "ORIGEN"    => $location, // opcional, para rastrear desde Brevo
+        "ORIGEN"    => $location,
     ],
     "listIds" => [(int)$listId]
 ];
 
-// === Enviar a Brevo ===
 $ch = curl_init("https://api.brevo.com/v3/contacts");
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "Content-Type: application/json",

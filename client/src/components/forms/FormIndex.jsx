@@ -9,9 +9,7 @@ export default function FormIndex({ location = "home" }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    submitForm(formData);
     formData.append("LOCATION", location);
-
     submitForm(formData);
   };
 

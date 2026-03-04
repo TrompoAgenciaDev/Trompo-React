@@ -1,0 +1,15 @@
+# Trompo Agencia - React SPA
+# https://trompoagencia.com
+
+User-agent: *
+Allow: /
+
+# Endpoints y rutas que no deben indexarse
+Disallow: /api/
+Disallow: /clear-cache
+Disallow: /gracias
+Disallow: /maintenance
+Disallow: /not-found
+
+# Sitemap
+Sitemap: https://trompoagencia.com/sitemap.xml
