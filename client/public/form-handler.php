@@ -42,6 +42,45 @@ $smsNum    = $_POST['SMS'] ?? '';
 $consulta  = $_POST['CONSULTA'] ?? '';
 $location  = $_POST['LOCATION'] ?? 'home';
 
+// === Validar reCAPTCHA v2 solo si se envía token (opcional en servidor) ===
+$recaptchaSecret = getenv('RECAPTCHA_SECRET') ?: '';
+$recaptchaToken = trim($_POST['g-recaptcha-response'] ?? '');
+if ($recaptchaSecret !== '' && $recaptchaToken !== '') {
+    $verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
+    $verifyPayload = http_build_query([
+        'secret' => $recaptchaSecret,
+        'response' => $recaptchaToken,
+        'remoteip' => $_SERVER['REMOTE_ADDR'] ?? ''
+    ]);
+
+    $vh = curl_init($verifyUrl);
+    curl_setopt($vh, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($vh, CURLOPT_POST, true);
+    curl_setopt($vh, CURLOPT_POSTFIELDS, $verifyPayload);
+    curl_setopt($vh, CURLOPT_HTTPHEADER, ["Content-Type: application/x-www-form-urlencoded"]);
+    $verifyResponse = curl_exec($vh);
+    $verifyErr = $verifyResponse === false ? curl_error($vh) : '';
+    curl_close($vh);
+
+    if ($verifyResponse === false) {
+        echo json_encode([
+            "success" => false,
+            "error"   => "Error al verificar captcha: " . $verifyErr
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    $verifyJson = json_decode($verifyResponse, true);
+    if (!is_array($verifyJson) || empty($verifyJson['success'])) {
+        echo json_encode([
+            "success" => false,
+            "error"   => "Captcha inválido"
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+}
+// Si no hay RECAPTCHA_SECRET o no se envió token, se permite el envío (sin validar captcha)
+
 if (empty($email)) {
     echo json_encode([
         "success" => false,

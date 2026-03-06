@@ -180,6 +180,48 @@ try {
 
     stepLog($logFile, 'parse_fields', 'OK', 'formId=' . $formId);
 
+    // Validar reCAPTCHA v2 solo si se envía token (opcional en servidor).
+    $recaptchaSecret = getenv('RECAPTCHA_SECRET') ?: '';
+    $recaptchaToken = isset($fields['g-recaptcha-response']) ? trim((string) $fields['g-recaptcha-response']) : '';
+    if ($recaptchaSecret !== '' && $recaptchaToken !== '') {
+        $verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
+        $verifyPayload = http_build_query([
+            'secret' => $recaptchaSecret,
+            'response' => $recaptchaToken,
+            'remoteip' => $_SERVER['REMOTE_ADDR'] ?? ''
+        ]);
+
+        $vh = curl_init($verifyUrl);
+        curl_setopt($vh, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($vh, CURLOPT_POST, true);
+        curl_setopt($vh, CURLOPT_POSTFIELDS, $verifyPayload);
+        curl_setopt($vh, CURLOPT_HTTPHEADER, ["Content-Type: application/x-www-form-urlencoded"]);
+        $verifyResponse = curl_exec($vh);
+        $verifyErr = $verifyResponse === false ? curl_error($vh) : '';
+        curl_close($vh);
+
+        if ($verifyResponse === false) {
+            stepLog($logFile, 'recaptcha', 'ERROR', 'curl_error ' . $verifyErr);
+            $logData['error'] = 'Error al verificar captcha';
+            writeLog($logFile, 'ERROR', $logData);
+            http_response_code(500);
+            jsonResponse(false, ['error' => 'Error al verificar captcha']);
+            exit;
+        }
+
+        $verifyJson = json_decode($verifyResponse, true);
+        if (!is_array($verifyJson) || empty($verifyJson['success'])) {
+            stepLog($logFile, 'recaptcha', 'ERROR', 'invalid');
+            $logData['error'] = 'Captcha inválido';
+            writeLog($logFile, 'ERROR', $logData);
+            http_response_code(400);
+            jsonResponse(false, ['error' => 'Captcha inválido']);
+            exit;
+        }
+
+        stepLog($logFile, 'recaptcha', 'OK', '');
+    }
+
     $autoloadPath = __DIR__ . '/../vendor/autoload.php';
     if (!file_exists($autoloadPath)) {
         stepLog($logFile, 'autoload', 'ERROR', 'file_not_found path=' . $autoloadPath);

@@ -61,25 +61,8 @@
       fetchpriority="high"
     />
     
-    <!-- Preload video hero (LCP crítico) - discoverable desde HTML inicial -->
-    <!-- Video hero desktop -->
-    <link 
-      rel="preload" 
-      href="/assets/hero/hero.webm" 
-      as="video" 
-      type="video/webm"
-      media="(min-width: 768px)"
-      fetchpriority="high"
-    />
-    <!-- Video hero mobile -->
-    <link 
-      rel="preload" 
-      href="/assets/hero/mobile/hero-mobile.mp4" 
-      as="video" 
-      type="video/mp4"
-      media="(max-width: 767px)"
-      fetchpriority="high"
-    />
+    <!-- No preload de video: as="video" no está bien soportado en todos los navegadores -->
+    <!-- El video se carga por el componente Hero -->
     
     <!-- Preload recursos críticos del hero -->
     <!-- Solo preload del poster (LCP), no del video -->
@@ -102,11 +85,8 @@
       fetchpriority="high"
     />
     
-    <!-- Prefetch para rutas probables - mejora navegación entre páginas -->
-    <link rel="prefetch" href="/nosotros" />
-    <link rel="prefetch" href="/servicios" />
-    <link rel="prefetch" href="/contactanos" />
-    <link rel="prefetch" href="/faqs" />
+    <!-- Prefetch de rutas desactivado: en muchos servidores devuelve 503 si la SPA no está configurada para esas URLs -->
+    <!-- Configurar el servidor para servir index.html en todas las rutas de la SPA evita 503 al navegar directo -->
     
     <!-- Preload fuentes críticas (above-the-fold) -->
     <!-- Google Fonts Montserrat -->

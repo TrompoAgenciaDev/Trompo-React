@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import useFormBrevo from "../../hooks/useFormBrevo";
 import "../../assets/styles/form-index.css";
 
 export default function FormIndex({ location = "home" }) {
   const { loading, error, submitForm } = useFormBrevo();
+  const recaptchaRef = useRef(null);
+  const [recaptchaToken, setRecaptchaToken] = useState("");
+  const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY || "";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (siteKey && !recaptchaToken) return;
     const formData = new FormData(e.target);
     formData.append("LOCATION", location);
+    if (siteKey) formData.append("g-recaptcha-response", recaptchaToken);
     submitForm(formData);
   };
 
@@ -261,8 +267,18 @@ export default function FormIndex({ location = "home" }) {
             required
           />{" "}
         </div>{" "}
+        {siteKey && (
+          <div className="recaptcha-wrapper">
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={siteKey}
+              onChange={(token) => setRecaptchaToken(token || "")}
+              onExpired={() => setRecaptchaToken("")}
+            />
+          </div>
+        )}{" "}
         <div className="submit-container">
-          <button type="submit" disabled={loading}>
+          <button type="submit" disabled={loading || (siteKey && !recaptchaToken)}>
             {loading ? "Enviando..." : "Enviar"}
             <svg
               xmlns="http://www.w3.org/2000/svg"
