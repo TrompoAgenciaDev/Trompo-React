@@ -44,11 +44,17 @@ export default function useFormBrevo() {
         setSuccess(true);
         window.location.href = `${import.meta.env.BASE_URL}gracias`;
       } else {
-        setError(json.error || "Hubo un error al enviar el formulario.");
+        // Asegurarse de que el error sea un string (Evita React Error #31)
+        const rawError = json.error;
+        const errorMsg = (typeof rawError === "object" && rawError !== null)
+          ? (rawError.message || JSON.stringify(rawError))
+          : (rawError || "Hubo un error al enviar el formulario.");
+        setError(errorMsg);
       }
     } catch (err) {
       console.error("Error en fetch:", err);
-      setError(err.message || "Hubo un error desconocido.");
+      // Asegurarse de que err.message sea string
+      setError(String(err.message || "Hubo un error desconocido."));
     } finally {
       setLoading(false);
     }

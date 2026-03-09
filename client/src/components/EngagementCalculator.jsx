@@ -65,14 +65,14 @@ const EngagementCalculator = () => {
 
   // Validación: solo números en inputs
   const handleNumericChange = (setter, value) => {
-    const cleaned = value.replace(/[^0-9.,]/g, "").replace(",", ".");
+    const cleaned = (value || "").replace(/[^0-9.,]/g, "").replace(",", ".");
     setter(cleaned);
   };
 
   return (
     <div className="engagement-calculator-wrap">
       <div className="engagement-calculator-layout">
-        <div className="engagement-calculator-texts">          
+        <div className="engagement-calculator-texts">
           <div></div>
 
           <div className="container text-calculator">
@@ -84,143 +84,143 @@ const EngagementCalculator = () => {
               <p>Porque la conversación correcta también tiene retorno.</p>
             </div>
           </div>
-          
+
         </div>
 
         <div className="engagement-calculator-block bg-yellow-2">
           <div className="engagement-calculator-body">
-        {/* Toggle Seguidores / Alcance */}
-        <div className="engagement-toggle-wrapper">
-          <button
-            type="button"
-            className={`engagement-toggle-btn ${mode === "seguidores" ? "active" : ""}`}
-            onClick={() => setMode("seguidores")}
-          >
-            Calcular sobre Seguidores
-          </button>
-          <button
-            type="button"
-            className={`engagement-toggle-btn ${mode === "alcance" ? "active" : ""}`}
-            onClick={() => setMode("alcance")}
-          >
-            Calcular sobre Alcance
-          </button>
-        </div>
-
-        {/* Sección Inputs */}
-        <div className="engagement-calculator-inputs">
-          {mode === "seguidores" ? (
-            <div className="engagement-input-group">
-              <label htmlFor="seguidores">Seguidores</label>
-              <input
-                id="seguidores"
-                type="text"
-                inputMode="numeric"
-                value={seguidores}
-                onChange={(e) => handleNumericChange(setSeguidores, e.target.value)}
-                placeholder="10000"
-              />
+            {/* Toggle Seguidores / Alcance */}
+            <div className="engagement-toggle-wrapper">
+              <button
+                type="button"
+                className={`engagement-toggle-btn ${mode === "seguidores" ? "active" : ""}`}
+                onClick={() => setMode("seguidores")}
+              >
+                Calcular sobre Seguidores
+              </button>
+              <button
+                type="button"
+                className={`engagement-toggle-btn ${mode === "alcance" ? "active" : ""}`}
+                onClick={() => setMode("alcance")}
+              >
+                Calcular sobre Alcance
+              </button>
             </div>
-          ) : (
-            <div className="engagement-input-group">
-              <label htmlFor="alcance">Alcance</label>
-              <input
-                id="alcance"
-                type="text"
-                inputMode="numeric"
-                value={alcance}
-                onChange={(e) => handleNumericChange(setAlcance, e.target.value)}
-                placeholder="5000"
-              />
+
+            {/* Sección Inputs */}
+            <div className="engagement-calculator-inputs">
+              {mode === "seguidores" ? (
+                <div className="engagement-input-group">
+                  <label htmlFor="seguidores">Seguidores</label>
+                  <input
+                    id="seguidores"
+                    type="text"
+                    inputMode="numeric"
+                    value={seguidores}
+                    onChange={(e) => handleNumericChange(setSeguidores, e.target.value)}
+                    placeholder="10000"
+                  />
+                </div>
+              ) : (
+                <div className="engagement-input-group">
+                  <label htmlFor="alcance">Alcance</label>
+                  <input
+                    id="alcance"
+                    type="text"
+                    inputMode="numeric"
+                    value={alcance}
+                    onChange={(e) => handleNumericChange(setAlcance, e.target.value)}
+                    placeholder="5000"
+                  />
+                </div>
+              )}
+              <div className="engagement-input-group">
+                <label htmlFor="likes">Likes</label>
+                <input
+                  id="likes"
+                  type="text"
+                  inputMode="numeric"
+                  value={likes}
+                  onChange={(e) => handleNumericChange(setLikes, e.target.value)}
+                  placeholder="350"
+                />
+              </div>
+              <div className="engagement-input-group">
+                <label htmlFor="comentarios">Comentarios</label>
+                <input
+                  id="comentarios"
+                  type="text"
+                  inputMode="numeric"
+                  value={comentarios}
+                  onChange={(e) => handleNumericChange(setComentarios, e.target.value)}
+                  placeholder="40"
+                />
+              </div>
+              <div className="engagement-input-group">
+                <label htmlFor="compartidos">Compartidos</label>
+                <input
+                  id="compartidos"
+                  type="text"
+                  inputMode="numeric"
+                  value={compartidos}
+                  onChange={(e) => handleNumericChange(setCompartidos, e.target.value)}
+                  placeholder="20"
+                />
+              </div>
+              <div className="engagement-input-group">
+                <label htmlFor="guardados">Guardados</label>
+                <input
+                  id="guardados"
+                  type="text"
+                  inputMode="numeric"
+                  value={guardados}
+                  onChange={(e) => handleNumericChange(setGuardados, e.target.value)}
+                  placeholder="30"
+                />
+              </div>
             </div>
-          )}
-          <div className="engagement-input-group">
-            <label htmlFor="likes">Likes</label>
-            <input
-              id="likes"
-              type="text"
-              inputMode="numeric"
-              value={likes}
-              onChange={(e) => handleNumericChange(setLikes, e.target.value)}
-              placeholder="350"
-            />
-          </div>
-          <div className="engagement-input-group">
-            <label htmlFor="comentarios">Comentarios</label>
-            <input
-              id="comentarios"
-              type="text"
-              inputMode="numeric"
-              value={comentarios}
-              onChange={(e) => handleNumericChange(setComentarios, e.target.value)}
-              placeholder="40"
-            />
-          </div>
-          <div className="engagement-input-group">
-            <label htmlFor="compartidos">Compartidos</label>
-            <input
-              id="compartidos"
-              type="text"
-              inputMode="numeric"
-              value={compartidos}
-              onChange={(e) => handleNumericChange(setCompartidos, e.target.value)}
-              placeholder="20"
-            />
-          </div>
-          <div className="engagement-input-group">
-            <label htmlFor="guardados">Guardados</label>
-            <input
-              id="guardados"
-              type="text"
-              inputMode="numeric"
-              value={guardados}
-              onChange={(e) => handleNumericChange(setGuardados, e.target.value)}
-              placeholder="30"
-            />
-          </div>
-        </div>
-        <p className="engagement-calculator-microcopy">
-          Ingresá tu alcance mensual estimado y tasa de interacción promedio. Visualizá cómo podría traducirse en oportunidades reales.
-        </p>
+            <p className="engagement-calculator-microcopy">
+              Ingresá tu alcance mensual estimado y tasa de interacción promedio. Visualizá cómo podría traducirse en oportunidades reales.
+            </p>
 
-        {/* Separador visual */}
-        <div className="engagement-calculator-separator" />
+            {/* Separador visual */}
+            <div className="engagement-calculator-separator" />
 
-        {/* Sección Resultados */}
-        <div className="engagement-calculator-results">
-          <motion.div
-            className="engagement-result-item"
-            key={`total-${calculated.totalInteracciones}`}
-            initial={{ opacity: 0.7, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.2 }}
-          >
-            <span className="engagement-result-label">Total de interacciones</span>
-            <span className="engagement-result-value">{formatNumber(calculated.totalInteracciones)}</span>
-          </motion.div>
-          <motion.div
-            className={`engagement-result-item engagement-rate ${performance.className}`}
-            key={`engagement-${calculated.engagement}`}
-            initial={{ opacity: 0.7, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.2 }}
-          >
-            <span className="engagement-result-label">Engagement Rate</span>
-            <span className="engagement-result-value engagement-result-main">
-              {calculated.engagement.toFixed(2)}%
-            </span>
-            <span className="engagement-result-interpretation">{performance.label}</span>
-          </motion.div>
-        </div>
+            {/* Sección Resultados */}
+            <div className="engagement-calculator-results">
+              <motion.div
+                className="engagement-result-item"
+                key={`total-${calculated.totalInteracciones}`}
+                initial={{ opacity: 0.7, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.2 }}
+              >
+                <span className="engagement-result-label">Total de interacciones</span>
+                <span className="engagement-result-value">{formatNumber(calculated.totalInteracciones)}</span>
+              </motion.div>
+              <motion.div
+                className={`engagement-result-item engagement-rate ${performance.className}`}
+                key={`engagement-${calculated.engagement}`}
+                initial={{ opacity: 0.7, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.2 }}
+              >
+                <span className="engagement-result-label">Engagement Rate</span>
+                <span className="engagement-result-value engagement-result-main">
+                  {calculated.engagement.toFixed(2)}%
+                </span>
+                <span className="engagement-result-interpretation">{performance.label}</span>
+              </motion.div>
+            </div>
 
-        <p className="engagement-result-message">{impactMessage}</p>
+            <p className="engagement-result-message">{impactMessage}</p>
 
-        <div className="engagement-calculator-cta-wrap">
-          <p className="engagement-calculator-cta-text">¿Querés profesionalizar tu ecosistema social?</p>
-          <a href="#contact" className="engagement-calculator-cta">Diseñar estrategia social</a>
-        </div>
+            <div className="engagement-calculator-cta-wrap">
+              <p className="engagement-calculator-cta-text">¿Querés profesionalizar tu ecosistema social?</p>
+              <a href="#contact" className="engagement-calculator-cta">Diseñar estrategia social</a>
+            </div>
 
-        <p className="engagement-calculator-closing">El crecimiento sostenible comienza con claridad.</p>
+            <p className="engagement-calculator-closing">El crecimiento sostenible comienza con claridad.</p>
           </div>
         </div>
       </div>

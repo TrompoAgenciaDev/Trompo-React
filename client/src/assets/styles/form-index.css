@@ -47,7 +47,29 @@
   -moz-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px;
+  /* Increased gap for labels */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1E1E1E;
+  margin-left: 2px;
+}
+
+.form-warning {
+  font-size: 13px;
+  color: #262626;
+  line-height: 1.4;
+  margin: 5px 0;
+  font-style: italic;
 }
 
 #sib-form input,
@@ -229,7 +251,7 @@
   height: 20px;
 }
 
-.entry__choice input[type="checkbox"]:active + .checkbox {
+.entry__choice input[type="checkbox"]:active+.checkbox {
   color: aqua;
   background-color: brown;
 }
@@ -260,6 +282,7 @@
 
 /* ---------- Responsive ---------- */
 @media (min-width: 768px) {
+
   #sib-form input,
   #sib-form textarea,
   #sib-form select {
@@ -280,6 +303,7 @@
 }
 
 @media (min-width: 1024px) {
+
   #sib-form input,
   #sib-form textarea,
   #sib-form select {
@@ -292,6 +316,7 @@
 }
 
 @media (min-width: 1280px) {
+
   #sib-form input,
   #sib-form textarea {
     font-size: 16px;

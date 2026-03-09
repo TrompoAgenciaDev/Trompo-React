@@ -9,7 +9,7 @@ const useImagePreloader = (imageUrls, bufferSize = 3) => {
 
   const preloadImage = useCallback((url) => {
     if (!url || preloadedRef.current.has(url) || preloadingRef.current.has(url)) return;
-    
+
     preloadingRef.current.add(url);
     const img = new Image();
     img.onload = () => {
@@ -25,7 +25,7 @@ const useImagePreloader = (imageUrls, bufferSize = 3) => {
   // Precargar imágenes críticas (primeras de cada slide)
   useEffect(() => {
     if (!imageUrls || imageUrls.length === 0) return;
-    
+
     // Precargar primeras imágenes de cada slide inmediatamente
     imageUrls.forEach((item) => {
       if (item.images && item.images.length > 0) {
@@ -42,14 +42,14 @@ const useImagePreloader = (imageUrls, bufferSize = 3) => {
   // Precargar buffer de imágenes alrededor del índice activo
   const preloadBuffer = useCallback((activeIndex) => {
     if (!imageUrls || imageUrls.length === 0) return;
-    
+
     const item = imageUrls[activeIndex];
     if (!item || !item.images) return;
 
     // Precargar imágenes del slide activo y adyacentes
     const start = Math.max(0, activeIndex - 1);
     const end = Math.min(imageUrls.length - 1, activeIndex + 1);
-    
+
     for (let i = start; i <= end; i++) {
       const slideItem = imageUrls[i];
       if (slideItem && slideItem.images) {
@@ -69,12 +69,12 @@ const portfolioCache = new Map();
 // Cargar datos del portfolio sin caché para ver cambios en tiempo real
 async function fetchPortfolioData(category = "branding") {
   const cacheKey = `portfolio-${category}`;
-  
+
   // COMENTADO: Deshabilitar caché en memoria para forzar recarga
   // if (portfolioCache.has(cacheKey)) {
   //   return portfolioCache.get(cacheKey);
   // }
-  
+
   // Usar buildTime para versionado del cache
   const buildTime = import.meta.env.BUILD_TIME || Date.now();
   const res = await fetch(`${import.meta.env.BASE_URL}portfolio.json?v=${buildTime}`, {
@@ -82,7 +82,7 @@ async function fetchPortfolioData(category = "branding") {
   });
   if (!res.ok) throw new Error("No se pudo cargar portfolio.json");
   const data = await res.json();
-  
+
   // Si es "branding", buscar en disenio
   if (category === "branding") {
     const items = Array.isArray(data?.disenio) ? data.disenio : [];
@@ -90,19 +90,19 @@ async function fetchPortfolioData(category = "branding") {
       const categories = Array.isArray(item.category) ? item.category : [];
       return categories.some(cat => cat && cat.toLowerCase() === "branding" && !categories.some(c => c && c.toLowerCase() === "branding-web"));
     });
-    
+
     // COMENTADO: No guardar en caché para forzar recarga
     // portfolioCache.set(cacheKey, filtered);
     return filtered;
   }
-  
+
   // Si es "social media", buscar en interaccion
   const items = Array.isArray(data?.interaccion) ? data.interaccion : [];
   const filtered = items.filter(item => {
     const categories = Array.isArray(item.category) ? item.category : [];
     return categories.some(cat => cat && cat.toLowerCase() === "social media");
   });
-  
+
   // COMENTADO: No guardar en caché para forzar recarga
   // portfolioCache.set(cacheKey, filtered);
   return filtered;
@@ -112,7 +112,7 @@ async function fetchPortfolioData(category = "branding") {
 /* REFACTORIZADO: Loop infinito con snap invisible para evitar saltos */
 function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHovered = false, autoStart = false, isInViewport: externalIsInViewport = null, preloadImage: externalPreloadImage = null }) {
   const len = list.length;
-  
+
   // TODOS LOS HOOKS DEBEN ESTAR ANTES DE CUALQUIER RETURN CONDICIONAL
   // Preparar array extendido: 5 copias para loop infinito real
   // [copia1][copia2][copia3][copia4][copia5]
@@ -120,15 +120,15 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
   const REPEAT = 5;
   const extended = useMemo(() => len > 1 ? Array.from({ length: REPEAT }, () => list).flat() : [], [list, len]);
   const baseLen = len;
-  
+
   // Índice GLOBAL en el array extendido (0 a extended.length-1)
   // Estado inicial: baseLen * 2 (inicio de copia central, imagen 0)
   const CENTER_COPY_START = baseLen > 1 ? baseLen * 2 : 0;
   const [globalIndex, setGlobalIndex] = useState(CENTER_COPY_START);
-  
+
   // Control de animación: true = animación normal, false = snap instantáneo
   const [shouldAnimate, setShouldAnimate] = useState(true);
-  
+
   // Ref para el intervalo de autoplay - cada instancia tiene su propio ref
   const autoplayIntervalRef = useRef(null);
   // Ref para el timeout del delay inicial
@@ -144,14 +144,14 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
   const prevGlobalIndexRef = useRef(CENTER_COPY_START);
   // Estado para rastrear si está en viewport (para autoStart)
   const [internalIsInViewport, setInternalIsInViewport] = useState(false);
-  
+
   // Usar el prop externo si está disponible, sino usar el interno
   const isInViewport = externalIsInViewport !== null ? externalIsInViewport : internalIsInViewport;
 
   // Lazy loading: solo renderizar cuando está visible
   useEffect(() => {
     if (!isVisible || shouldRender) return;
-    
+
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -172,7 +172,7 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
   // Detectar si está en viewport (para autoStart en mobile) - solo si no hay prop externo
   useEffect(() => {
     if (!autoStart || !shouldRender || !containerRef.current || externalIsInViewport !== null) return;
-    
+
     const observer = new IntersectionObserver(
       (entries) => {
         setInternalIsInViewport(entries[0].isIntersecting);
@@ -204,18 +204,18 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
 
     const prevIndex = prevGlobalIndexRef.current;
     const CENTER_COPY_END = CENTER_COPY_START + baseLen - 1;
-    
+
     // Detectar saltos grandes (más de 1) que indican un loop
     const indexDiff = Math.abs(globalIndex - prevIndex);
     const isLargeJump = indexDiff > 1 && indexDiff < baseLen; // Salto grande pero no un reset completo
-    
+
     // Verificar si estamos fuera del rango de la copia central
     const isOutOfRange = globalIndex < CENTER_COPY_START || globalIndex > CENTER_COPY_END;
-    
+
     // Si hay un salto grande o estamos fuera del rango, hacer snap sin animación
     if (isLargeJump || isOutOfRange) {
       let targetIndex = globalIndex;
-      
+
       if (isOutOfRange) {
         // Calcular el índice relativo dentro de cualquier copia
         const relativeIndex = globalIndex % baseLen;
@@ -225,23 +225,23 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
         // Estamos haciendo loop: ya estamos en la posición correcta (imagen 1)
         targetIndex = globalIndex;
       }
-      
+
       // Snap instantáneo sin animación
       setShouldAnimate(false);
-      
+
       // Si necesitamos cambiar el índice, hacerlo
       if (targetIndex !== globalIndex) {
         setGlobalIndex(targetIndex);
       }
-      
+
       // Habilitar animación después del snap (muy corto delay para que React procese el snap)
       const timeoutId = setTimeout(() => {
         setShouldAnimate(true);
       }, 10);
-      
+
       // Actualizar el ref del índice anterior
       prevGlobalIndexRef.current = targetIndex !== globalIndex ? targetIndex : globalIndex;
-      
+
       return () => clearTimeout(timeoutId);
     } else {
       // Actualizar el ref del índice anterior en caso normal
@@ -259,7 +259,7 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
 
     // Si el estado no cambió, no hacer nada
     if (wasHoveredRef.current === shouldBeActive) return;
-    
+
     // Actualizar el ref INMEDIATAMENTE para prevenir ejecuciones múltiples
     wasHoveredRef.current = shouldBeActive;
 
@@ -273,15 +273,15 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
       const hoverStartIndex = CENTER_COPY_START + 1; // Imagen 1 (segunda) en copia central
       setGlobalIndex(hoverStartIndex);
       prevGlobalIndexRef.current = hoverStartIndex; // Actualizar ref para evitar falsos saltos
-      
+
       // Habilitar animación después del snap
       setTimeout(() => setShouldAnimate(true), 50);
-      
+
       // 2. Iniciar autoplay después de un pequeño delay
       startDelayRef.current = setTimeout(() => {
         // Verificar que aún estamos en hover
         if (!wasHoveredRef.current || isResettingRef.current) return;
-        
+
         // Crear UN SOLO intervalo de autoplay
         autoplayIntervalRef.current = setInterval(() => {
           // Verificar que aún estamos en hover antes de avanzar
@@ -289,12 +289,12 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
             clearAllTimers();
             return;
           }
-          
+
           // Avanzar al siguiente slide en el array extendido
           setGlobalIndex((prev) => {
             const next = prev + 1;
             const CENTER_COPY_END = CENTER_COPY_START + baseLen - 1;
-            
+
             // Si el siguiente índice estaría fuera de la copia central, hacer loop a imagen 1
             if (next > CENTER_COPY_END) {
               // Hacer loop: volver a la segunda imagen (índice 1) en la copia central
@@ -306,7 +306,7 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
               setTimeout(() => setShouldAnimate(true), 10);
               return loopIndex;
             }
-            
+
             return next;
           });
         }, interval);
@@ -321,14 +321,14 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
       // AL QUITAR HOVER:
       // 1. Detener autoplay completamente
       clearAllTimers();
-      
+
       // 2. Resetear al slide índice 0 (primera imagen) en la copia central con snap instantáneo
       setShouldAnimate(false);
       const resetIndex = CENTER_COPY_START; // Imagen 0 (primera) en copia central
       setGlobalIndex(resetIndex);
       prevGlobalIndexRef.current = resetIndex; // Actualizar ref para evitar falsos saltos
       isResettingRef.current = true;
-      
+
       // Desactivar el flag de reset después de un breve momento
       setTimeout(() => {
         isResettingRef.current = false;
@@ -343,24 +343,24 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
 
   // Precargar imágenes próximas cuando está activo - MOVIDO ANTES DE RETURNS
   const shouldBeActive = autoStart ? isInViewport : isHovered;
-  
+
   useEffect(() => {
     if (!shouldBeActive || !shouldRender || len <= 1) return;
-    
+
     // Función de precarga local si no se pasa externamente
     const preload = externalPreloadImage || ((url) => {
       if (!url) return;
       const img = new Image();
       img.src = url;
     });
-    
+
     // Precargar imágenes próximas (actual + siguientes 2)
     const currentImageIndex = globalIndex % baseLen;
     const nextIndices = [
       (currentImageIndex + 1) % baseLen,
       (currentImageIndex + 2) % baseLen,
     ];
-    
+
     nextIndices.forEach(idx => {
       if (list[idx]) {
         preload(list[idx]);
@@ -464,8 +464,8 @@ function InnerAutoSlider({ list, interval = 1500, direction = 1, isVisible, isHo
         style={{ position: "absolute", inset: 0, display: "flex" }}
         animate={{ x: `-${offsetPct}%` }}
         transition={
-          shouldAnimate 
-            ? { duration: 0.45, ease: "easeOut" } 
+          shouldAnimate
+            ? { duration: 0.45, ease: "easeOut" }
             : { duration: 0 } // Snap instantáneo sin animación
         }
       >
@@ -536,7 +536,7 @@ export default function DisenioPortfolio({ category = "branding" }) {
   const draggingRef = useRef(false);
   const dragControls = useDragControls();
   const containerRef = useRef(null);
-  
+
   // Hook de precarga de imágenes
   const { preloadBuffer, preloadImage } = useImagePreloader(items, 3);
 
@@ -554,45 +554,45 @@ export default function DisenioPortfolio({ category = "branding" }) {
   useEffect(() => {
     let mounted = true;
     let abortController = new AbortController();
-    
+
     (async () => {
       try {
         const data = await fetchPortfolioData(category);
         if (!mounted || abortController.signal.aborted) return;
-        
+
         // Preparar items con imágenes
         const preparedItems = data.map(item => {
           const base = import.meta.env.BASE_URL?.endsWith("/")
             ? import.meta.env.BASE_URL
             : `${import.meta.env.BASE_URL}/`;
-          
+
           const images = [];
-          
+
           // Para branding: usar featured_image y gallery
           if (category === "branding") {
             if (item.featured_image) {
-              images.push(`${base}${item.featured_image.replace(/^\//, '')}`);
+              images.push(`${base}${String(item.featured_image).replace(/^\//, '')}`);
             }
             if (Array.isArray(item.gallery)) {
               item.gallery.forEach(g => {
-                images.push(`${base}${g.replace(/^\//, '')}`);
+                images.push(`${base}${String(g || "").replace(/^\//, '')}`);
               });
             }
           } else {
             // Para social media: usar vertical_image, featured_image y gallery
             if (item.vertical_image) {
-              images.push(`${base}${item.vertical_image.replace(/^\//, '')}`);
+              images.push(`${base}${String(item.vertical_image).replace(/^\//, '')}`);
             }
             if (item.featured_image) {
-              images.push(`${base}${item.featured_image.replace(/^\//, '')}`);
+              images.push(`${base}${String(item.featured_image).replace(/^\//, '')}`);
             }
             if (Array.isArray(item.gallery)) {
               item.gallery.forEach(g => {
-                images.push(`${base}${g.replace(/^\//, '')}`);
+                images.push(`${base}${String(g || "").replace(/^\//, '')}`);
               });
             }
           }
-          
+
           return {
             id: item.id,
             title: item.title || item.name,
@@ -602,7 +602,7 @@ export default function DisenioPortfolio({ category = "branding" }) {
 
         // Limitar a 12 items para el grid 4x3
         const limitedItems = preparedItems.slice(0, 12);
-        
+
         if (mounted && !abortController.signal.aborted) {
           setItems(limitedItems);
         }
@@ -612,8 +612,8 @@ export default function DisenioPortfolio({ category = "branding" }) {
         }
       }
     })();
-    
-    return () => { 
+
+    return () => {
       mounted = false;
       abortController.abort();
     };
@@ -629,19 +629,19 @@ export default function DisenioPortfolio({ category = "branding" }) {
     if (firstImages.length === 0) return [];
     return Array.from({ length: REPEAT }, () => firstImages).flat();
   }, [firstImages]);
-  
+
   const baseLength = firstImages.length;
   const middleIndex = baseLength > 0 ? baseLength * Math.floor(REPEAT / 2) : 0;
-  
+
   // Índice lógico: 0 → baseLength - 1 (para saber qué slide mostrar)
   const [logicalIndex, setLogicalIndex] = useState(0);
   // Índice visual extendido: para el loop infinito
   const [visualIndex, setVisualIndex] = useState(middleIndex);
-  
+
   // Precargar buffer cuando cambia el hover (desktop) o índice (mobile)
   useEffect(() => {
     if (items.length === 0) return;
-    
+
     const activeIndex = isMobile ? logicalIndex : hoveredIndex;
     if (activeIndex !== null && activeIndex >= 0 && activeIndex < items.length) {
       preloadBuffer(activeIndex);
@@ -649,7 +649,7 @@ export default function DisenioPortfolio({ category = "branding" }) {
   }, [hoveredIndex, logicalIndex, isMobile, items, preloadBuffer]);
   // Estado para controlar animación durante corrección del loop
   const [shouldAnimateTransition, setShouldAnimateTransition] = useState(true);
-  
+
   // Refs para control de autoplay y drag
   const autoplayTimerRef = useRef(null);
   const autoplayResumeTimeoutRef = useRef(null);
@@ -668,7 +668,7 @@ export default function DisenioPortfolio({ category = "branding" }) {
   // Función para mover al siguiente slide (lógica centralizada)
   const moveToNext = useCallback(() => {
     if (baseLength <= 1 || isDraggingRef.current || isCorrectingLoopRef.current) return;
-    
+
     setLogicalIndex((prev) => {
       const next = (prev + 1) % baseLength;
       return next;
@@ -678,7 +678,7 @@ export default function DisenioPortfolio({ category = "branding" }) {
   // Función para mover al slide anterior
   const moveToPrev = useCallback(() => {
     if (baseLength <= 1 || isDraggingRef.current || isCorrectingLoopRef.current) return;
-    
+
     setLogicalIndex((prev) => {
       const next = (prev - 1 + baseLength) % baseLength;
       return next;
@@ -688,10 +688,10 @@ export default function DisenioPortfolio({ category = "branding" }) {
   // Sincronizar índice visual con índice lógico (para loop infinito)
   useEffect(() => {
     if (!isMobile || baseLength === 0) return;
-    
+
     // Calcular el índice visual equivalente en la copia central
     const targetVisualIndex = middleIndex + logicalIndex;
-    
+
     // Solo actualizar si es diferente (evitar loops infinitos)
     if (targetVisualIndex !== visualIndex) {
       setVisualIndex(targetVisualIndex);
@@ -701,28 +701,28 @@ export default function DisenioPortfolio({ category = "branding" }) {
   // Corrección del loop infinito (UN SOLO LUGAR)
   useEffect(() => {
     if (!isMobile || baseLength <= 1 || isCorrectingLoopRef.current) return;
-    
+
     const min = baseLength * 2;
     const max = baseLength * (REPEAT - 2);
-    
+
     // Si estamos fuera del rango de la copia central, hacer snap invisible
     if (visualIndex < min || visualIndex > max) {
       isCorrectingLoopRef.current = true;
-      
+
       // Desactivar animación para snap instantáneo
       setShouldAnimateTransition(false);
-      
+
       // Calcular el índice relativo dentro de cualquier copia
       const relativeIndex = ((visualIndex % baseLength) + baseLength) % baseLength;
       // Mover a la posición equivalente en la copia central
       const correctedIndex = middleIndex + relativeIndex;
-      
+
       // Snap instantáneo sin animación (usando requestAnimationFrame para evitar conflictos)
       requestAnimationFrame(() => {
         setVisualIndex(correctedIndex);
         setLogicalIndex(relativeIndex);
         isCorrectingLoopRef.current = false;
-        
+
         // Re-habilitar animación después del snap
         setTimeout(() => {
           setShouldAnimateTransition(true);
@@ -754,7 +754,7 @@ export default function DisenioPortfolio({ category = "branding" }) {
       clearInterval(autoplayTimerRef.current);
       autoplayTimerRef.current = null;
     }
-    
+
     // Limpiar timeout de reanudación si existe
     if (autoplayResumeTimeoutRef.current) {
       clearTimeout(autoplayResumeTimeoutRef.current);
@@ -800,13 +800,13 @@ export default function DisenioPortfolio({ category = "branding" }) {
   const handleDragStart = useCallback(() => {
     isDraggingRef.current = true;
     draggingRef.current = true;
-    
+
     // Pausar autoplay durante el drag
     if (autoplayTimerRef.current) {
       clearInterval(autoplayTimerRef.current);
       autoplayTimerRef.current = null;
     }
-    
+
     // Guardar posición inicial del drag
     if (containerRef.current) {
       dragStartXRef.current = containerRef.current.getBoundingClientRect().left;
@@ -821,17 +821,17 @@ export default function DisenioPortfolio({ category = "branding" }) {
   const handleDragEnd = useCallback((event, info) => {
     isDraggingRef.current = false;
     draggingRef.current = false;
-    
+
     // Limpiar timeout anterior si existe (evitar múltiples timeouts)
     if (autoplayResumeTimeoutRef.current) {
       clearTimeout(autoplayResumeTimeoutRef.current);
       autoplayResumeTimeoutRef.current = null;
     }
-    
+
     // Calcular delta del drag
     const deltaX = info.offset.x;
     const threshold = containerWidthRef.current * 0.3; // 30% del ancho para activar cambio
-    
+
     // Determinar dirección y mover solo 1 slide
     if (Math.abs(deltaX) > threshold) {
       if (deltaX > 0) {
@@ -842,19 +842,19 @@ export default function DisenioPortfolio({ category = "branding" }) {
         moveToNext();
       }
     }
-    
+
     // Reanudar autoplay después de un breve delay
     autoplayResumeTimeoutRef.current = setTimeout(() => {
       autoplayResumeTimeoutRef.current = null;
-      
+
       if (!isMobile || baseLength <= 1 || isDraggingRef.current) return;
-      
+
       // Limpiar timer anterior si existe
       if (autoplayTimerRef.current) {
         clearInterval(autoplayTimerRef.current);
         autoplayTimerRef.current = null;
       }
-      
+
       // Crear nuevo intervalo
       autoplayTimerRef.current = setInterval(() => {
         if (!isDraggingRef.current && !isCorrectingLoopRef.current) {
@@ -881,8 +881,8 @@ export default function DisenioPortfolio({ category = "branding" }) {
             const isVisible = true; // En desktop siempre visible
             const isHovered = hoveredIndex === i;
             return (
-              <div 
-                key={item.id || i} 
+              <div
+                key={item.id || i}
                 className="grid-portfolio-item"
                 onMouseEnter={() => {
                   setHoveredIndex(i);
@@ -893,10 +893,10 @@ export default function DisenioPortfolio({ category = "branding" }) {
                 }}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <InnerAutoSlider 
-                  list={item.images} 
-                  interval={1500} 
-                  direction={1} 
+                <InnerAutoSlider
+                  list={item.images}
+                  interval={1500}
+                  direction={1}
                   isVisible={isVisible}
                   isHovered={isHovered}
                   preloadImage={preloadImage}
@@ -912,12 +912,12 @@ export default function DisenioPortfolio({ category = "branding" }) {
   // Mobile: Carrusel - REFACTORIZADO
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="grid-portfolio-container portfolio-carousel-mobile"
-      style={{ 
-        position: "relative", 
-        overflow: "hidden", 
+      style={{
+        position: "relative",
+        overflow: "hidden",
         width: "100%",
       }}
     >
@@ -983,15 +983,15 @@ export default function DisenioPortfolio({ category = "branding" }) {
 
       <motion.div
         className="portfolio-carousel-track"
-        style={{ 
+        style={{
           display: "flex",
           width: "100%",
           willChange: "transform"
         }}
         animate={{ x: `-${offsetPct}%` }}
-        transition={{ 
-          duration: shouldAnimateTransition ? 0.6 : 0, 
-          ease: "easeOut" 
+        transition={{
+          duration: shouldAnimateTransition ? 0.6 : 0,
+          ease: "easeOut"
         }}
         drag="x"
         dragConstraints={{ left: 0, right: 0 }}

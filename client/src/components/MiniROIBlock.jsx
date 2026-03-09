@@ -52,7 +52,7 @@ const MiniROIBlock = () => {
 
   // Validación: solo números en inputs
   const handleNumericChange = (setter, value) => {
-    const cleaned = value.replace(/[^0-9.,]/g, "").replace(",", ".");
+    const cleaned = (value || "").replace(/[^0-9.,]/g, "").replace(",", ".");
     setter(cleaned);
   };
 
@@ -77,112 +77,112 @@ const MiniROIBlock = () => {
           </div>
         </div>
 
-      <div className="roi-calculator-block bg-yellow-2">
-        <div className="roi-calculator-body">
-        {/* Sección Inputs */}
-        <div className="roi-calculator-inputs">
-          <div className="roi-input-group">
-            <label htmlFor="inversion">Inversión mensual</label>
-            <input
-              id="inversion"
-              type="text"
-              inputMode="decimal"
-              value={inversion}
-              onChange={(e) => handleNumericChange(setInversion, e.target.value)}
-              placeholder="1000000"
-            />
-          </div>
-          <div className="roi-input-group">
-            <label htmlFor="cpl">CPL promedio</label>
-            <input
-              id="cpl"
-              type="text"
-              inputMode="decimal"
-              value={cpl}
-              onChange={(e) => handleNumericChange(setCpl, e.target.value)}
-              placeholder="10000"
-            />
-          </div>
-          <div className="roi-input-group">
-            <label htmlFor="tasa">Tasa de cierre (%)</label>
-            <input
-              id="tasa"
-              type="text"
-              inputMode="decimal"
-              value={tasaCierre}
-              onChange={(e) => handleNumericChange(setTasaCierre, e.target.value)}
-              placeholder="10"
-            />
-          </div>
-          <div className="roi-input-group">
-            <label htmlFor="ticket">Ticket promedio</label>
-            <input
-              id="ticket"
-              type="text"
-              inputMode="decimal"
-              value={ticket}
-              onChange={(e) => handleNumericChange(setTicket, e.target.value)}
-              placeholder="300000"
-            />
-          </div>
-        </div>
-        <p className="roi-calculator-microcopy">
-          Ajustá los valores según tu escenario actual o proyectado. El resultado es una estimación orientativa para analizar viabilidad y escalabilidad.
-        </p>
+        <div className="roi-calculator-block bg-yellow-2">
+          <div className="roi-calculator-body">
+            {/* Sección Inputs */}
+            <div className="roi-calculator-inputs">
+              <div className="roi-input-group">
+                <label htmlFor="inversion">Inversión mensual</label>
+                <input
+                  id="inversion"
+                  type="text"
+                  inputMode="decimal"
+                  value={inversion}
+                  onChange={(e) => handleNumericChange(setInversion, e.target.value)}
+                  placeholder="1000000"
+                />
+              </div>
+              <div className="roi-input-group">
+                <label htmlFor="cpl">CPL promedio</label>
+                <input
+                  id="cpl"
+                  type="text"
+                  inputMode="decimal"
+                  value={cpl}
+                  onChange={(e) => handleNumericChange(setCpl, e.target.value)}
+                  placeholder="10000"
+                />
+              </div>
+              <div className="roi-input-group">
+                <label htmlFor="tasa">Tasa de cierre (%)</label>
+                <input
+                  id="tasa"
+                  type="text"
+                  inputMode="decimal"
+                  value={tasaCierre}
+                  onChange={(e) => handleNumericChange(setTasaCierre, e.target.value)}
+                  placeholder="10"
+                />
+              </div>
+              <div className="roi-input-group">
+                <label htmlFor="ticket">Ticket promedio</label>
+                <input
+                  id="ticket"
+                  type="text"
+                  inputMode="decimal"
+                  value={ticket}
+                  onChange={(e) => handleNumericChange(setTicket, e.target.value)}
+                  placeholder="300000"
+                />
+              </div>
+            </div>
+            <p className="roi-calculator-microcopy">
+              Ajustá los valores según tu escenario actual o proyectado. El resultado es una estimación orientativa para analizar viabilidad y escalabilidad.
+            </p>
 
-        {/* Separador visual */}
-        <div className="roi-calculator-separator" />
+            {/* Separador visual */}
+            <div className="roi-calculator-separator" />
 
-        {/* Sección Resultados */}
-        <div className="roi-calculator-results">
-          <motion.div
-            className="roi-result-item"
-            key={`leads-${calculated.leads}`}
-            initial={{ opacity: 0.7, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.2 }}
-          >
-            <span className="roi-result-label">Leads generados</span>
-            <span className="roi-result-value">{calculated.leads.toLocaleString("es-AR")}</span>
-          </motion.div>
-          <motion.div
-            className="roi-result-item"
-            key={`ventas-${calculated.ventas}`}
-            initial={{ opacity: 0.7, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.2 }}
-          >
-            <span className="roi-result-label">Ventas</span>
-            <span className="roi-result-value">{calculated.ventas.toLocaleString("es-AR")}</span>
-          </motion.div>
-          <motion.div
-            className="roi-result-item"
-            key={`ingresos-${calculated.ingresos}`}
-            initial={{ opacity: 0.7, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.2 }}
-          >
-            <span className="roi-result-label">Ingresos</span>
-            <span className="roi-result-value roi-result-ingresos">{formatARS(calculated.ingresos)}</span>
-          </motion.div>
-          <motion.div
-            className={`roi-result-item roi-result-roi ${calculated.roi >= 0 ? "roi-positive" : "roi-negative"}`}
-            key={`roi-${calculated.roi}`}
-            initial={{ opacity: 0.7, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.2 }}
-          >
-            <span className="roi-result-label">ROI</span>
-            <span className="roi-result-value">{calculated.roi >= 0 ? "+" : ""}{calculated.roi}%</span>
-          </motion.div>
-        </div>
+            {/* Sección Resultados */}
+            <div className="roi-calculator-results">
+              <motion.div
+                className="roi-result-item"
+                key={`leads-${calculated.leads}`}
+                initial={{ opacity: 0.7, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.2 }}
+              >
+                <span className="roi-result-label">Leads generados</span>
+                <span className="roi-result-value">{calculated.leads.toLocaleString("es-AR")}</span>
+              </motion.div>
+              <motion.div
+                className="roi-result-item"
+                key={`ventas-${calculated.ventas}`}
+                initial={{ opacity: 0.7, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.2 }}
+              >
+                <span className="roi-result-label">Ventas</span>
+                <span className="roi-result-value">{calculated.ventas.toLocaleString("es-AR")}</span>
+              </motion.div>
+              <motion.div
+                className="roi-result-item"
+                key={`ingresos-${calculated.ingresos}`}
+                initial={{ opacity: 0.7, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.2 }}
+              >
+                <span className="roi-result-label">Ingresos</span>
+                <span className="roi-result-value roi-result-ingresos">{formatARS(calculated.ingresos)}</span>
+              </motion.div>
+              <motion.div
+                className={`roi-result-item roi-result-roi ${calculated.roi >= 0 ? "roi-positive" : "roi-negative"}`}
+                key={`roi-${calculated.roi}`}
+                initial={{ opacity: 0.7, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.2 }}
+              >
+                <span className="roi-result-label">ROI</span>
+                <span className="roi-result-value">{calculated.roi >= 0 ? "+" : ""}{calculated.roi}%</span>
+              </motion.div>
+            </div>
 
-        <p className="roi-result-message">{roiMessage}</p>
+            <p className="roi-result-message">{roiMessage}</p>
 
-        <div className="roi-calculator-cta-wrap">
-          <p className="roi-calculator-cta-text">¿Querés validar este escenario con datos reales?</p>
-          <a href="#contact" className="roi-calculator-cta">Coordinar análisis estratégico</a>
-          </div>
+            <div className="roi-calculator-cta-wrap">
+              <p className="roi-calculator-cta-text">¿Querés validar este escenario con datos reales?</p>
+              <a href="#contact" className="roi-calculator-cta">Coordinar análisis estratégico</a>
+            </div>
             <p className="roi-calculator-closing">El crecimiento sostenible comienza con claridad.</p>
           </div>
         </div>

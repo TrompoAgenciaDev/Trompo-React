@@ -13,9 +13,9 @@ const base = import.meta.env.BASE_URL?.endsWith("/")
 const norm = (i, n) => ((i % n) + n) % n;
 
 // Componente para cada slide - sin efectos 3D, solo movimiento vertical
-const TestimonialSlide = ({ 
-  item, 
-  getImagePath 
+const TestimonialSlide = ({
+  item,
+  getImagePath
 }) => {
   return (
     <div
@@ -29,12 +29,12 @@ const TestimonialSlide = ({
     >
       <div className="testimoniales-card" style={{ width: "100%" }}>
         <div className="testimoniales-text">
-          {item.text.replace(/^✨\s*/, '')}
+          {String(item.text || "").replace(/^✨\s*/, "")}
         </div>
         <div className="testimoniales-author-info">
-          <img 
-            src={getImagePath(item.image)} 
-            alt={item.name || item.author} 
+          <img
+            src={getImagePath(item.image)}
+            alt={item.name || item.author}
             className="testimoniales-avatar"
             draggable={false}
             onError={(e) => {
@@ -60,8 +60,8 @@ const TestimonialSlide = ({
             </div>
           </div>
           {item.logo && getImagePath(item.logo) && (
-            <img 
-              src={getImagePath(item.logo)} 
+            <img
+              src={getImagePath(item.logo)}
               alt={`Logo ${item.name || item.author}`}
               className="testimoniales-logo"
               draggable={false}
@@ -98,7 +98,7 @@ export default function Testimonials3D({ size = null }) {
   );
 
   const middle = total * Math.floor(REPEAT / 2);
-  
+
   // Función helper para obtener altura del slide
   // Cachear altura para evitar lecturas repetidas
   const slideHeightRef = useRef(500);
@@ -108,7 +108,7 @@ export default function Testimonials3D({ size = null }) {
       if (slideHeightRef.current !== 500) {
         return slideHeightRef.current;
       }
-      
+
       // Leer propiedades geométricas solo cuando sea necesario
       // Usar requestAnimationFrame para evitar forced reflow
       if (trackRef.current?.firstElementChild) {
@@ -137,15 +137,15 @@ export default function Testimonials3D({ size = null }) {
     }
 
     const container = containerRef.current;
-    
+
     // Animación continua hacia arriba
     const animateContinuous = () => {
       if (!container || draggingRef.current || isPaused) return;
-      
+
       const currentY = autoScrollY.get();
       const slideHeight = getSlideHeight();
       const newY = currentY - SCROLL_SPEED;
-      
+
       // Si llegamos al final de un ciclo, resetear suavemente
       const maxY = slideHeight * total;
       if (Math.abs(newY) >= maxY) {
@@ -154,7 +154,7 @@ export default function Testimonials3D({ size = null }) {
       } else {
         autoScrollY.set(newY);
       }
-      
+
       animationRef.current = requestAnimationFrame(animateContinuous);
     };
 
@@ -172,7 +172,7 @@ export default function Testimonials3D({ size = null }) {
   const handleDragStart = () => {
     draggingRef.current = true;
     setIsPaused(true);
-    
+
     // Cancelar animación automática
     if (animationRef.current) {
       cancelAnimationFrame(animationRef.current);
@@ -196,7 +196,7 @@ export default function Testimonials3D({ size = null }) {
           }
         }
       }
-      
+
       // Usar requestAnimationFrame para asegurar que el estado se actualice después del drag
       requestAnimationFrame(() => {
         draggingRef.current = false;
@@ -206,7 +206,7 @@ export default function Testimonials3D({ size = null }) {
   };
 
   if (loading) return <div>Cargando testimonios...</div>;
-  if (error) return <div>{error}</div>;
+  if (error) return <div>{typeof error === 'object' ? (error.message || JSON.stringify(error)) : String(error)}</div>;
   if (!total) return <div>No hay testimonios disponibles.</div>;
 
   // Función para obtener la ruta de la imagen con base
@@ -235,7 +235,7 @@ export default function Testimonials3D({ size = null }) {
         <motion.div
           ref={trackRef}
           className="testimoniales-track testimoniales-track-vertical"
-          style={{ 
+          style={{
             y: autoScrollY,
             display: "flex",
             flexDirection: "column",

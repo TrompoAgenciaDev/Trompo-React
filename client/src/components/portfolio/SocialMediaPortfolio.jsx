@@ -151,7 +151,7 @@ export default function SocialMediaPortfolio() {
             if (item.vertical_image) images.push(`${base}${String(item.vertical_image).replace(/^\//, "")}`);
             if (item.featured_image) images.push(`${base}${String(item.featured_image).replace(/^\//, "")}`);
             if (Array.isArray(item.gallery)) {
-              item.gallery.forEach((g) => images.push(`${base}${String(g).replace(/^\//, "")}`));
+              item.gallery.forEach((g) => images.push(`${base}${String(g || "").replace(/^\//, "")}`));
             }
             return { id: item.id, title: item.title || item.name, images };
           })

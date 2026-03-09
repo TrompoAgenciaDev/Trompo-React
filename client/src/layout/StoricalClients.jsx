@@ -27,7 +27,7 @@ export default function StoricalClients() {
     return (
       <section className="full-container storical black-bg">
         <div className="storical-error">
-          Error al cargar: {String(error.message || error)}
+          Error al cargar: {typeof error === 'object' ? (error.message || JSON.stringify(error)) : String(error)}
         </div>
       </section>
     );

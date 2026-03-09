@@ -6,9 +6,9 @@ import "../assets/styles/single-post.css";
 const getPrimaryCategory = (post) => {
   const cats = Array.isArray(post?.category) ? post.category
     : Array.isArray(post?.categories) ? post.categories
-    : post?.category ? [post.category]
-    : post?.categories ? [post.categories]
-    : [];
+      : post?.category ? [post.category]
+        : post?.categories ? [post.categories]
+          : [];
   return cats[0] ?? "";
 };
 
@@ -20,8 +20,8 @@ const SinglePost = () => {
   const primaryCategory = useMemo(() => (post ? getPrimaryCategory(post) : ""), [post]);
 
   if (loading) return <p>Cargando post…</p>;
-  if (error)   return <p>{error}</p>;
-  if (!post)   return <p>Post no encontrado</p>;
+  if (error) return <p>{typeof error === 'object' ? (error.message || JSON.stringify(error)) : String(error)}</p>;
+  if (!post) return <p>Post no encontrado</p>;
 
   return (
     <div className="full-container single-post-container">

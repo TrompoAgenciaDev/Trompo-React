@@ -43,7 +43,7 @@ export default function PostGrid3({ category, tag }) {
   }, [isMobile, posts]);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (error) return <p>{typeof error === 'object' ? (error.message || JSON.stringify(error)) : String(error)}</p>;
 
   return (
     <div className="post-grid">

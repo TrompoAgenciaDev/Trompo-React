@@ -83,6 +83,10 @@
   gap: 4px;
 }
 
+.grid-item-title h5 {
+  line-height: 1em;
+}
+
 .grid-item-title h1 {
   font-style: italic;
 }
@@ -99,6 +103,7 @@
 /* ===== min-width: 1024px ===== */
 
 @media (min-width: 1024px) {
+
   .contact-section--contacto,
   .contact-section--form {
     background-image: var(--contact-bg-desktop);
@@ -131,7 +136,7 @@
 
 
 @media (min-width: 1440px) {
-  .contact-section{
+  .contact-section {
     background-size: 98%;
     min-height: 1050px;
   }

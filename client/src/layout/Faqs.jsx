@@ -8,7 +8,7 @@ function Faqs({ location = "home" }) {
   const { items, loading, error } = useFetchFaqs(location);
 
   if (loading) return <p>Cargando...</p>;
-  if (error) return <p>{error}</p>;
+  if (error) return <p>{typeof error === 'object' ? (error.message || JSON.stringify(error)) : String(error)}</p>;
 
   const toggleItem = (i) => setOpenIndex(openIndex === i ? -1 : i);
 

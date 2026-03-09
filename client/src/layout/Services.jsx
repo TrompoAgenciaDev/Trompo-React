@@ -7,7 +7,7 @@ function Services() {
   const { items, loading, error } = useFetchServices();
 
   if (loading) return <p>Cargando...</p>;
-  if (error) return <p>{error}</p>;
+  if (error) return <p>{typeof error === 'object' ? (error.message || JSON.stringify(error)) : String(error)}</p>;
 
   return (
     <section className="full-container services  bg-yellow-2">
@@ -31,7 +31,7 @@ function Services() {
 
       <div className="container services-link-container">
         <h1 className="services-title">
-          Con más de 10 años de experiencia, diseñamos soluciones integrales <span className="jump-br"><br/></span> a través de cinco  <span className="secondary-font">pilares clave</span>:
+          Con más de 10 años de experiencia, diseñamos soluciones integrales <span className="jump-br"><br /></span> a través de cinco  <span className="secondary-font">pilares clave</span>:
         </h1>
         <div className="grid-services">
           {items.map((item) => {

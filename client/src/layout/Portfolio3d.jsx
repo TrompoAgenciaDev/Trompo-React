@@ -44,12 +44,12 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
 
     // Para desarrollo, usar div en lugar de <a> para evitar navegación
     const Component = location === "desarrollo" ? motion.div : motion.a;
-    const linkProps = location === "desarrollo" 
-      ? {} 
-      : { 
-          href: enlacePortfolio || "#",
-          rel: "noopener noreferrer"
-        };
+    const linkProps = location === "desarrollo"
+      ? {}
+      : {
+        href: enlacePortfolio || "#",
+        rel: "noopener noreferrer"
+      };
 
     return (
       <Component
@@ -70,7 +70,7 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
   };
 
   if (loading) return <p>Cargando...</p>;
-  if (error) return <p>{error}</p>;
+  if (error) return <p>{typeof error === 'object' ? (error.message || JSON.stringify(error)) : String(error)}</p>;
 
   return (
     <div className="portfolio-section">
@@ -81,8 +81,10 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
           dragElastic={0.05}
           dragMomentum
           dragTransition={{ power: 0.2, timeConstant: 200 }}
-          style={{ display: "flex", gap: "20px", cursor: "grab", willChange: "transform",
-                   minWidth: "max-content", height: "100%", alignItems: "center" }}
+          style={{
+            display: "flex", gap: "20px", cursor: "grab", willChange: "transform",
+            minWidth: "max-content", height: "100%", alignItems: "center"
+          }}
           whileTap={{ cursor: "grabbing" }}
           onDragStart={() => { draggingRef.current = true; }}
           onDragEnd={() => { requestAnimationFrame(() => { draggingRef.current = false; }); }}
