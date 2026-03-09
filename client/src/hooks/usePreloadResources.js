@@ -50,26 +50,8 @@ export const usePreloadResources = () => {
         ? import.meta.env.BASE_URL
         : `${import.meta.env.BASE_URL}/`;
 
-      // Preload del video hero de la página actual
-      // Todos usan el mismo video del home
-      const getHeroVideo = (pathname) => {
-        // Todas las páginas usan los mismos videos del home
-        return {
-          desktop: `${base}assets/hero/home.mp4`,
-          mobile: `${base}assets/hero/mobile/home-mobile.mp4`
-        };
-      };
-
-      // Detectar si es móvil
-      const isMobile = window.matchMedia('(max-width: 767px)').matches;
-      
-      const heroVideo = getHeroVideo(location.pathname);
-      
-      if (heroVideo) {
-        const videoToPreload = isMobile ? heroVideo.mobile : heroVideo.desktop;
-        preloadResource(videoToPreload, 'video', 'video/mp4');
-      }
-
+      // Preload del video hero: no usar preload con as="video" (soporte limitado).
+      // El video se carga cuando el componente Hero lo necesita.
       // Preload de imágenes críticas de la página actual
       const getCriticalImages = (pathname) => {
         const images = [];

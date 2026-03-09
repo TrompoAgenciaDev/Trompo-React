@@ -67,11 +67,8 @@ export default defineConfig({
           if (id.includes("node_modules/react-router") || id.includes("node_modules/@remix-run/router")) {
             return "vendor-router";
           }
-          // Separar otros vendors grandes
-          if (id.includes("node_modules")) {
-            // Agrupar otros node_modules en vendor-general
-            return "vendor-general";
-          }
+          // No agrupar el resto en vendor-general: deja que Rollup mantenga el orden
+          // de dependencias (evita "Cannot read properties of undefined (reading 'Component')").
         },
       },
     },

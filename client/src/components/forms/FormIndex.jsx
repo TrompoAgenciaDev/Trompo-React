@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import useFormBrevo from "../../hooks/useFormBrevo";
 import "../../assets/styles/form-index.css";
 
 export default function FormIndex({ location = "home" }) {
   const { loading, error, submitForm } = useFormBrevo();
+  const recaptchaRef = useRef(null);
+  const [recaptchaToken, setRecaptchaToken] = useState("");
+  const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY || "";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (siteKey && !recaptchaToken) return;
     const formData = new FormData(e.target);
     formData.append("LOCATION", location);
+    if (siteKey) formData.append("g-recaptcha-response", recaptchaToken);
     submitForm(formData);
   };
 
@@ -266,13 +272,28 @@ export default function FormIndex({ location = "home" }) {
             placeholder="Tu consulta"
             rows="4"
             required
+<<<<<<< HEAD
           />
         </div>
         <p className="form-warning">
           *Por favor, completá los campos correctamente para poder derivar tu consulta. (hacerlo en dos lineas si es necesario, avisame cuando hagas esta parte asi lo vemos juntos)
         </p>
+=======
+          />{" "}
+        </div>{" "}
+        {siteKey && (
+          <div className="recaptcha-wrapper">
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={siteKey}
+              onChange={(token) => setRecaptchaToken(token || "")}
+              onExpired={() => setRecaptchaToken("")}
+            />
+          </div>
+        )}{" "}
+>>>>>>> origin/nuevo-concepto
         <div className="submit-container">
-          <button type="submit" disabled={loading}>
+          <button type="submit" disabled={loading || (siteKey && !recaptchaToken)}>
             {loading ? "Enviando..." : "Enviar"}
             <svg
               xmlns="http://www.w3.org/2000/svg"

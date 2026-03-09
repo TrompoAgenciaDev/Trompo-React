@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { sendBackupNotification } from "../utils/sendBackupNotification";
 
 export default function useFormBrevo() {
@@ -6,8 +6,11 @@ export default function useFormBrevo() {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [result, setResult] = useState(null);
+  const isSubmittingRef = useRef(false);
 
   const submitForm = async (formData) => {
+    if (isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
     setLoading(true);
     setError(null);
     setResult(null);
@@ -15,12 +18,17 @@ export default function useFormBrevo() {
     const fields = Object.fromEntries(
       typeof formData.entries === "function" ? formData.entries() : []
     );
-    sendBackupNotification({
-      formId: fields.LOCATION || "home",
-      fields,
-      timestamp: new Date().toISOString(),
-      pageUrl: typeof window !== "undefined" ? window.location.href : "",
-    });
+
+    // Solo enviar al backup si el usuario resolvió el reCAPTCHA (si está activo).
+    // El endpoint de backup también valida el token en servidor si hay RECAPTCHA_SECRET.
+    if (typeof fields["g-recaptcha-response"] === "string" && fields["g-recaptcha-response"].trim() !== "") {
+      sendBackupNotification({
+        formId: fields.LOCATION || "home",
+        fields,
+        timestamp: new Date().toISOString(),
+        pageUrl: typeof window !== "undefined" ? window.location.href : "",
+      });
+    }
 
     try {
       const url = `${import.meta.env.BASE_URL}form-handler.php`;
@@ -57,6 +65,7 @@ export default function useFormBrevo() {
       setError(String(err.message || "Hubo un error desconocido."));
     } finally {
       setLoading(false);
+      isSubmittingRef.current = false;
     }
   };
 
