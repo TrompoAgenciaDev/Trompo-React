@@ -369,7 +369,7 @@ const Campaigns = () => {
 
       {/* Productos Section */}
       <div className="full-container black-bg">
-        <div className="container">
+          <div className="container">
           <div className="grid-paid-media-container">
             <PaidMediaItem
               title="Google Ads"
@@ -400,33 +400,33 @@ const Campaigns = () => {
               description={<>Transformamos bases de datos en activos estratégicos.<br/>Diseñamos flujos automatizados, secuencias de nutrición y campañas segmentadas que acompañan el recorrido del usuario, fortalecen relación de marca y aumentan tasa de cierre.</>}
               footerText="→ Ideal para consolidar leads, aumentar recurrencia y mejorar conversión comercial."
               svgStroke="#FED332"
-            />
-          </div>
-        </div>
-      </div>
+                        />
+                      </div>
+                    </div>
+                  </div>
 
       <div className="full-container">
         <CustomerSlider />
-      </div>
+                  </div>
 
       {/* Entregables Section */}
       <div className="full-container bg-yellow-2 entregables-container">
-        <div className="container">
+                  <div className="container">
           <h3 className="title-entregables">Entregables</h3>
-        </div>
+                          </div>
         <div className="container grid-entregables">
           <div className="item-entregables">
             <h5>Estrategia y Dirección</h5>
             <p>Desarrollamos una arquitectura editorial sólida que define el rol de cada red, los pilares de contenido, el tono de comunicación y los objetivos medibles. Este entregable ordena el sistema conversacional y establece la base estratégica para el crecimiento sostenido.</p>
-          </div>
+                        </div>
           <div className="item-entregables">
             <h5>Planificación y Producción de Contenidos</h5>
             <p>Construimos un calendario editorial alineado a negocio, acompañado de piezas visuales y copies estratégicos adaptados a cada formato y plataforma. El contenido no es improvisado: responde a una lógica narrativa y a un objetivo claro dentro del ecosistema digital.</p>
-          </div>
+                        </div>
           <div className="item-entregables">
             <h5>Integración con Ecosistema Digital</h5>
             <p>Conectamos Social Media con landing pages, WhatsApp, CRM y funnels activos. La presencia social deja de ser aislada para convertirse en parte del sistema de adquisición y conversión.</p>
-          </div>
+                      </div>
           <div className="item-entregables">
             <h5>Analítica y Evolución Continua</h5>
             <p>Entregamos reportes ejecutivos con interpretación estratégica, no solo métricas. Analizamos comportamiento, identificamos oportunidades y definimos ajustes que permitan mejorar alcance útil, interacción relevante y conversión asistida.</p>
@@ -445,7 +445,7 @@ const Campaigns = () => {
         <div className="container title-beneficios">
           <h3>Beneficios diferenciales</h3>
           <h5>Nuestra metodología garantiza</h5>
-        </div>
+      </div>
         <div className="container">
           <div className="grid-beneficios">
             <div className="grid-item-beneficios">

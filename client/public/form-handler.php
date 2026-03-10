@@ -42,10 +42,29 @@ $smsNum    = $_POST['SMS'] ?? '';
 $consulta  = $_POST['CONSULTA'] ?? '';
 $location  = $_POST['LOCATION'] ?? 'home';
 
-// === Validar reCAPTCHA v2 solo si se envía token (opcional en servidor) ===
+// Honeypot: si "fax" tiene valor, es un bot (humanos no completan este campo invisible)
+$honeypot = trim($_POST['fax'] ?? '');
+if ($honeypot !== '') {
+    echo json_encode([
+        "success" => false,
+        "error"   => "Envío no válido"
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+// === Validar reCAPTCHA v2 (obligatorio si RECAPTCHA_SECRET está definido) ===
 $recaptchaSecret = getenv('RECAPTCHA_SECRET') ?: '';
 $recaptchaToken = trim($_POST['g-recaptcha-response'] ?? '');
-if ($recaptchaSecret !== '' && $recaptchaToken !== '') {
+
+if ($recaptchaSecret !== '') {
+    if ($recaptchaToken === '') {
+        echo json_encode([
+            "success" => false,
+            "error"   => "Validación de captcha requerida"
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
     $verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
     $verifyPayload = http_build_query([
         'secret' => $recaptchaSecret,

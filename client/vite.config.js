@@ -5,6 +5,7 @@ import viteCompression from "vite-plugin-compression";
 
 export default defineConfig({
   base: "/",
+  envDir: "../",
   plugins: [
     react(),
     svgr(),

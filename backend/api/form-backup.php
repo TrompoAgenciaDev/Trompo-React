@@ -231,10 +231,20 @@ try {
         exit;
     }
 
-    // Validar reCAPTCHA v2 solo si se envía token (opcional en servidor).
+    // Validar reCAPTCHA v2 (obligatorio si RECAPTCHA_SECRET está definido).
     $recaptchaSecret = getenv('RECAPTCHA_SECRET') ?: '';
     $recaptchaToken = isset($fields['g-recaptcha-response']) ? trim((string) $fields['g-recaptcha-response']) : '';
-    if ($recaptchaSecret !== '' && $recaptchaToken !== '') {
+
+    if ($recaptchaSecret !== '') {
+        if ($recaptchaToken === '') {
+            stepLog($logFile, 'recaptcha', 'ERROR', 'missing_token');
+            $logData['error'] = 'Token de captcha ausente';
+            writeLog($logFile, 'ERROR', $logData);
+            http_response_code(400);
+            jsonResponse(false, ['error' => 'Validación de captcha requerida']);
+            exit;
+        }
+
         $verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
         $verifyPayload = http_build_query([
             'secret' => $recaptchaSecret,

@@ -1,24 +1,33 @@
-import React, { useRef, useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 import useFormBrevo from "../../hooks/useFormBrevo";
 import "../../assets/styles/form-index.css";
 
 export default function FormIndex({ location = "home" }) {
   const { loading, error, submitForm } = useFormBrevo();
-  const recaptchaRef = useRef(null);
-  const [recaptchaToken, setRecaptchaToken] = useState("");
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY || "";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!executeRecaptcha) {
+      console.warn("reCAPTCHA no está listo");
+      return;
+    }
+
     const formData = new FormData(e.target);
     // Honeypot: si un bot completó este campo invisible, no enviar
     if (formData.get("fax") && String(formData.get("fax")).trim() !== "") return;
-    if (siteKey && !recaptchaToken) return;
-    formData.append("LOCATION", location);
-    if (siteKey) formData.append("g-recaptcha-response", recaptchaToken);
-    submitForm(formData);
+
+    try {
+      const token = await executeRecaptcha("form_submit");
+      formData.append("LOCATION", location);
+      formData.append("g-recaptcha-response", token);
+      submitForm(formData);
+    } catch (err) {
+      console.error("Error al obtener token de reCAPTCHA:", err);
+    }
   };
 
   return (
@@ -301,18 +310,9 @@ export default function FormIndex({ location = "home" }) {
         <p className="form-warning">
           *Por favor, completá los campos correctamente para poder derivar tu consulta.
         </p>
-        {siteKey && (
-          <div className="recaptcha-wrapper">
-            <ReCAPTCHA
-              ref={recaptchaRef}
-              sitekey={siteKey}
-              onChange={(token) => setRecaptchaToken(token || "")}
-              onExpired={() => setRecaptchaToken("")}
-            />
-          </div>
-        )}
+        {/* reCAPTCHA v3 es invisible, no requiere componente aquí */}
         <div className="submit-container">
-          <button type="submit" disabled={loading || (siteKey && !recaptchaToken)}>
+          <button type="submit" disabled={loading}>
             {loading ? "Enviando..." : "Enviar"}
             <svg
               xmlns="http://www.w3.org/2000/svg"

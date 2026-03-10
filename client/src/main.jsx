@@ -34,8 +34,20 @@ if ('serviceWorker' in navigator) {
   }
 }
 
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <GoogleReCaptchaProvider 
+      reCaptchaKey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+      scriptProps={{
+        async: false,
+        defer: false,
+        appendTo: "head",
+        nonce: undefined,
+      }}
+    >
+      <App />
+    </GoogleReCaptchaProvider>
   </StrictMode>,
 )
