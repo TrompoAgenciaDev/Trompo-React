@@ -220,6 +220,17 @@ try {
 
     stepLog($logFile, 'parse_fields', 'OK', 'formId=' . $formId);
 
+    // Honeypot: si "fax" tiene valor, es un bot (humanos no completan este campo invisible)
+    $honeypot = isset($fields['fax']) ? trim((string) $fields['fax']) : '';
+    if ($honeypot !== '') {
+        stepLog($logFile, 'honeypot', 'BLOCKED', 'bot_detected');
+        $logData['error'] = 'Envío no válido';
+        writeLog($logFile, 'HONEYPOT', $logData);
+        http_response_code(400);
+        jsonResponse(false, ['error' => 'Hubo un error. Por favor intentá de nuevo.']);
+        exit;
+    }
+
     // Validar reCAPTCHA v2 solo si se envía token (opcional en servidor).
     $recaptchaSecret = getenv('RECAPTCHA_SECRET') ?: '';
     $recaptchaToken = isset($fields['g-recaptcha-response']) ? trim((string) $fields['g-recaptcha-response']) : '';
