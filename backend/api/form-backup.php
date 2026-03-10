@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 $maxPayloadSize = 256 * 1024;
-$contentLength = (int)($_SERVER['CONTENT_LENGTH'] ?? 0);
+$contentLength = (int) ($_SERVER['CONTENT_LENGTH'] ?? 0);
 if ($contentLength > $maxPayloadSize || $contentLength <= 0) {
     ob_clean();
     echo json_encode(['success' => false, 'error' => 'Payload demasiado grande'], JSON_UNESCAPED_UNICODE);
@@ -119,8 +119,7 @@ foreach ($envPaths as $candidate) {
             }
             $envLoaded = true;
             stepLog($logFile, 'load_env', 'OK', 'file=' . $resolved);
-        }
-        else {
+        } else {
             stepLog($logFile, 'load_env', 'ERROR', 'read_failed path=' . $candidate);
         }
         break;
@@ -200,10 +199,10 @@ try {
     }
     stepLog($logFile, 'json_decode', 'OK', '');
 
-    $formId = isset($data['formId']) ? trim(preg_replace('/[^\p{L}\p{N}\-_]/u', '', (string)$data['formId'])) : 'unknown';
+    $formId = isset($data['formId']) ? trim(preg_replace('/[^\p{L}\p{N}\-_]/u', '', (string) $data['formId'])) : 'unknown';
     $formId = $formId !== '' ? $formId : 'unknown';
-    $timestamp = isset($data['timestamp']) ? trim((string)$data['timestamp']) : date('c');
-    $pageUrl = isset($data['pageUrl']) ? trim((string)$data['pageUrl']) : '';
+    $timestamp = isset($data['timestamp']) ? trim((string) $data['timestamp']) : date('c');
+    $pageUrl = isset($data['pageUrl']) ? trim((string) $data['pageUrl']) : '';
     $pageUrl = strlen($pageUrl) > 2048 ? substr($pageUrl, 0, 2048) : $pageUrl;
     $fields = isset($data['fields']) && is_array($data['fields']) ? $data['fields'] : [];
 
@@ -212,7 +211,7 @@ try {
             unset($fields[$k]);
             continue;
         }
-        $fields[$k] = trim((string)$v);
+        $fields[$k] = trim((string) $v);
     }
 
     $logData['formId'] = $formId;
@@ -277,10 +276,59 @@ try {
 
     $smtpHost = getenv('SMTP_HOST') ?: '';
     $smtpTo = getenv('SMTP_TO') ?: '';
+    $smtpCco = getenv('SMTP_CCO') ?: '';
     $mailSent = false;
 
+    // --- Lógica de Base de Datos ---
+    $dbHost = getenv('DB_HOST') ?: '';
+    $dbName = getenv('DB_NAME') ?: '';
+    $dbUser = getenv('DB_USER') ?: '';
+    $dbPass = getenv('DB_PASS') ?: '';
+    $dbLogged = false;
+
+    if ($dbHost !== '' && $dbName !== '') {
+        try {
+            $dsn = "mysql:host=$dbHost;dbname=$dbName;charset=utf8mb4";
+            $pdo = new PDO($dsn, $dbUser, $dbPass, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]);
+
+            // 1. Asegurar que la tabla existe
+            $pdo->exec("CREATE TABLE IF NOT EXISTS `form_submissions` (
+                `id` INT AUTO_INCREMENT PRIMARY KEY,
+                `form_id` VARCHAR(100) NOT NULL,
+                `url` TEXT NOT NULL,
+                `ip` VARCHAR(45) NOT NULL,
+                `user_agent` TEXT,
+                `fields` JSON NOT NULL,
+                `created_at` DATETIME NOT NULL
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+
+            // 2. Insertar el registro
+            $stmt = $pdo->prepare("INSERT INTO `form_submissions` 
+                (`form_id`, `url`, `ip`, `user_agent`, `fields`, `created_at`) 
+                VALUES (?, ?, ?, ?, ?, ?)");
+
+            $stmt->execute([
+                $formId,
+                $pageUrl,
+                $logData['ip'],
+                $logData['user_agent'],
+                json_encode($fields, JSON_UNESCAPED_UNICODE),
+                date('Y-m-d H:i:s')
+            ]);
+
+            $dbLogged = true;
+            stepLog($logFile, 'db_save', 'OK', 'id=' . $pdo->lastInsertId());
+        } catch (PDOException $e) {
+            stepLog($logFile, 'db_save', 'ERROR', $e->getMessage());
+            // No detenemos el flujo si falla la DB, pero lo logueamos
+        }
+    }
+
     if ($smtpHost !== '' && $smtpTo !== '') {
-        stepLog($logFile, 'smtp_config', 'OK', 'host=' . $smtpHost . ' to=' . $smtpTo);
+        stepLog($logFile, 'smtp_config', 'OK', 'host=' . $smtpHost . ' to=' . $smtpTo . ($smtpCco !== '' ? ' cco=' . $smtpCco : ''));
         $smtpUser = getenv('SMTP_USER') ?: '';
         $smtpPass = getenv('SMTP_PASS') ?: '';
 
@@ -292,7 +340,7 @@ try {
         }
 
         // Configuraciones a probar: 587+TLS primero; si falla, 465+SSL (muchos hostings bloquean 587)
-        $envPort = (int)(getenv('SMTP_PORT') ?: 587);
+        $envPort = (int) (getenv('SMTP_PORT') ?: 587);
         $envEnc = getenv('SMTP_ENCRYPTION') ?: 'tls';
         $attempts = $isGmail
             ? [['port' => 587, 'encryption' => 'tls'], ['port' => 465, 'encryption' => 'ssl']]
@@ -323,17 +371,31 @@ try {
                 @file_put_contents($logFile, $line, FILE_APPEND | LOCK_EX);
             };
         }
-        $mail->setFrom($smtpFrom, 'Trompo Agencia');
+        $mail->setFrom($smtpFrom, 'Contacto de Formulario');
         foreach (array_map('trim', explode(',', $smtpTo)) as $to) {
             if ($to !== '') {
                 $mail->addAddress($to);
             }
         }
+        if ($smtpCco !== '') {
+            foreach (array_map('trim', explode(',', $smtpCco)) as $cco) {
+                if ($cco !== '') {
+                    $mail->addBCC($cco);
+                }
+            }
+        }
         $mail->Subject = 'Nuevo mensaje de contacto - Trompo';
         $mail->isHTML(true);
 
-        $rows = '';
+        $pageUrlEsc = htmlspecialchars($pageUrl, ENT_QUOTES, 'UTF-8');
+        $rows = "<tr>
+                    <th style='text-align: left; padding: 12px; background-color: #f9f9fb; border-top: 1px solid #eeeeee; width: 30%; color: #6b6b75; font-size: 13px; text-transform: uppercase; font-family: Helvetica, Arial, sans-serif;'>URL DE ORIGEN</th>
+                    <td style='padding: 12px; border-top: 1px solid #eeeeee; font-size: 11px; color: #6b6b75; font-family: Helvetica, Arial, sans-serif;'><a href='{$pageUrlEsc}' style='color: #6b6b75; text-decoration: none;'>{$pageUrlEsc}</a></td>
+                  </tr>";
+
         foreach ($fields as $label => $value) {
+            if ($label === 'g-recaptcha-response' || $label === 'LOCATION')
+                continue; // Ocultar token y location
             $labelEsc = htmlspecialchars($label, ENT_QUOTES, 'UTF-8');
             $valueEsc = nl2br(htmlspecialchars($value, ENT_QUOTES, 'UTF-8'));
             $rows .= "<tr>
@@ -406,8 +468,7 @@ try {
                 $mailSent = true;
                 stepLog($logFile, 'send_mail', 'OK', 'port=' . $cfg['port']);
                 break;
-            }
-            catch (Exception $e) {
+            } catch (Exception $e) {
                 $lastError = $e->getMessage();
                 stepLog($logFile, 'send_mail', 'RETRY', 'port=' . $cfg['port'] . ' error=' . $lastError);
             }
@@ -416,8 +477,7 @@ try {
             stepLog($logFile, 'send_mail', 'ERROR', $lastError);
             $logData['error'] = 'SMTP: ' . $lastError;
         }
-    }
-    else {
+    } else {
         $reason = [];
         if ($smtpHost === '') {
             $reason[] = 'SMTP_HOST vacío';
@@ -439,8 +499,7 @@ try {
     stepLog($logFile, 'response', 'OK', '200');
     http_response_code(200);
     jsonResponse(true, ['message' => 'Backup registrado']);
-}
-catch (Exception $e) {
+} catch (Exception $e) {
     stepLog($logFile, 'exception', 'ERROR', $e->getMessage());
     $logData['formId'] = $logData['formId'] ?? 'unknown';
     $logData['pageUrl'] = $logData['pageUrl'] ?? '';

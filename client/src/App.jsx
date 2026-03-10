@@ -15,20 +15,22 @@ import React from "react";
 function AppContent() {
   const { isOpen, togglePopup } = useTogglePopup();
   const location = useLocation();
-  
+
   // Preload dinámico de recursos críticos
   usePreloadResources();
-  
+
   // Prefetch inteligente de rutas relacionadas
   usePrefetchRoutes();
 
+  const isReportsPage = location.pathname === "/reportes";
+
   return (
     <>
-      <Header onTogglePopup={togglePopup} />
-      <MenuPopup isOpen={isOpen} onClose={togglePopup} />
+      {!isReportsPage && <Header onTogglePopup={togglePopup} />}
+      {!isReportsPage && <MenuPopup isOpen={isOpen} onClose={togglePopup} />}
       <AppRoutes />
-      <ScrollTop />
-      <Footer />
+      {!isReportsPage && <ScrollTop />}
+      {!isReportsPage && <Footer />}
     </>
   );
 }

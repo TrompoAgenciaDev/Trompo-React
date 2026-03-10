@@ -4,6 +4,10 @@
 RewriteEngine On
 RewriteBase /
 
+# Pasar el header de Authorization a PHP (necesario para FastCGI)
+RewriteCond %{HTTP:Authorization} ^(.+)$
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
 # Permitir acceso directo a archivos PHP (endpoints de API)
 RewriteCond %{REQUEST_FILENAME} \.php$
 RewriteRule . - [L]

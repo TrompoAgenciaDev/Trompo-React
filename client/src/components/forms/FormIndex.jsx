@@ -21,9 +21,7 @@ export default function FormIndex({ location = "home" }) {
 
   return (
     <div className="sib-form">
-      {" "}
       <form id="sib-form" onSubmit={handleSubmit}>
-        {" "}
         <div className="form-group">
           <label htmlFor="NOMBRE">Ingresá tu nombre*</label>
           <input
@@ -272,15 +270,11 @@ export default function FormIndex({ location = "home" }) {
             placeholder="Tu consulta"
             rows="4"
             required
-<<<<<<< HEAD
           />
         </div>
         <p className="form-warning">
-          *Por favor, completá los campos correctamente para poder derivar tu consulta. (hacerlo en dos lineas si es necesario, avisame cuando hagas esta parte asi lo vemos juntos)
+          *Por favor, completá los campos correctamente para poder derivar tu consulta.
         </p>
-=======
-          />{" "}
-        </div>{" "}
         {siteKey && (
           <div className="recaptcha-wrapper">
             <ReCAPTCHA
@@ -290,8 +284,7 @@ export default function FormIndex({ location = "home" }) {
               onExpired={() => setRecaptchaToken("")}
             />
           </div>
-        )}{" "}
->>>>>>> origin/nuevo-concepto
+        )}
         <div className="submit-container">
           <button type="submit" disabled={loading || (siteKey && !recaptchaToken)}>
             {loading ? "Enviando..." : "Enviar"}

@@ -28,6 +28,7 @@ const NotFound = lazy(() => import("../pages/NotFound"));
 const Maintenance = lazy(() => import("../pages/Maintenance.jsx"));
 const ClearCache = lazy(() => import("../pages/ClearCache"));
 const Faqs = lazy(() => import("../pages/Faqs"));
+const Reports = lazy(() => import("../pages/Reports.jsx"));
 
 const routesConfig = {
   main: [
@@ -102,6 +103,7 @@ const routesConfig = {
     { path: "/gracias", label: "gracias", Component: Gracias },
     { path: "/primavera", label: "Landing Primavera", Component: Primavera },
     { path: "/clear-cache", label: "Limpiar Caché", Component: ClearCache },
+    { path: "/reportes", label: "Reportes", Component: Reports },
   ],
 
 };

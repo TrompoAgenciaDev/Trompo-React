@@ -8,12 +8,12 @@ export default defineConfig({
   plugins: [
     react(),
     svgr(),
-    viteCompression({
-      algorithm: "brotliCompress",
-      ext: ".br",
-      threshold: 1024,
-      deleteOriginFile: false,
-    }),
+    // viteCompression({
+    //   algorithm: "brotliCompress",
+    //   ext: ".br",
+    //   threshold: 1024,
+    //   deleteOriginFile: false,
+    // }),
   ],
   define: {
     "import.meta.env.BUILD_TIME": JSON.stringify(Date.now()),
@@ -44,7 +44,8 @@ export default defineConfig({
         entryFileNames: "assets/[name].[hash].js",
         chunkFileNames: "assets/[name].[hash].js",
         assetFileNames: (assetInfo) => {
-          const ext = assetInfo.name.split(".").pop();
+          const name = assetInfo.name.split('/').pop().split('\\').pop();
+          const ext = name.split(".").pop();
           if (ext === "css") return "assets/[name].[hash].css";
           return "assets/[name].[hash][extname]";
         },

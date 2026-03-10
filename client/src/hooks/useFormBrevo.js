@@ -19,23 +19,23 @@ export default function useFormBrevo() {
       typeof formData.entries === "function" ? formData.entries() : []
     );
 
-    // Solo enviar al backup si el usuario resolvió el reCAPTCHA (si está activo).
-    // El endpoint de backup también valida el token en servidor si hay RECAPTCHA_SECRET.
-    if (typeof fields["g-recaptcha-response"] === "string" && fields["g-recaptcha-response"].trim() !== "") {
-      sendBackupNotification({
+    try {
+      // Ahora enviamos directamente al handler de SMTP (backup) como destino principal
+      const url = `${import.meta.env.BASE_URL}api/form-backup.php`;
+
+      const payload = {
         formId: fields.LOCATION || "home",
         fields,
         timestamp: new Date().toISOString(),
         pageUrl: typeof window !== "undefined" ? window.location.href : "",
-      });
-    }
-
-    try {
-      const url = `${import.meta.env.BASE_URL}form-handler.php`;
+      };
 
       const response = await fetch(url, {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
       });
 
       const text = await response.text();
@@ -50,18 +50,17 @@ export default function useFormBrevo() {
 
       if (json.success) {
         setSuccess(true);
+        // Redirigir a la página de gracias tras el envío exitoso por SMTP
         window.location.href = `${import.meta.env.BASE_URL}gracias`;
       } else {
-        // Asegurarse de que el error sea un string (Evita React Error #31)
         const rawError = json.error;
         const errorMsg = (typeof rawError === "object" && rawError !== null)
           ? (rawError.message || JSON.stringify(rawError))
-          : (rawError || "Hubo un error al enviar el formulario.");
+          : (rawError || (json.http ? `Error SMTP ${json.http}` : JSON.stringify(json)) || "Hubo un error al enviar el formulario.");
         setError(errorMsg);
       }
     } catch (err) {
-      console.error("Error en fetch:", err);
-      // Asegurarse de que err.message sea string
+      console.error("Error en el envío:", err);
       setError(String(err.message || "Hubo un error desconocido."));
     } finally {
       setLoading(false);
