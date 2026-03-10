@@ -12,8 +12,10 @@ export default function FormIndex({ location = "home" }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (siteKey && !recaptchaToken) return;
     const formData = new FormData(e.target);
+    // Honeypot: si un bot completó este campo invisible, no enviar
+    if (formData.get("fax") && String(formData.get("fax")).trim() !== "") return;
+    if (siteKey && !recaptchaToken) return;
     formData.append("LOCATION", location);
     if (siteKey) formData.append("g-recaptcha-response", recaptchaToken);
     submitForm(formData);
@@ -43,12 +45,14 @@ export default function FormIndex({ location = "home" }) {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="EMPRESA">Ingresá tu empresa*</label>
+          <label htmlFor="EMPRESA">Ingresá la URL de la empresa*</label>
           <input
             id="EMPRESA"
             type="text"
             name="EMPRESA"
-            placeholder="Trompo Agencia"
+            placeholder="www.miempresa.com"
+            pattern="^(https?://)?.+\..+"
+            title="Ingresá una URL válida (ej: www.miempresa.com o https://miempresa.com)"
             required
           />
         </div>
@@ -270,6 +274,28 @@ export default function FormIndex({ location = "home" }) {
             placeholder="Tu consulta"
             rows="4"
             required
+          />
+        </div>
+        {/* Honeypot: campo invisible para bots; humanos no lo ven ni completan */}
+        <div
+          style={{
+            position: "absolute",
+            left: "-9999px",
+            width: "1px",
+            height: "1px",
+            overflow: "hidden",
+            opacity: 0,
+            pointerEvents: "none",
+          }}
+          aria-hidden="true"
+        >
+          <label htmlFor="fax">No completar</label>
+          <input
+            id="fax"
+            type="text"
+            name="fax"
+            tabIndex={-1}
+            autoComplete="off"
           />
         </div>
         <p className="form-warning">
