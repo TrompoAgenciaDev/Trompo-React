@@ -385,12 +385,12 @@ const SocialMedia = () => {
         </div>
       </div>
 
-      {/* Calculadora Engagement Section */}
+      {/* Calculadora Engagement Section
       <div className="full-container bg-white engagement-calculator-section">
         <div className="container">
           <EngagementCalculator />
         </div>
-      </div>
+      </div> */}
 
       <div className="full-container beneficios-container black-bg">
         <div className="container title-beneficios">
