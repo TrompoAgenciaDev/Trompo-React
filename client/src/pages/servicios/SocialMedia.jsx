@@ -5,7 +5,7 @@ import StaticHero from "../../components/StaticHero.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import SocialMediaShowcaseSlider from "../../components/sliders/SocialMediaShowcaseSlider.jsx";
 import AutoSlider from "../../components/sliders/AutoSlider.jsx";
-import EngagementCalculator from "../../components/EngagementCalculator.jsx";
+import EngagementCalculator from "../../components/EngagementCalculator_old.jsx";
 //styles
 import "../../assets/styles/social-media.css";
 import "../../assets/styles/entregables.css";

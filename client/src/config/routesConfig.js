@@ -30,6 +30,10 @@ const ClearCache = lazy(() => import("../pages/ClearCache"));
 const Faqs = lazy(() => import("../pages/Faqs"));
 const Reports = lazy(() => import("../pages/Reports.jsx"));
 
+
+const PopupPage = lazy(() => import("../pages/Popupage"));
+
+
 const routesConfig = {
   main: [
     { path: "/", label: "inicio", Component: Home },
@@ -104,6 +108,7 @@ const routesConfig = {
     { path: "/primavera", label: "Landing Primavera", Component: Primavera },
     { path: "/clear-cache", label: "Limpiar Caché", Component: ClearCache },
     { path: "/reportes", label: "Reportes", Component: Reports },
+    { path: "/popup", label: "Popup", Component: PopupPage },
   ],
 
 };
