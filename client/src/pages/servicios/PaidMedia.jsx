@@ -6,8 +6,7 @@ import StaticHero from "../../components/StaticHero.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import Icons from "../../components/Icons.jsx";
 import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
-import AutoSlider from "../../components/sliders/AutoSlider.jsx";
-import MiniROIBlock from "../../components/MiniROIBlock.jsx";
+import RoiCalculator from "../../components/MiniROICalculator.jsx";
 //styles
 import "../../assets/styles/paid-media.css";
 import "../../assets/styles/entregables.css";
@@ -209,12 +208,15 @@ const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }
   );
 };
 
-const Campaigns = () => {
+const PaidMedia = () => {
   const [activeTab, setActiveTab] = useState("graficos");
   const textRef = useRef(null);
   const animatedTextContainerRef = useRef(null);
   const containerRef = useRef(null);
   const isInView = useInView(textRef, { once: false, amount: 0.3 });
+  
+  //Para el popup de la calculadora roi
+  const [open, setOpen] = useState(false);
   
   const tabs = [
     { id: "busqueda", label: "Anuncios de búsqueda" },
@@ -256,7 +258,7 @@ const Campaigns = () => {
     setBaseOpacity(latest);
   });
 
-  const text = "En Trompo, Paid Media no es “hacer campañas”, es diseñar sistemas de adquisición, optimización y escalamiento sostenido.Planificamos, ejecutamos y optimizamos inversiones digitales con foco en rentabilidad real. Cada peso invertido tiene una lógica estratégica, una hipótesis y un objetivo medible";
+  const text = "En Trompo, Paid Media no es “hacer campañas”, es diseñar sistemas de adquisición, optimización y escalamiento sostenido. Planificamos, ejecutamos y optimizamos inversiones digitales con foco en rentabilidad real. Cada peso invertido tiene una lógica estratégica, una hipótesis y un objetivo medible";
   
   // Delay entre frases: 0.3s por frase para una animación fluida
   const phraseDelay = 0.3;
@@ -369,7 +371,7 @@ const Campaigns = () => {
 
       {/* Productos Section */}
       <div className="full-container black-bg">
-          <div className="container">
+        <div className="container">
           <div className="grid-paid-media-container">
             <PaidMediaItem
               title="Google Ads"
@@ -401,32 +403,32 @@ const Campaigns = () => {
               footerText="→ Ideal para consolidar leads, aumentar recurrencia y mejorar conversión comercial."
               svgStroke="#FED332"
                         />
-                      </div>
-                    </div>
-                  </div>
+          </div>
+        </div>
+      </div>
 
       <div className="full-container">
         <CustomerSlider />
-                  </div>
+      </div>
 
       {/* Entregables Section */}
       <div className="full-container bg-yellow-2 entregables-container">
-                  <div className="container">
+        <div className="container">
           <h3 className="title-entregables">Entregables</h3>
-                          </div>
+        </div>
         <div className="container grid-entregables">
           <div className="item-entregables">
             <h5>Estrategia y Dirección</h5>
             <p>Desarrollamos una arquitectura editorial sólida que define el rol de cada red, los pilares de contenido, el tono de comunicación y los objetivos medibles. Este entregable ordena el sistema conversacional y establece la base estratégica para el crecimiento sostenido.</p>
-                        </div>
+          </div>
           <div className="item-entregables">
             <h5>Planificación y Producción de Contenidos</h5>
             <p>Construimos un calendario editorial alineado a negocio, acompañado de piezas visuales y copies estratégicos adaptados a cada formato y plataforma. El contenido no es improvisado: responde a una lógica narrativa y a un objetivo claro dentro del ecosistema digital.</p>
-                        </div>
+          </div>
           <div className="item-entregables">
             <h5>Integración con Ecosistema Digital</h5>
             <p>Conectamos Social Media con landing pages, WhatsApp, CRM y funnels activos. La presencia social deja de ser aislada para convertirse en parte del sistema de adquisición y conversión.</p>
-                      </div>
+          </div>
           <div className="item-entregables">
             <h5>Analítica y Evolución Continua</h5>
             <p>Entregamos reportes ejecutivos con interpretación estratégica, no solo métricas. Analizamos comportamiento, identificamos oportunidades y definimos ajustes que permitan mejorar alcance útil, interacción relevante y conversión asistida.</p>
@@ -434,12 +436,38 @@ const Campaigns = () => {
         </div>
       </div>
 
-      {/* Calculadora ROI Section 
-      <div className="full-container bg-white roi-calculator-section">
-        <div className="container">
-          <MiniROIBlock />
+      {/* Calculadora ROI Section */}
+      <div className="full-container bg-white container-calculator">
+        <div className="container container-grid-calculator">
+          <div className="item">
+            <svg 
+              className="svg-icon svg-white"
+              xmlns="http://www.w3.org/2000/svg" 
+              width="102" 
+              height="102" 
+              viewBox="0 0 102 102" 
+              fill="none"
+              style={{transform: "rotate(180deg)"}}
+            >
+              <g clipPath="url(#clip0_3525_2018_white)">
+                <path d="M102 94L-1.52588e-05 94" stroke="#1E1E1E" strokeWidth="20" fill="none"/>
+                <path d="M8 0L8 102" stroke="#1E1E1E" strokeWidth="20" fill="none"/>
+                <path d="M95.9375 5.93756L5.87504 96" stroke="#1E1E1E" strokeWidth="20" fill="none"/>
+              </g>
+            </svg>
+          </div>
+          <div className="item">
+            <h3>
+              ¿Cuánto puede rendir tu inversión publicitaria?
+            </h3>
+            <h5>Simulá leads, ventas y ROI en segundos.</h5>
+          </div>
+          <div className="item">
+            <button onClick={() => setOpen(true)} className="button-calculator">Ir al Simulador ROI</button>
+            {open && <RoiCalculator onClose={() => setOpen(false)} />}
+          </div>
         </div>
-      </div>*/}
+      </div>
 
       <div className="full-container beneficios-container black-bg">
         <div className="container title-beneficios">
@@ -502,4 +530,4 @@ const Campaigns = () => {
   );
 };
 
-export default Campaigns;
+export default PaidMedia;

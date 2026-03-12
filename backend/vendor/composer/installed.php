@@ -3,7 +3,7 @@
         'name' => 'trompo/form-backup',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'd780e767bc21f6588d743a8b8a155f7fa7258984',
+        'reference' => '765d30c48c534962623d2866095b6ef986dcfc1f',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'trompo/form-backup' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'd780e767bc21f6588d743a8b8a155f7fa7258984',
+            'reference' => '765d30c48c534962623d2866095b6ef986dcfc1f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

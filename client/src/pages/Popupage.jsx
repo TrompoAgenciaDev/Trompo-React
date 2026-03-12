@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Popup from "@/components/EngagementCalculator";
+import Popup from "@/components/MiniROICalculator";
+import Popup2 from "@/components/EngagementCalculator";
 
 function Popupage() {
   const [open, setOpen] = useState(false);
@@ -7,8 +8,12 @@ function Popupage() {
   return (
     <div className="full-container">
         <div className="full-container black-bg" style={{width: "100vw", height: "90svh"}}>
-            <button onClick={() => setOpen(true)}>Abrir popup</button>
+            <button onClick={() => setOpen(true)} style={{marginBottom: "100px"}}>Abrir ROI</button>
             {open && <Popup onClose={() => setOpen(false)} />}
+              
+            
+            <button onClick={() => setOpen(true)}>Abrir Engagement</button>
+            {open && <Popup2 onClose={() => setOpen(false)} />}
         </div>
         <div className="full-container bg-white" style={{width: "100vw", height: "90svh"}}>
             <h1 style={{color: "white"}}>Text</h1>

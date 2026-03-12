@@ -5,7 +5,7 @@ import StaticHero from "../../components/StaticHero.jsx";
 import ServiceTitle from "../../components/services/ServiceTitle.jsx";
 import SocialMediaShowcaseSlider from "../../components/sliders/SocialMediaShowcaseSlider.jsx";
 import AutoSlider from "../../components/sliders/AutoSlider.jsx";
-import EngagementCalculator from "../../components/EngagementCalculator_old.jsx";
+import EngagementCalculator from "../../components/EngagementCalculator.jsx";
 //styles
 import "../../assets/styles/social-media.css";
 import "../../assets/styles/entregables.css";
@@ -219,6 +219,9 @@ const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }
 const SocialMedia = () => {
   const textRef = useRef(null);
   const animatedTextContainerRef = useRef(null);
+  
+  //Para el popup de la calculadora de Engagement
+  const [open, setOpen] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: animatedTextContainerRef,
@@ -385,12 +388,40 @@ const SocialMedia = () => {
         </div>
       </div>
 
-      {/* Calculadora Engagement Section
-      <div className="full-container bg-white engagement-calculator-section">
-        <div className="container">
-          <EngagementCalculator />
+      {/* Calculadora Engagement Section */}
+      <div className="full-container bg-white container-calculator">
+        <div className="container container-grid-calculator">
+          <div className="item">
+            <svg 
+              className="svg-icon svg-white"
+              xmlns="http://www.w3.org/2000/svg" 
+              width="102" 
+              height="102" 
+              viewBox="0 0 102 102" 
+              fill="none"
+              style={{transform: "rotate(180deg)"}}
+            >
+              <g clipPath="url(#clip0_3525_2018_white)">
+                <path d="M102 94L-1.52588e-05 94" stroke="#1E1E1E" strokeWidth="20" fill="none"/>
+                <path d="M8 0L8 102" stroke="#1E1E1E" strokeWidth="20" fill="none"/>
+                <path d="M95.9375 5.93756L5.87504 96" stroke="#1E1E1E" strokeWidth="20" fill="none"/>
+              </g>
+            </svg>
+          </div>
+          <div className="item">
+            <h3>
+              ¿Cuánto puede crecer tu comunidad?
+            </h3>
+            <h5>
+              Calculá engagement y oportunidades a partir de tus interacciones.
+            </h5>
+          </div>
+          <div className="item">
+            <button onClick={() => setOpen(true)} className="button-calculator">Ir al simulador de Impacto Social</button>
+            {open && <EngagementCalculator onClose={() => setOpen(false)} />}
+          </div>
         </div>
-      </div> */}
+      </div>
 
       <div className="full-container beneficios-container black-bg">
         <div className="container title-beneficios">

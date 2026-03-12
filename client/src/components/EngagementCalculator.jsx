@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
-import "../assets/styles/EngagementCalculator.css";
+import "../assets/styles/Calculators.css";
 
 /**
  * EngagementCalculator - Calculadora de tasa de engagement para redes sociales
@@ -48,14 +48,14 @@ const EngagementCalculator = ({ onClose }) => {
 
   // Clasificación del rendimiento
   const getPerformance = () => {
-    if (calculated.engagement < 1) return { label: "Bajo rendimiento", className: "engagement-low" };
-    if (calculated.engagement < 3) return { label: "Rendimiento aceptable", className: "engagement-mid" };
-    return { label: "Alto rendimiento", className: "engagement-high" };
+    if (calculated.engagement < 1) return { label: "Bajo rendimiento", className: "low" };
+    if (calculated.engagement < 3) return { label: "Rendimiento aceptable", className: "mid" };
+    return { label: "Alto rendimiento", className: "high" };
   };
 
   const performance = getPerformance();
 
-  const impactMessage = performance.className === "engagement-high"
+  const impactMessage = performance.className === "high"
     ? "Tu comunidad tiene potencial de conversión estructural."
     : "El contenido necesita dirección estratégica para generar impacto real.";
 
@@ -82,6 +82,7 @@ const EngagementCalculator = ({ onClose }) => {
           </g>
         </svg>
       </button>
+
       <div className="header-card">
         {/* Textos */}
         <div className="left-card-grid">
@@ -137,17 +138,17 @@ const EngagementCalculator = ({ onClose }) => {
             <p className="mobile-popup-description">
               Calcular:
             </p>
-            <div className="engagement-toggle-wrapper">              
+            <div className="toggle-wrapper">              
               <button
                 type="button"
-                className={`engagement-toggle-btn ${mode === "seguidores" ? "active" : ""}`}
+                className={`toggle-btn ${mode === "seguidores" ? "active" : ""}`}
                 onClick={() => setMode("seguidores")}
               >
                 Sobre Seguidores
               </button>
               <button
                 type="button"
-                className={`engagement-toggle-btn ${mode === "alcance" ? "active" : ""}`}
+                className={`toggle-btn ${mode === "alcance" ? "active" : ""}`}
                 onClick={() => setMode("alcance")}
               >
                 Sobre Alcance
@@ -155,9 +156,9 @@ const EngagementCalculator = ({ onClose }) => {
             </div>
 
             {/* Sección Inputs */}
-            <div className="engagement-calculator-inputs">
+            <div className="calculator-inputs">
               {mode === "seguidores" ? (
-                <div className="engagement-input-group">
+                <div className="input-group">
                   <label className="desktop-text" htmlFor="seguidores">Seguidores</label>
                   <input
                     id="seguidores"
@@ -170,7 +171,7 @@ const EngagementCalculator = ({ onClose }) => {
                   />
                 </div>
               ) : (
-                <div className="engagement-input-group">
+                <div className="input-group">
                   <label className="desktop-text" htmlFor="alcance">Alcance</label>
                   <input
                     id="alcance"
@@ -182,7 +183,7 @@ const EngagementCalculator = ({ onClose }) => {
                   />
                 </div>
               )}
-              <div className="engagement-input-group">
+              <div className="input-group">
                 <label className="desktop-text" htmlFor="likes">Likes</label>
                 <input
                   id="likes"
@@ -193,7 +194,7 @@ const EngagementCalculator = ({ onClose }) => {
                   placeholder="Likes"
                 />
               </div>
-              <div className="engagement-input-group">
+              <div className="input-group">
                 <label className="desktop-text" htmlFor="comentarios">Comentarios</label>
                 <input
                   id="comentarios"
@@ -204,7 +205,7 @@ const EngagementCalculator = ({ onClose }) => {
                   placeholder="Comentarios"
                 />
               </div>
-              <div className="engagement-input-group">
+              <div className="input-group">
                 <label className="desktop-text" htmlFor="compartidos">Compartidos</label>
                 <input
                   id="compartidos"
@@ -215,7 +216,7 @@ const EngagementCalculator = ({ onClose }) => {
                   placeholder="Compartidos"
                 />
               </div>
-              <div className="engagement-input-group">
+              <div className="input-group">
                 <label className="desktop-text" htmlFor="guardados">Guardados</label>
                 <input
                   id="guardados"
@@ -229,49 +230,49 @@ const EngagementCalculator = ({ onClose }) => {
             </div>
 
             {/* Sección Resultados */}
-            <div className="engagement-calculator-results">
+            <div className="calculator-results">
               <motion.div
-                className="engagement-result-item"
+                className="result-item"
                 key={`total-${calculated.totalInteracciones}`}
                 initial={{ opacity: 0.7, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.2 }}
               >
-                <h5 className="engagement-result-label">Total de interacciones</h5>
-                <span className="engagement-result-value">{formatNumber(calculated.totalInteracciones)}</span>
+                <h5 className="result-label">Total de interacciones</h5>
+                <span className="result-value">{formatNumber(calculated.totalInteracciones)}</span>
               </motion.div>
               <motion.div
-                className={`engagement-result-item engagement-rate ${performance.className}`}
-                key={`engagement-${calculated.engagement}`}
+                className={`result-item rate ${performance.className}`}
+                key={`${calculated.engagement}`}
                 initial={{ opacity: 0.7, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.2 }}
               >
-                <h5 className="engagement-result-label">Engagement Rate</h5>
-                <span className="engagement-result-value engagement-result-main">
+                <h5 className="result-label">Engagement Rate</h5>
+                <span className="result-value result-main">
                   {calculated.engagement.toFixed(2)}%
                 </span>
-                <span className="engagement-result-interpretation">{performance.label}</span>
+                <span className="result-main">{performance.label}</span>
               </motion.div>
             </div>
 
-            <p className="engagement-result-message">Este simulador estima cómo el engagement y la interacción pueden generar leads cuando el ecosistema digital está bien estructurado.</p>
+            <p className="result-message">Este simulador estima cómo el engagement y la interacción pueden generar leads cuando el ecosistema digital está bien estructurado.</p>
 
           </div>
           <div className="desktop-calculator">
             {/* Toggle Seguidores / Alcance */}
             <p className="desktop-text">Ingresá tu alcance mensual estimado y tasa de interacción promedio. Visualizá cómo podría traducirse en oportuniades reales.</p>
-            <div className="engagement-toggle-wrapper">              
+            <div className="toggle-wrapper">              
               <button
                 type="button"
-                className={`engagement-toggle-btn ${mode === "seguidores" ? "active" : ""}`}
+                className={`toggle-btn ${mode === "seguidores" ? "active" : ""}`}
                 onClick={() => setMode("seguidores")}
               >
                 Calcular sobre Seguidores
               </button>
               <button
                 type="button"
-                className={`engagement-toggle-btn ${mode === "alcance" ? "active" : ""}`}
+                className={`toggle-btn ${mode === "alcance" ? "active" : ""}`}
                 onClick={() => setMode("alcance")}
               >
                 Calcular sobre Alcance
@@ -279,9 +280,9 @@ const EngagementCalculator = ({ onClose }) => {
             </div>
 
             {/* Sección Inputs */}
-            <div className="engagement-calculator-inputs">
+            <div className="calculator-inputs">
               {mode === "seguidores" ? (
-                <div className="engagement-input-group">
+                <div className="input-group">
                   <label htmlFor="seguidores">Seguidores</label>
                   <input
                     id="seguidores"
@@ -293,7 +294,7 @@ const EngagementCalculator = ({ onClose }) => {
                   />
                 </div>
               ) : (
-                <div className="engagement-input-group">
+                <div className="input-group">
                   <label htmlFor="alcance">Alcance</label>
                   <input
                     id="alcance"
@@ -305,7 +306,7 @@ const EngagementCalculator = ({ onClose }) => {
                   />
                 </div>
               )}
-              <div className="engagement-input-group">
+              <div className="input-group">
                 <label htmlFor="likes">Likes</label>
                 <input
                   id="likes"
@@ -316,7 +317,7 @@ const EngagementCalculator = ({ onClose }) => {
                   placeholder="350"
                 />
               </div>
-              <div className="engagement-input-group">
+              <div className="input-group">
                 <label htmlFor="comentarios">Comentarios</label>
                 <input
                   id="comentarios"
@@ -327,7 +328,7 @@ const EngagementCalculator = ({ onClose }) => {
                   placeholder="40"
                 />
               </div>
-              <div className="engagement-input-group">
+              <div className="input-group">
                 <label htmlFor="compartidos">Compartidos</label>
                 <input
                   id="compartidos"
@@ -338,7 +339,7 @@ const EngagementCalculator = ({ onClose }) => {
                   placeholder="20"
                 />
               </div>
-              <div className="engagement-input-group">
+              <div className="input-group">
                 <label htmlFor="guardados">Guardados</label>
                 <input
                   id="guardados"
@@ -352,44 +353,44 @@ const EngagementCalculator = ({ onClose }) => {
             </div>
 
             {/* Sección Resultados */}
-            <div className="engagement-calculator-results">
+            <div className="calculator-results">
               <motion.div
-                className="engagement-result-item"
+                className="result-item"
                 key={`total-${calculated.totalInteracciones}`}
                 initial={{ opacity: 0.7, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.2 }}
               >
-                <span className="engagement-result-label">Total de interacciones</span>
+                <span className="result-label">Total de interacciones</span>
                 <div className="results">
-                  <span className="engagement-result-value">{formatNumber(calculated.totalInteracciones)}</span>
+                  <span className="result-value">{formatNumber(calculated.totalInteracciones)}</span>
                 </div>
               </motion.div>
               <motion.div
-                className={`engagement-result-item engagement-rate ${performance.className}`}
-                key={`engagement-${calculated.engagement}`}
+                className={`result-item rate ${performance.className}`}
+                key={`${calculated.engagement}`}
                 initial={{ opacity: 0.7, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.2 }}
               >
-                <span className="engagement-result-label">Engagement Rate</span>
+                <span className="result-label">Engagement Rate</span>
                 <div className="results">
-                  <span className="engagement-result-value engagement-result-main">
+                  <span className="result-value result-main">
                     {calculated.engagement.toFixed(2)}%
                   </span>
-                  <span className="engagement-result-interpretation">{performance.label}</span>
+                  <span className="result-interpretation">{performance.label}</span>
                 </div>
               </motion.div>
             </div>
 
-            <h5 className="engagement-result-message">{impactMessage}</h5>
+            <h5 className="result-message">{impactMessage}</h5>
 
           </div>
         </div>
       </div>
       <div className="bottom-card">
         <h5>¿Querés profesionalizar tu ecosistema social?</h5>
-        <a href="#contactanos" className="popup-close-back active" onClick={onClose}>Diseñar estrategia social</a>
+        <a href="#contact" className="popup-close-back active" onClick={onClose}>Diseñar estrategia social</a>
       </div>
     </div>
     </>

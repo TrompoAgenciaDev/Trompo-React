@@ -10,6 +10,17 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 
+// Configuración de Seguridad
+define('SECURITY_MIN_RECAPTCHA_SCORE', 0.5);
+define('SECURITY_RECAPTCHA_ACTION', 'form_submit');
+define('SECURITY_MIN_COMPLETION_TIME', 3); // Segundos mínimos para considerar humano
+define('SECURITY_MAX_MESSAGE_LENGTH', 5000);
+define('SECURITY_RATE_LIMIT_MAX', 3); // 3 intentos
+define('SECURITY_RATE_LIMIT_WINDOW', 600); // En 10 minutos (600s)
+
+// Cargar Sistema de Alertas (Desacoplado)
+require_once __DIR__ . '/security-alerts.php';
+
 // Limpieza de salida: evita que Warnings de PHP ensucien la respuesta JSON
 ob_start();
 
@@ -165,6 +176,7 @@ function jsonResponse($success, $data = [])
 $logData = [
     'ip' => preg_replace('/[^\d\.\:\s]/', '', trim($_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '')),
     'user_agent' => $_SERVER['HTTP_USER_AGENT'] ?? '',
+    'country' => $_SERVER['HTTP_CF_IPCOUNTRY'] ?? 'Unknown'
 ];
 
 try {
@@ -218,16 +230,121 @@ try {
     $logData['pageUrl'] = $pageUrl;
     $logData['fields'] = $fields;
 
-    stepLog($logFile, 'parse_fields', 'OK', 'formId=' . $formId);
+    // 0. Rate Limiting (requiere DB)
+    $dbHost = getenv('DB_HOST') ?: '';
+    $dbName = getenv('DB_NAME') ?: '';
+    $dbUser = getenv('DB_USER') ?: '';
+    $dbPass = getenv('DB_PASS') ?: '';
 
-    // Honeypot: si "fax" tiene valor, es un bot (humanos no completan este campo invisible)
+    if ($dbHost !== '' && $dbName !== '') {
+        try {
+            $dsn = "mysql:host=$dbHost;dbname=$dbName;charset=utf8mb4";
+            $pdo = new PDO($dsn, $dbUser, $dbPass, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]);
+
+            // Crear tabla de rate limit si no existe
+            $pdo->exec("CREATE TABLE IF NOT EXISTS `api_rate_limits` (
+                `ip` VARCHAR(45) PRIMARY KEY,
+                `attempts` INT DEFAULT 1,
+                `last_attempt` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
+
+            // Limpiar intentos viejos
+            $pdo->exec("DELETE FROM `api_rate_limits` WHERE `last_attempt` < (NOW() - INTERVAL " . SECURITY_RATE_LIMIT_WINDOW . " SECOND)");
+
+            // Verificar límite
+            $stmt = $pdo->prepare("SELECT attempts FROM `api_rate_limits` WHERE ip = ?");
+            $stmt->execute([$logData['ip']]);
+            $rate = $stmt->fetch();
+
+            if ($rate && $rate['attempts'] >= SECURITY_RATE_LIMIT_MAX) {
+                stepLog($logFile, 'rate_limit', 'BLOCKED', 'ip=' . $logData['ip']);
+                sendTechnicalAlert('RATE_LIMIT', 'IP bloqueada por exceso de intentos', $logData);
+                http_response_code(429);
+                jsonResponse(false, ['error' => 'Demasiados intentos. Por favor esperá 10 minutos.']);
+                exit;
+            }
+
+            // Registrar intento
+            $pdo->prepare("INSERT INTO `api_rate_limits` (ip, attempts) VALUES (?, 1) 
+                          ON DUPLICATE KEY UPDATE attempts = attempts + 1")->execute([$logData['ip']]);
+
+        } catch (PDOException $e) {
+            stepLog($logFile, 'db_rate_limit', 'ERROR', $e->getMessage());
+        }
+    }
+
+    // 1. Validaciones de Contenido
+    $required_fields = ['NOMBRE', 'APELLIDOS', 'EMAIL', 'SMS', 'CONSULTA'];
+    $missing_fields = [];
+    foreach ($required_fields as $rf) {
+        if (!isset($fields[$rf]) || trim((string)$fields[$rf]) === '') {
+            $missing_fields[] = $rf;
+        }
+    }
+
+    if (!empty($missing_fields)) {
+        $msg = "Campos obligatorios faltantes: " . implode(', ', $missing_fields);
+        stepLog($logFile, 'validation', 'ERROR', $msg);
+        sendTechnicalAlert('MISSING_FIELDS', $msg, $fields);
+        http_response_code(400);
+        jsonResponse(false, ['error' => 'Por favor, completá todos los campos obligatorios.']);
+        exit;
+    }
+
+    $email = $fields['EMAIL'] ?? '';
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        stepLog($logFile, 'validation', 'ERROR', 'invalid_email=' . $email);
+        sendTechnicalAlert('VALIDATION_ERROR', "Email inválido: $email", $fields);
+        http_response_code(400);
+        jsonResponse(false, ['error' => 'El formato del email no es válido.']);
+        exit;
+    }
+
+    // Bloqueo de dominios temporales (ejemplo básico)
+    $disposable_domains = ['yopmail.com', 'mailinator.com', 'guerrillamail.com', 'tempmail.com', '10minutemail.com'];
+    $email_parts = explode('@', $email);
+    $domain = strtolower(end($email_parts));
+    if (in_array($domain, $disposable_domains)) {
+        stepLog($logFile, 'validation', 'BLOCKED', 'disposable_email=' . $domain);
+        http_response_code(403);
+        jsonResponse(false, ['error' => 'No se aceptan correos electrónicos temporales.']);
+        exit;
+    }
+
+    $consulta_text = $fields['CONSULTA'] ?? '';
+    if (strlen($consulta_text) > SECURITY_MAX_MESSAGE_LENGTH) {
+        stepLog($logFile, 'validation', 'ERROR', 'message_too_long');
+        http_response_code(400);
+        jsonResponse(false, ['error' => 'El mensaje es demasiado largo (máx ' . SECURITY_MAX_MESSAGE_LENGTH . ' chars).']);
+        exit;
+    }
+
+    // 2. Time Trap
+    $startTime = isset($fields['_t']) ? (int)$fields['_t'] : 0;
+    $currentTime = time();
+    if ($startTime > 0 && ($currentTime - $startTime) < SECURITY_MIN_COMPLETION_TIME) {
+        stepLog($logFile, 'timetrap', 'BLOCKED', 'too_fast=' . ($currentTime - $startTime) . 's');
+        sendTechnicalAlert('BOT_DETECTED_TIMETRAP', "Envío instantáneo detectado", $logData);
+        $logData['error'] = 'Envío demasiado rápido (bot)';
+        writeLog($logFile, 'TIMETRAP', $logData);
+        http_response_code(400);
+        jsonResponse(false, ['error' => 'Por favor intentá de nuevo.']);
+        exit;
+    }
+
+    // 3. Honeypot
     $honeypot = isset($fields['fax']) ? trim((string) $fields['fax']) : '';
     if ($honeypot !== '') {
         stepLog($logFile, 'honeypot', 'BLOCKED', 'bot_detected');
-        $logData['error'] = 'Envío no válido';
+        sendTechnicalAlert('BOT_DETECTED_HONEYPOT', "Campo invisible completado", $logData);
+        $logData['error'] = 'Envío no válido (honeypot)';
         writeLog($logFile, 'HONEYPOT', $logData);
-        http_response_code(400);
-        jsonResponse(false, ['error' => 'Hubo un error. Por favor intentá de nuevo.']);
+        // Simulamos éxito para el bot pero no procesamos (Silent Block)
+        http_response_code(200);
+        jsonResponse(true, ['message' => 'Mensaje recibido']); 
         exit;
     }
 
@@ -271,16 +388,44 @@ try {
         }
 
         $verifyJson = json_decode($verifyResponse, true);
+        
+        // Log del score para fine-tuning
+        $score = $verifyJson['score'] ?? 0;
+        $action = $verifyJson['action'] ?? 'none';
+        $hostname = $verifyJson['hostname'] ?? 'unknown';
+        
+        stepLog($logFile, 'recaptcha_assessment', 'INFO', "score=$score action=$action host=$hostname");
+
         if (!is_array($verifyJson) || empty($verifyJson['success'])) {
-            stepLog($logFile, 'recaptcha', 'ERROR', 'invalid');
+            stepLog($logFile, 'recaptcha', 'ERROR', 'validation_failed');
+            sendTechnicalAlert('RECAPTCHA_FAIL', "Token de Google no válido o ausente", $verifyJson);
             $logData['error'] = 'Captcha inválido';
             writeLog($logFile, 'ERROR', $logData);
             http_response_code(400);
-            jsonResponse(false, ['error' => 'Captcha inválido']);
+            jsonResponse(false, ['error' => 'Error de validación de seguridad (Captcha)']);
             exit;
         }
 
-        stepLog($logFile, 'recaptcha', 'OK', '');
+        // Validación de Score, Action y Hostname (reCAPTCHA v3)
+        if ($score < SECURITY_MIN_RECAPTCHA_SCORE || $action !== SECURITY_RECAPTCHA_ACTION) {
+            stepLog($logFile, 'recaptcha_score', 'BLOCKED', "low_score=$score action=$action");
+            sendTechnicalAlert('LOW_SECURITY_SCORE', "Intento con score bajo: $score", $verifyJson);
+            $logData['error'] = "Score insuficiente ($score)";
+            writeLog($logFile, 'LOW_SCORE', $logData);
+            
+            // Si el score es muy bajo (< 0.3), bloqueo silencioso
+            if ($score < 0.3) {
+                http_response_code(200);
+                jsonResponse(true, ['message' => 'El mensaje será revisado']);
+                exit;
+            }
+
+            http_response_code(403);
+            jsonResponse(false, ['error' => 'Petición rechazada por sistema anti-spam.']);
+            exit;
+        }
+
+        stepLog($logFile, 'recaptcha', 'OK', "score=$score");
     }
 
     $autoloadPath = __DIR__ . '/../vendor/autoload.php';
@@ -370,6 +515,15 @@ try {
             $attempts[] = ['port' => 465, 'encryption' => 'ssl'];
         }
 
+        if (!class_exists('\PHPMailer\PHPMailer\PHPMailer')) {
+            stepLog($logFile, 'smtp_error', 'FATAL', 'PHPMailer class not found. Run composer install.');
+            $logData['error'] = 'PHPMailer no instalado';
+            writeLog($logFile, 'ERROR', $logData);
+            http_response_code(500);
+            jsonResponse(false, ['error' => 'Error de configuración del servidor (Mail)']);
+            exit;
+        }
+
         $mail = new \PHPMailer\PHPMailer\PHPMailer(true);
         $mail->isSMTP();
         $mail->Host = $smtpHost;
@@ -415,8 +569,8 @@ try {
                   </tr>";
 
         foreach ($fields as $label => $value) {
-            if ($label === 'g-recaptcha-response' || $label === 'LOCATION')
-                continue; // Ocultar token y location
+            if (in_array($label, ['g-recaptcha-response', 'LOCATION', '_t', 'fax']))
+                continue; // Ocultar campos técnicos y de seguridad
             $labelEsc = htmlspecialchars($label, ENT_QUOTES, 'UTF-8');
             $valueEsc = nl2br(htmlspecialchars($value, ENT_QUOTES, 'UTF-8'));
             $rows .= "<tr>
@@ -522,6 +676,7 @@ try {
     jsonResponse(true, ['message' => 'Backup registrado']);
 } catch (Exception $e) {
     stepLog($logFile, 'exception', 'ERROR', $e->getMessage());
+    sendTechnicalAlert('SYSTEM_CRASH', $e->getMessage(), $logData);
     $logData['formId'] = $logData['formId'] ?? 'unknown';
     $logData['pageUrl'] = $logData['pageUrl'] ?? '';
     $logData['fields'] = $logData['fields'] ?? [];

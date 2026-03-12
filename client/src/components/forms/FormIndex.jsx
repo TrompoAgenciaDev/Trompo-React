@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 import useFormBrevo from "../../hooks/useFormBrevo";
@@ -7,6 +8,8 @@ export default function FormIndex({ location = "home" }) {
   const { loading, error, submitForm } = useFormBrevo();
   const { executeRecaptcha } = useGoogleReCaptcha();
   const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY || "";
+
+  const [renderTime] = useState(Math.floor(Date.now() / 1000));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +27,7 @@ export default function FormIndex({ location = "home" }) {
       const token = await executeRecaptcha("form_submit");
       formData.append("LOCATION", location);
       formData.append("g-recaptcha-response", token);
+      formData.append("_t", renderTime); // Time Trap
       submitForm(formData);
     } catch (err) {
       console.error("Error al obtener token de reCAPTCHA:", err);
@@ -298,7 +302,7 @@ export default function FormIndex({ location = "home" }) {
           }}
           aria-hidden="true"
         >
-          <label htmlFor="fax">No completar</label>
+          <label htmlFor="fax">Fax</label>
           <input
             id="fax"
             type="text"

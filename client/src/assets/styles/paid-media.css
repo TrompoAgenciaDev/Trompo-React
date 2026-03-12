@@ -822,6 +822,68 @@
   padding: 16px;
 }
 
+
+/* Roi calculator section */
+.container-calculator{
+  padding: 50px 20px;
+}
+
+.container-grid-calculator{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0;
+  align-items: flex-start;
+}
+
+.item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.item h5{
+  font-weight: 400;
+}
+
+
+.item:nth-child(3){
+  align-items: center;
+}
+
+.button-calculator{
+  width: 100%;
+  max-width: fit-content;
+  height: 40px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 0;
+  border-radius: 10px;
+  border: 1px solid #000;
+  background-color: #1E1E1E;
+  color: #ffffff;
+  padding: 4px 30px;
+  cursor: pointer;
+}
+
+.portfolio-social-media-container{
+  padding: 30px 10px 50px;
+}
+
+/* Título del portfolio - mismo estilo que en Social Media, en negro */
+.portfolio-title{
+  color: #000000;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.sm-showcase-section button {
+  display: block;
+}
+
 @media (min-width: 540px) {
   .grafico-slide {
     width: -webkit-calc((100% - 16px) / 2);
@@ -848,9 +910,6 @@
     font-size: 15px;
   }
 
-  .footer-paid-container p{
-  }
-
   .icon-container-paid{
     width: 100px;
     height: 100px;
@@ -867,12 +926,6 @@
     padding: 50px 0;
   }
 
-  .grid-item-header h2 {
-  }
-
-  .grid-item-body p {
-  }
-
   .ads-grid {
     -ms-grid-columns: 1fr 1fr;
     grid-template-columns: 1fr 1fr;
@@ -885,12 +938,6 @@
     gap: 18px;
   }
 
-  .text-container h3 {
-  }
-
-  .text-container p {
-  }
-
   .bento-grid {
     gap: 20px;
   }
@@ -898,10 +945,6 @@
   .bento-item {
     padding: 18px 18px 0;
     gap: 18px;
-  }
-
-
-  .content-bento p {
   }
 
   .grafico-slide {
@@ -915,18 +958,10 @@
     height: 45px;
   }
 
-
-  .grafico-slide .item-body p {
-  }
-
   .video-slide {
     width: 300px;
     min-width: 300px;
     padding: 18px;
-  }
-
-
-  .video-slide .item-body p {
   }
 
   .graficos-slider-container {
@@ -941,15 +976,28 @@
     box-sizing: border-box;
   }
 
-
-  .grafico-slide .item-body p {
-  }
-
   .video-slide {
     width: 300px;
     min-width: 0;
     flex: 0 0 auto;
     box-sizing: border-box;
+  }
+
+  .container-grid-calculator{
+    width: 100%;
+    max-width: 650px;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 2fr 1fr;
+    column-gap: 40px;
+  }
+
+  .item.item:nth-child(3){
+    grid-column: 1/4;
+  }
+
+  .button-calculator{
+    padding: 0 40px;
   }
 }
 
@@ -976,9 +1024,6 @@
     font-size: 44px;
   }
 
-  .footer-paid-container p{
-  }
-
   .icon-container-paid{
     width: 80px;
     height: 80px;
@@ -992,12 +1037,6 @@
   .ads-grid-2 {
     gap: 60px;
     padding: 70px 0;
-  }
-
-  .grid-item-header h2 {
-  }
-
-  .grid-item-body p {
   }
 
   .tab-content {
@@ -1088,10 +1127,6 @@
     gap: 0;
   }
 
-
-  .content-bento p {
-  }
-
   .grafico-slide {
     width: 290px;
     min-width: 290px;
@@ -1104,19 +1139,11 @@
     height: 50px;
   }
 
-
-  .grafico-slide .item-body p {
-  }
-
   .video-slide {
     width: 290px;
     min-width: 290px;
     padding: 20px;
     gap: 20px;
-  }
-
-
-  .video-slide .item-body p {
   }
 
   .grafico-slide {
@@ -1138,6 +1165,44 @@
     grid-template-columns: 5fr 1fr;
     gap: 10px;
     max-width: 100%;
+  }
+  
+  .portfolio-title{
+    font-size: 64px;
+  }
+
+  .portfolio-social-media-container{
+    padding: 50px 10px 100px;
+  }
+
+  .container-calculator{
+    height: 300px;
+    padding: 50px 10px;
+  }
+
+  .container-grid-calculator{
+    max-width: 950px;
+    grid-template-columns: 1fr 8fr 5fr;
+    grid-template-rows: 1fr;
+    gap: 30px;
+  }
+
+  .item.item:nth-child(3){
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .button-calculator{
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .item h3{
+    line-height: 40px;
+  }
+
+  .item:nth-child(2){
+    padding: 0 20px;
   }
 }
 
@@ -1173,43 +1238,21 @@
     font-size: 20px;
     padding: 16px 20px;
   }
-}
 
-/* ============================================
-   PORTFOLIO SLIDER STYLES
-   ============================================ */
-.portfolio-social-media-container{
-  padding: 30px 10px 50px;
-}
-
-/* Título del portfolio - mismo estilo que en Social Media, en negro */
-.portfolio-title{
-  color: #000000;
-  font-size: 48px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.sm-showcase-section button {
-  display: block;
-}
-
-/* ============================================
-   MEDIA QUERIES
-   ============================================ */
-
-/* Media Query: max-width 767px (mobile) */
-@media (max-width: 767px) {
-  /* Las flechas ahora son visibles en mobile */
-}
-
-/* Media Query: 1024px */
-@media (min-width: 1024px) {
-  .portfolio-title{
-    font-size: 64px;
+  .container-calculator{    
+    height: 400px;
+    padding: 50px 10px;
   }
 
-  .portfolio-social-media-container{
-    padding: 50px 10px 100px;
+  .container-grid-calculator{
+    max-width: 1140px;
+    grid-template-columns: 1fr 7fr 5fr;
+    grid-template-rows: 1fr;
+    gap: 30px;
+  }
+
+  .button-calculator{
+    height: 48px;
+    font-size: 16px;
   }
 }

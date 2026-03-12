@@ -3,7 +3,7 @@
   inset:0;
   background:rgba(0,0,0,.8);
   pointer-events:none;
-  z-index: 99999;
+  z-index: 999999;
 }
 
 .calculator-popup{
@@ -15,7 +15,7 @@
   transform: translate(-50%, -50%);
   max-height: 90vh;
   overflow-y: auto;
-  z-index: 99999;
+  z-index: 9999999;
   display: grid;
   grid-template-rows: 1fr 100px;
   border-radius: 9px 9px 0 0;
@@ -24,10 +24,11 @@
 
 .popup-close{
   width: 50px;
-  position: absolute;
+  position: fixed;
   top: 10px;
   right: 10px;
   background-color: transparent;
+  cursor: pointer;
 }
 
 .popup-close svg{
@@ -41,6 +42,14 @@
   grid-template-rows: 3fr 4fr;
   padding: 50px 20px 20px;
   gap: 20px;
+}
+
+.header-card.roi{
+  grid-template-rows: 1fr 2fr;
+}
+
+.icon-desktop{
+  display: none;
 }
 
 .icon-popup-head{
@@ -86,15 +95,18 @@
 
 .right-card-grid{
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .desktop-calculator{
   display: none;
 }
 
-.engagement-toggle-wrapper,
-.engagement-calculator-inputs,
-.engagement-calculator-results{
+.toggle-wrapper,
+.calculator-inputs,
+.calculator-results{
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -102,7 +114,7 @@
   padding: 0 0 10px;
 }
 
-.engagement-toggle-btn,
+.toggle-btn,
 .popup-close-back{
   width: 100%;
   height: 30px;
@@ -114,9 +126,10 @@
   border: 1px solid #000;
   color: #262626;
   background-color: transparent;
+  cursor: pointer;
 }
 
-.engagement-toggle-btn.active,
+.toggle-btn.active,
 .popup-close-back.active{
   background-color: #1E1E1E;
   color: #ffffff;
@@ -133,15 +146,19 @@
   font-weight: 500;
 }
 
-.engagement-calculator-inputs{
+.calculator-inputs{
   grid-template-rows: repeat(3, 1fr);
+}
+
+.calculator-inputs.roi{
+  grid-template-rows: repeat(2, 1fr);
 }
 
 .desktop-text{
   display: none;
 }
 
-.engagement-calculator-inputs input{
+.calculator-inputs input{
   width: 100%;
   height: 30px;
   border-radius: 10px;
@@ -149,25 +166,25 @@
   font-size: 13px;
 }
 
-.engagement-calculator-results .engagement-result-item{
+.calculator-results .result-item{
   display: flex;
   flex-direction: column;
   border-top: 1px solid #262626;
   gap: 8px;
 }
 
-.engagement-result-label{
+.result-label{
   text-transform: uppercase;
   font-weight: 600;
   padding-top: 8px;
 }
 
-.engagement-result-value{
+.result-value{
   font-size: 18px;
   font-weight: 700;
 }
 
-.engagement-result-interpretation{
+.result-interpretation{
   font-weight: 500;
 }
 
@@ -194,15 +211,20 @@
     grid-template-rows: 1fr 140px;
   }
 
-  .header-card{
+  .header-card,
+  .header-card.roi{
     grid-template-columns: 3fr 4fr;
     grid-template-rows: 1fr;
     padding: 70px 30px;
     gap: 30px;
   }
 
-  .icon-popup-head:not(.icon-popup-head.icon-desktop){
+  .icon-popup-head{
     display: none;
+  }
+
+  .icon-desktop{
+    display: block;
   }
 
   .text-popup h2{
@@ -220,18 +242,20 @@
   }
 
   .desktop-calculator{
-    display: block;
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
   }
 
-  .engagement-calculator-results{
+  .calculator-results{
     margin-top: 20px;
   }
 
-  .engagement-result-message{
+  .result-message{
     line-height: 22px;
   }
 
-  .engagement-result-item{
+  .result-item{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -253,7 +277,7 @@
     flex-direction: column;
   }
 
-  .engagement-result-message{
+  .result-message{
     margin-top: 50px;
   }
 
@@ -265,7 +289,7 @@
     max-width: 100%;
   }
 
-  .engagement-toggle-btn,
+  .toggle-btn,
   .popup-close-back{
     height: 40px;
   }
@@ -276,17 +300,55 @@
     display: block;
   }
 
+  .header-card,
+  .header-card.roi{
+    padding: 50px 30px;
+  }
+
+  .mobile-text{
+    display: none;
+  }
+
+  .desktop-calculator{
+    gap: 16px;
+  }
+
+  .icon-popup-head{
+    width: 70px;
+    height: 70px;
+  }
+
   .calculator-popup{
     max-width: 1140px;
     grid-template-rows: 1fr 140px;
     max-height: fit-content;
   }
 
-  .engagement-result-message{
+  .result-message{
     margin-top: 30px;
+    line-height: 26px;
   }
 
   .mobile-popup-description{
     display: none;
+  }
+
+  .text-popup h2{
+    line-height: 55px;
+  }
+
+  .popup-close-back{
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1366px){
+  .icon-popup-head{
+    width: 90px;
+    height: 90px;
+  }
+
+  .text-popup h2{
+    line-height: 60px;
   }
 }

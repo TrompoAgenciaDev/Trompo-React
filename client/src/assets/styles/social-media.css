@@ -491,6 +491,55 @@
   color: #ffffff;
 }
 
+
+/* Engagement calculator section */
+.container-calculator{
+  padding: 50px 20px;
+}
+
+.container-grid-calculator{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0;
+  align-items: flex-start;
+}
+
+.item{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.item h5{
+  font-weight: 400;
+}
+
+.item:nth-child(3){
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-calculator{
+  width: 100%;
+  max-width: fit-content;
+  height: 40px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 0;
+  border-radius: 10px;
+  border: 1px solid #000;
+  background-color: #1E1E1E;
+  color: #ffffff;
+  padding: 4px 20px;
+  cursor: pointer;
+}
+
 /* ============================================
    TABLET: min-width 768px
    ============================================ */
@@ -528,6 +577,19 @@
   .grid-portfolio-wrapper {
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
+  }
+
+  .container-grid-calculator{
+    width: 100%;
+    max-width: 750px;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 2fr 1fr;
+    column-gap: 0;
+  }
+
+  .item.item:nth-child(3){
+    grid-column: 1/4;
   }
 }
 
@@ -627,6 +689,36 @@
   .grid-portfolio-item:hover {
     transform: scale(1.02);
   }
+
+  .container-calculator{
+    height: 300px;
+    padding: 50px 10px;
+  }
+
+  .container-grid-calculator{
+    max-width: 950px;
+    grid-template-columns: 1fr 7fr 5fr;
+    grid-template-rows: 1fr;
+    gap: 30px;
+  }
+
+  .item.item:nth-child(3){
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .button-calculator{
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .item h3{
+    line-height: 40px;
+  }
+
+  .item:nth-child(2){
+    padding: 0 20px;
+  }
 }
 
 /* ============================================
@@ -695,6 +787,23 @@
 
   h1.portfolio-title {
     font-size: 134px;
+  }
+
+  .container-calculator{    
+    height: 400px;
+    padding: 50px 10px;
+  }
+
+  .container-grid-calculator{
+    max-width: 1140px;
+    grid-template-columns: 1fr 7fr 5fr;
+    grid-template-rows: 1fr;
+    gap: 30px;
+  }
+
+  .button-calculator{
+    height: 48px;
+    font-size: 16px;
   }
 }
 

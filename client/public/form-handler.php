@@ -8,6 +8,13 @@ error_reporting(E_ALL);
 
 header('Content-Type: application/json; charset=utf-8');
 
+// Configuración de Seguridad
+define('SECURITY_MIN_RECAPTCHA_SCORE', 0.5);
+define('SECURITY_RECAPTCHA_ACTION', 'form_submit');
+define('SECURITY_MIN_COMPLETION_TIME', 3);
+define('SECURITY_RATE_LIMIT_MAX', 5); // Un poco más laxo para contactos directos
+define('SECURITY_RATE_LIMIT_WINDOW', 600);
+
 // Cargar .env: solo rutas permitidas por open_basedir (un nivel arriba o mismo directorio)
 $envPath = __DIR__ . '/../.env';
 if (!@file_exists($envPath)) {
@@ -33,21 +40,55 @@ $listMap = [
     "creatividad" => getenv('BREVO_LIST_CREATIVIDAD'),
 ];
 
-$nombre    = $_POST['NOMBRE'] ?? '';
-$apellidos = $_POST['APELLIDOS'] ?? '';
-$email     = $_POST['EMAIL'] ?? '';
-$empresa   = $_POST['EMPRESA'] ?? '';
-$smsCode   = $_POST['SMS_COUNTRY_CODE'] ?? '';
-$smsNum    = $_POST['SMS'] ?? '';
-$consulta  = $_POST['CONSULTA'] ?? '';
-$location  = $_POST['LOCATION'] ?? 'home';
+// Soporte para JSON y POST tradicional
+$rawInput = file_get_contents('php://input');
+$jsonData = json_decode($rawInput, true);
+
+if ($jsonData) {
+    // Si viene de React vía fetch(json)
+    $fields    = $jsonData['fields'] ?? [];
+    $nombre    = $fields['NOMBRE'] ?? '';
+    $apellidos = $fields['APELLIDOS'] ?? '';
+    $email     = $fields['EMAIL'] ?? '';
+    $empresa   = $fields['EMPRESA'] ?? '';
+    $smsCode   = $fields['SMS_COUNTRY_CODE'] ?? '';
+    $smsNum    = $fields['SMS'] ?? '';
+    $consulta  = $fields['CONSULTA'] ?? '';
+    $location  = $jsonData['formId'] ?? $fields['LOCATION'] ?? 'home';
+    $recaptchaToken = $fields['g-recaptcha-response'] ?? '';
+    $honeypot = trim($fields['fax'] ?? '');
+    $startTime = (int)($fields['_t'] ?? 0);
+} else {
+    // Si viene vía POST tradicional
+    $nombre    = $_POST['NOMBRE'] ?? '';
+    $apellidos = $_POST['APELLIDOS'] ?? '';
+    $email     = $_POST['EMAIL'] ?? '';
+    $empresa   = $_POST['EMPRESA'] ?? '';
+    $smsCode   = $_POST['SMS_COUNTRY_CODE'] ?? '';
+    $smsNum    = $_POST['SMS'] ?? '';
+    $consulta  = $_POST['CONSULTA'] ?? '';
+    $location  = $_POST['LOCATION'] ?? 'home';
+    $recaptchaToken = trim($_POST['g-recaptcha-response'] ?? '');
+    $honeypot = trim($_POST['fax'] ?? '');
+    $startTime = (int)($_POST['_t'] ?? 0);
+}
 
 // Honeypot: si "fax" tiene valor, es un bot (humanos no completan este campo invisible)
 $honeypot = trim($_POST['fax'] ?? '');
 if ($honeypot !== '') {
     echo json_encode([
+        "success" => true, // Bloqueo silencioso
+        "message"   => "Mensaje recibido"
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+// Time Trap
+$startTime = (int)($_POST['_t'] ?? 0);
+if ($startTime > 0 && (time() - $startTime) < SECURITY_MIN_COMPLETION_TIME) {
+    echo json_encode([
         "success" => false,
-        "error"   => "Envío no válido"
+        "error"   => "Error de envío. Por favor intente de nuevo."
     ], JSON_UNESCAPED_UNICODE);
     exit;
 }
@@ -90,6 +131,9 @@ if ($recaptchaSecret !== '') {
     }
 
     $verifyJson = json_decode($verifyResponse, true);
+    $score = $verifyJson['score'] ?? 0;
+    $action = $verifyJson['action'] ?? 'none';
+
     if (!is_array($verifyJson) || empty($verifyJson['success'])) {
         echo json_encode([
             "success" => false,
@@ -97,13 +141,38 @@ if ($recaptchaSecret !== '') {
         ], JSON_UNESCAPED_UNICODE);
         exit;
     }
+
+    if ($score < SECURITY_MIN_RECAPTCHA_SCORE || $action !== SECURITY_RECAPTCHA_ACTION) {
+        // Bloqueo silencioso si es muy bajo
+        if ($score < 0.3) {
+            echo json_encode(["success" => true, "message" => "Recibido"]);
+            exit;
+        }
+        echo json_encode([
+            "success" => false,
+            "error"   => "Petición rechazada por sistema anti-spam (Score: $score)"
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
 }
 // Si no hay RECAPTCHA_SECRET o no se envió token, se permite el envío (sin validar captcha)
 
-if (empty($email)) {
+// Validaciones de Contenido
+$required = ['NOMBRE', 'APELLIDOS', 'EMAIL', 'SMS', 'CONSULTA'];
+foreach ($required as $f) {
+    if (empty($$f)) { // $$f accede a la variable con el nombre contenido en $f
+        echo json_encode([
+            "success" => false,
+            "error"   => "El campo $f es obligatorio"
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo json_encode([
         "success" => false,
-        "error"   => "El campo EMAIL es obligatorio"
+        "error"   => "El formato del email no es válido"
     ], JSON_UNESCAPED_UNICODE);
     exit;
 }
