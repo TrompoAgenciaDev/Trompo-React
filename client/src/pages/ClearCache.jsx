@@ -7,6 +7,15 @@ const ClearCache = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Prevenir indexación en motores de búsqueda
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (!robotsMeta) {
+      robotsMeta = document.createElement("meta");
+      robotsMeta.setAttribute("name", "robots");
+      document.head.appendChild(robotsMeta);
+    }
+    robotsMeta.setAttribute("content", "noindex, nofollow");
+
     // Forzar no-cache en esta página
     const metaTags = [
       { httpEquiv: "Cache-Control", content: "no-cache, no-store, must-revalidate" },
@@ -137,10 +146,13 @@ const ClearCache = () => {
           >
             <div
               style={{
-                width: `${progress}%`,
+                width: "100%",
                 height: "100%",
                 backgroundColor: "#4CAF50",
-                transition: "width 0.3s ease",
+                transform: `scaleX(${progress / 100})`,
+                transformOrigin: "left center",
+                transition: "transform 0.3s ease",
+                willChange: "transform",
               }}
             />
           </div>

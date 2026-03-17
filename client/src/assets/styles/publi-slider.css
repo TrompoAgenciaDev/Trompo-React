@@ -28,9 +28,13 @@
   -ms-grid-columns: 1fr 10px 1fr;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  aspect-ratio: 2 / 1; /* Reservar espacio: 2 columnas con imágenes 1:1 = 2:1 total */
+  min-height: 300px; /* Fallback para navegadores sin soporte aspect-ratio */
 }
 
 .publi-slide {
+  -webkit-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
   padding: 0;
 }
@@ -57,6 +61,8 @@
     -ms-grid-columns: 1fr 20px 1fr 20px 1fr;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
+    aspect-ratio: 3 / 1; /* 3 columnas con imágenes 1:1 = 3:1 total */
+    min-height: 200px; /* Fallback */
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
@@ -79,10 +85,19 @@
   }
 
   .publi-slide{
+    -webkit-transition: -webkit-transform 0.2s ease-in-out;
+    -moz-transition: -moz-transform 0.2s ease-in-out;
+    -o-transition: -o-transform 0.2s ease-in-out;
     transition: transform 0.2s ease-in-out;
+    will-change: transform;
+    overflow: hidden;
   }
 
   .publi-slide:hover{
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
     transform: scale(1.1);
   }
 }

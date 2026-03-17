@@ -1,0 +1,99 @@
+.contact-title-container {
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-main-title {
+    font-weight: 700;
+    line-height: 1.2;
+    -webkit-transition: color 0.3s ease;
+    -o-transition: color 0.3s ease;
+    transition: color 0.3s ease;
+    color: #ffffff;
+}
+
+.contact-main-title span,
+.contact-main-title .animated-letter {
+    font-size: 48px;
+}
+
+.animated-letter {
+    display: inline;
+}
+
+.hero-contactanos-container{
+    height: 400px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.hero-contactanos-container .container {
+    width: 100%;
+}
+
+/* Media Query: 768px */
+@media (min-width: 768px) {
+    .contact-main-title span,
+    .contact-main-title .animated-letter {
+        font-size: 64px;
+    }
+    .hero-contactanos-container{
+        height: 500px;
+    }
+}
+
+/* Media Query: 1024px */
+@media (min-width: 1024px) {
+    .hero-contactanos-container{
+        height: 90svh;
+    }
+
+    .contact-main-title {
+        font-weight: 500;
+    }
+    
+    .contact-title-container {
+        padding: 100px 0;
+    }
+}
+
+/* Media Query: 1280px */
+@media (min-width: 1280px) {
+    .contact-main-title span,
+    .contact-main-title .animated-letter {
+        font-size: 80px;
+    }
+}
+
+/* Estilos para la sección de texto animado (de Nosotros) */
+
+/* Estilos específicos para testimonios en Contactanos */
+.contactanos-testimonials-wrapper .testimonial-cards-slider::before {
+    background: linear-gradient(to bottom, rgba(38, 38, 38, 1) 0%, rgba(38, 38, 38, 0) 100%);
+}
+
+.contactanos-testimonials-wrapper .testimonial-cards-slider::after {
+    background: linear-gradient(to top, rgba(38, 38, 38, 1) 0%, rgba(38, 38, 38, 0) 100%);
+}
+
+.contactanos-testimonials-wrapper .testimonial-text-content h1 {
+    color: #ffffff;
+}
+
+.contactanos-testimonials-wrapper .testimonial-text-content p {
+    color: #ffffff;
+}

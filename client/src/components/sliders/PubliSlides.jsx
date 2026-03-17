@@ -2,20 +2,24 @@ import React, { useRef, useEffect, useState } from "react";
 import LazyImage from "../LazyImage";
 import "../../assets/styles/publi-slider.css";
 
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
 const slides = [
   {
     href: "https://www.google.com",
-    img: "/assets/instagramPublis/search-display.webp",
+    img: `${base}assets/instagramPublis/search-display.webp`,
     alt: "ADS",
   },
   {
     href: "https://www.bing.com",
-    img: "/assets/instagramPublis/raulito.webp",
+    img: `${base}assets/instagramPublis/raulito.webp`,
     alt: "Mermeladas Raulito",
   },
   {
     href: "https://www.duckduckgo.com",
-    img: "/assets/instagramPublis/tono-de-voz.webp",
+    img: `${base}assets/instagramPublis/tono-de-voz.webp`,
     alt: "Trompo Tono de Voz",
   },
 ];
@@ -25,14 +29,26 @@ export default function PubliSlides() {
   const [slidesToShow, setSlidesToShow] = useState(2);
 
   useEffect(() => {
+    let ticking = false;
     function handleResize() {
-      const width = window.innerWidth;
-      if (width >= 768) setSlidesToShow(3);
-      else setSlidesToShow(2);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const width = window.innerWidth;
+          if (width >= 768) setSlidesToShow(3);
+          else setSlidesToShow(2);
+          ticking = false;
+        });
+        ticking = true;
+      }
     }
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
+    // Diferir medición inicial
+    if (typeof window !== 'undefined' && window.requestIdleCallback) {
+      requestIdleCallback(() => handleResize(), { timeout: 100 });
+    } else {
+      setTimeout(handleResize, 100);
+    }
+    window.addEventListener("resize", handleResize, { passive: true });
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -52,6 +68,8 @@ export default function PubliSlides() {
             src={item.img} 
             alt={item.alt}
             placeholder="#f0f0f0"
+            width={600}
+            height={600}
           />
         </a>
       ))}

@@ -1,6 +1,5 @@
 import { motion, useCycle } from 'framer-motion';
 import { useState } from 'react';
-import MixBlendCursor from "./customCursors/MixBlendCursor";
 
 // styles
 import './assets/styles/estrategias-text.css';
@@ -23,8 +22,7 @@ function EstrategiesText() {
       <div className="et-text">
         <h1>
           Estrategias que Convierten <br />
-          <span className="hover-y">Marketing en Crecimiento.</span>          
-          <MixBlendCursor/>
+          <span className="hover-y">Marketing en Crecimiento.</span>
         </h1>
         <motion.button 
           onClick={handleRevealing}

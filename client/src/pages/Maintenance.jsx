@@ -45,7 +45,7 @@ export default function Maintenance() {
           className="maintenance-icon"
           aria-hidden
         >
-          <Icons iconName="logoAmarillo" />
+          <Icons iconName="logoWhite" />
         </motion.div>
 
         <motion.h1

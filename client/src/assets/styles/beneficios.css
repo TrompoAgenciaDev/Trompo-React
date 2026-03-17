@@ -1,0 +1,111 @@
+.grid-item-beneficios svg,
+.beneficios-icon{
+    width: 50px;
+    height: 50px;
+    color: #ffffff;
+}
+
+.grid-beneficios{
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+    gap: 10px;
+}
+
+.grid-item-beneficios{
+    padding: 20px 10px;
+    border: 1px solid #E1C025;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 16px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+
+.beneficios-container{
+    padding: 30px 0;
+}
+
+.grid-item-beneficios p{
+    color: #ffffff;
+}
+
+.grid-item-beneficios h6{
+    color: #ffffff;
+}
+
+/* Variante amarilla - textos e íconos negros */
+.beneficios-yellow .grid-item-beneficios p,
+.beneficios-yellow .title-beneficios h5,
+.beneficios-yellow .grid-item-beneficios h6{
+    color: #000000;
+}
+
+.beneficios-yellow .beneficios-icon{
+    color: #000000;
+}
+
+.beneficios-container h3{
+    color: #E1C025;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* El título siempre es amarillo, incluso en variante amarilla */
+.beneficios-yellow .beneficios-container h3{
+    color: #E1C025 !important;
+}
+
+.beneficios-container h5{
+    font-weight: 400;
+}
+
+.title-beneficios h5{
+    color: #ffffff;
+}
+
+@media (min-width: 768px) {
+    .grid-beneficios{
+        -ms-grid-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    .grid-item-beneficios{
+        padding: 20px;
+    }
+
+    .beneficios-container{
+        padding: 70px 0 120px;
+    }
+
+    .title-beneficios{
+        gap: 0;
+        padding-bottom: 50px;
+    }
+
+    .beneficios-container h5{
+        max-width: 600px;
+    }
+}
+
+
+@media (min-width: 1280px) {
+    .grid-item-beneficios svg,
+    .beneficios-icon{
+        width: 60px;
+        height: 60px;
+    }
+
+}
+

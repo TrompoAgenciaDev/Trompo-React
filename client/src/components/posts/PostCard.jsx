@@ -3,10 +3,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import usePostsData from "../../hooks/usePostsData";
 import "../../assets/styles/post-card.css";
 
-const toSrc = (src) =>
-  /^(https?:|data:|blob:)/i.test(src)
-    ? src
-    : (src || "assets/postImg/post.webp").replace(/^\/+/, "");
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+
+const toSrc = (src) => {
+  if (!src) return `${base}assets/postImg/post.webp`;
+  if (/^(https?:|data:|blob:)/i.test(src)) return src;
+  // Si ya empieza con base, devolverlo tal cual
+  if (src.startsWith(base)) return src;
+  // Si empieza con /, reemplazarlo con base
+  if (src.startsWith('/')) return `${base}${src.replace(/^\/+/, '')}`;
+  // Si no, agregar base al inicio
+  return `${base}${src}`;
+};
 
 export default function PostGrid3({ category, tag }) {
   const {
@@ -33,7 +43,7 @@ export default function PostGrid3({ category, tag }) {
   }, [isMobile, posts]);
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (error) return <p>{typeof error === 'object' ? (error.message || JSON.stringify(error)) : String(error)}</p>;
 
   return (
     <div className="post-grid">
@@ -65,6 +75,11 @@ export default function PostGrid3({ category, tag }) {
                       src={toSrc(posts[current]?.featured_image)}
                       alt={posts[current]?.title || "Sin título"}
                       className="post-media"
+                      loading="lazy"
+                      decoding="async"
+                      width={600}
+                      height={400}
+                      style={{ aspectRatio: '3/2', maxWidth: '100%', height: 'auto' }}
                       whileHover={{ scale: 1.08 }}
                       transition={{ duration: 0.45, ease: "easeOut" }}
                     />
@@ -95,6 +110,11 @@ export default function PostGrid3({ category, tag }) {
                     src={img}
                     alt={title}
                     className="post-media"
+                    loading="lazy"
+                    decoding="async"
+                    width={600}
+                    height={400}
+                    style={{ aspectRatio: '3/2', maxWidth: '100%', height: 'auto' }}
                     whileHover={{ scale: 1.08 }}
                     transition={{ duration: 0.45, ease: "easeOut" }}
                   />

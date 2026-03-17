@@ -4,14 +4,10 @@
 }
 
 .member-header h4 {
-    font-size: 18px;
     font-weight: 500;
     margin-bottom: 10px;
 }
 
-.member-header p {
-    font-size: 13px;
-}
 
 .member-header h4,
 .member-header p {

@@ -46,6 +46,8 @@ const OptimizedHeroVideo = ({
       <LazyVideo
         src={desktopSrc}
         poster={desktopPoster}
+        posterWidth={1920}
+        posterHeight={720}
         className={`hero-video desktop-only ${className}`}
         autoPlay
         loop
@@ -64,6 +66,8 @@ const OptimizedHeroVideo = ({
       <LazyVideo
         src={mobileSrc}
         poster={mobilePoster}
+        posterWidth={768}
+        posterHeight={1024}
         className={`hero-video mobile-only ${className}`}
         autoPlay
         loop

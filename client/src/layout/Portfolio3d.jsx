@@ -18,36 +18,59 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
   const PortfolioCarruselItem = ({
     id, title, backgroundImage, enlacePortfolio, draggingRef,
   }) => {
-    const [velocityReduction, setVelocityReduction] = useState(50);
-    const SlowSpeed = () => setVelocityReduction(5);
-    const NormalSpeed = () => setVelocityReduction(260);
+    const [velocityReduction, setVelocityReduction] = useState(12);
+    const SlowSpeed = () => setVelocityReduction(2);
+    const NormalSpeed = () => setVelocityReduction(40);
 
     const handleClick = (e) => {
-      if (draggingRef.current) { e.preventDefault(); e.stopPropagation(); }
+      // Si está arrastrando, prevenir la navegación
+      if (draggingRef.current) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+
+      // Solo para desarrollo, abrir en nueva pestaña de forma segura
+      if (location === "desarrollo" && enlacePortfolio) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.nativeEvent?.stopImmediatePropagation();
+        // Usar window.open solo en respuesta directa a un click del usuario
+        // Esto evita que los adblockers lo detecten como popup automático
+        window.open(enlacePortfolio, '_blank', 'noopener,noreferrer');
+        return false;
+      }
     };
 
+    // Para desarrollo, usar div en lugar de <a> para evitar navegación
+    const Component = location === "desarrollo" ? motion.div : motion.a;
+    const linkProps = location === "desarrollo"
+      ? {}
+      : {
+        href: enlacePortfolio || "#",
+        rel: "noopener noreferrer"
+      };
+
     return (
-      <motion.a
+      <Component
         onMouseOver={SlowSpeed}
         onMouseLeave={NormalSpeed}
         animate={{ x: ["-0%", "-300%"] }}
         transition={{ ease: "linear", duration: velocityReduction, repeat: Infinity }}
-        href={location === "desarrollo" ? enlacePortfolio : undefined}
-        target="_blank"
-        rel="noreferrer"
+        {...linkProps}
         data-id={id}
         className="portfolio-card"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
+        style={{ backgroundImage: `url(${backgroundImage})`, cursor: location === "desarrollo" ? "pointer" : undefined }}
         onClick={handleClick}
         draggable={false}
       >
         <h2 className="portfolio-title">{title}</h2>
-      </motion.a>
+      </Component>
     );
   };
 
   if (loading) return <p>Cargando...</p>;
-  if (error) return <p>{error}</p>;
+  if (error) return <p>{typeof error === 'object' ? (error.message || JSON.stringify(error)) : String(error)}</p>;
 
   return (
     <div className="portfolio-section">
@@ -58,8 +81,10 @@ function Portfolio3d({ location = "desarrollo", categoria }) {
           dragElastic={0.05}
           dragMomentum
           dragTransition={{ power: 0.2, timeConstant: 200 }}
-          style={{ display: "flex", gap: "20px", cursor: "grab", willChange: "transform",
-                   minWidth: "max-content", height: "100%", alignItems: "center" }}
+          style={{
+            display: "flex", gap: "20px", cursor: "grab", willChange: "transform",
+            minWidth: "max-content", height: "100%", alignItems: "center"
+          }}
           whileTap={{ cursor: "grabbing" }}
           onDragStart={() => { draggingRef.current = true; }}
           onDragEnd={() => { requestAnimationFrame(() => { draggingRef.current = false; }); }}

@@ -1,5 +1,5 @@
 // App.jsx
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useLocation } from "react-router-dom";
 import AppRoutes from "@/routes/AppRoutes";
 import Header from "@/layout/Header";
 import Footer from "@/layout/Footer";
@@ -8,26 +8,29 @@ import useTogglePopup from "@/hooks/useTogglePopup";
 import ScrollTop from "@/components/buttons/ScrollTop";
 import { usePreloadResources } from "@/hooks/usePreloadResources";
 import { usePrefetchRoutes } from "@/hooks/usePrefetchRoutes";
+import { HoverProvider } from "@/context/HoverContext";
 import React from "react";
 
 // Componente interno que usa el hook dentro del contexto del router
 function AppContent() {
   const { isOpen, togglePopup } = useTogglePopup();
-  
+  const location = useLocation();
+
   // Preload dinámico de recursos críticos
   usePreloadResources();
-  
+
   // Prefetch inteligente de rutas relacionadas
   usePrefetchRoutes();
 
+  const isReportsPage = location.pathname === "/reportes";
+
   return (
     <>
-      <Header onTogglePopup={togglePopup} />
-      <MenuPopup isOpen={isOpen} onClose={togglePopup} />
-      <ScrollTop />
+      {!isReportsPage && <Header onTogglePopup={togglePopup} />}
+      {!isReportsPage && <MenuPopup isOpen={isOpen} onClose={togglePopup} />}
       <AppRoutes />
-      <ScrollTop />
-      <Footer />
+      {!isReportsPage && <ScrollTop />}
+      {!isReportsPage && <Footer />}
     </>
   );
 }
@@ -35,7 +38,9 @@ function AppContent() {
 function App() {
   return (
     <BrowserRouter basename={`${import.meta.env.BASE_URL}`}>
-      <AppContent />
+      <HoverProvider>
+        <AppContent />
+      </HoverProvider>
     </BrowserRouter>
   );
 }

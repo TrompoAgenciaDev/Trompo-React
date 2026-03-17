@@ -5,16 +5,20 @@ import viteCompression from "vite-plugin-compression";
 
 export default defineConfig({
   base: "/",
+  envDir: "../",
   plugins: [
     react(),
     svgr(),
-    viteCompression({
-      algorithm: "brotliCompress",
-      ext: ".br",
-      threshold: 1024,
-      deleteOriginFile: false,
-    }),
+    // viteCompression({
+    //   algorithm: "brotliCompress",
+    //   ext: ".br",
+    //   threshold: 1024,
+    //   deleteOriginFile: false,
+    // }),
   ],
+  define: {
+    "import.meta.env.BUILD_TIME": JSON.stringify(Date.now()),
+  },
 
   resolve: {
     alias: {
@@ -34,15 +38,39 @@ export default defineConfig({
     target: "esnext",
     minify: "terser",
     chunkSizeWarningLimit: 800,
+    reportCompressedSize: false,
 
     rollupOptions: {
       output: {
         entryFileNames: "assets/[name].[hash].js",
         chunkFileNames: "assets/[name].[hash].js",
         assetFileNames: (assetInfo) => {
-          const ext = assetInfo.name.split(".").pop();
+          const name = assetInfo.name.split('/').pop().split('\\').pop();
+          const ext = name.split(".").pop();
           if (ext === "css") return "assets/[name].[hash].css";
           return "assets/[name].[hash][extname]";
+        },
+        manualChunks: (id) => {
+          // Separar vendor de React y React DOM
+          if (
+            id.includes("node_modules/react/") ||
+            id.includes("node_modules/react-dom/") ||
+            id === "node_modules/react" ||
+            id === "node_modules/react-dom" ||
+            id.includes("node_modules/scheduler/")
+          ) {
+            return "vendor-react";
+          }
+          // Separar vendor de Framer Motion
+          if (id.includes("node_modules/framer-motion") || id.includes("node_modules/motion/")) {
+            return "vendor-framer";
+          }
+          // Separar vendor de React Router
+          if (id.includes("node_modules/react-router") || id.includes("node_modules/@remix-run/router")) {
+            return "vendor-router";
+          }
+          // No agrupar el resto en vendor-general: deja que Rollup mantenga el orden
+          // de dependencias (evita "Cannot read properties of undefined (reading 'Component')").
         },
       },
     },

@@ -7,7 +7,7 @@ body.hide-chrome header,
 body.hide-chrome .header,
 body.hide-chrome footer,
 body.hide-chrome .footer {
-  display: none !important;
+    display: none !important;
 }
 
 .maintenance-wrapper {
@@ -46,6 +46,8 @@ body.hide-chrome .footer {
     padding: clamp(24px, 4vw, 44px);
     z-index: 1;
     text-align: center;
+    position: relative;
+    /* Added to support ::after and other absolute children */
 }
 
 .maintenance-card::after {
@@ -60,7 +62,7 @@ body.hide-chrome .footer {
     mix-blend-mode: screen;
 }
 
-.maintenance-icon {    
+.maintenance-icon {
     width: 100%;
     max-width: 180px;
     height: auto;
@@ -116,6 +118,7 @@ body.hide-chrome .footer {
 
 /* reduce motion */
 @media (prefers-reduced-motion: reduce) {
+
     .maintenance-card,
     .maintenance-icon,
     .m-dot {

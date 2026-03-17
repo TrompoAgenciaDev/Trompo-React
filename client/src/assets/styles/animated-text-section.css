@@ -1,0 +1,61 @@
+/* ============================================================
+   COMPONENTE ANIMATED TEXT SECTION - ESTILOS UNIFICADOS
+   ============================================================ */
+
+.animated-text-section-wrapper {
+  width: 100%;
+}
+
+.animated-text-container {
+  width: 100%;
+}
+
+.animated-text {
+  display: block;
+  line-height: 1.6;
+  text-align: center;
+  font-weight: 500;
+  padding: 50px 10px;
+  font-size: 16px;
+}
+
+.animated-text-phrase {
+  display: inline;
+}
+
+/* Estilos para fondos negros */
+.black-bg .animated-text,
+.black-bg-2 .animated-text {
+  color: #ffffff;
+}
+
+/* Estilos para fondos blancos o sin clase */
+.animated-text-section-wrapper:not(.black-bg):not(.black-bg-2) .animated-text {
+  color: #000000;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (min-width: 768px) {
+  .animated-text-container {
+    font-size: 28px;
+  }
+  
+  .animated-text {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .animated-text-container {
+    font-size: 32px;
+    padding: 70px 10px;
+  }
+  
+  .animated-text {
+    font-size: 32px;
+    padding: 70px 10px;
+  }
+}

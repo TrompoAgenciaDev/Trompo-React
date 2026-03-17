@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google Tag Manager -->
+    <!-- Google Tag Manager - Inicialización asíncrona del dataLayer -->
     <script>
-      // Excluir página de limpieza de caché de las analíticas
-      if (window.location.pathname !== '/clear-cache' && !window.location.pathname.includes('/clear-cache')) {
-        (function (w, d, s, l, i) {
-          w[l] = w[l] || [];
-          w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-          var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s),
-            dl = l != "dataLayer" ? "&l=" + l : "";
-          j.async = true;
-          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-          f.parentNode.insertBefore(j, f);
-        })(window, document, "script", "dataLayer", "GTM-WTCNM4L");
+      // Inicializar dataLayer de forma no bloqueante
+      window.dataLayer = window.dataLayer || [];
+    </script>
+    <!-- Google Tag Manager - Script diferido después de window.load -->
+    <script>
+      // Cargar GTM después de window.load para no bloquear render inicial
+      function loadGTM() {
+        // Excluir página de limpieza de caché de las analíticas
+        if (window.location.pathname !== '/clear-cache' && !window.location.pathname.includes('/clear-cache')) {
+          (function (w, d, s, l, i) {
+            w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+            var j = d.createElement(s),
+              dl = l != "dataLayer" ? "&l=" + l : "";
+            j.async = true;
+            j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+            d.head.appendChild(j);
+          })(window, document, "script", "dataLayer", "GTM-WTCNM4L");
+        }
+      }
+      
+      // Cargar después de window.load o después de 3 segundos como máximo
+      if (document.readyState === 'complete') {
+        loadGTM();
+      } else {
+        window.addEventListener('load', loadGTM);
+        // Fallback: cargar después de 3 segundos máximo
+        setTimeout(loadGTM, 3000);
       }
     </script>
     <!-- End Google Tag Manager -->
@@ -23,14 +38,212 @@
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+    <!-- DNS Prefetch para recursos externos -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="dns-prefetch" href="https://sibforms.com" />
+
+    <!-- Preconnect para recursos críticos -->
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="preconnect" href="https://p.typekit.net" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://sibforms.com" />
+    
+    <!-- Preload logo del header (LCP crítico) -->
+    <link 
+      rel="preload" 
+      href="/assets/black.webp" 
+      as="image" 
+      type="image/webp"
+      fetchpriority="high"
     />
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.typekit.net/crf2yba.css" />
+    
+    <!-- No preload de video: as="video" no está bien soportado en todos los navegadores -->
+    <!-- El video se carga por el componente Hero -->
+    
+    <!-- Preload recursos críticos del hero -->
+    <!-- Solo preload del poster (LCP), no del video -->
+    <!-- Poster hero desktop - solo para pantallas grandes -->
+    <link 
+      rel="preload" 
+      href="/assets/hero/home.webp" 
+      as="image" 
+      type="image/webp" 
+      media="(min-width: 768px)"
+      fetchpriority="high"
+    />
+    <!-- Poster hero mobile - solo para pantallas pequeñas -->
+    <link 
+      rel="preload" 
+      href="/assets/hero/mobile/home.webp" 
+      as="image" 
+      type="image/webp" 
+      media="(max-width: 767px)"
+      fetchpriority="high"
+    />
+    
+    <!-- Prefetch de rutas desactivado: en muchos servidores devuelve 503 si la SPA no está configurada para esas URLs -->
+    <!-- Configurar el servidor para servir index.html en todas las rutas de la SPA evita 503 al navegar directo -->
+    
+    <!-- Preload fuentes críticas (above-the-fold) -->
+    <!-- Google Fonts Montserrat -->
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw5aXpsog.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw9aXpsog.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    
+    <!-- Neue Haas Grotesk Display Pro - Fuentes críticas -->
+    <!-- Bold (más crítica según Lighthouse - 862ms) -->
+    <link
+      rel="preload"
+      href="/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayBold.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <!-- Roman (500ms) -->
+    <link
+      rel="preload"
+      href="/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayRoman.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <!-- Light (515ms) -->
+    <link
+      rel="preload"
+      href="/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayLight.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <!-- Thin (518ms) -->
+    <link
+      rel="preload"
+      href="/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayThin.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    
+    <!-- Google Fonts - Solo pesos usados: 400, 500, 600, 700, 800, 900 -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <!-- TypeKit (Adobe Fonts) - Carga asíncrona para no bloquear render -->
+    <link
+      rel="stylesheet"
+      href="https://use.typekit.net/crf2yba.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://use.typekit.net/crf2yba.css" />
+    </noscript>
+    
+    <!-- CSS de fuentes - Carga asíncrona para no bloquear render -->
+    <link
+      rel="stylesheet"
+      href="/assets/fonts/fonts.css"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="/assets/fonts/fonts.css" />
+    </noscript>
+
+    <!-- CSS crítico inline para header y hero - evita CLS y mejora LCP -->
+    <style>
+      /* Header crítico - sticky en desktop */
+      header.full-container {
+        z-index: 100;
+        height: fit-content;
+        padding: 0 10px;
+      }
+      
+      @media (min-width: 768px) {
+        header.full-container {
+          position: sticky;
+          top: 0;
+        }
+      }
+      
+      .header .container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .logo-img {
+        width: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      @media (min-width: 768px) {
+        .header .container {
+          padding: 20px 0;
+        }
+        .logo-img {
+          width: 160px;
+        }
+      }
+      
+      @media (min-width: 1024px) {
+        .logo-img {
+          width: 180px;
+        }
+      }
+      
+      /* Hero - contenedor sin alto, video 100% ancho */
+      .hero-video,
+      .hero-poster-img {
+        width: 100%;
+        max-width: 100%;
+        display: block;
+      }
+      
+      [data-hero-container] {
+        position: relative;
+        width: 100%;
+        overflow: visible;
+      }
+    </style>
 
     <title>Trompo Agencia</title>
   </head>
@@ -47,9 +260,79 @@
     <!-- End Google Tag Manager (noscript) -->
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script
-      defer
-      src="https://sibforms.com/forms/end-form/build/main.js"
-    ></script>
+    <!-- Brevo (Sibforms) - Lazy load condicional: solo cuando el formulario esté cerca del viewport -->
+    <script>
+      function loadBrevo() {
+        // Verificar que no existe ya el script
+        if (document.querySelector('script[src*="sibforms.com"]')) {
+          return;
+        }
+        
+        var script = document.createElement('script');
+        script.defer = true;
+        script.src = 'https://sibforms.com/forms/end-form/build/main.js';
+        script.onerror = function() {
+          console.warn('Error al cargar script de Brevo');
+        };
+        document.body.appendChild(script);
+      }
+      
+      // Cargar solo cuando el formulario esté cerca del viewport (Intersection Observer)
+      function initBrevoLazyLoad() {
+        function checkAndLoad() {
+          const brevoForm = document.querySelector('.sib-form, #sib-form, [data-sib-form]');
+          if (!brevoForm) {
+            return;
+          }
+          
+          // Si Intersection Observer está disponible, usarlo para lazy load
+          if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(function(entries) {
+              entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                  loadBrevo();
+                  observer.disconnect();
+                }
+              });
+            }, {
+              // Cargar cuando el formulario esté a 200px del viewport
+              rootMargin: '200px'
+            });
+            
+            observer.observe(brevoForm);
+            
+            // Fallback: cargar después de 5 segundos si el formulario no entra en viewport
+            setTimeout(function() {
+              if (document.querySelector('script[src*="sibforms.com"]')) {
+                return; // Ya se cargó
+              }
+              loadBrevo();
+              observer.disconnect();
+            }, 5000);
+          } else {
+            // Fallback para navegadores sin Intersection Observer
+            // Cargar después de que la página esté completamente cargada
+            if (document.readyState === 'complete') {
+              setTimeout(loadBrevo, 2000);
+            } else {
+              window.addEventListener('load', function() {
+                setTimeout(loadBrevo, 2000);
+              });
+            }
+          }
+        }
+        
+        // Esperar a que React renderice los componentes
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(checkAndLoad, 500);
+          });
+        } else {
+          setTimeout(checkAndLoad, 500);
+        }
+      }
+      
+      initBrevoLazyLoad();
+    </script>
   </body>
 </html>

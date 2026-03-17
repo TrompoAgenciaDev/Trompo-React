@@ -13,8 +13,9 @@ const useFetchFaqs = (section = "home") => {
         setLoading(true);
         setError(null);
 
-        const url = `${import.meta.env.BASE_URL}faqs.json`;
-        const res = await fetch(url, { cache: "no-store" });
+        const buildTime = import.meta.env.BUILD_TIME || Date.now();
+        const url = `${import.meta.env.BASE_URL}faqs.json?v=${buildTime}`;
+        const res = await fetch(url, { cache: "default" });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
         const data = await res.json();

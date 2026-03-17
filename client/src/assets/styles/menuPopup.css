@@ -3,7 +3,6 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #FEE070;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -22,7 +21,7 @@
   -moz-align-items: center;
   align-items: center;
   gap: 30px;
-  z-index: 9999999;
+  z-index: 100000000;
   padding: 20px 10px 50px;
 }
 
@@ -62,22 +61,46 @@
   background: rgba(0, 0, 0, 0.38);
   -webkit-backdrop-filter: saturate(120%) blur(1px);
   backdrop-filter: saturate(120%) blur(1px);
-  z-index: 99999;
+  z-index: 100000000;
 }
 
 /* --- Ítems principales del menú --- */
 .menu-popup {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #dddddd;
 }
 
 /* --- Estilos específicos para menú mobile --- */
 .mobile-menu li {
-  border-bottom: 1px solid #3f3e3e;
+  border-bottom: 1px solid #3f3f3f;
   list-style: none;
 }
 
 .mobile-menu li:last-child {
   border-bottom: none;
+}
+
+/* Estilos para los links y textos del menú mobile */
+.mobile-menu .menu-item {
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  text-transform: capitalize;
+  -webkit-transition: color 0.1s ease-in-out;
+  -moz-transition: color 0.1s ease-in-out;
+  -o-transition: color 0.1s ease-in-out;
+  transition: color 0.1s ease-in-out;
+}
+
+.mobile-menu .menu-item .menu-item-content {
+  color: inherit;
+}
+
+.mobile-menu .menu-item:hover,
+.mobile-menu .menu-item:hover .menu-item-content {
+  color: #fed332;
 }
 
 /* Quitar borde inferior del contenedor cuando se usa menú mobile */
@@ -112,10 +135,10 @@
   text-transform: capitalize;
   color: #000;
   cursor: pointer;
-  -webkit-transition: color 0.25s ease-in-out;
-  -moz-transition: color 0.25s ease-in-out;
-  -o-transition: color 0.25s ease-in-out;
-  transition: color 0.25s ease-in-out;
+  -webkit-transition: color 0.1s ease-in-out;
+  -moz-transition: color 0.1s ease-in-out;
+  -o-transition: color 0.1s ease-in-out;
+  transition: color 0.1s ease-in-out;
 }
 
 .servicios-options span {
@@ -124,10 +147,13 @@
   font-weight: 400;
 }
 
-.menu-popup h3:hover,
-.menu-popup span:hover {
-  color: #fed332;
-}
+  /* Hover solo para mobile - en desktop se maneja con .menu-popup:hover */
+  @media (max-width: 1023px) {
+    .menu-popup h3:hover,
+    .menu-popup span:hover {
+      color: #fed332;
+    }
+  }
 
 .servicios-header {
   display: -webkit-box;
@@ -150,14 +176,22 @@
   font-weight: 600;
   font-size: 1.1rem;
   line-height: 1.2;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #262626;
   color: #000;
   cursor: pointer;
 }
 
+/* Asegurar que el contenedor padre no corte el submenú */
+.servicios-menu {
+  overflow: visible;
+}
+
 .submenu-servicios {
-  overflow: hidden;
+  overflow: visible;
   padding: 8px 0 12px 8px;
+  max-height: 1000px;
+  opacity: 1;
+  visibility: visible;
 }
 
 .submenu-servicios li a {
@@ -165,11 +199,12 @@
   padding: 6px 0;
   text-decoration: none;
   color: #000000;
-  -webkit-transition: color 0.25s ease-in-out;
-  -moz-transition: color 0.25s ease-in-out;
-  -o-transition: color 0.25s ease-in-out;
-  transition: color 0.25s ease-in-out;
+  -webkit-transition: color 0.1s ease-in-out;
+  -moz-transition: color 0.1s ease-in-out;
+  -o-transition: color 0.1s ease-in-out;
+  transition: color 0.1s ease-in-out;
 }
+
 
 /* --- Hover consistente --- */
 .submenu-servicios li a:hover {
@@ -195,7 +230,7 @@
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
-    z-index: 99999;
+    z-index: 100000000;
   }
 
   .menu-options-container {
@@ -223,7 +258,16 @@
   .menu-popup {
     width: 100%;
     padding: 0;
-    border-right: 1px solid #9A7A00;
+    border-right: 1px solid #404040;
+    position: relative;
+    -webkit-transition: background-color 0.1s ease-in-out;
+    -moz-transition: background-color 0.1s ease-in-out;
+    -o-transition: background-color 0.1s ease-in-out;
+    transition: background-color 0.1s ease-in-out;
+  }
+  
+  .servicios-menu {
+    position: relative;
   }
 
   .menu-popup * a:not(.submenu-servicios a),
@@ -267,23 +311,51 @@
     border: none;
   }
 
+  /* Textos en blanco por defecto */
   .menu-popup h3,
-  .menu-popup span {
-    font-weight: 700;
+  .menu-popup span,
+  .servicios-header span {
+    font-weight: 500;
     font-size: 22px;
-    font-family: var(--font-portfolio);
+    color: #ffffff;
   }
 
-  .menu-popup h3:hover,
-  .menu-popup span:hover {
-    color: #000000;
+  /* Submenú de servicios - texto blanco por defecto en desktop */
+  /* Mayor especificidad para sobrescribir el color #000000 de mobile */
+  .menu-popup .servicios-menu .submenu-servicios li a {
+    color: #ffffff;
   }
 
   .servicios-options a span {
-    font-size: 16px;
     font-weight: 500;
+    color: #ffffff;
   }
 
+  /* Cuando se hace hover en una sección, fondo blanco y textos negros */
+  .menu-popup:hover h3,
+  .menu-popup:hover h3:hover,
+  .menu-popup:hover span,
+  .menu-popup:hover span:hover,
+  .menu-popup:hover .servicios-header span,
+  .menu-popup:hover .servicios-header span:hover {
+    color: #262626;
+  }
+
+  .menu-popup:hover .servicios-options a span,
+  .menu-popup:hover .servicios-options a:hover span {
+    color: #262626;
+  }
+
+  .menu-popup:hover .servicios-menu .submenu-servicios li a,
+  .menu-popup:hover .servicios-menu .submenu-servicios li a:hover {
+    color: #262626;
+  }
+
+  /* Asegurar que servicios-menu no corte el submenú con overflow */
+  .servicios-menu {
+    overflow: visible;
+  }
+  
   .submenu-servicios {
     position: absolute;
     width: 100%;
@@ -292,6 +364,17 @@
     left: 50px;
     z-index: 999999;
     padding: 0;
+    pointer-events: auto;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+  }
+  
+  /* Submenú siempre visible en desktop */
+  .submenu-servicios {
+    max-height: 1000px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 }
 
@@ -304,13 +387,24 @@
   }
 
   .menu-popup h3,
-  .menu-popup span {
-    font-weight: 800;
+  .menu-popup span,
+  .servicios-header span {
     font-size: 32px;
+    color: #ffffff;
   }
 
   .submenu-servicios {
     top: 60px;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+  }
+  
+  /* Submenú siempre visible en desktop 1280px+ */
+  .submenu-servicios {
+    max-height: 1000px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .submenu-servicios ul{
@@ -329,16 +423,28 @@
   }
 
   .servicios-options a span {
-    font-weight: 600;
-    color: #000000;
-    font-family: var(--font-portfolio);
+    font-weight: 400;
+    color: #ffffff;
     font-style: normal;
     font-size: 24px;
   }
 
+  /* Submenú de servicios - texto blanco por defecto */
+  /* Mayor especificidad para sobrescribir el color #000000 de mobile */
+  .menu-popup .servicios-menu .submenu-servicios li a {
+    color: #ffffff;
+  }
+
   .servicios-options a:hover span {
-    font-family: var(--subtitle-font);
-    font-style: italic;
-    font-size: 26px;
+    font-weight: 700;
+  }
+
+  /* Cuando se hace hover en una sección, textos negros */
+  .menu-popup:hover .servicios-options a span {
+    color: #262626;
+  }
+
+  .menu-popup:hover .servicios-menu .submenu-servicios li a {
+    color: #262626;
   }
 }

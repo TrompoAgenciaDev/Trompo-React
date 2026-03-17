@@ -1,37 +1,37 @@
 [
     {
         "id": 0,
-        "title": "estrategia",
+        "title": "paid media",
         "subtitle": "inteligente",
         "content": "Publicidad con dirección, optimización y resultados.",
-        "service": "/estrategia"
+        "service": "/paid-media"
     },
     {
         "id": 1,
-        "title": "creatividad",
+        "title": "diseño",
         "subtitle": "que conecta",
         "content": "Branding, diseño y multimedia para marcas con propósito.",
-        "service": "/creatividad"
+        "service": "/diseno"
     },
     {
         "id": 2,
-        "title": "interacción",
-        "subtitle": "que transforma",
-        "content": "Estrategias que conectan. Contenidos que provocan respuesta.",
-        "service": "/interaccion"
+        "title": "multimedia",
+        "subtitle": "que impacta",
+        "content": "Contenido visual y audiovisual que captura y comunica.",
+        "service": "/multimedia"
     },
     {
         "id": 3,
+        "title": "redes sociales",
+        "subtitle": "que transforma",
+        "content": "Estrategias que conectan. Contenidos que provocan respuesta.",
+        "service": "/social-media"
+    },
+    {
+        "id": 4,
         "title": "desarrollo",
         "subtitle": "que evoluciona",
         "content": "Sitios que no se detienen, se adaptan y crecen.",
         "service": "/desarrollo"
-    },
-    {
-        "id": 4,
-        "title": "soporte",
-        "subtitle": "continuo",
-        "content": "Soporte técnico y creativo para que tu marca no se detenga.",
-        "service": "/soporte"
     }
 ]

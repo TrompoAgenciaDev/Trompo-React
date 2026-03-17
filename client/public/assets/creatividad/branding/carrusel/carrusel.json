@@ -5,59 +5,98 @@
       "name": "Lema",
       "description": "Desarrollamos la identidad visual para Lema, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.",
       "gallery": [
-        "lema1.webp",
-        "lema2.webp",
-        "lema3.webp",
-        "lema4.webp"
+        "institucional/lema1.webp",
+        "institucional/lema2.webp",
+        "institucional/lema3.webp",
+        "institucional/lema4.webp"
       ],
       "logo": null
     },
     {
-      "id": "kindom",
-      "name": "Kindom",
-      "description": "Desarrollamos la identidad visual para Kindom, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.",
+      "id": "raulito",
+      "name": "Raulito",
+      "description": "Desarrollamos la identidad visual para Raulito, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.",
       "gallery": [
-        "kindom1.webp",
-        "kindom2.webp",
-        "kindom3.webp"
+        "institucional/raulito.webp",
+        "institucional/raulito-1.webp"
       ],
       "logo": null
     },
     {
       "id": "vox",
       "name": "Vox",
-      "description": "Desarrollamos la identidad de VOX, una agencia de prensa y comunicación.</br></br>Creamos un concepto visual basado en un búho que transmite criterio y cercanía, junto con un sistema gráfico cálido y profesional.</br></br>Completamos el proyecto con un sitio web dinámico que ordena sus servicios y potencia su presencia en medios.",
+      "description": "Desarrollamos la identidad de VOX, una agencia de prensa y comunicación. Creamos un concepto visual basado en un búho que transmite criterio y cercanía, junto con un sistema gráfico cálido y profesional.<br><br>Completamos el proyecto con un sitio web dinámico que ordena sus servicios y potencia su presencia en medios.",
       "gallery": [
-        "vox1.webp",
-        "vox2.webp",
-        "vox3.webp",
-        "vox4.webp"
+        "institucional/vox1.webp",
+        "institucional/vox2.webp",
+        "institucional/vox3.webp",
+        "institucional/vox4.webp"
       ],
       "logo": null
     },
     {
       "id": "airon",
       "name": "Airon",
-      "description": "Desde la creación de isologotipos hasta el diseño de material editorial y publicitario, este producto busca construir una identidad visual coherente, profesional y alineada a los valores y objetivos estratégicos de la empresa.",
+      "description": "Airon es una marca dedicada a la venta online de productos para construcción y diseño, orientada inicialmente al público B2B.<br><br>Desarrollamos una identidad moderna, práctica y digital, pensada para posicionarla en sus primeros años como un e-commerce sólido, eficiente y confiable dentro del sector.<br><br>El sistema visual combina solidez, claridad y un enfoque contemporáneo que acompaña su crecimiento.",
       "gallery": [
-        "airon1.webp",
-        "airon2.webp",
-        "airon3.webp",
-        "airon4.webp"
+        "institucional/airon1.webp",
+        "institucional/airon2.webp",
+        "institucional/airon3.webp",
+        "institucional/airon4.webp"
+      ],
+      "logo": null
+    },
+    {
+      "id": "volvo-usados",
+      "name": "Volvo Usados",
+      "description": "Desarrollamos la identidad visual y comunicación digital para Volvo Usados, destacando su proceso de reacondicionamiento, la garantía oficial y la experiencia de compra confiable.<br><br>El sistema gráfico, la web y las piezas publicitarias refuerzan una propuesta clara: vehículos seleccionados con rendimiento comprobado y respaldo Volvo.",
+      "gallery": [
+        "institucional/volvo1.webp",
+        "institucional/volvo2.webp",
+        "institucional/volvo3.webp"
       ],
       "logo": null
     }
   ],
   "web": [
     {
-      "id": "vox",
-      "name": "Vox",
-      "description": "Desarrollamos la identidad de VOX, una agencia de prensa y comunicación.</br></br>Creamos un concepto visual basado en un búho que transmite criterio y cercanía, junto con un sistema gráfico cálido y profesional.</br></br>Completamos el proyecto con un sitio web dinámico que ordena sus servicios y potencia su presencia en medios.",
-      "gallery": [
-        "vox1.webp",
-        "vox2.webp",
-        "vox3.webp"
-      ],
+      "id": "galpones-modulares",
+      "name": "Galpones Modulares",
+      "description": "Desarrollamos la identidad visual para Galpones Modulares, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.",
+      "video": "branding-web/galpones-modulares.mp4",
+      "gallery": [],
+      "logo": null
+    },
+    {
+      "id": "ravana",
+      "name": "Ravana",
+      "description": "Desarrollamos la identidad visual para Ravana, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.",
+      "video": "branding-web/ravana.mp4",
+      "gallery": [],
+      "logo": null
+    },
+    {
+      "id": "super-walter",
+      "name": "Super Walter",
+      "description": "Desarrollamos la identidad visual para Super Walter, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.",
+      "video": "branding-web/super-walter.mp4",
+      "gallery": [],
+      "logo": null
+    },
+    {
+      "id": "volvo-usados",
+      "name": "Volvo Usados",
+      "description": "Desarrollamos la identidad visual y comunicación digital para Volvo Usados, destacando su proceso de reacondicionamiento, la garantía oficial y la experiencia de compra confiable.",
+      "video": "branding-web/volvo-usados.mp4",
+      "gallery": [],
+      "logo": null
+    },
+    {
+      "id": "volvo-vm",
+      "name": "Volvo VM",
+      "description": "Desarrollamos la identidad visual para Volvo VM, creando un sistema gráfico coherente y profesional que refleja los valores y objetivos de la marca.",
+      "video": "branding-web/volvo-vm.mp4",
+      "gallery": [],
       "logo": null
     }
   ],

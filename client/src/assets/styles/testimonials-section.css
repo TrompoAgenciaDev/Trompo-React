@@ -1,0 +1,152 @@
+/* Estilos para la sección de testimonios reutilizable */
+.testimonial-cards-slider{
+    width: 100%;
+    max-width: 600px;
+    padding: 0;
+    margin: 0 auto;
+    position: relative;
+    height: 400px;
+}
+
+/* Gradientes de desvanecimiento en los bordes superior e inferior */
+.testimonial-cards-slider::before,
+.testimonial-cards-slider::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.testimonial-cards-slider::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.testimonial-cards-slider::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.testimonial-wrapper{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 2fr;
+    overflow: hidden;
+    position: relative;
+    gap: 0;
+}
+
+/* Estilos para el contenido de texto de testimonios */
+.testimonial-text-content {
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 40px;
+    background-color: #ffffff;
+    z-index: 10;
+}
+
+.testimonial-text-content h3 {
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.testimonial-text-content p {
+    max-width: 800px;
+    margin-bottom: 1rem;
+    text-align: left;
+    color: #ffffff;
+}
+
+/* Estilos cuando el fondo es claro (blanco o amarillo) */
+.bg-yellow .testimonial-text-content h3,
+.bg-yellow-2 .testimonial-text-content h3,
+.bg-white .testimonial-text-content h3,
+.white-bg .testimonial-text-content h3 {
+    color: #262626;
+}
+
+.bg-yellow .testimonial-text-content p,
+.bg-yellow-2 .testimonial-text-content p,
+.bg-white .testimonial-text-content p,
+.white-bg .testimonial-text-content p {
+    color: #262626;
+}
+
+/* Estilos cuando el fondo es oscuro (black-bg) - mantener texto blanco por defecto */
+.black-bg .testimonial-text-content h3,
+.black-bg-2 .testimonial-text-content h3 {
+    color: #ffffff;
+}
+
+.black-bg .testimonial-text-content p,
+.black-bg-2 .testimonial-text-content p {
+    color: #ffffff;
+}
+
+/* Gradientes adaptados para fondo amarillo */
+.bg-yellow .testimonial-cards-slider::before,
+.bg-yellow-2 .testimonial-cards-slider::before {
+    background: linear-gradient(to bottom, rgba(254, 224, 112, 1) 0%, rgba(254, 224, 112, 0) 100%);
+}
+
+.bg-yellow .testimonial-cards-slider::after,
+.bg-yellow-2 .testimonial-cards-slider::after {
+    background: linear-gradient(to top, rgba(254, 224, 112, 1) 0%, rgba(254, 224, 112, 0) 100%);
+}
+
+/* Gradientes adaptados para fondo blanco */
+.bg-white .testimonial-cards-slider::before,
+.white-bg .testimonial-cards-slider::before {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.bg-white .testimonial-cards-slider::after,
+.white-bg .testimonial-cards-slider::after {
+    background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+/* Gradientes adaptados para fondo oscuro (black-bg) */
+.black-bg .testimonial-cards-slider::before,
+.black-bg-2 .testimonial-cards-slider::before {
+    background: linear-gradient(to bottom, rgba(38, 38, 38, 1) 0%, rgba(38, 38, 38, 0) 100%);
+}
+
+.black-bg .testimonial-cards-slider::after,
+.black-bg-2 .testimonial-cards-slider::after {
+    background: linear-gradient(to top, rgba(38, 38, 38, 1) 0%, rgba(38, 38, 38, 0) 100%);
+}
+
+/* Grid de 2 columnas para testimonial-wrapper en desktop */
+@media (min-width: 1024px) {
+    .testimonial-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: stretch;
+        position: relative;
+        padding: 0;
+        height: 600px;
+    }
+    
+    .testimonial-cards-slider {
+        max-width: 600px;
+        width: 100%;
+        height: 600px;
+        grid-column: 1;
+        justify-self: end;
+        margin: 0;
+    }
+
+    .testimonial-wrapper > div:empty,
+    .testimonial-text-content {
+        grid-column: 2;
+    }
+}

@@ -1,16 +1,10 @@
-import { motion } from "framer-motion";
-import Icons from "../components/Icons";
-import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
 
-
-import ImageSlider from "../components/sliders/CustomerSlider";
-import Faqs from "../layout/Faqs";
-import Hero from "../layout/Hero";
 import Contact from "../layout/Contact";
-import Testimonials from "../components/Testimonials.jsx";
+import AnimatedTextSection from "../components/AnimatedTextSection";
 
 import "../assets/styles/contact-page.css";
-import "@as/hero.css";
 
 const Contactanos = () => {
 
@@ -32,8 +26,82 @@ const Contactanos = () => {
     show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
   };
 
+  // Componente para animar letra por letra
+  const AnimatedLetter = ({ letter, index, letterDelay }) => {
+    return (
+      <motion.span
+        className="animated-letter"
+        initial={{ opacity: 0.1 }}
+        animate={{ opacity: 1 }}
+        transition={{
+          delay: index * letterDelay,
+          duration: 0.3,
+          ease: "easeOut"
+        }}
+      >
+        {letter === " " ? "\u00A0" : letter}
+      </motion.span>
+    );
+  };
+
+
+  // Componente InfiniteSlider (igual al de Home)
+  const InfiniteSlider = ({ text, items: itemsProp }) => {
+    const shouldReduceMotion = useReducedMotion();
+    
+    // Si se pasa items (array), usar esos; si no, usar text como antes
+    const itemsArray = itemsProp || (text ? [text] : []);
+    
+    // 8 copias para crear un loop infinito más fluido (se duplican para 16 totales)
+    const items = Array(8).fill(itemsArray).flat();
+
+    // Calcular duración basada en la cantidad de items y su longitud total
+    const totalLength = itemsArray.reduce((sum, item) => sum + item.trim().length, 0);
+    const baseDuration = 30;
+    const duration = baseDuration + Math.max(0, (totalLength - 80) / 30);
+
+    return (
+      <motion.div 
+        className="infinite-slider"
+        animate={{
+          x: shouldReduceMotion ? 0 : ['0%', '-10%']
+        }}
+        transition={{
+          x: {
+            repeat: Infinity,
+            repeatType: "loop",
+            duration: duration,
+            ease: "linear"
+          }
+        }}
+        style={{
+          // Asegurar que el cursor funcione correctamente
+          pointerEvents: 'auto',
+          // Optimizar rendering
+          willChange: 'transform'
+        }}
+      >
+        {items.map((item, index) => (
+          <h2 key={index} className="infinite-slider-item">{item}</h2>
+        ))}
+        {items.map((item, index) => (
+          <h2 key={`duplicate-${index}`} className="infinite-slider-item">{item}</h2>
+        ))}
+      </motion.div>
+    );
+  };
+
   // --- CONTACTANOS ---
   const [revealed, setRevealed] = useState(false);
+  const titleTextPart1 = "Hablemos";
+  const titleTextPart2 = "de tu proyecto.";
+  
+  // Delay entre letras: 0.05s por letra para una animación fluida
+  const letterDelay = 0.05;
+  
+  // Dividir el texto en letras
+  const lettersPart1 = titleTextPart1.split("");
+  const lettersPart2 = titleTextPart2.split("");
 
   useEffect(() => {
     const onScroll = () => {
@@ -47,55 +115,41 @@ const Contactanos = () => {
     };
   }, []);
 
+
   return (
     <>
-      <div className="full-container hero-contactanos bg-yellow">
-        <div className="contacto-wrap">
-          <motion.h1
-            className="contacto-title"
-            variants={titleVar}
-            initial="hidden"
-            animate="show"
-          >
-            Hablemos de tu proyecto
-          </motion.h1>
-
-          {revealed && (
-            <motion.div
-              className="contacto-reveal"
-              variants={groupVar}
-              initial="hidden"
-              animate="show"
-            >
-              <motion.p className="contacto-subtitle" variants={itemVar}>
-                Cada proyecto es único. Completá el formulario y diseñemos la estrategia que tu marca necesita.
-              </motion.p>
-              <motion.a
-                href="#contacto"
-                className="contacto-cta"
-                variants={itemVar}
-              >
-                <Icons iconName="down" link="#contacto" />
-              </motion.a>
-            </motion.div>
-          )}
+      <div className="full-container black-bg hero-contactanos-container">
+        <div className="container contact-title-container">
+          <h1 className="contact-main-title">
+            {lettersPart1.map((letter, index) => (
+              <AnimatedLetter
+                key={`part1-${index}`}
+                letter={letter}
+                index={index}
+                letterDelay={letterDelay}
+              />
+            ))}
+            <br />
+            {lettersPart2.map((letter, index) => (
+              <AnimatedLetter
+                key={`part2-${index}`}
+                letter={letter}
+                index={lettersPart1.length + index}
+                letterDelay={letterDelay}
+              />
+            ))}
+          </h1>
         </div>
       </div>
 
       <div id="contacto"></div>
 
-      <Contact form="contactanos" location="contactanos"/>
+      <AnimatedTextSection 
+        text="En Trompo no creemos en soluciones mágicas. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Acompañamos a las empresas a convertir desafíos digitales en ventajas competitivas."
+        backgroundClass=""
+      />
 
-      <section className="full-container bg-yellow testimonial-wrapper">
-        <div className="container testimonial-header">
-          <h4>Más que clientes, aliados estratégicos.</h4>
-          <p>Historias que muestran el valor de trabajar en equipo.</p>
-        </div>
-        <div className="full-container">
-          <Testimonials size={3} />
-        </div>
-      </section>
-
+      <Contact form="contactanos" location="contacto"/>
 
     </>
   );

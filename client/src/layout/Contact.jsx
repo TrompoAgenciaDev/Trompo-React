@@ -2,23 +2,32 @@
 import "../assets/styles/contact.css";
 import FormIndex from "../components/forms/FormIndex";
 
-const BGS = {
-  home: "form.webp",
-  contactanos: "contact-bg.webp", // Nueva imagen específica para contacto
-  default: "form.webp", // Fallback
-};
-
 function Contact({ location = "home", form }) {
   const base = import.meta.env.BASE_URL;
-  const key = String(location).toLowerCase();
-  const file = BGS[key] || BGS.default;
-  const bg = `url(${base}assets/contact/${file})`;
+
+  const getBgStyle = () => {
+    if (location === "contacto") {
+      return {
+        "--contact-bg-desktop": `url(${base}assets/img/contacto.webp)`,
+        "--contact-bg-mobile": `url(${base}assets/img/contacto-mobile.webp)`,
+      };
+    }else{
+      return { 
+        "--contact-bg-desktop": `url(${base}assets/img/form.webp)`,
+        "--contact-bg-mobile": `url(${base}assets/img/form-mobile.webp)`,
+      };
+    }
+  };
+
+  const sectionClass = location === "contacto"
+    ? "full-container contact-section contact-section--contacto black-bg"
+    : "full-container contact-section contact-section--form black-bg";
 
   return (
     <section
       id="contact"
-      className="full-container contact-section"
-      style={{ backgroundImage: bg }}
+      className={sectionClass}
+      style={getBgStyle()}
     >
       <div className="container">
         <div className="grid-contact">
@@ -45,11 +54,11 @@ function Contact({ location = "home", form }) {
               </svg>
             </div>
             <div className="grid-item-title">
-              <h1>
-                Hablemos de lo que tu marca necesita. 
-              </h1>
+              <h5>
+                Completá el siguiente formulario.
+              </h5>
               <p>
-                Cada proyecto es único. Completá el formulario y diseñemos la estrategia que tu marca necesita para evolucionar
+              Definamos tu próximo paso estratégico.
               </p>
             </div>
           </div>

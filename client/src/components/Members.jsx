@@ -34,7 +34,7 @@ export default function Members() {
   }, [index, isPaused, isDragging, members.length]);
 
   if (loading) return <div>Cargando miembros…</div>;
-  if (error) return <div>{error}</div>;
+  if (error) return <div>{typeof error === 'object' ? (error.message || JSON.stringify(error)) : String(error)}</div>;
   if (!members.length) return <div>No hay miembros de equipo disponibles.</div>;
 
   function handleDragStart(_e, info) {

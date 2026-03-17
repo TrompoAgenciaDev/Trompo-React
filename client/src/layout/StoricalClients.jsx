@@ -18,16 +18,16 @@ export default function StoricalClients() {
 
   if (loading) {
     return (
-      <section className="full-container storical">
+      <section className="full-container storical black-bg">
         <div className="storical-loading">Cargando…</div>
       </section>
     );
   }
   if (error) {
     return (
-      <section className="full-container storical">
+      <section className="full-container storical black-bg">
         <div className="storical-error">
-          Error al cargar: {String(error.message || error)}
+          Error al cargar: {typeof error === 'object' ? (error.message || JSON.stringify(error)) : String(error)}
         </div>
       </section>
     );
@@ -36,12 +36,12 @@ export default function StoricalClients() {
   const categories = listCategories();
 
   return (
-    <section className="full-container storical">
+    <section className="full-container storical black-bg">
       <div className="title-historical-container">
-        <h3>
+        <h5>
           Trayectoria y Confianza:{" "}
           <strong>Las verticales que Escribieron Nuestra Historia</strong>
-        </h3>
+        </h5>
         <p>
           Un vistazo a los diversos sectores que han depositado su confianza en
           nuestra agencia para lograr sus objetivos
@@ -86,7 +86,7 @@ export default function StoricalClients() {
       </div>
 
       {/* Listado de clientes */}
-      <div className="storical-panel" role="tabpanel">
+      <div className="storical-panel black-bg" role="tabpanel">
         <AnimatePresence mode="popLayout">
           <motion.ul
             key={selectedCategory}

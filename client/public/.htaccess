@@ -4,6 +4,14 @@
 RewriteEngine On
 RewriteBase /
 
+# Pasar el header de Authorization a PHP (necesario para FastCGI)
+RewriteCond %{HTTP:Authorization} ^(.+)$
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# Permitir acceso directo a archivos PHP (endpoints de API)
+RewriteCond %{REQUEST_FILENAME} \.php$
+RewriteRule . - [L]
+
 # Permitir acceso a archivos estáticos (assets, imágenes, videos, etc.)
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule . - [L]
@@ -64,11 +72,44 @@ AddType font/woff .woff
     Header always set Expires "0" env=NO_CACHE
   </IfModule>
 
-  # Fuerza el caché para assets (videos, fuentes, imágenes)
-  <FilesMatch "\.(mp4|webm|ogv|mov|jpg|jpeg|png|gif|svg|woff|woff2)$">
+  # ================================
+  # Caché largo (1 año) para recursos estáticos inmutables
+  # ================================
+  
+  # Imágenes estáticas (incluyendo WebP)
+  <FilesMatch "\.(jpg|jpeg|png|gif|svg|webp|ico)$">
     Header always set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
-
+  
+  # Videos
+  <FilesMatch "\.(mp4|webm|ogv|mov)$">
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  
+  # Fuentes (todas las variantes)
+  <FilesMatch "\.(woff|woff2|ttf|eot|otf)$">
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  
+  # Archivos JS y CSS con hash (generados por Vite) - inmutables
+  # Patrón: NombreComponente.hash.js o vendor-nombre.hash.js
+  # El hash tiene 8 caracteres alfanuméricos seguidos de .js o .css
+  # También incluye archivos .br (Brotli comprimidos)
+  <FilesMatch "\.([A-Za-z0-9]{8}\.)(js|css|br)$">
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  
+  # Fallback: Archivos JS/CSS que tengan dos puntos (nombre.hash.extensión)
+  # Esto captura todos los archivos con hash de Vite
+  <FilesMatch "\.[A-Za-z0-9]+\.[A-Za-z0-9]+\.(js|css|br)$">
+    Header always set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  
+  # Archivos JSON estáticos (portfolio, posts, etc.)
+  <FilesMatch "\.(json)$">
+    Header always set Cache-Control "public, max-age=2592000, must-revalidate"
+  </FilesMatch>
+  
   # Asegura que los vídeos se entreguen con el tipo MIME correcto
   <FilesMatch "\.(mp4|webm|ogv|mov)$">
     Header always set Content-Type "video/mp4"

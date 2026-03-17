@@ -1,0 +1,129 @@
+/* Hero Section - Similar a Contactanos */
+.hero-faqs-container {
+  height: 90svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-faqs-container .container {
+  width: 100%;
+}
+
+.faqs-title-container {
+  padding: 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.faqs-main-title {
+  font-weight: 700;
+  line-height: 1.2;
+  transition: color 0.3s ease;
+  color: #ffffff;
+}
+
+.animated-letter {
+  display: inline;
+}
+
+/* Slider Infinito para FAQs */
+.faqs-slider-container {
+  overflow: hidden;
+  width: 100%;
+  padding: 0;
+  contain: layout style paint;
+  isolation: isolate;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.faqs-infinite-slider {
+  display: flex;
+  width: fit-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 30px 0;
+}
+
+.faqs-infinite-slider-item {
+  white-space: nowrap;
+  margin: 0;
+  padding-right: 60px;
+  flex-shrink: 0;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #000000 !important;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 1.2;
+  transition: mix-blend-mode 0.2s ease;
+}
+
+
+/* Sección de FAQs */
+.faqs-section-container {
+  background-color: #ffffff;
+  padding: 50px 0;
+}
+
+.faqs-section-container:last-of-type {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.faqs-category-title {
+  font-weight: 700;
+  color: #1D1D1B;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.white-bg {
+  background-color: #ffffff;
+}
+
+/* Ocultar el título "Preguntas Frecuentes" del componente Faqs ya que tenemos el título de categoría */
+.faqs-section-container .accordion-title-section {
+  display: none;
+}
+
+/* ============================================
+   MEDIA QUERIES
+   ============================================ */
+
+/* Media Query: 768px */
+@media (min-width: 768px) {
+}
+
+@media (min-width: 1024px) {
+
+  .hero-faqs-container{
+    margin-bottom: 50px;
+  }
+
+  .faqs-main-title {
+    font-weight: 500;
+  }
+  
+  .faqs-title-container {
+    padding: 100px 0;
+  }
+
+
+  .faqs-infinite-slider-item {
+    font-size: 64px;
+  }
+
+
+}

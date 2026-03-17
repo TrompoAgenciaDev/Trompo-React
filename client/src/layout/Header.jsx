@@ -1,12 +1,17 @@
-import { useState } from "react";
 import Icons from "../components/Icons";
 
 import "../assets/styles/header.css";
+
+const base = import.meta.env.BASE_URL?.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 import { motion } from "framer-motion";
 
 const Header = ({ onTogglePopup }) => {
   return (
-    <header className="full-container header">
+    <motion.header 
+      className="full-container header"
+    >
       <div className="container">
         <motion.a
           className="logo-img"
@@ -24,6 +29,18 @@ const Header = ({ onTogglePopup }) => {
           }}
         >
           <Icons iconName="logoBlack" />
+
+          {/*
+            <video
+              src={`${base}logo.webm`}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="logo-video"
+            />
+          */}
+          
         </motion.a>
 
         <motion.button
@@ -47,7 +64,7 @@ const Header = ({ onTogglePopup }) => {
           <Icons iconName={"burguer"}/>
         </motion.button>
       </div>
-    </header>
+    </motion.header>
   );
 };
 

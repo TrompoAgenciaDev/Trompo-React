@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
 
 import Hero from "../../layout/Hero.jsx";
-import CustomerSlider from "../../components/sliders/CustomerSlider.jsx";
 import Portfolio3d from "../../layout/Portfolio3d.jsx";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
-import Testimonials from "../../components/Testimonials.jsx";
 
 import "../../assets/styles/landing-primavera.css";
 
@@ -16,16 +14,32 @@ const Primavera = () => {
     <>
       <section className="hero-landing full-container">
         <picture>
-          {/* Imagen desktop */}
+          {/* Imagen desktop con múltiples tamaños */}
           <source
             media="(min-width: 1024px)"
-            srcSet={`${BASE}assets/landing/primavera.webp`}
+            srcSet={`
+              ${BASE}assets/landing/primavera.webp 1920w,
+              ${BASE}assets/landing/primavera-800w.webp 800w,
+              ${BASE}assets/landing/primavera-1200w.webp 1200w
+            `}
+            sizes="100vw"
           />
-          {/* Imagen mobile (default) */}
+          {/* Imagen mobile con múltiples tamaños (default) */}
           <img
             src={`${BASE}assets/landing/primavera-mobile.webp`}
+            srcSet={`
+              ${BASE}assets/landing/primavera-mobile.webp 1200w,
+              ${BASE}assets/landing/primavera-mobile-400w.webp 400w,
+              ${BASE}assets/landing/primavera-mobile-800w.webp 800w
+            `}
+            sizes="100vw"
             alt="Hero Landing"
             className="hero-image"
+            width={1920}
+            height={1080}
+            style={{ aspectRatio: '16/9', maxWidth: '100%', height: 'auto' }}
+            loading="eager"
+            decoding="async"
           />
         </picture>
       </section>
@@ -49,20 +63,7 @@ const Primavera = () => {
 
       <Contact location="home" />
 
-      <section className="full-container bg-yellow testimonial-wrapper">
-        <div className="container testimonial-header">
-          <h4>Más que clientes, aliados estratégicos.</h4>
-          <p>Historias que muestran el valor de trabajar en equipo.</p>
-        </div>
-        <div className="full-container">
-          <Testimonials size={4} />
-        </div>
-      </section>
-
       <Faqs location="landing" />
-      <div className="full-container">
-        <CustomerSlider />
-      </div>
     </>
   );
 };

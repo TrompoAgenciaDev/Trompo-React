@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Menu from "@/components/Menu";
 import routesConfig from "@/config/routesConfig";
@@ -7,8 +8,38 @@ import "@as/menuPopup.css";
 
 const MenuPopup = ({ isOpen, onClose }) => {
   const popupRef = useRef(null);
+  const portalContainerRef = useRef(null);
   const [isServiciosOpen, setIsServiciosOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
+
+  // Crear portal container - diferido para no afectar render inicial
+  useEffect(() => {
+    const createPortal = () => {
+      const container = document.createElement('div');
+      container.id = 'menu-popup-portal';
+      document.body.appendChild(container);
+      portalContainerRef.current = container;
+    };
+
+    // Diferir creación del portal para no afectar render inicial
+    if ('requestIdleCallback' in window) {
+      const idleId = requestIdleCallback(createPortal, { timeout: 500 });
+      return () => {
+        cancelIdleCallback(idleId);
+        if (portalContainerRef.current?.parentNode) {
+          portalContainerRef.current.parentNode.removeChild(portalContainerRef.current);
+        }
+      };
+    } else {
+      const timeoutId = setTimeout(createPortal, 0);
+      return () => {
+        clearTimeout(timeoutId);
+        if (portalContainerRef.current?.parentNode) {
+          portalContainerRef.current.parentNode.removeChild(portalContainerRef.current);
+        }
+      };
+    }
+  }, []);
 
   // Detectar si está en modo desktop
   useEffect(() => {
@@ -40,12 +71,17 @@ const MenuPopup = ({ isOpen, onClose }) => {
   }, [isOpen, onClose]);
 
   useEffect(() => {
-    if (!isOpen) return;
-    const { overflow } = document.body.style;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = overflow;
-    };
+    if (isOpen) {
+      const { overflow } = document.body.style;
+      document.body.style.overflow = "hidden";
+      document.body.classList.add("menu-open");
+      return () => {
+        document.body.style.overflow = overflow;
+        document.body.classList.remove("menu-open");
+      };
+    } else {
+      document.body.classList.remove("menu-open");
+    }
   }, [isOpen]);
 
   const handleOverlayPointerDown = (e) => {
@@ -67,7 +103,11 @@ const MenuPopup = ({ isOpen, onClose }) => {
     if (isDesktop) setIsServiciosOpen(false);
   };
 
-  return (
+  if (!portalContainerRef.current) {
+    return null;
+  }
+
+  const popupContent = (
     <>
       {isOpen && (
         <>
@@ -77,10 +117,10 @@ const MenuPopup = ({ isOpen, onClose }) => {
             aria-hidden="true"
           />
 
-          <div className="full-container popup-menu" role="dialog" aria-modal="true" ref={popupRef}>
+          <div className="full-container popup-menu black-bg" role="dialog" aria-modal="true" ref={popupRef}>
             <div className="container mobile-header">
               <a className="logo-img" href="/">
-                <Icons iconName="logoBlack" />
+                
               </a>
 
               <button
@@ -139,10 +179,6 @@ const MenuPopup = ({ isOpen, onClose }) => {
                         </div>
 
                         <div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.2, ease: "easeInOut" }}
                           className="submenu-servicios"
                         >
                           <Menu
@@ -186,6 +222,8 @@ const MenuPopup = ({ isOpen, onClose }) => {
       )}
     </>
   );
+
+  return createPortal(popupContent, portalContainerRef.current);
 };
 
 export default MenuPopup;

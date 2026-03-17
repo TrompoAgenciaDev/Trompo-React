@@ -52,17 +52,11 @@
   gap: 16px;
 }
 
-.soporte-grid .grid-item-soporte p{
-  font-size: 12px;
-}
 
 .soporte-grid .grid-item-soporte .title-section-container{
   font-size: 15px;
 }
 
-.title-section-container h2{
-  font-family: var(--font-portfolio);
-}
 
 /* portfolio 3d*/
 .soporte-title-portfolio-container{
@@ -81,13 +75,9 @@
 }
 
 .soporte-title-portfolio-container h3{
-  font-size: 26px;
   font-weight: 400;
 }
 
-.soporte-title-portfolio-container p{
-  font-size: 13px;
-}
 
 @media (min-width: 768px) {
   .soporte-diagonal-invertida{
@@ -109,13 +99,7 @@
     padding-top: 35px;
   }
 
-  .soporte-title-portfolio-container h3{
-    font-size: 28px;
-  }
 
-  .soporte-title-portfolio-container p{
-    font-size: 15px;
-  }
 }
 
 @media (min-width: 1024px) {
@@ -141,9 +125,6 @@
     -ms-flex-align: start;
     align-items: flex-start;
   }
-  .soporte-grid .grid-item-soporte p{
-    font-size: 14px;
-  }
   .soporte-title-portfolio-container{
     -webkit-clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
     clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%);
@@ -152,9 +133,6 @@
     padding-top: 100px;
   }
 
-  .soporte-title-portfolio-container h3{
-    font-size: 28px;
-  }
 }
 
 @media (min-width: 1280px) {
@@ -180,9 +158,6 @@
     -ms-grid-columns: 2fr 3fr !important;
     grid-template-columns: 2fr 3fr !important;
   }
-  .soporte-grid .grid-item-soporte p{
-    font-size: 15px;
-  }
   .soporte-grid .grid-item-soporte .title-section-container{
     font-size: 18px;
   }
@@ -203,7 +178,4 @@
     gap: 8px;
   }
 
-  .soporte-title-portfolio-container h3{
-    font-size: 32px;
-  }
 }

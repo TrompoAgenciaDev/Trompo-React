@@ -31,8 +31,6 @@
 
 .services-title{
   font-weight: normal;
-  font-family: var(--font-portfolio);
-  font-size: 18px;
 }
 
 .grid-services{
@@ -126,7 +124,6 @@
 
 .content-text-grid p{
   font-weight: 500;
-  font-size: 15px;
   color: #000000;
 }
 
@@ -143,10 +140,10 @@
   border-radius: 9999px;
   top: 50%;
   right: 20px;
-  -webkit-transition: all .2s ease-in-out;
-  -moz-transition: all .2s ease-in-out;
-  -o-transition: all .2s ease-in-out;
-  transition: all .2s ease-in-out;
+  -webkit-transition: opacity .2s ease-in-out, transform .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out, transform .2s ease-in-out;
+  -o-transition: opacity .2s ease-in-out, transform .2s ease-in-out;
+  transition: opacity .2s ease-in-out, transform .2s ease-in-out;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
@@ -165,7 +162,6 @@
 .service-section-row p{
   color: #222222;
   opacity: 0.6;
-  font-size: 14px;
 }
 
 .hover-show p{
@@ -201,10 +197,6 @@
   .title-grid{
     font-size: 16px;
   }
-
-  .hover-show p{
-    font-size: 16px;
-  }
 }
 
 @media (min-width: 1024px) {
@@ -213,7 +205,6 @@
   }
 
   .services-title{
-    font-size: 22px;
     line-height: 0.9;
   }
 }
@@ -229,7 +220,6 @@
   }
 
   .services-title{
-    font-size: 28px;
     line-height: 0.8;
   }
 
@@ -274,9 +264,5 @@
     -webkit-align-items: center;
     align-items: center;
     padding: 0 5px;
-  }
-
-  .hover-show p{
-    font-size: 18px;
   }
 }

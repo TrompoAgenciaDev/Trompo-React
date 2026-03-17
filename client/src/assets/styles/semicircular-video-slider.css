@@ -1,0 +1,93 @@
+.multimedia-video-slider-container {
+    position: relative;
+    width: 100%;
+    padding: 100px 0 100px 0; /* Padding inferior reducido para mobile */
+    margin-top: 50px; /* Margin reducido para mobile */
+    height: 450px; /* Altura fija para mobile */
+    overflow: hidden;
+}
+
+.multimedia-video-slider-track {
+    position: relative;
+    width: 100%;
+    overflow: visible; /* Cambiado a visible para mostrar la curva */
+    min-height: 300px; /* Altura mínima reducida para mobile */
+    padding-bottom: 100px; /* Espacio adicional reducido para mobile */
+}
+
+@media (min-width: 1024px) {
+    .multimedia-video-slider-container {
+        padding: 50px 0 200px 0; /* Padding inferior aumentado para la curva */
+        margin-top: 300px;
+        height: auto; /* Altura automática en desktop */
+        overflow: visible;
+    }
+    
+    .multimedia-video-slider-track {
+        overflow: visible;
+        min-height: 600px; /* Altura mínima aumentada para la curva */
+        padding-bottom: 300px; /* Espacio adicional para la curva */
+    }
+}
+
+.multimedia-video-slider-wrapper {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    align-items: flex-start;
+    position: relative; /* Necesario para que las transformaciones Y funcionen */
+}
+
+.multimedia-video-slide {
+    width: 160px;
+    max-width: 160px;
+    flex: 0 0 160px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative; /* Necesario para que la transformación Y funcione */
+    /* NO usar transition en transform, Framer Motion lo maneja */
+}
+
+/* Hover se maneja con Framer Motion si es necesario */
+
+.multimedia-video-slide-video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+}
+
+.multimedia-video-slide-title {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0;
+    padding: 5px 0;
+    text-transform: uppercase;
+}
+
+@media (min-width: 1024px) {
+    .multimedia-video-slider-wrapper {
+        gap: 70px;
+        /* NO usar justify-content: center, interfiere con las transformaciones */
+    }
+
+    .multimedia-video-slide {
+        width: 400px;
+        max-width: 400px;
+        flex: 0 0 400px;
+    }
+
+    .multimedia-video-slide-title {
+        font-size: 16px;
+        padding: 10px 0;
+    }
+}

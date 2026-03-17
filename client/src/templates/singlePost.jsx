@@ -6,9 +6,9 @@ import "../assets/styles/single-post.css";
 const getPrimaryCategory = (post) => {
   const cats = Array.isArray(post?.category) ? post.category
     : Array.isArray(post?.categories) ? post.categories
-    : post?.category ? [post.category]
-    : post?.categories ? [post.categories]
-    : [];
+      : post?.category ? [post.category]
+        : post?.categories ? [post.categories]
+          : [];
   return cats[0] ?? "";
 };
 
@@ -20,8 +20,8 @@ const SinglePost = () => {
   const primaryCategory = useMemo(() => (post ? getPrimaryCategory(post) : ""), [post]);
 
   if (loading) return <p>Cargando post…</p>;
-  if (error)   return <p>{error}</p>;
-  if (!post)   return <p>Post no encontrado</p>;
+  if (error) return <p>{typeof error === 'object' ? (error.message || JSON.stringify(error)) : String(error)}</p>;
+  if (!post) return <p>Post no encontrado</p>;
 
   return (
     <div className="full-container single-post-container">
@@ -36,7 +36,7 @@ const SinglePost = () => {
       </div>
       <div className="container featured-image-container">
         {post.featured_image && (
-          <img className="featured-image" src={post.featured_image} alt="" />
+          <img className="featured-image" src={post.featured_image} alt="" width={1200} height={675} style={{ aspectRatio: '16/9', maxWidth: '100%', height: 'auto' }} loading="lazy" decoding="async" />
         )}
         <div className="post-content-container">
           <div

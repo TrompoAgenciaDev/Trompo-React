@@ -10,10 +10,23 @@ const BrandingCarrusel = ({ category }) => {
   const [clientsData, setClientsData] = useState([]);
   const [hoveredClientIndex, setHoveredClientIndex] = useState(null);
   const [currentImageIndices, setCurrentImageIndices] = useState({});
+  const [isMobile, setIsMobile] = useState(false);
   const timeoutRefs = useRef({});
   const isAnimatingRefs = useRef({});
   const isHoveredRefs = useRef({});
   const lastHoveredIndexRef = useRef(null);
+
+  // Detectar si estamos en responsive
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1023);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Cargar datos de la categoría desde el JSON
   useEffect(() => {
@@ -49,8 +62,17 @@ const BrandingCarrusel = ({ category }) => {
     }
   }, [hoveredClientIndex]);
 
-  // Slide automático solo cuando hay hover en un cliente específico
+  // Slide automático solo cuando hay hover en un cliente específico (solo desktop, no responsive)
   useEffect(() => {
+    // Desactivar slider automático en responsive para institucional
+    if (category === "institucional") {
+      // Verificar si estamos en responsive (ancho de ventana <= 1023px)
+      const isMobile = window.innerWidth <= 1023;
+      if (isMobile) {
+        return; // No ejecutar slider automático en responsive
+      }
+    }
+
     if (hoveredClientIndex === null) return;
     
     const clientData = clientsData[hoveredClientIndex];
@@ -102,7 +124,7 @@ const BrandingCarrusel = ({ category }) => {
       }
       isAnimatingRefs.current[hoveredClientIndex] = false;
     };
-  }, [hoveredClientIndex, clientsData]);
+  }, [hoveredClientIndex, clientsData, category]);
 
   // Resetear al salir del hover
   useEffect(() => {
@@ -154,6 +176,29 @@ const BrandingCarrusel = ({ category }) => {
     lastHoveredIndexRef.current = null;
   }, []);
 
+  // Handlers para navegación manual de galería (solo responsive)
+  const handlePreviousImage = useCallback((index, e) => {
+    e.stopPropagation();
+    const clientData = clientsData[index];
+    if (!clientData || clientData.gallery.length <= 1) return;
+    
+    setCurrentImageIndices((prev) => ({
+      ...prev,
+      [index]: prev[index] === 0 ? clientData.gallery.length - 1 : prev[index] - 1
+    }));
+  }, [clientsData]);
+
+  const handleNextImage = useCallback((index, e) => {
+    e.stopPropagation();
+    const clientData = clientsData[index];
+    if (!clientData || clientData.gallery.length <= 1) return;
+    
+    setCurrentImageIndices((prev) => ({
+      ...prev,
+      [index]: (prev[index] + 1) % clientData.gallery.length
+    }));
+  }, [clientsData]);
+
   if (!clientsData || clientsData.length === 0) {
     return null;
   }
@@ -163,15 +208,14 @@ const BrandingCarrusel = ({ category }) => {
       {clientsData.map((clientData, index) => {
         const isHovered = hoveredClientIndex === index;
         const currentImageIndex = currentImageIndices[index] || 0;
-        // Ruta de imágenes: algunos proyectos están en carrusel/categoria/, otros en la carpeta principal
-        // Lema y Vox están en carrusel/institucional/, Kindom y Airon en la carpeta principal
+        // Ruta de imágenes: las imágenes en el JSON ya incluyen la ruta relativa desde carrusel
+        // Por ejemplo: "institucional/lema1.webp" o "vox1.webp"
         const getImagePath = (imageName) => {
-          // Proyectos que están en la subcarpeta de la categoría
-          const projectsInSubfolder = ['lema', 'vox'];
-          if (category && projectsInSubfolder.includes(clientData.id)) {
-            return `${base}assets/creatividad/branding/carrusel/${category}/${imageName}`;
+          // Si la imagen ya incluye una carpeta (tiene /), usar la ruta completa desde carrusel
+          if (imageName.includes('/')) {
+            return `${base}assets/creatividad/branding/carrusel/${imageName}`;
           }
-          // Resto de proyectos en la carpeta principal
+          // Si no tiene carpeta, está en la carpeta principal de branding
           return `${base}assets/creatividad/branding/${imageName}`;
         };
         const firstImage = clientData.gallery && clientData.gallery.length > 0
@@ -181,12 +225,25 @@ const BrandingCarrusel = ({ category }) => {
           ? getImagePath(clientData.gallery[currentImageIndex])
           : null;
 
+        const isInstitucional = category === "institucional";
+        const hasMultipleImages = clientData.gallery && clientData.gallery.length > 1;
+
         return (
           <div
             key={clientData.id || index}
-            className="full-container brand-item"
-            onMouseEnter={() => handleMouseEnter(index)}
-            onMouseLeave={handleMouseLeave}
+            className={`full-container brand-item ${isInstitucional ? "brand-item-institucional" : ""}`}
+            onMouseEnter={() => {
+              // Solo activar hover en desktop (no responsive)
+              if (!isInstitucional || window.innerWidth > 1023) {
+                handleMouseEnter(index);
+              }
+            }}
+            onMouseLeave={() => {
+              // Solo desactivar hover en desktop (no responsive)
+              if (!isInstitucional || window.innerWidth > 1023) {
+                handleMouseLeave();
+              }
+            }}
           >
             {/* Galería de fondo */}
             <div className="brand-gallery-background">
@@ -210,27 +267,91 @@ const BrandingCarrusel = ({ category }) => {
               </AnimatePresence>
             </div>
 
-            {/* Container vacío */}
-            <div className="container">
-              {/* Panel de contenido del cliente */}
-              <motion.div
-                className="brand-item-panel"
-                initial={{ x: -300, opacity: 0 }}
-                animate={{
-                  x: isHovered ? 0 : -300,
-                  opacity: isHovered ? 1 : 0
-                }}
-                transition={{
-                  duration: 0.5,
-                  ease: "easeOut"
-                }}
-              >
-                <h2 className="brand-item-title">
-                  {clientData.name}
-                </h2>
-                <p dangerouslySetInnerHTML={{ __html: clientData.description }} />
-              </motion.div>
-            </div>
+            {/* Container y Panel solo en desktop o cuando no es institucional en responsive */}
+            {(!isInstitucional || !isMobile) && (
+              <div className="container">
+                {/* Panel de contenido del cliente */}
+                <motion.div
+                  className="brand-item-panel"
+                  initial={{ x: -300, opacity: 0 }}
+                  animate={{
+                    x: isHovered ? 0 : -300,
+                    opacity: isHovered ? 1 : 0
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    ease: "easeOut"
+                  }}
+                >
+                  <h2 className="brand-item-title">
+                    {clientData.name}
+                  </h2>
+                  <p dangerouslySetInnerHTML={{ __html: clientData.description }} />
+                </motion.div>
+              </div>
+            )}
+
+            {/* Grid responsive para institucional (hasta tablet) */}
+            {isInstitucional && (
+              <div className="brand-item-responsive-grid">
+                {/* Primera fila: Container con texto */}
+                <div className="brand-item-responsive-text">
+                  <h2 className="brand-item-title">
+                    {clientData.name}
+                  </h2>
+                  <p dangerouslySetInnerHTML={{ __html: clientData.description }} />
+                </div>
+                
+                {/* Segunda fila: Galería manual con flechas */}
+                <div className="brand-item-responsive-gallery">
+                  <div className="brand-gallery-responsive-image">
+                    <AnimatePresence mode="wait">
+                      <motion.img
+                        key={currentImageIndex}
+                        src={currentImage || firstImage}
+                        alt={clientData.name}
+                        initial={{ x: 100, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        exit={{ x: -100, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        decoding="async"
+                        width={1200}
+                        height={900}
+                        style={{ 
+                          width: '100%', 
+                          height: 'auto', 
+                          aspectRatio: '4/3',
+                          maxWidth: '100%',
+                          display: 'block'
+                        }}
+                      />
+                    </AnimatePresence>
+                  </div>
+                  {hasMultipleImages && (
+                    <>
+                      <button 
+                        className="brand-gallery-arrow brand-gallery-arrow-prev slider-control slider-control-prev slider-control-left"
+                        onClick={(e) => handlePreviousImage(index, e)}
+                        aria-label="Imagen anterior"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                      </button>
+                      <button 
+                        className="brand-gallery-arrow brand-gallery-arrow-next slider-control slider-control-next slider-control-right"
+                        onClick={(e) => handleNextImage(index, e)}
+                        aria-label="Imagen siguiente"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         );
       })}

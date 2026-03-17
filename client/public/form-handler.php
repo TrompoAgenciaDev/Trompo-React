@@ -1,14 +1,27 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+/**
+ * Form handler: envía los datos del formulario a Brevo.
+ * Carga .env desde rutas compatibles con open_basedir en hosting compartido.
+ */
+ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
 header('Content-Type: application/json; charset=utf-8');
 
-// === CARGAR .ENV MANUALMENTE ===
+// Configuración de Seguridad
+define('SECURITY_MIN_RECAPTCHA_SCORE', 0.5);
+define('SECURITY_RECAPTCHA_ACTION', 'form_submit');
+define('SECURITY_MIN_COMPLETION_TIME', 3);
+define('SECURITY_RATE_LIMIT_MAX', 5); // Un poco más laxo para contactos directos
+define('SECURITY_RATE_LIMIT_WINDOW', 600);
+
+// Cargar .env: solo rutas permitidas por open_basedir (un nivel arriba o mismo directorio)
 $envPath = __DIR__ . '/../.env';
-if (file_exists($envPath)) {
-    $vars = parse_ini_file($envPath, false, INI_SCANNER_RAW);
+if (!@file_exists($envPath)) {
+    $envPath = __DIR__ . '/.env';
+}
+if (@file_exists($envPath)) {
+    $vars = @parse_ini_file($envPath, false, INI_SCANNER_RAW);
     if ($vars !== false) {
         foreach ($vars as $key => $value) {
             putenv("$key=$value");
@@ -18,7 +31,6 @@ if (file_exists($envPath)) {
 
 $brevoApiKey = getenv('BREVO_API_KEY') ?: '';
 
-// === MAPEO DE LISTAS SEGÚN LOCATION ===
 $listMap = [
     "home"        => getenv('BREVO_LIST_HOME'),
     "desarrollo"  => getenv('BREVO_LIST_DESARROLLO'),
@@ -28,29 +40,145 @@ $listMap = [
     "creatividad" => getenv('BREVO_LIST_CREATIVIDAD'),
 ];
 
-// === CAPTURAR DATOS DEL POST ===
-$nombre    = $_POST['NOMBRE'] ?? '';
-$apellidos = $_POST['APELLIDOS'] ?? '';
-$email     = $_POST['EMAIL'] ?? '';
-$empresa   = $_POST['EMPRESA'] ?? '';
-$smsCode   = $_POST['SMS_COUNTRY_CODE'] ?? '';
-$smsNum    = $_POST['SMS'] ?? '';
-$consulta  = $_POST['CONSULTA'] ?? '';
-$location  = $_POST['LOCATION'] ?? 'home';
+// Soporte para JSON y POST tradicional
+$rawInput = file_get_contents('php://input');
+$jsonData = json_decode($rawInput, true);
 
-// === Validar email requerido por Brevo ===
-if (empty($email)) {
+if ($jsonData) {
+    // Si viene de React vía fetch(json)
+    $fields    = $jsonData['fields'] ?? [];
+    $nombre    = $fields['NOMBRE'] ?? '';
+    $apellidos = $fields['APELLIDOS'] ?? '';
+    $email     = $fields['EMAIL'] ?? '';
+    $empresa   = $fields['EMPRESA'] ?? '';
+    $smsCode   = $fields['SMS_COUNTRY_CODE'] ?? '';
+    $smsNum    = $fields['SMS'] ?? '';
+    $consulta  = $fields['CONSULTA'] ?? '';
+    $location  = $jsonData['formId'] ?? $fields['LOCATION'] ?? 'home';
+    $recaptchaToken = $fields['g-recaptcha-response'] ?? '';
+    $honeypot = trim($fields['fax'] ?? '');
+    $startTime = (int)($fields['_t'] ?? 0);
+} else {
+    // Si viene vía POST tradicional
+    $nombre    = $_POST['NOMBRE'] ?? '';
+    $apellidos = $_POST['APELLIDOS'] ?? '';
+    $email     = $_POST['EMAIL'] ?? '';
+    $empresa   = $_POST['EMPRESA'] ?? '';
+    $smsCode   = $_POST['SMS_COUNTRY_CODE'] ?? '';
+    $smsNum    = $_POST['SMS'] ?? '';
+    $consulta  = $_POST['CONSULTA'] ?? '';
+    $location  = $_POST['LOCATION'] ?? 'home';
+    $recaptchaToken = trim($_POST['g-recaptcha-response'] ?? '');
+    $honeypot = trim($_POST['fax'] ?? '');
+    $startTime = (int)($_POST['_t'] ?? 0);
+}
+
+// Honeypot: si "fax" tiene valor, es un bot (humanos no completan este campo invisible)
+$honeypot = trim($_POST['fax'] ?? '');
+if ($honeypot !== '') {
     echo json_encode([
-        "success" => false,
-        "error"   => "El campo EMAIL es obligatorio"
+        "success" => true, // Bloqueo silencioso
+        "message"   => "Mensaje recibido"
     ], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-// === Determinar listId por location ===
+// Time Trap
+$startTime = (int)($_POST['_t'] ?? 0);
+if ($startTime > 0 && (time() - $startTime) < SECURITY_MIN_COMPLETION_TIME) {
+    echo json_encode([
+        "success" => false,
+        "error"   => "Error de envío. Por favor intente de nuevo."
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+// === Validar reCAPTCHA v2 (obligatorio si RECAPTCHA_SECRET está definido) ===
+$recaptchaSecret = getenv('RECAPTCHA_SECRET') ?: '';
+$recaptchaToken = trim($_POST['g-recaptcha-response'] ?? '');
+
+if ($recaptchaSecret !== '') {
+    if ($recaptchaToken === '') {
+        echo json_encode([
+            "success" => false,
+            "error"   => "Validación de captcha requerida"
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    $verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
+    $verifyPayload = http_build_query([
+        'secret' => $recaptchaSecret,
+        'response' => $recaptchaToken,
+        'remoteip' => $_SERVER['REMOTE_ADDR'] ?? ''
+    ]);
+
+    $vh = curl_init($verifyUrl);
+    curl_setopt($vh, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($vh, CURLOPT_POST, true);
+    curl_setopt($vh, CURLOPT_POSTFIELDS, $verifyPayload);
+    curl_setopt($vh, CURLOPT_HTTPHEADER, ["Content-Type: application/x-www-form-urlencoded"]);
+    $verifyResponse = curl_exec($vh);
+    $verifyErr = $verifyResponse === false ? curl_error($vh) : '';
+    curl_close($vh);
+
+    if ($verifyResponse === false) {
+        echo json_encode([
+            "success" => false,
+            "error"   => "Error al verificar captcha: " . $verifyErr
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    $verifyJson = json_decode($verifyResponse, true);
+    $score = $verifyJson['score'] ?? 0;
+    $action = $verifyJson['action'] ?? 'none';
+
+    if (!is_array($verifyJson) || empty($verifyJson['success'])) {
+        echo json_encode([
+            "success" => false,
+            "error"   => "Captcha inválido"
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    if ($score < SECURITY_MIN_RECAPTCHA_SCORE || $action !== SECURITY_RECAPTCHA_ACTION) {
+        // Bloqueo silencioso si es muy bajo
+        if ($score < 0.3) {
+            echo json_encode(["success" => true, "message" => "Recibido"]);
+            exit;
+        }
+        echo json_encode([
+            "success" => false,
+            "error"   => "Petición rechazada por sistema anti-spam (Score: $score)"
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+}
+// Si no hay RECAPTCHA_SECRET o no se envió token, se permite el envío (sin validar captcha)
+
+// Validaciones de Contenido
+$required = ['NOMBRE', 'APELLIDOS', 'EMAIL', 'SMS', 'CONSULTA'];
+foreach ($required as $f) {
+    if (empty($$f)) { // $$f accede a la variable con el nombre contenido en $f
+        echo json_encode([
+            "success" => false,
+            "error"   => "El campo $f es obligatorio"
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo json_encode([
+        "success" => false,
+        "error"   => "El formato del email no es válido"
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 $listId = $listMap[$location] ?? $listMap['home'];
 
-// === Preparar payload para Brevo ===
 $payload = [
     "updateEnabled" => true,
     "email" => $email,
@@ -61,12 +189,11 @@ $payload = [
         "SMS"       => $smsCode . $smsNum,
         "WHATSAPP"  => $smsCode . $smsNum,
         "CONSULTA"  => $consulta,
-        "ORIGEN"    => $location, // opcional, para rastrear desde Brevo
+        "ORIGEN"    => $location,
     ],
     "listIds" => [(int)$listId]
 ];
 
-// === Enviar a Brevo ===
 $ch = curl_init("https://api.brevo.com/v3/contacts");
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     "Content-Type: application/json",

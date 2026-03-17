@@ -13,8 +13,9 @@ export default function useFetchTestimonials() {
         setLoading(true);
         setError(null);
 
-        const url = `${import.meta.env.BASE_URL}testimoniales.json`;
-        const res = await fetch(url, { cache: "no-store" });
+        const buildTime = import.meta.env.BUILD_TIME || Date.now();
+        const url = `${import.meta.env.BASE_URL}testimoniales.json?v=${buildTime}`;
+        const res = await fetch(url, { cache: "default" });
         if (!res.ok) throw new Error("No se pudo cargar el archivo de testimonios");
 
         const data = await res.json();

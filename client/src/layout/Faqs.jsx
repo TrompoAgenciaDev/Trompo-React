@@ -8,7 +8,7 @@ function Faqs({ location = "home" }) {
   const { items, loading, error } = useFetchFaqs(location);
 
   if (loading) return <p>Cargando...</p>;
-  if (error) return <p>{error}</p>;
+  if (error) return <p>{typeof error === 'object' ? (error.message || JSON.stringify(error)) : String(error)}</p>;
 
   const toggleItem = (i) => setOpenIndex(openIndex === i ? -1 : i);
 
@@ -28,10 +28,11 @@ function Faqs({ location = "home" }) {
                   {item.question}
                 </button>
                 <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={openIndex === index ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+                  initial={{ maxHeight: 0, opacity: 0 }}
+                  animate={openIndex === index ? { maxHeight: "2000px", opacity: 1 } : { maxHeight: 0, opacity: 0 }}
                   transition={{ duration: 0.3 }}
                   className="full-container accordion-content"
+                  style={{ overflow: "hidden" }}
                 >
                   <div
                     className="accordion-text"

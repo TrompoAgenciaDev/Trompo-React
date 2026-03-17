@@ -1,0 +1,69 @@
+/* ============================================
+   ENTREGABLES - Estilos unificados para todos los servicios
+   ============================================ */
+
+.entregables-container {
+  padding: 30px 10px;
+}
+
+.title-entregables {
+  color: #262626;
+}
+
+.grid-entregables {
+  border-radius: 50px;
+  padding: 30px 0;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 30px;
+}
+
+.item-entregables {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.item-entregables h5 {
+  color: #262626;
+}
+
+.item-entregables p {
+  color: #262626;
+}
+
+@media (min-width: 540px) {
+  .grid-entregables {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .entregables-container {
+    padding: 50px 10px;
+  }
+
+  .grid-entregables {
+    padding: 50px;
+    gap: 30px;
+    border: 1px solid #262626;
+  }
+
+  .item-entregables {
+    gap: 16px;
+  }
+
+  .item-entregables h5 {
+    max-width: 350px;
+  }
+
+  .item-entregables h5,
+  .item-entregables p {
+    font-size: 16px;
+  }
+
+  .item-entregables p {
+    width: 100%;
+    max-width: 450px;
+  }
+}

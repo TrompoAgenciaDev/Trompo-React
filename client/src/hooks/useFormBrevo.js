@@ -33,6 +33,9 @@ export default function useFormBrevo() {
     setError(null);
     setResult(null);
 
+    // Payload para Backup (JSON o FormData según prefiera el backend)
+    // El backend nuevo (PHP) parece aceptar FormData o JSON.
+    // En main se usaba FormData para el backupFetch.
     const backupPayload = new FormData();
     formData.forEach((value, key) => backupPayload.append(key, value));
     if (submissionId) backupPayload.append("SUBMISSION_ID", submissionId);
@@ -64,9 +67,6 @@ export default function useFormBrevo() {
           ...data,
         });
         console.log("[Backup]", data);
-        if (!data.success && !data.duplicate) {
-          console.warn("[Backup] Falló:", data.db_saved, data.mail_sent, data.error);
-        }
         return data;
       })
       .catch((err) => {
@@ -80,6 +80,7 @@ export default function useFormBrevo() {
     try {
       traceEvent("FORM_NATIVE_SUBMIT", submissionId || "none", { formIdentifier: fid });
       const response = await fetch(brevoUrl(), { method: "POST", body: formData });
+      
       const text = await response.text();
       let json;
       try {
@@ -87,17 +88,32 @@ export default function useFormBrevo() {
       } catch {
         throw new Error("La respuesta del servidor no es JSON válido");
       }
+
       setResult(json);
       if (json.success) {
         setSuccess(true);
+        traceEvent("FORM_SUCCESS", submissionId || "none", { formIdentifier: fid });
+        // Redirigir a la página de gracias tras el envío exitoso
         window.location.href = `${import.meta.env.BASE_URL}gracias`;
       } else {
-        setError(json.error || "Error al enviar");
+        const rawError = json.error;
+        const errorMsg = (typeof rawError === "object" && rawError !== null)
+          ? (rawError.message || JSON.stringify(rawError))
+          : (rawError || "Error al enviar");
+        setError(errorMsg);
+        traceEvent("FORM_SERVER_ERROR", submissionId || "none", { formIdentifier: fid, error: errorMsg });
       }
     } catch (err) {
-      console.error("Error en fetch Brevo:", err);
-      setError(err.message || "Hubo un error desconocido.");
+      console.error("Error en envío:", err);
+      const errorMsg = err.message || "Hubo un error desconocido.";
+      setError(errorMsg);
+      traceEvent("FORM_FETCH_ERROR", submissionId || "none", { formIdentifier: fid, error: errorMsg });
     } finally {
+      // Esperamos el backup por si acaso? No, keepalive se encarga si cerramos pestaña,
+      // pero aquí redirigimos. window.location.href corta la ejecución.
+      // Si queremos asegurar el backup, deberíamos esperar el backupPromise antes de redirigir.
+      await backupPromise; 
+      
       setLoading(false);
       isSubmittingRef.current = false;
     }

@@ -1,21 +1,38 @@
-.contact-section{  
-  background-size: cover;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  padding: 50px 10px;
-  background-color: #e9e9e9;
+/* ===== MOBILE FIRST - Base = mobile ===== */
+
+.contact-section--contacto,
+.contact-section--form {
+  background-image: var(--contact-bg-mobile);
 }
 
-.contact-section .container{
+.contact-section {
+  background-size: 97%;
+  -webkit-background-size: 97%;
+  -moz-background-size: 97%;
+  -o-background-size: 97%;
+  background-position: center center;
+  -webkit-background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-repeat: no-repeat;
+  padding: 50px 0;
+  width: 100vw;
+  width: 100svw;
+  position: relative;
+  margin-left: calc((100svw - 100%) / -2);
+  margin-right: calc((100svw - 100%) / -2);
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  overflow: hidden;
+}
+
+.contact-section .container {
   display: -ms-grid;
   display: grid;
   justify-items: center;
 }
 
-.grid-contact{
+.grid-contact {
   width: 100%;
   max-width: 600px;
   display: -webkit-box;
@@ -29,11 +46,12 @@
   flex-direction: column;
   gap: 30px;
   background: #FEE070;
+  -webkit-box-shadow: 0 4px 20px 5px rgba(0, 0, 0, 0.25);
   box-shadow: 0 4px 20px 5px rgba(0, 0, 0, 0.25);
   padding: 20px;
 }
 
-.grid-contact-item:first-child{
+.grid-contact-item:first-child {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -42,17 +60,17 @@
   gap: 20px;
 }
 
-.grid-item-icon svg{
+.grid-item-icon svg {
   width: 100%;
   height: 100%;
 }
 
-.grid-item-icon{
+.grid-item-icon {
   width: 50px;
   height: 50px;
 }
 
-.grid-item-title{
+.grid-item-title {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -65,47 +83,61 @@
   gap: 4px;
 }
 
-.grid-item-title h1{
-  font-size: 16px;
+.grid-item-title h5 {
+  line-height: 1em;
+}
+
+.grid-item-title h1 {
   font-style: italic;
 }
 
-.grid-item-title p{
-  font-size: 12px;
-}
+/* ===== min-width: 768px ===== */
 
-@media (min-width:768px){
-  .grid-item-icon{
+@media (min-width: 768px) {
+  .grid-item-icon {
     width: 60px;
     height: 60px;
   }
 }
 
-@media (min-width:1024px){
-  .grid-contact-item h1{
-    font-size: 20px;
+/* ===== min-width: 1024px ===== */
+
+@media (min-width: 1024px) {
+
+  .contact-section--contacto,
+  .contact-section--form {
+    background-image: var(--contact-bg-desktop);
+  }
+
+  .contact-section {
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
   }
 }
 
-@media (min-width:1280px){
-  .grid-contact{
+/* ===== min-width: 1280px ===== */
+
+@media (min-width: 1280px) {
+  .grid-contact {
     padding: 50px;
   }
 
-  .contact-section{
-    padding: 100px 10px;
+  .contact-section {
+    padding: 100px 0;
   }
-  
-  .grid-item-icon{
+
+  .grid-item-icon {
     width: 120px;
     height: 120px;
   }
+}
 
-  .grid-item-title h1{
-    font-size: 36px;
-  }
 
-  .grid-item-title p{
-    font-size: 16px;
+@media (min-width: 1440px) {
+  .contact-section {
+    background-size: 98%;
+    min-height: 1050px;
   }
 }

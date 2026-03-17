@@ -1,0 +1,883 @@
+/* Estilos de ServiceTitle removidos - solo deben estar en service-title.css */
+
+.grid-item-beneficios svg{
+    width: 50px;
+    height: 50px;
+}
+
+.grid-beneficios{
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+    gap: 10px;
+}
+
+.grid-item-beneficios{
+    padding: 20px;
+    border: 1px solid #E1C025;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: 8px;
+}
+
+.beneficios-container{
+    padding: 30px 0;
+}
+
+.grid-item-beneficios p{
+    color: #ffffff;
+}
+
+.beneficios-container h3{
+    color: #E1C025;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.beneficios-container h5{
+    font-weight: 400;
+}
+
+/* Estilos para el video reel */
+
+/* Modal de video a pantalla completa */
+.video-modal-fullscreen{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    z-index: 99999;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.video-modal-content{
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.video-modal-close{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10000;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-transition: background-color 0.3s ease;
+    -o-transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
+}
+
+.video-modal-close:hover{
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.video-modal-player{
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
+}
+
+
+/* Estándar para h6 */
+h6{
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+}
+
+.title-beneficios h5{
+    color: #ffffff;
+}
+
+.branding-tab-content{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+
+/* Branding Carousel Styles */
+/* Section Wrapper - Contiene todo, permite visibilidad al entrar en viewport */
+.branding-section-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* A) Scroll Spacer - Solo genera altura, NO visible, NO contiene contenido */
+.branding-scroll-spacer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+    background: transparent;
+    visibility: hidden;
+    z-index: 0;
+}
+
+/* B) Pinned Container - SIEMPRE visible desde el inicio, se fija a 10svh cuando corresponde */
+.branding-pinned-container {
+    position: relative;
+    left: 0;
+    right: 0;
+    width: 100%;
+    min-height: calc(100vh - 10svh);
+    overflow: hidden;
+    will-change: transform, position;
+    z-index: 1;
+}
+
+/* Tabs dentro del pinned - Siempre visibles, z-index alto */
+/* Slide Content - Visible desde el primer render, sin ocultar */
+.branding-slide-content {
+    position: relative;
+    z-index: 20;
+    height: calc(100% - 100px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.branding-tab-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.branding-tab-container {
+    padding: 60px 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+
+.title-client {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    display: block;
+}
+
+.category-client {
+    font-size: 18px;
+    font-weight: 400;
+    color: #B3B3B3;
+    text-transform: lowercase;
+    display: block;
+}
+
+.img-tab-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+}
+
+.img-tab-container img {
+    width: 100%;
+    height: auto;
+    display: block !important;
+    object-fit: cover;
+    opacity: 1 !important;
+}
+
+.slide-counter {
+    display: flex;
+    gap: 10px;
+    font-size: 16px;
+    color: #B3B3B3;
+}
+
+.slide-counter span {
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+
+.slide-counter span.active {
+    color: #FED332;
+    font-weight: 700;
+}
+
+.branding-title-container{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: row;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-pack: flex-end;
+    -moz-box-pack: flex-end;
+    -ms-flex-pack: flex-end;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Estilos para productos y entregables */
+.grid-productos{
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.grid-item-productos{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.grid-item-img{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    height: auto;
+}
+
+.grid-item-img img,
+.grid-item-img .productos-image{
+    width: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
+    display: block;
+}
+
+.productos-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ocultar MouseTrackingImage en mobile, mostrar imagen normal */
+.image-desktop-only {
+    display: none;
+}
+
+.image-mobile-only {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+.image-mobile-only .productos-image {
+    width: 100%;
+    height: auto;
+    max-width: calc(100% - 50px);
+    -o-object-fit: contain;
+    object-fit: contain;
+}
+
+.optimized-video-container{
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+    -webkit-border-radius: 16px;
+    border-radius: 16px;
+    -webkit-transform-origin: center;
+    -ms-transform-origin: center;
+    transform-origin: center;
+    background-color: #000000;
+}
+
+.optimized-video{
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    display: block;
+    -webkit-border-radius: 16px;
+    border-radius: 16px;
+}
+
+.design-history-item{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.design-history-item-header{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.design-history-item h3{
+    margin: 0;
+    color: #000000;
+}
+
+.design-history-item p{
+    color: #000000;
+    margin: 0;
+    padding-left: 56px;
+}
+
+.design-entregable-number{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+    border: 1px solid #000000;
+    color: #000000;
+    font-size: 18px;
+    font-weight: 500;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.design-entregable-item-wrapper{
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    z-index: 1;
+}
+
+.design-entregable-line{
+    position: absolute;
+    left: 20px;
+    width: 1px;
+    background-color: #000000;
+    z-index: 0;
+}
+
+/* Estilos cuando está dentro de black-bg */
+.black-bg .design-history-item{
+    color: #ffffff;
+}
+
+.black-bg .design-history-item h3{
+    color: #ffffff;
+}
+
+.black-bg .design-history-item p{
+    color: #ffffff;
+}
+
+.black-bg .design-entregable-number{
+    border: 1px solid #FEE070;
+    color: #FEE070;
+    background-color: #262626;
+}
+
+.black-bg .design-entregable-line{
+    background-color: #FEE070;
+}
+
+.testimonial-cards-slider{
+    width: 100%;
+    max-width: 600px;
+    padding: 0;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Gradientes de desvanecimiento en los bordes superior e inferior */
+.testimonial-cards-slider::before,
+.testimonial-cards-slider::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 100px;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.testimonial-cards-slider::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.testimonial-cards-slider::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+
+/* Estilos para el contenido de texto de testimonios */
+.testimonial-text-content {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    display: none;
+}
+
+.testimonial-text-content h1 {
+    margin-bottom: 1rem;
+}
+
+.testimonial-text-content p {
+    max-width: 800px;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+
+
+/* Estilos para texto animado */
+.animated-text {
+    display: block;
+    line-height: 1.6;
+    text-align: center;
+    font-weight: 500;
+    padding: 50px 10px;
+}
+
+.animated-letter {
+    display: inline;
+}
+
+.animated-word {
+    display: inline-block;
+}
+
+.animated-phrase {
+    display: inline;
+}
+
+.animated-letter-opacity {
+    display: inline-block;
+}
+
+.animated-opacity-text {
+    display: block;
+}
+
+.animated-text-container{
+    width: 100%;
+}
+
+
+/* ============================================
+   PORTFOLIO GRID 4x3 - DISEÑO
+   ============================================ */
+.grid-portfolio-container {
+  width: 100%;
+  padding: 50px 0;
+}
+
+.grid-portfolio-wrapper {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+}
+
+.grid-portfolio-item {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Carrusel mobile */
+.portfolio-carousel-mobile {
+  padding: 20px 0;
+}
+
+.portfolio-carousel-track {
+  display: flex;
+  width: 100%;
+  cursor: grab;
+}
+
+.portfolio-carousel-track:active {
+  cursor: grabbing;
+}
+
+.portfolio-section-container{
+    padding: 30px 10px;
+}
+
+/* Título del portfolio - mismo estilo que Diseño Estratégico pero en negro */
+.portfolio-title {
+  color: #000000;
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* ============================================
+   MEDIA QUERIES
+   ============================================ */
+
+/* Media Query: 768px */
+@media (min-width: 768px) {
+  .grid-portfolio-wrapper {
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .animated-text-container{
+    font-size: 28px;
+  }
+}
+
+/* Media Query: 1024px */
+@media (min-width: 1024px) {
+
+  .grid-beneficios{
+    -ms-grid-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+  }
+
+  .beneficios-container{
+    padding: 70px 0 120px;
+  }
+
+  .title-beneficios{
+    gap: 0;
+    padding-bottom: 50px;
+  }
+
+  .beneficios-container h5{
+    max-width: 600px;
+  }
+
+  .branding-tab-content{
+    -webkit-box-orient: row;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+
+  .title-client {
+    font-size: 48px;
+  }
+
+  .category-client {
+    font-size: 24px;
+  }
+
+  .slide-counter {
+    font-size: 18px;
+    gap: 15px;
+  }
+
+  .branding-title-container{
+    padding: 50px;
+  }
+
+  .testimonial-wrapper {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+    position: relative;
+  }
+
+  .testimonial-cards-slider {
+    max-width: 600px;
+    width: 100%;
+    grid-column: 1;
+    -webkit-box-pack: flex-end;
+    -ms-flex-pack: flex-end;
+    -webkit-justify-self: flex-end;
+    justify-self: flex-end;
+    margin: 0;
+  }
+
+  .testimonial-wrapper > div:empty,
+  .testimonial-text-content {
+    grid-column: 2;
+  }
+
+  .optimized-video-container{
+    height: 600px;
+  }
+
+  .grid-productos{
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    padding: 0;
+}
+
+  .animated-text-container{
+    font-size: 32px;
+    padding: 70px 10px;
+  }
+
+  .grid-portfolio-container {
+    padding: 40px 0;
+  }
+
+  .grid-portfolio-wrapper {
+    -ms-grid-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .grid-portfolio-item {
+    -webkit-transition: transform 0.3s ease;
+    -o-transition: transform 0.3s ease;
+    transition: transform 0.3s ease;
+    will-change: transform;
+    overflow: hidden;
+  }
+
+  .grid-portfolio-item:hover {
+    -webkit-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    -o-transform: scale(1.02);
+    transform: scale(1.02);
+  }
+
+  .portfolio-section-container{
+    padding: 50px 10px 100px;
+  }
+
+  .portfolio-title {
+    font-size: 64px;
+  }
+}
+
+/* Media Query: 1280px */
+@media (min-width: 1280px) {
+  .grid-item-beneficios svg{
+    width: 60px;
+    height: 60px;
+  }
+
+  .image-desktop-only {
+    display: block;
+    width: 100%;
+    max-width: calc(100% - 50px);
+  }
+
+  .image-mobile-only {
+    display: none;
+  }
+  
+  .grid-item-img {
+    aspect-ratio: 4/3;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
+  }
+
+  .testimonial-text-content {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+  }
+
+  .grid-productos{
+    -ms-grid-columns: 3fr 2fr;
+    grid-template-columns: 3fr 2fr;
+    gap: 50px;    
+    padding: 50px 0;
+  }
+}
+
+
+/* Estilos para grid-multimedia-wrapper (copiados de multimedia.css) */
+.grid-multimedia-wrapper{
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+    padding: 50px 0;
+}
+
+.grid-item-multimedia span,
+.grid-item-multimedia h6,
+.grid-item-multimedia p{
+    color: #ffffff;
+}
+
+.grid-item-multimedia h6,
+.grid-item-multimedia p{
+    padding-left: 8px;
+}
+
+.grid-item-multimedia{
+    padding: 20px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.grid-item-multimedia h6{
+    text-transform: uppercase;
+    font-weight: 400;
+}
+
+.grid-item-multimedia:before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #8E8E8E;
+}
+
+.grid-item-multimedia p{
+    line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+    .grid-multimedia-wrapper{
+        -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 80px 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .grid-multimedia-wrapper{
+        column-gap: 168px;
+        row-gap: 70px;
+        padding: 120px 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .design-history-item h3,
+    .design-history-item p{
+        font-size: 16px;
+    }
+}
