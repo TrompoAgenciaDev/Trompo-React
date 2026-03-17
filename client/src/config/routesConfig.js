@@ -36,21 +36,21 @@ const PopupPage = lazy(() => import("../pages/Popupage"));
 
 const routesConfig = {
   main: [
-    { path: "/", label: "inicio", Component: Home },
-    { path: "/nosotros", label: "nosotros", Component: Nosotros },
-    { path: "", label: "servicios", Component: Servicios },
-    { path: "/contactanos", label: "contactanos", Component: Contactanos },
+    { path: "/", label: "Inicio", Component: Home },
+    { path: "/nosotros", label: "Nosotros", Component: Nosotros },
+    { path: "", label: "Servicios", Component: Servicios },
+    { path: "/contactanos", label: "Contactanos", Component: Contactanos },
   ],
 
   menuMobile: [
-    { path: "/", label: "inicio", Component: Home },
-    { path: "/nosotros", label: "nosotros", Component: Nosotros },
+    { path: "/", label: "Inicio", Component: Home },
+    { path: "/nosotros", label: "Nosotros", Component: Nosotros },
     { path: "/servicios/disenio", label: "Diseño", Component: Disenio },
     { path: "/servicios/multimedia", label: "Multimedia", Component: Multimedia },
-    { path: "/servicios/desarrollo", label: "desarrollo web", Component: Desarrollo },
+    { path: "/servicios/desarrollo", label: "Desarrollo web", Component: Desarrollo },
     { path: "/servicios/paid-media", label: "Paid Media", Component: PaidMedia },
     { path: "/servicios/social-media", label: "Redes Sociales", Component: SocialMedia },
-    { path: "/contactanos", label: "contactanos", Component: Contactanos },
+    { path: "/contactanos", label: "Contactanos", Component: Contactanos },
   ],
 
   home: [
@@ -58,47 +58,51 @@ const routesConfig = {
   ],
 
   footerMobile: [
-    { path: "/", label: "inicio", Component: Home },
-    { path: "/nosotros", label: "nosotros", Component: Nosotros },
+    { path: "/", label: "Inicio", Component: Home },
+    { path: "/nosotros", label: "Nosotros", Component: Nosotros },
     { path: "/servicios/disenio", label: "Diseño", Component: Disenio },
     { path: "/servicios/multimedia", label: "Multimedia", Component: Multimedia },
-    { path: "/servicios/desarrollo", label: "desarrollo web", Component: Desarrollo },
+    { path: "/servicios/desarrollo", label: "Desarrollo web", Component: Desarrollo },
     { path: "/servicios/paid-media", label: "Paid Media", Component: PaidMedia },
     { path: "/servicios/social-media", label: "Redes Sociales", Component: SocialMedia },
-    { path: "/contactanos", label: "contactanos", Component: Contactanos },
+    { path: "/contactanos", label: "Contactanos", Component: Contactanos },
   ],
 
   footerInstitucional: [
-    { path: "/", label: "inicio", Component: Home },
-    { path: "/nosotros", label: "nosotros", Component: Nosotros },
-    { path: "/contactanos", label: "contactanos", Component: Contactanos },
+    { path: "/", label: "Inicio", Component: Home },
+    { path: "/nosotros", label: "Nosotros", Component: Nosotros },
+    { path: "/contactanos", label: "Contactanos", Component: Contactanos },
+    { path: "/terminos", label: "Términos y condiciones", component: Terms},
   ],
 
 
   servicios: [
     { path: "/servicios/disenio", label: "Diseño", Component: Disenio },
     { path: "/servicios/multimedia", label: "Multimedia", Component: Multimedia },
-    { path: "/servicios/desarrollo", label: "desarrollo web", Component: Desarrollo },
+    { path: "/servicios/desarrollo", label: "Desarrollo web", Component: Desarrollo },
     { path: "/servicios/paid-media", label: "Paid Media", Component: PaidMedia },
     { path: "/servicios/social-media", label: "Redes Sociales", Component: SocialMedia },
   ],
 
   us: [
-    { path: "/nosotros", label: "nosotros", Component: Nosotros },
+    { path: "/nosotros", label: "Nosotros", Component: Nosotros },
   ],
 
   contacto: [
-    { path: "/contactanos", label: "contactanos", Component: Contactanos },
+    { path: "/contactanos", label: "Contactanos", Component: Contactanos },
   ],
 
   mainFooter: [
-    { path: "/", label: "inicio", Component: Home },
-    { path: "/nosotros", label: "nosotros", Component: Nosotros },
-    { path: "/contactanos", label: "contactanos", Component: Contactanos },
+    { path: "/", label: "Inicio", Component: Home },
+    { path: "/nosotros", label: "Nosotros", Component: Nosotros },
+    { path: "/contactanos", label: "Contactanos", Component: Contactanos },
+    { path: "/terminos", label: "Términos y condiciones", component: Terms},
   ],
+
   legal: [
-    { path: "/terms", label: "términos y condiciones", Component: Terms },
+    { path: "/terms", label: "Términos y condiciones", Component: Terms },
   ],
+
   posts: [{ path: "/post/:slug", Component: SinglePost }],
 
   AlternativePages: [
