@@ -156,7 +156,7 @@ const ServiceItem = ({ title, subtitle, subtitles, link, links }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-        <div className="service-item-home-content">
+      <div className="service-item-home-content">
         <div className="service-title-wrapper">
           {link ? (
             <Link to={link} className="service-title-link">
@@ -365,12 +365,12 @@ const Home = () => {
         </div>
       </div>
 
+      {/*
       <div className="full-container bg-white contactanos-testimonials-wrapper">
         <TestimonialsSection />
       </div>
 
 
-      {/*
       <MenuHomeSectionDuplicate />
 
       <div className="full-container infinite-slider-container">
