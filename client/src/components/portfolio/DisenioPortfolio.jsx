@@ -96,11 +96,11 @@ async function fetchPortfolioData(category = "branding") {
     return filtered;
   }
 
-  // Si es "social media", buscar en interaccion
+  // Si es "redes sociales", buscar en interaccion
   const items = Array.isArray(data?.interaccion) ? data.interaccion : [];
   const filtered = items.filter(item => {
     const categories = Array.isArray(item.category) ? item.category : [];
-    return categories.some(cat => cat && cat.toLowerCase() === "social media");
+    return categories.some(cat => cat && cat.toLowerCase() === "redes sociales");
   });
 
   // COMENTADO: No guardar en caché para forzar recarga
@@ -579,7 +579,7 @@ export default function DisenioPortfolio({ category = "branding" }) {
               });
             }
           } else {
-            // Para social media: usar vertical_image, featured_image y gallery
+            // Para Redes Sociales: usar vertical_image, featured_image y gallery
             if (item.vertical_image) {
               images.push(`${base}${String(item.vertical_image).replace(/^\//, '')}`);
             }

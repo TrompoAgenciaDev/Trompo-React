@@ -66,7 +66,7 @@ src/
 - `/estrategia` - Servicios de estrategia digital
 - `/creatividad` - Servicios creativos y branding
 - `/desarrollo` - Desarrollo web y plataformas
-- `/interaccion` - Social media y automation
+- `/interaccion` - Redes sociales y automation
 - `/soporte` - Soporte técnico y mantenimiento
 
 ### **Otras Páginas**

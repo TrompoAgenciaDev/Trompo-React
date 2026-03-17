@@ -30,7 +30,7 @@
   {
     "id": 4,
     "name": "Micaela Labrone",
-    "position": "Social Media Marketing",
+    "position": "Marketing de Redes Sociales",
     "portfolio": "Graduada en Marketing y Publicidad Digital. Gestionó cuentas clave con estrategia, contenido y arte digital que mueven la aguja. Buyer persona, benchmark y calendarios. Le interesan comunidades sanas y métricas claras.",
     "featured_image": "/assets/members/mica.webp"
   },
@@ -52,14 +52,14 @@
     "id": 7,
     "name": "Alfonsina Bonacossa",
     "position": "Project Manager",
-    "portfolio": "Especialista en email marketing, social media, UX, campañas y presentaciones. Gestión y coordinación de proyectos creativos. Ordena procesos, prioridades y entregables, articulando equipos de diseño, contenido y multimedia con foco en calidad, timing y resultados.",
+    "portfolio": "Especialista en email marketing, redes sociales, UX, campañas y presentaciones. Gestión y coordinación de proyectos creativos. Ordena procesos, prioridades y entregables, articulando equipos de diseño, contenido y multimedia con foco en calidad, timing y resultados.",
     "featured_image": "/assets/members/alfon.webp"
   },
   {
     "id": 8,
     "name": "Ivan Varela",
     "position": "Diseñador Creativo Digital",
-    "portfolio": "Diseñador Gráfico Publicitario. Comunicación visual y desarrollo creativo para marcas, emprendimientos y equipos. Branding, social media y diseño digital con criterio y versatilidad.",
+    "portfolio": "Diseñador Gráfico Publicitario. Comunicación visual y desarrollo creativo para marcas, emprendimientos y equipos. Branding, redes sociales y diseño digital con criterio y versatilidad.",
     "featured_image": "/assets/members/ivan.webp"
   }
 ]

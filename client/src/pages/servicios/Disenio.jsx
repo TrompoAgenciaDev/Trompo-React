@@ -535,7 +535,7 @@ const EntregableItemsList = () => {
       children: <p>Diseño de piezas para ventas y comunicación: brochures, catálogos, avisos, material POP y recursos gráficos aplicados a campañas. Enfoque en claridad, impacto y coherencia estratégica.</p>
     },
     { number: 4, title: "Aplicación Visual en Campañas", ref: item4Ref, nextRef: item5Ref, isLast: false,
-      children: <p>Adaptación del sistema de marca a entornos digitales: creatividades para Paid Media, piezas para Social Media y contenidos visuales alineados a objetivos de performance y posicionamiento.</p>
+      children: <p>Adaptación del sistema de marca a entornos digitales: creatividades para Paid Media, piezas para Redes Sociales y contenidos visuales alineados a objetivos de performance y posicionamiento.</p>
     },
     { number: 5, title: "Diseño Orientado a Performance Digital", ref: item5Ref, nextRef: null, isLast: true,
       children: <p>Creatividades optimizadas para conversión: estructura visual pensada para mejorar CTR, legibilidad, jerarquía de mensaje y eficacia publicitaria en plataformas digitales.</p>
@@ -934,7 +934,7 @@ const Disenio = () => {
             <p>Diseño de presentaciones, brochures, catálogos, papelería, avisos, material POP y recursos gráficos aplicados a comunicación corporativa y comercial.</p>
           </div>
           <div className="item-entregables">
-            <h5>Sistema Visual para Social Media y Ads</h5>
+            <h5>Sistema Visual para Redes Sociales y Ads</h5>
             <p>Plantillas estructuradas para feed, historias, carruseles, anuncios ads y piezas promocionales, alineadas al ADN de marca y optimizadas para producción continua de contenidos.</p>
           </div>          
         </div>

@@ -15,10 +15,10 @@ async function fetchSocialMediaPortfolioData() {
 
   const socialMedia = interaccion.filter((item) => {
     const cats = Array.isArray(item.category) ? item.category : [];
-    return cats.some((c) => String(c).toLowerCase() === "social media");
+    return cats.some((c) => String(c).toLowerCase() === "redes sociales");
   });
 
-  // Orden: primero Estrategia, luego Social Media
+  // Orden: primero Estrategia, luego Redes Sociales
   return [...estrategia, ...socialMedia];
 }
 
@@ -160,7 +160,7 @@ export default function SocialMediaPortfolio() {
 
         if (mounted) setItems(prepared);
       } catch (e) {
-        console.error("Error cargando portfolio social media:", e);
+        console.error("Error cargando portfolio redes sociales:", e);
       }
     })();
     return () => {

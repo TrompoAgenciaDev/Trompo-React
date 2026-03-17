@@ -427,7 +427,7 @@ const PaidMedia = () => {
           </div>
           <div className="item-entregables">
             <h5>Integración con Ecosistema Digital</h5>
-            <p>Conectamos Social Media con landing pages, WhatsApp, CRM y funnels activos. La presencia social deja de ser aislada para convertirse en parte del sistema de adquisición y conversión.</p>
+            <p>Conectamos las Redes Sociales con landing pages, WhatsApp, CRM y funnels activos. La presencia social deja de ser aislada para convertirse en parte del sistema de adquisición y conversión.</p>
           </div>
           <div className="item-entregables">
             <h5>Analítica y Evolución Continua</h5>

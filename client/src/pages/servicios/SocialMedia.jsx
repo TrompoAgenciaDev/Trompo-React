@@ -118,10 +118,10 @@ const PortfolioIntroList = () => {
   const isBrInView = useInView(cornerBrRef, { once: false, amount: 0.15 });
 
   const items = [
-    { key: 1, ref: p1Ref, text: "Las redes sociales se han convertido en uno de los principales entornos de construcción de valor de marca." },
+    { key: 1, ref: p1Ref, text: "Las Redes Sociales se han convertido en uno de los principales entornos de construcción de valor de marca." },
     { key: 2, ref: p2Ref, text: "Allí se define percepción, se valida autoridad y se influye en decisiones de compra, incluso antes del primer contacto comercial." },
     { key: 3, ref: p3Ref, text: "Cuando el ecosistema social está alineado a estrategia, contenido y performance, deja de ser comunicación dispersa y se transforma en un activo competitivo." },
-    { key: 4, ref: p4Ref, text: "Social Media no es exposición constante; es influencia sostenida con intención clara." },
+    { key: 4, ref: p4Ref, text: "Las Redes Sociales no son exposición constante; es influencia sostenida con intención clara." },
     { key: 5, ref: p5Ref, text: "Los resultados se ven en la coherencia, en la evolución de la marca y en cada caso que demuestra cómo la estrategia bien ejecutada genera impacto real." },
   ];
 
@@ -248,7 +248,7 @@ const SocialMedia = () => {
     setBaseOpacity(latest);
   });
 
-  const text = "En Trompo, Social Media no es publicar contenido. Es construir una comunidad estratégica que impulsa credibilidad, tráfico y conversiones. Diseñamos, gestionamos y optimizamos experiencias sociales que se integran con toda tu estrategia digital para transformar presencia en impacto real.";
+  const text = "En Trompo, las Redes Sociales no son publicar contenido. Es construir una comunidad estratégica que impulsa credibilidad, tráfico y conversiones. Diseñamos, gestionamos y optimizamos experiencias sociales que se integran con toda tu estrategia digital para transformar presencia en impacto real.";
 
   const phraseDelay = 0.3;
 
@@ -300,7 +300,7 @@ const SocialMedia = () => {
         mobilePoster={`${base}assets/hero/mobile/home.webp`}
       />
 
-      <ServiceTitle titulo="Social Media" tituloReplace="cultura de marca" subtitulo="Diseñamos, gestionamos y  optimizamos experiencias sociales que se integran con toda tu estrategia digital para transformar presencia en impacto real." />
+      <ServiceTitle titulo="Redes Sociales" tituloReplace="cultura de marca" subtitulo="Diseñamos, gestionamos y  optimizamos experiencias sociales que se integran con toda tu estrategia digital para transformar presencia en impacto real." />
 
       <div ref={animatedTextContainerRef} className="full-container white-bg">
         <div className="container animated-text-container">
@@ -329,7 +329,7 @@ const SocialMedia = () => {
                   type="image/webp"
                   media="(min-width: 951px)"
                 />
-                <img src={`${base}assets/img/social-mobile.webp`} alt="Social Media" />
+                <img src={`${base}assets/img/social-mobile.webp`} alt="Redes Sociales" />
               </picture>
             </div>
             <div className="grid-item-productos-multimedia">
@@ -355,7 +355,7 @@ const SocialMedia = () => {
           </div>
           <div className="item-entregables">
             <h5>Integración con Ecosistema Digital</h5>
-            <p>Conectamos Social Media con landing pages, WhatsApp, CRM y funnels activos. La presencia social deja de ser aislada para convertirse en parte del sistema de adquisición y conversión.</p>
+            <p>Conectamos las Redes Sociales con landing pages, WhatsApp, CRM y funnels activos. La presencia social deja de ser aislada para convertirse en parte del sistema de adquisición y conversión.</p>
           </div>
           <div className="item-entregables">
             <h5>Analítica y Evolución Continua</h5>
@@ -374,7 +374,7 @@ const SocialMedia = () => {
               muted
               loop
               preload="auto"
-              aria-label="Social Media"
+              aria-label="Redes Sociales"
             >
               <source src={`${base}assets/social-media/social.webm`} type="video/webm" />
               <source src={`${base}assets/social-media/social.mp4`} type="video/mp4" />

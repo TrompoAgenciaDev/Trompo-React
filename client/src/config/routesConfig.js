@@ -49,7 +49,7 @@ const routesConfig = {
     { path: "/servicios/multimedia", label: "Multimedia", Component: Multimedia },
     { path: "/servicios/desarrollo", label: "desarrollo web", Component: Desarrollo },
     { path: "/servicios/paid-media", label: "Paid Media", Component: PaidMedia },
-    { path: "/servicios/social-media", label: "Social Media", Component: SocialMedia },
+    { path: "/servicios/social-media", label: "Redes Sociales", Component: SocialMedia },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],
 
@@ -64,7 +64,7 @@ const routesConfig = {
     { path: "/servicios/multimedia", label: "Multimedia", Component: Multimedia },
     { path: "/servicios/desarrollo", label: "desarrollo web", Component: Desarrollo },
     { path: "/servicios/paid-media", label: "Paid Media", Component: PaidMedia },
-    { path: "/servicios/social-media", label: "Social Media", Component: SocialMedia },
+    { path: "/servicios/social-media", label: "Redes Sociales", Component: SocialMedia },
     { path: "/contactanos", label: "contactanos", Component: Contactanos },
   ],
 
@@ -80,7 +80,7 @@ const routesConfig = {
     { path: "/servicios/multimedia", label: "Multimedia", Component: Multimedia },
     { path: "/servicios/desarrollo", label: "desarrollo web", Component: Desarrollo },
     { path: "/servicios/paid-media", label: "Paid Media", Component: PaidMedia },
-    { path: "/servicios/social-media", label: "Social Media", Component: SocialMedia },
+    { path: "/servicios/social-media", label: "Redes Sociales", Component: SocialMedia },
   ],
 
   us: [

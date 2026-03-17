@@ -65,7 +65,7 @@ const categoryTitles = {
   ecommerce: "E-commerce",
   elearning: "E-learning",
   institucional: "Web Institucional",
-  socialmedia: "Social Media",
+  socialmedia: "Redes Sociales",
   metaads: "Meta Ads",
   googleads: "Google Ads",
   campagnes: "Campañas",
