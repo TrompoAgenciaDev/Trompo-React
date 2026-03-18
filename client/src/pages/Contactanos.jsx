@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 
 import Contact from "../layout/Contact";
 import AnimatedTextSection from "../components/AnimatedTextSection";
+import TestimonialsSection from "../components/TestimonialsSection";
 
 import "../assets/styles/contact-page.css";
 
@@ -148,6 +149,10 @@ const Contactanos = () => {
         text="En Trompo no creemos en soluciones mágicas. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Acompañamos a las empresas a convertir desafíos digitales en ventajas competitivas."
         backgroundClass=""
       />
+
+      <div className="full-container bg-yellow-2 contactanos-testimonials-wrapper">
+        <TestimonialsSection />
+      </div>
 
       <Contact form="contactanos" location="contacto"/>
 

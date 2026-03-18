@@ -83,17 +83,17 @@
 
 /* Estilos específicos para testimonios en Contactanos */
 .contactanos-testimonials-wrapper .testimonial-cards-slider::before {
-    background: linear-gradient(to bottom, rgba(38, 38, 38, 1) 0%, rgba(38, 38, 38, 0) 100%);
+    background: linear-gradient(to bottom, rgb(255, 220, 104) 0%, rgba(38, 38, 38, 0) 100%);
 }
 
 .contactanos-testimonials-wrapper .testimonial-cards-slider::after {
-    background: linear-gradient(to top, rgba(38, 38, 38, 1) 0%, rgba(38, 38, 38, 0) 100%);
+    background: linear-gradient(to top, rgb(255, 220, 104) 0%, rgba(38, 38, 38, 0) 100%);
 }
 
 .contactanos-testimonials-wrapper .testimonial-text-content h1 {
-    color: #ffffff;
+    color: #262626;
 }
 
 .contactanos-testimonials-wrapper .testimonial-text-content p {
-    color: #ffffff;
+    color: #262626;
 }
