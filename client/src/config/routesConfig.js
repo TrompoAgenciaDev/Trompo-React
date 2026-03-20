@@ -72,7 +72,7 @@ const routesConfig = {
     { path: "/", label: "Inicio", Component: Home },
     { path: "/nosotros", label: "Nosotros", Component: Nosotros },
     { path: "/contactanos", label: "Contactanos", Component: Contactanos },
-    { path: "/terminos", label: "Términos y condiciones", component: Terms},
+    { path: "/terms", label: "Términos y condiciones", Component: Terms},
   ],
 
 
@@ -96,7 +96,7 @@ const routesConfig = {
     { path: "/", label: "Inicio", Component: Home },
     { path: "/nosotros", label: "Nosotros", Component: Nosotros },
     { path: "/contactanos", label: "Contactanos", Component: Contactanos },
-    { path: "/terminos", label: "Términos y condiciones", component: Terms},
+    { path: "/terms", label: "Términos y condiciones", Component: Terms},
   ],
 
   legal: [
