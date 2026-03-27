@@ -1,51 +1,59 @@
 <?php
 /**
- * Form handler: envía los datos del formulario a Brevo.
- * Carga .env desde rutas compatibles con open_basedir en hosting compartido.
+ * FORM HANDLER UNIFICADO - TROMPO
+ * Gestión de leads: reCAPTCHA v3 + Base de Datos Local + Email SMTP.
+ * Independiente de Brevo.
  */
-ini_set('display_errors', 0);
+
+// 1. Configuración de Errores (Activar para diagnóstico si hay 500)
+ini_set('display_errors', 1);
+ini_set('log_errors', 1);
 error_reporting(E_ALL);
 
 header('Content-Type: application/json; charset=utf-8');
 
 // Configuración de Seguridad
-define('SECURITY_MIN_RECAPTCHA_SCORE', 0.5);
+define('RECAPTCHA_BLOCK_SCORE', 0.3);
+define('RECAPTCHA_LOW_CONFIDENCE_SCORE', 0.5);
 define('SECURITY_RECAPTCHA_ACTION', 'form_submit');
-define('SECURITY_MIN_COMPLETION_TIME', 3);
-define('SECURITY_RATE_LIMIT_MAX', 5); // Un poco más laxo para contactos directos
-define('SECURITY_RATE_LIMIT_WINDOW', 600);
+define('SECURITY_MIN_TIME_TRAP', 2);
+define('SECURITY_MAX_TIME_TRAP', 3600);
 
-// Cargar .env: solo rutas permitidas por open_basedir (un nivel arriba o mismo directorio)
-$envPath = __DIR__ . '/../.env';
-if (!@file_exists($envPath)) {
-    $envPath = __DIR__ . '/.env';
-}
-if (@file_exists($envPath)) {
-    $vars = @parse_ini_file($envPath, false, INI_SCANNER_RAW);
-    if ($vars !== false) {
-        foreach ($vars as $key => $value) {
-            putenv("$key=$value");
+// --- Función de Trazabilidad (Log) ---
+function flowLog($message, $data = null) {
+    // Intentar encontrar el log en raíz o carpeta logs
+    $candidates = [
+        __DIR__ . '/../../form-flow.log',
+        __DIR__ . '/../form-flow.log',
+        __DIR__ . '/form-flow.log'
+    ];
+    $logFile = null;
+    foreach ($candidates as $c) {
+        if (@file_exists($c) || @is_writable(dirname($c))) {
+            $logFile = $c;
+            break;
         }
     }
+    if (!$logFile) return;
+
+    $timestamp = date('Y-m-d H:i:s');
+    $entry = "\n[{$timestamp}]\nEVENT: {$message}\n";
+    if ($data !== null) {
+        $encoded = is_string($data) ? $data : json_encode($data, JSON_UNESCAPED_UNICODE);
+        if (strlen($encoded) > 1000) $encoded = substr($encoded, 0, 1000) . '...';
+        $entry .= "DATA: " . $encoded . "\n";
+    }
+    $entry .= "----------------------------------------\n";
+    @file_put_contents($logFile, $entry, FILE_APPEND | LOCK_EX);
 }
 
-$brevoApiKey = getenv('BREVO_API_KEY') ?: '';
+flowLog('SCRIPT_START_UNIFIED', ['ip' => $_SERVER['REMOTE_ADDR'] ?? 'unknown']);
 
-$listMap = [
-    "home"        => getenv('BREVO_LIST_HOME'),
-    "desarrollo"  => getenv('BREVO_LIST_DESARROLLO'),
-    "soporte"     => getenv('BREVO_LIST_SOPORTE'),
-    "interaccion" => getenv('BREVO_LIST_INTERACCION'),
-    "estrategia"  => getenv('BREVO_LIST_ESTRATEGIA'),
-    "creatividad" => getenv('BREVO_LIST_CREATIVIDAD'),
-];
-
-// Soporte para JSON y POST tradicional
+// 2. Procesamiento de Input (Soporta FormData y JSON)
 $rawInput = file_get_contents('php://input');
 $jsonData = json_decode($rawInput, true);
 
 if ($jsonData) {
-    // Si viene de React vía fetch(json)
     $fields    = $jsonData['fields'] ?? [];
     $nombre    = $fields['NOMBRE'] ?? '';
     $apellidos = $fields['APELLIDOS'] ?? '';
@@ -56,10 +64,10 @@ if ($jsonData) {
     $consulta  = $fields['CONSULTA'] ?? '';
     $location  = $jsonData['formId'] ?? $fields['LOCATION'] ?? 'home';
     $recaptchaToken = $fields['g-recaptcha-response'] ?? '';
-    $honeypot = trim($fields['fax'] ?? '');
-    $startTime = (int)($fields['_t'] ?? 0);
+    $timeField = $fields['_t'] ?? 0;
+    $honeypotField = $fields['fax'] ?? '';
+    $submissionId = $fields['SUBMISSION_ID'] ?? null;
 } else {
-    // Si viene vía POST tradicional
     $nombre    = $_POST['NOMBRE'] ?? '';
     $apellidos = $_POST['APELLIDOS'] ?? '';
     $email     = $_POST['EMAIL'] ?? '';
@@ -68,194 +76,133 @@ if ($jsonData) {
     $smsNum    = $_POST['SMS'] ?? '';
     $consulta  = $_POST['CONSULTA'] ?? '';
     $location  = $_POST['LOCATION'] ?? 'home';
-    $recaptchaToken = trim($_POST['g-recaptcha-response'] ?? '');
-    $honeypot = trim($_POST['fax'] ?? '');
-    $startTime = (int)($_POST['_t'] ?? 0);
+    $recaptchaToken = $_POST['g-recaptcha-response'] ?? '';
+    $timeField = $_POST['_t'] ?? 0;
+    $honeypotField = $_POST['fax'] ?? '';
+    $submissionId = $_POST['SUBMISSION_ID'] ?? null;
 }
 
-// Honeypot: si "fax" tiene valor, es un bot (humanos no completan este campo invisible)
-$honeypot = trim($_POST['fax'] ?? '');
-if ($honeypot !== '') {
-    echo json_encode([
-        "success" => true, // Bloqueo silencioso
-        "message"   => "Mensaje recibido"
-    ], JSON_UNESCAPED_UNICODE);
+// === Validaciones de Seguridad ===
+$isLowConfidence = false;
+$ua = $_SERVER['HTTP_USER_AGENT'] ?? '';
+if (empty($ua)) $isLowConfidence = true;
+
+// Honeypot
+if (trim((string)$honeypotField) !== '') {
+    flowLog('HONEYPOT_BLOCKED');
+    echo json_encode(["success" => true, "message" => "Mensaje recibido"], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
 // Time Trap
-$startTime = (int)($_POST['_t'] ?? 0);
-if ($startTime > 0 && (time() - $startTime) < SECURITY_MIN_COMPLETION_TIME) {
-    echo json_encode([
-        "success" => false,
-        "error"   => "Error de envío. Por favor intente de nuevo."
-    ], JSON_UNESCAPED_UNICODE);
+$startTime = (int)$timeField;
+$duration = ($startTime > 0) ? (time() - $startTime) : 0;
+if ($startTime > 0 && ($duration < SECURITY_MIN_TIME_TRAP || $duration > SECURITY_MAX_TIME_TRAP)) {
+    $isLowConfidence = true;
+}
+
+// reCAPTCHA v3
+$recaptchaScore = null;
+$recaptchaSecret = getenv('RECAPTCHA_SECRET') ?: ''; // Se carga después con config.php, pero validamos token aquí
+
+// 3. Cargar Sistema de Backend (Base de Datos + SMTP)
+$backendPath = __DIR__ . '/../backend';
+if (!is_dir($backendPath)) { $backendPath = __DIR__ . '/../../backend'; }
+
+if (!is_dir($backendPath)) {
+    flowLog('CRITICAL_ERROR', 'No se encontró carpeta /backend');
+    echo json_encode(["success" => false, "error" => "Error de configuración del sistema (backend)"], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-// === Validar reCAPTCHA v2 (obligatorio si RECAPTCHA_SECRET está definido) ===
-$recaptchaSecret = getenv('RECAPTCHA_SECRET') ?: '';
-$recaptchaToken = trim($_POST['g-recaptcha-response'] ?? '');
+try {
+    require_once $backendPath . '/config.php'; // Carga .env y crea $pdo
+    require_once $backendPath . '/LeadRepository.php';
+    require_once $backendPath . '/MailService.php';
+    require_once $backendPath . '/NotificationTemplate.php';
 
-if ($recaptchaSecret !== '') {
-    if ($recaptchaToken === '') {
-        echo json_encode([
-            "success" => false,
-            "error"   => "Validación de captcha requerida"
-        ], JSON_UNESCAPED_UNICODE);
-        exit;
-    }
+    $repo = new LeadRepository($pdo);
+    $mailService = new MailService(function($msg, $data) { flowLog($msg, $data); });
 
-    $verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
-    $verifyPayload = http_build_query([
-        'secret' => $recaptchaSecret,
-        'response' => $recaptchaToken,
-        'remoteip' => $_SERVER['REMOTE_ADDR'] ?? ''
-    ]);
+    // Validar reCAPTCHA v3 seriamente
+    $recaptchaSecret = getenv('RECAPTCHA_SECRET') ?: '';
+    if ($recaptchaSecret !== '' && !empty($recaptchaToken)) {
+        $verifyUrl = "https://www.google.com/recaptcha/api/siteverify";
+        $vh = curl_init($verifyUrl);
+        curl_setopt($vh, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($vh, CURLOPT_POST, true);
+        curl_setopt($vh, CURLOPT_POSTFIELDS, http_build_query([
+            'secret' => $recaptchaSecret,
+            'response' => $recaptchaToken,
+            'remoteip' => $_SERVER['REMOTE_ADDR'] ?? ''
+        ]));
+        curl_setopt($vh, CURLOPT_TIMEOUT, 10);
+        $res = curl_exec($vh);
+        curl_close($vh);
 
-    $vh = curl_init($verifyUrl);
-    curl_setopt($vh, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($vh, CURLOPT_POST, true);
-    curl_setopt($vh, CURLOPT_POSTFIELDS, $verifyPayload);
-    curl_setopt($vh, CURLOPT_HTTPHEADER, ["Content-Type: application/x-www-form-urlencoded"]);
-    $verifyResponse = curl_exec($vh);
-    $verifyErr = $verifyResponse === false ? curl_error($vh) : '';
-    curl_close($vh);
-
-    if ($verifyResponse === false) {
-        echo json_encode([
-            "success" => false,
-            "error"   => "Error al verificar captcha: " . $verifyErr
-        ], JSON_UNESCAPED_UNICODE);
-        exit;
-    }
-
-    $verifyJson = json_decode($verifyResponse, true);
-    $score = $verifyJson['score'] ?? 0;
-    $action = $verifyJson['action'] ?? 'none';
-
-    if (!is_array($verifyJson) || empty($verifyJson['success'])) {
-        echo json_encode([
-            "success" => false,
-            "error"   => "Captcha inválido"
-        ], JSON_UNESCAPED_UNICODE);
-        exit;
-    }
-
-    if ($score < SECURITY_MIN_RECAPTCHA_SCORE || $action !== SECURITY_RECAPTCHA_ACTION) {
-        // Bloqueo silencioso si es muy bajo
-        if ($score < 0.3) {
-            echo json_encode(["success" => true, "message" => "Recibido"]);
-            exit;
+        if ($res) {
+            $vj = json_decode($res, true);
+            $recaptchaScore = $vj['score'] ?? 0;
+            if (!($vj['success'] ?? false)) { $isLowConfidence = true; }
+            elseif ($recaptchaScore < RECAPTCHA_BLOCK_SCORE) {
+                flowLog('RECAPTCHA_BLOCK', ['score' => $recaptchaScore]);
+                echo json_encode(["success" => true, "message" => "Recibido"], JSON_UNESCAPED_UNICODE);
+                exit;
+            }
+            elseif ($recaptchaScore < RECAPTCHA_LOW_CONFIDENCE_SCORE) { $isLowConfidence = true; }
+        } else {
+            $isLowConfidence = true; // Fall abierto
         }
-        echo json_encode([
-            "success" => false,
-            "error"   => "Petición rechazada por sistema anti-spam (Score: $score)"
-        ], JSON_UNESCAPED_UNICODE);
+    }
+
+    // Validaciones de Contenido
+    if (empty($nombre) || empty($email) || empty($smsNum) || empty($consulta)) {
+        flowLog('VALIDATION_ERROR', 'Campos requeridos vacíos');
+        echo json_encode(["success" => false, "error" => "Por favor completá todos los campos obligatorios."], JSON_UNESCAPED_UNICODE);
         exit;
     }
-}
-// Si no hay RECAPTCHA_SECRET o no se envió token, se permite el envío (sin validar captcha)
 
-// Validaciones de Contenido
-$required = ['NOMBRE', 'APELLIDOS', 'EMAIL', 'SMS', 'CONSULTA'];
-foreach ($required as $f) {
-    if (empty($$f)) { // $$f accede a la variable con el nombre contenido en $f
-        echo json_encode([
-            "success" => false,
-            "error"   => "El campo $f es obligatorio"
-        ], JSON_UNESCAPED_UNICODE);
+    // Guardado y Envío
+    flowLog('PROCESSING_LEAD', ['id' => $submissionId, 'loc' => $location]);
+
+    if ($repo->existsBySubmissionId($submissionId)) {
+        flowLog('DUPLICATE_EXIT');
+        echo json_encode(["success" => true, "duplicate" => true], JSON_UNESCAPED_UNICODE);
         exit;
     }
-}
 
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    echo json_encode([
-        "success" => false,
-        "error"   => "El formato del email no es válido"
-    ], JSON_UNESCAPED_UNICODE);
-    exit;
-}
+    $formData = [
+        'NOMBRE'    => $nombre,
+        'APELLIDOS' => $apellidos,
+        'EMPRESA'   => $empresa,
+        'SMS'       => $smsCode . $smsNum,
+        'EMAIL'     => $email,
+        'CONSULTA'  => $consulta,
+        'ORIGEN'    => $location,
+        'LOW_CONFIDENCE' => $isLowConfidence ? '1' : '0',
+        'timestamp' => date('Y-m-d H:i:s'),
+        'year'      => date('Y')
+    ];
 
-$listId = $listMap[$location] ?? $listMap['home'];
+    $leadId = $repo->saveLead($location, $formData, $_SERVER['REMOTE_ADDR'] ?? 'unknown', $ua, $submissionId);
+    flowLog('DB_SAVE_OK', ['lead_id' => $leadId]);
 
-$payload = [
-    "updateEnabled" => true,
-    "email" => $email,
-    "attributes" => [
-        "NOMBRE"    => $nombre,
-        "APELLIDOS" => $apellidos,
-        "EMPRESA"   => $empresa,
-        "SMS"       => $smsCode . $smsNum,
-        "WHATSAPP"  => $smsCode . $smsNum,
-        "CONSULTA"  => $consulta,
-        "ORIGEN"    => $location,
-    ],
-    "listIds" => [(int)$listId]
-];
+    $htmlBody = NotificationTemplate::generate($location, $formData);
+    $mailSent = $mailService->sendLeadNotification($location, $formData, $htmlBody);
+    flowLog('SMTP_RESULT', ['success' => $mailSent]);
 
-$ch = curl_init("https://api.brevo.com/v3/contacts");
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    "Content-Type: application/json",
-    "api-key: $brevoApiKey"
-]);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+    if ($mailSent) {
+        $repo->updateLeadStatus($leadId, 'notified');
+    }
 
-$response = curl_exec($ch);
-
-if ($response === false) {
-    echo json_encode([
-        "success" => false,
-        "error"   => "cURL error: " . curl_error($ch)
-    ], JSON_UNESCAPED_UNICODE);
-    curl_close($ch);
-    exit;
-}
-
-$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
-
-$trimmedResponse = is_string($response) ? trim($response) : '';
-
-// Brevo puede responder 204 No Content en casos de éxito (sin body).
-if ($httpCode === 204 && $trimmedResponse === '') {
     echo json_encode([
         "success" => true,
-        "http"    => 204,
-        "brevo"   => null
+        "db_saved" => true,
+        "mail_sent" => $mailSent,
+        "low_confidence" => $isLowConfidence
     ], JSON_UNESCAPED_UNICODE);
-    exit;
-}
 
-$decoded = json_decode($response, true);
-
-if ($decoded === null) {
-    echo json_encode([
-        "success" => false,
-        "http"    => $httpCode,
-        "error"   => $response
-    ], JSON_UNESCAPED_UNICODE);
-    exit;
-}
-
-if ($httpCode >= 200 && $httpCode < 300) {
-    if (isset($decoded['id']) || isset($decoded['email'])) {
-        echo json_encode([
-            "success" => true,
-            "brevo"   => $decoded
-        ], JSON_UNESCAPED_UNICODE);
-    } else {
-        echo json_encode([
-            "success" => false,
-            "error"   => $decoded ?: $response
-        ], JSON_UNESCAPED_UNICODE);
-    }
-} else {
-    echo json_encode([
-        "success" => false,
-        "http"    => $httpCode,
-        "error"   => $decoded ?: $response
-    ], JSON_UNESCAPED_UNICODE);
+} catch (Exception $e) {
+    flowLog('FATAL_EXCEPTION', $e->getMessage());
+    echo json_encode(["success" => false, "error" => "Error interno del servidor. Reintente más tarde."], JSON_UNESCAPED_UNICODE);
 }

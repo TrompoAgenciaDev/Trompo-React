@@ -6,6 +6,10 @@
 class NotificationTemplate {
     public static function generate($formIdentifier, $formData) {
         $fields = self::formatFields($formData);
+        
+        // Pre-calculamos valores para evitar problemas de sintaxis en el Heredoc
+        $date = $formData['timestamp'] ?? date('Y-m-d H:i:s');
+        $year = $formData['year'] ?? date('Y');
 
         $html = <<<HTML
 <!DOCTYPE html>
@@ -32,13 +36,13 @@ class NotificationTemplate {
                             <table role="presentation" style="width: 100%; border-collapse: collapse;">{$fields}</table>
                             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
                                 <p style="margin: 0; color: #666; font-size: 12px;">Este correo fue generado automáticamente por el sistema de backup de formularios.</p>
-                                <p style="margin: 5px 0 0 0; color: #666; font-size: 12px;">Fecha: <strong>{$formData['timestamp'] ?? date('Y-m-d H:i:s')}</strong></p>
+                                <p style="margin: 5px 0 0 0; color: #666; font-size: 12px;">Fecha: <strong>{$date}</strong></p>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td style="padding: 20px 30px; background-color: #f9f9f9; border-radius: 0 0 8px 8px; text-align: center;">
-                            <p style="margin: 0; color: #999; font-size: 11px;">© {$formData['year'] ?? date('Y')} Trompo - Sistema de Backup</p>
+                            <p style="margin: 0; color: #999; font-size: 11px;">© {$year} Trompo - Sistema de Backup</p>
                         </td>
                     </tr>
                 </table>
@@ -54,15 +58,15 @@ HTML;
 
     private static function formatFields($formData) {
         $rows = '';
-        $excludeFields = ['LOCATION', 'timestamp', 'year'];
+        $excludeFields = ['LOCATION', 'timestamp', 'year', 'SUBMISSION_ID', 'LOCATION', 'LOW_CONFIDENCE'];
 
         foreach ($formData as $key => $value) {
             if (in_array($key, $excludeFields) || empty($value)) {
                 continue;
             }
-            $label = ucfirst(str_replace('_', ' ', $key));
-            $displayValue = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
-            $isLongField = strlen($value) > 100 || $key === 'CONSULTA';
+            $label = ucfirst(str_replace('_', ' ', strtolower($key)));
+            $displayValue = htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
+            $isLongField = strlen((string)$value) > 100 || $key === 'CONSULTA';
 
             if ($isLongField) {
                 $rows .= "<tr><td style=\"padding: 12px 0; vertical-align: top;\"><strong style=\"color: #1E1E1E; font-size: 14px; display: block; margin-bottom: 5px;\">{$label}:</strong><div style=\"color: #333; font-size: 14px; line-height: 1.6; background-color: #f9f9f9; padding: 12px; border-radius: 4px; white-space: pre-wrap;\">{$displayValue}</div></td></tr>";

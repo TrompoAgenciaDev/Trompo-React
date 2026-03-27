@@ -29,6 +29,7 @@ class MailService {
     private $smtpEncryption;
     private $smtpFrom;
     private $smtpTo;
+    private $smtpBcc;
 
     /** @var callable|null (event, data) para flowLog desde form-backup */
     private $flowLogCallback;
@@ -44,6 +45,7 @@ class MailService {
         $this->smtpEncryption = getenv('SMTP_ENCRYPTION') ?: 'tls';
         $this->smtpFrom = getenv('SMTP_FROM') ?: $this->smtpUser;
         $this->smtpTo = getenv('SMTP_TO') ?: '';
+        $this->smtpBcc = getenv('SMTP_CCO') ?: '';
 
         $this->mailer = new PHPMailer(true);
         $this->configureMailer();
@@ -119,7 +121,9 @@ class MailService {
 
             $this->mailer->clearAddresses();
             $this->mailer->clearAttachments();
+            $this->mailer->clearBCCs();
 
+            // Destinatarios principales
             $recipients = explode(',', $this->smtpTo);
             foreach ($recipients as $recipient) {
                 $recipient = trim($recipient);
@@ -128,7 +132,19 @@ class MailService {
                 }
             }
 
+            // Copia oculta (BCC / CCO)
+            if (!empty($this->smtpBcc)) {
+                $recipientsBcc = explode(',', $this->smtpBcc);
+                foreach ($recipientsBcc as $bcc) {
+                    $bcc = trim($bcc);
+                    if (!empty($bcc)) {
+                        $this->mailer->addBCC($bcc);
+                    }
+                }
+            }
+
             $this->mailer->isHTML(true);
+
             $this->mailer->Subject = "Nueva consulta - {$formIdentifier}";
             $this->mailer->Body = $htmlBody;
             $this->mailer->AltBody = $this->generatePlainTextBody($formIdentifier, $formData);

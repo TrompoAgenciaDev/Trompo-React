@@ -1,14 +1,21 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
-import useFormBrevo from "../../hooks/useFormBrevo";
+import { useFormSubmit } from "../../hooks/useFormSubmit";
 import { generateSubmissionId, traceEvent } from "../../utils/formTrace";
 import "../../assets/styles/form-index.css";
 
 export default function FormIndex({ location = "home" }) {
-  const { loading, error, submitForm } = useFormBrevo();
+  const { loading, success, error, submitForm, setError } = useFormSubmit();
   const submissionIdRef = useRef(null);
   const { executeRecaptcha } = useGoogleReCaptcha();
+
+  useEffect(() => {
+
+    if (success) {
+      window.location.href = `${import.meta.env.BASE_URL}gracias`;
+    }
+  }, [success]);
   const [renderTime] = useState(Math.floor(Date.now() / 1000));
 
   const handleClickSubmit = () => {
@@ -20,8 +27,7 @@ export default function FormIndex({ location = "home" }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // 1. Traceability
+    if (loading) return; // Evitar ejecuciones duplicadas si ya está cargando
     const submissionId = submissionIdRef.current || generateSubmissionId();
     if (!submissionIdRef.current) submissionIdRef.current = submissionId;
     traceEvent("ONSUBMIT_TRIGGERED", submissionId, { formIdentifier: location });
@@ -29,7 +35,7 @@ export default function FormIndex({ location = "home" }) {
     // 2. reCAPTCHA check
     if (!executeRecaptcha) {
       console.warn("reCAPTCHA no está listo");
-      traceEvent("RECAPTCHA_NOT_READY", submissionId, { formIdentifier: location });
+      setError("No se pudo validar el envío. Intentá nuevamente.");
       return;
     }
 
@@ -39,12 +45,18 @@ export default function FormIndex({ location = "home" }) {
     if (formData.get("fax") && String(formData.get("fax")).trim() !== "") {
       traceEvent("HONEYPOT_BLOCKED", submissionId, { formIdentifier: location });
       console.warn("[FormIndex] Bot detectado (honeypot).");
+      window.location.href = `${import.meta.env.BASE_URL}gracias`;
       return;
     }
 
     try {
       // 4. reCAPTCHA Token
       const token = await executeRecaptcha("form_submit");
+      
+      if (!token) {
+        throw new Error("recaptcha_failed");
+      }
+
       formData.append("LOCATION", location);
       formData.append("g-recaptcha-response", token);
       formData.append("_t", renderTime); // Time Trap
@@ -53,6 +65,7 @@ export default function FormIndex({ location = "home" }) {
       submitForm(formData, { submissionId, formIdentifier: location });
     } catch (err) {
       console.error("Error al obtener token de reCAPTCHA:", err);
+      setError("No se pudo validar el envío. Intentá nuevamente.");
       traceEvent("RECAPTCHA_ERROR", submissionId, { formIdentifier: location, error: String(err) });
     }
   };
@@ -357,7 +370,13 @@ export default function FormIndex({ location = "home" }) {
           </button>
         </div>
       </form>
-      {error && <p style={{ color: "red" }}>{typeof error === 'object' ? (error.message || JSON.stringify(error)) : String(error)}</p>}
+      {error && (
+        <p style={{ color: "red", marginTop: "10px", fontSize: "14px" }}>
+          {error === "validation_failed" || error === "spam_detected" || error === "recaptcha_failed" || error === "token_missing"
+            ? "No se pudo validar el envío. Intentá nuevamente."
+            : "Error al enviar el formulario."}
+        </p>
+      )}
     </div>
   );
 }
