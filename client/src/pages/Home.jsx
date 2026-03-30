@@ -309,6 +309,18 @@ const Home = () => {
         </div>
       </div>
 
+      <div className="full-container clients-img-container black-bg">
+        <div className="grid-container-img">
+          <div className="grid-item-client"></div>
+          <div className="grid-item-client"></div>
+          <div className="grid-item-client"></div>
+          <div className="grid-item-client"></div>
+          <div className="grid-item-client"></div>
+          <div className="grid-item-client"></div>
+          <div className="grid-item-client"></div>
+        </div>
+      </div>
+
       <div className="full-container beneficios-container black-bg">
         <div className="container title-beneficios">
           <h3>Beneficios diferenciales</h3>
