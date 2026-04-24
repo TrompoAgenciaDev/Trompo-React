@@ -211,7 +211,7 @@ Variables `DB_*` están presentes en el .env; el sistema de backup **no usa base
 
 - **Home sin Suspense:** La ruta `/` renderiza el componente Home directamente para mejorar LCP.
 - **CSS crítico inline:** En `index.html`, bloque `<style>` con estilos mínimos del header y del hero para reducir CLS y mejorar LCP.
-- **Brevo (Sibforms):** Script de Brevo cargado bajo demanda con Intersection Observer (formulario a 200px del viewport) o timeout 5 s; evita bloquear el render inicial.
+- **Brevo (Sibforms):** No se utiliza en este proyecto (formulario propio React + handler PHP).
 
 ### 7.5 Hooks de preload y prefetch
 

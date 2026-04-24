@@ -33,7 +33,7 @@ export const useFormSubmit = () => {
       } else {
         const errorMsg = json.error || "Error al enviar el formulario";
         setError(errorMsg);
-        console.error(`[Form] Error del servidor: ${errorMsg}`);
+        console.error(`[Form] Error del servidor: ${errorMsg}`, json);
       }
     } catch (err) {
       console.error("[Form] Error de red:", err);

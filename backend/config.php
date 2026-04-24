@@ -15,22 +15,5 @@ if (file_exists($envPath)) {
     }
 }
 
-$dbHost = getenv('DB_HOST') ?: 'localhost';
-$dbName = getenv('DB_NAME') ?: 'trompo_db';
-$dbUser = getenv('DB_USER') ?: 'root';
-$dbPass = getenv('DB_PASS') ?: '';
-$dbCharset = getenv('DB_CHARSET') ?: 'utf8mb4';
-
-$dsn = "mysql:host={$dbHost};dbname={$dbName};charset={$dbCharset}";
-$options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE  => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES   => false,
-];
-
-try {
-    $pdo = new PDO($dsn, $dbUser, $dbPass, $options);
-} catch (PDOException $e) {
-    error_log("Error de conexión a la base de datos: " . $e->getMessage());
-    throw new Exception("Error de conexión a la base de datos");
-}
+// La base de datos ha sido desactivada según requerimiento.
+// Los leads se guardarán en un archivo de texto plano (logs).

@@ -11,16 +11,26 @@ $phpmailerDir = __DIR__ . '/phpmailer';
 
 if (file_exists($autoloadPath)) {
     require_once $autoloadPath;
-} elseif (file_exists($phpmailerDir . '/Exception.php')) {
-    // Hosting sin Composer: PHPMailer incluido en backend/phpmailer/
-    require_once $phpmailerDir . '/Exception.php';
-    require_once $phpmailerDir . '/SMTP.php';
-    require_once $phpmailerDir . '/PHPMailer.php';
-} else {
-    throw new \Exception("PHPMailer no encontrado. Sube la carpeta backend/phpmailer/ (o ejecuta 'composer install' en backend/).");
 }
 
-class MailService {
+if (!class_exists(\PHPMailer\PHPMailer\PHPMailer::class)) {
+    if (
+        file_exists($phpmailerDir . '/Exception.php') &&
+        file_exists($phpmailerDir . '/SMTP.php') &&
+        file_exists($phpmailerDir . '/PHPMailer.php')
+    ) {
+        require_once $phpmailerDir . '/Exception.php';
+        require_once $phpmailerDir . '/SMTP.php';
+        require_once $phpmailerDir . '/PHPMailer.php';
+    }
+}
+
+if (!class_exists(\PHPMailer\PHPMailer\PHPMailer::class)) {
+    throw new \Exception("PHPMailer no encontrado. Revisá vendor/ o backend/phpmailer/.");
+}
+
+class MailService
+{
     private $mailer;
     private $smtpHost;
     private $smtpPort;
@@ -34,12 +44,13 @@ class MailService {
     /** @var callable|null (event, data) para flowLog desde form-backup */
     private $flowLogCallback;
 
-    public function __construct(callable $flowLogCallback = null) {
+    public function __construct(callable $flowLogCallback = null)
+    {
         $this->flowLogCallback = $flowLogCallback;
 
         // Cargar configuración SMTP desde .env
         $this->smtpHost = getenv('SMTP_HOST') ?: 'smtp.gmail.com';
-        $this->smtpPort = (int)(getenv('SMTP_PORT') ?: 587);
+        $this->smtpPort = (int) (getenv('SMTP_PORT') ?: 587);
         $this->smtpUser = getenv('SMTP_USER') ?: '';
         $this->smtpPass = getenv('SMTP_PASS') ?: '';
         $this->smtpEncryption = getenv('SMTP_ENCRYPTION') ?: 'tls';
@@ -51,7 +62,8 @@ class MailService {
         $this->configureMailer();
     }
 
-    private function flowLog($message, $data = null) {
+    private function flowLog($message, $data = null)
+    {
         if ($this->flowLogCallback !== null) {
             ($this->flowLogCallback)($message, $data);
         }
@@ -61,7 +73,8 @@ class MailService {
      * Configura PHPMailer: por defecto 587 + STARTTLS (no SSL implícito).
      * .env: SMTP_USE_LOCALHOST_25=true para probar localhost:25 sin auth.
      */
-    private function configureMailer() {
+    private function configureMailer()
+    {
         try {
             $this->mailer->Timeout = 10;
             $this->mailer->SMTPKeepAlive = false;
@@ -76,14 +89,59 @@ class MailService {
                 $this->mailer->SMTPAutoTLS = false;
                 $this->flowLog('SMTP_CONFIG_USING_LOCALHOST_25');
             } else {
-                $this->mailer->Host = $this->smtpHost;
-                $this->mailer->Port = 587;
-                $this->mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                $host = trim((string)$this->smtpHost);
+                $user = trim((string)$this->smtpUser);
+                $pass = (string)$this->smtpPass;
+                $from = trim((string)($this->smtpFrom ?: $user));
+                $enc = strtolower(trim((string)$this->smtpEncryption));
+
+                if ($host === '') {
+                    throw new \Exception('SMTP_HOST no está configurado en .env');
+                }
+
+                // Puerto: usar el de .env si está, si no elegir default según encriptación
+                $port = (int)$this->smtpPort;
+                if ($port <= 0) {
+                    $port = ($enc === 'ssl' || $enc === 'smtps') ? 465 : 587;
+                }
+
+                // Encriptación: tls/starttls | ssl/smtps | none
+                $smtpSecure = false;
+                $smtpAutoTls = true;
+                if ($enc === 'ssl' || $enc === 'smtps') {
+                    $smtpSecure = PHPMailer::ENCRYPTION_SMTPS;
+                    $smtpAutoTls = false;
+                } elseif ($enc === 'tls' || $enc === 'starttls' || $enc === '') {
+                    $smtpSecure = PHPMailer::ENCRYPTION_STARTTLS;
+                    $smtpAutoTls = true;
+                } elseif ($enc === 'none' || $enc === 'false' || $enc === '0') {
+                    $smtpSecure = false;
+                    $smtpAutoTls = false;
+                }
+
+                $this->mailer->Host = $host;
+                $this->mailer->Port = $port;
+                $this->mailer->SMTPSecure = $smtpSecure;
+                $this->mailer->SMTPAutoTLS = $smtpAutoTls;
+
+                // Auth
                 $this->mailer->SMTPAuth = true;
-                $this->mailer->Username = $this->smtpUser;
-                $this->mailer->Password = $this->smtpPass;
-                $this->mailer->setFrom($this->smtpFrom ?: $this->smtpUser, 'Sistema de Backup - Trompo');
-                $this->flowLog('SMTP_CONFIG_USING_587_TLS');
+                if ($user === '' || $pass === '') {
+                    throw new \Exception('Faltan credenciales SMTP (SMTP_USER / SMTP_PASS) en .env');
+                }
+                $this->mailer->Username = $user;
+                $this->mailer->Password = $pass;
+
+                if ($from === '') {
+                    throw new \Exception('SMTP_FROM no está configurado en .env');
+                }
+                $this->mailer->setFrom($from, 'Sistema de Backup - Trompo');
+
+                $this->flowLog('SMTP_CONFIG_USING_ENV', [
+                    'host' => $host,
+                    'port' => $port,
+                    'encryption' => $enc === '' ? 'tls' : $enc
+                ]);
             }
 
             $this->mailer->isSMTP();
@@ -113,7 +171,8 @@ class MailService {
     /**
      * Envía una notificación de nuevo lead
      */
-    public function sendLeadNotification($formIdentifier, $formData, $htmlBody) {
+    public function sendLeadNotification($formIdentifier, $formData, $htmlBody)
+    {
         try {
             if (empty($this->smtpTo)) {
                 throw new \Exception("SMTP_TO no está configurado en .env");
@@ -163,7 +222,8 @@ class MailService {
         }
     }
 
-    private function generatePlainTextBody($formIdentifier, $formData) {
+    private function generatePlainTextBody($formIdentifier, $formData)
+    {
         $text = "Nueva consulta recibida desde: {$formIdentifier}\n\n";
         $text .= "Datos del formulario:\n";
         $text .= str_repeat("=", 40) . "\n\n";

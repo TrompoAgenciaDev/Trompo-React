@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trompo — Mockups completos</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#e8e8e4;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;padding:2rem;color:#1a1a1a}
+h1{font-size:20px;font-weight:500;margin-bottom:4px}
+.intro{font-size:13px;color:#888;margin-bottom:3rem}
+.section{margin-bottom:4rem}
+.sec-title{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#888;font-weight:600;margin-bottom:1.5rem;padding-bottom:8px;border-bottom:2px solid #E8C547}
+
+/* ===================== LANDING ===================== */
+.landing-frame{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.12);max-width:900px}
+.browser-bar{background:#f0f0f0;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #ddd}
+.browser-dots{display:flex;gap:5px}
+.dot-r{width:10px;height:10px;border-radius:50%;background:#ff5f57}
+.dot-y{width:10px;height:10px;border-radius:50%;background:#febc2e}
+.dot-g{width:10px;height:10px;border-radius:50%;background:#28c840}
+.url-bar{flex:1;background:#fff;border:1px solid #ddd;border-radius:6px;padding:4px 10px;font-size:11px;color:#888}
+
+/* Landing nav */
+.l-nav{background:#1a1a1a;padding:14px 32px;display:flex;justify-content:space-between;align-items:center}
+.l-logo{font-size:16px;font-weight:700;color:#fff;letter-spacing:.08em}
+.l-nav-links{display:flex;gap:24px}
+.l-nav-link{font-size:11px;color:rgba(255,255,255,.6);text-decoration:none}
+.l-nav-cta{font-size:11px;background:#E8C547;color:#1a1a1a;padding:6px 14px;border-radius:5px;font-weight:700}
+
+/* Landing hero */
+.l-hero{background:#1a1a1a;padding:64px 32px 56px;position:relative;overflow:hidden}
+.l-hero-road{position:absolute;inset:0;opacity:.18}
+.l-hero-content{position:relative;z-index:2;max-width:620px}
+.l-eyebrow{font-size:10px;color:#E8C547;text-transform:uppercase;letter-spacing:.1em;font-weight:600;margin-bottom:16px}
+.l-h1{font-size:36px;font-weight:500;color:#fff;line-height:1.2;margin-bottom:16px}
+.l-h1 span{color:#E8C547}
+.l-sub{font-size:14px;color:rgba(255,255,255,.6);line-height:1.7;max-width:520px;margin-bottom:28px}
+.l-hero-cta{display:inline-block;background:#E8C547;color:#1a1a1a;padding:12px 24px;border-radius:6px;font-size:13px;font-weight:700;margin-right:12px}
+.l-hero-cta2{font-size:13px;color:rgba(255,255,255,.5)}
+
+/* Logo strip */
+.l-logos{background:#111;padding:18px 32px;display:flex;align-items:center;gap:0;border-top:1px solid #2a2a2a}
+.l-logos-label{font-size:10px;color:#555;text-transform:uppercase;letter-spacing:.08em;margin-right:24px;white-space:nowrap}
+.l-logo-items{display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+.l-logo-item{font-size:11px;color:#444;font-weight:600;letter-spacing:.04em;white-space:nowrap}
+
+/* Landing case section */
+.l-cases-header{background:#f8f8f6;padding:40px 32px 24px}
+.l-cases-eye{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.09em;margin-bottom:8px}
+.l-cases-h{font-size:22px;font-weight:500;color:#1a1a1a;line-height:1.3}
+
+.l-case{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #eee}
+.l-case:nth-child(even){background:#fafaf8}
+.l-case-left{padding:28px 32px;border-right:1px solid #eee}
+.l-case-right{padding:28px 32px}
+.l-case-num{font-size:32px;font-weight:500;color:#e8e8e4;line-height:1;margin-bottom:8px}
+.l-case-tag{font-size:10px;color:#E8C547;text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:6px}
+.l-case-name{font-size:17px;font-weight:500;color:#1a1a1a;margin-bottom:8px}
+.l-case-sector{font-size:12px;color:#888;margin-bottom:12px}
+.l-case-body{font-size:12px;color:#666;line-height:1.65}
+.l-case-services{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.l-service-pill{font-size:10px;padding:3px 8px;border-radius:20px;background:#f0f0ec;color:#666;border:1px solid #e5e5e5}
+.l-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.l-metric{background:#f0f0ec;border-radius:8px;padding:10px 12px}
+.l-metric-val{font-size:20px;font-weight:500;color:#1a1a1a}
+.l-metric-label{font-size:10px;color:#888;margin-top:2px}
+.l-gallery{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.l-gallery-item{background:#1a1a1a;border-radius:6px;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center}
+.l-gallery-label{font-size:8px;color:#555;text-align:center}
+
+/* Landing CTA final */
+.l-cta-section{background:#1a1a1a;padding:40px 32px;text-align:center}
+.l-cta-h{font-size:22px;font-weight:500;color:#fff;margin-bottom:8px}
+.l-cta-sub{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:20px;line-height:1.6}
+.l-cta-btn{display:inline-block;background:#E8C547;color:#1a1a1a;padding:12px 28px;border-radius:6px;font-size:13px;font-weight:700}
+.l-cta-note{font-size:11px;color:#555;margin-top:8px}
+
+/* ===================== META ===================== */
+.meta-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.meta-label{font-size:10px;font-weight:700;color:#666;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
+
+.phone{background:#1a1a1a;border-radius:32px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,.22)}
+.phone-screen{background:#fff;border-radius:23px;overflow:hidden}
+
+.fb-top{background:#fff;padding:7px 10px;display:flex;align-items:center;gap:6px;border-bottom:1px solid #e5e5e5}
+.fb-logo-sq{width:22px;height:22px;background:#1877F2;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff}
+.fb-srch{flex:1;background:#f0f2f5;border-radius:14px;height:18px}
+.fb-ic{width:18px;height:18px;background:#e4e6ea;border-radius:50%}
+
+.post-hd{padding:8px 10px 5px;display:flex;align-items:center;gap:7px}
+.p-av{width:30px;height:30px;border-radius:50%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#E8C547;flex-shrink:0}
+.p-name{font-size:11px;font-weight:700;color:#050505}
+.p-sp{font-size:9px;color:#65676B}
+.p-more{font-size:14px;color:#65676B;margin-left:auto}
+
+.ad-sq{width:100%;aspect-ratio:1;position:relative;overflow:hidden}
+.road-svg{position:absolute;inset:0;width:100%;height:100%}
+.ad-ov{position:absolute;inset:0;background:rgba(18,18,18,.72)}
+.ad-cnt{position:absolute;inset:0;padding:14px;display:flex;flex-direction:column;justify-content:space-between}
+.ybar{width:30px;height:3px;background:#E8C547;border-radius:2px;margin-bottom:8px}
+.ad-eye{font-size:8px;color:#E8C547;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;font-weight:600;opacity:.9}
+.ad-claim{font-size:13px;font-weight:500;color:#fff;line-height:1.3}
+.ad-claim em{color:#E8C547;font-style:normal}
+.ad-foot{display:flex;justify-content:space-between;align-items:flex-end;margin-top:6px}
+.ad-clients{font-size:7px;color:rgba(255,255,255,.4);line-height:1.5}
+.ad-logo-sm{font-size:8px;color:rgba(255,255,255,.35);font-weight:700;letter-spacing:.06em}
+
+.cta-strip{padding:7px 10px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #f0f0f0}
+.cta-domain{font-size:9px;color:#65676B}
+.cta-y{background:#E8C547;border-radius:5px;padding:5px 10px;font-size:10px;font-weight:700;color:#1a1a1a}
+
+/* Story */
+.story-phone{background:#1a1a1a;border-radius:32px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,.22)}
+.story-screen{background:#1a1a1a;border-radius:23px;overflow:hidden}
+.story-ad{width:100%;aspect-ratio:9/18;position:relative;overflow:hidden}
+.story-cnt{position:absolute;inset:0;padding:12px;display:flex;flex-direction:column;justify-content:space-between}
+.s-prog{display:flex;gap:3px;margin-bottom:6px}
+.s-bar{height:2px;flex:1;border-radius:2px;background:rgba(255,255,255,.25)}
+.s-bar.done{background:#fff}
+.s-bar.act{background:#E8C547}
+.s-head{display:flex;align-items:center;gap:6px}
+.s-av{width:22px;height:22px;border-radius:50%;background:#E8C547;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;color:#1a1a1a;border:1px solid #fff;flex-shrink:0}
+.s-name{font-size:9px;font-weight:600;color:#fff}
+.s-sp{font-size:8px;color:rgba(255,255,255,.5)}
+.s-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:6px 0}
+.s-claim{font-size:18px;font-weight:500;color:#fff;line-height:1.2}
+.s-sub{font-size:8px;color:rgba(255,255,255,.5);margin-top:10px;line-height:1.5}
+.s-cta{display:flex;flex-direction:column;align-items:center;gap:5px}
+.s-swipe{font-size:8px;color:rgba(255,255,255,.45)}
+.s-btn{background:#E8C547;border-radius:20px;padding:7px 22px;font-size:10px;font-weight:700;color:#1a1a1a}
+
+/* ===================== LINKEDIN ===================== */
+.li-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.li-phone{background:#1a1a1a;border-radius:32px;padding:10px;box-shadow:0 8px 24px rgba(0,0,0,.22)}
+.li-screen{background:#f3f2ef;border-radius:23px;overflow:hidden}
+.li-top{background:#fff;padding:8px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid #e0dbd3}
+.li-logo{width:22px;height:22px;background:#0A66C2;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.li-srch{flex:1;background:#eef3f8;border-radius:4px;height:20px;border:1px solid #c9cdd2}
+.li-ic{width:18px;height:18px;background:#e0dbd3;border-radius:3px}
+
+.li-feed-item{background:#fff;margin:6px 8px;border-radius:8px;overflow:hidden;border:1px solid #e0dbd3}
+.li-post-hd{padding:10px 12px 6px;display:flex;align-items:flex-start;gap:8px}
+.li-av{width:36px;height:36px;border-radius:50%;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#E8C547;flex-shrink:0}
+.li-meta{flex:1}
+.li-name{font-size:12px;font-weight:700;color:#000}
+.li-role{font-size:10px;color:#666;line-height:1.3}
+.li-sp{font-size:9px;color:#666}
+.li-sp-dot{color:#0A66C2;font-size:8px}
+
+.li-copy{padding:0 12px 8px;font-size:11px;color:#1a1a1a;line-height:1.6}
+.li-copy strong{font-weight:700}
+
+.li-ad-img{width:100%;aspect-ratio:1.91;background:#1a1a1a;position:relative;overflow:hidden}
+.li-ad-cnt{position:absolute;inset:0;padding:16px;display:flex;flex-direction:column;justify-content:space-between}
+.li-ad-eye{font-size:9px;color:#E8C547;text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:6px}
+.li-ad-claim{font-size:15px;font-weight:500;color:#fff;line-height:1.3}
+.li-ad-claim em{color:#E8C547;font-style:normal}
+.li-ad-foot{display:flex;justify-content:space-between;align-items:flex-end}
+.li-ad-sub{font-size:9px;color:rgba(255,255,255,.5);line-height:1.4}
+.li-ad-logo{font-size:9px;color:rgba(255,255,255,.35);font-weight:700;letter-spacing:.05em}
+
+.li-cta-strip{padding:8px 12px;background:#f3f2ef;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e0dbd3}
+.li-domain{font-size:10px;color:#666}
+.li-cta-btn{background:#0A66C2;color:#fff;border-radius:20px;padding:6px 14px;font-size:10px;font-weight:600}
+
+/* Lead gen form */
+.li-form{background:#fff;margin:6px 8px;border-radius:8px;overflow:hidden;border:1px solid #e0dbd3;padding:14px}
+.li-form-h{font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:4px}
+.li-form-sub{font-size:11px;color:#666;margin-bottom:12px;line-height:1.5}
+.li-field{background:#f3f2ef;border:1px solid #e0dbd3;border-radius:4px;padding:7px 10px;font-size:10px;color:#1a1a1a;margin-bottom:6px;width:100%}
+.li-field-label{font-size:9px;color:#888;margin-bottom:2px}
+.li-submit{background:#0A66C2;color:#fff;border-radius:20px;padding:8px 0;font-size:11px;font-weight:600;text-align:center;width:100%;margin-top:4px}
+.li-disclaimer{font-size:9px;color:#888;margin-top:6px;line-height:1.4}
+
+/* ===================== GOOGLE ADS ===================== */
+.google-grid{display:grid;gap:20px}
+
+/* Search SERP */
+.serp-frame{background:#fff;border-radius:12px;padding:20px 24px;box-shadow:0 4px 16px rgba(0,0,0,.08);max-width:680px}
+.serp-top{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.g-logo{font-size:20px;font-weight:700;letter-spacing:-.5px}
+.g-logo span:nth-child(1){color:#4285F4}
+.g-logo span:nth-child(2){color:#EA4335}
+.g-logo span:nth-child(3){color:#FBBC05}
+.g-logo span:nth-child(4){color:#4285F4}
+.g-logo span:nth-child(5){color:#34A853}
+.g-logo span:nth-child(6){color:#EA4335}
+.serp-search{flex:1;border:1px solid #dfe1e5;border-radius:24px;padding:8px 16px;font-size:13px;color:#1a1a1a;display:flex;align-items:center;justify-content:space-between}
+.serp-search-text{color:#1a1a1a}
+.serp-search-icon{color:#4285F4;font-size:14px}
+
+.serp-ad{border:1px solid #e8eaed;border-radius:8px;padding:14px 16px;margin-bottom:10px}
+.serp-ad:hover{border-color:#c5c6c7}
+.serp-ad-label{display:inline-block;border:1px solid #006621;border-radius:3px;padding:1px 4px;font-size:9px;color:#006621;font-weight:600;margin-bottom:6px;margin-right:6px}
+.serp-domain{font-size:12px;color:#202124;display:inline}
+.serp-title{font-size:16px;color:#1a0dab;line-height:1.3;margin-bottom:4px}
+.serp-desc{font-size:13px;color:#4d5156;line-height:1.5}
+.serp-sitelinks{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px}
+.serp-sitelink{font-size:12px;color:#1a0dab}
+.serp-sitelink-desc{font-size:11px;color:#4d5156}
+
+/* Display banners */
+.banners-grid{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+.banner-col{display:flex;flex-direction:column;gap:12px}
+
+.banner-leaderboard{width:100%;max-width:580px;height:60px;background:#1a1a1a;border-radius:6px;display:flex;align-items:center;padding:0 16px;gap:16px;position:relative;overflow:hidden}
+.banner-rect{width:200px;height:150px;background:#1a1a1a;border-radius:8px;position:relative;overflow:hidden;flex-shrink:0}
+.banner-half{width:200px;height:300px;background:#1a1a1a;border-radius:8px;position:relative;overflow:hidden;flex-shrink:0}
+.banner-sky{width:100px;height:500px;background:#1a1a1a;border-radius:8px;position:relative;overflow:hidden;flex-shrink:0}
+
+.banner-road{position:absolute;inset:0;width:100%;height:100%;opacity:.3}
+.banner-ov{position:absolute;inset:0;background:rgba(20,20,20,.65)}
+.banner-cnt{position:absolute;inset:0;padding:10px 12px;display:flex;flex-direction:column;justify-content:space-between}
+.b-eye{font-size:7px;color:#E8C547;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.b-claim{font-size:11px;font-weight:500;color:#fff;line-height:1.3}
+.b-claim-sm{font-size:9px;font-weight:500;color:#fff;line-height:1.3}
+.b-claim em{color:#E8C547;font-style:normal}
+.b-logo{font-size:7px;color:rgba(255,255,255,.4);font-weight:700;letter-spacing:.06em}
+.b-cta{background:#E8C547;border-radius:4px;padding:4px 8px;font-size:8px;font-weight:700;color:#1a1a1a;display:inline-block}
+.b-sub{font-size:7px;color:rgba(255,255,255,.5);line-height:1.4}
+
+/* Leaderboard horizontal layout */
+.b-ld-content{flex:1;display:flex;flex-direction:column;justify-content:center;gap:2px;position:relative;z-index:2}
+.b-ld-eye{font-size:7px;color:#E8C547;text-transform:uppercase;letter-spacing:.07em;font-weight:600}
+.b-ld-claim{font-size:11px;font-weight:500;color:#fff;line-height:1.2}
+.b-ld-sub{font-size:8px;color:rgba(255,255,255,.5)}
+.b-ld-cta{background:#E8C547;border-radius:4px;padding:5px 10px;font-size:9px;font-weight:700;color:#1a1a1a;white-space:nowrap;flex-shrink:0;position:relative;z-index:2}
+.b-ld-logo{font-size:7px;color:rgba(255,255,255,.3);font-weight:700;letter-spacing:.06em;white-space:nowrap;position:relative;z-index:2}
+
+/* Sky vertical text */
+.sky-vertical{position:absolute;inset:0;padding:10px 8px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;z-index:2}
+.sky-words{display:flex;flex-direction:column;align-items:center;gap:2px}
+.sky-word{font-size:10px;font-weight:500;color:#fff;text-align:center;line-height:1.2}
+.sky-word.accent{color:#E8C547}
+
+@media(max-width:700px){
+  .l-case{grid-template-columns:1fr}
+  .meta-grid{grid-template-columns:1fr 1fr}
+  .li-grid{grid-template-columns:1fr}
+  .banners-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- SVG ruta reutilizable -->
+<svg width="0" height="0" style="position:absolute">
+<defs>
+<symbol id="road" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+  <rect width="400" height="400" fill="#0d0d0d"/>
+  <rect y="0" width="400" height="185" fill="#0d0d0d"/>
+  <rect y="140" width="400" height="50" fill="#1a1008"/>
+  <rect y="180" width="400" height="5" fill="#3a2208"/>
+  <rect y="185" width="400" height="215" fill="#0a0a06"/>
+  <polygon points="138,185 262,185 345,400 55,400" fill="#1e1e1e"/>
+  <polygon points="193,192 207,192 214,225 186,225" fill="#3a3000" opacity=".8"/>
+  <polygon points="191,238 209,238 218,275 182,275" fill="#3a3000" opacity=".8"/>
+  <polygon points="188,288 212,288 224,330 176,330" fill="#3a3000" opacity=".8"/>
+  <polygon points="185,343 215,343 230,390 170,390" fill="#3a3000" opacity=".8"/>
+  <polygon points="55,400 138,185 100,185 10,400" fill="#0f0f0a"/>
+  <polygon points="345,400 262,185 300,185 390,400" fill="#0f0f0a"/>
+  <ellipse cx="200" cy="183" rx="20" ry="4" fill="#E8C547" opacity=".2"/>
+  <ellipse cx="200" cy="183" rx="6" ry="2" fill="#fff" opacity=".25"/>
+  <circle cx="70" cy="28" r="1.2" fill="#fff" opacity=".5"/>
+  <circle cx="140" cy="14" r="1" fill="#fff" opacity=".45"/>
+  <circle cx="210" cy="38" r="1.2" fill="#fff" opacity=".4"/>
+  <circle cx="290" cy="18" r="1" fill="#fff" opacity=".5"/>
+  <circle cx="340" cy="52" r="1.2" fill="#fff" opacity=".45"/>
+  <circle cx="40" cy="65" r="1" fill="#fff" opacity=".35"/>
+  <circle cx="360" cy="80" r="1.2" fill="#fff" opacity=".4"/>
+  <circle cx="115" cy="55" r="1" fill="#fff" opacity=".4"/>
+  <circle cx="245" cy="70" r="1" fill="#fff" opacity=".35"/>
+  <circle cx="320" cy="42" r="1.2" fill="#fff" opacity=".4"/>
+</symbol>
+</defs>
+</svg>
+
+<!-- ==================== LANDING ==================== -->
+<div class="section">
+  <div class="sec-title">Landing page — sector que mueve Argentina</div>
+  <div class="landing-frame">
+    <div class="browser-bar">
+      <div class="browser-dots"><div class="dot-r"></div><div class="dot-y"></div><div class="dot-g"></div></div>
+      <div class="url-bar">trompoagencia.com/el-sector-que-mueve-argentina</div>
+    </div>
+
+    <!-- Nav -->
+    <div class="l-nav">
+      <div class="l-logo">TROMPO</div>
+      <div class="l-nav-links">
+        <span class="l-nav-link">Servicios</span>
+        <span class="l-nav-link">Casos</span>
+        <span class="l-nav-link">Nosotros</span>
+        <span class="l-nav-cta">Hablemos</span>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <div class="l-hero">
+      <svg class="l-hero-road" style="position:absolute;inset:0;width:100%;height:100%"><use href="#road"/></svg>
+      <div class="l-hero-content">
+        <div class="l-eyebrow">El sector que mueve Argentina</div>
+        <div class="l-h1">Más de 10 años ordenando<br>el marketing de <span>transporte,<br>agro y autopartes.</span></div>
+        <div class="l-sub">Las marcas del transporte pesado, liviano, autopartes y agro están en un momento particular: más canales, más datos, más inversión — y sin embargo, cada vez más difícil demostrar qué parte del marketing realmente mueve el negocio.</div>
+        <div>
+          <span class="l-hero-cta">Ver los casos →</span>
+          <span class="l-hero-cta2">o hablemos directo</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Logo strip -->
+    <div class="l-logos">
+      <div class="l-logos-label">Trabajamos con</div>
+      <div class="l-logo-items">
+        <span class="l-logo-item">VOLVO TRUCKS</span>
+        <span class="l-logo-item">SUPER WALTER</span>
+        <span class="l-logo-item">FRAMEX</span>
+        <span class="l-logo-item">DENSO</span>
+        <span class="l-logo-item">KAMAX MOTOS</span>
+        <span class="l-logo-item">AMES MOTOS</span>
+      </div>
+    </div>
+
+    <!-- Cases header -->
+    <div class="l-cases-header">
+      <div class="l-cases-eye">Casos del sector</div>
+      <div class="l-cases-h">El problema no es la inversión. Es la estructura.<br>Así lo resolvimos.</div>
+    </div>
+
+    <!-- Case 01 — Volvo -->
+    <div class="l-case">
+      <div class="l-case-left">
+        <div class="l-case-num">01</div>
+        <div class="l-case-tag">Fabricante · Transporte pesado</div>
+        <div class="l-case-name">Volvo Trucks Argentina</div>
+        <div class="l-case-sector">Paid media · Desarrollo web · Reporting</div>
+        <div class="l-case-body">Ecosistema digital fragmentado: campañas de paid activas sin alineación entre sí, reporting que no informaba decisiones y un sitio que no acompañaba el ciclo de compra del sector. Restructuramos la arquitectura completa y conectamos cada pieza en un sistema unificado.</div>
+        <div class="l-case-services">
+          <span class="l-service-pill">Google Ads</span>
+          <span class="l-service-pill">Meta Ads</span>
+          <span class="l-service-pill">Web</span>
+          <span class="l-service-pill">Reporting</span>
+        </div>
+      </div>
+      <div class="l-case-right">
+        <div class="l-metrics">
+          <div class="l-metric"><div class="l-metric-val" style="color:#E8C547">↑ X%</div><div class="l-metric-label">leads calificados</div></div>
+          <div class="l-metric"><div class="l-metric-val" style="color:#E8C547">↓ X%</div><div class="l-metric-label">costo por lead</div></div>
+          <div class="l-metric"><div class="l-metric-val">1</div><div class="l-metric-label">sistema integrado</div></div>
+          <div class="l-metric"><div class="l-metric-val">X sem</div><div class="l-metric-label">implementación</div></div>
+        </div>
+        <div class="l-gallery">
+          <div class="l-gallery-item"><div class="l-gallery-label" style="color:#E8C547;font-size:7px">Campaña</div></div>
+          <div class="l-gallery-item"><div class="l-gallery-label" style="color:#E8C547;font-size:7px">Dashboard</div></div>
+          <div class="l-gallery-item"><div class="l-gallery-item" style="background:#111;width:100%;height:100%;display:flex;align-items:center;justify-content:center"><div style="font-size:7px;color:#E8C547">Video</div></div></div>
+        </div>
+        <div style="margin-top:10px;padding:10px;background:#f8f8f6;border-radius:6px;border-left:3px solid #E8C547">
+          <div style="font-size:11px;color:#666;font-style:italic;line-height:1.55">"Antes teníamos datos. Ahora tenemos claridad."</div>
+          <div style="font-size:10px;color:#888;margin-top:4px">— [Nombre], Volvo Trucks Argentina</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 02 — Super Walter -->
+    <div class="l-case">
+      <div class="l-case-left">
+        <div class="l-case-num">02</div>
+        <div class="l-case-tag">Maquinaria agrícola</div>
+        <div class="l-case-name">Super Walter Maquinaria Agrícola</div>
+        <div class="l-case-sector">Branding digital · Web · Social · Meta Ads</div>
+        <div class="l-case-body">Empresa con fuerte presencia offline pero sin ecosistema digital estructurado. Construimos la presencia desde la base: identidad, sitio web orientado a conversión y campañas segmentadas por tipo de maquinaria y zona geográfica.</div>
+        <div class="l-case-services">
+          <span class="l-service-pill">Branding</span>
+          <span class="l-service-pill">Web</span>
+          <span class="l-service-pill">Social media</span>
+          <span class="l-service-pill">Meta Ads</span>
+        </div>
+      </div>
+      <div class="l-case-right">
+        <div class="l-metrics">
+          <div class="l-metric"><div class="l-metric-val" style="color:#E8C547">↑ X%</div><div class="l-metric-label">consultas online</div></div>
+          <div class="l-metric"><div class="l-metric-val">X prov</div><div class="l-metric-label">regiones nuevas</div></div>
+        </div>
+        <div class="l-gallery">
+          <div class="l-gallery-item"></div>
+          <div class="l-gallery-item"></div>
+          <div class="l-gallery-item"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 03 — Framex -->
+    <div class="l-case">
+      <div class="l-case-left">
+        <div class="l-case-num">03</div>
+        <div class="l-case-tag">Logística · Transporte</div>
+        <div class="l-case-name">Framex Logística</div>
+        <div class="l-case-sector">LinkedIn · Contenido B2B · Web · Branding</div>
+        <div class="l-case-body">Empresa con operación sólida y sin presencia digital que la acompañara. Desarrollamos una estrategia de posicionamiento B2B centrada en LinkedIn que mostró la operación real y posicionó a Framex como referente del sector.</div>
+        <div class="l-case-services">
+          <span class="l-service-pill">LinkedIn</span>
+          <span class="l-service-pill">Contenido B2B</span>
+          <span class="l-service-pill">Web</span>
+        </div>
+      </div>
+      <div class="l-case-right">
+        <div class="l-metrics">
+          <div class="l-metric"><div class="l-metric-val" style="color:#E8C547">↑ X%</div><div class="l-metric-label">alcance LinkedIn</div></div>
+          <div class="l-metric"><div class="l-metric-val">X</div><div class="l-metric-label">leads B2B / mes</div></div>
+        </div>
+        <div class="l-gallery">
+          <div class="l-gallery-item"></div>
+          <div class="l-gallery-item"></div>
+          <div class="l-gallery-item"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA final -->
+    <div class="l-cta-section">
+      <div class="l-cta-h">¿Tu empresa está en el sector que mueve Argentina?</div>
+      <div class="l-cta-sub">Si reconocés alguno de estos problemas en tu operación,<br>probablemente valga la pena una conversación.</div>
+      <div class="l-cta-btn">Hablemos →</div>
+      <div class="l-cta-note">Sin compromiso. Una reunión de 30 minutos, sin PowerPoint.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== META ADS ==================== -->
+<div class="section">
+  <div class="sec-title">Meta Ads — Facebook + Instagram · Tres temperaturas</div>
+  <div class="meta-grid">
+
+    <!-- Facebook feed frío -->
+    <div>
+      <div class="meta-label">Facebook feed · Frío</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="fb-top"><div class="fb-logo-sq">f</div><div class="fb-srch"></div><div class="fb-ic"></div></div>
+          <div class="post-hd"><div class="p-av">TR</div><div><div class="p-name">Trompo Agencia</div><div class="p-sp">Patrocinado · 🌐</div></div><div class="p-more">···</div></div>
+          <div class="ad-sq">
+            <svg class="road-svg"><use href="#road"/></svg>
+            <div class="ad-ov"></div>
+            <div class="ad-cnt">
+              <div>
+                <div class="ybar"></div>
+                <div class="ad-eye">El sector que mueve Argentina</div>
+                <div class="ad-claim">Cuando el<br>marketing no<br>está alineado,<br><em>tu negocio<br>lo siente.</em></div>
+              </div>
+              <div class="ad-foot">
+                <div class="ad-clients">Transporte · Agro · Autopartes<br>Volvo · Super Walter · Framex</div>
+                <div class="ad-logo-sm">TROMPO</div>
+              </div>
+            </div>
+          </div>
+          <div class="cta-strip"><div class="cta-domain">trompoagencia.com</div><div class="cta-y">Ver casos →</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Facebook feed templado -->
+    <div>
+      <div class="meta-label">Facebook feed · Templado</div>
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="fb-top"><div class="fb-logo-sq">f</div><div class="fb-srch"></div><div class="fb-ic"></div></div>
+          <div class="post-hd"><div class="p-av">TR</div><div><div class="p-name">Trompo Agencia</div><div class="p-sp">Patrocinado · 🌐</div></div><div class="p-more">···</div></div>
+          <div class="ad-sq">
+            <svg class="road-svg"><use href="#road"/></svg>
+            <div class="ad-ov"></div>
+            <div class="ad-cnt">
+              <div>
+                <div class="ybar"></div>
+                <div class="ad-eye">Caso · Transporte pesado</div>
+                <div class="ad-claim">Trabajamos con<br>Volvo Trucks.<br><em>Esto es lo que<br>ordenamos.</em></div>
+              </div>
+              <div class="ad-foot">
+                <div class="ad-clients">10 años · Sector motor<br>Argentina</div>
+                <div class="ad-logo-sm">TROMPO</div>
+              </div>
+            </div>
+          </div>
+          <div class="cta-strip"><div class="cta-domain">trompoagencia.com</div><div class="cta-y">Ver caso →</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instagram story remarketing -->
+    <div>
+      <div class="meta-label">Instagram story · Remarketing</div>
+      <div class="story-phone">
+        <div class="story-screen">
+          <div class="story-ad">
+            <svg class="road-svg"><use href="#road"/></svg>
+            <div class="ad-ov"></div>
+            <div class="story-cnt">
+              <div>
+                <div class="s-prog"><div class="s-bar done"></div><div class="s-bar done"></div><div class="s-bar act"></div></div>
+                <div class="s-head">
+                  <div class="s-av">TR</div>
+                  <div><div class="s-name">trompoagencia</div><div class="s-sp">Publicidad</div></div>
+                </div>
+              </div>
+              <div class="s-body">
+                <div style="width:28px;height:2px;background:#E8C547;border-radius:2px;margin-bottom:10px"></div>
+                <div style="font-size:8px;color:#E8C547;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-weight:600">Remarketing</div>
+                <div class="s-claim">Una mirada<br>externa.<br>30 minutos.<br><span style="color:#E8C547">Sin<br>PowerPoint.</span></div>
+                <div class="s-sub">Si algo de lo que viste resonó,<br>probablemente valga<br>una conversación.</div>
+              </div>
+              <div class="s-cta">
+                <div class="s-swipe">Sin compromiso.</div>
+                <div class="s-btn">Hablemos →</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== LINKEDIN ADS ==================== -->
+<div class="section">
+  <div class="sec-title">LinkedIn Ads — Sponsored content + Lead Gen Form</div>
+  <div class="li-grid">
+
+    <!-- Sponsored content imagen -->
+    <div>
+      <div class="meta-label">Sponsored content · Frío</div>
+      <div class="li-phone">
+        <div class="li-screen">
+          <div class="li-top"><div class="li-logo">in</div><div class="li-srch"></div><div class="li-ic"></div></div>
+          <div class="li-feed-item">
+            <div class="li-post-hd">
+              <div class="li-av">TR</div>
+              <div class="li-meta">
+                <div class="li-name">Trompo Agencia</div>
+                <div class="li-role">Marketing digital · Córdoba, Argentina</div>
+                <div class="li-sp">Promocionado <span class="li-sp-dot">·</span> <span style="font-size:10px">🌐</span></div>
+              </div>
+            </div>
+            <div class="li-copy">Las marcas del <strong>transporte pesado, liviano, autopartes y agro</strong> están invirtiendo más en marketing que nunca. Y sin embargo, cada vez más difícil demostrar qué parte está moviendo el negocio.<br><br>El problema no es la inversión. Es la estructura.<br><br>Así lo resolvimos con Volvo Trucks, Super Walter y Framex →</div>
+            <div class="li-ad-img">
+              <svg style="position:absolute;inset:0;width:100%;height:100%"><use href="#road"/></svg>
+              <div style="position:absolute;inset:0;background:rgba(18,18,18,.68)"></div>
+              <div class="li-ad-cnt">
+                <div>
+                  <div class="li-ad-eye">El sector que mueve Argentina</div>
+                  <div class="li-ad-claim">Cuando el marketing<br>no está alineado,<br><em>tu negocio lo siente.</em></div>
+                </div>
+                <div class="li-ad-foot">
+                  <div class="li-ad-sub">Volvo Trucks · Super Walter<br>Framex · Denso · Kamax</div>
+                  <div class="li-ad-logo">TROMPO</div>
+                </div>
+              </div>
+            </div>
+            <div class="li-cta-strip">
+              <div>
+                <div style="font-size:9px;color:#888">trompoagencia.com</div>
+                <div style="font-size:11px;font-weight:600;color:#1a1a1a">10 años ordenando el marketing del sector</div>
+              </div>
+              <div class="li-cta-btn">Más información</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lead Gen Form -->
+    <div>
+      <div class="meta-label">Lead Gen Form · Caliente</div>
+      <div class="li-phone">
+        <div class="li-screen">
+          <div class="li-top"><div class="li-logo">in</div><div class="li-srch"></div><div class="li-ic"></div></div>
+          <div class="li-feed-item">
+            <div class="li-post-hd">
+              <div class="li-av">TR</div>
+              <div class="li-meta">
+                <div class="li-name">Trompo Agencia</div>
+                <div class="li-role">Patrocinado</div>
+              </div>
+            </div>
+            <div class="li-form">
+              <div class="li-form-h">Una mirada externa. 30 minutos.</div>
+              <div class="li-form-sub">Si algo de lo que viste resonó, completá el formulario y coordinamos una conversación. Sin PowerPoint. Sin compromiso.</div>
+              <div>
+                <div class="li-field-label">Nombre completo</div>
+                <div class="li-field">Juan García</div>
+              </div>
+              <div>
+                <div class="li-field-label">Email laboral</div>
+                <div class="li-field">j.garcia@empresa.com</div>
+              </div>
+              <div>
+                <div class="li-field-label">Empresa</div>
+                <div class="li-field">Transportes García S.A.</div>
+              </div>
+              <div>
+                <div class="li-field-label">Cargo</div>
+                <div class="li-field">Director de Marketing</div>
+              </div>
+              <div>
+                <div class="li-field-label">¿Cuál es tu principal desafío hoy? (opcional)</div>
+                <div class="li-field" style="height:40px"></div>
+              </div>
+              <div class="li-submit">Enviar →</div>
+              <div class="li-disclaimer">Al enviar aceptás que Trompo Agencia te contacte. Sin compromiso.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ==================== GOOGLE ADS ==================== -->
+<div class="section">
+  <div class="sec-title">Google Ads — Search SERP + Display banners</div>
+
+  <!-- Search -->
+  <div style="margin-bottom:24px">
+    <div class="meta-label" style="margin-bottom:12px">Google Search — SERP</div>
+    <div class="serp-frame">
+      <div class="serp-top">
+        <div class="g-logo"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
+        <div class="serp-search">
+          <span class="serp-search-text">agencia marketing transporte pesado argentina</span>
+          <span class="serp-search-icon">&#9654;</span>
+        </div>
+      </div>
+
+      <!-- Ad 1 -->
+      <div class="serp-ad">
+        <div><span class="serp-ad-label">Anuncio</span><span class="serp-domain">trompoagencia.com › sector-que-mueve-argentina</span></div>
+        <div class="serp-title">Marketing para el sector que mueve Argentina — Trompo</div>
+        <div class="serp-desc">10 años acompañando a Volvo Trucks, Super Walter y Framex. Cuando el marketing no está alineado, tu negocio lo siente. Revisamos tu ecosistema juntos.</div>
+        <div class="serp-sitelinks">
+          <div><div class="serp-sitelink">Ver casos del sector</div><div class="serp-sitelink-desc">Transporte · Agro · Autopartes</div></div>
+          <div><div class="serp-sitelink">Hablemos — 30 min</div><div class="serp-sitelink-desc">Sin PowerPoint. Sin compromiso.</div></div>
+          <div><div class="serp-sitelink">Caso Volvo Trucks</div><div class="serp-sitelink-desc">Ecosistema digital ordenado</div></div>
+          <div><div class="serp-sitelink">Caso Super Walter</div><div class="serp-sitelink-desc">Maquinaria agrícola desde cero</div></div>
+        </div>
+      </div>
+
+      <!-- Ad 2 variante -->
+      <div class="serp-ad">
+        <div><span class="serp-ad-label">Anuncio</span><span class="serp-domain">trompoagencia.com › casos</span></div>
+        <div class="serp-title">No falta inversión. Falta sistema. — Trompo Agencia</div>
+        <div class="serp-desc">Transporte pesado, liviano, agro y autopartes. Más de 10 años ordenando ecosistemas digitales en el sector. Volvo Trucks · Super Walter · Framex.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Display banners -->
+  <div class="meta-label" style="margin-bottom:12px">Google Display — Banners</div>
+  <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+
+    <!-- Leaderboard 728x90 -->
+    <div style="width:100%;max-width:580px">
+      <div style="font-size:10px;color:#888;margin-bottom:5px">Leaderboard 728×90</div>
+      <div class="banner-leaderboard">
+        <svg class="banner-road"><use href="#road"/></svg>
+        <div class="banner-ov"></div>
+        <div style="width:3px;height:36px;background:#E8C547;border-radius:2px;position:relative;z-index:2;flex-shrink:0"></div>
+        <div class="b-ld-content">
+          <div class="b-ld-eye">El sector que mueve Argentina</div>
+          <div class="b-ld-claim">No falta inversión. Falta sistema.</div>
+          <div class="b-ld-sub">Transporte · Agro · Autopartes · trompoagencia.com</div>
+        </div>
+        <div class="b-ld-cta">Ver casos →</div>
+        <div class="b-ld-logo">TROMPO</div>
+      </div>
+    </div>
+
+    <!-- Rectangle 300x250 + Half page + Skyscraper -->
+    <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+
+      <!-- Rectangle 300x250 frío -->
+      <div>
+        <div style="font-size:10px;color:#888;margin-bottom:5px">Rectangle 300×250 · Frío</div>
+        <div class="banner-rect">
+          <svg class="banner-road"><use href="#road"/></svg>
+          <div class="banner-ov"></div>
+          <div class="banner-cnt">
+            <div>
+              <div style="width:24px;height:2px;background:#E8C547;border-radius:2px;margin-bottom:7px"></div>
+              <div class="b-eye">El sector que mueve Argentina</div>
+              <div class="b-claim">Cuando el marketing<br>no está alineado,<br><em>tu negocio lo siente.</em></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-end">
+              <div class="b-cta">Ver casos →</div>
+              <div class="b-logo">TROMPO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rectangle 300x250 remarketing -->
+      <div>
+        <div style="font-size:10px;color:#888;margin-bottom:5px">Rectangle 300×250 · Remarketing</div>
+        <div class="banner-rect">
+          <svg class="banner-road"><use href="#road"/></svg>
+          <div class="banner-ov"></div>
+          <div class="banner-cnt">
+            <div>
+              <div style="width:24px;height:2px;background:#E8C547;border-radius:2px;margin-bottom:7px"></div>
+              <div class="b-eye" style="color:rgba(232,197,71,.7)">Remarketing</div>
+              <div class="b-claim-sm">Una mirada externa.<br>30 minutos.<br><em>Sin PowerPoint.</em></div>
+              <div class="b-sub" style="margin-top:5px">Si algo resonó,<br>vale una conversación.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-end">
+              <div class="b-cta">Hablemos →</div>
+              <div class="b-logo">TROMPO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Half page 300x600 -->
+      <div>
+        <div style="font-size:10px;color:#888;margin-bottom:5px">Half page 300×600</div>
+        <div class="banner-half">
+          <svg class="banner-road"><use href="#road"/></svg>
+          <div class="banner-ov"></div>
+          <div class="banner-cnt">
+            <div>
+              <div style="width:28px;height:3px;background:#E8C547;border-radius:2px;margin-bottom:10px"></div>
+              <div class="b-eye">El sector que mueve Argentina</div>
+            </div>
+            <div>
+              <div style="font-size:16px;font-weight:500;color:#fff;line-height:1.25;margin-bottom:10px">Cuando el<br>marketing no<br>está alineado,<br><span style="color:#E8C547">tu negocio<br>lo siente.</span></div>
+              <div style="font-size:8px;color:rgba(255,255,255,.4);line-height:1.6;margin-bottom:12px">Volvo Trucks · Super Walter<br>Framex · Denso · Kamax</div>
+              <div class="b-cta">Ver casos →</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-end">
+              <div class="b-logo">TROMPO</div>
+              <div style="font-size:7px;color:rgba(255,255,255,.25)">trompoagencia.com</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skyscraper 160x600 -->
+      <div>
+        <div style="font-size:10px;color:#888;margin-bottom:5px">Skyscraper 160×600</div>
+        <div class="banner-sky">
+          <svg class="banner-road"><use href="#road"/></svg>
+          <div class="banner-ov"></div>
+          <div class="sky-vertical">
+            <div style="width:20px;height:2px;background:#E8C547;border-radius:2px"></div>
+            <div class="sky-words">
+              <div class="sky-word">NO</div>
+              <div class="sky-word">FALTA</div>
+              <div class="sky-word" style="color:rgba(255,255,255,.3)">—</div>
+              <div class="sky-word">FALTA</div>
+              <div class="sky-word accent">SISTEMA.</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+              <div class="b-cta" style="font-size:7px;padding:4px 6px;writing-mode:horizontal-tb">Ver casos →</div>
+              <div style="font-size:7px;color:rgba(255,255,255,.3);font-weight:700;letter-spacing:.05em">TROMPO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

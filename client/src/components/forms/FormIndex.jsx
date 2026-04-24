@@ -71,8 +71,8 @@ export default function FormIndex({ location = "home" }) {
   };
 
   return (
-    <div className="sib-form">
-      <form id="sib-form" onSubmit={handleSubmit}>
+    <div className="trompo-form">
+      <form id="trompo-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="NOMBRE">Ingresá tu nombre*</label>
           <input

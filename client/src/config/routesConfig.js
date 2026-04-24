@@ -29,6 +29,7 @@ const Maintenance = lazy(() => import("../pages/Maintenance.jsx"));
 const ClearCache = lazy(() => import("../pages/ClearCache"));
 const Faqs = lazy(() => import("../pages/Faqs"));
 const Reports = lazy(() => import("../pages/Reports.jsx"));
+const IndustriaMovimiento = lazy(() => import('../pages/LandingIndustriaMovimiento.jsx'))
 
 
 const PopupPage = lazy(() => import("../pages/Popupage"));
@@ -113,6 +114,7 @@ const routesConfig = {
     { path: "/clear-cache", label: "Limpiar Caché", Component: ClearCache },
     { path: "/reportes", label: "Reportes", Component: Reports },
     { path: "/popup", label: "Popup", Component: PopupPage },
+    { path: "/landing-industria-movimiento", label: "Landing Industria Movimiento", Component: IndustriaMovimiento },
   ],
 
 };

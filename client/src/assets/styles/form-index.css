@@ -1,7 +1,7 @@
 /* ---------- Reset & Base ---------- */
-#sib-form *,
-#sib-form *::before,
-#sib-form *::after {
+#trompo-form *,
+#trompo-form *::before,
+#trompo-form *::after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -9,35 +9,35 @@
 }
 
 /* ---------- Placeholders ---------- */
-#sib-form input::placeholder,
-#sib-form textarea::placeholder {
+#trompo-form input::placeholder,
+#trompo-form textarea::placeholder {
   color: #9e9e9e;
 }
 
-#sib-form input::-webkit-input-placeholder,
-#sib-form textarea::-webkit-input-placeholder {
+#trompo-form input::-webkit-input-placeholder,
+#trompo-form textarea::-webkit-input-placeholder {
   color: #9e9e9e;
 }
 
-#sib-form input:-moz-placeholder,
-#sib-form textarea:-moz-placeholder {
-  color: #9e9e9e;
-  opacity: 1;
-}
-
-#sib-form input::-moz-placeholder,
-#sib-form textarea::-moz-placeholder {
+#trompo-form input:-moz-placeholder,
+#trompo-form textarea:-moz-placeholder {
   color: #9e9e9e;
   opacity: 1;
 }
 
-#sib-form input:-ms-input-placeholder,
-#sib-form textarea:-ms-input-placeholder {
+#trompo-form input::-moz-placeholder,
+#trompo-form textarea::-moz-placeholder {
+  color: #9e9e9e;
+  opacity: 1;
+}
+
+#trompo-form input:-ms-input-placeholder,
+#trompo-form textarea:-ms-input-placeholder {
   color: #9e9e9e;
 }
 
 /* ---------- Layout ---------- */
-#sib-form {
+#trompo-form {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -72,20 +72,20 @@
   font-style: italic;
 }
 
-#sib-form input,
-#sib-form textarea,
-#sib-form select {
+#trompo-form input,
+#trompo-form textarea,
+#trompo-form select {
   font-family: inherit;
 }
 
 /* Inputs */
-#sib-form input:not([type="checkbox"]) {
+#trompo-form input:not([type="checkbox"]) {
   width: 100%;
   height: 50px;
   padding: 0 10px;
 }
 
-#sib-form textarea {
+#trompo-form textarea {
   width: 100%;
   padding: 10px;
 }
@@ -101,7 +101,7 @@
 }
 
 /* ---------- Submit Button ---------- */
-#sib-form button[type="submit"] {
+#trompo-form button[type="submit"] {
   width: 130px;
   height: 40px;
   display: -webkit-box;
@@ -132,7 +132,7 @@
   font-family: inherit;
 }
 
-#sib-form button[type="submit"]:hover {
+#trompo-form button[type="submit"]:hover {
   -webkit-transform: translateX(15px) scale(1.15);
   -moz-transform: translateX(15px) scale(1.15);
   -ms-transform: translateX(15px) scale(1.15);
@@ -141,7 +141,7 @@
   font-weight: 500;
 }
 
-#sib-form button[type="submit"] svg {
+#trompo-form button[type="submit"] svg {
   width: 20px;
   height: 20px;
 }
@@ -283,13 +283,13 @@
 /* ---------- Responsive ---------- */
 @media (min-width: 768px) {
 
-  #sib-form input,
-  #sib-form textarea,
-  #sib-form select {
+  #trompo-form input,
+  #trompo-form textarea,
+  #trompo-form select {
     font-size: 15px;
   }
 
-  #sib-form small {
+  #trompo-form small {
     font-size: 13.5px;
   }
 
@@ -304,21 +304,21 @@
 
 @media (min-width: 1024px) {
 
-  #sib-form input,
-  #sib-form textarea,
-  #sib-form select {
+  #trompo-form input,
+  #trompo-form textarea,
+  #trompo-form select {
     font-size: 16px;
   }
 
-  #sib-form small {
+  #trompo-form small {
     font-size: 14px;
   }
 }
 
 @media (min-width: 1280px) {
 
-  #sib-form input,
-  #sib-form textarea {
+  #trompo-form input,
+  #trompo-form textarea {
     font-size: 16px;
   }
 }
