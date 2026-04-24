@@ -1,29 +1,85 @@
-import "../assets/styles/landing-industria-movimiento.css";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import "../../assets/styles/landing-industria-movimiento.css";
+
+const images = [
+  [
+    `${import.meta.env.BASE_URL}assets/landing/sw.png`,
+    `${import.meta.env.BASE_URL}assets/landing/sw-mobile.png`,
+  ],
+  [
+    `${import.meta.env.BASE_URL}assets/landing/volvo.png`,
+    `${import.meta.env.BASE_URL}assets/landing/volvo-mobile.png`,
+  ],
+  [
+    `${import.meta.env.BASE_URL}assets/landing/clients.png`,
+    `${import.meta.env.BASE_URL}assets/landing/clients-mobile.png`,
+  ],
+];
 
 const LandingIndustriaMovimiento = () => {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
   const base = import.meta.env.BASE_URL?.endsWith("/")
     ? import.meta.env.BASE_URL
     : `${import.meta.env.BASE_URL}/`;
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % images.length);
+    }, 2600);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const currentImage = isMobile
+    ? images[activeSlide][1]
+    : images[activeSlide][0];
 
   return (
     <>
       <div className="l-nav">
         <div className="l-logo">
-          <img src={`${base}assets/white.webp`} alt="Trompo" />
+          <a href="/">
+            <img src={`${base}assets/white.webp`} alt="Trompo" />
+          </a>
         </div>
 
         <div className="l-nav-links">
+          {/*
           <span className="l-nav-link">Servicios</span>
           <span className="l-nav-link">Casos</span>
           <span className="l-nav-link">Nosotros</span>
-          <span className="l-nav-cta">Hablemos</span>
+          <span className="l-nav-cta">Hablemos</span> */}
         </div>
       </div>
 
-      <div className="l-hero"
-        style={{background: `url(${base}assets/landing/industria.png)`, backgroundPosition: "top center", backgroundRepeat: "no-repeat", backgroundSize:"cover"}}
-      >
-        
+      <div className="l-hero" style={{ position: "relative", overflow: "hidden" }}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            id='slider-hero'
+            key={currentImage}
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 1.02 }}
+            transition={{ duration: 0.40, ease: "easeOut" }}
+            style={{
+              backgroundImage: `url(${currentImage})`,
+            }}
+          />
+        </AnimatePresence>
       </div>
 
       <div className="l-logos">
@@ -69,6 +125,7 @@ const LandingIndustriaMovimiento = () => {
             <span className="l-service-pill">Reporting</span>
           </div>
         </div>
+
         <div className="l-case-right">
           <div className="l-metrics">
             <div className="l-metric">
@@ -88,6 +145,7 @@ const LandingIndustriaMovimiento = () => {
               <div className="l-metric-label">implementación</div>
             </div>
           </div>
+
           <div className="l-gallery">
             <div className="l-gallery-item">
               <div className="l-gallery-label l-gallery-label-accent-sm">
@@ -105,6 +163,7 @@ const LandingIndustriaMovimiento = () => {
               </div>
             </div>
           </div>
+
           <div className="l-quote">
             <div className="l-quote-text">
               "Antes teníamos datos. Ahora tenemos claridad."
@@ -137,6 +196,7 @@ const LandingIndustriaMovimiento = () => {
             <span className="l-service-pill">Meta Ads</span>
           </div>
         </div>
+
         <div className="l-case-right">
           <div className="l-metrics">
             <div className="l-metric">
@@ -149,6 +209,7 @@ const LandingIndustriaMovimiento = () => {
               <div className="l-metric-label">regiones nuevas</div>
             </div>
           </div>
+
           <div className="l-gallery">
             <div className="l-gallery-item"></div>
             <div className="l-gallery-item"></div>
@@ -177,6 +238,7 @@ const LandingIndustriaMovimiento = () => {
             <span className="l-service-pill">Web</span>
           </div>
         </div>
+
         <div className="l-case-right">
           <div className="l-metrics">
             <div className="l-metric">
@@ -188,6 +250,7 @@ const LandingIndustriaMovimiento = () => {
               <div className="l-metric-label">leads B2B / mes</div>
             </div>
           </div>
+
           <div className="l-gallery">
             <div className="l-gallery-item"></div>
             <div className="l-gallery-item"></div>
@@ -205,7 +268,7 @@ const LandingIndustriaMovimiento = () => {
           <br />
           probablemente valga la pena una conversación.
         </div>
-        <div className="l-cta-btn">Hablemos →</div>
+        {/* <div className="l-cta-btn">Hablemos →</div> */}
         <div className="l-cta-note">
           Sin compromiso. Una reunión de 30 minutos, sin PowerPoint.
         </div>

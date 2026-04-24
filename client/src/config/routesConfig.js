@@ -29,7 +29,7 @@ const Maintenance = lazy(() => import("../pages/Maintenance.jsx"));
 const ClearCache = lazy(() => import("../pages/ClearCache"));
 const Faqs = lazy(() => import("../pages/Faqs"));
 const Reports = lazy(() => import("../pages/Reports.jsx"));
-const IndustriaMovimiento = lazy(() => import('../pages/LandingIndustriaMovimiento.jsx'))
+const IndustriaMovimiento = lazy(() => import('../pages/landings/LandingIndustriaMovimiento.jsx'));
 
 
 const PopupPage = lazy(() => import("../pages/Popupage"));
