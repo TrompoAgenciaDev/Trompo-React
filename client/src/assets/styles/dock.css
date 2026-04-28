@@ -1,0 +1,73 @@
+/* DOCK */
+.dock {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 55;
+    background: rgba(24,24,28,0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--line-strong);
+    border-radius: 100px;
+    padding: 8px 8px 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    transition: all 0.4s ease;
+    opacity: 0;
+    animation: dockIn 0.6s ease 2s forwards;
+}
+@keyframes dockIn {
+    from { opacity: 0; transform: translate(-50%, 30px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+.dock-status {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-right: 16px;
+    border-right: 1px solid var(--line-strong);
+}
+.dock-status .live-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green-live);
+    animation: blinkLive 1.5s infinite;
+    box-shadow: 0 0 8px var(--green-live);
+}
+.dock-link {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 8px 10px;
+    border-radius: 100px;
+    transition: all 0.3s ease;
+}
+.dock-link:hover { color: var(--bg); background: var(--accent); }
+.dock-cta {
+    background: var(--accent);
+    color: var(--bg);
+    padding: 10px 18px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+}
+.dock-cta:hover { background: var(--ink); transform: translateY(-1px); }
+
+@media (max-width: 720px) {
+    .dock { padding: 6px 6px 6px 16px; gap: 8px; }
+    .dock-status, .dock-link:not(.dock-cta) { display: none; }
+}
+

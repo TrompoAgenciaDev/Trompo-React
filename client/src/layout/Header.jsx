@@ -1,71 +1,85 @@
-import Icons from "../components/Icons";
+import '../assets/styles/header.css';
+import { useEffect } from 'react';
 
-import "../assets/styles/header.css";
+export default function Header() {
+    useEffect(() => {
+        const nav = document.getElementById('nav');
+        const clock = document.getElementById('status-clock');
 
-const base = import.meta.env.BASE_URL?.endsWith("/")
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
-import { motion } from "framer-motion";
+        const handleScroll = () => {
+            if (!nav) return;
+            if (window.scrollY > 60) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+        };
 
-const Header = ({ onTogglePopup }) => {
-  return (
-    <motion.header 
-      className="full-container header"
-    >
-      <div className="container">
-        <motion.a
-          className="logo-img"
-          href="/"
-          initial={{
-            y: -250,
-          }}
-          animate={{
-            y: 0,
-          }}
-          transition={{
-            type: "spring",
-            damping: 20,
-            stiffness: 350,
-          }}
-        >
-          <Icons iconName="logoBlack" />
+        const updateClock = () => {
+            if (!clock) return;
 
-          {/*
-            <video
-              src={`${base}logo.webm`}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="logo-video"
-            />
-          */}
-          
-        </motion.a>
+            const now = new Date();
+            const opts = {
+                timeZone: 'America/Argentina/Buenos_Aires',
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+            };
 
-        <motion.button
-          className="nav-button"
-          initial={{
-            y: -250,
-            opacity: 0,
-          }}
-          animate={{
-            y: 0,
-            opacity: 1,
-          }}
-          transition={{
-            delay: 0.3,
-            type: "spring",
-            damping: 28,
-            stiffness: 350,
-          }}
-          onClick={onTogglePopup}
-        >
-          <Icons iconName={"burguer"}/>
-        </motion.button>
-      </div>
-    </motion.header>
-  );
-};
+            const time = new Intl.DateTimeFormat('es-AR', opts).format(now);
+            clock.textContent = `${time} ART`;
+        };
 
-export default Header;
+        window.addEventListener('scroll', handleScroll);
+        updateClock();
+
+        const clockInterval = window.setInterval(updateClock, 1000);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.clearInterval(clockInterval);
+        };
+    }, []);
+
+    return (
+        <>
+            <div className="status-bar">
+                <div className="status-left">
+                    <div className="status-item">
+                        <span className="dot"></span>
+                        <span>Agencia online</span>
+                    </div>
+                    <div className="status-divider"></div>
+                    <div className="status-item"><span>Operativo · Lun–Vie · 09–18 hs</span></div>
+                    <div className="status-divider"></div>
+                    <div className="status-item"><span>10+ años · 80+ marcas</span></div>
+                </div>
+                <div className="status-right">
+                    <div className="status-item"><span>CBA · AR</span></div>
+                    <div className="status-divider"></div>
+                    <div className="status-item"><span className="status-clock" id="status-clock">00:00:00</span></div>
+                </div>
+            </div>
+
+            <nav id="nav">
+                <a href="#" className="logo" data-cursor-hover>
+                    <span className="brand-mark">
+                        <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="6" r="3.5" fill="#E8B73A"/>
+                            <circle cx="18" cy="12" r="3.5" fill="#E8B73A"/>
+                            <circle cx="12" cy="18" r="3.5" fill="#E8B73A"/>
+                            <circle cx="6" cy="12" r="3.5" fill="#E8B73A"/>
+                            <circle cx="12" cy="12" r="2.5" fill="#E8458F"/>
+                        </svg>
+                    </span>
+                    Trompo <small>Agencia digital</small>
+                </a>
+                <div className="nav-links">
+                    <a href="#sistema" className="nav-link" data-cursor-hover>Sistema</a>
+                    <a href="#verticales" className="nav-link" data-cursor-hover>Verticales</a>
+                    <a href="#equipo" className="nav-link" data-cursor-hover>Equipo</a>
+                    <a href="#cartera" className="nav-link" data-cursor-hover>Cartera</a>
+                    <a href="#contacto" className="nav-cta" data-cursor-hover>Hablemos →</a>
+                </div>
+            </nav>
+        </>
+    );
+}

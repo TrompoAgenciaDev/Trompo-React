@@ -4,7 +4,7 @@ import svgr from "vite-plugin-svgr";
 import viteCompression from "vite-plugin-compression";
 
 export default defineConfig({
-  base: "/",
+  base: "/trompo/",
   envDir: "../",
   plugins: [
     react(),

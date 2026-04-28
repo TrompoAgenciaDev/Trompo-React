@@ -1,137 +1,63 @@
-import { useState, useEffect, useRef } from "react";
-import videojs from "video.js";
-import "video.js/dist/video-js.css";
-import { motion } from "framer-motion";
-import Icons from "../components/Icons";
-import "@as/hero.css";
+import '../assets/styles/hero.css';
+import { useEffect } from 'react';
 
-const base = import.meta.env.BASE_URL?.endsWith("/")
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
-
-const videosByLocation = {
-  home: {
-    desktop: `${base}assets/hero/home.mp4`,
-    mobile: `${base}assets/hero/mobile/home-mobile.mp4`,
-  },
-  // Todos los demás servicios usan los mismos videos que home
-  desarrollo: {
-    desktop: `${base}assets/hero/home.mp4`,
-    mobile: `${base}assets/hero/mobile/home-mobile.mp4`,
-  },
-  creatividad: {
-    desktop: `${base}assets/hero/home.mp4`,
-    mobile: `${base}assets/hero/mobile/home-mobile.mp4`,
-  },
-  estrategia: {
-    desktop: `${base}assets/hero/home.mp4`,
-    mobile: `${base}assets/hero/mobile/home-mobile.mp4`,
-  },
-};
-
-const Hero = ({ location = "home" }) => {
-  const [isMobile, setIsMobile] = useState(false);
-  const videoRef = useRef(null);
-  const playerRef = useRef(null);
-  
-  // Hooks para contacto (siempre se ejecutan, pero solo tienen efecto si location === "contactanos")
-  const [revealed, setRevealed] = useState(false);
-
+const Hero = () => {
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767.98px)");
-    const handler = (e) => setIsMobile(e.matches);
-    handler(mq);
-    mq.addEventListener?.("change", handler);
-    return () => mq.removeEventListener?.("change", handler);
+      const glitchTarget = document.getElementById('glitch-target');
+      if (!glitchTarget) return;
+
+      const interval = window.setInterval(() => {
+          if (Math.random() > 0.5) {
+              glitchTarget.classList.add('glitch');
+              window.setTimeout(() => glitchTarget.classList.remove('glitch'), 300);
+          }
+      }, 4000);
+
+      return () => window.clearInterval(interval);
   }, []);
 
-  const videoSrc = isMobile
-    ? videosByLocation[location]?.mobile
-    : videosByLocation[location]?.desktop;
-
-  useEffect(() => {
-    // Solo inicializar video si no es la página de contacto
-    if (location === "contactanos" || !videoRef.current || !videoSrc) return;
-    
-    if (playerRef.current) {
-      playerRef.current.dispose();
-    }
-
-    playerRef.current = videojs(videoRef.current, {
-      autoplay: true,
-      loop: true,
-      muted: true,
-      controls: false,
-      preload: "metadata",
-      playsinline: true,
-    });
-
-    playerRef.current.src({ src: videoSrc, type: "video/mp4" });
-
-    return () => {
-      if (playerRef.current) {
-        playerRef.current.dispose();
-        playerRef.current = null;
-      }
-    };
-  }, [location, videoSrc]);
-
-  // Hook para scroll de contacto (solo activo si location === "contactanos")
-  useEffect(() => {
-    if (location !== "contactanos") return;
-    
-    const onScroll = () => {
-      if (window.scrollY >= 40) setRevealed(true);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    const timer = setTimeout(() => setRevealed(true), 2000);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      clearTimeout(timer);
-    };
-  }, [location]);
-
-  // HERO PRINCIPAL
-  if (location !== "contactanos") {
-    return (
-      videoSrc && (
-        <div data-vjs-player>
-          <video
-            ref={videoRef}
-            className="video-js vjs-default-skin"
-            disablePictureInPicture
-            controlsList="nodownload noremoteplayback"
-          />
-        </div>
-      )
-    );
-  }
-
   return (
-    <div className="full-container hero-contactanos bg-yellow">
-      <div className="contacto-wrap">
-        <motion.h1 className="contacto-title" initial="hidden" animate="show">
-          Hablemos de tu proyecto
-        </motion.h1>
+    <section className="hero">
+      <div className="hero-video-bg">
+          <video autoPlay muted loop playsInline>
+              <source src="https://videos.pexels.com/video-files/3196284/3196284-uhd_2560_1440_25fps.mp4" type="video/mp4" />
 
-        {revealed && (
-          <motion.div
-            className="contacto-reveal"
-            initial="hidden"
-            animate="show"
-          >
-            <motion.p className="contacto-subtitle">
-              Cada proyecto es único. Completá el formulario y diseñemos la
-              estrategia que tu marca necesita para evolucionar.
-            </motion.p>
-            <motion.a href="#contacto" className="contacto-cta">
-              <Icons iconName="down" link="#contacto" />
-            </motion.a>
-          </motion.div>
-        )}
+          </video>
       </div>
-    </div>
+
+      <div className="hero-video-tag">
+          <span>Trompo · Equipo en operación</span>
+      </div>
+
+      <div className="hero-eyebrow">
+          <span>Trompo Agencia · 2026</span>
+          <span className="blink">●</span>
+          <span>Vanguardia digital · Córdoba</span>
+      </div>
+
+      <h1 className="hero-title">
+          <span className="hero-title-line"><span>Marketing</span></span>
+          <span className="hero-title-line"><span>para marcas</span></span>
+          <span className="hero-title-line"><span>que <em id="glitch-target">mueven</em></span></span>
+          <span className="hero-title-line"><span>el negocio.</span></span>
+      </h1>
+
+      <div className="hero-bottom">
+          <p className="hero-desc">
+              <strong>Diez años acompañando marcas argentinas.</strong>
+              Diseño, multimedia, desarrollo web, paid media y redes sociales funcionando como un sistema integrado para mover el negocio del cliente — no para llenar reportes.
+          </p>
+          <div className="hero-stat">
+              <div className="hero-stat-num">10<em>+</em></div>
+              <div className="hero-stat-label">Años de operación<br/>desde Córdoba</div>
+          </div>
+          <div className="hero-stat">
+              <div className="hero-stat-num">80<em>+</em></div>
+              <div className="hero-stat-label">Marcas argentinas<br/>en nuestra cartera</div>
+          </div>
+      </div>
+  </section>
   );
-};
+}
 
 export default Hero;

@@ -1,0 +1,50 @@
+/* KINETIC BAND */
+.kinetic-band {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+    overflow: hidden;
+    padding: 24px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.kinetic-track {
+    display: flex;
+    gap: 50px;
+    animation: kineticScroll 30s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+    align-items: center;
+}
+
+.kinetic-item {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(36px, 6vw, 90px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    -webkit-text-stroke: 1px var(--accent);
+    color: transparent;
+    transition: color 0.3s ease;
+}
+
+.kinetic-item:hover {
+    color: var(--accent);
+}
+
+.kinetic-sep {
+    color: var(--accent);
+    font-size: clamp(36px, 6vw, 90px);
+    line-height: 1;
+}
+
+@keyframes kineticScroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}

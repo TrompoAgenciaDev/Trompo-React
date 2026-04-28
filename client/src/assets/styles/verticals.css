@@ -1,0 +1,132 @@
+/* VERTICALES / INDUSTRIAS */
+.verticals {
+    padding: 140px var(--gutter);
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    position: relative;
+    z-index: 1;
+}
+.verticals-wrap { max-width: var(--max); margin: 0 auto; }
+
+.verticals-header {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 60px;
+}
+.verticals-h {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 100px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+}
+.verticals-h em { font-style: normal; color: var(--accent); }
+.verticals-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    text-align: right;
+}
+.verticals-meta strong {
+    display: block;
+    font-family: var(--display);
+    font-size: 36px;
+    color: var(--accent);
+    font-weight: 400;
+    margin-bottom: 4px;
+}
+
+.verticals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.vertical-card {
+    background: var(--bg);
+    border: 1px solid var(--line-strong);
+    padding: 36px 30px;
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+}
+
+.vertical-card::after {
+    content: '↗';
+    position: absolute;
+    top: 30px; right: 30px;
+    font-size: 22px;
+    color: var(--accent);
+    transition: transform 0.4s ease;
+}
+
+.vertical-card:hover {
+    background: var(--bg-elev);
+    border-color: var(--accent);
+    transform: translateY(-4px);
+}
+
+.vertical-card:hover::after { transform: translate(4px, -4px); }
+
+.vertical-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--ink-mute);
+    margin-bottom: 20px;
+}
+
+.vertical-card.feat {
+    background: linear-gradient(135deg, rgba(232,183,58,0.1), transparent 70%);
+    border-color: var(--accent);
+}
+
+.vertical-card.feat .vertical-num { color: var(--accent); }
+
+.vertical-h {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(22px, 1.8vw, 28px);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+}
+
+.vertical-text {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.vertical-clients {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    text-transform: uppercase;
+    border-top: 1px solid var(--line-strong);
+    padding-top: 16px;
+}
+
+@media (max-width: 920px) {
+    .verticals-grid { grid-template-columns: 1fr 1fr; }
+    .verticals-header { grid-template-columns: 1fr; }
+    .verticals-meta { text-align: left; }
+}
+@media (max-width: 540px) {
+    .verticals-grid { grid-template-columns: 1fr; }
+}
+

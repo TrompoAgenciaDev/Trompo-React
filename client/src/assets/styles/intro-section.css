@@ -1,0 +1,90 @@
+/* INTRO PROBLEMA / DIFERENCIAL */
+.intro {
+    padding: 140px var(--gutter) 80px;
+    max-width: var(--max);
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+.intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+}
+.intro-num {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(60px, 8vw, 120px);
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+    position: sticky;
+    top: 120px;
+}
+.intro-num small {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-soft);
+    margin-top: 12px;
+    font-weight: 400;
+}
+.intro-text-block { padding-top: 30px; }
+.intro-h {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(36px, 5.5vw, 80px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 50px;
+    color: var(--ink);
+}
+.intro-h em { font-style: normal; color: var(--accent); }
+.intro-h .strike { text-decoration: line-through; text-decoration-color: var(--ink-mute); color: var(--ink-soft); font-size: 0.7em; }
+
+.intro-features {
+    display: grid;
+    gap: 0;
+    margin-top: 50px;
+}
+.intro-feature {
+    padding: 26px 0;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 24px;
+    align-items: start;
+    transition: padding 0.3s ease;
+}
+.intro-feature:hover { padding-left: 12px; }
+.intro-feature:hover .intro-feature-num { color: var(--accent); }
+.intro-feature-num {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: 32px;
+    color: var(--ink-mute);
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+.intro-feature-h {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+}
+.intro-feature-text {
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+}
+
+@media (max-width: 920px) {
+    .intro-grid { grid-template-columns: 1fr; gap: 30px; }
+    .intro-num { position: static; }
+}
+

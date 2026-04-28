@@ -1,0 +1,174 @@
+/* TROMPO 3D */
+.trompo-3d {
+    padding: 130px var(--gutter) 100px;
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.trompo-3d-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.trompo-3d-eyebrow::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--accent);
+}
+
+.trompo-3d-h {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 72px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+    color: var(--ink);
+}
+
+.trompo-3d-h em {
+    font-style: normal;
+    color: var(--accent);
+}
+
+.trompo-3d-text p {
+    font-size: clamp(15px, 1.1vw, 17px);
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-width: 480px;
+    margin-bottom: 20px;
+}
+
+.trompo-3d-hint {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.trompo-3d-hint::before {
+    content: '◉';
+    color: var(--accent);
+    animation: blinkLive 1.5s infinite;
+}
+
+#trompo-canvas-wrap {
+    aspect-ratio: 1;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Video del equipo en lugar del canvas 3D */
+.trompo-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    /* Duotono dorado característico */
+    filter: grayscale(100%) contrast(1.15) brightness(0.75) sepia(0.85) hue-rotate(-15deg) saturate(2.4);
+    transition: filter 0.6s ease;
+}
+
+#trompo-canvas-wrap:hover .trompo-video {
+    filter: grayscale(70%) contrast(1.1) brightness(0.9) sepia(0.5) hue-rotate(-10deg) saturate(1.8);
+}
+
+/* Overlay sutil sobre video */
+.trompo-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(232, 183, 58, 0.1) 0%, rgba(8, 8, 10, 0.3) 100%);
+    pointer-events: none;
+    mix-blend-mode: multiply;
+}
+
+/* Tag "equipo en vivo" sobre el video */
+.trompo-video-tag {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 2;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+    background: rgba(8, 8, 10, 0.7);
+    backdrop-filter: blur(8px);
+    padding: 8px 14px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.trompo-video-tag::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--green-live);
+    border-radius: 50%;
+    animation: blinkLive 1.5s infinite;
+}
+
+.trompo-3d-corners {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.trompo-3d-corners::before,
+.trompo-3d-corners::after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--accent);
+}
+
+.trompo-3d-corners::before {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+}
+
+.trompo-3d-corners::after {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+}
+
+@media (max-width: 920px) {
+    .trompo-3d {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    #trompo-canvas-wrap {
+        max-width: 400px;
+    }
+}

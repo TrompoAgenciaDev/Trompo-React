@@ -257,3 +257,13 @@ Variables `DB_*` están presentes en el .env; el sistema de backup **no usa base
 - **Instalación del backup:** `archivo-backend/INSTALACION.md`.
 - **Log del backup:** `backend/logs/form-backup.log` (líneas JSON; `type: "step"` para pasos; registro final con `log_version`, `mail_sent`, `status`).
 - **Dominio y sitemap:** https://trompoagencia.com, https://trompoagencia.com/sitemap.xml.
+
+
+## 11. Modificación Final del sitio:
+ 
+- **Nuevo site:** `solo se mantenienen los componentes respectivos al formulario, luego, el resto se eliminará del proyecto`
+- **Rutas:** `El ruteo del sitio se mantiene casi intacto, según la documentación inicial.`
+- **Formulario:** `el formulario queda intacto`
+- **SEO:** `el SEO se actualizará con los nuevos campos que se soliciten`
+- **Performance:** `el performance se mantiene con los mismos principios, solo hay que adapta las nuevas modificaciones al proyecto.`
+- **Configuración:** `Se mantiene intacta`

@@ -3,7 +3,8 @@ import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 import { useFormSubmit } from "../../hooks/useFormSubmit";
 import { generateSubmissionId, traceEvent } from "../../utils/formTrace";
-import "../../assets/styles/form-index.css";
+{/*import "../../assets/styles/form-index.css"; */}
+import '../../assets/styles/cta-section.css';
 
 export default function FormIndex({ location = "home" }) {
   const { loading, success, error, submitForm, setError } = useFormSubmit();
