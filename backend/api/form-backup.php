@@ -277,7 +277,7 @@ try {
     }
 
     // 1. Validaciones de Contenido
-    $required_fields = ['NOMBRE', 'APELLIDOS', 'EMAIL', 'SMS', 'CONSULTA'];
+    $required_fields = ['NOMBRE', 'APELLIDOS', 'EMAIL', 'EMPRESA', 'CONSULTA'];
     $missing_fields = [];
     foreach ($required_fields as $rf) {
         if (!isset($fields[$rf]) || trim((string)$fields[$rf]) === '') {

@@ -1,6 +1,9 @@
 import '../assets/styles/trompo-3d.css';
 
 export default function Trompo3D() {
+
+    const base = import.meta.env.BASE_URL;
+
     return (
         <>
             <section className="trompo-3d">
@@ -23,7 +26,7 @@ export default function Trompo3D() {
                 <div id="trompo-canvas-wrap" data-cursor-hover>
                     <div className="trompo-3d-corners"></div>
                     <video className="trompo-video" autoPlay muted loop playsInline>
-                        <source src="https://videos.pexels.com/video-files/3209828/3209828-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+                        <source src={`${base}assets/img/home.mp4`} type="video/mp4" />
                     </video>
                     <div className="trompo-video-overlay"></div>
                     <div className="trompo-video-tag">
