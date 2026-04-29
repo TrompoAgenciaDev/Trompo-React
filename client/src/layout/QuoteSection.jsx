@@ -1,5 +1,8 @@
 import '../assets/styles/quote-section.css';
 export default function QuoteSection() {
+
+  const base = import.meta.env.BASE_URL;
+
     return (
         <>
             <section className="quote-section" id="nosotros">
@@ -16,7 +19,7 @@ export default function QuoteSection() {
                     </div>
 
                     <div className="quote-founder-photo reveal">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80" alt="Esteban Raparo, Founder" />
+                        <img src={`${base}assets/img/esteban.jpeg`} alt="Esteban Raparo, Founder" />
                         <div className="quote-founder-tag">15+ años · Google Certified</div>
                     </div>
                 </div>

@@ -25,10 +25,6 @@ const Hero = () => {
           </video>
       </div>
 
-      <div className="hero-video-tag">
-          <span>Trompo · Equipo en operación</span>
-      </div>
-
       <div className="hero-eyebrow">
           <span>Trompo Agencia · 2026</span>
           <span className="blink">●</span>

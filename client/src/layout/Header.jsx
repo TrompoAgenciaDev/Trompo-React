@@ -2,6 +2,9 @@ import '../assets/styles/header.css';
 import { useEffect } from 'react';
 
 export default function Header() {
+
+    const base = import.meta.env.BASE_URL;
+
     useEffect(() => {
         const nav = document.getElementById('nav');
         const clock = document.getElementById('status-clock');
@@ -41,36 +44,9 @@ export default function Header() {
 
     return (
         <>
-            <div className="status-bar">
-                <div className="status-left">
-                    <div className="status-item">
-                        <span className="dot"></span>
-                        <span>Agencia online</span>
-                    </div>
-                    <div className="status-divider"></div>
-                    <div className="status-item"><span>Operativo · Lun–Vie · 09–18 hs</span></div>
-                    <div className="status-divider"></div>
-                    <div className="status-item"><span>10+ años · 80+ marcas</span></div>
-                </div>
-                <div className="status-right">
-                    <div className="status-item"><span>CBA · AR</span></div>
-                    <div className="status-divider"></div>
-                    <div className="status-item"><span className="status-clock" id="status-clock">00:00:00</span></div>
-                </div>
-            </div>
-
             <nav id="nav">
-                <a href="#" className="logo" data-cursor-hover>
-                    <span className="brand-mark">
-                        <svg viewBox="0 0 24 24" fill="none">
-                            <circle cx="12" cy="6" r="3.5" fill="#E8B73A"/>
-                            <circle cx="18" cy="12" r="3.5" fill="#E8B73A"/>
-                            <circle cx="12" cy="18" r="3.5" fill="#E8B73A"/>
-                            <circle cx="6" cy="12" r="3.5" fill="#E8B73A"/>
-                            <circle cx="12" cy="12" r="2.5" fill="#E8458F"/>
-                        </svg>
-                    </span>
-                    Trompo <small>Agencia digital</small>
+                <a href={`${base}`} className="logo" data-cursor-hover>
+                    <img className='logo-img' src={`${base}assets/white.webp`} alt="" />
                 </a>
                 <div className="nav-links">
                     <a href="#sistema" className="nav-link" data-cursor-hover>Sistema</a>

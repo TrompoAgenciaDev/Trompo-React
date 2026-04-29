@@ -18,7 +18,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <KineticBand />
       <TrompoIntro />
       <IntroSection />
       <UnitsSection />
