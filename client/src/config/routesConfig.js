@@ -9,6 +9,7 @@ const Contactanos = lazy(() => import("../pages/Contactanos"));
 const Casos = lazy(() => import("../pages/Casos"));
 const Terms = lazy(() => import("../pages/terms"));
 const Gracias = lazy(() => import("../pages/Gracias"));
+const Verticales = lazy(() => import("../pages/Verticales.jsx"));
 
 //Servicios
 const Servicios = lazy(() => import("../pages/Servicios"));
@@ -39,8 +40,8 @@ const routesConfig = {
   main: [
     { path: "/", label: "Inicio", Component: Home },
     { path: "/nosotros", label: "Nosotros", Component: Nosotros },
-    { path: "", label: "Servicios", Component: Servicios },
-    { path: "/contactanos", label: "Contactanos", Component: Contactanos },
+    { path: "/verticales", label: "Verticales", Component: Verticales },
+    { path: "/contactanos", label: "Hablemos", Component: Contactanos },
   ],
 
   menuMobile: [
@@ -73,7 +74,7 @@ const routesConfig = {
     { path: "/", label: "Inicio", Component: Home },
     { path: "/nosotros", label: "Nosotros", Component: Nosotros },
     { path: "/contactanos", label: "Contactanos", Component: Contactanos },
-    { path: "/terms", label: "Términos y condiciones", Component: Terms},
+    { path: "/terms", label: "Términos y condiciones", Component: Terms },
   ],
 
 
@@ -97,7 +98,7 @@ const routesConfig = {
     { path: "/", label: "Inicio", Component: Home },
     { path: "/nosotros", label: "Nosotros", Component: Nosotros },
     { path: "/contactanos", label: "Contactanos", Component: Contactanos },
-    { path: "/terms", label: "Términos y condiciones", Component: Terms},
+    { path: "/terms", label: "Términos y condiciones", Component: Terms },
   ],
 
   legal: [

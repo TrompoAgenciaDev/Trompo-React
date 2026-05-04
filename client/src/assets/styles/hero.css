@@ -1,4 +1,4 @@
-/* HERO con video background */
+/* HERO con slider de imágenes */
 .hero {
     min-height: 100vh;
     padding: 130px var(--gutter) 80px;
@@ -10,29 +10,35 @@
     border-bottom: 1px solid var(--line);
 }
 
-/* Video de fondo del hero */
-.hero-video-bg {
+/* SLIDER ============= */
+.hero-slider {
     position: absolute;
     inset: 0;
     z-index: 0;
     overflow: hidden;
 }
 
-.hero-video-bg video {
+.slider-image {
     position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: cover;
-    /* Duotono dorado + oscurecido para legibilidad */
-    filter: grayscale(100%) contrast(1.05) brightness(0.45) sepia(0.8) hue-rotate(-15deg) saturate(2.2);
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.6s cubic-bezier(0.65, 0, 0.35, 1);
+    filter: grayscale(60%) contrast(1.1) brightness(0.55) sepia(0.4) hue-rotate(-8deg) saturate(1.6);
 }
 
-/* Overlay para asegurar legibilidad del texto */
-.hero-video-bg::after {
+.slider-image.active {
+    opacity: 1;
+    animation: kenBurns 8s ease-out forwards;
+}
+
+@keyframes kenBurns {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.12); }
+}
+
+.hero-slider::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -40,46 +46,62 @@
         radial-gradient(ellipse at 30% 50%, rgba(8,8,10,0.4) 0%, rgba(8,8,10,0.85) 80%),
         linear-gradient(180deg, rgba(8,8,10,0.3) 0%, rgba(8,8,10,0.95) 100%);
     pointer-events: none;
+    z-index: 5;
 }
 
-/* Indicador "live video" en el hero */
-.hero-video-tag {
+/* Indicadores del slider */
+.slider-indicators {
     position: absolute;
-    top: 100px;
+    bottom: 50px;
     right: var(--gutter);
-    z-index: 2;
+    z-index: 6;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.slider-indicator {
+    width: 30px;
+    height: 2px;
+    background: rgba(242,239,230,0.25);
+    transition: all 0.4s ease;
+    cursor: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.slider-indicator.active {
+    background: rgba(242,239,230,0.25);
+    width: 60px;
+}
+
+.slider-indicator.active::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateX(-100%);
+    animation: indicatorFill 5s linear forwards;
+}
+
+@keyframes indicatorFill {
+    to { transform: translateX(0); }
+}
+
+.slider-counter {
     font-family: var(--mono);
     font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
+    letter-spacing: 0.15em;
     color: var(--accent);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(8,8,10,0.6);
-    backdrop-filter: blur(10px);
-    padding: 8px 14px;
-    border: 1px solid var(--line-strong);
-    border-radius: 100px;
-    opacity: 0;
-    animation: heroIn 0.8s ease 1.5s forwards;
-}
-
-.hero-video-tag::before {
-    content: '';
-    width: 6px; height: 6px;
-    background: var(--pop);
-    border-radius: 50%;
-    animation: blinkLive 1s infinite;
+    margin-left: 14px;
 }
 
 @media (max-width: 720px) {
-    .hero-video-tag { top: 80px; padding: 6px 12px; font-size: 9px; }
+    .slider-indicators { bottom: 30px; }
 }
 
-/* Asegurar que el contenido del hero esté arriba del video */
-.hero > * { position: relative; z-index: 1; }
-.hero-video-bg { z-index: 0; }
+/* Contenido del hero por encima del slider */
+.hero > *:not(.hero-slider) { position: relative; z-index: 10; }
 
 .hero-eyebrow {
     font-family: var(--mono);
@@ -100,12 +122,11 @@
 .hero-title {
     font-family: var(--display);
     font-weight: 300;
-    font-size: clamp(48px, 11vw, 192px);
-    line-height: 0.9;
-    letter-spacing: -0.04em;
+    font-size: clamp(36px, 11vw, 150px);
+    line-height: 1.1;
+    letter-spacing: -0.06em;
     color: var(--ink);
-    position: relative;
-    z-index: 1;
+    text-shadow: 0 2px 40px rgba(8, 8, 10, 0.5);
 }
 .hero-title-line { display: block; overflow: hidden; }
 .hero-title-line span {
@@ -123,7 +144,6 @@
 .hero-title em {
     font-style: normal;
     color: var(--accent);
-    position: relative;
     display: inline-block;
 }
 .hero-title em.glitch { animation: glitchEffect 0.3s ease; }
@@ -144,8 +164,6 @@
     align-items: end;
     opacity: 0;
     animation: heroIn 1s ease 1.6s forwards;
-    position: relative;
-    z-index: 1;
 }
 @keyframes heroIn {
     from { opacity: 0; transform: translateY(40px); }
@@ -190,4 +208,3 @@
     .hero-bottom { grid-template-columns: 1fr; gap: 30px; margin-top: 50px; }
     .hero-stat { border-left: none; border-top: 1px solid var(--line-strong); padding-left: 0; padding-top: 24px; }
 }
-

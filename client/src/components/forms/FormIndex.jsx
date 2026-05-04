@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 import { useFormSubmit } from "../../hooks/useFormSubmit";
@@ -6,7 +6,7 @@ import { generateSubmissionId, traceEvent } from "../../utils/formTrace";
 {/*import "../../assets/styles/form-index.css"; */}
 import '../../assets/styles/cta-section.css';
 
-export default function FormIndex({ location = "home" }) {
+export default function FormIndex({ location = "home", showServicio = false }) {
   const { loading, success, error, submitForm, setError } = useFormSubmit();
   const submissionIdRef = useRef(null);
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -118,6 +118,21 @@ export default function FormIndex({ location = "home" }) {
             required
           />
         </div>
+        {showServicio && (
+          <div className="form-group">
+            <label className="form-label" htmlFor="SERVICIO">¿Qué servicio te interesa?</label>
+            <select id="SERVICIO" name="SERVICIO" className="form-select">
+              <option value="">Seleccioná una opción</option>
+              <option value="estrategia">Estrategia Digital Integral</option>
+              <option value="paid-media">Paid Media (Google / Meta Ads)</option>
+              <option value="social-media">Redes Sociales</option>
+              <option value="diseno">Diseño &amp; Branding</option>
+              <option value="web">Desarrollo Web</option>
+              <option value="multimedia">Multimedia &amp; Producción</option>
+              <option value="todo">Sistema Completo (todo integrado)</option>
+            </select>
+          </div>
+        )}
         <div className="form-group">
           <label className="form-label" htmlFor="CONSULTA">Describí brevemente tu consulta*</label>
           <textarea

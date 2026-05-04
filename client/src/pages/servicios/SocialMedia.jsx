@@ -1,4 +1,5 @@
 import React, { useRef, useState, useLayoutEffect } from "react";
+import Dock from "../../components/Dock";
 import { motion, useScroll, useTransform, useMotionValueEvent, useInView, useSpring } from "framer-motion";
 import Contact from "../../layout/Contact.jsx";
 import StaticHero from "../../components/StaticHero.jsx";
@@ -480,6 +481,10 @@ const SocialMedia = () => {
       </div>
 
       <Contact form="interaccion" />
+      <Dock
+        links={[{ anchor: "#contact", title: "Contacto" }]}
+        cta={{ label: "Hablemos →", to: "/contactanos" }}
+      />
     </>
   );
 };

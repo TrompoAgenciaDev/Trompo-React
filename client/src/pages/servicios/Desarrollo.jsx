@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, useMemo, Suspense, lazy } from "react";
+import Dock from "../../components/Dock";
 import { motion, useReducedMotion, useScroll, useTransform, useMotionValueEvent, useInView, useSpring, useMotionValue } from "framer-motion";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
@@ -599,6 +600,10 @@ const Desarrollo = () => {
       </div>
 
       <Contact form="desarrollo"/>
+      <Dock
+        links={[{ anchor: "#contact", title: "Contacto" }]}
+        cta={{ label: "Hablemos →", to: "/contactanos" }}
+      />
     </>
   );
 };

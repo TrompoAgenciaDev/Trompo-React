@@ -3,7 +3,7 @@
 
 import Hero from '../layout/Hero';
 import KineticBand from '../layout/KineticBand';
-import TrompoIntro from '../layout/Tropo3D.jsx';
+import TrompoIntro from '../layout/Trompo3D.jsx';
 import IntroSection from '../layout/IntroSection';
 import UnitsSection from '../layout/UnitsSection';
 import VerticalsSection from '../layout/VerticalsSection';
@@ -27,11 +27,13 @@ export default function Home() {
       <QuoteSection />
       <StatsBand />
       <CtaSection />
-      <Dock links={[
-        { anchor: "#sistema", title: "Sistema", cta: false },
-        { anchor: "#cartera", title: "Cartera", cta: false },
-        { anchor: "#contacto", title: "Hablemos", cta: true }
-      ]} />
+      <Dock
+        links={[
+          { anchor: "#sistema", title: "Sistema" },
+          { anchor: "#cartera", title: "Cartera" },
+        ]}
+        cta={{ label: "Hablemos →", to: "/contactanos" }}
+      />
     </>
   );
 }

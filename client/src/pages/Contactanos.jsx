@@ -1,162 +1,98 @@
-import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 
-import Contact from "../layout/Contact";
-import AnimatedTextSection from "../components/AnimatedTextSection";
-import TestimonialsSection from "../components/TestimonialsSection";
+import FormIndex from "../components/forms/FormIndex";
+import Dock from "../components/Dock";
 
 import "../assets/styles/contact-page.css";
 
 const Contactanos = () => {
-
-  const titleVar = {
-    hidden: { opacity: 0, y: 16 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-  };
-
-  const groupVar = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { duration: 0.5, ease: "easeOut", staggerChildren: 0.12 },
-    },
-  };
-
-  const itemVar = {
-    hidden: { opacity: 0, y: 10 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
-  };
-
-  // Componente para animar letra por letra
-  const AnimatedLetter = ({ letter, index, letterDelay }) => {
-    return (
-      <motion.span
-        className="animated-letter"
-        initial={{ opacity: 0.1 }}
-        animate={{ opacity: 1 }}
-        transition={{
-          delay: index * letterDelay,
-          duration: 0.3,
-          ease: "easeOut"
-        }}
-      >
-        {letter === " " ? "\u00A0" : letter}
-      </motion.span>
-    );
-  };
-
-
-  // Componente InfiniteSlider (igual al de Home)
-  const InfiniteSlider = ({ text, items: itemsProp }) => {
-    const shouldReduceMotion = useReducedMotion();
-    
-    // Si se pasa items (array), usar esos; si no, usar text como antes
-    const itemsArray = itemsProp || (text ? [text] : []);
-    
-    // 8 copias para crear un loop infinito más fluido (se duplican para 16 totales)
-    const items = Array(8).fill(itemsArray).flat();
-
-    // Calcular duración basada en la cantidad de items y su longitud total
-    const totalLength = itemsArray.reduce((sum, item) => sum + item.trim().length, 0);
-    const baseDuration = 30;
-    const duration = baseDuration + Math.max(0, (totalLength - 80) / 30);
-
-    return (
-      <motion.div 
-        className="infinite-slider"
-        animate={{
-          x: shouldReduceMotion ? 0 : ['0%', '-10%']
-        }}
-        transition={{
-          x: {
-            repeat: Infinity,
-            repeatType: "loop",
-            duration: duration,
-            ease: "linear"
-          }
-        }}
-        style={{
-          // Asegurar que el cursor funcione correctamente
-          pointerEvents: 'auto',
-          // Optimizar rendering
-          willChange: 'transform'
-        }}
-      >
-        {items.map((item, index) => (
-          <h2 key={index} className="infinite-slider-item">{item}</h2>
-        ))}
-        {items.map((item, index) => (
-          <h2 key={`duplicate-${index}`} className="infinite-slider-item">{item}</h2>
-        ))}
-      </motion.div>
-    );
-  };
-
-  // --- CONTACTANOS ---
-  const [revealed, setRevealed] = useState(false);
-  const titleTextPart1 = "Hablemos";
-  const titleTextPart2 = "de tu proyecto.";
-  
-  // Delay entre letras: 0.05s por letra para una animación fluida
-  const letterDelay = 0.05;
-  
-  // Dividir el texto en letras
-  const lettersPart1 = titleTextPart1.split("");
-  const lettersPart2 = titleTextPart2.split("");
+  const observerRef = useRef(null);
 
   useEffect(() => {
-    const onScroll = () => {
-      if (window.scrollY >= 40) setRevealed(true);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    const timer = setTimeout(() => setRevealed(true), 2000);
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      clearTimeout(timer);
-    };
+    observerRef.current = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll(".contact-wrap .reveal").forEach((el) => observerRef.current.observe(el));
+    return () => observerRef.current?.disconnect();
   }, []);
 
-
   return (
-    <>
-      <div className="full-container black-bg hero-contactanos-container">
-        <div className="container contact-title-container">
-          <h1 className="contact-main-title">
-            {lettersPart1.map((letter, index) => (
-              <AnimatedLetter
-                key={`part1-${index}`}
-                letter={letter}
-                index={index}
-                letterDelay={letterDelay}
-              />
-            ))}
-            <br />
-            {lettersPart2.map((letter, index) => (
-              <AnimatedLetter
-                key={`part2-${index}`}
-                letter={letter}
-                index={lettersPart1.length + index}
-                letterDelay={letterDelay}
-              />
-            ))}
+    <div className="contact-wrap">
+      <div className="contact-info">
+        <div className="contact-info-top">
+          <div className="contact-eyebrow reveal">Contacto · 2026</div>
+          <h1 className="contact-h reveal">
+            Hablemos<br />de tu<br />
+            <em>negocio.</em>
           </h1>
+          <p className="contact-desc reveal">
+            <strong>Una conversación corta, sin presión.</strong> Te hacemos un diagnóstico genuino de tu situación actual y te mostramos cómo trabajamos. Sin propuesta cerrada de entrada.
+          </p>
+        </div>
+
+        <div>
+          <div className="contact-data">
+            <div className="contact-data-item reveal">
+              <div className="contact-data-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+              </div>
+              <div>
+                <div className="contact-data-label">Email</div>
+                <div className="contact-data-val">
+                  <a href="mailto:somos@trompoagencia.com">somos@trompoagencia.com</a>
+                </div>
+              </div>
+            </div>
+
+            <div className="contact-data-item reveal">
+              <div className="contact-data-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <div>
+                <div className="contact-data-label">Ubicación</div>
+                <div className="contact-data-val">
+                  Córdoba, Argentina<br />
+                  <span>Atendemos clientes en todo el país</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="contact-data-item reveal">
+              <div className="contact-data-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <div>
+                <div className="contact-data-label">Horario de atención</div>
+                <div className="contact-data-val">Lun a Vie · 09:00 a 18:00 hs</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="contact-disclaimer reveal">
+            La información que compartís en este formulario se usa únicamente para contactarte y preparar una propuesta personalizada.
+          </div>
         </div>
       </div>
 
-      <div id="contacto"></div>
-
-      <AnimatedTextSection 
-        text="En Trompo no creemos en soluciones mágicas. Creemos en conocimiento aplicado, trabajo riguroso y acompañamiento real. Acompañamos a las empresas a convertir desafíos digitales en ventajas competitivas."
-        backgroundClass=""
-      />
-
-      <div className="full-container bg-yellow-2 contactanos-testimonials-wrapper">
-        <TestimonialsSection />
+      <div className="contact-form-wrap">
+        <div className="form-header reveal">
+          <h2>Completá el formulario<br />y te contactamos.</h2>
+          <p>Respondemos dentro de las 24 horas hábiles.</p>
+        </div>
+        <FormIndex showServicio location="contacto" />
       </div>
-
-      <Contact form="contactanos" location="contacto"/>
-
-    </>
+      <Dock links={[]} />
+    </div>
   );
 };
 

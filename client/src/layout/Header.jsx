@@ -1,5 +1,7 @@
 import '../assets/styles/header.css';
 import { useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
+import HeaderNav from '../components/HeaderNav';
 
 export default function Header() {
 
@@ -45,16 +47,10 @@ export default function Header() {
     return (
         <>
             <nav id="nav">
-                <a href={`${base}`} className="logo" data-cursor-hover>
+                <NavLink to="/" className="logo" data-cursor-hover>
                     <img className='logo-img' src={`${base}assets/white.webp`} alt="" />
-                </a>
-                <div className="nav-links">
-                    <a href="#sistema" className="nav-link" data-cursor-hover>Sistema</a>
-                    <a href="#verticales" className="nav-link" data-cursor-hover>Verticales</a>
-                    <a href="#equipo" className="nav-link" data-cursor-hover>Equipo</a>
-                    <a href="#cartera" className="nav-link" data-cursor-hover>Cartera</a>
-                    <a href="#contacto" className="nav-cta" data-cursor-hover>Hablemos →</a>
-                </div>
+                </NavLink>
+                <HeaderNav menuKey="main" ctaLabel="Hablemos →" />
             </nav>
         </>
     );

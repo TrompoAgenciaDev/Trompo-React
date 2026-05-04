@@ -10,9 +10,9 @@ export default function QuoteSection() {
                     <div>
                         <div className="quote-mark reveal">"</div>
                         <p className="quote-text reveal">
-                            Trabajamos para que cada peso<br/>
-                            invertido en marketing empuje<br/>
-                            en <strong>la misma dirección</strong> —<br/>
+                            Trabajamos para que cada peso
+                            invertido en marketing empuje en 
+                            <br/><strong>la misma dirección</strong> —
                             la del negocio.
                         </p>
                         <p className="quote-author reveal">Esteban Raparo · <span>Founder Trompo Agencia</span></p>

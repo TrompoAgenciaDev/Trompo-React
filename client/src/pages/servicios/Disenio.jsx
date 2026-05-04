@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import Dock from "../../components/Dock";
 import { motion, useScroll, useTransform, useInView, useMotionValueEvent, useSpring } from "framer-motion";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
@@ -1008,6 +1009,10 @@ const Disenio = () => {
       </div>
 
       <Contact form="creative" />
+      <Dock
+        links={[{ anchor: "#contact", title: "Contacto" }]}
+        cta={{ label: "Hablemos →", to: "/contactanos" }}
+      />
     </>
   );
 };
