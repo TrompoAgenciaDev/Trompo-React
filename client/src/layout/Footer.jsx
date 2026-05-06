@@ -6,15 +6,6 @@ export default function Footer() {
                 <div className="footer-top">
                     <div className="footer-brand-col">
                         <div className="footer-logo">
-                            <span className="brand-mark">
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <circle cx="12" cy="6" r="3.5" fill="#E8B73A"/>
-                                    <circle cx="18" cy="12" r="3.5" fill="#E8B73A"/>
-                                    <circle cx="12" cy="18" r="3.5" fill="#E8B73A"/>
-                                    <circle cx="6" cy="12" r="3.5" fill="#E8B73A"/>
-                                    <circle cx="12" cy="12" r="2.5" fill="#E8458F"/>
-                                </svg>
-                            </span>
                             Trompo
                         </div>
                         <div className="footer-tagline">Vanguardia digital · Córdoba</div>

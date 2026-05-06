@@ -23,16 +23,18 @@ function AppContent() {
   // Prefetch inteligente de rutas relacionadas
   usePrefetchRoutes();
 
-  const isReportsPage = location.pathname === "/reportes";
+  const hideLayout =
+    location.pathname === "/reportes" ||
+    location.pathname === "/verticales";
 
   return (
     <>
-      {!isReportsPage && <Header onTogglePopup={togglePopup} />}
-      {!isReportsPage && <MenuPopup isOpen={isOpen} onClose={togglePopup} />}
+      {!hideLayout && <Header onTogglePopup={togglePopup} />}
+      {!hideLayout && <MenuPopup isOpen={isOpen} onClose={togglePopup} />}
       <AppRoutes />
-      {!isReportsPage && <Cursor />}
-      {!isReportsPage && <ScrollTop />}
-      {!isReportsPage && <Footer />}
+      {!hideLayout && <Cursor />}
+      {!hideLayout && <ScrollTop />}
+      {!hideLayout && <Footer />}
     </>
   );
 }

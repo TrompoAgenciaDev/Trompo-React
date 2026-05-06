@@ -9,7 +9,7 @@ const Contactanos = lazy(() => import("../pages/Contactanos"));
 const Casos = lazy(() => import("../pages/Casos"));
 const Terms = lazy(() => import("../pages/terms"));
 const Gracias = lazy(() => import("../pages/Gracias"));
-const Verticales = lazy(() => import("../pages/Verticales.jsx"));
+const Verticales = lazy(() => import("../pages/landings/Verticales.jsx"));
 
 //Servicios
 const Servicios = lazy(() => import("../pages/Servicios"));

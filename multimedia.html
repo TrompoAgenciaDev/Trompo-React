@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/trompo/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Producción audiovisual y motion para marcas argentinas. Video institucional, contenido para redes, animación 2D y fotografía profesional in-house.">
+  <title>Multimedia · Trompo Agencia</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="/trompo/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayBold.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="/trompo/assets/fonts/neue-haas-grotesk-display-pro-cdnfonts/NeueHaasDisplayRoman.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="/trompo/assets/fonts/fonts.css">
+  <style>
+/* ===========================================================
+   TROMPO · SERVICIOS · SISTEMA BASE COMPARTIDO
+   Idéntico a nosotros.html / contactanos.html
+   =========================================================== */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #f0ede6;
+  --ink-dim: rgba(240,237,230,0.55);
+  --ink-faint: rgba(240,237,230,0.2);
+  --ink-mute: rgba(240,237,230,0.12);
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --bg3: #161616;
+  --bg-elev: #1a1a1a;
+  --gold: #E8B73A;
+  --gold-warm: #f5c84a;
+  --gold-deep: #C99A23;
+  --pink: #E8458F;
+  --green: #4ADE80;
+  --red: #ef4444;
+  --border: rgba(240,237,230,0.08);
+  --border-strong: rgba(240,237,230,0.13);
+  --font-display: 'NeueHaasDisplayBold', 'Neue Haas Grotesk Display Pro', 'Montserrat', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'JetBrains Mono', 'Courier New', monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.33, 1, 0.68, 1);
+  --max: 1400px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+}
+a, button { cursor: none; }
+::selection { background: var(--gold); color: var(--bg); }
+
+/* === CURSOR === */
+.cursor {
+  position: fixed;
+  width: 10px; height: 10px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%,-50%);
+  mix-blend-mode: difference;
+  transition: width 0.25s var(--ease), height 0.25s var(--ease);
+}
+.cursor.hover { width: 48px; height: 48px; }
+.cursor-trail {
+  position: fixed;
+  width: 32px; height: 32px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%,-50%);
+  opacity: 0.5;
+}
+@media (max-width: 920px) {
+  .cursor, .cursor-trail { display: none; }
+  body, a, button { cursor: auto; }
+}
+
+/* === NAV === */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 64px;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-logo img { width: 130px; }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-link:hover, .nav-link.active { color: var(--ink); }
+.nav-cta {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--gold);
+  padding: 10px 22px;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover { background: var(--gold-warm); transform: translateY(-1px); }
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links .nav-link { display: none; }
+}
+
+/* === BREADCRUMB (pequeño nav contextual) === */
+.breadcrumb {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 24px 40px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.breadcrumb a { color: var(--ink-dim); text-decoration: none; transition: color 0.2s; }
+.breadcrumb a:hover { color: var(--gold); }
+.breadcrumb-sep { color: var(--ink-faint); }
+.breadcrumb-current { color: var(--gold); }
+
+/* === HERO con SLIDER === */
+.hero {
+  min-height: 92vh;
+  padding: 80px 40px 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-slider { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.slider-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.6s cubic-bezier(0.65, 0, 0.35, 1);
+  filter: grayscale(100%) contrast(1.1) brightness(0.45) sepia(0.85) hue-rotate(-15deg) saturate(2.2);
+}
+.slider-image.active { opacity: 1; animation: kenBurns 8s ease-out forwards; }
+@keyframes kenBurns { from { transform: scale(1.05); } to { transform: scale(1.12); } }
+.hero-slider::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.85) 80%),
+    linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.95) 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+.slider-indicators {
+  position: absolute;
+  bottom: 50px;
+  right: 40px;
+  z-index: 6;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.slider-indicator {
+  width: 30px; height: 2px;
+  background: rgba(240,237,230,0.25);
+  transition: all 0.4s ease;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+}
+.slider-indicator.active { width: 60px; }
+.slider-indicator.active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: translateX(-100%);
+  animation: indicatorFill 5s linear forwards;
+}
+@keyframes indicatorFill { to { transform: translateX(0); } }
+.slider-counter {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  margin-left: 14px;
+}
+@keyframes blinkLive { 50% { opacity: 0.3; } }
+
+.hero > *:not(.hero-slider) { position: relative; z-index: 10; }
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: heroIn 0.8s var(--ease) 0.4s forwards;
+}
+.hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--gold); }
+.hero-eyebrow .blink { color: var(--gold); animation: blinkLive 1.5s infinite; }
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 9vw, 140px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.hero-title-line { display: block; overflow: hidden; }
+.hero-title-line span {
+  display: inline-block;
+  transform: translateY(110%);
+  animation: titleReveal 1.2s var(--ease) forwards;
+}
+.hero-title-line:nth-child(1) span { animation-delay: 0.7s; }
+.hero-title-line:nth-child(2) span { animation-delay: 0.85s; }
+.hero-title-line:nth-child(3) span { animation-delay: 1.0s; }
+.hero-title-line:nth-child(4) span { animation-delay: 1.15s; }
+@keyframes titleReveal { to { transform: translateY(0); } }
+.hero-title em { font-style: italic; color: var(--gold); }
+
+.hero-bottom {
+  display: grid;
+  grid-template-columns: 1.4fr 0.7fr 0.7fr;
+  gap: 60px;
+  margin-top: 60px;
+  align-items: end;
+  opacity: 0;
+  animation: heroIn 1s var(--ease) 1.7s forwards;
+}
+@keyframes heroIn { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: none; } }
+.hero-desc { font-size: 17px; line-height: 1.7; color: var(--ink-dim); max-width: 480px; }
+.hero-desc strong { color: var(--ink); font-weight: 600; }
+.hero-stat { border-left: 1px solid var(--border-strong); padding-left: 20px; }
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: 42px;
+  line-height: 1;
+  color: var(--gold);
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+  display: flex; align-items: baseline; gap: 4px;
+}
+.hero-stat-num em { color: var(--gold); font-style: normal; }
+.hero-stat-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-dim);
+  line-height: 1.5;
+}
+
+/* HERO CTA inline */
+.hero-cta-row {
+  display: flex; gap: 14px; flex-wrap: wrap; margin-top: 36px;
+  opacity: 0;
+  animation: heroIn 1s var(--ease) 1.9s forwards;
+}
+
+@media (max-width: 920px) {
+  .hero { padding: 60px 20px 60px; }
+  .hero-bottom { grid-template-columns: 1fr; gap: 28px; margin-top: 40px; }
+  .hero-stat { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 20px; }
+  .slider-indicators { bottom: 30px; right: 20px; }
+}
+
+/* === DIVIDER === */
+.divider { height: 1px; background: var(--border); margin: 0 40px; }
+
+/* === SECTION-EYEBROW comun === */
+.section-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 32px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+
+/* === MANIFIESTO 2-COL === */
+.manifesto {
+  padding: 100px 40px;
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 80px;
+}
+.manifesto-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  padding-top: 6px;
+}
+.manifesto-num small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-top: 6px;
+}
+.manifesto-content h2 {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 3.5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 36px;
+}
+.manifesto-content h2 em { font-style: italic; color: var(--gold); }
+.manifesto-content h2 .strike { text-decoration: line-through; color: var(--ink-dim); }
+.manifesto-lead {
+  font-size: 18px;
+  line-height: 1.75;
+  color: var(--ink-dim);
+  max-width: 720px;
+}
+@media (max-width: 768px) {
+  .manifesto { grid-template-columns: 1fr; gap: 32px; padding: 60px 20px; }
+}
+
+/* === BUTTONS === */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--gold);
+  padding: 18px 36px;
+  text-decoration: none;
+  border: none;
+  cursor: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.btn-primary:hover { background: var(--gold-warm); transform: translateY(-2px); }
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border: 1px solid var(--border-strong);
+  padding: 18px 36px;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+  background: transparent;
+  cursor: none;
+}
+.btn-ghost:hover { border-color: var(--ink-dim); transform: translateY(-2px); }
+
+/* === STATS BAND DORADO === */
+.stats {
+  background: var(--gold);
+  color: var(--bg);
+  padding: 100px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.stats::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 34px, rgba(10,10,10,0.04) 34px, rgba(10,10,10,0.04) 35px);
+  pointer-events: none;
+}
+.stats-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bg);
+  opacity: 0.65;
+  margin-bottom: 48px;
+  text-align: center;
+  display: flex; align-items: center; justify-content: center; gap: 14px;
+}
+.stats-eyebrow::before, .stats-eyebrow::after { content: ''; display: block; width: 28px; height: 1px; background: var(--bg); opacity: 0.4; }
+.stats-grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 48px;
+  position: relative; z-index: 1;
+}
+.stat-cell { border-left: 2px solid var(--bg); padding-left: 28px; }
+.stat-cell:first-child { border-left: none; padding-left: 0; }
+.stat-big {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 6vw, 96px);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--bg);
+  margin-bottom: 12px;
+}
+.stat-big em { font-style: normal; }
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--bg);
+  opacity: 0.7;
+  line-height: 1.5;
+}
+@media (max-width: 920px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 40px 28px; }
+  .stat-cell:nth-child(3) { border-left: none; padding-left: 0; }
+}
+
+/* === CTA BANNER === */
+.cta-banner {
+  background: var(--bg3);
+  border-top: 1px solid var(--border);
+  padding: 100px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-banner-bg {
+  position: absolute;
+  inset: 0;
+  font-family: var(--font-display);
+  font-size: 280px;
+  font-weight: 900;
+  color: rgba(240,237,230,0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+.cta-inner { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+.cta-banner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.cta-banner h2 em { font-style: italic; color: var(--gold); }
+.cta-banner p {
+  font-size: 17px;
+  color: var(--ink-dim);
+  max-width: 620px;
+  margin: 0 auto 48px;
+  line-height: 1.7;
+}
+.cta-buttons-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+@media (max-width: 540px) {
+  .cta-banner-bg { font-size: 100px; }
+}
+
+/* === FOOTER === */
+footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 80px 40px 40px; }
+.footer-top {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--border);
+}
+.footer-brand-mark {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.footer-brand-mark svg { width: 24px; height: 24px; }
+.footer-tagline {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-dim);
+  letter-spacing: 0.08em;
+  margin-bottom: 20px;
+}
+.footer-desc { font-size: 13px; line-height: 1.7; color: var(--ink-dim); }
+.footer-col-h {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 20px;
+}
+.footer-list { list-style: none; }
+.footer-list li { margin-bottom: 10px; }
+.footer-list a { font-size: 13px; color: var(--ink-dim); text-decoration: none; transition: color 0.2s; }
+.footer-list a:hover { color: var(--ink); }
+.footer-list li:not(:has(a)) { font-size: 13px; color: var(--ink-dim); }
+.footer-base {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-top: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: var(--ink-dim);
+}
+.footer-base a { color: var(--ink-dim); text-decoration: none; transition: color 0.2s; }
+.footer-base a:hover { color: var(--gold); }
+@media (max-width: 920px) { .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; } }
+@media (max-width: 540px) {
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-base { flex-direction: column; gap: 12px; }
+}
+
+/* === DOCK === */
+.dock {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(22,22,22,0.92);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  padding: 8px 12px;
+}
+.dock-status {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-dim);
+  padding: 6px 10px;
+  border-right: 1px solid var(--border);
+  margin-right: 4px;
+}
+.live-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: blinkLive 2s infinite; }
+.dock-link {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  text-decoration: none;
+  padding: 8px 14px;
+  transition: color 0.2s, background 0.2s;
+}
+.dock-link:hover { color: var(--ink); background: rgba(240,237,230,0.05); }
+.dock-cta {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bg);
+  background: var(--gold);
+  padding: 8px 18px;
+  text-decoration: none;
+  margin-left: 4px;
+  transition: background 0.2s;
+}
+.dock-cta:hover { background: var(--gold-warm); }
+@media (max-width: 768px) {
+  .dock-status, .dock-link { display: none; }
+  .dock { bottom: 16px; padding: 6px 8px; }
+}
+
+/* === REVEAL === */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* === SCROLL TOP === */
+.scroll-top-button {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  z-index: 200;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: none;
+  opacity: 0;
+  transition: opacity 0.3s, background 0.2s;
+}
+.scroll-top-button.visible { opacity: 1; }
+.scroll-top-button:hover { background: var(--bg3); }
+
+/* === FAQs (común a todos) === */
+.faqs {
+  padding: 100px 40px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.faqs-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+.faqs-h {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 3.5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.faqs-h em { font-style: italic; color: var(--gold); }
+.faqs-meta { font-size: 14px; color: var(--ink-dim); line-height: 1.6; max-width: 380px; }
+.faq-list { border-top: 1px solid var(--border); }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 28px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: clamp(18px, 1.5vw, 22px);
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  cursor: none;
+  transition: color 0.2s;
+}
+.faq-q:hover { color: var(--gold); }
+.faq-q-icon {
+  width: 22px; height: 22px;
+  flex-shrink: 0;
+  margin-left: 24px;
+  transition: transform 0.4s var(--ease);
+  position: relative;
+}
+.faq-q-icon::before, .faq-q-icon::after {
+  content: ''; position: absolute;
+  background: var(--gold);
+  transition: transform 0.4s var(--ease);
+}
+.faq-q-icon::before { top: 50%; left: 0; right: 0; height: 1.5px; transform: translateY(-50%); }
+.faq-q-icon::after { left: 50%; top: 0; bottom: 0; width: 1.5px; transform: translateX(-50%); }
+.faq-item.open .faq-q-icon::after { transform: translateX(-50%) rotate(90deg); }
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s var(--ease);
+}
+.faq-item.open .faq-a { max-height: 600px; }
+.faq-a-inner {
+  padding: 0 0 32px;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--ink-dim);
+  max-width: 720px;
+}
+@media (max-width: 768px) {
+  .faqs { padding: 60px 20px; }
+  .faqs-header { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* === TESTIMONIALS slider === */
+.testimonials {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 100px 40px;
+  position: relative;
+  overflow: hidden;
+}
+.testimonials-inner { max-width: var(--max); margin: 0 auto; }
+.testimonial-card {
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  padding: 56px 48px;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 32px;
+  align-items: start;
+  margin-bottom: 14px;
+  transition: border-color 0.3s, background 0.3s;
+}
+.testimonial-card:hover { border-color: var(--gold); background: var(--bg3); }
+.testimonial-quote-mark {
+  font-family: var(--font-display);
+  font-size: 80px;
+  color: var(--gold);
+  line-height: 0.5;
+  height: 40px;
+}
+.testimonial-text {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.8vw, 26px);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 28px;
+  font-style: italic;
+}
+.testimonial-meta {
+  display: flex; align-items: center; gap: 14px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+.testimonial-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--bg3);
+  border: 1px solid var(--border-strong);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.testimonial-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+.testimonial-role {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+}
+@media (max-width: 768px) {
+  .testimonial-card { grid-template-columns: 1fr; padding: 36px 28px; gap: 14px; }
+  .testimonials { padding: 60px 20px; }
+}
+
+/* === OTROS SERVICIOS GRID === */
+.other-services {
+  padding: 100px 40px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.other-services-h {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 48px;
+}
+.other-services-h em { font-style: italic; color: var(--gold); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.service-card {
+  background: var(--bg);
+  padding: 32px 24px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: background 0.3s;
+  position: relative;
+}
+.service-card:hover { background: var(--bg2); }
+.service-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: var(--gold); transform: translateY(-100%);
+  transition: transform 0.4s var(--ease);
+}
+.service-card:hover::before { transform: translateY(0); }
+.service-card-num {
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.12em;
+  color: var(--pink); margin-bottom: 18px;
+  font-weight: 600; text-transform: uppercase;
+}
+.service-card h4 {
+  font-family: var(--font-display); font-size: 20px;
+  letter-spacing: -0.01em; margin-bottom: 8px;
+}
+.service-card p { font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
+.service-card-arrow {
+  display: inline-block; font-size: 14px; color: var(--gold);
+  margin-top: 16px; transition: transform 0.3s;
+}
+.service-card:hover .service-card-arrow { transform: translateX(4px); }
+@media (max-width: 920px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .other-services { padding: 60px 20px; }
+}
+
+/* === DELIVERABLES (entregables 4 columnas brutalist) === */
+.deliverables-section {
+  padding: 100px 40px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.deliverables-h {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 3.5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 64px;
+  max-width: 820px;
+}
+.deliverables-h em { font-style: italic; color: var(--gold); }
+.deliverables-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+}
+.deliverable-cell {
+  background: var(--bg);
+  padding: 40px 28px 48px;
+  position: relative;
+  transition: background 0.3s;
+}
+.deliverable-cell:hover { background: var(--bg2); }
+.deliverable-cell::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: var(--gold); transform: translateY(-100%);
+  transition: transform 0.4s var(--ease);
+}
+.deliverable-cell:hover::before { transform: translateY(0); }
+.deliverable-letter {
+  font-family: var(--font-display);
+  font-size: 56px;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 32px;
+}
+.deliverable-cell h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  margin-bottom: 14px;
+  line-height: 1.15;
+}
+.deliverable-cell p { font-size: 14px; line-height: 1.7; color: var(--ink-dim); }
+@media (max-width: 1100px) { .deliverables-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) {
+  .deliverables-grid { grid-template-columns: 1fr; }
+  .deliverables-section { padding: 60px 20px; }
+}
+
+/* === PROCESS / TIMELINE === */
+.process {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 100px 40px;
+}
+.process-inner { max-width: var(--max); margin: 0 auto; }
+.process-h {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 3.5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 64px;
+  max-width: 820px;
+}
+.process-h em { font-style: italic; color: var(--gold); }
+.timeline-list { border-top: 1px solid var(--border); }
+.timeline-item {
+  display: grid;
+  grid-template-columns: 120px 1fr 200px;
+  gap: 40px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+  transition: padding-left 0.3s var(--ease);
+}
+.timeline-item:hover { padding-left: 12px; }
+.timeline-step {
+  font-family: var(--font-display);
+  font-size: 32px;
+  color: var(--ink-faint);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  padding-top: 4px;
+  transition: color 0.3s;
+}
+.timeline-item:hover .timeline-step { color: var(--gold); }
+.timeline-content h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+.timeline-content p { font-size: 14px; line-height: 1.7; color: var(--ink-dim); }
+.timeline-duration {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: right;
+  padding-top: 8px;
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .timeline-item { grid-template-columns: 80px 1fr; gap: 20px; }
+  .timeline-duration { grid-column: 2; padding-top: 10px; text-align: left; }
+  .process { padding: 60px 20px; }
+}
+
+/* === PORTFOLIO grid (compartido) === */
+.portfolio {
+  padding: 100px 40px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.portfolio-header {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 60px;
+  margin-bottom: 56px;
+  align-items: end;
+}
+.portfolio-h {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 3.5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.portfolio-h em { font-style: italic; color: var(--gold); }
+.portfolio-meta {
+  font-size: 13px;
+  color: var(--ink-dim);
+  line-height: 1.6;
+  text-align: right;
+}
+.portfolio-meta strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 42px;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: var(--bg2);
+  text-decoration: none;
+  color: var(--ink);
+  display: block;
+  border: 1px solid var(--border);
+  transition: border-color 0.3s;
+}
+.portfolio-item:hover { border-color: var(--gold); }
+.portfolio-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(60%) contrast(1.05);
+  transition: filter 0.6s, transform 0.6s var(--ease);
+}
+.portfolio-item:hover img { filter: grayscale(0); transform: scale(1.06); }
+.portfolio-item-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(10,10,10,0.95));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+}
+.portfolio-item-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.portfolio-item-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+@media (max-width: 920px) {
+  .portfolio-grid { grid-template-columns: 1fr 1fr; }
+  .portfolio-header { grid-template-columns: 1fr; }
+  .portfolio-meta { text-align: left; }
+}
+@media (max-width: 540px) {
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .portfolio { padding: 60px 20px; }
+}
+
+
+/* === REEL GRID (multimedia hero showcase) === */
+.reel-section {
+  padding: 100px 40px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.reel-header {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 60px;
+  align-items: end;
+  margin-bottom: 56px;
+}
+.reel-h {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 3.5vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.reel-h em { font-style: italic; color: var(--gold); }
+.reel-meta { font-size: 13px; color: var(--ink-dim); line-height: 1.6; text-align: right; }
+.reel-meta strong { display: block; font-family: var(--font-display); font-size: 36px; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+
+.reel-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  aspect-ratio: 16/9;
+  max-height: 720px;
+}
+.reel-item {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  cursor: none;
+  transition: border-color 0.3s;
+}
+.reel-item:hover { border-color: var(--gold); }
+.reel-item:nth-child(1) { grid-row: 1 / 3; }
+.reel-item img, .reel-item video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%) contrast(1.05);
+  transition: filter 0.5s, transform 0.6s var(--ease);
+}
+.reel-item:hover img, .reel-item:hover video { filter: grayscale(0); transform: scale(1.04); }
+.reel-item-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(10,10,10,0.92));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 20px;
+  pointer-events: none;
+}
+.reel-item-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.reel-item-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+.reel-item:nth-child(1) .reel-item-name { font-size: 28px; }
+.reel-play-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px; height: 56px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.reel-item:hover .reel-play-btn { opacity: 1; }
+.reel-play-btn svg { width: 22px; height: 22px; color: var(--bg); margin-left: 3px; }
+
+@media (max-width: 920px) {
+  .reel-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; aspect-ratio: auto; max-height: none; }
+  .reel-item { aspect-ratio: 4/5; }
+  .reel-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1; aspect-ratio: 16/9; }
+  .reel-header { grid-template-columns: 1fr; }
+  .reel-meta { text-align: left; }
+}
+@media (max-width: 540px) {
+  .reel-grid { grid-template-columns: 1fr; }
+  .reel-item:nth-child(1) { grid-column: 1; }
+}
+
+/* === FORMATOS PILL CHIPS === */
+.formats-section {
+  padding: 80px 40px;
+  max-width: var(--max);
+  margin: 0 auto;
+}
+.formats-h {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 2.8vw, 40px);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 40px;
+  max-width: 720px;
+}
+.formats-h em { font-style: italic; color: var(--gold); }
+.formats-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.format-pill {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ink-dim);
+  background: var(--bg2);
+  border: 1px solid var(--border-strong);
+  padding: 12px 20px;
+  transition: all 0.2s;
+  cursor: none;
+}
+.format-pill:hover {
+  color: var(--bg);
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.format-pill em {
+  color: var(--gold);
+  font-style: normal;
+  margin-right: 8px;
+}
+.format-pill:hover em { color: var(--bg); }
+
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursor-trail"></div>
+
+  <nav id="nav">
+    <a href="/trompo/" class="nav-logo" data-cursor-hover>
+      <img src="/trompo/assets/white.webp" alt="Trompo Agencia">
+    </a>
+    <div class="nav-links">
+      <a href="/trompo/" class="nav-link" data-cursor-hover>Inicio</a>
+      <a href="/trompo/nosotros" class="nav-link" data-cursor-hover>Nosotros</a>
+      <a href="/trompo/servicios" class="nav-link active" data-cursor-hover>Servicios</a>
+      <a href="/trompo/contactanos" class="nav-cta" data-cursor-hover>Hablemos →</a>
+    </div>
+  </nav>
+
+  <div class="breadcrumb">
+    <a href="/trompo/" data-cursor-hover>Trompo</a>
+    <span class="breadcrumb-sep">/</span>
+    <a href="/trompo/servicios" data-cursor-hover>Servicios</a>
+    <span class="breadcrumb-sep">/</span>
+    <span class="breadcrumb-current">Multimedia</span>
+  </div>
+
+  <section class="hero">
+    <div class="hero-slider" id="slider">
+      <div class="slider-image active" style="background-image: url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1920&q=85');"></div>
+      <div class="slider-image" style="background-image: url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=1920&q=85');"></div>
+      <div class="slider-image" style="background-image: url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1920&q=85');"></div>
+    </div>
+    <div class="slider-indicators">
+      <div class="slider-indicator active" data-index="0"></div>
+      <div class="slider-indicator" data-index="1"></div>
+      <div class="slider-indicator" data-index="2"></div>
+      <span class="slider-counter" id="slider-counter">01 / 03</span>
+    </div>
+    <div class="hero-eyebrow">
+      <span>Servicio · 2026</span>
+      <span class="blink">●</span>
+      <span>Producción audiovisual & motion</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="hero-title-line"><span>Audiovisual</span></span>
+      <span class="hero-title-line"><span>que humaniza</span></span>
+      <span class="hero-title-line"><span>y <em>activa</em></span></span>
+      <span class="hero-title-line"><span>la marca.</span></span>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-desc"><strong>Hoy todo se decide en pocos segundos de pantalla.</strong> Producimos video, motion graphics, fotografía y contenido audiovisual para captar atención, comunicar con impacto y sostener relación con la audiencia en feed, reels y campañas.</p>
+      <div class="hero-stat">
+        <div class="hero-stat-num">200+</div>
+        <div class="hero-stat-label">Proyectos audiovisuales producidos por año en operación</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">2x</div>
+        <div class="hero-stat-label">Producción in-house o en locación según el proyecto</div>
+      </div>
+    </div>
+    
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="manifesto">
+    <div>
+      <div class="manifesto-num reveal">01<small>Multimedia & Producción</small></div>
+    </div>
+    <div class="manifesto-content">
+      <h2 class="reveal">No producimos <span class="strike">videos.</span><br>Producimos <em>activos</em><br>que mueven el negocio.</h2>
+      <p class="manifesto-lead reveal">Un video no es una pieza más del calendario. Es una herramienta concreta para resolver una necesidad de comunicación: explicar un producto, posicionar una marca, sostener un lanzamiento, capacitar una red comercial. Lo abordamos así desde la pre-producción: con un objetivo de negocio claro, un guión que lo respalda y una ejecución técnica que está al servicio del mensaje — no del lucimiento estético.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- REEL GRID -->
+  <section class="reel-section">
+    <div class="reel-header">
+      <div>
+        <div class="section-eyebrow reveal">02 · Reel</div>
+        <h2 class="reel-h reveal">Algunas piezas<br><em>recientes.</em></h2>
+      </div>
+      <p class="reel-meta reveal"><strong>1.5K+</strong>piezas audiovisuales producidas en los últimos 24 meses · clickeá para reproducir</p>
+    </div>
+
+    <div class="reel-grid">
+      <div class="reel-item reveal" data-cursor-hover>
+        <video src="https://cdn.coverr.co/videos/coverr-an-empty-warehouse-with-orange-light-7466/1080p.mp4" muted loop playsinline autoplay></video>
+        <div class="reel-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="reel-item-overlay">
+          <div class="reel-item-tag">Video institucional · Volvo</div>
+          <div class="reel-item-name">Industrias del Movimiento — manifiesto de marca</div>
+        </div>
+      </div>
+      <div class="reel-item reveal" data-cursor-hover>
+        <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=900&q=85" alt="Editing">
+        <div class="reel-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="reel-item-overlay">
+          <div class="reel-item-tag">Reel · Ardu Café</div>
+          <div class="reel-item-name">Lanzamiento</div>
+        </div>
+      </div>
+      <div class="reel-item reveal" data-cursor-hover>
+        <img src="https://images.unsplash.com/photo-1606170033648-5d55a3edf314?w=900&q=85" alt="Motion">
+        <div class="reel-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="reel-item-overlay">
+          <div class="reel-item-tag">Motion · CEDIR</div>
+          <div class="reel-item-name">Explainer salud</div>
+        </div>
+      </div>
+      <div class="reel-item reveal" data-cursor-hover>
+        <img src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?w=900&q=85" alt="Reel">
+        <div class="reel-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="reel-item-overlay">
+          <div class="reel-item-tag">Producto · Denso</div>
+          <div class="reel-item-name">Spot técnico</div>
+        </div>
+      </div>
+      <div class="reel-item reveal" data-cursor-hover>
+        <img src="https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=900&q=85" alt="Stories">
+        <div class="reel-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <div class="reel-item-overlay">
+          <div class="reel-item-tag">Reels · Lozada</div>
+          <div class="reel-item-name">Serie viajes</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMATOS PILLS -->
+  <section class="formats-section">
+    <h2 class="formats-h reveal">Producimos en <em>todos los formatos</em><br>nativos de cada canal.</h2>
+    <div class="formats-pills reveal">
+      <span class="format-pill" data-cursor-hover><em>01</em> Video institucional</span>
+      <span class="format-pill" data-cursor-hover><em>02</em> Manifiesto de marca</span>
+      <span class="format-pill" data-cursor-hover><em>03</em> Reels Instagram</span>
+      <span class="format-pill" data-cursor-hover><em>04</em> Stories animadas</span>
+      <span class="format-pill" data-cursor-hover><em>05</em> Shorts YouTube</span>
+      <span class="format-pill" data-cursor-hover><em>06</em> TikTok nativo</span>
+      <span class="format-pill" data-cursor-hover><em>07</em> Spot publicitario</span>
+      <span class="format-pill" data-cursor-hover><em>08</em> Motion 2D</span>
+      <span class="format-pill" data-cursor-hover><em>09</em> Lottie UI</span>
+      <span class="format-pill" data-cursor-hover><em>10</em> Explainer video</span>
+      <span class="format-pill" data-cursor-hover><em>11</em> Infografía animada</span>
+      <span class="format-pill" data-cursor-hover><em>12</em> Producto fotográfico</span>
+      <span class="format-pill" data-cursor-hover><em>13</em> Lifestyle</span>
+      <span class="format-pill" data-cursor-hover><em>14</em> Foto de equipo</span>
+      <span class="format-pill" data-cursor-hover><em>15</em> Producción de packshot</span>
+      <span class="format-pill" data-cursor-hover><em>16</em> Video drone</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="deliverables-section">
+    <div class="section-eyebrow reveal">03 · Entregables</div>
+    <h2 class="deliverables-h reveal">Lo que producimos<br>en <em>cada proyecto.</em></h2>
+    <div class="deliverables-grid">
+      <div class="deliverable-cell reveal" data-cursor-hover>
+        <div class="deliverable-letter">A</div>
+        <h3>Video institucional</h3>
+        <p>Piezas de presentación corporativa, manifiestos de marca, reels para inversores y materiales para procesos comerciales. Producción con estándar profesional.</p>
+      </div>
+      <div class="deliverable-cell reveal" data-cursor-hover>
+        <div class="deliverable-letter">B</div>
+        <h3>Contenido para redes</h3>
+        <p>Reels, stories, shorts y formatos verticales nativos de cada plataforma. Pensados para feed — no como adaptación de un video más largo.</p>
+      </div>
+      <div class="deliverable-cell reveal" data-cursor-hover>
+        <div class="deliverable-letter">C</div>
+        <h3>Motion graphics</h3>
+        <p>Animación 2D, lottie para UI, motion para spots digitales, infografías animadas y explainer videos. Producción ágil, escalable y modular.</p>
+      </div>
+      <div class="deliverable-cell reveal" data-cursor-hover>
+        <div class="deliverable-letter">D</div>
+        <h3>Fotografía</h3>
+        <p>Producto, lifestyle, equipo y locación. Contenido fotográfico pensado para alimentar todo el ecosistema digital — no solo el sitio web.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="process">
+    <div class="process-inner">
+      <div class="section-eyebrow reveal">04 · Cómo trabajamos</div>
+      <h2 class="process-h reveal">El proceso<br>de <em>cada producción.</em></h2>
+      <div class="timeline-list">
+        <div class="timeline-item reveal">
+          <div class="timeline-step">01</div>
+          <div class="timeline-content">
+            <h3>Briefing y guión</h3>
+            <p>Antes de filmar definimos: qué problema de negocio resuelve este video, quién es la audiencia, qué tiene que pasar después de verlo. El guión es el plan, no la creatividad.</p>
+          </div>
+          <div class="timeline-duration">Semana 1</div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-step">02</div>
+          <div class="timeline-content">
+            <h3>Pre-producción</h3>
+            <p>Casting, locación, scouting, plan de rodaje, timeline y plan de cobertura. Llegar al rodaje con todo cerrado separa lo profesional de la improvisación.</p>
+          </div>
+          <div class="timeline-duration">Semanas 2–3</div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-step">03</div>
+          <div class="timeline-content">
+            <h3>Producción</h3>
+            <p>Rodaje con equipo técnico, dirección, sonido directo y registro en formato adecuado al destino final. Sin sobre-producción ni atajos — el equilibrio justo.</p>
+          </div>
+          <div class="timeline-duration">Semana 4</div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-step">04</div>
+          <div class="timeline-content">
+            <h3>Post-producción</h3>
+            <p>Edición, color, sonido, motion y entrega en los formatos que necesita cada canal. Una sola producción se traduce a múltiples entregables nativos por plataforma.</p>
+          </div>
+          <div class="timeline-duration">Semanas 5–6</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <div class="testimonials-inner">
+      <div class="section-eyebrow reveal">05 · Lo que dicen los clientes</div>
+      <h2 class="deliverables-h reveal">Marcas que confiaron<br><em>su producción</em> a Trompo.</h2>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote-mark">"</div>
+        <div>
+          <p class="testimonial-text">Hicieron el video institucional para una presentación a casa matriz en Japón. Estuvimos cómodos en el rodaje, claros en el guión y la pieza final terminó usándose mucho más allá del evento original.</p>
+          <div class="testimonial-meta">
+            <div class="testimonial-avatar">FS</div>
+            <div>
+              <div class="testimonial-name">Federico Saluzzi</div>
+              <div class="testimonial-role">Marketing · Denso Argentina</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote-mark">"</div>
+        <div>
+          <p class="testimonial-text">La producción para nuestras campañas de lanzamiento de café fue espectacular. No solo el video — el sistema completo de fotos, reels y stories nos sirvió todo el trimestre.</p>
+          <div class="testimonial-meta">
+            <div class="testimonial-avatar">LA</div>
+            <div>
+              <div class="testimonial-name">Lucía Ardusso</div>
+              <div class="testimonial-role">Founder · Ardu Café</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stats-eyebrow">Trompo en números</div>
+    <div class="stats-grid">
+      <div class="stat-cell reveal">
+        <div class="stat-big">1.5K<em>+</em></div>
+        <div class="stat-label">Piezas audiovisuales<br>producidas por año</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-big">200<em>+</em></div>
+        <div class="stat-label">Proyectos completos<br>de video institucional</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-big">48hs</div>
+        <div class="stat-label">Tiempo promedio de<br>edición y entrega</div>
+      </div>
+      <div class="stat-cell reveal">
+        <div class="stat-big">HD<em>·</em>4K</div>
+        <div class="stat-label">Formatos nativos<br>según destino</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faqs">
+    <div class="faqs-header">
+      <div>
+        <div class="section-eyebrow reveal">06 · Preguntas frecuentes</div>
+        <h2 class="faqs-h reveal">Las preguntas <em>antes</em><br>de empezar a producir.</h2>
+      </div>
+      <p class="faqs-meta reveal">Las dudas más frecuentes sobre nuestro modo de trabajar producción audiovisual. Si tu pregunta no está, escribinos.</p>
+    </div>
+    <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" data-cursor-hover>
+            <span>¿Trabajan con productora propia o tercerizan el rodaje?</span>
+            <span class="faq-q-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Producimos in-house para piezas de redes, motion y fotografía. Para producciones más grandes (spots, video institucional con casting, locación múltiple) trabajamos con un equipo técnico de confianza que coordinamos como dirección creativa. La calidad y el criterio editorial los mantenemos nosotros siempre.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" data-cursor-hover>
+            <span>¿Cuánto cuesta un video institucional?</span>
+            <span class="faq-q-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">El rango es amplio: desde una producción ágil enfocada para redes hasta un manifiesto de marca con casting, locación, drone y post completa. En la primera reunión lo definimos según el objetivo del video y los canales de uso. Lo que nunca hacemos es cobrar lo mismo por dos producciones distintas.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" data-cursor-hover>
+            <span>¿Pueden adaptar una pieza a múltiples formatos?</span>
+            <span class="faq-q-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Sí — y de hecho es como recomendamos producir hoy. Una sola sesión bien planificada se traduce a video largo, reels verticales, stories, post estáticos y carruseles. Más eficiente y mucho más coherente que producir cada formato por separado.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" data-cursor-hover>
+            <span>¿Hacen guión y dirección creativa o solo ejecutan?</span>
+            <span class="faq-q-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Hacemos guión, dirección creativa, dirección de arte y dirección audiovisual. No ejecutamos guiones ajenos sin antes proponer ajustes — si vamos a poner el nombre, queremos que la pieza funcione.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" data-cursor-hover>
+            <span>¿Trabajan con motion graphics y animación 2D?</span>
+            <span class="faq-q-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Sí. Tenemos equipo de motion in-house. Producimos animación 2D, lottie para interfaces, motion para spots digitales, explainer videos e infografías animadas. Todo bajo el sistema visual de la marca.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q" data-cursor-hover>
+            <span>¿Pueden mantener un calendario de contenido sostenido?</span>
+            <span class="faq-q-icon"></span>
+          </button>
+          <div class="faq-a"><div class="faq-a-inner">Sí. Tenemos clientes que producen 100+ piezas mensuales con nosotros. Trabajamos con un sistema de jornadas de producción mensuales que permite mantener calidad y volumen sin caer en automatización ciega.</div></div>
+        </div>
+    </div>
+  </section>
+
+  <section class="other-services">
+    <div class="section-eyebrow reveal">Sistema integrado</div>
+    <h2 class="other-services-h reveal">Conocé los otros<br>servicios <em>del sistema.</em></h2>
+    <div class="services-grid">
+      <a href="/trompo/servicios/diseno" class="service-card" data-cursor-hover>
+        <div class="service-card-num">01 / Diseño</div>
+        <h4>Diseño</h4>
+        <p>Identidad y sistema visual.</p>
+        <span class="service-card-arrow">→</span>
+      </a>
+      <a href="/trompo/servicios/desarrollo" class="service-card" data-cursor-hover>
+        <div class="service-card-num">03 / Desarrollo Web</div>
+        <h4>Desarrollo Web</h4>
+        <p>Sitios y plataformas que escalan.</p>
+        <span class="service-card-arrow">→</span>
+      </a>
+      <a href="/trompo/servicios/paid-media" class="service-card" data-cursor-hover>
+        <div class="service-card-num">04 / Paid Media</div>
+        <h4>Paid Media</h4>
+        <p>Inversión publicitaria con ROI.</p>
+        <span class="service-card-arrow">→</span>
+      </a>
+      <a href="/trompo/servicios/social-media" class="service-card" data-cursor-hover>
+        <div class="service-card-num">05 / Redes Sociales</div>
+        <h4>Redes Sociales</h4>
+        <p>Contenido y comunidad diaria.</p>
+        <span class="service-card-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="cta-banner" id="contacto">
+    <div class="cta-banner-bg">Multimedia</div>
+    <div class="cta-inner">
+      <div class="section-eyebrow reveal" style="justify-content: center;">
+        Conversemos
+      </div>
+      <h2 class="reveal">¿Necesitás <em>contenido audiovisual</em><br>para tu marca?</h2>
+      <p class="reveal">Charlemos sobre el proyecto. Sin propuesta cerrada, sin presión — diagnóstico genuino sobre qué tipo de producción te conviene y por qué.</p>
+      <div class="cta-buttons-row reveal">
+        <a href="/trompo/contactanos" class="btn-primary" data-cursor-hover>Pedir reunión →</a>
+        <a href="/trompo/nosotros" class="btn-ghost" data-cursor-hover>Ver más reels</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-mark">
+          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="6" r="3.5" fill="#E8B73A"/><circle cx="18" cy="12" r="3.5" fill="#E8B73A"/><circle cx="12" cy="18" r="3.5" fill="#E8B73A"/><circle cx="6" cy="12" r="3.5" fill="#E8B73A"/><circle cx="12" cy="12" r="2.5" fill="#E8458F"/></svg>
+          Trompo
+        </div>
+        <div class="footer-tagline">Vanguardia digital · Córdoba</div>
+        <p class="footer-desc">Marketing para marcas que mueven el negocio. Diez años de operación desde Córdoba con clientes en toda Argentina.</p>
+      </div>
+      <div>
+        <h4 class="footer-col-h">Institucional</h4>
+        <ul class="footer-list">
+          <li><a href="/trompo/" data-cursor-hover>Inicio</a></li>
+          <li><a href="/trompo/nosotros" data-cursor-hover>Nosotros</a></li>
+          <li><a href="/trompo/contactanos" data-cursor-hover>Contactanos</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-h">Servicios</h4>
+        <ul class="footer-list">
+          <li><a href="/trompo/servicios/diseno" data-cursor-hover>Diseño</a></li>
+          <li><a href="/trompo/servicios/multimedia" data-cursor-hover>Multimedia</a></li>
+          <li><a href="/trompo/servicios/desarrollo" data-cursor-hover>Desarrollo Web</a></li>
+          <li><a href="/trompo/servicios/paid-media" data-cursor-hover>Paid Media</a></li>
+          <li><a href="/trompo/servicios/social-media" data-cursor-hover>Redes Sociales</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-h">Horarios</h4>
+        <ul class="footer-list">
+          <li>Lunes a Viernes</li>
+          <li>09:00 a 18:00 hs</li>
+          <li>&nbsp;</li>
+          <li><strong style="color:var(--ink)">Córdoba, Argentina</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span>© 2026 Trompo Agencia · Sistema digital v.2030.04</span>
+      <a href="mailto:somos@trompoagencia.com" data-cursor-hover>somos@trompoagencia.com</a>
+    </div>
+  </footer>
+
+  <div class="dock">
+    <div class="dock-status">
+      <span class="live-dot"></span>
+      <span>Online</span>
+    </div>
+    <a href="#" class="dock-link" data-cursor-hover>Reel</a>
+    <a href="#" class="dock-link" data-cursor-hover>Casos</a>
+    <a href="/trompo/" class="dock-link" data-cursor-hover>Inicio</a>
+    <a href="/trompo/contactanos" class="dock-cta" data-cursor-hover>Hablemos →</a>
+  </div>
+  <button class="scroll-top-button" id="scrollTop" aria-label="Scroll to top">
+    <svg width="18" height="18" viewBox="0 0 23 24" fill="none"><path d="M11.6526 22.231L11.6526 1.83985M11.6526 1.83985L1.62695 12.0354M11.6526 1.83985L21.6782 12.0354" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script>
+// ============================================================
+// TROMPO · SERVICIOS · JS BASE COMPARTIDO
+// ============================================================
+
+// CURSOR
+(function initCursor() {
+  const cursor = document.getElementById('cursor');
+  const trail = document.getElementById('cursor-trail');
+  if (!cursor || !trail) return;
+  let mx = 0, my = 0, tx = 0, ty = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`;
+  });
+  function animTrail() {
+    tx += (mx - tx) * 0.18;
+    ty += (my - ty) * 0.18;
+    trail.style.transform = `translate(${tx}px,${ty}px) translate(-50%,-50%)`;
+    requestAnimationFrame(animTrail);
+  }
+  animTrail();
+  document.querySelectorAll('[data-cursor-hover]').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+})();
+
+// REVEAL
+(function initReveal() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+
+// SCROLL TOP
+(function initScrollTop() {
+  const btn = document.getElementById('scrollTop');
+  if (!btn) return;
+  window.addEventListener('scroll', () => btn.classList.toggle('visible', window.scrollY > 400));
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+})();
+
+// SLIDER hero
+(function initSlider() {
+  const sliderEl = document.getElementById('slider');
+  if (!sliderEl) return;
+  const slides = sliderEl.querySelectorAll('.slider-image');
+  const indicators = document.querySelectorAll('.slider-indicators .slider-indicator');
+  const counter = document.getElementById('slider-counter');
+  if (!slides.length || !indicators.length) return;
+  let current = 0;
+  const total = slides.length;
+  const DURATION = 5000;
+  function update(i) {
+    slides[current].classList.remove('active');
+    indicators[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    indicators[current].classList.add('active');
+    if (counter) counter.textContent = `0${current+1} / 0${total}`;
+    const active = indicators[current];
+    active.style.animation = 'none';
+    void active.offsetWidth;
+    active.style.animation = '';
+  }
+  function nextSlide() { update((current + 1) % total); }
+  let timer = setInterval(nextSlide, DURATION);
+  indicators.forEach((ind, i) => {
+    ind.addEventListener('click', () => {
+      clearInterval(timer);
+      update(i);
+      timer = setInterval(nextSlide, DURATION);
+    });
+  });
+})();
+
+// FAQ accordion
+(function initFAQ() {
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const open = item.classList.contains('open');
+      item.classList.toggle('open', !open);
+    });
+  });
+})();
+
+  </script>
+</body>
+</html>
