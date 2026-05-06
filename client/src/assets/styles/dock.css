@@ -68,6 +68,121 @@
 
 @media (max-width: 720px) {
     .dock { padding: 6px 6px 6px 16px; gap: 8px; }
-    .dock-status, .dock-link:not(.dock-cta) { display: none; }
+    .dock-status, .dock-link:not(.dock-cta), .dock-services-wrap { display: none; }
 }
+
+/* ===== DOCK SERVICES SUBMENU ===== */
+.dock-services-wrap { position: relative; }
+
+.dock-services-trigger {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 8px 10px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s;
+    display: inline-block;
+    user-select: none;
+}
+.dock-services-trigger::after {
+    content: '▴';
+    display: inline-block;
+    margin-left: 6px;
+    font-size: 9px;
+    color: var(--accent);
+    transition: transform 0.3s, color 0.2s;
+}
+.dock-services-wrap:hover .dock-services-trigger {
+    color: var(--bg);
+    background: var(--accent);
+}
+.dock-services-wrap:hover .dock-services-trigger::after {
+    transform: rotate(180deg);
+    color: var(--bg);
+}
+
+.dock-services-panel::before {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    right: 0;
+    height: 12px;
+}
+
+.dock-services-panel {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: rgba(24,24,28,0.96);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--line-strong);
+    width: 280px;
+    padding: 8px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+        opacity 0.25s cubic-bezier(0.16,1,0.3,1),
+        transform 0.25s cubic-bezier(0.16,1,0.3,1),
+        visibility 0s linear 0.25s;
+    z-index: 60;
+}
+.dock-services-wrap:hover .dock-services-panel {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+    transition-delay: 0s;
+}
+
+.dock-panel-eyebrow {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    text-transform: uppercase;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 4px;
+}
+
+.dock-panel-link {
+    display: grid;
+    grid-template-columns: 28px 1fr 14px;
+    gap: 8px;
+    align-items: center;
+    padding: 12px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    transition: color 0.2s, background 0.2s;
+    border-radius: 4px;
+}
+.dock-panel-link:hover { color: var(--ink); background: rgba(242,239,230,0.05); }
+
+.dock-panel-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--accent);
+}
+.dock-panel-name {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+.dock-panel-arrow {
+    font-size: 12px;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity 0.2s, transform 0.2s;
+}
+.dock-panel-link:hover .dock-panel-arrow { opacity: 1; transform: translateX(0); }
 

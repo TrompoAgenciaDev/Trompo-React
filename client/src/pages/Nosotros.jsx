@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
-import Dock from "../components/Dock";
 import "../assets/styles/about.css";
 
 const base = import.meta.env.BASE_URL?.endsWith("/")
@@ -103,34 +102,34 @@ const Nosotros = () => {
       {/* VALORES */}
       <section className="valores">
         <div className="section-eyebrow reveal">02 · Lo que nos mueve</div>
-        <h2 className="valores-h reveal">Los principios que<br />guían <em>cada decisión.</em></h2>
+        <h2 className="valores-h reveal">Los principios que<br/>guían <em>cada decisión.</em></h2>
         <div className="valores-grid">
-          <div className="valor reveal">
+          <div className="valor reveal" data-cursor-hover="true">
             <div className="valor-num">A / Criterio</div>
             <h3>Diagnóstico antes de propuesta</h3>
             <p>Nunca arrancamos sin entender. Marca, negocio, contexto competitivo y audiencia bajo una misma lectura estratégica. La propuesta viene después — siempre.</p>
           </div>
-          <div className="valor reveal">
+          <div className="valor reveal" data-cursor-hover="true">
             <div className="valor-num">B / Claridad</div>
             <h3>Roadmap, no táctica suelta</h3>
             <p>Definimos rumbo antes de ejecutar. Prioridades claras, acciones ordenadas y foco en impacto real de negocio. Sin dispersión, sin listas de cosas por hacer sin hilo conductor.</p>
           </div>
-          <div className="valor reveal">
+          <div className="valor reveal" data-cursor-hover="true">
             <div className="valor-num">C / Funcionalidad</div>
             <h3>Producción que activa</h3>
             <p>Todo lo que creamos tiene una función. El diseño convierte. El contenido activa. El sitio posiciona. Nada decorativo, todo orientado a mover la aguja del cliente.</p>
           </div>
-          <div className="valor reveal">
+          <div className="valor reveal" data-cursor-hover="true">
             <div className="valor-num">D / Continuidad</div>
             <h3>Optimización real, no reporting</h3>
             <p>Los datos existen para mejorar, no para justificar. Medimos lo que importa, tomamos decisiones y ajustamos en tiempo real. El reporte es la consecuencia, no el producto.</p>
           </div>
-          <div className="valor reveal">
+          <div className="valor reveal" data-cursor-hover="true">
             <div className="valor-num">E / Integridad</div>
             <h3>Honestidad ante todo</h3>
             <p>Si algo no va a funcionar, lo decimos. Si el presupuesto no alcanza para el objetivo propuesto, lo aclaramos antes de arrancar. Preferimos perder una propuesta que prometer lo que no podemos cumplir.</p>
           </div>
-          <div className="valor reveal">
+          <div className="valor reveal" data-cursor-hover="true">
             <div className="valor-num">F / Sistema</div>
             <h3>Integración, no silos</h3>
             <p>El diseño, el paid media, el contenido y el desarrollo se hablan entre sí. Ese es nuestro diferencial más tangible: cinco unidades que trabajan como una. Coordinadas, informadas, alineadas.</p>
@@ -150,7 +149,7 @@ const Nosotros = () => {
             </div>
             <div className="equipo-meta reveal">
               <strong>13+</strong>
-              personas trabajando<br />en oficina · Córdoba<br />Lun a Vie · 09–18 hs
+              personas trabajando<br />en oficina · Córdoba<br />Lun a Vie · 09-18 hs
             </div>
           </div>
           <div className="equipo-grid">
@@ -244,13 +243,6 @@ const Nosotros = () => {
         </div>
       </section>
 
-      <Dock
-        links={[
-          { anchor: "#esteban", title: "Fundador" },
-          { anchor: "#equipo", title: "Equipo" },
-        ]}
-        cta={{ label: "Hablemos →", to: "/contactanos" }}
-      />
     </div>
   );
 };

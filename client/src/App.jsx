@@ -10,6 +10,7 @@ import { usePreloadResources } from "@/hooks/usePreloadResources";
 import { usePrefetchRoutes } from "@/hooks/usePrefetchRoutes";
 import { HoverProvider } from "@/context/HoverContext";
 import Cursor from "@/components/Cursor";
+import Dock from "@/components/Dock";
 import React from "react";
 
 // Componente interno que usa el hook dentro del contexto del router
@@ -35,6 +36,7 @@ function AppContent() {
       {!hideLayout && <Cursor />}
       {!hideLayout && <ScrollTop />}
       {!hideLayout && <Footer />}
+      {!hideLayout && <Dock />}
     </>
   );
 }

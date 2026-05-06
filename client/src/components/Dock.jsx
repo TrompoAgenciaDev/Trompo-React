@@ -1,15 +1,10 @@
 import { NavLink } from 'react-router-dom';
+import routesConfig from '../config/routesConfig';
 import '../assets/styles/dock.css';
 
-/**
- * Dock flotante de navegación rápida.
- *
- * Props:
- *   links  – array de { title, anchor } con anclas a secciones de la página actual
- *   cta    – objeto { label, to } para el botón de navegación tipo "Hablemos →"
- *            Si se omite, no se renderiza el botón CTA
- */
-export default function Dock({ links = [], cta }) {
+export default function Dock() {
+    const services = routesConfig.servicios;
+
     return (
         <div className="dock">
             <div className="dock-status">
@@ -17,26 +12,25 @@ export default function Dock({ links = [], cta }) {
                 <span>Online</span>
             </div>
 
-            {links.map((link, i) => (
-                <a
-                    key={i}
-                    href={link.anchor}
-                    className="dock-link"
-                    data-cursor-hover
-                >
-                    {link.title}
-                </a>
-            ))}
+            <div className="dock-services-wrap">
+                <span className="dock-services-trigger">Servicios</span>
+                <div className="dock-services-panel">
+                    <div className="dock-panel-eyebrow">5 unidades · sistema integrado</div>
+                    {services.map(({ path, label }, i) => (
+                        <NavLink key={path} to={path} className="dock-panel-link" data-cursor-hover>
+                            <span className="dock-panel-num">0{i + 1}</span>
+                            <span className="dock-panel-name">{label}</span>
+                            <span className="dock-panel-arrow">→</span>
+                        </NavLink>
+                    ))}
+                </div>
+            </div>
 
-            {cta && (
-                <NavLink
-                    to={cta.to ?? '/contactanos'}
-                    className="dock-cta"
-                    data-cursor-hover
-                >
-                    {cta.label ?? 'Hablemos →'}
-                </NavLink>
-            )}
+            <NavLink to="/" className="dock-link" data-cursor-hover>Inicio</NavLink>
+
+            <NavLink to="/contactanos" className="dock-cta" data-cursor-hover>
+                Hablemos →
+            </NavLink>
         </div>
     );
 }

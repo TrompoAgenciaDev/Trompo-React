@@ -56,16 +56,15 @@
 
 .cta-h {
     font-family: var(--display);
-    font-weight: 300;
-    font-size: clamp(40px, 6vw, 88px);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
     margin-bottom: 30px;
     color: var(--ink);
 }
 
 .cta-h em {
-    font-style: normal;
+    font-style: italic;
     color: var(--accent);
 }
 

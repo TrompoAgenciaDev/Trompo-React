@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Botoneras de Servicios · Preview · Trompo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #f0ede6;
+      --ink-dim: rgba(240,237,230,0.55);
+      --ink-faint: rgba(240,237,230,0.2);
+      --bg: #0a0a0a;
+      --bg2: #111111;
+      --bg3: #161616;
+      --gold: #E8B73A;
+      --gold-warm: #f5c84a;
+      --pink: #E8458F;
+      --green: #4ADE80;
+      --border: rgba(240,237,230,0.08);
+      --border-strong: rgba(240,237,230,0.13);
+      --font-display: 'Montserrat', sans-serif;
+      --font-body: 'Montserrat', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --max: 1400px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      padding-bottom: 200px;
+    }
+    a { text-decoration: none; }
+
+    /* ===== PAGE HEADER ===== */
+    .preview-header {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px 40px 40px;
+    }
+    .preview-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      display: inline-flex; align-items: center; gap: 10px;
+    }
+    .preview-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+    .preview-h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .preview-h1 em { font-style: italic; color: var(--gold); }
+    .preview-sub {
+      font-size: 17px;
+      color: var(--ink-dim);
+      max-width: 720px;
+      line-height: 1.6;
+    }
+
+    /* ===== SECTION WRAP ===== */
+    .demo-section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 80px 40px 40px;
+      border-top: 1px solid var(--border);
+    }
+    .demo-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .demo-h {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(28px, 3vw, 40px);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .demo-h em { font-style: italic; color: var(--gold); }
+    .demo-desc {
+      font-size: 15px;
+      color: var(--ink-dim);
+      max-width: 720px;
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+    .demo-desc strong { color: var(--ink); font-weight: 600; }
+    .demo-context {
+      background: var(--bg2);
+      border-left: 2px solid var(--gold);
+      padding: 14px 20px;
+      margin-bottom: 32px;
+      font-size: 13px;
+      color: var(--ink-dim);
+      line-height: 1.6;
+      max-width: 720px;
+    }
+    .demo-context strong { color: var(--ink); }
+
+    /* ===== OPCIÓN 1 · MEGA-MENU ===== */
+    .mock-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .mock-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--ink);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .mock-logo svg { width: 24px; height: 24px; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+    .nav-link:hover { color: var(--ink); }
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 10px 22px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-warm); transform: translateY(-1px); }
+
+    .has-megamenu { position: relative; }
+    .megamenu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      width: 720px;
+      background: rgba(10,10,10,0.98);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-strong);
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0s linear 0.25s;
+      z-index: 200;
+    }
+    .has-megamenu:hover .megamenu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+      transition-delay: 0s;
+    }
+    .mm-eyebrow {
+      grid-column: 1 / -1;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 0 12px 14px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 10px;
+    }
+    .mm-item {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 14px;
+      padding: 14px 12px;
+      color: var(--ink);
+      transition: background 0.2s;
+      align-items: start;
+    }
+    .mm-item:hover { background: var(--bg2); }
+    .mm-num {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--gold);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .mm-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .mm-desc { font-size: 12px; color: var(--ink-dim); line-height: 1.4; }
+    .mm-footer {
+      grid-column: 1 / -1;
+      margin-top: 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .mm-footer-text { font-size: 12px; color: var(--ink-dim); }
+    .mm-footer-cta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .mm-footer-cta:hover { color: var(--gold-warm); }
+
+    /* ===== OPCIÓN 2 · BAND HORIZONTAL ===== */
+    .services-band {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .services-band-inner {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+    }
+    .services-band-link {
+      padding: 28px 24px;
+      color: var(--ink-dim);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+    .services-band-link:last-child { border-right: none; }
+    .services-band-link:hover { background: var(--bg); color: var(--ink); }
+    .services-band-link::after {
+      content: '→';
+      position: absolute;
+      top: 28px; right: 24px;
+      color: var(--gold);
+      opacity: 0;
+      transform: translateX(-6px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .services-band-link:hover::after { opacity: 1; transform: translateX(0); }
+    .services-band-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .services-band-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+
+    /* ===== OPCIÓN 3 · DOCK FLOTANTE ===== */
+    .dock-demo-wrap {
+      position: relative;
+      height: 200px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 24px;
+    }
+    .dock-mock {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(22,22,22,0.92);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      padding: 8px 12px;
+      position: relative;
+    }
+    .dock-status {
+      display: flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-dim);
+      padding: 6px 10px;
+      border-right: 1px solid var(--border);
+      margin-right: 4px;
+    }
+    .live-dot {
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: blinkLive 2s infinite;
+    }
+    @keyframes blinkLive { 50% { opacity: 0.3; } }
+    .dock-link {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      padding: 8px 14px;
+      transition: color 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+    .dock-link:hover { color: var(--ink); background: rgba(240,237,230,0.05); }
+    .dock-cta {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      padding: 8px 18px;
+      margin-left: 4px;
+      transition: background 0.2s;
+    }
+    .dock-cta:hover { background: var(--gold-warm); }
+
+    .dock-services-wrap { position: relative; }
+    .dock-services-trigger {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s;
+      display: inline-block;
+    }
+    .dock-services-trigger:hover { color: var(--ink); background: rgba(240,237,230,0.05); }
+    .dock-services-trigger::after {
+      content: '▴';
+      display: inline-block;
+      margin-left: 6px;
+      font-size: 9px;
+      color: var(--gold);
+      transition: transform 0.3s;
+    }
+    .dock-services-wrap:hover .dock-services-trigger::after { transform: rotate(180deg); }
+
+    .dock-services-panel {
+      position: absolute;
+      bottom: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      background: rgba(22,22,22,0.96);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-strong);
+      width: 280px;
+      padding: 8px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0s linear 0.25s;
+      z-index: 50;
+    }
+    .dock-services-wrap:hover .dock-services-panel {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+      transition-delay: 0s;
+    }
+    .dock-panel-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      text-transform: uppercase;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4px;
+    }
+    .dock-panel-link {
+      display: grid;
+      grid-template-columns: 28px 1fr 14px;
+      gap: 8px;
+      align-items: center;
+      padding: 12px;
+      color: var(--ink-dim);
+      transition: color 0.2s, background 0.2s;
+    }
+    .dock-panel-link:hover { color: var(--ink); background: rgba(240,237,230,0.05); }
+    .dock-panel-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .dock-panel-name {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .dock-panel-arrow {
+      font-size: 12px;
+      color: var(--gold);
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .dock-panel-link:hover .dock-panel-arrow { opacity: 1; transform: translateX(0); }
+
+    /* ===== OPCIÓN 4 · FOOTER ===== */
+    .footer-mock {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 60px 40px 30px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 50px;
+      border-bottom: 1px solid var(--border);
+    }
+    .footer-brand-mark {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .footer-brand-mark svg { width: 24px; height: 24px; }
+    .footer-tagline {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-dim);
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .footer-desc { font-size: 13px; line-height: 1.7; color: var(--ink-dim); }
+    .footer-col-h {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      margin-bottom: 18px;
+    }
+    .footer-list { list-style: none; }
+    .footer-list li { margin-bottom: 9px; }
+    .footer-list a { font-size: 13px; color: var(--ink-dim); transition: color 0.2s; }
+    .footer-list a:hover { color: var(--gold); }
+    .footer-list li:not(:has(a)) { font-size: 13px; color: var(--ink-dim); }
+    .footer-base {
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--ink-dim);
+    }
+    .footer-base a { color: var(--ink-dim); transition: color 0.2s; }
+    .footer-base a:hover { color: var(--gold); }
+    .footer-legales { display: flex; gap: 24px; }
+
+    @media (max-width: 920px) {
+      .megamenu { display: none; }
+      .services-band-inner { grid-template-columns: 1fr 1fr; }
+      .services-band-link { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+    @media (max-width: 540px) {
+      .services-band-inner { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-base { flex-direction: column; gap: 16px; }
+    }
+
+    /* Recommendation card */
+    .reco {
+      max-width: var(--max);
+      margin: 80px auto 0;
+      padding: 48px 40px;
+      background: linear-gradient(135deg, rgba(232,183,58,0.08), transparent 60%);
+      border: 1px solid var(--gold);
+      border-left: 4px solid var(--gold);
+    }
+    .reco-h {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(22px, 2.4vw, 32px);
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+    .reco-h em { font-style: italic; color: var(--gold); }
+    .reco-table { width: 100%; border-collapse: collapse; }
+    .reco-table th, .reco-table td {
+      text-align: left;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    .reco-table th {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .reco-table td:first-child {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .reco-table td:nth-child(2) { color: var(--ink-dim); }
+    .reco-table td:nth-child(3) { color: var(--ink); font-weight: 500; }
+  </style>
+</head>
+<body>
+
+  <header class="preview-header">
+    <div class="preview-eyebrow">Preview · Botoneras de servicios</div>
+    <h1 class="preview-h1">4 patrones de <em>acceso a servicios</em><br>para Trompo Agencia.</h1>
+    <p class="preview-sub">Cada uno resuelve un momento distinto del recorrido del usuario. La recomendación es combinarlos en simultáneo. Pasá el mouse sobre cada elemento para ver las animaciones e interacciones.</p>
+  </header>
+
+  <!-- ===== OPCIÓN 1 · MEGA-MENU ===== -->
+  <section class="demo-section">
+    <div class="demo-tag">Opción 01 · Nav superior</div>
+    <h2 class="demo-h">Mega-menu desde el <em>navbar</em>.</h2>
+    <p class="demo-desc"><strong>Atiende al usuario que está navegando y todavía no decidió.</strong> Hover sobre "Servicios" abre un panel ancho con los 5 servicios + descripción breve. El que ya sabe qué busca llega de un click; el que está explorando ve el sistema completo.</p>
+    <div class="demo-context">
+      ⓘ <strong>Probá pasar el mouse</strong> sobre "Servicios ▾" en el nav simulado abajo.
+    </div>
+
+    <nav class="mock-nav">
+      <div class="mock-logo">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="6" r="3.5" fill="#E8B73A"/><circle cx="18" cy="12" r="3.5" fill="#E8B73A"/><circle cx="12" cy="18" r="3.5" fill="#E8B73A"/><circle cx="6" cy="12" r="3.5" fill="#E8B73A"/><circle cx="12" cy="12" r="2.5" fill="#E8458F"/></svg>
+        Trompo
+      </div>
+      <div class="nav-links">
+        <a class="nav-link">Inicio</a>
+        <a class="nav-link">Nosotros</a>
+        <div class="has-megamenu">
+          <a class="nav-link">Servicios ▾</a>
+          <div class="megamenu">
+            <span class="mm-eyebrow">Sistema integrado · 5 unidades</span>
+            <a href="#" class="mm-item">
+              <span class="mm-num">01</span>
+              <div>
+                <div class="mm-title">Diseño</div>
+                <div class="mm-desc">Identidad y sistema visual que ordena la marca.</div>
+              </div>
+            </a>
+            <a href="#" class="mm-item">
+              <span class="mm-num">02</span>
+              <div>
+                <div class="mm-title">Multimedia</div>
+                <div class="mm-desc">Audiovisual, motion y producción.</div>
+              </div>
+            </a>
+            <a href="#" class="mm-item">
+              <span class="mm-num">03</span>
+              <div>
+                <div class="mm-title">Desarrollo Web</div>
+                <div class="mm-desc">Sitios y plataformas que escalan.</div>
+              </div>
+            </a>
+            <a href="#" class="mm-item">
+              <span class="mm-num">04</span>
+              <div>
+                <div class="mm-title">Paid Media</div>
+                <div class="mm-desc">Inversión que devuelve negocio.</div>
+              </div>
+            </a>
+            <a href="#" class="mm-item">
+              <span class="mm-num">05</span>
+              <div>
+                <div class="mm-title">Redes Sociales</div>
+                <div class="mm-desc">Contenido y comunidad diaria.</div>
+              </div>
+            </a>
+            <div class="mm-footer">
+              <span class="mm-footer-text">¿Querés trabajarlos como sistema?</span>
+              <a href="#" class="mm-footer-cta">Hablemos →</a>
+            </div>
+          </div>
+        </div>
+        <a class="nav-link">Contactanos</a>
+        <a class="nav-cta">Hablemos →</a>
+      </div>
+    </nav>
+  </section>
+
+  <!-- ===== OPCIÓN 2 · BAND HORIZONTAL ===== -->
+  <section class="demo-section">
+    <div class="demo-tag">Opción 02 · Body del home</div>
+    <h2 class="demo-h">Botonera horizontal en el <em>home</em>.</h2>
+    <p class="demo-desc"><strong>Atiende al usuario que llegó al sitio sin saber qué quiere.</strong> Banda de 5 columnas con los servicios numerados. Funciona como atajo de navegación que se imprime al ojo en pocos segundos. Va arriba o debajo del hero del home.</p>
+    <div class="demo-context">
+      ⓘ <strong>Probá hover</strong> en cada celda — aparece la flecha y cambia el fondo.
+    </div>
+
+    <section class="services-band">
+      <div class="services-band-inner">
+        <a href="#" class="services-band-link">
+          <span class="services-band-num">01 / Servicio</span>
+          <span class="services-band-name">Diseño</span>
+        </a>
+        <a href="#" class="services-band-link">
+          <span class="services-band-num">02 / Servicio</span>
+          <span class="services-band-name">Multimedia</span>
+        </a>
+        <a href="#" class="services-band-link">
+          <span class="services-band-num">03 / Servicio</span>
+          <span class="services-band-name">Desarrollo Web</span>
+        </a>
+        <a href="#" class="services-band-link">
+          <span class="services-band-num">04 / Servicio</span>
+          <span class="services-band-name">Paid Media</span>
+        </a>
+        <a href="#" class="services-band-link">
+          <span class="services-band-num">05 / Servicio</span>
+          <span class="services-band-name">Redes Sociales</span>
+        </a>
+      </div>
+    </section>
+  </section>
+
+  <!-- ===== OPCIÓN 3 · DOCK FLOTANTE ===== -->
+  <section class="demo-section">
+    <div class="demo-tag">Opción 03 · Dock flotante</div>
+    <h2 class="demo-h">Submenu desplegable hacia <em>arriba</em>.</h2>
+    <p class="demo-desc"><strong>Atiende al usuario que está navegando una interna larga.</strong> Mejora del dock actual: cuando hover sobre "Servicios", se despliega un panel chico encima del dock con las 5 opciones. Mantiene el dock compacto y abre acceso completo a todo el árbol.</p>
+    <div class="demo-context">
+      ⓘ <strong>Probá hover</strong> en el botón "Servicios ▴" del dock simulado abajo.
+    </div>
+
+    <div class="dock-demo-wrap">
+      <div class="dock-mock">
+        <div class="dock-status">
+          <span class="live-dot"></span>
+          <span>Online</span>
+        </div>
+
+        <div class="dock-services-wrap">
+          <span class="dock-services-trigger">Servicios</span>
+          <div class="dock-services-panel">
+            <div class="dock-panel-eyebrow">5 unidades · sistema integrado</div>
+            <a href="#" class="dock-panel-link">
+              <span class="dock-panel-num">01</span>
+              <span class="dock-panel-name">Diseño</span>
+              <span class="dock-panel-arrow">→</span>
+            </a>
+            <a href="#" class="dock-panel-link">
+              <span class="dock-panel-num">02</span>
+              <span class="dock-panel-name">Multimedia</span>
+              <span class="dock-panel-arrow">→</span>
+            </a>
+            <a href="#" class="dock-panel-link">
+              <span class="dock-panel-num">03</span>
+              <span class="dock-panel-name">Desarrollo Web</span>
+              <span class="dock-panel-arrow">→</span>
+            </a>
+            <a href="#" class="dock-panel-link">
+              <span class="dock-panel-num">04</span>
+              <span class="dock-panel-name">Paid Media</span>
+              <span class="dock-panel-arrow">→</span>
+            </a>
+            <a href="#" class="dock-panel-link">
+              <span class="dock-panel-num">05</span>
+              <span class="dock-panel-name">Redes Sociales</span>
+              <span class="dock-panel-arrow">→</span>
+            </a>
+          </div>
+        </div>
+
+        <a href="#" class="dock-link">Inicio</a>
+        <a href="#" class="dock-cta">Hablemos →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OPCIÓN 4 · FOOTER ===== -->
+  <section class="demo-section">
+    <div class="demo-tag">Opción 04 · Footer</div>
+    <h2 class="demo-h">Columna de servicios en el <em>footer</em>.</h2>
+    <p class="demo-desc"><strong>Última red de seguridad y refuerzo SEO.</strong> El usuario que llegó al fondo de la página y no encontró lo que buscaba arriba, lo encuentra acá. Footer depurado al sitemap actual: sin Industrias ni Casos.</p>
+
+    <footer class="footer-mock">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-mark">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="6" r="3.5" fill="#E8B73A"/><circle cx="18" cy="12" r="3.5" fill="#E8B73A"/><circle cx="12" cy="18" r="3.5" fill="#E8B73A"/><circle cx="6" cy="12" r="3.5" fill="#E8B73A"/><circle cx="12" cy="12" r="2.5" fill="#E8458F"/></svg>
+            Trompo
+          </div>
+          <div class="footer-tagline">Vanguardia digital · Córdoba</div>
+          <p class="footer-desc">Marketing para marcas que mueven el negocio. Diez años de operación desde Córdoba con clientes en toda Argentina.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-h">Institucional</h4>
+          <ul class="footer-list">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Nosotros</a></li>
+            <li><a href="#">Contactanos</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-h">Servicios</h4>
+          <ul class="footer-list">
+            <li><a href="#">Diseño</a></li>
+            <li><a href="#">Multimedia</a></li>
+            <li><a href="#">Desarrollo Web</a></li>
+            <li><a href="#">Paid Media</a></li>
+            <li><a href="#">Redes Sociales</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-h">Contacto</h4>
+          <ul class="footer-list">
+            <li><a href="mailto:somos@trompoagencia.com">somos@trompoagencia.com</a></li>
+            <li>+54 351 XXX XXXX</li>
+            <li>Lun a Vie · 09–18 hs</li>
+            <li>Córdoba, Argentina</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-base">
+        <span>© 2026 Trompo Agencia</span>
+        <div class="footer-legales">
+          <a href="#">Privacidad</a>
+          <a href="#">Términos</a>
+          <a href="#">Cookies</a>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <!-- RECOMMENDATION CARD -->
+  <div class="reco">
+    <h2 class="reco-h">Mi recomendación: <em>combinar las 4</em></h2>
+    <p style="font-size:14px;color:var(--ink-dim);margin-bottom:24px;line-height:1.7;">Cada capa atiende un momento distinto del usuario. Implementadas en simultáneo cubren todo el recorrido sin saturar.</p>
+    <table class="reco-table">
+      <thead>
+        <tr>
+          <th>Capa</th>
+          <th>Cuándo se usa</th>
+          <th>Patrón sugerido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nav superior</td>
+          <td>Usuario explorando, todavía decidiendo qué necesita</td>
+          <td>Mega-menu (Opción 01)</td>
+        </tr>
+        <tr>
+          <td>Body del home</td>
+          <td>Usuario que aterriza sin objetivo claro</td>
+          <td>Banda horizontal (Opción 02)</td>
+        </tr>
+        <tr>
+          <td>Dock flotante</td>
+          <td>Usuario en una interna larga, quiere saltar</td>
+          <td>Submenu desplegable (Opción 03)</td>
+        </tr>
+        <tr>
+          <td>Footer</td>
+          <td>Última red de seguridad + SEO</td>
+          <td>Columna simple (Opción 04)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import Dock from "../../components/Dock";
 import "../../assets/styles/desarrollo-page.css";
 
 const SLIDER_IMAGES = [
@@ -443,13 +442,6 @@ export default function Desarrollo() {
         </div>
       </section>
 
-      <Dock
-        links={[
-          { title: "Auditar mi sitio", anchor: "#scorecard" },
-          { title: "Contacto", anchor: "#contacto" },
-        ]}
-        cta={{ label: "Hablemos →", to: "/contactanos" }}
-      />
 
     </div>
   );

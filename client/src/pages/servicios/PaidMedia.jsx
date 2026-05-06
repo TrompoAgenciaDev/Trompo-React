@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import Dock from "../../components/Dock";
 import { motion, useInView, useScroll, useTransform, useMotionValueEvent, useMotionValue, useAnimation, useSpring, AnimatePresence } from "framer-motion";
 import Faqs from "../../layout/Faqs.jsx";
 import Contact from "../../layout/Contact.jsx";
@@ -527,10 +526,6 @@ const PaidMedia = () => {
       </div>
 
       <Contact form="estrategia" />
-      <Dock
-        links={[{ anchor: "#contact", title: "Contacto" }]}
-        cta={{ label: "Hablemos →", to: "/contactanos" }}
-      />
     </>
   );
 };

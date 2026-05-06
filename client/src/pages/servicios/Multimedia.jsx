@@ -1,771 +1,450 @@
-import React, { useRef, useState } from "react";
-import Dock from "../../components/Dock";
-import { motion, useInView, useScroll, useTransform, useMotionValueEvent, useSpring } from "framer-motion";
-import Faqs from "../../layout/Faqs";
-import Contact from "../../layout/Contact";
-import StaticHero from "../../components/StaticHero";
-import ServiceTitle from "../../components/services/ServiceTitle.jsx";
-import SemicircularVideoSlider from "../../components/sliders/SemicircularVideoSlider.jsx";
-//styles
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import "../../assets/styles/multimedia.css";
-import "../../assets/styles/entregables.css";
-import "../../assets/styles/beneficios.css";
-import "@as/hero.css";
 
-const base = import.meta.env.BASE_URL?.endsWith("/")
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
+const SLIDER_IMAGES = [
+  "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1920&q=85",
+  "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=1920&q=85",
+  "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1920&q=85",
+];
 
-const AnimatedLetter = ({ letter, index, letterDelay, baseOpacity, hasAnimated }) => {
-  // Calcular el delay: si NO ha animado, aplicar delay progresivo para animar letra por letra
-  // Si ya animó, no aplicar delay (todas las letras aparecen juntas)
-  const delay = hasAnimated ? 0 : index * letterDelay;
-  
-  // Asegurar que cuando está visible, la opacidad sea 1
-  // Si baseOpacity es >= 0.9, forzar a 1 para máxima visibilidad
-  const targetOpacity = baseOpacity >= 0.9 ? 1 : Math.max(0.1, baseOpacity);
+const REEL_ITEMS = [
+  {
+    type: "video",
+    src: "https://cdn.coverr.co/videos/coverr-an-empty-warehouse-with-orange-light-7466/1080p.mp4",
+    tag: "Video institucional · Volvo",
+    name: "Industrias del Movimiento — manifiesto de marca",
+  },
+  {
+    type: "img",
+    src: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=900&q=85",
+    alt: "Editing",
+    tag: "Reel · Ardu Café",
+    name: "Lanzamiento",
+  },
+  {
+    type: "img",
+    src: "https://images.unsplash.com/photo-1606170033648-5d55a3edf314?w=900&q=85",
+    alt: "Motion",
+    tag: "Motion · CEDIR",
+    name: "Explainer salud",
+  },
+  {
+    type: "img",
+    src: "https://images.unsplash.com/photo-1493863641943-9b68992a8d07?w=900&q=85",
+    alt: "Reel",
+    tag: "Producto · Denso",
+    name: "Spot técnico",
+  },
+  {
+    type: "img",
+    src: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=900&q=85",
+    alt: "Stories",
+    tag: "Reels · Lozada",
+    name: "Serie viajes",
+  },
+];
 
-  return (
-    <motion.span
-      className="animated-letter"
-      initial={{ opacity: 0.1 }}
-      animate={{ opacity: targetOpacity }}
-      transition={{
-        delay: delay,
-        duration: 0.3,
-        ease: "easeOut"
-      }}
-    >
-      {letter === " " ? "\u00A0" : letter}
-    </motion.span>
-  );
-};
+const FORMAT_PILLS = [
+  "Video institucional", "Manifiesto de marca", "Reels Instagram", "Stories animadas",
+  "Shorts YouTube", "TikTok nativo", "Spot publicitario", "Motion 2D",
+  "Lottie UI", "Explainer video", "Infografía animada", "Producto fotográfico",
+  "Lifestyle", "Foto de equipo", "Producción de packshot", "Video drone",
+];
 
-// Componente para animar frase por frase
-const AnimatedPhrase = ({ phrase, index, phraseDelay, baseOpacity, hasAnimated }) => {
-  // Calcular el delay: si NO ha animado, aplicar delay progresivo para animar frase por frase
-  // Si ya animó, no aplicar delay (todas las frases aparecen juntas)
-  const delay = hasAnimated ? 0 : index * phraseDelay;
-  
-  // Asegurar que cuando está visible, la opacidad sea 1
-  // Si baseOpacity es >= 0.9, forzar a 1 para máxima visibilidad
-  const targetOpacity = baseOpacity >= 0.9 ? 1 : Math.max(0.1, baseOpacity);
+const DELIVERABLES = [
+  {
+    letter: "A",
+    title: "Video institucional",
+    desc: "Piezas de presentación corporativa, manifiestos de marca, reels para inversores y materiales para procesos comerciales. Producción con estándar profesional.",
+  },
+  {
+    letter: "B",
+    title: "Contenido para redes",
+    desc: "Reels, stories, shorts y formatos verticales nativos de cada plataforma. Pensados para feed — no como adaptación de un video más largo.",
+  },
+  {
+    letter: "C",
+    title: "Motion graphics",
+    desc: "Animación 2D, lottie para UI, motion para spots digitales, infografías animadas y explainer videos. Producción ágil, escalable y modular.",
+  },
+  {
+    letter: "D",
+    title: "Fotografía",
+    desc: "Producto, lifestyle, equipo y locación. Contenido fotográfico pensado para alimentar todo el ecosistema digital — no solo el sitio web.",
+  },
+];
 
-  return (
-    <motion.span
-      className="animated-phrase"
-      initial={{ opacity: 0.1 }}
-      animate={{ opacity: targetOpacity }}
-      transition={{
-        delay: delay,
-        duration: 0.4,
-        ease: "easeOut"
-      }}
-    >
-      {phrase}
-    </motion.span>
-  );
-};
+const TIMELINE = [
+  {
+    step: "01",
+    title: "Briefing y guión",
+    desc: "Antes de filmar definimos: qué problema de negocio resuelve este video, quién es la audiencia, qué tiene que pasar después de verlo. El guión es el plan, no la creatividad.",
+    duration: "Semana 1",
+  },
+  {
+    step: "02",
+    title: "Pre-producción",
+    desc: "Casting, locación, scouting, plan de rodaje, timeline y plan de cobertura. Llegar al rodaje con todo cerrado separa lo profesional de la improvisación.",
+    duration: "Semanas 2–3",
+  },
+  {
+    step: "03",
+    title: "Producción",
+    desc: "Rodaje con equipo técnico, dirección, sonido directo y registro en formato adecuado al destino final. Sin sobre-producción ni atajos — el equilibrio justo.",
+    duration: "Semana 4",
+  },
+  {
+    step: "04",
+    title: "Post-producción",
+    desc: "Edición, color, sonido, motion y entrega en los formatos que necesita cada canal. Una sola producción se traduce a múltiples entregables nativos por plataforma.",
+    duration: "Semanas 5–6",
+  },
+];
 
-const AnimatedImageContainer = ({ src, alt, containerRef: parentContainerRef }) => {
-  const imageRef = useRef(null);
-  const isInView = useInView(imageRef, { once: false, amount: 0.2 });
+const TESTIMONIALS = [
+  {
+    initials: "FS",
+    text: "Hicieron el video institucional para una presentación a casa matriz en Japón. Estuvimos cómodos en el rodaje, claros en el guión y la pieza final terminó usándose mucho más allá del evento original.",
+    name: "Federico Saluzzi",
+    role: "Marketing · Denso Argentina",
+  },
+  {
+    initials: "LA",
+    text: "La producción para nuestras campañas de lanzamiento de café fue espectacular. No solo el video — el sistema completo de fotos, reels y stories nos sirvió todo el trimestre.",
+    name: "Lucía Ardusso",
+    role: "Founder · Ardu Café",
+  },
+];
 
-  // Scroll progress para efecto parallax basado en el contenedor padre
-  const { scrollYProgress } = useScroll({
-    target: parentContainerRef || imageRef,
-    offset: ["start end", "end start"]
-  });
+const STATS = [
+  { big: "1.5K", suffix: "+", label: "Piezas audiovisuales\nproducidas por año" },
+  { big: "200", suffix: "+", label: "Proyectos completos\nde video institucional" },
+  { big: "48hs", suffix: "", label: "Tiempo promedio de\nedición y entrega" },
+  { big: "HD", suffix: "·4K", label: "Formatos nativos\nsegún destino" },
+];
 
-  // Transformar el scroll progress para animaciones más dinámicas
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const parallaxRotate = useTransform(scrollYProgress, [0, 1], [0, -8]);
-  const parallaxScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.98, 1, 0.98]);
-
-  return (
-    <motion.div
-      ref={imageRef}
-      className="image-multimedia-container"
-      initial={{ 
-        bottom: -100, 
-        rotateZ: 120,
-        opacity: 0,
-        scale: 0.85
-      }}
-      animate={{ 
-        bottom: isInView ? -200 : -300,
-        rotateZ: isInView ? 10 : 30,
-        opacity: isInView ? 1 : 0.6
-      }}
-      style={{
-        y: parallaxY,
-        rotate: parallaxRotate,
-        scale: parallaxScale
-      }}
-      transition={{
-        bottom: {
-          type: "spring",
-          stiffness: 50,
-          damping: 15,
-          mass: 1
-        },
-        rotateZ: {
-          type: "spring",
-          stiffness: 40,
-          damping: 12
-        },
-        opacity: {
-          duration: 0.8,
-          ease: [0.25, 0.1, 0.25, 1]
-        },
-        scale: {
-          type: "spring",
-          stiffness: 100,
-          damping: 20
-        }
-      }}
-    >
-      <motion.img 
-        src={src} 
-        alt={alt}
-        loading="lazy"
-        decoding="async"
-        width={1200}
-        height={900}
-        style={{
-          width: '100%',
-          height: 'auto',
-          aspectRatio: '4/3',
-          maxWidth: '100%',
-          display: 'block'
-        }}
-        initial={{ scale: 1 }}
-        whileHover={{
-          scale: 1.05,
-          transition: {
-            duration: 0.4,
-            ease: [0.25, 0.1, 0.25, 1]
-          }
-        }}
-      />
-    </motion.div>
-  );
-};
-
-const AnimatedLetterOpacity = ({ letter, index, letterDelay, baseOpacity, hasAnimated }) => {
-  // Calcular el delay para esta letra específica (solo en la primera animación)
-  const delay = hasAnimated ? 0 : index * letterDelay;
-
-  return (
-    <motion.span
-      className="animated-letter-opacity"
-      initial={{ opacity: 0.1 }}
-      animate={{ opacity: baseOpacity }}
-      transition={{
-        delay: delay,
-        duration: 0.3,
-        ease: "easeOut"
-      }}
-    >
-      {letter === " " ? "\u00A0" : letter}
-    </motion.span>
-  );
-};
-
-const OptimizedVideo = ({ src }) => {
-  const videoRef = useRef(null);
-  const containerRef = useRef(null);
-  const [isInView, setIsInView] = React.useState(false);
-  const [shouldLoad, setShouldLoad] = React.useState(false);
-
-  // Usar Intersection Observer nativo para mejor rendimiento (más ligero que useInView)
-  React.useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry) {
-          const isVisible = entry.isIntersecting && entry.intersectionRatio >= 0.5;
-          setIsInView(isVisible);
-          
-          // Cargar el video cuando está cerca de ser visible (25%)
-          if (entry.intersectionRatio >= 0.25 && !shouldLoad) {
-            setShouldLoad(true);
-          }
-        }
-      },
-      {
-        threshold: [0.25, 0.5],
-        rootMargin: "50px"
-      }
-    );
-
-    observer.observe(container);
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [shouldLoad]);
-
-  // Controlar la reproducción del video cuando alcanza scale 1 y está visible
-  React.useEffect(() => {
-    const video = videoRef.current;
-    if (!video || !shouldLoad) return;
-
-    if (isInView) {
-      // Cuando está al 50% visible, reproducir con pequeño delay
-      const timeoutId = setTimeout(() => {
-        if (video.paused) {
-          video.play().catch(() => {});
-        }
-      }, 200);
-
-      return () => clearTimeout(timeoutId);
-    } else {
-      // Cuando sale de vista, pausar
-      if (!video.paused) {
-        video.pause();
-      }
-    }
-  }, [isInView, shouldLoad]);
-
-  return (
-    <motion.div 
-      ref={containerRef} 
-      className="optimized-video-container"
-      initial={{ scale: 0.85 }}
-      animate={{ 
-        scale: isInView ? 1 : 0.85
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 50,
-        damping: 18,
-        mass: 0.8
-      }}
-    >
-      {shouldLoad && (
-        <video
-          ref={videoRef}
-          src={src}
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          className="optimized-video"
-        />
-      )}
-    </motion.div>
-  );
-};
-
-const ProductosItemsList = () => {
-  const item1Ref = useRef(null);
-  const item2Ref = useRef(null);
-  const item3Ref = useRef(null);
-  const item4Ref = useRef(null);
-  const item5Ref = useRef(null);
-
-  const items = [
-    { number: 1, title: "Redes Sociales", ref: item1Ref, nextRef: item2Ref, isLast: false,
-      children: <p>Reels, Shorts (YouTube / Instagram), TikTok y piezas verticales para Stories. Contenidos pensados para impactar en los primeros segundos y adaptados al lenguaje de cada plataforma.</p>
-    },
-    { number: 2, title: "Videos Corporativos y Testimoniales", ref: item2Ref, nextRef: item3Ref, isLast: false,
-      children: <p>Producciones ágiles y auténticas, grabadas en contextos reales, que comunican valores, servicios y casos de éxito con un ritmo moderno y cercano.</p>
-    },
-    { number: 3, title: "Animación & Motion Graphics", ref: item3Ref, nextRef: item4Ref, isLast: false,
-      children: <p>Producciones ágiles y auténticas, grabadas en contextos reales, que comunican valores, servicios y casos de éxito con un ritmo moderno y cercano.</p>
-    },
-    { number: 4, title: "Contenido paraPublicidad Digital (Ads)", ref: item4Ref, nextRef: item5Ref, isLast: false,
-      children: <p>Videos optimizados para campañas en Meta Ads, Google Video y LinkedIn, diseñados para conversión y ajustados a los formatos y objetivos de cada canal.</p>
-    },
-    { number: 5, title: "Audio, Subtitulado & Assets con IA", ref: item5Ref, nextRef: null, isLast: true,
-      children: <p>Producción y edición de audio, podcasts y sound design. Subtitulado creativo integrado como parte de la narrativa visual. Generación de imágenes y assets visuales potenciados con inteligencia artificial para enriquecer cada proyecto.</p>
-    }
-  ];
-
-  return (
-    <>
-      {items.map((item) => (
-        <EntregableItem
-          key={item.number}
-          number={item.number}
-          title={item.title}
-          itemRef={item.ref}
-          nextItemRef={item.nextRef}
-          isLast={item.isLast}
-        >
-          {item.children}
-        </EntregableItem>
-      ))}
-    </>
-  );
-};
-
-const EntregableItem = ({ number, title, children, isLast, itemRef, nextItemRef }) => {
-  const isInView = useInView(itemRef, { once: false, amount: 0.1 });
-
-  // Efecto para calcular la altura y posición de la línea
-  const [lineHeight, setLineHeight] = React.useState(0);
-  const [lineTop, setLineTop] = React.useState(0);
-
-  React.useEffect(() => {
-    if (isLast || !nextItemRef?.current || !itemRef.current) {
-      setLineHeight(0);
-      return;
-    }
-
-    let rafId = null;
-    const updateLineDimensions = () => {
-      // Cancelar frame anterior si existe
-      if (rafId !== null) {
-        cancelAnimationFrame(rafId);
-      }
-      
-      // Usar requestAnimationFrame para batch las lecturas geométricas
-      rafId = requestAnimationFrame(() => {
-        if (!itemRef.current || !nextItemRef.current) return;
-        
-        // Batch todas las lecturas en un solo frame para evitar múltiples reflows
-        const currentRect = itemRef.current.getBoundingClientRect();
-        const nextRect = nextItemRef.current.getBoundingClientRect();
-        
-        // El wrapper tiene padding-top: 15px
-        // El número tiene height: 40px, así que el centro está a 15px (padding-top) + 20px (mitad del número) = 35px desde el top del wrapper
-        const currentNumberCenterY = 35; // 15px padding-top + 20px (mitad de 40px)
-        
-        // Calcular la posición del siguiente wrapper relativa al actual
-        // nextRect.top es la posición absoluta en el viewport
-        // currentRect.top es la posición absoluta del wrapper actual
-        // La diferencia nos da la posición relativa del siguiente wrapper
-        const nextWrapperTopRelative = nextRect.top - currentRect.top;
-        
-        // Centro del número siguiente: desde el top del wrapper siguiente
-        // Como ambos wrappers tienen la misma estructura, el centro del número siguiente también está a 35px desde el top de su wrapper
-        const nextNumberCenterY = nextWrapperTopRelative + 35;
-        
-        // Altura de la línea: desde el centro del número actual hasta el centro del número siguiente
-        const calculatedHeight = nextNumberCenterY - currentNumberCenterY;
-        
-        // Top de la línea: desde el centro del número actual
-        const calculatedTop = currentNumberCenterY;
-        
-        setLineHeight(Math.max(0, calculatedHeight));
-        setLineTop(calculatedTop);
-        rafId = null;
-      });
-    };
-
-    // Diferir medición inicial
-    requestAnimationFrame(() => updateLineDimensions());
-    window.addEventListener('scroll', updateLineDimensions, { passive: true });
-    window.addEventListener('resize', updateLineDimensions);
-
-    return () => {
-      window.removeEventListener('scroll', updateLineDimensions);
-      window.removeEventListener('resize', updateLineDimensions);
-    };
-  }, [isLast, itemRef, nextItemRef]);
-
-  return (
-    <div ref={itemRef} className="multimedia-entregable-item-wrapper">
-      <div className="multimedia-history-item black-bg">
-        <div className="multimedia-history-item-header">
-          <motion.span
-            className="multimedia-entregable-number black-bg"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{
-              scale: isInView ? 1 : 0,
-              opacity: isInView ? 1 : 0
-            }}
-            transition={{
-              duration: 0.4,
-              ease: "easeOut"
-            }}
-          >
-            {number}
-          </motion.span>
-          <motion.h6
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{
-              scale: isInView ? 1 : 0,
-              opacity: isInView ? 1 : 0
-            }}
-            transition={{
-              duration: 0.4,
-              ease: "easeOut"
-            }}
-          >
-            {title}
-          </motion.h6>
-        </div>
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{
-            scale: isInView ? 1 : 0,
-            opacity: isInView ? 1 : 0
-          }}
-          transition={{
-            duration: 0.4,
-            ease: "easeOut"
-          }}
-        >
-          {children}
-        </motion.div>
-      </div>
-      {!isLast && (
-        <motion.div
-          className="multimedia-entregable-line"
-          style={{
-            top: `${lineTop}px`,
-            height: `${lineHeight}px`,
-            opacity: lineHeight > 0 ? 1 : 0
-          }}
-          transition={{
-            type: "spring",
-            stiffness: 100,
-            damping: 20
-          }}
-        />
-      )}
-    </div>
-  );
-};
-
-const AnimatedOpacityText = ({ text, containerRef }) => {
-  const textRef = useRef(null);
-  const isInView = useInView(textRef, { once: false, amount: 0.3 });
-  const [baseOpacity, setBaseOpacity] = React.useState(0.1);
-  const [hasAnimated, setHasAnimated] = React.useState(false);
-
-  // Cuando está en view, establecer opacidad a 1 (100%)
-  // Cuando sale de view, volver a 0.1 (10%)
-  React.useEffect(() => {
-    if (isInView) {
-      // Cuando entra en view, establecer opacidad a 1
-      setBaseOpacity(1);
-      // Reset hasAnimated para que se anime letra por letra
-      setHasAnimated(false);
-    } else {
-      // Cuando sale de view, volver a opacidad 0.1
-      setBaseOpacity(0.1);
-      // Reset hasAnimated para que vuelva a animar cuando entre de nuevo
-      setHasAnimated(false);
-    }
-  }, [isInView]);
-
-  // Marcar como animado después de un pequeño delay para permitir la animación letra por letra
-  React.useEffect(() => {
-    if (isInView && baseOpacity === 1) {
-      const timeout = setTimeout(() => {
-        setHasAnimated(true);
-      }, 100);
-      return () => clearTimeout(timeout);
-    }
-  }, [isInView, baseOpacity]);
-
-  // Dividir el texto en letras, preservando espacios
-  const letters = text.split("");
-
-  // 60ppm = 60 palabras por minuto = 1 palabra por segundo
-  // Promedio de 5 letras por palabra = 5 letras por segundo = 0.2s por letra
-  // Pero para una animación más fluida, usaremos 0.0167s (60 caracteres por segundo)
-  const letterDelay = 0.0167;
-
-  return (
-    <motion.p
-      ref={textRef}
-      className="animated-opacity-text"
-    >
-      {letters.map((letter, index) => (
-        <AnimatedLetterOpacity
-          key={index}
-          letter={letter}
-          index={index}
-          letterDelay={letterDelay}
-          baseOpacity={baseOpacity}
-          hasAnimated={hasAnimated}
-        />
-      ))}
-    </motion.p>
-  );
-};
+const FAQ_ITEMS = [
+  {
+    q: "¿Trabajan con productora propia o tercerizan el rodaje?",
+    a: "Producimos in-house para piezas de redes, motion y fotografía. Para producciones más grandes (spots, video institucional con casting, locación múltiple) trabajamos con un equipo técnico de confianza que coordinamos como dirección creativa. La calidad y el criterio editorial los mantenemos nosotros siempre.",
+  },
+  {
+    q: "¿Cuánto cuesta un video institucional?",
+    a: "El rango es amplio: desde una producción ágil enfocada para redes hasta un manifiesto de marca con casting, locación, drone y post completa. En la primera reunión lo definimos según el objetivo del video y los canales de uso. Lo que nunca hacemos es cobrar lo mismo por dos producciones distintas.",
+  },
+  {
+    q: "¿Pueden adaptar una pieza a múltiples formatos?",
+    a: "Sí — y de hecho es como recomendamos producir hoy. Una sola sesión bien planificada se traduce a video largo, reels verticales, stories, post estáticos y carruseles. Más eficiente y mucho más coherente que producir cada formato por separado.",
+  },
+  {
+    q: "¿Hacen guión y dirección creativa o solo ejecutan?",
+    a: "Hacemos guión, dirección creativa, dirección de arte y dirección audiovisual. No ejecutamos guiones ajenos sin antes proponer ajustes — si vamos a poner el nombre, queremos que la pieza funcione.",
+  },
+  {
+    q: "¿Trabajan con motion graphics y animación 2D?",
+    a: "Sí. Tenemos equipo de motion in-house. Producimos animación 2D, lottie para interfaces, motion para spots digitales, explainer videos e infografías animadas. Todo bajo el sistema visual de la marca.",
+  },
+  {
+    q: "¿Pueden mantener un calendario de contenido sostenido?",
+    a: "Sí. Tenemos clientes que producen 100+ piezas mensuales con nosotros. Trabajamos con un sistema de jornadas de producción mensuales que permite mantener calidad y volumen sin caer en automatización ciega.",
+  },
+];
 
 const Multimedia = () => {
-  const textRef = useRef(null);
-  const containerRef = useRef(null);
-  const enfoqueContainerRef = useRef(null);
-  const isInView = useInView(textRef, { once: false, amount: 0.3 });
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "start start"]
-  });
+  const [slide, setSlide] = useState(0);
+  const [openFaq, setOpenFaq] = useState(null);
+  const observerRef = useRef(null);
+  const timerRef = useRef(null);
+  const total = SLIDER_IMAGES.length;
 
-  // Transformar el scroll progress: cuando está visible (entre 0.1 y 0.9), opacidad 1
-  // Usando easing suave para transiciones más fluidas
-  const opacityValue = useTransform(
-    scrollYProgress,
-    [0, 0.1, 0.9, 1],
-    [0.1, 1, 1, 0.1],
-    {
-      clamp: false, // Permitir valores fuera del rango para suavidad
-    }
-  );
-  
-  // Suavizar el valor de opacidad con un spring para transiciones más fluidas
-  // Parámetros ajustados para scroll más suave con frenado progresivo
-  const smoothedOpacity = useSpring(opacityValue, {
-    stiffness: 80,   // Más bajo = más suave pero más lento
-    damping: 30,     // Más alto = menos rebote, más controlado
-    mass: 0.6,       // Más bajo = más responsivo, más fluido
-  });
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("in")),
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll(".mm-page .mm-reveal").forEach((el) => observerRef.current.observe(el));
+    return () => observerRef.current?.disconnect();
+  }, []);
 
-  // Convertir el motion value a un estado para usar en las animaciones
-  const [baseOpacity, setBaseOpacity] = React.useState(0.1);
-  const [hasAnimated, setHasAnimated] = React.useState(false);
+  useEffect(() => {
+    timerRef.current = setInterval(() => setSlide((s) => (s + 1) % total), 5000);
+    return () => clearInterval(timerRef.current);
+  }, [total]);
 
-  // Escuchar cambios en el scroll progress y actualizar opacidad
-  // Usar el valor suavizado para transiciones más fluidas
-  useMotionValueEvent(smoothedOpacity, "change", (latest) => {
-    setBaseOpacity(latest);
-  });
+  const goTo = (i) => {
+    clearInterval(timerRef.current);
+    setSlide(i);
+    timerRef.current = setInterval(() => setSlide((s) => (s + 1) % total), 5000);
+  };
 
-  const text = "Si el Diseño construye la identidad, la Multimedia le da movimiento y aliento. No se trata solo de ver, sino de sentir. Contamos historias que se experimentan, que capturan la atención en segundos y permanecen en la memoria, creamos momentos con intención, emoción y sentido. No producimos contenido: diseñamos experiencias sensoriales que hacen vivir a la marca.";
-  
-  // Delay entre frases: 0.3s por frase para una animación fluida
-  const phraseDelay = 0.3;
-  
-  // Dividir el texto en frases separadas por comas o puntos (incluyendo el espacio después)
-  const phrases = React.useMemo(() => {
-    // Dividir por comas o puntos seguidos de espacio, pero mantener el delimitador
-    // Usamos lookahead para incluir el espacio en el split pero mantenerlo con la frase anterior
-    const splitRegex = /([,.])\s+/g;
-    const result = [];
-    let lastIndex = 0;
-    let match;
-    
-    // Encontrar todas las coincidencias de coma o punto seguido de espacio
-    while ((match = splitRegex.exec(text)) !== null) {
-      // Agregar la frase desde el último índice hasta la coma/punto (incluyéndolo)
-      const phrase = text.substring(lastIndex, match.index + 1) + ' ';
-      if (phrase.trim().length > 0) {
-        result.push(phrase);
-      }
-      lastIndex = match.index + match[0].length; // Avanzar después del delimitador completo
-    }
-    
-    // Agregar la última frase (desde el último índice hasta el final)
-    if (lastIndex < text.length) {
-      const lastPhrase = text.substring(lastIndex);
-      if (lastPhrase.trim().length > 0) {
-        result.push(lastPhrase);
-      }
-    }
-    
-    return result;
-  }, [text]);
-
-  // Controlar la animación frase por frase
-  // Cuando baseOpacity es alta, iniciar animación progresiva
-  // Cuando baja, resetear para que vuelva a animar cuando vuelva a subir
-  React.useEffect(() => {
-    if (baseOpacity >= 0.9) {
-      // Cuando la opacidad es alta, mantener hasAnimated en false
-      // para que se anime frase por frase
-      // Después de un tiempo, marcar como animado para que todas las frases
-      // se mantengan visibles sin delay en futuros cambios
-      if (!hasAnimated) {
-        const totalPhrases = phrases.length;
-        const totalAnimationTime = (totalPhrases * phraseDelay + 0.4) * 1000;
-        const timeout = setTimeout(() => {
-          setHasAnimated(true);
-        }, totalAnimationTime);
-        
-        return () => clearTimeout(timeout);
-      }
-    } else if (baseOpacity < 0.3) {
-      // Cuando la opacidad baja mucho, resetear para que vuelva a animar
-      setHasAnimated(false);
-    }
-  }, [baseOpacity, hasAnimated, phrases.length, phraseDelay]);
+  const toggleFaq = (i) => setOpenFaq(openFaq === i ? null : i);
 
   return (
-    <>
-      <StaticHero
-        desktopSrc={`${base}assets/hero/hero.mp4`}
-        mobileSrc={`${base}assets/hero/mobile/hero-mobile.mp4`}
-        desktopPoster={`${base}assets/hero/home.webp`}
-        mobilePoster={`${base}assets/hero/mobile/home.webp`}
-      />
+    <div className="mm-page">
 
-      <ServiceTitle titulo="Multimedia" tituloReplace="que mueve marcas" subtitulo="Construimos sistemas visuales para campañas, contenidos y plataformas digitales." />
+      {/* BREADCRUMB */}
+      <div className="mm-breadcrumb">
+        <Link to="/">Trompo</Link>
+        <span className="mm-breadcrumb-sep">/</span>
+        <Link to="/servicios">Servicios</Link>
+        <span className="mm-breadcrumb-sep">/</span>
+        <span className="mm-breadcrumb-current">Multimedia</span>
+      </div>
 
-      <div ref={containerRef} className="full-container bg-yellow-2">
-        <div className="container animated-text-container">
-          <motion.span 
-            ref={textRef}
-            className="animated-text"
-          >
-            {phrases.map((phrase, phraseIndex) => (
-              <AnimatedPhrase
-                key={`phrase-${phraseIndex}`}
-                phrase={phrase}
-                index={phraseIndex}
-                phraseDelay={phraseDelay}
-                baseOpacity={baseOpacity}
-                hasAnimated={hasAnimated}
-              />
+      {/* HERO */}
+      <section className="mm-hero">
+        <div className="mm-hero-slider">
+          {SLIDER_IMAGES.map((url, i) => (
+            <div
+              key={i}
+              className={`mm-slider-image${i === slide ? " active" : ""}`}
+              style={{ backgroundImage: `url('${url}')` }}
+            />
+          ))}
+          <div className="mm-slider-overlay" />
+        </div>
+
+        <div className="mm-slider-indicators">
+          {SLIDER_IMAGES.map((_, i) => (
+            <div
+              key={i}
+              className={`mm-slider-indicator${i === slide ? " active" : ""}`}
+              onClick={() => goTo(i)}
+            />
+          ))}
+          <span className="mm-slider-counter">0{slide + 1} / 0{total}</span>
+        </div>
+
+        <div className="mm-hero-eyebrow">
+          <span>Servicio · 2026</span>
+          <span className="mm-blink">●</span>
+          <span>Producción audiovisual & motion</span>
+        </div>
+
+        <h1 className="mm-hero-title">
+          <span className="mm-title-line"><span>Producción</span></span>
+          <span className="mm-title-line"><span>audiovisual</span></span>
+          <span className="mm-title-line"><span>con <em>propósito</em></span></span>
+          <span className="mm-title-line"><span>de negocio.</span></span>
+        </h1>
+
+        <div className="mm-hero-bottom">
+          <p className="mm-hero-desc">
+            <strong>La producción audiovisual no es contenido decorativo.</strong> Cada pieza producida resuelve una necesidad de comunicación específica: explicar un producto, posicionar una marca, sostener un lanzamiento, capacitar una red comercial. La estética se subordina al objetivo — no al revés.
+          </p>
+          <div className="mm-hero-stat">
+            <div className="mm-hero-stat-num">200+</div>
+            <div className="mm-hero-stat-label">Proyectos audiovisuales producidos por año en operación</div>
+          </div>
+          <div className="mm-hero-stat">
+            <div className="mm-hero-stat-num">2x</div>
+            <div className="mm-hero-stat-label">Producción in-house o en locación según el proyecto</div>
+          </div>
+        </div>
+      </section>
+
+      <div className="mm-divider" />
+
+      {/* MANIFESTO */}
+      <section className="mm-manifesto">
+        <div>
+          <div className="mm-manifesto-num mm-reveal">
+            01<small>Lo que sostenemos</small>
+          </div>
+        </div>
+        <div className="mm-manifesto-content">
+          <h2 className="mm-reveal">
+            No producimos <span className="mm-strike">videos sueltos.</span><br />
+            Producimos <em>activos</em><br />
+            al servicio del negocio.
+          </h2>
+          <p className="mm-manifesto-lead mm-reveal">
+            Un video no es una pieza más del calendario editorial. Es una herramienta concreta para resolver una necesidad de comunicación con un objetivo medible. Lo abordamos así desde la pre-producción: con propósito definido, guion que lo respalda y ejecución técnica al servicio del mensaje. Las producciones que existen para lucirse y no para resolver consumen recursos sin generar resultado.
+          </p>
+        </div>
+      </section>
+
+      <div className="mm-divider" />
+
+      {/* REEL GRID */}
+      <section className="mm-reel-section">
+        <div className="mm-reel-header">
+          <div>
+            <div className="mm-section-eyebrow mm-reveal">02 · Reel</div>
+            <h2 className="mm-reel-h mm-reveal">Algunas piezas<br /><em>recientes.</em></h2>
+          </div>
+          <p className="mm-reel-meta mm-reveal">
+            <strong>1.5K+</strong>
+            {" "}piezas audiovisuales producidas en los últimos 24 meses · clickeá para reproducir
+          </p>
+        </div>
+
+        <div className="mm-reel-grid">
+          {REEL_ITEMS.map((item, i) => (
+            <div key={i} className="mm-reel-item mm-reveal">
+              {item.type === "video" ? (
+                <video src={item.src} muted loop playsInline autoPlay />
+              ) : (
+                <img src={item.src} alt={item.alt} />
+              )}
+              <div className="mm-reel-play-btn">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5,3 19,12 5,21" />
+                </svg>
+              </div>
+              <div className="mm-reel-item-overlay">
+                <div className="mm-reel-item-tag">{item.tag}</div>
+                <div className="mm-reel-item-name">{item.name}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FORMATS */}
+      <section className="mm-formats-section">
+        <h2 className="mm-formats-h mm-reveal">
+          Producimos en <em>todos los formatos</em><br />nativos de cada canal.
+        </h2>
+        <div className="mm-formats-pills mm-reveal">
+          {FORMAT_PILLS.map((pill, i) => (
+            <span key={i} className="mm-format-pill">
+              <em>{String(i + 1).padStart(2, "0")}</em>
+              {pill}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      <div className="mm-divider" />
+
+      {/* DELIVERABLES */}
+      <section className="mm-deliverables-section">
+        <div className="mm-section-eyebrow mm-reveal">03 · Entregables</div>
+        <h2 className="mm-deliverables-h mm-reveal">
+          Lo que producimos<br />en <em>cada proyecto.</em>
+        </h2>
+        <div className="mm-deliverables-grid">
+          {DELIVERABLES.map((d) => (
+            <div key={d.letter} className="mm-deliverable-cell mm-reveal">
+              <div className="mm-deliverable-letter">{d.letter}</div>
+              <h3>{d.title}</h3>
+              <p>{d.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* PROCESS */}
+      <section className="mm-process">
+        <div className="mm-process-inner">
+          <div className="mm-section-eyebrow mm-reveal">04 · Cómo trabajamos</div>
+          <h2 className="mm-process-h mm-reveal">
+            El proceso<br />de <em>cada producción.</em>
+          </h2>
+          <div className="mm-timeline-list">
+            {TIMELINE.map((t) => (
+              <div key={t.step} className="mm-timeline-item mm-reveal">
+                <div className="mm-timeline-step">{t.step}</div>
+                <div className="mm-timeline-content">
+                  <h3>{t.title}</h3>
+                  <p>{t.desc}</p>
+                </div>
+                <div className="mm-timeline-duration">{t.duration}</div>
+              </div>
             ))}
-          </motion.span>
-        </div>
-      </div>
-      {/*
-      <div className="full-container black-bg">
-        <div className="container">
-          <div className="grid-multimedia-wrapper">
-            <div className="grid-item-multimedia">
-              <span>01</span>
-              <h6 className="question-multimedia">qué hacemos</h6>
-              <p>Creamos contenido audiovisual estratégico que pone en movimiento la identidad de tu marca. Desde piezas breves y potentes para redes sociales hasta producciones corporativas ágiles, narramos, mostramos y hacemos sentir lo que la marca representa, con intención y coherencia en cada formato.</p>
-            </div>
-            <div className="grid-item-multimedia">
-              <span>02</span>
-              <h6 className="question-multimedia">Cómo lo hacemos</h6>
-              <p>Nuestro proceso combina estrategia narrativa, producción ágil y tecnología aplicada con criterio. Partimos de ideas claras, guiones optimizados y storyboards pensados para captar atención en segundos y cumplir un objetivo concreto en cada plataforma.</p>
-            </div>
-            <div className="grid-item-multimedia">
-              <span>03</span>
-              <h6 className="question-multimedia">Producción y post con propósito</h6>
-              <p>Grabamos en contextos reales o sets ligeros, priorizando autenticidad, ritmo visual y mensaje. En postproducción sumamos edición dinámica, motion graphics, animación 2D, transiciones y sonido para transformar la idea en una pieza lista para competir en entornos digitales.</p>
-            </div>
-            <div className="grid-item-multimedia">
-              <span>04</span>
-              <h6 className="question-multimedia">Tecnología e IA aplicada</h6>
-              <p>Integramos inteligencia artificial de forma estratégica para potenciar resultados: asistencia creativa en guiones y copy, generación de assets visuales, locuciones sintéticas de alta calidad, limpieza de audio y subtitulado creativo diseñado como parte activa de la narrativa.</p>
-            </div>
           </div>
         </div>
-      </div>*/}
+      </section>
 
-      <div className="full-container slider-container">
-        <div className="full-container">
-          <SemicircularVideoSlider />
+      {/* TESTIMONIALS */}
+      <section className="mm-testimonials">
+        <div className="mm-testimonials-inner">
+          <div className="mm-section-eyebrow mm-reveal">05 · Lo que dicen los clientes</div>
+          <h2 className="mm-deliverables-h mm-reveal">
+            Marcas que confiaron<br /><em>su producción</em> a Trompo.
+          </h2>
+          {TESTIMONIALS.map((t, i) => (
+            <div key={i} className="mm-testimonial-card mm-reveal">
+              <div className="mm-testimonial-quote">"</div>
+              <div>
+                <p className="mm-testimonial-text">{t.text}</p>
+                <div className="mm-testimonial-meta">
+                  <div className="mm-testimonial-avatar">{t.initials}</div>
+                  <div>
+                    <div className="mm-testimonial-name">{t.name}</div>
+                    <div className="mm-testimonial-role">{t.role}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="container slider-text">
-          <span className="">Producciones audiovisuales pensadas para captar atención, comunicar con claridad y generar impacto. </span>
-        </div>
-      </div>
+      </section>
 
-      <div className="productos-container black-bg">
-        <div className="container">
-          <div className="grid-productos">
-            <div className="grid-item-img">
-              <picture>
-                <source
-                  srcSet={`${base}assets/img/multimedia.webp`}
-                  type="image/webp"
-                  media="(min-width: 951px)"
-                />
-                <img src={`${base}assets/img/multimedia-mobile.webp`} alt="Multimedia" />
-              </picture>
+      {/* STATS */}
+      <section className="mm-stats">
+        <div className="mm-stats-eyebrow">Trompo en números</div>
+        <div className="mm-stats-grid">
+          {STATS.map((s, i) => (
+            <div key={i} className="mm-stat-cell mm-reveal">
+              <div className="mm-stat-big">{s.big}<em>{s.suffix}</em></div>
+              <div className="mm-stat-label">{s.label}</div>
             </div>
-            <div className="grid-item-productos-multimedia">
-              <ProductosItemsList />
-            </div>
-          </div>
+          ))}
         </div>
-      </div>
-      
-      <div className="full-container bg-yellow-2 entregables-container">
-        <div className="container">
-          <h3 className="title-entregables">Entregables</h3>
-          <h5>Sistema Visual Estratégico</h5>
-        </div>
-        <div className="container grid-entregables">
-          <div className="item-entregables">
-            <h5>Videos estratégicos para Redes Sociales y Ads</h5>
-            <p>Reels, Shorts (YouTube/Instagram), TikTok y piezas verticales nativas para Stories, Meta Ads, Google Video o LinkedIn Ads, diseñados para captar atención en los primeros segundos.</p>
-          </div>
-          <div className="item-entregables">
-            <h5>Videos Corporativos y Testimoniales</h5>
-            <p>Producciones dinámicas y auténticas, grabadas en contexto real, que comunican valores, servicios o casos de éxito con un ritmo moderno.</p>
-          </div>
-          <div className="item-entregables">
-            <h5>Animaciones 2D y Motion Graphics explicativos</h5>
-            <p>Gráficos en movimiento que simplifican ideas complejas, presentan datos o dan vida a elementos de marca de forma clara y atractiva.</p>
-          </div>
-          <div className="item-entregables">
-            <h5>Imágenes, Locución y Assets Visuales Potenciados con IA</h5>
-            <p>Generación y edición de imágenes, ilustraciones o elementos gráficos únicos mediante inteligencia artificial, para complementar y enriquecer proyectos audiovisuales o de campaña.</p>
-          </div>
-        </div>
-      </div>
-     
-      <div className="full-container beneficios-container black-bg">
-        <div className="container title-beneficios">
-          <h3>Beneficios diferenciales</h3>
-          <h5>que aporta nuestra metodología</h5>
-        </div>
-        <div className="container">          
-          <div className="grid-beneficios">
-            <div className="grid-item-beneficios">
-              <svg className="beneficios-icon" xmlns="http://www.w3.org/2000/svg" width="78" height="63" viewBox="0 0 78 63" fill="none">
-                <path fillRule="evenodd" clipRule="evenodd" d="M45.9594 58.8817C31.3315 67.3724 12.5358 62.3091 4.09035 47.6028C-4.35509 32.8966 0.704931 14.0415 15.3328 5.55082C26.5503 -0.960289 40.4448 0.338323 50.2206 8.489L49.481 8.91831C48.6181 9.41916 48.0336 10.3093 47.9027 11.3216L47.3474 14.8385C39.8116 7.5357 28.1221 5.78348 18.6304 11.2929C7.12526 17.9709 3.18306 32.7622 9.80181 44.2877C16.4443 55.8544 31.1568 59.8177 42.6619 53.1397C52.1536 47.6303 56.4653 36.5352 53.9424 26.3226L57.2733 27.6389C58.1871 27.9898 59.2461 27.9259 60.109 27.4251L60.8486 26.9958C63.0055 39.6239 57.1769 52.3706 45.9594 58.8817ZM19.7216 13.1931C9.28485 19.2511 5.73107 32.7153 11.733 43.1667C17.7587 53.6594 31.1101 57.256 41.5469 51.1981C50.6688 45.9034 54.5221 34.9641 51.3309 25.3048L50.0456 24.784L45.197 27.5983C47.2983 34.3101 44.5598 41.8483 38.2731 45.4973C30.9592 49.7427 21.6261 47.2285 17.4034 39.8754C13.2044 32.5635 15.7052 23.1805 23.0191 18.9352C29.3059 15.2861 37.1685 16.6709 41.8758 21.815L46.7244 19.0006L46.9421 17.6625C40.1934 10.013 28.8435 7.89838 19.7216 13.1931ZM24.1104 20.8354C17.8648 24.4607 15.7524 32.5166 19.3346 38.7544C22.9405 45.0335 30.9125 47.181 37.1581 43.5558C42.3765 40.5268 44.7503 34.357 43.2247 28.7431L32.2949 35.0873C30.6924 36.0174 28.6832 35.4762 27.758 33.8651C26.8565 32.2954 27.3711 30.2341 28.9736 29.3039L39.9035 22.9598C35.8304 18.8246 29.3288 17.8064 24.1104 20.8354Z" fill="#E1C025"/>
-                <path fillRule="evenodd" clipRule="evenodd" d="M62.3907 15.0847L31.2036 33.187C30.6695 33.4971 29.9565 33.305 29.6481 32.768C29.3397 32.231 29.5545 31.5555 30.0886 31.2455L61.2757 13.1432C61.8098 12.8331 62.458 13.0077 62.7664 13.5448C63.0748 14.0818 62.9248 14.7747 62.3907 15.0847Z" fill="#E1C025"/>
-                <path fillRule="evenodd" clipRule="evenodd" d="M49.3983 22.1304L49.3335 22.1129L49.3097 22.0716L49.2686 22.0954L49.2212 22.0128L49.1801 22.0367L49.1327 21.9541L49.0916 21.9779L49.0204 21.854L48.9793 21.8778L48.6946 21.3821L48.7357 21.3583L48.6646 21.2343L48.7057 21.2105L48.6582 21.1279L48.6993 21.104L48.6756 21.0627L48.7167 21.0389L48.6692 20.9562L48.7103 20.9324L50.0699 11.661C50.0919 11.3177 50.3084 11.0268 50.596 10.8599L55.198 8.18864L53.7406 17.9575L53.7232 18.0227C53.747 18.064 53.7059 18.0878 53.7296 18.1291L53.7533 18.1704L53.7122 18.1943L53.736 18.2356L53.7186 18.3008C53.7249 18.4072 53.7961 18.5312 53.8262 18.6789L53.8974 18.8029C53.9859 18.8616 54.0333 18.9443 54.1219 19.003L54.1693 19.0856L54.2104 19.0618L54.2579 19.1444L54.299 19.1206L54.3227 19.1619L54.3875 19.1793L54.4112 19.2206L54.4523 19.1968L63.5786 22.8775L59.0177 25.5248C58.7301 25.6918 58.3475 25.6935 58.0646 25.5823L49.3983 22.1304ZM57.6634 6.75763L64.2377 2.9416L62.7392 12.7343L62.763 12.7756L62.7219 12.7995C62.7456 12.8408 62.7456 12.8408 62.7282 12.9059L62.752 12.9472L62.7109 12.9711L62.7583 13.0537C62.7647 13.1602 62.7947 13.308 62.8659 13.4319L62.9371 13.5558C62.9845 13.6384 63.032 13.7211 63.1205 13.7798L63.1442 13.8211L63.1853 13.7973L63.2328 13.8799L63.2976 13.8974L63.3213 13.9387C63.3624 13.9148 63.3861 13.9561 63.3861 13.9561L63.4509 13.9736L72.5773 17.6543L66.0029 21.4703L56.0688 17.4323L57.6634 6.75763ZM66.662 1.53444L69.0452 0.151124C69.415 -0.0635281 69.8624 -0.0477808 70.2165 0.187296C70.5707 0.422374 70.7668 0.859322 70.7274 1.26774L69.464 9.65717L77.3462 12.7932C77.7177 12.9631 77.9723 13.311 77.9977 13.7369C78.0231 14.1628 77.8368 14.6014 77.4669 14.8161L75.0427 16.2232L65.0674 12.2091L66.662 1.53444Z" fill="#E1C025"/>
-              </svg>
-              <h6>Impacto</h6>
-              <p>Contenido audiovisual diseñado para captar atención en segundos y aumentar la recordación de marca.</p>
-            </div>
-            <div className="grid-item-beneficios">
-              <svg className="beneficios-icon" xmlns="http://www.w3.org/2000/svg" width="74" height="74" viewBox="0 0 74 74" fill="none">
-                <path fillRule="evenodd" clipRule="evenodd" d="M68.2188 60.5586H5.78125C4.48047 60.5586 3.46875 59.4023 3.46875 58.1016V15.8984C3.46875 14.4531 4.48047 13.4414 5.78125 13.4414H18.2109C18.6445 13.4414 19.0781 13.7305 19.0781 14.3086L17.3438 15.1758H5.78125C5.63672 15.1758 5.49219 15.1758 5.34766 15.3203C5.20312 15.4648 5.20312 15.6094 5.20312 15.8984V58.1016V52.0312H68.7969V15.8984C68.7969 15.4648 68.5078 15.1758 68.2188 15.1758H63.8828L63.7383 13.1523L68.2188 13.4414C69.5195 13.4414 70.5312 14.4531 70.5312 15.8984V58.1016C70.5312 59.4023 69.5195 60.5586 68.2188 60.5586ZM51.5977 59.1133C50.0078 59.1133 48.707 57.957 48.707 56.3672C48.707 54.7773 50.0078 53.4766 51.5977 53.4766C53.1875 53.4766 54.4883 54.7773 54.4883 56.3672C54.4883 57.957 53.1875 59.1133 51.5977 59.1133ZM59.1133 59.1133C57.5234 59.1133 56.2227 57.957 56.2227 56.3672C56.2227 54.7773 57.5234 53.4766 59.1133 53.4766C60.7031 53.4766 61.8594 54.7773 61.8594 56.3672C61.8594 57.957 60.7031 59.1133 59.1133 59.1133Z" fill="#E1C025"/>
-                <path fillRule="evenodd" clipRule="evenodd" d="M42.6367 68.2188H31.3633C30.9297 68.2188 30.4961 67.9297 30.4961 67.3516V62.293H43.5039V67.3516C43.5039 67.9297 43.0703 68.2188 42.6367 68.2188Z" fill="#E1C025"/>
-                <path fillRule="evenodd" clipRule="evenodd" d="M51.7422 74H22.2578C21.9688 74 21.8242 73.8555 21.6797 73.7109C21.5352 73.5664 21.3906 73.4219 21.3906 73.1328V70.2422C21.3906 68.2188 23.125 66.4844 25.1484 66.4844H48.8516C50.875 66.4844 52.6094 68.2188 52.6094 70.2422V73.1328C52.6094 73.5664 52.1758 74 51.7422 74Z" fill="#E1C025"/>
-                <path fillRule="evenodd" clipRule="evenodd" d="M55.7891 47.4062H18.2109C17.7773 47.4062 17.3438 47.1172 17.3438 46.5391V2.89062C17.3438 2.45703 17.7773 2.02344 18.2109 2.02344H55.7891C56.2227 2.02344 56.6562 2.45703 56.6562 2.89062V5.92578L43.3594 29.0508V29.1953H43.2148V29.3398V29.4844H43.0703V29.6289V30.0625L41.9141 40.4688C42.2031 41.0469 42.6367 41.625 43.2148 41.9141C43.5039 42.0586 43.9375 42.2031 44.5156 42.2031C45.0938 42.2031 45.5273 42.0586 45.9609 41.7695L53.4766 36.1328H53.6211V35.9883H53.7656V35.8438H53.9102V35.6992H54.0547V35.5547V35.4102H54.1992V35.2656L56.6562 31.0742V46.5391C56.6562 47.1172 56.2227 47.4062 55.7891 47.4062ZM38.5898 40.4688H35.4102C34.9766 40.4688 34.543 40.1797 34.543 39.6016C34.543 39.168 34.9766 38.7344 35.4102 38.7344H38.5898C39.0234 38.7344 39.457 39.168 39.457 39.6016C39.457 40.1797 39.0234 40.4688 38.5898 40.4688ZM31.6523 40.4688H28.4727C28.0391 40.4688 27.6055 40.1797 27.6055 39.6016C27.6055 39.168 28.0391 38.7344 28.4727 38.7344H31.6523C32.0859 38.7344 32.5195 39.168 32.5195 39.6016C32.5195 40.1797 32.0859 40.4688 31.6523 40.4688ZM24.7148 40.4688H21.5352C20.957 40.4688 20.668 40.1797 20.668 39.6016C20.668 39.168 20.957 38.7344 21.5352 38.7344H24.7148C25.1484 38.7344 25.582 39.168 25.582 39.6016C25.582 40.1797 25.1484 40.4688 24.7148 40.4688ZM30.0625 25.1484C29.7734 25.1484 29.6289 25.0039 29.4844 24.8594L26.7383 22.2578C26.4492 21.8242 26.4492 21.2461 26.7383 20.957C27.1719 20.668 27.6055 20.668 28.0391 20.957L30.0625 22.9805L34.543 18.6445C34.832 18.2109 35.4102 18.2109 35.6992 18.6445C36.1328 18.9336 36.1328 19.5117 35.6992 19.8008L30.6406 24.8594C30.4961 25.0039 30.3516 25.1484 30.0625 25.1484ZM31.2188 32.0859C25.582 32.0859 20.957 27.4609 20.957 21.6797C20.957 16.043 25.582 11.418 31.2188 11.418C37 11.418 41.625 16.043 41.625 21.6797C41.625 27.4609 37 32.0859 31.2188 32.0859ZM31.2188 13.1523C26.4492 13.1523 22.6914 16.9102 22.6914 21.6797C22.6914 26.4492 26.4492 30.3516 31.2188 30.3516C35.9883 30.3516 39.8906 26.4492 39.8906 21.6797C39.8906 16.9102 35.9883 13.1523 31.2188 13.1523Z" fill="#E1C025"/>
-                <path fillRule="evenodd" clipRule="evenodd" d="M44.5157 40.4688C44.3712 40.4688 44.2267 40.4688 44.0821 40.4688C43.7931 40.1797 43.504 39.8906 43.6486 39.6016L44.5157 32.6641L50.5861 36.1328L44.9493 40.3242C44.8048 40.4688 44.6603 40.4688 44.5157 40.4688Z" fill="#E1C025"/>
-                <path fillRule="evenodd" clipRule="evenodd" d="M52.0313 34.832C51.8867 34.832 51.7422 34.832 51.5977 34.6875L45.2383 31.0742C44.9492 30.9297 44.8047 30.7852 44.8047 30.4961C44.6602 30.3516 44.8047 30.0625 44.8047 29.918L59.4024 4.76953C59.6914 4.33594 60.125 4.19141 60.5586 4.33594L66.918 8.09375C67.2071 8.23828 67.3516 8.38281 67.3516 8.52734C67.3516 8.81641 67.3516 9.10547 67.2071 9.25L52.7539 34.3984C52.6094 34.6875 52.3203 34.832 52.0313 34.832Z" fill="#E1C025"/>
-                <path fillRule="evenodd" clipRule="evenodd" d="M66.4844 9.68359C66.3398 9.68359 66.1953 9.68359 66.0508 9.53906L59.6914 5.92578C59.2578 5.63672 59.1133 5.05859 59.4023 4.76953L61.8594 0.433594C62.0039 0.289062 62.1484 0.144531 62.4375 0C62.582 0 62.8711 0 63.0156 0.144531L69.375 3.75781C69.8086 4.04688 69.9531 4.625 69.6641 4.91406L67.207 9.25C67.0625 9.53906 66.7734 9.68359 66.4844 9.68359Z" fill="#E1C025"/>
-              </svg>
-              <h6>Adaptabilidad</h6>
-              <p>Piezas optimizadas y versionadas para cada plataforma, formato y objetivo de campaña.</p>
-            </div>
-            <div className="grid-item-beneficios">
-              <svg className="beneficios-icon" xmlns="http://www.w3.org/2000/svg" width="75" height="75" viewBox="0 0 75 75" fill="none">
-                <g clipPath="url(#clip0_2493_937)">
-                  <path d="M74.9878 33.1722C74.9241 32.5649 74.6116 32.011 74.125 31.6423L68.1841 27.1422L70.3456 20.01C70.5227 19.4254 70.45 18.7937 70.1447 18.2648C69.8395 17.736 69.3287 17.3572 68.7341 17.2183L61.4761 15.5236L60.5496 8.12865C60.4737 7.52279 60.1504 6.97523 59.6563 6.61649C59.1625 6.25731 58.5417 6.11874 57.9422 6.23402L50.6226 7.63793L46.7679 1.25926C46.4521 0.736754 45.934 0.368052 45.3367 0.241197C44.7394 0.114195 44.1162 0.240025 43.6151 0.589097L37.4998 4.84872L31.3842 0.589244C30.883 0.240318 30.2597 0.114342 29.6626 0.241344C29.0653 0.368199 28.5473 0.736754 28.2315 1.25956L24.3773 7.63836L17.0578 6.23446C16.4581 6.11962 15.8374 6.2579 15.3435 6.61693C14.8495 6.97582 14.5261 7.52308 14.4504 8.12909L13.5238 15.5241L6.26584 17.2187C5.67111 17.3576 5.16061 17.7364 4.85519 18.2652C4.54992 18.7942 4.47726 19.4257 4.65422 20.01L6.81545 27.1425L0.874921 31.6423C0.388153 32.011 0.0758483 32.5647 0.0121276 33.1721C-0.0517395 33.7794 0.138544 34.386 0.538153 34.8478L5.4133 40.4847L1.81638 47.0119C1.52165 47.5467 1.46159 48.1797 1.65026 48.7605C1.83908 49.341 2.25964 49.8178 2.81247 50.0772L9.55895 53.2436L8.92775 60.6698C8.8759 61.2783 9.07834 61.8811 9.48718 62.3349C9.89558 62.7887 10.474 63.053 11.0844 63.0653L18.5361 63.2138L20.9798 70.2544C21.1799 70.8313 21.6099 71.2997 22.1677 71.548C22.7258 71.7966 23.3614 71.8026 23.9242 71.5656L30.7923 68.6706L35.8885 74.1087C36.3061 74.5543 36.8894 74.8072 37.5 74.8072C38.1107 74.8072 38.694 74.5543 39.1116 74.1087L44.2079 68.6706L51.0754 71.5656C51.6381 71.8025 52.2739 71.7962 52.8318 71.548C53.3896 71.2997 53.8198 70.8316 54.0199 70.2546L56.4638 63.2138L63.9152 63.0653C64.5256 63.0531 65.1039 62.7887 65.5125 62.3349C65.921 61.8811 66.1236 61.2785 66.0719 60.6698L65.4407 53.2436L72.1876 50.0772C72.7406 49.8178 73.1611 49.341 73.3498 48.7603C73.5385 48.1798 73.4784 47.5467 73.1836 47.0117L69.5863 40.4846L74.4619 34.8477C74.8612 34.3861 75.0515 33.7794 74.9878 33.1722ZM37.4998 58.6344C25.8461 58.6344 16.3654 49.1535 16.3654 37.4999C16.3654 25.8464 25.8463 16.3655 37.4998 16.3655C49.1534 16.3655 58.6343 25.8465 58.6343 37.4999C58.6343 49.1534 49.1534 58.6344 37.4998 58.6344Z" fill="#E1C025"/>
-                  <path d="M37.4998 20.7827C28.282 20.7827 20.7827 28.282 20.7827 37.4998C20.7827 46.7176 28.2821 54.2169 37.4998 54.2169C46.7179 54.2169 54.2169 46.7176 54.2169 37.4998C54.2169 28.282 46.7178 20.7827 37.4998 20.7827ZM46.1588 34.3303L36.696 43.7931C36.2646 44.2243 35.6995 44.4401 35.1342 44.4401C34.5691 44.4401 34.0038 44.2243 33.5727 43.7931L28.841 39.0616C27.9786 38.1993 27.9786 36.8008 28.841 35.9381C29.7033 35.0758 31.102 35.0755 31.9645 35.9381L35.1342 39.1078L43.0353 31.2068C43.8978 30.3445 45.2963 30.3442 46.1589 31.2068C47.0213 32.0693 47.0213 33.4678 46.1588 34.3303Z" fill="#E1C025"/>
-                </g>
-                <defs>
-                  <clipPath id="clip0_2493_937">
-                    <rect width="75" height="75" fill="white"/>
-                  </clipPath>
-                </defs>
-              </svg>
-              <h6>Coherencia</h6>
-              <p>Producciones alineadas al sistema visual y narrativo de la marca, garantizando continuidad estética.</p>
-            </div>
-            <div className="grid-item-beneficios">
-              <svg className="beneficios-icon" xmlns="http://www.w3.org/2000/svg" width="69" height="69" viewBox="0 0 69 69" fill="none">
-                <path d="M68.4545 26.6504C68.0819 25.9779 67.5356 25.4177 66.8726 25.0284C66.2096 24.6392 65.4542 24.4351 64.6853 24.4375H23.8227C22.445 24.4375 21.1044 24.8843 20.0023 25.7109C18.9001 26.5375 18.0958 27.6993 17.71 29.0219L9.62191 56.7525C9.1961 58.2123 8.30831 59.4946 7.09179 60.407C5.87526 61.3194 4.39564 61.8125 2.875 61.8125H54.2625C55.7834 61.8125 57.2633 61.3192 58.4801 60.4066C59.6968 59.4941 60.5848 58.2115 61.0107 56.7514L68.7752 30.1313C68.9558 29.5589 69.0205 28.9562 68.9654 28.3586C68.9103 27.7609 68.7366 27.1802 68.4545 26.6504Z" fill="#E1C025"/>
-                <path d="M6.85687 55.9475L14.95 28.2181C15.5138 26.3011 16.6818 24.6176 18.2801 23.4183C19.8783 22.219 21.8212 21.568 23.8194 21.5625H60.375V20.125C60.375 18.6 59.7692 17.1375 58.6909 16.0591C57.6125 14.9808 56.15 14.375 54.625 14.375H32.7113C32.2829 14.375 31.8599 14.2795 31.4731 14.0955C31.0863 13.9115 30.7453 13.6436 30.475 13.3113L27.6493 9.83667C26.9762 9.00903 26.127 8.34182 25.1636 7.88356C24.2002 7.42531 23.1468 7.18752 22.08 7.1875H5.75C4.22501 7.1875 2.76247 7.7933 1.68414 8.87164C0.605802 9.94997 0 11.4125 0 12.9375L0 56.0625C0 56.825 0.302901 57.5563 0.842068 58.0954C1.38124 58.6346 2.1125 58.9375 2.875 58.9375C3.77236 58.935 4.6449 58.6426 5.36248 58.1038C6.08006 57.5649 6.60425 56.8086 6.85687 55.9475Z" fill="#E1C025"/>
-              </svg>
-              <h6>Rendimiento</h6>
-              <p>Videos y animaciones pensados para performance: mayor retención, mejor engagement y mejor conversión.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      </section>
 
-      <Contact form="multimedia" />
-      <Dock
-        links={[{ anchor: "#contact", title: "Contacto" }]}
-        cta={{ label: "Hablemos →", to: "/contactanos" }}
-      />
-    </>
+      {/* FAQs */}
+      <section className="mm-faqs">
+        <div className="mm-faqs-header">
+          <div>
+            <div className="mm-section-eyebrow mm-reveal">06 · Preguntas frecuentes</div>
+            <h2 className="mm-faqs-h mm-reveal">
+              Las preguntas <em>antes</em><br />de empezar a producir.
+            </h2>
+          </div>
+          <p className="mm-faqs-meta mm-reveal">
+            Las dudas más frecuentes sobre nuestro modo de trabajar producción audiovisual. Si tu pregunta no está, escribinos.
+          </p>
+        </div>
+        <div className="mm-faq-list">
+          {FAQ_ITEMS.map((faq, i) => (
+            <div key={i} className={`mm-faq-item${openFaq === i ? " open" : ""}`}>
+              <button className="mm-faq-q" onClick={() => toggleFaq(i)}>
+                <span>{faq.q}</span>
+                <span className="mm-faq-icon" />
+              </button>
+              <div className="mm-faq-a">
+                <div className="mm-faq-a-inner">{faq.a}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA BANNER */}
+      <section className="mm-cta-banner">
+        <div className="mm-cta-banner-bg">Multimedia</div>
+        <div className="mm-cta-inner">
+          <div className="mm-section-eyebrow mm-reveal" style={{ justifyContent: "center" }}>
+            Conversemos
+          </div>
+          <h2 className="mm-reveal">
+            ¿Necesitás <em>contenido audiovisual</em><br />con criterio profesional?
+          </h2>
+          <p className="mm-reveal">
+            Una conversación inicial sobre el proyecto audiovisual. Sin propuesta cerrada de antemano. Recomendación profesional honesta sobre qué tipo de producción se ajusta al objetivo de negocio.
+          </p>
+          <div className="mm-cta-buttons mm-reveal">
+            <Link to="/contactanos" className="mm-btn-primary">Solicitar reunión →</Link>
+            <Link to="/nosotros" className="mm-btn-ghost">Ver más reels</Link>
+          </div>
+        </div>
+      </section>
+
+    </div>
   );
 };
 

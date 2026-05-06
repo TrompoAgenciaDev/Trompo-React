@@ -1,308 +1,164 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Dock from "../../components/Dock";
 import "../../assets/styles/disenio-page.css";
 
-/* ── Data ─────────────────────────────────────────────── */
-
 const SLIDER_IMAGES = [
-  {
-    src: "https://images.unsplash.com/photo-1545235617-9465d2a55698?w=1400&q=80",
-    alt: "Diseño gráfico profesional",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1400&q=80",
-    alt: "Branding creativo",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=1400&q=80",
-    alt: "Identidad visual",
-  },
+  "https://images.unsplash.com/photo-1561070791-2526d30994b8?w=1920&q=85",
+  "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=1920&q=85",
+  "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=1920&q=85",
 ];
 
 const BA_CASES = [
   {
-    label: "CEDIR Salud",
-    before: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=80",
-    after: "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=1200&q=80",
-    desc: "Rediseño de identidad visual para transmitir confianza y modernidad.",
-    result: "+340% en reconocimiento de marca",
+    label: "01 · CEDIR Salud",
+    before: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=85",
+    after:  "https://images.unsplash.com/photo-1631549916768-4119b2e5f926?w=1920&q=85",
+    sector:       "Salud · Diagnóstico por imagen",
+    intervencion: "Rediseño completo de identidad + sistema digital",
+    resultado:    "Reposicionamiento de marca y unificación de 6 unidades clínicas bajo un solo sistema visual.",
   },
   {
-    label: "Super Walter",
-    before: "https://images.unsplash.com/photo-1604908554007-b1f9c47b88a6?w=1200&q=80",
-    after: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&q=80",
-    desc: "Nueva imagen de marca para la cadena de supermercados.",
-    result: "Reconocimiento duplicado en 6 meses",
+    label: "02 · Super Walter",
+    before: "https://images.unsplash.com/photo-1604908554007-b1f9c47b88a6?w=1920&q=85",
+    after:  "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920&q=85",
+    sector:       "Maquinaria agrícola · Distribución",
+    intervencion: "Refresh de identidad + rediseño web + brandbook",
+    resultado:    "Profesionalización de la marca para soportar crecimiento de la red comercial.",
   },
   {
-    label: "Ardu Café",
-    before: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&q=80",
-    after: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=1200&q=80",
-    desc: "Branding artesanal que captura la esencia del café de especialidad.",
-    result: "Aumento del 60% en ticket promedio",
+    label: "03 · Ardu Café",
+    before: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1920&q=85",
+    after:  "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=1920&q=85",
+    sector:       "Café · Retail gastronómico",
+    intervencion: "Identidad nueva + packaging + carta + uniformes",
+    resultado:    "Sistema visual coherente desde el grano al consumidor — cada touchpoint en el mismo lenguaje.",
   },
   {
-    label: "Mosaicos Blangino",
-    before: "https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=1200&q=80",
-    after: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80",
-    desc: "Tradición artesanal con estética contemporánea.",
-    result: "Expansión a 3 nuevos mercados",
+    label: "04 · Mosaicos Blangino",
+    before: "https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=1920&q=85",
+    after:  "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1920&q=85",
+    sector:       "Construcción · Materiales",
+    intervencion: "Rediseño de identidad de fábrica con 90 años de historia",
+    resultado:    "Modernización sin perder anclaje patrimonial — código visual contemporáneo, esencia conservada.",
   },
 ];
 
 const DELIVERABLES = [
   {
-    letter: "Id",
-    title: "Identidad de Marca",
-    desc: "Logotipo, paleta cromática, tipografías, voz y manual de uso completo.",
+    letter: "A",
+    title: "Identidad de marca",
+    desc: "Logo principal y variantes, sistema de marca, manual de uso, paleta cromática extendida y sistema tipográfico jerarquizado para garantizar consistencia.",
   },
   {
-    letter: "Ed",
-    title: "Diseño Editorial",
-    desc: "Catálogos, brochures, revistas y piezas impresas de alta calidad.",
+    letter: "B",
+    title: "Sistema visual",
+    desc: "Grilla, criterios de diagramación, biblioteca de iconos, ilustraciones y stock fotográfico curado. Plantillas listas para que el equipo del cliente opere sin perder coherencia.",
   },
   {
-    letter: "Di",
-    title: "Piezas Digitales",
-    desc: "Posts, stories, banners, newsletters y assets para todas las plataformas.",
+    letter: "C",
+    title: "Piezas y aplicaciones",
+    desc: "Avisos digitales, presentaciones corporativas, papelería, packaging, señalética e indumentaria institucional — todo dentro del mismo sistema.",
   },
   {
-    letter: "Pk",
-    title: "Packaging",
-    desc: "Diseño de etiquetas, cajas y envases que destacan en el punto de venta.",
+    letter: "D",
+    title: "Brandbook editorial",
+    desc: "Manual de marca con criterios de uso, ejemplos correctos e incorrectos, lineamientos de tono y voz. Documento vivo que escala con la operación.",
   },
 ];
 
 const PORTFOLIO_ITEMS = [
-  {
-    src: "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&q=80",
-    tag: "Branding",
-    name: "CEDIR Salud",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&q=80",
-    tag: "Editorial",
-    name: "Super Walter",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
-    tag: "Packaging",
-    name: "Ardu Café",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
-    tag: "Identidad",
-    name: "Mosaicos Blangino",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1542744094-3a31f272c490?w=800&q=80",
-    tag: "Social Media",
-    name: "Campañas 2024",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1545235617-9465d2a55698?w=800&q=80",
-    tag: "UX/UI",
-    name: "Apps & Web",
-  },
+  { src: "https://images.unsplash.com/photo-1620207418302-439b387441b0?w=900&q=85", tag: "Salud · Diagnóstico", name: "CEDIR" },
+  { src: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=900&q=85", tag: "Maquinaria agrícola",  name: "Super Walter" },
+  { src: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=900&q=85",   tag: "Café · Retail",       name: "Ardu Café" },
+  { src: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=900&q=85", tag: "Construcción",        name: "Mosaicos Blangino" },
+  { src: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=900&q=85", tag: "Estética médica",     name: "Korper" },
+  { src: "https://images.unsplash.com/photo-1567789884554-0b844b597180?w=900&q=85", tag: "Turismo",             name: "Lozada Viajes" },
 ];
 
 const TIMELINE = [
-  {
-    num: "01",
-    title: "Descubrimiento",
-    desc: "Investigamos tu marca, competidores y audiencia para definir el territorio visual.",
-    duration: "1–2 días",
-  },
-  {
-    num: "02",
-    title: "Concepto",
-    desc: "Desarrollamos moodboards y alternativas conceptuales para validar la dirección.",
-    duration: "3–5 días",
-  },
-  {
-    num: "03",
-    title: "Diseño",
-    desc: "Refinamos la propuesta elegida en todos los formatos y aplicaciones necesarias.",
-    duration: "1–2 semanas",
-  },
-  {
-    num: "04",
-    title: "Entrega",
-    desc: "Manual de marca, archivos editables y soporte para la implementación.",
-    duration: "1–2 días",
-  },
+  { num: "01", title: "Inmersión",         desc: "Workshop con el equipo del cliente para entender negocio, audiencia, posición competitiva y tono deseado. Sin este paso, el diseño es solo decoración.",                          duration: "Semana 1" },
+  { num: "02", title: "Conceptualización", desc: "Definimos el territorio de marca: qué se busca transmitir, qué referentes funcionan, qué territorio se evita. Antes de bocetar, alineamos dirección.",                       duration: "Semanas 2–3" },
+  { num: "03", title: "Diseño",            desc: "Iteramos propuestas en rondas acotadas — máximo dos. Trabajamos con criterio profesional, no con votaciones internas. Lo que se presenta, se defiende.",                   duration: "Semanas 4–6" },
+  { num: "04", title: "Implementación",    desc: "Bajamos la marca a todas las aplicaciones: digital, print, físico. Entregamos archivos abiertos, tipografías licenciadas y manual completo.",                              duration: "Semanas 7–8" },
 ];
 
 const TESTIMONIALS = [
   {
-    quote:
-      "Trompo transformó nuestra imagen por completo. El nuevo branding nos abrió puertas que antes ni imaginábamos.",
-    author: "Lucía Fernández",
-    role: "Directora, CEDIR Salud",
-    initial: "L",
+    quote:    "Trompo entendió en una reunión lo que tres agencias antes no habían podido captar en seis meses. La identidad nueva ordenó todo el sistema digital y dejó al equipo interno trabajando con criterio.",
+    name:     "Mauro Lazzarini",
+    role:     "Director Comercial · CEDIR Salud",
+    initials: "ML",
   },
   {
-    quote:
-      "En tres semanas teníamos una identidad visual que realmente nos representaba. El proceso fue increíblemente claro.",
-    author: "Martín Quiroga",
-    role: "Fundador, Ardu Café",
-    initial: "M",
+    quote:    "La marca venía de 90 años de historia y un montón de versiones del logo dando vueltas. El proceso fue serio, sin votaciones internas que desordenan. Quedamos con un sistema que escala.",
+    name:     "Patricia Blangino",
+    role:     "Gerente · Mosaicos Blangino",
+    initials: "PB",
   },
 ];
 
 const STATS = [
-  { value: "200+", label: "Marcas\ndiseñadas" },
-  { value: "98%", label: "Clientes\nsatisfechos" },
-  { value: "12", label: "Premios\nregionales" },
-  { value: "8", label: "Años de\ntrayectoria" },
-];
-
-const SCORE_QUESTIONS = [
-  {
-    q: "¿Tu logo se ve bien en blanco y negro?",
-    opts: ["Sí, siempre", "Más o menos", "No, se pierde todo"],
-  },
-  {
-    q: "¿Tenés un manual de marca definido?",
-    opts: ["Sí, completo", "Algo básico", "No tengo nada"],
-  },
-  {
-    q: "¿Tus piezas de comunicación son consistentes?",
-    opts: ["Siempre", "A veces", "Rara vez"],
-  },
-  {
-    q: "¿Podés describir tu paleta de colores de memoria?",
-    opts: ["Perfectamente", "Solo algunos", "No tengo paleta fija"],
-  },
-  {
-    q: "¿Tus clientes reconocen tu marca sin el nombre?",
-    opts: ["La mayoría", "Algunos", "Necesitan el nombre"],
-  },
-  {
-    q: "¿Cuándo fue la última vez que actualizaste tu identidad?",
-    opts: ["Menos de 2 años", "Entre 2 y 5 años", "Más de 5 años o nunca"],
-  },
+  { big: "60",  suffix: "+",  label: "Marcas con identidad\ndesarrollada en 10 años" },
+  { big: "14",  suffix: "",   label: "Rediseños completos\nen los últimos 24 meses" },
+  { big: "360", suffix: "°",  label: "Sistema aplicable a\ndigital, print y físico" },
+  { big: "G",   suffix: "·P", label: "Google Partner\nCertified desde el inicio" },
 ];
 
 const FAQ_ITEMS = [
-  {
-    q: "¿Cuánto tarda un proyecto de branding completo?",
-    a: "Un proyecto de identidad visual completo lleva entre 3 y 6 semanas, dependiendo de la complejidad y los ciclos de revisión. Proyectos más acotados como rediseño de logo pueden estar listos en 1–2 semanas.",
-  },
-  {
-    q: "¿Qué formatos entregás al final del proyecto?",
-    a: "Entregamos todos los archivos fuente (AI, PSD, Figma), versiones exportadas en PNG, SVG, PDF, más el manual de marca en PDF interactivo con todas las especificaciones.",
-  },
-  {
-    q: "¿Trabajamos juntos durante el proceso o solo al final?",
-    a: "El proceso es colaborativo desde el día uno. Tenemos instancias de revisión en cada etapa: concepto, primer borrador y versión final. Tu feedback es parte del diseño.",
-  },
-  {
-    q: "¿Puedo pedir cambios después de la entrega final?",
-    a: "Incluimos dos rondas de revisión en cada etapa. Cambios adicionales o nuevas aplicaciones post-entrega se presupuestan por separado.",
-  },
-  {
-    q: "¿Diseñan solo para empresas grandes?",
-    a: "No. Trabajamos con emprendedores, pymes y marcas consolidadas. Tenemos propuestas adaptadas a cada escala sin sacrificar calidad.",
-  },
-  {
-    q: "¿También hacen diseño para redes sociales?",
-    a: "Sí. Creamos templates de posts, stories, highlights covers y banners optimizados para cada plataforma, con coherencia total con tu identidad.",
-  },
-  {
-    q: "¿Cómo empezamos?",
-    a: "Escribinos a través del formulario de contacto o por WhatsApp. Agendamos una llamada de 30 minutos sin cargo para entender tu proyecto y presentarte una propuesta.",
-  },
+  { q: "¿Cuánto dura un proyecto de identidad de marca completo?",        a: "Entre 6 y 8 semanas para un sistema completo desde cero. Un rediseño parcial o refresh puede resolverse en 3–4 semanas. Lo definimos en el primer encuentro según alcance, urgencia y nivel de iteración esperado por parte del cliente." },
+  { q: "¿Trabajan con votaciones internas o democratización del diseño?", a: "No. Presentamos máximo dos rutas conceptuales con criterio fundamentado y defendemos lo que proponemos. Las votaciones de equipo amplio suelen llevar al promedio — y el promedio nunca diferencia. Sí trabajamos con quien toma la decisión final, alineando temprano para no frustrar el proceso." },
+  { q: "¿Qué incluye el manual de marca que entregan?",                   a: "Logo y variantes, área de respeto, paleta cromática primaria y secundaria, sistema tipográfico jerarquizado, lenguaje fotográfico, sistema de iconos, criterios de aplicación correcta e incorrecta, plantillas para redes sociales, presentaciones y papelería. Documento PDF + archivos abiertos editables." },
+  { q: "¿Pueden trabajar con la marca actual sin rediseñarla?",           a: "Sí. Muchas veces la marca está bien y lo que falta es el sistema visual que la rodea: tipografía, paleta, plantillas, lenguaje fotográfico. Auditamos el estado actual y definimos qué intervenir. No todo proyecto requiere logo nuevo." },
+  { q: "¿Entregan los archivos editables o solo finales?",                a: "Entregamos todo: archivos abiertos en Adobe Illustrator y Figma, tipografías licenciadas a nombre del cliente, plantillas editables y formatos PNG/JPG/SVG/PDF para uso operativo. La marca queda 100% del cliente." },
+  { q: "¿Cuál es el rango de inversión típico para un proyecto?",         a: "Depende del alcance: una identidad completa con manual y aplicaciones primarias arranca desde un piso definido, y proyectos con desarrollo web, packaging y aplicaciones físicas pueden multiplicar varias veces ese piso. En la primera reunión te damos un rango realista — sin compromiso." },
 ];
 
-const OTHER_SERVICES = [
-  { title: "Desarrollo Web", href: "/servicios/desarrollo", icon: "⟨/⟩", desc: "Sitios y apps a medida" },
-  { title: "Multimedia", href: "/servicios/multimedia", icon: "▶", desc: "Video, foto y animación" },
-  { title: "Paid Media", href: "/servicios/paid-media", icon: "◎", desc: "Publicidad que convierte" },
-  { title: "Social Media", href: "/servicios/social-media", icon: "⊕", desc: "Comunidades que crecen" },
-];
-
-/* ── Score helpers ─────────────────────────────────────── */
-const CIRCUMFERENCE = 2 * Math.PI * 54; // ≈ 339.29
-
-function computeScore(answers) {
-  const filled = answers.filter((a) => a !== null);
-  if (!filled.length) return { score: 0, offset: CIRCUMFERENCE, verdict: null };
-  const total = filled.reduce((sum, i) => sum + (2 - i) * 33.33, 0) / filled.length;
-  const score = Math.round(total);
-  const offset = CIRCUMFERENCE - (score / 100) * CIRCUMFERENCE;
-  let verdict = "Identidad sólida";
-  if (score < 40) verdict = "Necesitás una identidad";
-  else if (score < 70) verdict = "Hay mucho por mejorar";
-  return { score, offset, verdict };
-}
-
-/* ── Component ─────────────────────────────────────────── */
 export default function Disenio() {
-  /* Hero slider */
-  const sliderRef = useRef(null);
-
-  /* Before/After */
+  const sliderRef  = useRef(null);
   const [baTab, setBaTab] = useState(0);
-  const dragging = useRef(false);
-  const stageRef = useRef(null);
+  const dragging   = useRef(false);
+  const stageRef   = useRef(null);
   const dividerRef = useRef(null);
-  const handleRef = useRef(null);
-  const afterRef = useRef(null);
-
-  /* Scorecard */
-  const [answers, setAnswers] = useState(Array(SCORE_QUESTIONS.length).fill(null));
-
-  /* FAQ */
+  const handleRef  = useRef(null);
+  const afterRef   = useRef(null);
   const [openFaq, setOpenFaq] = useState(null);
 
-  /* ── Hero slider effect ─────────────────────────────── */
   useEffect(() => {
-    const slides = sliderRef.current?.querySelectorAll(".dn-slider-image");
-    const inds = sliderRef.current?.querySelectorAll(".dn-slider-indicator");
+    const slides  = sliderRef.current?.querySelectorAll(".dn-slider-image");
+    const inds    = sliderRef.current?.querySelectorAll(".dn-slider-indicator");
+    const counter = document.getElementById("dn-slider-counter");
     if (!slides?.length) return;
-
     let current = 0;
-
     function goTo(idx) {
       slides[current].classList.remove("active");
-      inds[current]?.classList.remove("active");
+      inds?.[current]?.classList.remove("active");
       current = idx;
       slides[current].classList.add("active");
-      if (inds[current]) {
+      if (inds?.[current]) {
         inds[current].classList.remove("active");
         void inds[current].offsetWidth;
         inds[current].classList.add("active");
       }
+      if (counter) counter.textContent = `0${current + 1} / 0${slides.length}`;
     }
-
     slides[0].classList.add("active");
-    inds[0]?.classList.add("active");
-
-    const timer = setInterval(() => goTo((current + 1) % slides.length), 4500);
+    inds?.[0]?.classList.add("active");
+    const timer = setInterval(() => goTo((current + 1) % slides.length), 5000);
     return () => clearInterval(timer);
   }, []);
 
-  /* ── BA drag ────────────────────────────────────────── */
   function updatePos(clientX) {
     const rect = stageRef.current?.getBoundingClientRect();
     if (!rect) return;
     const pct = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
     if (dividerRef.current) dividerRef.current.style.left = `${pct}%`;
-    if (handleRef.current) handleRef.current.style.left = `${pct}%`;
-    if (afterRef.current)
-      afterRef.current.style.clipPath = `polygon(${pct}% 0, 100% 0, 100% 100%, ${pct}% 100%)`;
+    if (handleRef.current)  handleRef.current.style.left  = `${pct}%`;
+    if (afterRef.current)   afterRef.current.style.clipPath = `polygon(${pct}% 0, 100% 0, 100% 100%, ${pct}% 100%)`;
   }
 
   useEffect(() => {
-    function onMove(e) {
-      if (!dragging.current) return;
-      updatePos(e.touches ? e.touches[0].clientX : e.clientX);
-    }
-    function onUp() {
-      dragging.current = false;
-    }
+    const onMove = (e) => { if (dragging.current) updatePos(e.touches ? e.touches[0].clientX : e.clientX); };
+    const onUp   = ()  => { dragging.current = false; };
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseup", onUp);
     window.addEventListener("touchmove", onMove, { passive: true });
@@ -315,202 +171,153 @@ export default function Disenio() {
     };
   }, []);
 
-  /* Reset BA divider on tab change */
   useEffect(() => {
     if (dividerRef.current) dividerRef.current.style.left = "50%";
-    if (handleRef.current) handleRef.current.style.left = "50%";
-    if (afterRef.current)
-      afterRef.current.style.clipPath = "polygon(50% 0, 100% 0, 100% 100%, 50% 100%)";
+    if (handleRef.current)  handleRef.current.style.left  = "50%";
+    if (afterRef.current)   afterRef.current.style.clipPath = "polygon(50% 0, 100% 0, 100% 100%, 50% 100%)";
   }, [baTab]);
 
-  /* ── Scroll reveal ──────────────────────────────────── */
   useEffect(() => {
-    const els = document.querySelectorAll(".dn-reveal");
     const obs = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("in")),
       { threshold: 0.1 }
     );
-    els.forEach((el) => obs.observe(el));
+    document.querySelectorAll(".dn-reveal").forEach((el) => obs.observe(el));
     return () => obs.disconnect();
   }, []);
 
-  /* ── Score ──────────────────────────────────────────── */
-  const { score, offset, verdict } = computeScore(answers);
-  const answered = answers.filter((a) => a !== null).length;
-
-  /* ── Render ─────────────────────────────────────────── */
   return (
     <div className="dn-page">
-      <Dock
-        links={[
-          { title: "Casos", anchor: "#portfolio" },
-          { title: "Proceso", anchor: "#proceso" },
-        ]}
-        cta={{ label: "Hablemos →", to: "/contactanos" }}
-      />
 
-      {/* Breadcrumb */}
       <nav className="dn-breadcrumb">
-        <Link to="/">Inicio</Link>
-        <span>/</span>
+        <Link to="/">Trompo</Link>
+        <span className="dn-breadcrumb-sep">/</span>
         <Link to="/servicios">Servicios</Link>
-        <span>/</span>
-        <span>Diseño</span>
+        <span className="dn-breadcrumb-sep">/</span>
+        <span className="dn-breadcrumb-current">Diseño</span>
       </nav>
 
-      {/* ── Hero ──────────────────────────────────────── */}
+      {/* HERO */}
       <section className="dn-hero">
         <div className="dn-hero-slider" ref={sliderRef}>
-          {SLIDER_IMAGES.map((img, i) => (
-            <div
-              key={i}
-              className="dn-slider-image"
-              style={{ backgroundImage: `url(${img.src})` }}
-              aria-label={img.alt}
-            />
+          {SLIDER_IMAGES.map((src, i) => (
+            <div key={i} className="dn-slider-image" style={{ backgroundImage: `url(${src})` }} />
           ))}
           <div className="dn-slider-indicators">
             {SLIDER_IMAGES.map((_, i) => (
               <span key={i} className="dn-slider-indicator" />
             ))}
-            <span className="dn-slider-counter">
-              01/{String(SLIDER_IMAGES.length).padStart(2, "0")}
-            </span>
+            <span className="dn-slider-counter" id="dn-slider-counter">01 / 03</span>
           </div>
         </div>
 
-        <p className="dn-hero-eyebrow">Diseño Gráfico &amp; Branding</p>
+        <div className="dn-hero-eyebrow">
+          <span>Servicio · 2026</span>
+          <span className="dn-blink">●</span>
+          <span>Diseño & Identidad de marca</span>
+        </div>
+
         <h1 className="dn-hero-title">
-          Identidades que
-          <br />
-          <em>se recuerdan</em>
+          <span className="dn-hero-title-line"><span>Diseño que</span></span>
+          <span className="dn-hero-title-line"><span>ordena y</span></span>
+          <span className="dn-hero-title-line"><span><em>profesionaliza</em></span></span>
+          <span className="dn-hero-title-line"><span>la marca.</span></span>
         </h1>
+
         <div className="dn-hero-bottom">
           <p className="dn-hero-desc">
-            Creamos sistemas visuales que comunican quiénes son{" "}
-            <strong>antes de decir una sola palabra.</strong> Cada decisión de diseño es estrategia.
+            <strong>La identidad es el primer activo de credibilidad de toda marca.</strong> Sistemas visuales completos, manuales rigurosos y aplicaciones consistentes desarrollados con metodología profesional — no con improvisación creativa.
           </p>
           <div className="dn-hero-stat">
-            <p className="dn-hero-stat-num">200+</p>
-            <p className="dn-hero-stat-label">{"Marcas\ndiseñadas"}</p>
+            <div className="dn-hero-stat-num">60+</div>
+            <div className="dn-hero-stat-label">Marcas con identidad construida o renovada por Trompo</div>
           </div>
           <div className="dn-hero-stat">
-            <p className="dn-hero-stat-num">8</p>
-            <p className="dn-hero-stat-label">{"Años de\ntrayectoria"}</p>
+            <div className="dn-hero-stat-num">360°</div>
+            <div className="dn-hero-stat-label">Sistema visual aplicable a digital, print y entornos físicos</div>
           </div>
         </div>
       </section>
 
-      {/* ── Manifesto ─────────────────────────────────── */}
-      <section className="dn-manifesto dn-reveal">
-        <div className="dn-manifesto-num">
-          § 01 — Filosofía
-          <small>Nuestro manifiesto</small>
+      <div className="dn-divider" />
+
+      {/* MANIFESTO */}
+      <section className="dn-manifesto">
+        <div>
+          <div className="dn-manifesto-num dn-reveal">
+            01<small>Lo que sostenemos</small>
+          </div>
         </div>
         <div className="dn-manifesto-content">
-          <h2>
-            El diseño no es decoración.
-            <br />
-            <em>Es la primera conversación</em>
-            <br />
-            que tu marca tiene con el mundo.
+          <h2 className="dn-reveal">
+            El diseño no es <span className="dn-strike">decoración.</span><br />
+            Es <em>infraestructura</em><br />
+            de marca.
           </h2>
-          <p className="dn-manifesto-lead">
-            Cada color, cada trazo, cada tipografía es una decisión estratégica. Diseñamos marcas
-            que generan reconocimiento, confianza y conexión emocional con quienes más importan.
+          <p className="dn-manifesto-lead dn-reveal">
+            Cada elemento visual de una marca es una pequeña promesa de credibilidad. Cuando esos elementos están desordenados, la promesa se vuelve incoherente — aunque el producto o servicio sea impecable. Por eso entendemos al diseño como sistema, no como sucesión de piezas decorativas. Logo, paleta, tipografía, lenguaje fotográfico y plantillas operan juntos para sostener un mismo criterio en cualquier canal.
           </p>
         </div>
       </section>
 
-      {/* ── Before / After ────────────────────────────── */}
-      <section className="dn-before-after-section dn-reveal">
+      <div className="dn-divider" />
+
+      {/* BEFORE / AFTER */}
+      <section className="dn-before-after-section">
         <div className="dn-ba-header">
-          <h2 className="dn-ba-h">
-            Antes y <em>después</em>
-          </h2>
-          <div className="dn-ba-meta">
-            <strong>4</strong>
-            transformaciones reales de marca
+          <div>
+            <p className="dn-section-eyebrow dn-reveal">02 · Rediseños</p>
+            <h2 className="dn-ba-h dn-reveal">Antes y después.<br />El sistema <em>en acción.</em></h2>
           </div>
+          <p className="dn-ba-meta dn-reveal">
+            <strong>14</strong>rediseños completos en los últimos 24 meses · arrastrá la barra para comparar
+          </p>
         </div>
 
-        <div className="dn-ba-tabs">
+        <div className="dn-ba-tabs dn-reveal">
           {BA_CASES.map((c, i) => (
-            <button
-              key={i}
-              className={`dn-ba-tab${baTab === i ? " active" : ""}`}
-              onClick={() => setBaTab(i)}
-            >
+            <button key={i} className={`dn-ba-tab${baTab === i ? " active" : ""}`} onClick={() => setBaTab(i)}>
               {c.label}
             </button>
           ))}
         </div>
 
         <div
-          className="dn-ba-stage"
+          className="dn-ba-stage dn-reveal"
           ref={stageRef}
-          onMouseDown={(e) => {
-            dragging.current = true;
-            updatePos(e.clientX);
-          }}
-          onTouchStart={(e) => {
-            dragging.current = true;
-            updatePos(e.touches[0].clientX);
-          }}
+          onMouseDown={(e) => { dragging.current = true; updatePos(e.clientX); }}
+          onTouchStart={(e) => { dragging.current = true; updatePos(e.touches[0].clientX); }}
         >
-          {/* Before pane (always visible underneath) */}
-          <div
-            className="dn-ba-pane"
-            style={{ backgroundImage: `url(${BA_CASES[baTab].before})` }}
-          />
-          {/* After pane (clipped to right side) */}
-          <div
-            className="dn-ba-pane dn-ba-pane-after"
-            ref={afterRef}
-            style={{ backgroundImage: `url(${BA_CASES[baTab].after})` }}
-          />
+          <div className="dn-ba-pane" style={{ backgroundImage: `url(${BA_CASES[baTab].before})` }} />
+          <div className="dn-ba-pane dn-ba-pane-after" ref={afterRef} style={{ backgroundImage: `url(${BA_CASES[baTab].after})` }} />
           <span className="dn-ba-label dn-ba-label-before">Antes</span>
           <span className="dn-ba-label dn-ba-label-after">Después</span>
           <div className="dn-ba-divider" ref={dividerRef} />
           <div className="dn-ba-handle" ref={handleRef}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M8 12l-4-4m0 0l4-4M4 8h16M16 12l4 4m0 0l-4 4m4-4H4"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <polyline points="15 18 9 12 15 6" />
+              <polyline points="9 18 3 12 9 6" transform="translate(12,0)" />
             </svg>
           </div>
         </div>
 
         <div className="dn-ba-info">
-          <div className="dn-ba-info-cell">
-            <h4>Empresa</h4>
-            <p>{BA_CASES[baTab].label}</p>
-          </div>
-          <div className="dn-ba-info-cell">
-            <h4>Intervención</h4>
-            <p>{BA_CASES[baTab].desc}</p>
-          </div>
-          <div className="dn-ba-info-cell">
-            <h4>Resultado</h4>
-            <p>{BA_CASES[baTab].result}</p>
-          </div>
+          <div className="dn-ba-info-cell"><h4>Sector</h4><p>{BA_CASES[baTab].sector}</p></div>
+          <div className="dn-ba-info-cell"><h4>Intervención</h4><p>{BA_CASES[baTab].intervencion}</p></div>
+          <div className="dn-ba-info-cell"><h4>Resultado</h4><p>{BA_CASES[baTab].resultado}</p></div>
         </div>
       </section>
 
-      {/* ── Deliverables ──────────────────────────────── */}
-      <section className="dn-deliverables-section dn-reveal">
-        <p className="dn-section-eyebrow">Qué creamos</p>
-        <h2 className="dn-deliverables-h">
-          Nuestros <em>entregables</em>
-        </h2>
+      <div className="dn-divider" />
+
+      {/* DELIVERABLES */}
+      <section className="dn-deliverables-section">
+        <p className="dn-section-eyebrow dn-reveal">03 · Entregables</p>
+        <h2 className="dn-deliverables-h dn-reveal">Lo que entregamos<br />en <em>cada proyecto.</em></h2>
         <div className="dn-deliverables-grid">
           {DELIVERABLES.map((d, i) => (
-            <div key={i} className="dn-deliverable-cell">
-              <span className="dn-deliverable-letter">{d.letter}</span>
+            <div key={i} className="dn-deliverable-cell dn-reveal">
+              <div className="dn-deliverable-letter">{d.letter}</div>
               <h3>{d.title}</h3>
               <p>{d.desc}</p>
             </div>
@@ -518,124 +325,65 @@ export default function Disenio() {
         </div>
       </section>
 
-      {/* ── Portfolio ─────────────────────────────────── */}
-      <section className="dn-portfolio dn-reveal" id="portfolio">
+      {/* PORTFOLIO */}
+      <section className="dn-portfolio">
         <div className="dn-portfolio-header">
-          <h2 className="dn-portfolio-h">
-            Casos <em>seleccionados</em>
-          </h2>
-          <div className="dn-portfolio-meta">
-            <strong>20+</strong>
-            proyectos de diseño en los últimos 12 meses
+          <div>
+            <p className="dn-section-eyebrow dn-reveal">04 · Portfolio</p>
+            <h2 className="dn-portfolio-h dn-reveal">Identidades que ya<br />están <em>en operación.</em></h2>
+          </div>
+          <div className="dn-portfolio-meta dn-reveal">
+            <strong>60+</strong>
+            marcas con identidad o sistema visual desarrollado por Trompo en los últimos 10 años de operación.
           </div>
         </div>
         <div className="dn-portfolio-grid">
           {PORTFOLIO_ITEMS.map((item, i) => (
-            <div key={i} className="dn-portfolio-item">
-              <img src={item.src} alt={item.name} className="dn-portfolio-img" loading="lazy" />
+            <a key={i} href="#" className="dn-portfolio-item dn-reveal">
+              <img src={item.src} alt={item.name} loading="lazy" />
               <div className="dn-portfolio-item-overlay">
-                <span className="dn-portfolio-item-tag">{item.tag}</span>
-                <span className="dn-portfolio-item-name">{item.name}</span>
+                <div className="dn-portfolio-item-tag">{item.tag}</div>
+                <div className="dn-portfolio-item-name">{item.name}</div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </section>
 
-      {/* ── Scorecard ─────────────────────────────────── */}
-      <section className="dn-scorecard dn-reveal" id="scorecard">
-        <div className="dn-scorecard-inner">
-          <div className="dn-scorecard-header">
-            <p className="dn-section-eyebrow">Diagnóstico rápido</p>
-            <h2 className="dn-scorecard-h">¿Qué tan fuerte es tu marca?</h2>
-          </div>
-          <div className="dn-scorecard-body">
-            <div className="dn-score-questions">
-              {SCORE_QUESTIONS.map((item, qi) => (
-                <div key={qi} className="dn-score-question">
-                  <p className="dn-score-q">{item.q}</p>
-                  <div className="dn-score-opts">
-                    {item.opts.map((opt, oi) => (
-                      <button
-                        key={oi}
-                        className={`dn-score-opt${answers[qi] === oi ? " selected" : ""}`}
-                        onClick={() => {
-                          const next = [...answers];
-                          next[qi] = oi;
-                          setAnswers(next);
-                        }}
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="dn-score-result">
-              <div className="dn-score-dial">
-                <svg className="dn-score-circle" viewBox="0 0 120 120">
-                  <circle cx="60" cy="60" r="54" className="dn-score-track" />
-                  <circle
-                    cx="60"
-                    cy="60"
-                    r="54"
-                    className="dn-score-fill"
-                    style={{ strokeDashoffset: offset }}
-                  />
-                </svg>
-                <div className="dn-score-center">
-                  <span className="dn-score-value">{answered ? `${score}%` : "—"}</span>
-                  <span className="dn-score-sub">{answered ? `${answered}/${SCORE_QUESTIONS.length}` : "Respondé"}</span>
-                </div>
-              </div>
-              <p className="dn-score-verdict">{verdict ?? "Respondé las preguntas"}</p>
-              {verdict && (
-                <Link to="/contactanos" className="dn-btn-primary">
-                  Hablemos de tu marca →
-                </Link>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Process ───────────────────────────────────── */}
-      <section className="dn-process dn-reveal" id="proceso">
+      {/* PROCESS */}
+      <section className="dn-process">
         <div className="dn-process-inner">
-          <p className="dn-section-eyebrow">Cómo trabajamos</p>
-          <h2 className="dn-process-h">
-            Nuestro <em>proceso</em>
-          </h2>
+          <p className="dn-section-eyebrow dn-reveal">05 · Cómo trabajamos</p>
+          <h2 className="dn-process-h dn-reveal">El proceso<br />de <em>cada proyecto.</em></h2>
           <div className="dn-timeline-list">
             {TIMELINE.map((step, i) => (
-              <div key={i} className="dn-timeline-item">
-                <span className="dn-timeline-step">{step.num}</span>
+              <div key={i} className="dn-timeline-item dn-reveal">
+                <div className="dn-timeline-step">{step.num}</div>
                 <div className="dn-timeline-content">
                   <h3>{step.title}</h3>
                   <p>{step.desc}</p>
                 </div>
-                <span className="dn-timeline-duration">{step.duration}</span>
+                <div className="dn-timeline-duration">{step.duration}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Testimonials ──────────────────────────────── */}
-      <section className="dn-testimonials dn-reveal">
+      {/* TESTIMONIALS */}
+      <section className="dn-testimonials">
         <div className="dn-testimonials-inner">
-          <p className="dn-section-eyebrow">Lo que dicen</p>
+          <p className="dn-section-eyebrow dn-reveal">06 · Testimonios</p>
+          <h2 className="dn-deliverables-h dn-reveal">Lo que dicen las marcas<br />que <em>trabajaron con nosotros.</em></h2>
           {TESTIMONIALS.map((t, i) => (
-            <div key={i} className="dn-testimonial-card">
+            <div key={i} className="dn-testimonial-card dn-reveal">
               <div className="dn-testimonial-quote-mark">"</div>
               <div>
                 <p className="dn-testimonial-text">{t.quote}</p>
                 <div className="dn-testimonial-meta">
-                  <div className="dn-testimonial-avatar">{t.initial}</div>
+                  <div className="dn-testimonial-avatar">{t.initials}</div>
                   <div>
-                    <p className="dn-testimonial-name">{t.author}</p>
+                    <p className="dn-testimonial-name">{t.name}</p>
                     <p className="dn-testimonial-role">{t.role}</p>
                   </div>
                 </div>
@@ -645,36 +393,32 @@ export default function Disenio() {
         </div>
       </section>
 
-      {/* ── Stats ─────────────────────────────────────── */}
-      <section className="dn-stats dn-reveal">
-        <p className="dn-stats-eyebrow">En números</p>
+      {/* STATS */}
+      <section className="dn-stats">
+        <div className="dn-stats-eyebrow">Trompo en números</div>
         <div className="dn-stats-grid">
           {STATS.map((s, i) => (
-            <div key={i} className="dn-stat-cell">
-              <p className="dn-stat-big">{s.value}</p>
-              <p className="dn-stat-label">{s.label}</p>
+            <div key={i} className="dn-stat-cell dn-reveal">
+              <div className="dn-stat-big">{s.big}<em>{s.suffix}</em></div>
+              <div className="dn-stat-label">{s.label}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── FAQs ──────────────────────────────────────── */}
-      <section className="dn-faqs dn-reveal">
+      {/* FAQs */}
+      <section className="dn-faqs">
         <div className="dn-faqs-header">
-          <h2 className="dn-faqs-h">
-            Lo que más nos <em>preguntan</em>
-          </h2>
-          <p className="dn-faqs-meta">
-            Respondemos las dudas más frecuentes sobre nuestro proceso y servicio de diseño.
-          </p>
+          <div>
+            <p className="dn-section-eyebrow dn-reveal">07 · Preguntas frecuentes</p>
+            <h2 className="dn-faqs-h dn-reveal">Preguntas <em>frecuentes</em><br />de clientes nuevos.</h2>
+          </div>
+          <p className="dn-faqs-meta dn-reveal">Las respuestas que más nos preguntan al inicio de un proyecto de identidad o rediseño. Si tu pregunta no está acá, escribinos.</p>
         </div>
         <div className="dn-faq-list">
           {FAQ_ITEMS.map((item, i) => (
             <div key={i} className={`dn-faq-item${openFaq === i ? " open" : ""}`}>
-              <button
-                className="dn-faq-q"
-                onClick={() => setOpenFaq(openFaq === i ? null : i)}
-              >
+              <button className="dn-faq-q" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
                 <span>{item.q}</span>
                 <span className="dn-faq-q-icon" />
               </button>
@@ -686,43 +430,20 @@ export default function Disenio() {
         </div>
       </section>
 
-      {/* ── Other Services ────────────────────────────── */}
-      <section className="dn-other-services dn-reveal">
-        <h2 className="dn-other-services-h">
-          También <em>hacemos</em>
-        </h2>
-        <div className="dn-services-grid">
-          {OTHER_SERVICES.map((s, i) => (
-            <Link key={i} to={s.href} className="dn-service-card">
-              <p className="dn-service-card-num">{s.icon}</p>
-              <h4>{s.title}</h4>
-              <p>{s.desc}</p>
-              <span className="dn-service-card-arrow">→</span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ── CTA Banner ────────────────────────────────── */}
-      <section className="dn-cta-banner dn-reveal" id="contacto">
-        <div className="dn-cta-banner-bg">DISEÑO</div>
+      {/* CTA BANNER */}
+      <section className="dn-cta-banner" id="contacto">
+        <div className="dn-cta-banner-bg">Diseño</div>
         <div className="dn-cta-inner">
-          <h2>
-            Tu marca merece
-            <br />
-            <em>diseño que funciona</em>
-          </h2>
-          <p>Contanos tu proyecto y te preparamos una propuesta en menos de 48 horas.</p>
-          <div className="dn-cta-buttons-row">
-            <Link to="/contactanos" className="dn-btn-primary">
-              Quiero mi propuesta →
-            </Link>
-            <Link to="/servicios" className="dn-btn-ghost">
-              Ver más servicios
-            </Link>
+          <p className="dn-section-eyebrow dn-reveal" style={{ justifyContent: "center" }}>Conversemos</p>
+          <h2 className="dn-reveal">¿Necesitás <em>diseño</em><br />para tu marca?</h2>
+          <p className="dn-reveal">Una conversación inicial para revisar el estado actual del sistema visual y definir hipótesis de intervención. Sin propuesta cerrada de antemano. Diagnóstico profesional con recomendación priorizada por impacto.</p>
+          <div className="dn-cta-buttons-row dn-reveal">
+            <Link to="/contactanos" className="dn-btn-primary">Solicitar reunión →</Link>
+            <Link to="/nosotros"    className="dn-btn-ghost">Ver más casos</Link>
           </div>
         </div>
       </section>
+
     </div>
   );
 }

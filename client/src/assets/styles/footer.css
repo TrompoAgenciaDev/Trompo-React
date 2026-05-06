@@ -41,13 +41,13 @@ footer {
     max-width: 360px;
 }
 .footer-col-h {
-    font-family: var(--display);
-    font-weight: 500;
-    font-size: 14px;
-    letter-spacing: 0.02em;
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
 }
 .footer-list { list-style: none; display: grid; gap: 10px; }
 .footer-list a {
@@ -57,29 +57,30 @@ footer {
     transition: color 0.3s ease;
 }
 .footer-list a:hover { color: var(--accent); }
+.footer-list-text {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
 .footer-base {
     max-width: var(--max);
     margin: 0 auto;
-    padding-top: 30px;
+    padding-top: 28px;
     border-top: 1px solid var(--line);
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
 }
-.footer-base a {
-    color: var(--accent);
+.footer-legales { display: flex; gap: 24px; }
+.footer-base a, .footer-legales a {
+    color: var(--ink-soft);
     text-decoration: none;
-    padding: 8px 16px;
-    border: 1px solid var(--accent);
-    border-radius: 100px;
-    transition: all 0.3s ease;
+    transition: color 0.2s;
 }
-.footer-base a:hover { background: var(--accent); color: var(--bg); }
+.footer-base a:hover, .footer-legales a:hover { color: var(--accent); }
 
 @media (max-width: 920px) {
     .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }

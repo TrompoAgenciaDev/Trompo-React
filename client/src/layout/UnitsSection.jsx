@@ -3,10 +3,10 @@ export default function Units() {
     return (
         <>
             <section className="units" id="sistema">
-                <div className="section-eyebrow reveal">02 · Sistema integrado</div>
+                <div className="section-eyebrow reveal">02 · Cinco unidades</div>
                 <h2 className="units-h reveal">
-                    Cinco unidades<br/>
-                    que <em>trabajan como una.</em>
+                    Cinco disciplinas<br/>
+                    operando como un <em>sistema.</em>
                 </h2>
 
                 <div className="units-grid">
@@ -16,7 +16,7 @@ export default function Units() {
                             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                         </svg>
                         <h3 className="unit-h">Diseño</h3>
-                        <p className="unit-text">Identidad y sistema visual que ordena, diferencia y profesionaliza la marca en cada punto de contacto.</p>
+                        <p className="unit-text">Una marca visualmente desordenada compite con desventaja. La identidad no es decoración: es el primer activo de credibilidad que tiene un negocio.</p>
                     </div>
 
                     <div className="unit reveal" data-cursor-hover>
@@ -25,7 +25,7 @@ export default function Units() {
                             <polygon points="5 3 19 12 5 21 5 3"/>
                         </svg>
                         <h3 className="unit-h">Multimedia</h3>
-                        <p className="unit-text">Motion, edición y producción audiovisual para comunicar con impacto y humanizar la marca.</p>
+                        <p className="unit-text">La atención disponible es escasa. La producción audiovisual profesional es lo que diferencia a una marca recordable de una marca olvidable.</p>
                     </div>
 
                     <div className="unit reveal" data-cursor-hover>
@@ -35,7 +35,7 @@ export default function Units() {
                             <path d="M8 21h8M12 17v4"/>
                         </svg>
                         <h3 className="unit-h">Desarrollo Web</h3>
-                        <p className="unit-text">Sitios y plataformas que posicionan, convierten y escalan. Performance técnica al servicio del negocio.</p>
+                        <p className="unit-text">El sitio web es el punto de contacto digital más visitado del negocio. Tratarlo como folleto institucional es subutilizar el activo. Lo construimos como herramienta de venta.</p>
                     </div>
 
                     <div className="unit reveal" data-cursor-hover>
@@ -44,7 +44,7 @@ export default function Units() {
                             <path d="M3 17l6-6 4 4 8-8M14 7h7v7"/>
                         </svg>
                         <h3 className="unit-h">Paid Media</h3>
-                        <p className="unit-text">Google, Meta, LinkedIn Ads, performance y posicionamiento. Inversión publicitaria que devuelve negocio.</p>
+                        <p className="unit-text">Cada peso de inversión publicitaria debe justificarse en términos de retorno. Las métricas que no se conectan con resultados de negocio carecen de utilidad operativa.</p>
                     </div>
 
                     <div className="unit reveal" data-cursor-hover>
@@ -54,7 +54,7 @@ export default function Units() {
                             <path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/>
                         </svg>
                         <h3 className="unit-h">Redes Sociales</h3>
-                        <p className="unit-text">Contenido, comunidad y narrativa diaria que construye cultura de marca y sostiene relación con la audiencia.</p>
+                        <p className="unit-text">Las redes sociales son el canal de relación diaria con la audiencia. Operarlas sin estrategia subutiliza uno de los activos digitales más continuos del negocio.</p>
                     </div>
                 </div>
             </section>

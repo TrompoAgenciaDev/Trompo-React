@@ -11,13 +11,9 @@ export default function CtaSection() {
                     <div>
                         <div className="cta-eyebrow">06 · Conversemos</div>
                         <h2 className="cta-h">
-                            Definamos tu<br />
-                            <em>próximo paso</em><br />
-                            estratégico.
+                            Si compartís este<br />criterio, <em>conversemos.</em>
                         </h2>
-                        <p className="cta-sub">
-                            Una conversación corta para entender cómo está hoy tu marketing y mostrarte cómo trabajamos. Sin propuesta cerrada, sin presión — diagnóstico genuino.
-                        </p>
+                        <p className="reveal">Sin propuestas cerradas de antemano. Sin promesas de resultados sin diagnóstico previo. Una conversación clara para entender el contexto, una recomendación profesional honesta y una decisión informada por ambas partes.</p>
                     </div>
 
                     <div className="cta-form-card reveal">

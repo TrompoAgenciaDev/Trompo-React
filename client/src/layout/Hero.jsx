@@ -60,10 +60,6 @@ const Hero = () => {
                 ))}
             </div>
 
-            <div className="hero-slider-tag">
-                <span>Trompo · Equipo en operación</span>
-            </div>
-
             <div className="slider-indicators">
                 {SLIDES.map((_, i) => (
                     <div
@@ -79,30 +75,30 @@ const Hero = () => {
             </div>
 
             <div className="hero-eyebrow">
-                <span>Trompo Agencia · 2026</span>
-                <span className="blink">●</span>
-                <span>Vanguardia digital · Córdoba</span>
+                <span className='yellow-text'>Trompo Agencia · 2026</span>
+                <span className="blink yellow-text">●</span>
+                <span className='yellow-text'>Diez años sosteniendo una postura</span>
             </div>
 
             <h1 className="hero-title">
                 <span className="hero-title-line"><span>Marketing</span></span>
-                <span className="hero-title-line"><span>para marcas</span></span>
-                <span className="hero-title-line"><span>que <em id="glitch-target">mueven</em></span></span>
-                <span className="hero-title-line"><span>el negocio.</span></span>
+                <span className="hero-title-line"><span>que se mide</span></span>
+                <span className="hero-title-line"><span>en <em>resultados</em></span></span>
+                <span className="hero-title-line"><span>de negocio.</span></span>
             </h1>
 
             <div className="hero-bottom">
                 <p className="hero-desc">
-                    <strong>Diez años acompañando marcas argentinas.</strong>
-                    {' '}Diseño, multimedia, desarrollo web, paid media y redes sociales funcionando como un sistema integrado para mover el negocio del cliente — no para llenar reportes.
+                    <strong>Diez años sosteniendo una forma rigurosa de trabajar. </strong> 
+                    Sin humo. Sin métricas decorativas. Sin propuestas armadas para impresionar antes que para resolver. Cada decisión orientada al negocio del cliente — y respaldada por datos, no por intuición.
                 </p>
                 <div className="hero-stat">
                     <div className="hero-stat-num">10<em>+</em></div>
-                    <div className="hero-stat-label">Años de operación<br/>desde Córdoba</div>
+                    <div className="hero-stat-label">Años sosteniendo<br/>esta forma de trabajar</div>
                 </div>
                 <div className="hero-stat">
                     <div className="hero-stat-num">80<em>+</em></div>
-                    <div className="hero-stat-label">Marcas argentinas<br/>en nuestra cartera</div>
+                    <div className="hero-stat-label">Marcas argentinas<br/>en nuestra trayectoria</div>
                 </div>
             </div>
         </section>

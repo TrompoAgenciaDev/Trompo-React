@@ -12,7 +12,6 @@ import CarteraSection from '../layout/CarteraSection';
 import QuoteSection from '../layout/QuoteSection';
 import StatsBand from '../layout/StatsBand';
 import CtaSection from '../layout/CtaSection';
-import Dock from '../components/Dock'
 
 export default function Home() {
   return (
@@ -27,13 +26,6 @@ export default function Home() {
       <QuoteSection />
       <StatsBand />
       <CtaSection />
-      <Dock
-        links={[
-          { anchor: "#sistema", title: "Sistema" },
-          { anchor: "#cartera", title: "Cartera" },
-        ]}
-        cta={{ label: "Hablemos →", to: "/contactanos" }}
-      />
     </>
   );
 }

@@ -6,42 +6,38 @@ export default function Intro() {
                 <div className="intro-grid">
                     <div className="intro-num reveal">
                         01
-                        <small>Cómo trabajamos</small>
+                        <small>Lo que sostenemos</small>
                     </div>
                     <div className="intro-text-block">
-                        <h2 className="intro-h reveal">
-                            No vendemos <span className="strike">campañas.</span><br/>
-                            Construimos <em>sistemas</em><br/>
-                            que mueven el negocio.
-                        </h2>
+                        <h2 className="intro-h reveal">El marketing no es <span className="strike">un gasto.</span><br/>Es la <em>inversión</em> más directa<br/>al crecimiento del negocio.</h2>
 
                         <div className="intro-features">
                             <div className="intro-feature reveal">
                                 <div className="intro-feature-num">A</div>
                                 <div>
-                                    <h3 className="intro-feature-h">Diagnóstico antes de propuesta</h3>
-                                    <p className="intro-feature-text">Entendemos antes de ejecutar. Marca, negocio, contexto y audiencias bajo una misma lectura estratégica.</p>
+                                    <h3>Diagnóstico antes que propuesta</h3>
+                                    <p>Una propuesta sin diagnóstico previo es una solución genérica aplicada a un problema específico. Entendemos el contexto primero. Recomendamos después. Esa es la disciplina.</p>
                                 </div>
                             </div>
                             <div className="intro-feature reveal">
                                 <div className="intro-feature-num">B</div>
                                 <div>
-                                    <h3 className="intro-feature-h">Dirección, no tácticas sueltas</h3>
-                                    <p className="intro-feature-text">Definimos rumbo, no acciones aisladas. Roadmap digital claro, prioridades bien ordenadas y foco en impacto real.</p>
+                                    <h3>Dirección, no actividad</h3>
+                                    <p>Producir mucho no equivale a avanzar. Definimos prioridades, ordenamos el roadmap y sostenemos la estrategia en el tiempo. La actividad sin dirección consume recursos sin generar resultado.</p>
                                 </div>
                             </div>
                             <div className="intro-feature reveal">
                                 <div className="intro-feature-num">C</div>
                                 <div>
-                                    <h3 className="intro-feature-h">Producción que activa</h3>
-                                    <p className="intro-feature-text">Creamos activos que convierten. Diseño, contenido y desarrollo listos para escalar — nada decorativo, todo funcional.</p>
+                                    <h3>Producción al servicio del negocio</h3>
+                                    <p>Cada pieza producida cumple una función concreta dentro del sistema. No hacemos contenido decorativo ni piezas pensadas para el portfolio. El criterio es uno: ¿esto contribuye al negocio del cliente?</p>
                                 </div>
                             </div>
                             <div className="intro-feature reveal">
                                 <div className="intro-feature-num">D</div>
                                 <div>
-                                    <h3 className="intro-feature-h">Optimización continua</h3>
-                                    <p className="intro-feature-text">Medimos para crecer, no para reportar. Datos, decisiones y mejora continua orientada a resultados de negocio reales.</p>
+                                    <h3>Transparencia antes que reporte estético</h3>
+                                    <p>Reportes hechos para decidir, no para archivar. Si algo no está funcionando, lo planteamos antes que nos pregunten. La transparencia metodológica es la base de cualquier relación profesional sostenida.</p>
                                 </div>
                             </div>
                         </div>

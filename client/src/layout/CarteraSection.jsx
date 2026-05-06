@@ -8,15 +8,13 @@ export default function Cartera() {
                         <div>
                             <div className="section-eyebrow reveal">05 · Cartera</div>
                             <h2 className="cartera-h reveal">
-                                Trayectoria<br/>
-                                que escribieron<br/>
-                                <em>las marcas.</em>
+                                Diez años.<br />Ochenta marcas.<br />Un <span class="italic">mismo criterio.</span>
                             </h2>
                         </div>
                         <div className="cartera-meta reveal">
                             <strong>80+</strong>
-                            marcas argentinas<br/>
-                            en 10 años de operación<br/>
+                            marcas argentinas en<br />
+                            10 años de operación<br />
                             multi-sector
                         </div>
                     </div>
@@ -61,7 +59,7 @@ export default function Cartera() {
                     </div>
 
                     <div className="cartera-note">
-                        La presencia de una marca no implica relación comercial vigente al día de hoy. Lista representativa de la trayectoria de Trompo Agencia.
+                        No todas las relaciones siguen vigentes al día de hoy. Algunas duraron meses, otras una década. Lista representativa de la trayectoria de Trompo Agencia.
                     </div>
                 </div>
             </section>
