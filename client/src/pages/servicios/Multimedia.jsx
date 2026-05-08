@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "../../assets/styles/multimedia.css";
+import "../../assets/styles/cta-section.css";
+import FormIndex from "../../components/forms/FormIndex";
+import TestimonialsSlider from "../../components/TestimonialsSlider";
 
 const SLIDER_IMAGES = [
   "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=1920&q=85",
@@ -102,20 +105,8 @@ const TIMELINE = [
   },
 ];
 
-const TESTIMONIALS = [
-  {
-    initials: "FS",
-    text: "Hicieron el video institucional para una presentación a casa matriz en Japón. Estuvimos cómodos en el rodaje, claros en el guión y la pieza final terminó usándose mucho más allá del evento original.",
-    name: "Federico Saluzzi",
-    role: "Marketing · Denso Argentina",
-  },
-  {
-    initials: "LA",
-    text: "La producción para nuestras campañas de lanzamiento de café fue espectacular. No solo el video — el sistema completo de fotos, reels y stories nos sirvió todo el trimestre.",
-    name: "Lucía Ardusso",
-    role: "Founder · Ardu Café",
-  },
-];
+
+
 
 const STATS = [
   { big: "1.5K", suffix: "+", label: "Piezas audiovisuales\nproducidas por año" },
@@ -359,29 +350,10 @@ const Multimedia = () => {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="mm-testimonials">
-        <div className="mm-testimonials-inner">
-          <div className="mm-section-eyebrow mm-reveal">05 · Lo que dicen los clientes</div>
-          <h2 className="mm-deliverables-h mm-reveal">
-            Marcas que confiaron<br /><em>su producción</em> a Trompo.
-          </h2>
-          {TESTIMONIALS.map((t, i) => (
-            <div key={i} className="mm-testimonial-card mm-reveal">
-              <div className="mm-testimonial-quote">"</div>
-              <div>
-                <p className="mm-testimonial-text">{t.text}</p>
-                <div className="mm-testimonial-meta">
-                  <div className="mm-testimonial-avatar">{t.initials}</div>
-                  <div>
-                    <div className="mm-testimonial-name">{t.name}</div>
-                    <div className="mm-testimonial-role">{t.role}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <TestimonialsSlider
+        eyebrow="05 · Testimonios"
+        heading="Marcas que confiaron<br /><em>su producción</em> a Trompo."
+      />
 
       {/* STATS */}
       <section className="mm-stats">
@@ -424,22 +396,25 @@ const Multimedia = () => {
         </div>
       </section>
 
-      {/* CTA BANNER */}
-      <section className="mm-cta-banner">
-        <div className="mm-cta-banner-bg">Multimedia</div>
-        <div className="mm-cta-inner">
-          <div className="mm-section-eyebrow mm-reveal" style={{ justifyContent: "center" }}>
-            Conversemos
+      {/* CTA + FORM */}
+      <section className="cta-section" id="contacto">
+        <div className="cta-bg-mega">Multimedia</div>
+        <div className="cta-wrap">
+          <div>
+            <div className="cta-eyebrow">Conversemos</div>
+            <h2 className="cta-h">
+              ¿Necesitás <em>contenido audiovisual</em><br />con criterio profesional?
+            </h2>
+            <p className="reveal">
+              Una conversación inicial sobre el proyecto audiovisual. Sin propuesta cerrada de antemano. Recomendación profesional honesta sobre qué tipo de producción se ajusta al objetivo de negocio.
+            </p>
           </div>
-          <h2 className="mm-reveal">
-            ¿Necesitás <em>contenido audiovisual</em><br />con criterio profesional?
-          </h2>
-          <p className="mm-reveal">
-            Una conversación inicial sobre el proyecto audiovisual. Sin propuesta cerrada de antemano. Recomendación profesional honesta sobre qué tipo de producción se ajusta al objetivo de negocio.
-          </p>
-          <div className="mm-cta-buttons mm-reveal">
-            <Link to="/contactanos" className="mm-btn-primary">Solicitar reunión →</Link>
-            <Link to="/nosotros" className="mm-btn-ghost">Ver más reels</Link>
+
+          <div className="cta-form-card reveal">
+            <h3 className="cta-form-h">Completá el siguiente formulario.</h3>
+            <p className="cta-form-sub">Definamos tu próximo paso estratégico.</p>
+
+            <FormIndex location="multimedia" />
           </div>
         </div>
       </section>

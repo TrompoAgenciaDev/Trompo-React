@@ -41,7 +41,7 @@ export default function Footer() {
                     <ul className="footer-list">
                         <li><a href="mailto:somos@trompoagencia.com" data-cursor-hover>somos@trompoagencia.com</a></li>
                         <li className="footer-list-text">+54 351 XXX XXXX</li>
-                        <li className="footer-list-text">Lun a Vie · 09–18 hs</li>
+                        <li className="footer-list-text">Lun a Vie · 09-18 hs</li>
                         <li className="footer-list-text">Córdoba, Argentina</li>
                     </ul>
                 </div>
@@ -52,7 +52,7 @@ export default function Footer() {
                 <div className="footer-legales">
                     <a href="#" data-cursor-hover>Privacidad</a>
                     <NavLink to="/terms" data-cursor-hover>Términos</NavLink>
-                    <a href="#" data-cursor-hover>Cookies</a>
+                    {/*<a href="#" data-cursor-hover>Cookies</a>*/}
                 </div>
             </div>
         </footer>

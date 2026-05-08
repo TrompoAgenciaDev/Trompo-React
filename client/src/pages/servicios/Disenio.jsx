@@ -1,6 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../assets/styles/disenio-page.css";
+import "../../assets/styles/cta-section.css";
+import FormIndex from "../../components/forms/FormIndex";
+import TestimonialsSlider from "../../components/TestimonialsSlider";
 
 const SLIDER_IMAGES = [
   "https://images.unsplash.com/photo-1561070791-2526d30994b8?w=1920&q=85",
@@ -82,20 +85,8 @@ const TIMELINE = [
   { num: "04", title: "Implementación",    desc: "Bajamos la marca a todas las aplicaciones: digital, print, físico. Entregamos archivos abiertos, tipografías licenciadas y manual completo.",                              duration: "Semanas 7–8" },
 ];
 
-const TESTIMONIALS = [
-  {
-    quote:    "Trompo entendió en una reunión lo que tres agencias antes no habían podido captar en seis meses. La identidad nueva ordenó todo el sistema digital y dejó al equipo interno trabajando con criterio.",
-    name:     "Mauro Lazzarini",
-    role:     "Director Comercial · CEDIR Salud",
-    initials: "ML",
-  },
-  {
-    quote:    "La marca venía de 90 años de historia y un montón de versiones del logo dando vueltas. El proceso fue serio, sin votaciones internas que desordenan. Quedamos con un sistema que escala.",
-    name:     "Patricia Blangino",
-    role:     "Gerente · Mosaicos Blangino",
-    initials: "PB",
-  },
-];
+
+
 
 const STATS = [
   { big: "60",  suffix: "+",  label: "Marcas con identidad\ndesarrollada en 10 años" },
@@ -371,27 +362,10 @@ export default function Disenio() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="dn-testimonials">
-        <div className="dn-testimonials-inner">
-          <p className="dn-section-eyebrow dn-reveal">06 · Testimonios</p>
-          <h2 className="dn-deliverables-h dn-reveal">Lo que dicen las marcas<br />que <em>trabajaron con nosotros.</em></h2>
-          {TESTIMONIALS.map((t, i) => (
-            <div key={i} className="dn-testimonial-card dn-reveal">
-              <div className="dn-testimonial-quote-mark">"</div>
-              <div>
-                <p className="dn-testimonial-text">{t.quote}</p>
-                <div className="dn-testimonial-meta">
-                  <div className="dn-testimonial-avatar">{t.initials}</div>
-                  <div>
-                    <p className="dn-testimonial-name">{t.name}</p>
-                    <p className="dn-testimonial-role">{t.role}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <TestimonialsSlider
+        eyebrow="06 · Testimonios"
+        heading="Lo que dicen las marcas<br />que <em>trabajaron con nosotros.</em>"
+      />
 
       {/* STATS */}
       <section className="dn-stats">
@@ -430,16 +404,25 @@ export default function Disenio() {
         </div>
       </section>
 
-      {/* CTA BANNER */}
-      <section className="dn-cta-banner" id="contacto">
-        <div className="dn-cta-banner-bg">Diseño</div>
-        <div className="dn-cta-inner">
-          <p className="dn-section-eyebrow dn-reveal" style={{ justifyContent: "center" }}>Conversemos</p>
-          <h2 className="dn-reveal">¿Necesitás <em>diseño</em><br />para tu marca?</h2>
-          <p className="dn-reveal">Una conversación inicial para revisar el estado actual del sistema visual y definir hipótesis de intervención. Sin propuesta cerrada de antemano. Diagnóstico profesional con recomendación priorizada por impacto.</p>
-          <div className="dn-cta-buttons-row dn-reveal">
-            <Link to="/contactanos" className="dn-btn-primary">Solicitar reunión →</Link>
-            <Link to="/nosotros"    className="dn-btn-ghost">Ver más casos</Link>
+      {/* CTA + FORM */}
+      <section className="cta-section" id="contacto">
+        <div className="cta-bg-mega">Diseño</div>
+        <div className="cta-wrap">
+          <div>
+            <div className="cta-eyebrow">Conversemos</div>
+            <h2 className="cta-h">
+              ¿Necesitás <em>diseño</em><br />para tu marca?
+            </h2>
+            <p className="reveal">
+              Una conversación inicial para revisar el estado actual del sistema visual y definir hipótesis de intervención. Sin propuesta cerrada de antemano. Diagnóstico profesional con recomendación priorizada por impacto.
+            </p>
+          </div>
+
+          <div className="cta-form-card reveal">
+            <h3 className="cta-form-h">Completá el siguiente formulario.</h3>
+            <p className="cta-form-sub">Definamos tu próximo paso estratégico.</p>
+
+            <FormIndex location="disenio" />
           </div>
         </div>
       </section>

@@ -1,6 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import "../../assets/styles/desarrollo-page.css";
+import "../../assets/styles/cta-section.css";
+import FormIndex from "../../components/forms/FormIndex";
+import TestimonialsSlider from "../../components/TestimonialsSlider";
 
 const SLIDER_IMAGES = [
   "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1920&q=85",
@@ -46,10 +49,8 @@ const TIMELINE = [
   { step: "04", title: "Deploy y mantenimiento", desc: "Lanzamiento, configuración de analítica, eventos, integraciones con CRM y campañas. Plan de mantenimiento mensual para sostener performance, seguridad y mejoras continuas.", duration: "Semana 9 →" },
 ];
 
-const TESTIMONIALS = [
-  { quote: "Trompo entendió que el sitio tenía que ser una herramienta de venta — no un folleto. El nuevo CEDIR.com nos cambió la forma de captar pacientes y le ahorra al equipo administrativo horas todos los días.", initials: "ML", name: "Mauro Lazzarini", role: "Director Comercial · CEDIR Salud" },
-  { quote: "La plataforma que armaron para nosotros se convirtió en parte central de la operación. Lo que antes era manual hoy es self-service para los clientes y el equipo.", initials: "FL", name: "Federico Lozada", role: "Founder · Lozada Viajes" },
-];
+
+
 
 const STATS = [
   { num: "120", suffix: "+", label: "Sitios y plataformas\ndesarrollados en 10 años" },
@@ -353,27 +354,11 @@ export default function Desarrollo() {
         </div>
       </section>
 
-      <section className="ds-testimonials">
-        <div className="ds-testimonials-inner">
-          <div className="ds-section-eyebrow ds-reveal">06 · Lo que dicen los clientes</div>
-          <h2 className="ds-deliverables-h ds-reveal">Lo que dicen los clientes<br />sobre <em>el proceso.</em></h2>
-          {TESTIMONIALS.map((t, i) => (
-            <div key={i} className="ds-testimonial-card ds-reveal">
-              <div className="ds-testimonial-quote-mark">"</div>
-              <div>
-                <p className="ds-testimonial-text">{t.quote}</p>
-                <div className="ds-testimonial-meta">
-                  <div className="ds-testimonial-avatar">{t.initials}</div>
-                  <div>
-                    <div className="ds-testimonial-name">{t.name}</div>
-                    <div className="ds-testimonial-role">{t.role}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* TESTIMONIALS */}
+      <TestimonialsSlider
+        eyebrow="06 · Lo que dicen los clientes"
+        heading="Lo que dicen los clientes<br />sobre <em>el proceso.</em>"
+      />
 
       <section className="ds-stats">
         <div className="ds-stats-eyebrow">Trompo en números</div>
@@ -427,17 +412,25 @@ export default function Desarrollo() {
         </div>
       </section>
 
-      <section className="ds-cta-banner" id="contacto">
-        <div className="ds-cta-banner-bg">Desarrollo</div>
-        <div className="ds-cta-inner">
-          <div className="ds-section-eyebrow ds-reveal" style={{ justifyContent: "center" }}>Conversemos</div>
-          <h2 className="ds-reveal">¿Tu sitio actual <em>no convierte</em><br />como debería?</h2>
-          <p className="ds-reveal">
-            Te hacemos una auditoría técnica completa: performance, SEO, conversión y arquitectura. Te decimos qué intervenir y por qué orden — sin propuesta cerrada de entrada.
-          </p>
-          <div className="ds-cta-buttons-row ds-reveal">
-            <Link to="/contactanos" className="ds-btn-primary">Pedir auditoría →</Link>
-            <Link to="/nosotros" className="ds-btn-ghost">Ver más casos</Link>
+      {/* CTA + FORM */}
+      <section className="cta-section" id="contacto">
+        <div className="cta-bg-mega">Desarrollo</div>
+        <div className="cta-wrap">
+          <div>
+            <div className="cta-eyebrow">Conversemos</div>
+            <h2 className="cta-h">
+              ¿Tu sitio actual <em>no convierte</em><br />como debería?
+            </h2>
+            <p className="reveal">
+              Te hacemos una auditoría técnica completa: performance, SEO, conversión y arquitectura. Te decimos qué intervenir y por qué orden — sin propuesta cerrada de entrada.
+            </p>
+          </div>
+
+          <div className="cta-form-card reveal">
+            <h3 className="cta-form-h">Completá el siguiente formulario.</h3>
+            <p className="cta-form-sub">Definamos tu próximo paso estratégico.</p>
+
+            <FormIndex location="desarrollo" />
           </div>
         </div>
       </section>
